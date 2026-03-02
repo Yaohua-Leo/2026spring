@@ -1,0 +1,554 @@
+\documentclass{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+\usepackage[UTF8]{ctex}
+\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015,gbalign=left,sorting=gb7714-2015]{biblatex}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+
+\tcbuselibrary{breakable}
+
+\addbibresource{references.bib}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=White}
+
+\declaretheoremstyle[name=Definition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=White}
+
+\declaretheoremstyle[name=Lemma,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=White}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+\def\E{\mathop{\mathcal E}}
+\def\D{\mathop{\mathcal D}}
+\def\lhdeq{\mathop{\trianglelefteq}}
+\def\<{\mathop{\langle}}
+\def\>{\mathop{\rangle}}
+\def\l{\mathop{\ell}}
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+
+\newcommand{\slC}{\mathfrak{sl}(2, \mathbb{C})}
+\newcommand{\vir}{\mathfrak{vir}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\N}{\mathbb{N}}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ----------------------------------------------------------------------
+\section{Lie Algebras and Representation Theory}
+
+\subsection*{Basic}
+
+\begin{exercise}
+Let $W_1$ be the Witt algebra spanned by the basis $\{ d_n=x^{n+1} \frac{\mathrm{d}}{\mathrm{d} x} \mid n \in \Z \}$ with the Lie bracket relations:
+\[ [d_n, d_m] = (m-n)d_{n+m} \]
+\begin{enumerate}
+    \item Consider the subspace $\mathfrak{h} = \mathrm{span}_{\C}\{ d_{-1}, d_0, d_1 \}$. By explicitly calculating the brackets $[d_0, d_{-1}]$, $[d_0, d_1]$, and $[d_1, d_{-1}]$, prove that $\mathfrak{h}$ is closed under the Lie bracket (i.e., it is a Lie subalgebra).
+    \item The standard basis $\{e, f, h\}$ of $\slC$ satisfies the relations $[h, e] = 2e$, $[h, f] = -2f$, and $[e, f] = h$. Give an explicit isomorphism of Lie algebras from $\slC$ to $\mathfrak{h}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $A_1 = \langle x, y \mid yx - xy = 1 \rangle$ be the first Weyl algebra (over $ \mathbb{C} $), $d = yx$.
+\begin{enumerate}
+    \item Using the algebraic relations, rewrite $x^2 y^2$ as a polynomial in $d$. That is, find constants $a, b, c$ such that:
+    \[ x^2 y^2 = a d^2 + b d + c \]
+    \item Show that $ \{ x^iy^j | i,j \in \mathbb{N}  \} $ is a basis of $A_1$ as a vector space over $\mathbb{C}$. 
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Intermediate}
+
+\begin{exercise}
+Recall the definition of the modules $V(\alpha, \beta)$ for the Witt algebra $W_1$. The underlying vector space is $z^\beta \C[z, z^{-1}] (\der z)^\alpha$ with the action:
+\[ d_n \cdot (z^{\gamma} (\der z)^\alpha) = (\gamma + n\alpha) z^{\gamma+n} (\der z)^\alpha \]
+\begin{enumerate}
+    \item Check whether $ V(-1,0) $ is irreducible. If it is, prove it. If it is not, explicitly identify a non-trivial proper submodule. 
+    \item Show that $ V(1,0) $ is reducible, describe its maximal proper submodule, denoted by $ W $.
+    \item Prove that $ W \simeq V(0,0)/\mathbb{C} \cdot 1 $.  
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+According to the Clebsch-Gordan decomposition theory, which is for simple $ \slC $ modules $ V(n) $ and $ V(m) $ where $ n \ge m $, $ V(n) \otimes V(m) \simeq  V(n+m) \oplus V(n+m-2) \oplus \ldots \oplus V(n-m) $.
+\begin{enumerate}
+    \item Decompose the tensor product of the irreducible $\slC$-modules $V(3) \otimes V(1)$ into a direct sum of irreducible modules.
+    \item Let $v_0$ be the highest weight vector of $V(3)$ (weight 3) and $u_0$ be the highest weight vector of $V(1)$ (weight 1). In the decomposition above, the highest weight component (isomorphic to $V(4)$) is generated by $v_0 \otimes u_0$. 
+    
+    Using the action of the lowering operator $f$ (via the rule $f(v \otimes u) = fv \otimes u + v \otimes fu$), find the specific linear combination of basis vectors that represents the \textbf{highest weight vector} of the component isomorphic to $V(2)$ (i.e., a vector of weight 2 that is annihilated by $e$).
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Advanced}
+
+\begin{exercise}
+Recall that the Casimir element in the universal enveloping algebra $U(\slC)$ is defined as $c = (h+1)^2 + 4fe$. It is known that $c$ acts as a scalar $(\lambda+1)^2$ on any irreducible module with highest weight $\lambda$.
+
+Consider the tensor product module $W = V(1) \otimes V(1) \otimes V(1)$ (note that the action of $ x \in \slC $ on triple tensor is $ x \cdot (v \otimes u \otimes w) =xv \otimes u \otimes w+ v \otimes xu \otimes w + v \otimes u \otimes xw $). Let $\{v_1, v_{-1}\}$ be the standard weight basis for the first $V(1)$, $\{u_1, u_{-1}\}$ for the second $V(1)$, $ \{w_1,w_{-1} \} $ for the third $V(1)$ (indices denote weights). The space $W$ has a basis $\{ v_1 \otimes u_1 \otimes w_1, v_1 \otimes u_1 \otimes w_{-1}, v_1 \otimes u_{-1} \otimes w_1, v_1 \otimes u_{-1} \otimes w_{-1}, v_{-1} \otimes u_1 \otimes w_1, v_{-1} \otimes u_1 \otimes w_{-1}, v_{-1} \otimes u_{-1} \otimes w_1, v_{-1} \otimes u_{-1} \otimes w_{-1} \}$.
+
+\begin{enumerate}
+    \item Write down the decomposition of $W$ into a direct sum of irreducible submodules.
+    \item How many highest weight vectors are there in $W$? Write down explicit expressions for each of them in terms of the product basis above.
+    \item Using the results above, determine the matrix representation of the operator $c$ acting on $W$ with respect to the product basis.
+\end{enumerate}
+\end{exercise}
+
+\section{Fnite Group Representation Theory}
+
+\subsection*{Basic}
+
+\begin{exercise}
+Let $G = S_3$ and let $V$ be the standard 2-dimensional irreducible representation. The character values for $V$ on the three conjugacy classes $e$, $(12)$, and $(123)$ are given by:
+\[ 
+\chi_V(e) = 2, \quad \chi_V((12)) = 0, \quad \chi_V((123)) = -1 
+\]
+Consider the tensor product representation $\rho = V \otimes V$.
+
+\begin{enumerate}
+    \item[(a)] Compute the character $\chi_\rho$ for all conjugacy classes and calculate the inner product $\langle \chi_\rho, \chi_\rho \rangle$. 
+    \item[(b)] Using the orthogonality relations, calculate the multiplicity of the trivial representation $\mathbf{1}$ in the decomposition of $\rho$. (Recall that $\chi_{\mathbf{1}}(g) = 1$ for all $g$).
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Intermediate}
+
+\begin{exercise}
+Let $G = S_3$. Consider the set $X = \{(i, j) \mid 1 \le i, j \le 3, i \neq j\}$ of ordered pairs of distinct elements from $\{1, 2, 3\}$. The size of $X$ is 6. $S_3$ acts on $X$ naturally by $\sigma \cdot (i, j) = (\sigma(i), \sigma(j))$.
+Let $\pi$ be the associated permutation representation on the vector space $\mathbb{C}[X]$.
+
+\begin{enumerate}
+    \item[(a)] Determine the character $\chi_\pi$ of this representation by counting the fixed points for representatives of each conjugacy class: $e$, $(12)$, and $(123)$.
+    \item[(b)] Decompose $\chi_\pi$ into a sum of irreducible characters of $S_3$.
+\end{enumerate}
+\end{exercise}
+
+\subsection*{Advanced}
+
+\begin{exercise}
+Let $G = S_4$ and let $W$ be the standard 3-dimensional irreducible representation defined by:
+\[ W = \left\{ (x_1, x_2, x_3, x_4) \in \mathbb{C}^4 \mid \sum_{i=1}^4 x_i = 0 \right\} \]
+where $G$ acts by permuting the coordinates.
+
+Let $H = S_3$ be the subgroup of $G$ consisting of permutations that fix the index 4 (i.e., permutations of $\{1, 2, 3\}$). Consider the permutation representation $\ell^H$ on the coset space $\mathbb{C}[G/H]$.
+
+\begin{enumerate}
+    \item[(a)] The multiplicity of an irreducible representation $V_k$ in $\ell^H$ is given by $m_k = \dim(V_k^{*H})$, where $V_k^{*H}$ is the subspace of vectors in $V_k^*$ fixed by all elements of $H$.
+    
+    Explicitly construct the subspace $W^H = \{ w \in W \mid \sigma \cdot w = w, \forall \sigma \in H \}$.
+
+    \item[(b)] Based on your construction in part (a), determine the dimension $\dim(W^H)$ and thus the multiplicity of the standard representation $W$ in the decomposition of $\ell^H$.
+\end{enumerate}
+\end{exercise}
+
+
+\section{Solutions}
+
+\subsection{Lie Algebra and Representation Theory}
+
+\textbf{Solution to Problem 1}
+
+\textbf{1. Proof that $\mathfrak{h}$ is a Lie subalgebra:}
+
+We calculate the Lie brackets for the basis elements $d_{-1}, d_0, d_1$ using the defining relation $[d_n, d_m] = (m-n)d_{n+m}$.
+\begin{align*}
+    [d_0, d_{-1}] &= (-1 - 0)d_{0+(-1)} = -d_{-1} \in \mathfrak{h} \\
+    [d_0, d_1] &= (1 - 0)d_{0+1} = d_1 \in \mathfrak{h} \\
+    [d_1, d_{-1}] &= (-1 - 1)d_{1+(-1)} = -2d_0 \in \mathfrak{h}
+\end{align*}
+Since the result of the bracket operation between any two basis vectors lies within the span of the basis vectors $\{d_{-1}, d_0, d_1\}$, the subspace $\mathfrak{h}$ is closed under the Lie bracket. Thus, $\mathfrak{h}$ is a Lie subalgebra of $W_1$.
+
+\vspace{0.5cm}
+
+\textbf{2. Explicit Isomorphism:}
+
+Let $\phi: \slC \to \mathfrak{h}$ be a linear map defined on the standard basis $\{e, f, h\}$ as follows:
+\[
+\phi(e) = d_1, \quad \phi(f) = -d_{-1}, \quad \phi(h) = 2d_0.
+\]
+We verify that this map preserves the Lie bracket relations of $\slC$:
+
+\begin{itemize}
+    \item \textbf{Relation $[h, e] = 2e$:}
+    \[ [\phi(h), \phi(e)] = [2d_0, d_1] = 2[d_0, d_1] = 2(d_1) = 2\phi(e). \quad \checkmark \]
+
+    \item \textbf{Relation $[h, f] = -2f$:}
+    \[ [\phi(h), \phi(f)] = [2d_0, -d_{-1}] = -2[d_0, d_{-1}] = -2(-d_{-1}) = 2d_{-1}. \]
+    On the other hand, $-2\phi(f) = -2(-d_{-1}) = 2d_{-1}$. Thus, the relation holds. \quad \checkmark
+
+    \item \textbf{Relation $[e, f] = h$:}
+    \[ [\phi(e), \phi(f)] = [d_1, -d_{-1}] = -[d_1, d_{-1}] = -(-2d_0) = 2d_0 = \phi(h). \quad \checkmark \]
+\end{itemize}
+
+Thus, the map $\phi$ is an isomorphism of Lie algebras.
+
+\hrulefill
+
+\textbf{Solution to Problem 2}
+
+\textbf{1. Rewriting $x^2 y^2$ in terms of $d$:}
+
+We use the relation $xy = yx - 1 = d - 1$. First, we establish the commutation relation between $x$ and $d$. Since $d = yx$:
+\[
+dx = (yx)x = yx^2 = (xy+1)x = x(yx) + x = xd + x = x(d+1).
+\]
+(Alternatively, using the commutator $[d, x] = y[x, x] + [y, x]x = 0 + 1 \cdot x = x$, so $dx - xd = x$).
+
+Now we compute $x^2 y^2$:
+\begin{align*}
+    x^2 y^2 &= x (xy) y \\
+    &= x (d-1) y \\
+    &= (xd)y - xy \\
+    &= (dx - x)y - (d-1) \\
+    &= d(xy) - xy - d + 1 \\
+    &= d(d-1) - (d-1) - d + 1 \\
+    &= d^2 - d - d + 1 - d + 1 \\
+    &= d^2 - 3d + 2.
+\end{align*}
+Thus, the constants are $a=1, b=-3, c=2$.
+
+\vspace{0.5cm}
+
+\textbf{2. Basis of $A_1$:}
+
+$A_1$ is defined as the quotient of the free algebra $\C\langle x, y \rangle$ by the ideal $I = \langle yx - xy - 1 \rangle$. We assume a filtration on $A_1$ where $\deg(x) = \deg(y) = 1$. The associated graded algebra $\mathrm{gr}(A_1)$ is generated by $\bar{x}, \bar{y}$ with the relation:
+\[ \bar{y}\bar{x} - \bar{x}\bar{y} = 0 \]
+(since the non-commutative term $1$ has degree 0, which is strictly lower than degree 2).
+Thus, $\mathrm{gr}(A_1) \cong \C[x, y]$ (the commutative polynomial ring). 
+
+The set of monomials $\{x^i y^j \mid i, j \in \N\}$ forms a basis for the commutative polynomial ring $\C[x, y]$. By the standard argument for filtered algebras (analogous to the Poincaré-Birkhoff-Witt theorem), the set of ordered monomials $\{x^i y^j \mid i, j \in \N\}$ forms a vector space basis for $A_1$.
+
+\hrulefill
+
+\textbf{Solution to Problem 3}
+
+\textbf{1. Irreducibility of $V(-1, 0)$:}
+
+The action is given by $d_n \cdot v_k = (k - n) v_{k+n}$ (where we identify $v_k = z^k (\der z)^{-1}$). This module is isomorphic to the adjoint representation of $W_1$ (via $v_k \leftrightarrow d_k$). Since $W_1$ is simple, its adjoint representation is irreducible.
+
+\textit{Direct Proof:} Let $U$ be a non-zero submodule. Let $v = \sum a_k v_k \in U$ ($v \neq 0$). The operator $d_0$ acts diagonally ($d_0 v_k = k v_k$), so we can isolate individual basis vectors $v_k \in U$.
+\begin{itemize}
+    \item Apply $d_{-k}$ to $v_k$: $d_{-k} v_k = (k - (-k)) v_0 = 2k v_0$. If $k \neq 0$, we generate $v_0$.
+    \item If we start with $v_0$, applying $d_n$ gives $d_n v_0 = (0-n) v_n = -n v_n$. This generates all $v_n$ for $n \neq 0$.
+    \item If we start with $v_{-1}$, apply $d_1$: $d_1 v_{-1} = (-1-1) v_0 = -2 v_0$.
+\end{itemize}
+Thus, from any non-zero vector, we can generate the entire space. $V(-1, 0)$ is irreducible.
+
+\vspace{0.5cm}
+
+\textbf{2. Reducibility of $V(1, 0)$:}
+
+The action is $d_n \cdot z^k \der z = (k+n) z^{k+n} \der z$. Let $v_k = z^k \der z$.
+Consider the vector $v_0 = \der z$ (index $k=0$).
+\[ d_n \cdot v_0 = (0+n) v_n = n v_n. \]
+$v_0$ generates the whole module (for $n \neq 0$). However, can we reach $v_0$ from other vectors? Suppose we have $v_k$ with $k \neq 0$. Applying $d_{-k}$:
+\[ d_{-k} \cdot v_k = (k + (-k)) v_0 = 0 \cdot v_0 = 0. \]
+The coefficient is always 0 when the target index is 0. Thus, $v_0$ cannot be generated by any other basis vector. The subspace spanned by all vectors \textit{except} $v_0$ is invariant.
+Let $W = \mathrm{span}_{\C} \{ z^k \der z \mid k \in \Z, k \neq 0 \}$.
+\begin{itemize}
+    \item If $k+n \neq 0$, $d_n v_k = (k+n)v_{k+n} \in W$.
+    \item If $k+n = 0$, $d_n v_k = 0 \in W$.
+\end{itemize}
+Thus, $W$ is a proper submodule, and $V(1, 0)$ is reducible.
+
+\vspace{0.5cm}
+
+\textbf{3. Isomorphism of $W$:}
+
+Consider the module $V(0,0) = \C[z, z^{-1}]$ with action $d_n z^k = k z^{k+n}$. The subspace $\C \cdot 1$ ($k=0$) is a trivial submodule. The quotient $M = V(0,0)/\C$ has a basis $\{ [z^k] \mid k \neq 0 \}$.
+The action on the quotient is $d_n [z^k] = k [z^{k+n}]$.
+
+Define $\phi: W \to M$ by $\phi(z^k \der z) = \frac{1}{k} [z^k]$ for $k \neq 0$. We check equivariance:
+\[ \phi(d_n \cdot z^k \der z) = \phi((k+n) z^{k+n} \der z) = (k+n) \frac{1}{k+n} [z^{k+n}] = [z^{k+n}]. \]
+\[ d_n \cdot \phi(z^k \der z) = d_n \left( \frac{1}{k} [z^k] \right) = \frac{1}{k} (k [z^{k+n}]) = [z^{k+n}]. \]
+The actions match, and $\phi$ is a bijection on the basis. Thus $W \simeq V(0,0)/\C$.
+
+\hrulefill
+
+\textbf{Solution to Problem 4}
+
+\textbf{1. Decomposition:}
+
+Using the Clebsch-Gordan rule for $\slC$:
+\[ V(3) \otimes V(1) \cong V(3+1) \oplus V(3-1) = V(4) \oplus V(2). \]
+
+\vspace{0.5cm}
+
+\textbf{2. Highest Weight Vector of $V(2)$:}
+
+Let $v_k$ denote a basis vector of weight $3-2k$ in $V(3)$ (where $v_0$ is HW) and $u_k$ denote a basis vector of weight $1-2k$ in $V(1)$ (where $u_0$ is HW).
+The action of the lowering operator $f$ (unnormalized) is $f v_k \propto v_{k+1}$. Specifically, for the highest weight vectors: $f v_0 = C_1 v_1$ and $f u_0 = C_2 u_1$. For simplicity, we assume standard normalization where coefficients are non-zero.
+
+The highest weight vector of the $V(4)$ component is $w_{V(4)} = v_0 \otimes u_0$.
+The vector in $V(4)$ with weight $2$ (one step down) is:
+\[ f(v_0 \otimes u_0) = (f v_0) \otimes u_0 + v_0 \otimes (f u_0) = 3 v_1 \otimes u_0 + v_0 \otimes u_1. \]
+(Note: Using the convention $f(x^k) = (m-k)x^{k+1}$ for $V(m)$, we get coeff 3 for $V(3)$ and 1 for $V(1)$).
+
+The highest weight vector $\psi$ of the $V(2)$ component must lie in the same weight space (weight $3+1-2=2$) and be orthogonal to $f(v_0 \otimes u_0)$ (or equivalently, annihilated by $e$).
+Let $\psi = A (v_1 \otimes u_0) + B (v_0 \otimes u_1)$.
+Applying the raising operator $e$ (with $e v_1 = v_0$ and $e u_1 = u_0$, up to scaling):
+\begin{align*}
+    e \psi &= A (e v_1 \otimes u_0 + v_1 \otimes e u_0) + B (e v_0 \otimes u_1 + v_0 \otimes e u_1) \\
+    &= A (v_0 \otimes u_0) + B (v_0 \otimes u_0) \\
+    &= (A+B) (v_0 \otimes u_0).
+\end{align*}
+For $\psi$ to be a highest weight vector, we need $e \psi = 0$, which implies $A = -B$.
+Thus, the vector is (up to a scalar):
+\[ \psi = v_1 \otimes u_0 - v_0 \otimes u_1. \]
+
+\hrulefill
+
+\textbf{Solution to Problem 5}
+
+\textbf{1. Decomposition of $W = V(1) \otimes V(1) \otimes V(1)$:}
+
+First step: $V(1) \otimes V(1) \cong V(2) \oplus V(0)$.
+Second step:
+\begin{align*}
+    (V(2) \oplus V(0)) \otimes V(1) &\cong (V(2) \otimes V(1)) \oplus (V(0) \otimes V(1)) \\
+    &\cong (V(3) \oplus V(1)) \oplus V(1).
+\end{align*}
+Total decomposition:
+\[ W \cong V(3) \oplus V(1) \oplus V(1). \]
+
+\vspace{0.5cm}
+
+\textbf{2. Highest Weight Vectors:}
+
+There are 3 highest weight vectors. Let $e_1$ (weight 1) and $e_{-1}$ (weight -1) be the basis of $V(1)$. Notation: $e_{ijk} = e_i \otimes e_j \otimes e_k$.
+
+\begin{itemize}
+    \item \textbf{For $V(3)$:} The unique state with max weight $1+1+1=3$.
+    \[ w_{V(3)} = e_{111} \]
+    
+    \item \textbf{For the two $V(1)$ components:} These must have weight 1 and be annihilated by $e$.
+    
+    \textbf{First HW vector (via $V(2) \otimes V(1)$):}
+    The weight 0 state in $V(2)$ is proportional to $e_{1,-1} + e_{-1,1}$.
+    Coupling $V(2)$ (weight 0) and $V(1)$ (weight 1) to get $V(1)$ requires the combination $v_{\text{mid}} \otimes u_{\text{high}} - v_{\text{high}} \otimes u_{\text{low}}$.
+    Let $v_{\text{high}} = e_{11}$ and $v_{\text{mid}} = e_{1,-1} + e_{-1,1}$.
+    \[ \psi_1 = (e_{1,-1} + e_{-1,1}) \otimes e_1 - 2(e_{11}) \otimes e_{-1} = e_{1,-1,1} + e_{-1,1,1} - 2e_{1,1,-1}. \]
+    
+    \textbf{Second HW vector (via $V(0) \otimes V(1)$):}
+    The $V(0)$ singlet state is $e_{1,-1} - e_{-1,1}$. Coupling this with $V(1)$ is trivial (tensor product).
+    \[ \psi_2 = (e_{1,-1} - e_{-1,1}) \otimes e_1 = e_{1,-1,1} - e_{-1,1,1}. \]
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{3. Matrix of the Casimir Operator $c$:}
+
+The Casimir element acts as a scalar $(\lambda+1)^2$ on $V(\lambda)$.
+\begin{itemize}
+    \item On $V(3)$: eigenvalue $(3+1)^2 = 16$.
+    \item On $V(1)$: eigenvalue $(1+1)^2 = 4$.
+\end{itemize}
+The matrix is block diagonal with respect to the weight spaces. We focus on the **weight 1 subspace**, spanned by $\{ e_{1,1,-1}, e_{1,-1,1}, e_{-1,1,1} \}$. Let's denote these basis vectors as $x, y, z$ respectively.
+
+We know the spectral decomposition of the operator $c$ on this subspace.
+One eigenvector is $v_3 = x+y+z$ (part of $V(3)$) with eigenvalue 16.
+Two eigenvectors (orthogonal complement) are in $V(1)$ with eigenvalue 4.
+The operator can be written as:
+\[ M = 16 P_{V(3)} + 4 P_{V(1)\oplus V(1)}. \]
+Since $P_{V(1)\oplus V(1)} = I - P_{V(3)}$, we have $M = 4I + 12 P_{V(3)}$.
+The projection onto the vector $\mathbf{1} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$ is $P_{V(3)} = \frac{1}{3} \mathbf{1}\mathbf{1}^T = \frac{1}{3} \begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{pmatrix}$.
+Thus,
+\[ M = \begin{pmatrix} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 4 \end{pmatrix} + \begin{pmatrix} 4 & 4 & 4 \\ 4 & 4 & 4 \\ 4 & 4 & 4 \end{pmatrix} = \begin{pmatrix} 8 & 4 & 4 \\ 4 & 8 & 4 \\ 4 & 4 & 8 \end{pmatrix}. \]
+
+The full matrix for $W$ is block diagonal.
+\begin{itemize}
+    \item On subspace $\{e_{111}\}$ (Weight 3): $[16]$.
+    \item On subspace $\{e_{1,1,-1}, e_{1,-1,1}, e_{-1,1,1}\}$ (Weight 1): $\begin{pmatrix} 8 & 4 & 4 \\ 4 & 8 & 4 \\ 4 & 4 & 8 \end{pmatrix}$.
+    \item On subspace $\{e_{-1,-1,1}, e_{-1,1,-1}, e_{1,-1,-1}\}$ (Weight -1): $\begin{pmatrix} 8 & 4 & 4 \\ 4 & 8 & 4 \\ 4 & 4 & 8 \end{pmatrix}$.
+    \item On subspace $\{e_{-1,-1,-1}\}$ (Weight -3): $[16]$.
+\end{itemize}
+
+\subsection{Finite Group Representation Theory}
+
+\textbf{Solution to Problem 1}
+
+\textbf{(a) Computing $\chi_\rho$}
+
+According to Proposition 12.20, the character of a tensor product is the product of the characters:
+\[ \chi_\rho(g) = \chi_{V \otimes V}(g) = \chi_V(g) \cdot \chi_V(g) = (\chi_V(g))^2 \]
+
+We compute the values for each conjugacy class:
+\begin{itemize}
+    \item Class $e$: $\chi_\rho(e) = (2)^2 = 4$.
+    \item Class $(12)$: $\chi_\rho((12)) = (0)^2 = 0$.
+    \item Class $(123)$: $\chi_\rho((123)) = (-1)^2 = 1$.
+\end{itemize}
+
+The sizes of the conjugacy classes in $S_3$ are: $|C_e| = 1$, $|C_{(12)}| = 3$, $|C_{(123)}| = 2$. The order of the group is $|G| = 6$.
+
+Now, we calculate the inner product $\langle \chi_\rho, \chi_\rho \rangle$:
+\[
+\begin{aligned}
+\langle \chi_\rho, \chi_\rho \rangle &= \frac{1}{|G|} \sum_{g \in G} |\chi_\rho(g)|^2 \\
+&= \frac{1}{6} \left( 1 \cdot (4)^2 + 3 \cdot (0)^2 + 2 \cdot (1)^2 \right) \\
+&= \frac{1}{6} (16 + 0 + 2) \\
+&= \frac{18}{6} = 3.
+\end{aligned}
+\]
+
+\vspace{1em}
+\textbf{(b) Multiplicity of the Trivial Representation}
+
+Let $n_{\mathbf{1}}$ be the multiplicity of the trivial representation $\mathbf{1}$ in $\rho$. By Corollary 14.14:
+\[ n_{\mathbf{1}} = \langle \chi_\rho, \chi_{\mathbf{1}} \rangle \]
+Recall that $\chi_{\mathbf{1}}(g) = 1$ for all $g$.
+\[
+\begin{aligned}
+\langle \chi_\rho, \chi_{\mathbf{1}} \rangle &= \frac{1}{6} \sum_{\text{classes}} |C_g| \cdot \chi_\rho(g) \cdot \overline{\chi_{\mathbf{1}}(g)} \\
+&= \frac{1}{6} \left( 1 \cdot 4 \cdot 1 + 3 \cdot 0 \cdot 1 + 2 \cdot 1 \cdot 1 \right) \\
+&= \frac{1}{6} (4 + 0 + 2) \\
+&= \frac{6}{6} = 1.
+\end{aligned}
+\]
+Thus, the multiplicity of the trivial representation is \textbf{1}.
+
+\hrulefill
+
+\textbf{Solution to problem 2}
+
+\textbf{(a) Determining the Character $\chi_\pi$}
+
+For a permutation representation, the character value $\chi_\pi(g)$ is equal to the number of elements in the set $X$ fixed by $g$.
+\[ \chi_\pi(g) = |\{ x \in X \mid g \cdot x = x \}| \]
+An element $(i, j) \in X$ is fixed by $\sigma$ if and only if $\sigma(i) = i$ AND $\sigma(j) = j$.
+
+\begin{itemize}
+    \item \textbf{Class $e$:} The identity fixes all elements. Since $|X| = 6$,
+    \[ \chi_\pi(e) = 6. \]
+    
+    \item \textbf{Class $(12)$:} This permutation swaps $1 \leftrightarrow 2$ and fixes $3$.
+    For a pair $(i, j)$ to be fixed, both $i$ and $j$ must be fixed points of $(12)$. The only fixed point is $3$.
+    However, elements in $X$ must have distinct indices ($i \neq j$). We cannot form a pair $(3, 3)$ because $i$ must not equal $j$.
+    Thus, there are no pairs $(i, j)$ with $i \neq j$ formed solely from the fixed point set $\{3\}$.
+    \[ \chi_\pi((12)) = 0. \]
+    
+    \item \textbf{Class $(123)$:} This permutation cycles $1 \to 2 \to 3 \to 1$. It has no fixed points in $\{1, 2, 3\}$.
+    Consequently, it cannot fix any pair $(i, j)$.
+    \[ \chi_\pi((123)) = 0. \]
+\end{itemize}
+
+The character is $\chi_\pi = (6, 0, 0)$.
+
+\vspace{1em}
+\textbf{(b) Decomposition into Irreducible Characters}
+
+The irreducible characters of $S_3$ are:
+\begin{itemize}
+    \item Trivial $\mathbf{1}$: $(1, 1, 1)$
+    \item Sign $\varepsilon$: $(1, -1, 1)$
+    \item Standard $V$: $(2, 0, -1)$
+\end{itemize}
+
+We calculate the multiplicities $n_k = \langle \chi_\pi, \chi_k \rangle$:
+
+1. \textbf{Multiplicity of $\mathbf{1}$:}
+\[ n_{\mathbf{1}} = \frac{1}{6} (1 \cdot 6 \cdot 1 + 3 \cdot 0 \cdot 1 + 2 \cdot 0 \cdot 1) = \frac{6}{6} = 1. \]
+
+2. \textbf{Multiplicity of $\varepsilon$:}
+\[ n_{\varepsilon} = \frac{1}{6} (1 \cdot 6 \cdot 1 + 3 \cdot 0 \cdot (-1) + 2 \cdot 0 \cdot 1) = \frac{6}{6} = 1. \]
+
+3. \textbf{Multiplicity of $V$:}
+\[ n_{V} = \frac{1}{6} (1 \cdot 6 \cdot 2 + 3 \cdot 0 \cdot 0 + 2 \cdot 0 \cdot (-1)) = \frac{12}{6} = 2. \]
+
+\textbf{Check dimensions:} $1 \cdot \dim(\mathbf{1}) + 1 \cdot \dim(\varepsilon) + 2 \cdot \dim(V) = 1 + 1 + 2(2) = 6 = \dim(\pi)$. This matches.
+
+\textbf{Conclusion:} The decomposition is:
+\[ \pi \cong \mathbf{1} \oplus \varepsilon \oplus 2V. \]
+
+\hrulefill
+
+\textbf{Solution to problem 3}
+
+\textbf{(a) Construction of the Subspace $W^H$}
+
+Let $w \in W$. We can write $w$ as a vector $(x_1, x_2, x_3, x_4) \in \mathbb{C}^4$.
+For $w$ to be in $W^H$, it must satisfy two conditions:
+\begin{enumerate}
+    \item \textbf{The Subspace Condition ($w \in W$):} The sum of coordinates must be zero.
+    \[ x_1 + x_2 + x_3 + x_4 = 0 \quad (*). \]
+    
+    \item \textbf{The Invariance Condition ($H$-fixed):} For all $\sigma \in H$, $\sigma \cdot w = w$.
+    The subgroup $H = S_3$ permutes the indices $\{1, 2, 3\}$ and leaves index $4$ fixed.
+    Since $H$ contains all transpositions of $\{1, 2, 3\}$, specifically $(12)$ and $(23)$, we must have:
+    \begin{itemize}
+        \item Invariance under $(12)$: $(x_2, x_1, x_3, x_4) = (x_1, x_2, x_3, x_4) \implies x_1 = x_2$.
+        \item Invariance under $(23)$: $(x_1, x_3, x_2, x_4) = (x_1, x_2, x_3, x_4) \implies x_2 = x_3$.
+    \end{itemize}
+    Therefore, for $w$ to be invariant under $H$, the first three coordinates must be equal. Let $x_1 = x_2 = x_3 = \alpha$ for some $\alpha \in \mathbb{C}$.
+\end{enumerate}
+
+Now, substitute this into the subspace condition $(*)$:
+\[ \alpha + \alpha + \alpha + x_4 = 0 \implies 3\alpha + x_4 = 0 \implies x_4 = -3\alpha. \]
+
+Thus, any vector $w \in W^H$ must be of the form:
+\[ w = (\alpha, \alpha, \alpha, -3\alpha) = \alpha(1, 1, 1, -3). \]
+This vector satisfies the sum condition ($1+1+1-3=0$), so it is indeed in $W$.
+
+The subspace is explicitly:
+\[ W^H = \operatorname{span}_{\mathbb{C}} \{ (1, 1, 1, -3) \}. \]
+
+\vspace{1em}
+\textbf{(b) Dimension and Multiplicity}
+
+From the construction in part (a), we see that $W^H$ is spanned by a single non-zero basis vector $v = (1, 1, 1, -3)$.
+Therefore:
+\[ \dim(W^H) = 1. \]
+
+The multiplicity of the irreducible representation $W$ in the decomposition of $\ell^H$ is equal to the dimension of the fixed-point subspace $W^H$.
+
+Thus, the multiplicity of $W$ in $\ell^H$ is \textbf{1}.
+
+
+% ------------------------------------------------------------------------------
+
+\end{document}

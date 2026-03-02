@@ -1,0 +1,261 @@
+\documentclass[11pt, a4paper]{report}
+%----------------------------------------------------------------------------------------
+%	PACKAGES (宏包管理)
+%----------------------------------------------------------------------------------------
+% 1. 编码与语言
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+% 2. 页面布局与排版
+\usepackage{geometry}
+\geometry{
+    textheight=9in,
+    textwidth=6in, % 稍微加宽以便放入更好的box
+    top=1in,
+    bottom=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{float}
+\usepackage{enumitem} % 更好的列表控制
+\usepackage{tocloft}  % 加载目录控制宏包
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % 强制让 section 后面显示点号
+% 3. 数学支持
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{thmtools} % 定理环境增强
+\usepackage{extarrows}
+% 4. 图形与颜色
+\usepackage{graphicx}
+\usepackage[dvipsnames, svgnames]{xcolor} % 加载更多颜色名
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ytableau} % 杨表
+\usetikzlibrary{decorations.pathreplacing, calc, shadows}
+% 5. 漂亮的文本框
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+% 6. 参考文献
+%\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015]{biblatex}
+%\addbibresource{references.bib}
+% 7. 交互 (最后加载)
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+%----------------------------------------------------------------------------------------
+%	CUSTOM COLORS (自定义配色方案)
+%----------------------------------------------------------------------------------------
+% 定理色系 - 蓝色
+\definecolor{ThmColor}{RGB}{0, 71, 171}        % 深钴蓝
+\definecolor{ThmBg}{RGB}{240, 244, 255}        % 极浅蓝
+% 定义色系 - 绿色
+\definecolor{DefColor}{RGB}{0, 100, 0}         % 深绿
+\definecolor{DefBg}{RGB}{240, 255, 240}        % 蜜瓜绿
+% 引理/命题色系 - 橙色
+\definecolor{LemColor}{RGB}{204, 85, 0}        % 焦橙色
+\definecolor{LemBg}{RGB}{255, 248, 240}        % 极浅橙
+% 示例/注记色系 - 灰色/紫色
+\definecolor{ExColor}{RGB}{105, 105, 105}      % 暗灰
+\definecolor{ExBg}{RGB}{250, 250, 250}         % 极浅灰
+% 专题/话题色系 - 靛紫色
+\definecolor{TopicColor}{RGB}{75, 0, 130}      % 靛蓝色 (Indigo)
+\definecolor{TopicBg}{RGB}{248, 245, 255}      % 极浅紫
+%----------------------------------------------------------------------------------------
+%	THEOREM ENVIRONMENTS (环境美化核心)
+%----------------------------------------------------------------------------------------
+% 1. Theorem (蓝色风格)
+\declaretheorem[name=Theorem, numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{
+    enhanced jigsaw,
+    colframe=ThmColor,       % 边框颜色
+    colback=ThmBg,           % 背景颜色
+    coltitle=white,          
+    boxrule=0.5pt,           % 边框粗细
+    leftrule=2pt,            % 左边框加粗
+    sharp corners=downhill,  % 样式
+    breakable,               % 允许跨页
+    drop shadow=black!5!white % 轻微阴影
+}
+% Corollary 使用与 Theorem 相同的风格，但通常紧随其后
+\declaretheorem[name=Corollary, numberlike=theorem]{corollary}
+\tcolorboxenvironment{corollary}{
+    enhanced jigsaw,
+    colframe=ThmColor!80!white, 
+    colback=ThmBg,
+    boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
+    breakable
+}
+% 2. Definition (绿色风格)
+\declaretheorem[name=Definition, numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{
+    enhanced jigsaw,
+    colframe=DefColor,
+    colback=DefBg,
+    boxrule=0.5pt, leftrule=2pt,
+    sharp corners=downhill,
+    breakable,
+    drop shadow=black!5!white
+}
+% 3. Lemma & Proposition (橙色风格)
+\declaretheorem[name=Lemma, numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition, numberlike=theorem]{proposition}
+\tcolorboxenvironment{lemma}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+\tcolorboxenvironment{proposition}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+% 4. Example & Remark (简约风格)
+\declaretheorem[name=Example, numberlike=theorem]{example}
+\declaretheorem[name=Remark, numberlike=theorem]{remark}
+\declaretheorem[name=Exercise, numberlike=theorem]{exercise}
+\tcolorboxenvironment{example}{
+    enhanced jigsaw,
+    colframe=ExColor,
+    colback=ExBg,
+    leftrule=2pt, boxrule=0pt,
+    frame hidden, % 隐藏其他三边
+    breakable
+}
+% 5. Topic (靛紫色风格，带标题支持)
+\declaretheorem[name=Topic, numberlike=theorem]{topic}
+\tcolorboxenvironment{topic}{
+    enhanced jigsaw,
+    breakable,
+    colframe=TopicColor,        % 边框为靛紫色
+    colback=TopicBg,           % 背景为极浅紫
+    boxrule=0.5pt,             % 细边框
+    leftrule=2pt,              % 左侧加粗线
+    sharp corners=downhill,    % 与你其他环境一致的切角样式
+    drop shadow=black!5!white, % 轻微阴影
+    before skip=15pt,
+    after skip=15pt
+}
+%----------------------------------------------------------------------------------------
+%	MATH MACROS (保留你的常用定义)
+%----------------------------------------------------------------------------------------
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\der}{\mathrm{d}} 
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    \textsc{\Large Course Notes}\\[0.5cm]
+
+    \HRule{1.5pt} \\[0.5cm]
+    { \huge \bfseries TOPICS IN ALGEBRA: \\[0.3cm] GROUP THEORY }\\[0.4cm] 
+    \HRule{1.5pt} \\[1.5cm]
+    
+    \vspace{3cm}
+
+    % 人员信息区域：垂直排列并区分字号
+    \begin{spacing}{1.8}
+        {\Large \textbf{Instructor:}} \\
+        {\Large Prof. Efilm \textsc{Zelmanov}} \\[0.8cm]
+        
+        {\normalsize \textit{Student:}} \\
+        {\normalsize Leo}
+    \end{spacing}
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%    CONTENT STRUCTURE TEMPLATE
+%----------------------------------------------------------------------------------------
+\chapter{Lecture 1}
+
+
+\chapter{Lecture 2}
+
+Recall last time: 
+
+1. Matrix Lie algebras, e.g. $ \mathfrak{sl}(n) $. Consider involution $ * : M_n(F) \to M_n(F) $ skew-symmetric matrices.
+
+2. Derivation, $ \operatorname{Der}(A) $. e.g. $ A=F[t_1,\ldots ,t_n] $, $ \mathrm{d}=\sum_{min}^{max} f_i() \partial $
+
+A non-associative algebra, $ \mathrm{d}: x \mapsto [a,x] $ is a derivation. 
+
+Let $ L $ a Lie algebra, inner derivation
+
+Q: $ \mathrm{d} $ a derivation and $ \operatorname{exp}(\mathrm{d}) $. It need convergence.
+
+\begin{example} 
+$ \mathrm{d}=t_1t_2 \frac{\partial}{\partial t_1} $.  
+\end{example}
+
+3. Brackets: 
+
+\section{Engel Theorem}
+
+$ L^n $: span of products of elements of length $ n $. Recall $ \mathrm{ad}([a,b])=[\mathrm{ad}(a),\mathrm{ad}(b)] $. $ L \to \operatorname{End}_F(L)^{(-)} , a \mapsto \mathrm{ad}(a)$. 
+
+$ [I,J] $ is again an ideal.
+
+Decending chain:
+\[
+L=L^1 \supseteq L^2 \supseteq \ldots
+\]
+L is nilpotent if....
+
+eg: strict upper matrix
+
+Another decending chain: $ L^{[1]}=[L,L] $, $ L^{[n+1]}=[L^{[n]},L^{[n]}] $  
+
+L is solvable if .....
+
+e.g. 2 dimentional sovable non nilpotent Lie alg.
+
+$ A $ associa. $ L \subseteq A^{(-)} $. Suppose $ A = <L> $ as an associa alge. Then A is an enveloping algebra of $ L $.
+
+\begin{theorem} 
+Let $ A $ be a finite dimensional associative algebra, $ L\subseteq A^{(-)} $, $ A = <L> $. $ \exists n \ge 1 $, $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.       
+\end{theorem}
+
+We say that a subset $S \subseteq L$ is a Lie subset if $ \forall a,b \in S $, $ [a,b] \in S $.
+
+\begin{theorem} 
+Let $ A $ be a finite dimensional associative algebra, $ L\subseteq A^{(-)} $, $ A = <L> $. Let $ S $ be a Lie subset of $ L $. $ L = \mathrm{span}(S) $, $ \forall a \in S $, $ a^n=0 $.    
+\end{theorem}
+
+Choose a maximal Lie subset $ S_1 \subset S $ such that the associative $ <S_1> $ is nilpotent. So $ \exists n $ such that $ S_1 \ldots S_1 =(0) $ (n times)   (existance?)
+
+claim $ \mathrm{ad}(S_1) \ldots \mathrm{ad}(S_n)=(0) $.
+
+  
+
+
+
+
+\end{document}
+
+

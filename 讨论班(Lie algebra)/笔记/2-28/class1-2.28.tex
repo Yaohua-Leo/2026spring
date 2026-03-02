@@ -1,0 +1,106 @@
+\documentclass{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+\usepackage[UTF8]{ctex}
+\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015,gbalign=left,sorting=gb7714-2015]{biblatex}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+
+\tcbuselibrary{breakable}
+
+\addbibresource{references.bib}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=White}
+
+\declaretheoremstyle[name=Definition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=White}
+
+\declaretheoremstyle[name=Lemma,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=White}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+\def\E{\mathop{\mathcal E}}
+\def\D{\mathop{\mathcal D}}
+\def\lhdeq{\mathop{\trianglelefteq}}
+\def\<{\mathop{\langle}}
+\def\>{\mathop{\rangle}}
+\def\l{\mathop{\ell}}
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+
+\newcommand{\slC}{\mathfrak{sl}(2, \mathbb{C})}
+\newcommand{\vir}{\mathfrak{vir}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\N}{\mathbb{N}}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ----------------------------------------------------------------------
+\section*{讨论班安排}
+
+\begin{itemize}
+\item 时间：每周一9-10节（19:00-20：:50）。
+\item 地点：一教121。
+\item 指导教师：VProf. Vyacheslav Futorny。
+\item 主持人：刘耀华。
+\item 讨论班形式：自行报名，填写群文件中“2026春李代数讨论班pre报名”在线表格，在报名时间进行pre。
+\item 主题要求：本讨论班是Zelmanov教授“李理论”课程的workshop，根据李理论课程内容自行选择topic进行讨论，讨论内容可以是课程内容的延伸和推广，也可以是参考书内容的介绍和课后习题解答。参考书为：Introduction to Lie Algebras and Representation Theory, J.E. Humphreys, Springer. 
+\item 流程：周一，周三（双）为李理论课程时间，需要做pre的同学在这1-2次课中选取topic，在下周一的9-10节讨论班上进行pre，时长不超过90分钟。并且在14周前把你的讲稿发给主持人。讨论班结束后，主持人将对pre内容进行总结，并在群文件中上传总结内容。每次内容的记录（pre或纯讲稿，见下文）会记录贡献者姓名和pre时间，作为讨论班的参与记录。并不定时向Futorny教授或Zelmanov教授汇报记录内容，以展示讨论班的进展情况。
+\item 学分相关：本讨论班为后置名单课程，请需要学分的同学qq私信我你的姓名与学号方便统计，我会在第14周将审核合格的名单上报给数学系完成学分评定。
+\item 如何审核合格？
+     \begin{enumerate}
+         \item 至少完成一次pre，或者从做pre的同学没有涉及的内容中选取topic，提交一次讲稿。
+         \item 积极参与线上，线下讨论。 
+     \end{enumerate}
+\item 补充：我会尽量邀请Futorny教授或Zelmanov教授，或者其他教授、博后来参加讨论班，听取同学们的pre内容，并给予指导。邀请成功后我会提前在群里通知大家。
+\end{itemize}
+
+
+
+
+\end{document}

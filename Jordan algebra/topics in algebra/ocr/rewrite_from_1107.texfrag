@@ -1,0 +1,880 @@
+Let $A$ be an algebra. Denote by $\operatorname{rad}(A)$ the intersection of all prime ideals of $A$.
+
+\begin{definition}
+An algebra $A$ is called a \textbf{prime algebra} if for any ideals $I, J$ of $A$ we have
+\[
+IJ = 0 \Rightarrow I = 0 \text{ or } J = 0.
+\]
+An ideal $P$ of $A$ is called \textbf{prime} if $A/P$ is a prime algebra. Thus $P$ is a prime ideal if for any two ideals $I, J$ of $A$ we have $IJ \subseteq P \Rightarrow I \subseteq P$ or $J \subseteq P$.
+\end{definition}
+
+\begin{definition}
+A sequence $\{a_i : a_i \in A, i \ge 1\}$ is an \textbf{$m$-sequence} if for any $i \ge 1$ we have $a_{i+1} \in (\operatorname{id}_A(a_i))^2$. We say that an element $a \in A$ \textbf{annihilates $m$-sequences} if any $m$-sequence which contains $a$ also contains zero.
+\end{definition}
+
+\begin{definition}
+An algebra $A$ is called a \textbf{semi-prime algebra} if for any ideal $I$ of $A$ with $I^2 = 0$ we have $I = 0$. An ideal $P$ of $A$ is called a \textbf{semi-prime ideal} if $A/P$ is a semi-prime algebra. Thus $P$ is a semi-prime ideal if for any ideal $I$ of $A$ with $I^2 \subseteq P$ we have $I \subseteq P$.
+\end{definition}
+
+\begin{lemma}
+If $a \in A$ is an element which annihilates $m$-sequences, then $a$ belongs to all semi-prime ideals of $A$.
+\end{lemma}
+
+\begin{proof}
+Suppose there exists a semi-prime ideal $P$ of $A$ such that $a \notin P$. Consider $(\operatorname{id}\langle a\rangle)^2$. If $(\operatorname{id}\langle a\rangle)^2 \subseteq P$, then $\operatorname{id}\langle a\rangle \subseteq P$ and thus $a \in P$. Hence there exists $a_1 \in (\operatorname{id}\langle a\rangle)^2$ with $a_1 \notin P$. Similarly, there exists $a_2 \in (\operatorname{id}\langle a_1\rangle)^2$ such that $a_2 \notin P$. Continuing, we construct an infinite $m$-sequence $\{a, a_1, a_2, \dots\}$ containing $a$. Thus $a$ does not annihilate $m$-sequences, contradicting the hypothesis.
+\end{proof}
+
+\begin{theorem}
+Let $A$ be an algebra. Then $\operatorname{rad}(A) = \{a \in A : a \text{ annihilates } m\text{-sequences}\}$.
+\end{theorem}
+
+\begin{proof}
+Let $M = \{a \in A : a \text{ annihilates } m\text{-sequences}\}$. To show $\operatorname{rad}(A) \subseteq M$, it is enough to prove that if $a \notin M$, then there exists a prime ideal $P$ of $A$ such that $a \notin P$. Let $m = \{a = a_0, a_1, \dots\}$ be an $m$-sequence with $0 \notin m$. Consider
+\[
+\mathcal{M} = \{I \triangleleft A : m \cap I = \varnothing\}.
+\]
+Then $(0) \in \mathcal{M}$ and $\mathcal{M}$ is inductive. By Zorn's lemma, there exists a maximal element $P \in \mathcal{M}$. Clearly $a \notin P$. We show that $P$ is prime. Let $I, J$ be ideals of $A$ such that $IJ \subseteq P$, $I \nsubseteq P$ and $J \nsubseteq P$. Without loss of generality, we may assume $P \cap I = P \cap J = \varnothing$ (otherwise replace $I$ by $I + P$ and $J$ by $J + P$). Then there exist $a_i \in I$ and $a_j \in J$ with $a_i, a_j \notin P$. Suppose $i \le j$; then $a_j \in I$ by induction since $a_{k+1} \in (\operatorname{id}\langle a_k\rangle)^2 \subseteq I$ for $k \ge i$. Therefore
+\[
+a_{j+1} \in (\operatorname{id}\langle a_j\rangle)^2 \subseteq IJ \subseteq P,
+\]
+which implies $a_{j+1} \in P \cap m$, contradicting $P \in \mathcal{M}$. Thus $P$ is prime.
+
+The reverse inclusion follows from the previous lemma, since any prime ideal is semi-prime.
+\end{proof}
+
+\begin{corollary}
+The ideal $\operatorname{rad}(A)$ is the minimal semi-prime ideal. In particular, if $A$ is semi-prime, then $\operatorname{rad}(A) = 0$.
+\end{corollary}
+
+\begin{proof}
+We show that $A/\operatorname{rad}(A)$ is semi-prime. Let $I \triangleleft A$ such that $I^2 \subseteq \operatorname{rad}(A)$. Equivalently, for each prime ideal $P$ of $A$, we have $I^2 \subseteq P$. Since $P$ is prime, this implies $I \subseteq P$. Therefore $I \subseteq \operatorname{rad}(A)$, and consequently $A/\operatorname{rad}(A)$ is a semi-prime algebra.
+\end{proof}
+
+\begin{corollary}
+For any algebra $A$ we have $\operatorname{rad}(A/\operatorname{rad}(A)) = 0$.
+\end{corollary}
+
+\begin{proof}
+Note that for any prime ideal $\overline{P}$ of $\overline{A} = A/\operatorname{rad}(A)$, there exists a prime ideal $P \triangleleft A$ with $\operatorname{rad}(A) \subseteq P$ and $\overline{P} = P/\operatorname{rad}(A)$. Conversely, for each prime ideal $P \triangleleft A$, the ideal $\overline{P} = P/\operatorname{rad}(A)$ is a prime ideal of $\overline{A}$. Then for any $\overline{a} \in \bigcap \{\overline{P} \triangleleft \overline{A}\}$, if $a \in A$ is such that $\overline{a} = a + \operatorname{rad}(A)$, then $a \in P$ for each prime ideal $P$ of $A$. Thus
+\[
+a \in \bigcap \{P \triangleleft A\} = \operatorname{rad}(A) \Rightarrow \overline{a} = \overline{0}.
+\]
+Consequently, $\operatorname{rad}(\overline{A}) = \bigcap \{\overline{P} \triangleleft \overline{A}\} = 0$.
+\end{proof}
+
+\begin{definition}
+We say that an algebra $A$ is a \textbf{subdirect product} of algebras $\{A_\alpha : \alpha \in I\}$ if $A$ is isomorphic to a subalgebra $B \subseteq \prod_{\alpha \in I} A_\alpha$ with the property that for any $\alpha \in I$, the projection $\pi_\alpha : B \to A_\alpha$ is surjective. We write $A \simeq \prod_{\alpha \in I} A_\alpha$ in this case.
+\end{definition}
+
+\begin{proposition}
+An algebra $A$ is isomorphic to a subdirect product of algebras $\{A_\alpha : \alpha \in I\}$ if and only if there exists a family of ideals $\{K_\alpha \triangleleft A : \alpha \in I\}$ such that
+\begin{enumerate}
+\item[(i)] for any $\alpha \in I$, $A/K_\alpha \simeq A_\alpha$,
+\item[(ii)] $\bigcap_{\alpha \in I} K_\alpha = 0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+If $A \simeq \prod_{\alpha \in I} A_\alpha$, then $A \hookrightarrow \prod_{\alpha \in I} A_\alpha$. Let $K_\alpha = \ker \pi_\alpha \cap A$, where $\pi_\alpha : \prod A_\alpha \to A_\alpha$ is the projection. Then $K_\alpha \triangleleft A$. If $a \in \bigcap K_\alpha$, then $\pi_\alpha(a) = 0$ for all $\alpha$, so $a = 0$. Moreover,
+\[
+A/K_\alpha = A/(A \cap \ker \pi_\alpha) \simeq (A + \ker \pi_\alpha)/\ker \pi_\alpha \simeq \pi_\alpha(A) = A_\alpha.
+\]
+
+Conversely, if there exists $\{K_\alpha \triangleleft A : \alpha \in I\}$ with $\bigcap K_\alpha = 0$, denote $A_\alpha = A/K_\alpha$ and consider $\varphi : A \to \prod_{\alpha \in I} A_\alpha$ defined by $\varphi(a)_\alpha = a + K_\alpha \in A_\alpha$. Then $\varphi$ is a homomorphism with $\ker \varphi = \bigcap K_\alpha = 0$, so $A$ embeds into $\prod_{\alpha \in I} A_\alpha$, and $\pi_\alpha(\varphi(A)) = A_\alpha$ for all $\alpha$.
+\end{proof}
+
+\begin{corollary}
+An algebra $A$ is semi-prime if and only if $A$ is isomorphic to a subdirect product of prime algebras.
+\end{corollary}
+
+\begin{proof}
+If $A$ is semi-prime, then $0 = \operatorname{rad}(A) = \bigcap \{P : P \text{ prime ideal of } A\}$. By the proposition, $A$ is a subdirect product of $\{A/P : P \text{ prime ideal of } A\}$, and each $A/P$ is prime.
+
+Conversely, if $A \simeq \prod_{\alpha \in I} A_\alpha$ with each $A_\alpha$ prime, then by the proposition there exists a family $\{P_\alpha \triangleleft A : \alpha \in I\}$ such that $A/P_\alpha \simeq A_\alpha$ and $\bigcap_{\alpha \in I} P_\alpha = 0$. Then
+\[
+\operatorname{rad}(A) = \bigcap \{P : P \text{ prime ideal of } A\} \subseteq \bigcap_{\alpha \in I} P_\alpha = 0,
+\]
+so $A$ is semi-prime.
+\end{proof}
+
+\begin{theorem}
+Let $\mathcal{V}$ be a homogeneous variety of algebras with the property that locally nilpotent algebras in $\mathcal{V}$ are radical. Then for any algebra $A \in \mathcal{V}$ we have $\operatorname{LocNilp}(A) = \bigcap \{P \triangleleft A : P \text{ prime}, \operatorname{LocNilp}(A/P) = 0\}$.
+\end{theorem}
+
+\begin{proof}
+Let $\operatorname{LocNilp}(A)=\bigcap\{P\triangleleft A:P\text{ prime},\ \operatorname{LocNilp}(A/P)=0\}$. 
+We have $\operatorname{LocNilp}(A)\subseteq\bigcap\{P\}$ because if $\operatorname{LocNilp}(A/P)=0$, then $P$ contains $\operatorname{LocNilp}(A)$. 
+For the reverse inclusion, let $a\in A\setminus\operatorname{LocNilp}(A)$. 
+We show there exists a prime ideal $P$ of $A$ with $\operatorname{LocNilp}(A/P)=0$ and $a\notin P$.
+
+Since $a\notin\operatorname{LocNilp}(A)$, the ideal $\langle a\rangle$ is not locally nilpotent. 
+Thus there exists a finitely generated subalgebra $S\subseteq\langle a\rangle$ which is not nilpotent. 
+Consider
+\[
+M=\{I\triangleleft A:a\notin I\text{ and }S^n\not\subseteq I,\ \forall n\geq1\}.
+\]
+$M$ is nonempty since $(0)\in M$ (as $a\neq0$ and $S$ is not nilpotent). 
+Moreover, $M$ is inductive: if $I_1\subseteq I_2\subseteq\cdots$ is a chain in $M$, set $I=\bigcup I_n$. 
+If $I\notin M$, then there exists $n\geq1$ such that $S^n\subseteq I$. 
+Let $S_0=\{v:v\text{ is a product of generators of }S\text{ with }n\leq d(v)\leq2n\}$, where $d(v)$ is the number of generators in $v$. 
+Since $S_0\subseteq I$, there exists $m\geq1$ with $S_0\subseteq I_m$. 
+We prove $S^n\subseteq I_m$ by induction on the degree of products. 
+If $u\in S^n$ with $d(u)\leq2n$, then $u\in S_0\subseteq I_m$. 
+If $d(u)>2n$, write $u=\sum_i v_i w_i$ with $d(v_i)+d(w_i)=d(u)>2n$. 
+Then $n<d(v_i)$ (or $d(w_i)$), so by induction $v_i\in I_m$ and similarly $w_i\in I_m$, hence $u\in I_m$. 
+Thus $S^n\subseteq I_m$, contradicting
+
+\begin{proof}
+Let $\bar{A}=A/\operatorname{rad} A$, then $\bar{J}\subseteq \bar{A}^{(+)}$ and $\bar{A}=\operatorname{alg}\langle\bar{J}\rangle$. Let $\bar{I}\triangleleft \bar{J}$ with $\bar{I}\cdot\bar{I}=0$. By previous lemma, $\bar{I}\subseteq \operatorname{rad}\bar{A}=0$, so $\bar{J}$ is semiprime and $\operatorname{rad}\bar{J}=0$, thus $\operatorname{rad} J\leq \operatorname{rad} A$. Therefore $\operatorname{rad} J\leq \operatorname{rad} A$.
+
+Conversely, let $a\in \operatorname{rad} A\cap J$. Consider any $m$-sequence $\{a_i:i\geqslant 1\}$ in $J$ which contains $a$. Since $\operatorname{id}_J\langle a_i\rangle\subseteq \operatorname{id}_A\langle a_i\rangle$, we have
+\[
+a_{i+1}=(\operatorname{id}_J\langle a_i\rangle)^2 \subseteq (\operatorname{id}_A\langle a_i\rangle)^2.
+\]
+Thus $\{a_i:i\geqslant 1\}$ is an $m$-sequence in $A$. Since $a\in \operatorname{rad} A$, this $m$-sequence contains $0$. Hence $a\in \operatorname{rad} J$. This gives the reverse inclusion.
+\end{proof}
+
+\begin{theorem}
+Let $J=H\langle X\rangle/P$. If $\operatorname{rad} J=0$, then $J$ is special.
+\end{theorem}
+
+\begin{proof}
+Let $\widehat{P^2}=\operatorname{id}_{F\langle X\rangle}\langle P^2\rangle$. We have $\widehat{P^2}\cap H\langle X\rangle\subseteq P$ by Corollary 1. Then
+\[
+\widehat{P^2}\cap P \subseteq \widehat{P^2}\cap H\langle X\rangle \subseteq \widehat{P^2}\cap P,
+\]
+so
+\[
+\widehat{P^2}\cap H\langle X\rangle = \widehat{P^2}\cap P.
+\]
+We have
+\[
+\frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}} \bigg/ \frac{P+\widehat{P^2}}{\widehat{P^2}} \simeq \frac{H\langle X\rangle}{H\langle X\rangle\cap \widehat{P^2}} \bigg/ \frac{P}{P\cap \widehat{P^2}} \simeq H\langle X\rangle/P = J
+\]
+as Jordan algebras.
+
+Since $\operatorname{rad} J=0$, we have
+\[
+\operatorname{rad}\left(\frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}}\right) \subseteq \frac{P+\widehat{P^2}}{\widehat{P^2}}.
+\]
+Let $B=\operatorname{rad}\left(F\langle X\rangle/\widehat{P^2}\right)$. Then by Corollary 2,
+\begin{align*}
+B\cap \frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}} &= \operatorname{rad}\left(\frac{F\langle X\rangle}{\widehat{P^2}}\right) \cap \frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}} \\
+&= \operatorname{rad}\left(\frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}}\right) \subseteq \frac{P+\widehat{P^2}}{\widehat{P^2}}.
+\end{align*}
+Conversely, since $\left(\frac{P+\widehat{P^2}}{\widehat{P^2}}\right)^2=0$, we have
+\[
+\frac{P+\widehat{P^2}}{\widehat{P^2}} \subseteq \operatorname{rad}\left(\frac{F\langle X\rangle}{\widehat{P^2}}\right)=B.
+\]
+Thus $\frac{P+\widehat{P^2}}{\widehat{P^2}} \subseteq B\cap \frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}}$, hence equality holds:
+\[
+B\cap \frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}} = \frac{P+\widehat{P^2}}{\widehat{P^2}}.
+\]
+Finally,
+\[
+J \simeq \frac{\frac{H\langle X\rangle+\widehat{P^2}}{\widehat{P^2}}}{\frac{P+\widehat{P^2}}{\widehat{P^2}}} \hookrightarrow \frac{F\langle X\rangle/\widehat{P^2}}{B},
+\]
+so $J$ is special.
+\end{proof}
+
+\begin{lemma}
+Let $J$ be a finite-dimensional simple Jordan algebra over an algebraically closed field $F$. If $J$ satisfies $f=0$, then $J$ is either $F$ or a Jordan algebra of a bilinear form.
+\end{lemma}
+
+\begin{proof}
+Assume $F=\bar{F}$. Write $1=e_1+\cdots+e_n$ with $e_1,\dots,e_n$ pairwise orthogonal idempotents. We show that if $n\geqslant 3$, then $J$ does not satisfy $f$ (since $F$ and $J(V,f)$ are simple algebras with at most two idempotents $e_1$, or $e_1,e_2$).
+
+If $n\geq 3$, then $H_n(D)\supseteq H_n(F)\supseteq H_3(F)$. Thus it suffices to show that $H_3(F)$ does not satisfy $f$. In $H_3(F)$ we may write
+\[
+[[a,b]^2,b]^2 = n(a,b)
+\]
+(considering $H_3(F)\subseteq A^{(+)}$, $A$ associative, the operation $n(a,b)$ is in $A$).
+
+Denote $u_{ij}=1_{[ij]}$ for $i\leq j\leq 3$. Also write $e_i=e_{ii}$, $i=1,2,3$, so $u_{ij}=e_i+e_j$, while $2u_{ij}u_{jk}=u_{ik}$.
+
+Let $a=e_2-e_3$ and $b=u_{12}+u_{13}$. Then in any $A^{(+)}$ we have
+\begin{align*}
+[a,b] &= -2\bigl((a^2,b,b)_+ - 2a\cdot(a,b,b)_+\bigr), \\
+(e_2,b,b)_+ &= (e_2,u_{12}+u_{13},u_{12}+u_{13}) = \frac{1}{2}u_{12}(u_{12}+u_{13}) - e_2(u_{12}+u_{13})^2 \\
+&= \frac{1}{2}(e_1+e_2+u_{23}) - e_2(e_1+e_2+e_1+e_3+u_{23}) \\
+&= \frac{1}{2}(e_1+e_2+u_{23}) - e_2(2e_1+e_2+e_3+u_{23}) \\
+&= \frac{1}{2}(e_1+e_2+u_{23}) - (e_2 + \frac{1}{2}u_{23}) = \frac{1}{2}(e_1 - e_2) - \frac{1}{4}u_{23}.
+\end{align*}
+Similarly, $(e_3,b,b)_+ = \frac{1}{2}(e_1-e_3) - \frac{1}{4}u_{23}$. Then
+\begin{align*}
+(a^2,b,b)_+ &= (e_2+e_3,b,b)_+ = e_1 - \frac{1}{2}(e_2+e_3) - \frac{1}{2}u_{23} = \frac{1}{2}(-1+3e_1-u_{23}), \\
+(a,b,b)_+ &= (e_2-e_3,b,b)_+ = -\frac{1}{2}(e_2-e_3), \\
+2a\cdot(a,b,b)_+ &= -(e_2-e_3)^2 = -e_2-e_3.
+\end{align*}
+Hence $[a,b]^2 = -2\bigl(\frac{1}{2}(-1+3e_1-u_{23}) + e_2+e_3\bigr) = -(1+e_1-u_{23})$, and
+\[
+[[a,b]^2,b]^2 = [e_1-u_{23},b]^2 = -2\bigl(((e_1-u_{23})^2,b,b)_+ - 2(e_1-u_{23})\cdot(e_1-u_{23},b,b)_+\bigr).
+\]
+Since $(e_1-u_{23})^2 = e_1+e_2+e_3 = 1$, we have $((e_1-u_{23})^2,b,b)_+ = 0$. Further,
+\begin{align*}
+(e_1,b,b)_+ &= (e_1,u_{12}+u_{13},u_{12}+u_{13}) = \frac{1}{2}(u_{12}+u_{13})^2 - e_1(u_{12}+u_{13})^2 \\
+&= \frac{1}{2}(e_1+e_2+e_1+e_3+u_{23}) - \frac{1}{2}(2e_1) = \frac{1}{2}(e_2+e_3+u_{23}), \\
+(u_{23},b,b)_+ &= (u_{23},u_{12}+u_{13},u_{12}+u_{13}) = \frac{1}{2}(u_{13}+u_{12})^2 - u_{23}(u_{13}+u_{12})^2 \\
+&= \frac{1}{2}(1+e_1+u_{23}) - u_{23}(1+e_1+u_{23}) \\
+&= \frac{1}{2}(1+e_1+u_{23}) - (u_{23}+e_2+e_3) = \frac{1}{2}(-1+3e_1-u_{23}).
+\end{align*}
+Then
+\begin{align*}
+2(e_1-u_{23})\cdot(u_{23},b,b)_+ &= -e_1+u_{23}+3e_1+u_{23}^2 = 1+e_1+u_{23}, \\
+2(e_1-u_{23})\cdot(e_1,b,b)_+ &= -\frac{1}{2}u_{23} - \frac{1}{2}u_{23} - e_2 - e_3 = e_2 - e_3 - u_{23}.
+\end{align*}
+Finally,
+\begin{align*}
+[[a,b]^2,b]^2 &= 2\bigl(-e_2-e_3-u_{23} - 1 - e_1 - u_{23}\bigr) = -4(1+u_{23}), \\
+&= [[e_2-e_3,u_{12}+u_{13}],u_{12}+u_{13}] = -4(1+u_{23}), \\
+&= [[e_1-e_3,u_{12}+u_{23}],u_{12}+u_{23}] = -4(1+u_{13}), \\
+&= [[e_1-e_2,u_{13}+u_{23}],u_{13}+u_{23}] = -4(1+u_{12}).
+\end{align*}
+Since
+\[
+(u_{23},u_{13},u_{12}) = \frac{1}{2}u_{12}^2 - \frac{1}{2}u_{23}^2 = \frac{1}{2}(e_1+e_2 - e_2 - e_3) = \frac{1}{2}(e_1-e_3) \neq 0,
+\]
+we have $(n_1,n_2,n_3)_+ \neq 0$ in $H_3(F)$.
+\end{proof}
+
+Simple Jordan PI-algebras.
+
+Let $X$ be a set of variables. We have proved that $\forall a,b\in J\langle X\rangle$, $[[a,b]^2,a]^2 \in F\langle X\rangle$ is a tetrad eater. If $x,y\in X$, since $[[x,y]^2,x]^2 \in J\langle X\rangle$, there exists a polynomial $n(x,y)\in F\{x\}$ such that $[[x,y]^2,x]^2 = n(x,y) + \cdots$.
+
+Let
+\[
+f(x_1,x_2,x_3,x_4,x_5,x_6) = \bigl(n(x_1,x_2), n(x_3,x_4), n(x_5,x_6)\bigr).
+\]
+
+\begin{lemma}
+Let $J$ be a simple, central, finite-dimensional Jordan algebra over $F$ (with $F$ infinite). If $J$ satisfies the identity $f=0$, then $J\simeq F$ or $J\simeq J(V,f)$.
+\end{lemma}
+
+We may suppose \(F\) algebraically closed.
+
+Consider \(\bar{J} = \bar{F} \otimes_F J\) with \(\bar{F}\) the algebraic closure of \(F\); then \(\bar{J}\) is simple, central, finite-dimensional over \(\bar{F}\). If \(\bar{J} = \bar{F}\) or \(\bar{J} = J(V,f)\), the same is valid for \(J\).
+
+We know that \(1 = e_1 + \dots + e_n\), with \(e_1, \dots, e_n\) primitive pairwise orthogonal idempotents. It is enough to prove that \(n \leq 2\).
+
+Suppose \(n \geq 3\); then \(H_3(F) \subseteq J\) (since \(J = H_n(D)\), \(D\) a composition algebra, and \(H_n(D) \supseteq H_n(F) \supseteq H_3(F)\)). We will show that \(H_3(F)\) does not satisfy the identity \(f = 0\).
+
+Denote \(u_{ij} = 1[i j]\) (elementary matrix) for \(1 \leq i < j \leq 3\), and denote \(e_i = e_{ii}\) for \(i = 1,2,3\). Then \(u_{ij}^2 = e_i + e_j\), and \(2u_{ij}u_{jk} = u_{ik}\).
+
+Let \(a = e_2 - e_3\) and \(b = u_{12} + u_{13}\). Then we have \([a,b]^2 = -2\bigl((a^2,b,b)_+ - 2a \cdot (a,b,b)_+\bigr)\). Observe that
+\[
+\begin{aligned}
+(e_2,b,b)_+ &= (e_2, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}u_{12}(u_{12}+u_{13}) - e_2\bigl(e_1+e_2+e_1+e_3+u_{23}\bigr) \\
+&= \frac{1}{2}\bigl(e_1+e_2+\frac{1}{2}u_{23}\bigr) - e_2 - \frac{1}{2}u_{23} = \frac{1}{2}(e_1-e_2) - \frac{1}{4}u_{23}.
+\end{aligned}
+\]
+Analogously, \((e_3,b,b)_+ = \frac{1}{2}(e_1-e_3) - \frac{1}{4}u_{23}\). Then
+\[
+\begin{aligned}
+(a^2,b,b)_+ &= (e_2+e_3,b,b)_+ = e_1 - \frac{1}{2}(e_2+e_3) - \frac{1}{2}u_{23} \\
+&= \frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr), \\
+(a,b,b)_+ &= (e_2-e_3,b,b)_+ = -\frac{1}{2}(e_2-e_3),
+\end{aligned}
+\]
+and
+\[
+2a \cdot (a,b,b)_+ = -(e_2-e_3)^2 = -e_2-e_3.
+\]
+Therefore
+\[
+\begin{aligned}
+[a,b]^2 &= -2\Bigl(\frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr) + e_2+e_3\Bigr) \\
+&= -\bigl(1+e_1-u_{23}\bigr). \\
+\Rightarrow \bigl[[a,b]^2,b\bigr]^2 &= [e_1-u_{23},b]^2.
+\end{aligned}
+\]
+Now we need to calculate
+\[
+\begin{aligned}
+[e_1-u_{23},b]^2 &= -2\Bigl(\bigl((e_1-u_{23})^2,b,b\bigr)_+ - 2(e_1-u_{23})(e_1-u_{23},b,b)_+\Bigr).
+\end{aligned}
+\]
+We have \((e_1-u_{23})^2 = e_1+e_2+e_3 = 1\), therefore \(\bigl((e_1-u_{23})^2,b,b\bigr)_+ = 0\). Next,
+\[
+\begin{aligned}
+(e_1,b,b)_+ &= (e_1, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}(u_{12}+u_{13})^2 - e_1(u_{12}+u_{13})^2 \\
+&= \frac{1}{2}\bigl(e_1+e_2+e_1+e_3+u_{23}\bigr) - \frac{1}{2}(2e_1) = \frac{1}{2}\bigl(e_2+e_3+u_{23}\bigr), \\
+(u_{23},b,b)_+ &= (u_{23}, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}(u_{13}+u_{12})^2 - u_{23}(u_{13}+u_{12})^2 \\
+&= \frac{1}{2}\bigl(1+e_1+u_{23}\bigr) - u_{23}\bigl(1+e_1+u_{23}\bigr) \\
+&= \frac{1}{2}\bigl(1+e_1+u_{23}\bigr) - u_{23} - e_2 - e_3 \\
+&= \frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr).
+\end{aligned}
+\]
+Then
+\[
+\begin{aligned}
+2(e_1-u_{23})(e_1,b,b)_+ &= -e_2-e_3-u_{23}, \\
+2(e_1-u_{23})(u_{23},b,b)_+ &= -e_1+u_{23}+3e_1+u_{23}^2.
+\end{aligned}
+\]
+Hence
+\[
+\bigl[[a,b]^2,b\bigr]^2 = 2\bigl(-e_2-e_3-u_{23} -1 - e_1 - u_{23}\bigr) = -4\bigl(1+u_{23}\bigr).
+\]
+Set
+\[
+\begin{aligned}
+n_1 &= \bigl[[e_2-e_3, u_{12}+u_{13}], u_{12}+u_{13}\bigr] = -4\bigl(1+u_{23}\bigr), \\
+n_2 &= \bigl[[e_1-e_3, u_{12}+u_{23}], u_{12}+u_{23}\bigr] = -4\bigl(1+u_{13}\bigr), \\
+n_3 &= \bigl[[e_1-e_2, u_{12}+u_{23}], u_{13}+u_{23}\bigr] = -4\bigl(1+u_{12}\bigr).
+\end{aligned}
+\]
+Since \((u_{23},u_{13},u_{12}) = \frac{1}{2}u_{12}^2 - \frac{1}{2}u_{23}^2 = \frac{1}{2}\bigl(e_1+e_2 - e_2 - e_3\bigr) = \frac{1}{2}(e_1-e_3) \neq 0\), it follows that \((n_1,n_2,n_3)_+ \neq 0\).
+
+\begin{theorem}[Posner]
+Let \(R\) be an associative prime PI-algebra over \(F\) with center \(Z\), and let \(S = Z \setminus \{0\}\). Then \(S^{-1}R\) is an \(S^{-1}Z\)-algebra which is central, simple and of finite dimension.
+\end{theorem}
+
+\begin{theorem}[Amitsur]
+Let \(R\) be a ring with involution \(*\) and let \(H(R,*)\) be the set of symmetric elements. If \(H(R,*)\) satisfies a polynomial identity, then \(R\) also satisfies a polynomial identity.
+\end{theorem}
+
+We want to show an analogue of Posner's theorem for Jordan algebras.
+
+\begin{lemma}
+Let $A$ be an associative algebra with involution $*$ such that $J = H(A,*)$ is prime and satisfies a polynomial identity. Then the center $Z(J) \neq 0$, and the localization $Z(J)^{-1}J$ is a central simple Jordan algebra, finite-dimensional over the field $Z(J)^{-1}Z(J)$.
+\end{lemma}
+
+\begin{proof}
+By Amitsur's theorem, $A$ is a PI associative algebra. First suppose $A$ is prime. By Posner's theorem, $Z(A) \neq 0$ and $Z(A)^{-1}A$ is central simple and finite-dimensional over $Z(A)^{-1}Z(A)$. The involution $*$ extends to $Z(A)^{-1}A$, and $Z(A)$ is $*$-invariant. Let $z_0 = H(Z(A), *)$. If $z_0 = 0$, then for any $z \in Z(A)$, $z^* = -z$ and $z^2 = -zz^* = 0$, so $z=0$ since $Z(A)$ has no nonzero nilpotent elements. Thus $z_0 \neq 0$. For any nonzero $z \in Z(J)$, we have $zz^* \in z_0$, and
+\[
+z^{-1}a = (zz^*)^{-1}(z^* a) \in z_0^{-1}A,
+\]
+so $Z(J)^{-1}J \subseteq z_0^{-1}A$. Since $z_0^{-1}A$ is simple, $H(z_0^{-1}A, *)$ is simple and equals $Z(J)^{-1}J$, which is finite-dimensional over $z_0^{-1}z_0 \subseteq Z(J)^{-1}Z(J)$. Hence $\dim_{Z(J)^{-1}Z(J)} Z(J)^{-1}J$ is finite.
+
+Now suppose $A$ is not prime. Since $J$ is prime, $\operatorname{rad} J = 0$, and $J \cap \operatorname{rad} A = 0$ because $\operatorname{rad} A$ is $*$-invariant. Replacing $A$ by $A/\operatorname{rad} A$, we may assume $A$ is semiprime. We show $A$ is $*$-prime: if $I$ and $K$ are $*$-invariant ideals with $IK = 0$, then $(I \cap K)^2 = 0$, so $I \cap K = 0$ by semiprimeness, and hence $KI = 0$. Then $(I \cap J)(K \cap J) = 0$ in $J$, so by primality of $J$, one of them is zero, say $I \cap J = 0$. Then $H(I,*) \subseteq I \cap J = 0$, so for any $a \in I$, $a^* = -a$ and $a^2 = 0$. Thus $I^3 = 0$, so $I = 0$. Hence $A$ is $*$-prime.
+
+Now suppose there exist nonzero ideals $I, K$ of $A$ (not necessarily $*$-invariant) with $IK = 0$. By semiprimeness, $KI = 0$. Consider the $*$-invariant ideals $K \cap K^*$ and $I \cap I^*$. Since $(K \cap K^*)(I \cap I^*) = 0$, $*$-primeness implies one is zero, say $K \cap K^* = 0$. Then $KK^* \subseteq K \cap K^* = 0$. We show $K$ is prime as an associative algebra. Let $K_1, K_2$ be ideals of $K$ with $K_1 K_2 = 0$. Consider the subsets $KK_1K$ and $KK_2K$ of $A$. They are ideals of $A$. Define
+\[
+I_1 = \{ a + a^* : a \in KK_1K \}, \quad I_2 = \{ a + a^* : a \in KK_2K \}.
+\]
+Then $I_1$ and $I_2$ are ideals of $J$ and $I_1 I_2 = 0$. Since $J$ is prime, one is zero, say $I_1 = 0$. Then for all $a \in KK_1K$, $a + a^* = 0$ and $aa^* = 0$, so $a^2 = 0$. Hence $(KK_1K)^3 = 0$. Since $KK_1K$ is an ideal of $A$, semiprimeness forces $KK_1K = 0$. Then $(AK_1A)(AK_1A)(AK_1A) = 0$, so $AK_1A = 0$ and $K_1 = 0$. Thus $K$ is prime.
+
+Since $K \cap K^* = 0$, Posner's theorem applied to $K$ gives $Z(K) \neq 0$ and $Z(K)^{-1}K$ is central simple and finite-dimensional over $Z(K)^{-1}Z(K)$. Let $I = \{ a + a^* : a \in K \}$, an ideal of $J$, and set $J_0 = \{ z + z^* : z \in Z(K) \} \neq 0$. Then $J_0 \subseteq Z(J)$ and $J_0^{-1}I = J_0^{-1}J$ is simple, central, and finite-dimensional over $J_0^{-1}J_0$. The conclusion follows as in the prime case.
+\end{proof}
+
+\begin{lemma}
+Let $J$ be a prime Jordan algebra generated by three elements. Suppose $J$ satisfies a polynomial identity $f = 0$. Then $Z(J) \neq 0$, and $Z(J)^{-1}J$ is finite-dimensional and either of Clifford type or isomorphic to a Jordan algebra of a symmetric bilinear form.
+\end{lemma}
+
+\begin{proof}
+We have $J \cong F\langle x, y, z \rangle / P$ for some prime ideal $P$ of the free Jordan algebra $F\langle x, y, z \rangle$. By Cohn's theorem, $F\langle x, y, z \rangle$ is special, so $J$ is special and embeds in an associative algebra with involution: $J \subseteq A^+$ where $A$ is associative with involution. By the previous lemma, $Z(J) \neq 0$ and $Z(J)^{-1}J$ is central simple and finite-dimensional. The structure theorem for finite-dimensional central simple Jordan algebras implies it is either of Clifford type or a Jordan algebra of a symmetric bilinear form.
+\end{proof}
+
+\begin{lemma}
+Let $J = J(V, f)$ with $\dim V \geq 2$ and $f$ nondegenerate.
+\begin{enumerate}
+\item[(i)] If $z \in J$ is such that for all $x \in J$, the associator $(z, x, x)$ is nilpotent, then $z \in F \cdot 1$.
+\item[(ii)] If $g \in J$ is such that for all $x \in J$, there exists $n$ (depending on $x$) with $(x g)^n = 0$, then $g = 0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+First note that $J(V, f)$ is quadratic: every element $a$ satisfies $a^2 = \operatorname{tr}(a)a - n(a)1$, with $\operatorname{tr}(a), n(a) \in F$. Write $x = \alpha 1 + x_1$ with $\alpha \in F$, $x_1 \in V$. Then
+\[
+x^2 = \alpha^2 1 + f(x_1, x_1)1 + 2\alpha x_1 = 2\alpha x + (f(x_1, x_1) - \alpha^2)1,
+\]
+so $\operatorname{tr}(x) = 2\alpha$ and $n(x) = \alpha^2 - f(x_1, x_1)$. Thus $1, x, x^2$ are linearly dependent.
+
+(i) Let $z = \alpha 1 + v$ with $\alpha \in F$, $v \in V$. For any $x \in V$, we have $(z, x, x) = (v, x, x)$. If $(z, x, x)$ is nilpotent, then its square is zero. Compute:
+\[
+(z, x, x)^2 = (v, x, x)^2 = f(v, x)^2 f(x, x)1 + f(x, x)^2 f(v, v)1 - 2f(v, x)^2 f
+
+\begin{definition}
+Let $\mathcal{J}$ be a Jordan algebra. We define
+\[
+\delta_{\mathrm{alt}}(\mathcal{J}) = \{ z \in \mathcal{J} : (z, x, x)=0 \ \forall x \in \mathcal{J} \},
+\]
+the alternative center of $\mathcal{J}$. In the free Jordan algebra $F\langle x,y\rangle$ we have the identity
+\[
+[x, y] = -2(x^2, y, y) + 4 x \cdot (x, y, y),
+\]
+so in particular $[x,y]$ is a Jordan element. For $x,y \in \mathcal{J}$, we denote the element $-2(x^2, y, y) + 4x \cdot (x, y, y)$ by $[x,y]$.
+\end{definition}
+
+\begin{lemma}\label{lem:1}
+Let $\mathcal{J}$ be a Jordan algebra satisfying a polynomial identity $f=0$, and suppose $\operatorname{Nil}(\mathcal{J})=0$. Then for all $a, b \in \mathcal{J}$ we have $[a, b]^2 \in Z(\mathcal{J})$.
+\end{lemma}
+
+\begin{proof}
+Let $c = [a, b]^2$. To show that $c \in Z(\mathcal{J})$, we prove:
+\begin{enumerate}
+\item[(1)] $(c, p, p)$ is nilpotent for every $p \in \mathcal{J}$.
+\item[(2)] For all $p, q \in \mathcal{J}$, $(c, p, p)q$ is nilpotent.
+\item[(3)] $(c, p, p) \in \operatorname{Nil}(\mathcal{J})$ for all $p \in \mathcal{J}$ (thus $c \in \delta_{\mathrm{alt}}(\mathcal{J})$).
+\item[(4)] If $z \in \delta_{\mathrm{alt}}(\mathcal{J})$ is nilpotent then $z=0$.
+\item[(5)] For all $x, y \in \mathcal{J}$, $(x, c, y)$ is nilpotent.
+\item[(6)] $c \in Z(\mathcal{J})$.
+\end{enumerate}
+For (1), consider $\mathcal{J}_0 = \operatorname{alg}\langle a, b, p \rangle$. Then $\mathcal{J}_0$ is a Jordan algebra and $f=0$ in $\mathcal{J}_0$. It suffices to show that $(c, p, p) \in \operatorname{Nil}(\mathcal{J}_0)$. We have
+\[
+\mathcal{J}_0 / \operatorname{Nil}(\mathcal{J}_0) \hookrightarrow \prod_\alpha \mathcal{J}_\alpha,
+\]
+with $\mathcal{J}_\alpha$ simple. Let $\varphi_\alpha: \mathcal{J} \to \mathcal{J}_\alpha$ be the epimorphism associated to the subdirect product. If $(c, p, p) \notin \operatorname{Nil}(\mathcal{J})$, then there exists $\alpha$ such that $\varphi_\alpha(c, p, p) \neq 0$ in $\mathcal{J}_\alpha$. In $\mathcal{J}_\alpha$, $\varphi_\alpha(c) = [\varphi_\alpha(a), \varphi_\alpha(b)]^2$. If we show that for every $x, y \in \mathcal{J}_\alpha$, $[x, y]^2 \in Z(\mathcal{J}_\alpha)$, then $\varphi_\alpha((c, p, p))=0$, a contradiction. To show that $([x, y], \mathcal{J}_\alpha, \mathcal{J}_\alpha)=0$, we prove $([x, y], \mathcal{J}_\alpha, \mathcal{J}_\alpha)=0$. If $\mathcal{J}_\alpha$ is a field, it is valid. Suppose that $\mathcal{J}_\alpha = \mathcal{J}(V, f)$. Since $[x, y] = -2(x^2, y, y) + 4x(x, y, y)$, we have
+\[
+(x^2, y, y) - 2x(x, y, y) = (\operatorname{tr}(x)x - n(x), y, y) - 2x(x, y, y) = \operatorname{tr}(x)(x, y, y) - 2x(x, y, y) = (\operatorname{tr}(x)-2x)(x, y, y).
+\]
+Observe that $\operatorname{tr}(x)-2x \in V$ (if $x = \alpha + x_1$ with $\alpha \in F$ and $x_1 \in V$, then $\operatorname{tr}(x)=2\alpha$ and $\operatorname{tr}(x)-2x = -x_1 \in V$) and $(x, y, y) \in V$ (if $y = \beta + y_1$ with $\beta \in F$ and $y_1 \in V$, then $(x, y, y) = (x, y_1, y_1) \in V$). Then $[x, y] = -2(\operatorname{tr}(x)-2x)(x, y, y) \in V \cdot V \subseteq F \cdot 1$, so $[x, y]^2 \in F \cdot 1 \subseteq Z(\mathcal{J}_\alpha)$. Thus $(c, p, p)$ is nilpotent for all $p \in \mathcal{J}$.
+
+For (2), let $\mathcal{J}_0 = \operatorname{alg}\langle c, p, q \rangle$. We prove that $(c, p, p) \in \operatorname{Nil}(\mathcal{J}_0)$. Consider the embedding
+\[
+\mathcal{J}_0 / \operatorname{Nil}(\mathcal{J}_0) \hookrightarrow \prod_\alpha \mathcal{J}_\alpha.
+\]
+For any $\alpha$, $\mathcal{J}_\alpha$ is either a field or of type $\mathcal{J}(V, f)$. For any $\bar{p} \in \mathcal{J}_\alpha$, $(\bar{c}, \bar{p}, \bar{p})$ is nilpotent. Thus $\bar{c} \in Z(\mathcal{J}_\alpha)$ (since $\mathcal{J}_\alpha = \mathcal{J}(V, f)$). Then $(\bar{c}, \bar{p}, \bar{p})=0$, equivalently $(c, p, p) \in \operatorname{Nil}(\mathcal{J}_0)$. Consequently, $(c, p, p)q$ is nilpotent.
+
+The proofs of (3) and (4) follow from Lemma~\ref{lem:2} and parts (1) and (2). We conclude that $(c, p, p) \in \operatorname{Nil}(\mathcal{J}) = \{0\}$, so $c \in \delta_{\mathrm{alt}}(\mathcal{J})$.
+
+For (5), let $\mathcal{J}_0 = \operatorname{alg}\langle z, x \rangle$ with $x \in \mathcal{J}$. We show that $z \in \operatorname{Nil}(\mathcal{J}_0)$ and then by Lemma~\ref{lem:2}, $z \in \operatorname{Nil}(\mathcal{J})$.
+
+Finally, (6) follows from the previous parts.
+\end{proof}
+
+\begin{lemma}\label{lem:identity}
+Every Jordan algebra satisfies the identity
+\[
+n_1(x, y) \cdot x^2 - n_2(x, y) \cdot x + n_3(x, y) = 0,
+\]
+where
+\begin{align*}
+& n_1(x, y) = [x, y]^2, \quad n_2(x, y) = [x^2, y] \circ [x, y], \\
+& n_3(x, y) = \frac{1}{2}\left( [x^2, y^2]^2 - 2 [y \circ x^2, x] \circ [y, x] \right).
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+Exercise (it suffices to verify for special Jordan algebras).
+\end{proof}
+
+\begin{lemma}\label{lem:2}
+Let $\mathcal{J}$ be a unital Jordan algebra over an infinite field $F$, such that for every $x, y \in \mathcal{J}$, $[x, y] \in F \cdot 1$. If there exist $a, b \in \mathcal{J}$ with $[a, b]^2 \neq 0$, then $\mathcal{J}$ is quadratic over $F$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:identity}, if $x \in \mathcal{J}$ is such that there exists $y \in \mathcal{J}$ with $[x, y]^2 \neq 0$, then $x$ is quadratic in $\mathcal{J}$. Observe that for all $x, y \in \mathcal{J}$, $n_i(x, y) \in F \cdot 1$ because $n_2$ and $n_3$ are linearizations of $n_1$. In particular, the elements $a$ and $b$ are quadratic. For $x \in \mathcal{J}$ and $\beta \in F$, consider
+\[
+[a, x + \beta b]^2 = [a, x]^2 + \beta [a, x] \cdot [a, b] + \beta^2 [a, b]^2.
+\]
+Since $F$ is infinite, there exist $\beta_1 \neq \beta_2 \in F$ such that $[a, x + \beta_i b]^2 \neq 0$ for $i=1,2$. Then $x + \beta_i b$ is quadratic for $i=1,2$. Thus there exist $\alpha_i \in F$ such that
+\[
+(x + \beta_i b)^2 - \alpha_i (x + \beta_i b) \in F \cdot 1.
+\]
+Since $b$ is quadratic, we have
+\[
+x^2 + 2\beta_i (x \cdot b) - \alpha_i x \in F \cdot 1 + F \cdot b, \quad i=1,2.
+\]
+Multiplying the first equation by $\beta_2$ and the second by $\beta_1$ and subtracting, we obtain
+\[
+x^2 - \alpha x = \gamma + \delta b, \quad \alpha, \gamma, \delta \in F.
+\]
+Doing the same for $a$ yields
+\[
+x^2 - \alpha' x = \gamma' + \delta' b.
+\]
+If $\delta = 0$ or $\delta' = 0$, then $x$ is quadratic. If $\delta \delta' \neq 0$, then
+\[
+\delta^2 (\delta')^2 [a, b]^2 = [x^2 - \alpha x - \gamma, x^2 - \alpha' x - \gamma']^2 = 0,
+\]
+which implies $[a, b]^2 = 0$, a contradiction. Hence $\delta = 0$ or $\delta' = 0$, and $x$ is quadratic.
+\end{proof}
+
+\begin{corollary}\label{cor:quadratic}
+If $\mathcal{J}$ satisfies the conditions of Lemma~\ref{lem:2}, then $\mathcal{J} \simeq \mathcal{J}(V, f)$ for some bilinear form $f$ on $V$.
+\end{corollary}
+
+\begin{proof}
+It suffices to observe that any quadratic Jordan algebra is a Jordan algebra of a bilinear form. The space $V$ consists of trace-zero elements.
+\end{proof}
+
+\begin{theorem}
+Let $\mathcal{J}$ be a prime Jordan algebra which satisfies $f=0$. Suppose that $[x, y]^2
+
+\begin{theorem}
+Let $\mathcal{J}$ be a nondegenerate Jordan algebra which satisfies the identity $[x, y]^2 = 0$. Then $\mathcal{J}$ is associative and therefore is a domain.
+\end{theorem}
+
+\begin{proof}
+We show that $(a, b, c)$ is an absolute zero divisor for any $a, b, c \in \mathcal{J}$. Since $\mathcal{J}$ is nondegenerate, this will imply that $(a, b, c) = 0$ for all $a, b, c \in \mathcal{J}$. From the identity $[x, y]^2 = 0$, we have $(x^2, y, y) = 2x(x, y, y)$. Since the associator in the second entry is a derivation, we have $2(x, y, y)y = (x, y^2, y)x$, and since $[R_y, R_{y^2}] = 0$, it follows that $(x, y^2, y) = (x, y, y^2)$.
+
+Linearizing the identity $(x^2, y, y) = 2x(x, y, y)$ in $y$, we obtain
+\[
+(x^2, y, z) + (x^2, z, y) = 2x(x, y, z) + 2x(x, z, y).
+\]
+In particular,
+\begin{equation} \tag{***}
+(x^2, y, y^2) + (x^2, y^2, y) = 2x\left((x, y, y^2) + (x, y, y^2)\right).
+\end{equation}
+Again, since $[R_y, R_{y^2}] = 0$, we have
+\begin{equation} \tag{****}
+2(x^2, y, y^2) = 4x(x, y, y^2).
+\end{equation}
+Observe that
+\[
+4(x, (x, y, y), y) = 4(x(x, y, y))y - 4x((x, y, y)y) = 2(x^2, y, y)y - 2x(x, y, y^2).
+\]
+Using the identity $2(x^2, y, y)y = (x^2, y, y^2)$ (from (**)?), we obtain
+\[
+4(x, (x, y, y), y) = (x^2, y, y^2) - (x^2, y, y^2) = 0.
+\]
+Thus
+\begin{equation} \tag{*v}
+(x, (x, y, y), y) = 0 \quad \text{for all } x, y \in \mathcal{J}.
+\end{equation}
+
+Linearizing the identity $(x^2, y, y) = 2x(x, y, y)$ in $x$, we get
+\[
+(xz, y, y) = x(z, y, y) + z(x, y, y)
+\]
+and
+\[
+(xy, y, y) = x(y, y, y) + y(x, y, y) = \frac{1}{2}(x, y, y^2). \tag{*7}
+\]
+Linearizing (****) in $x$ yields
+\begin{equation} \tag{*8}
+(xy, y^2, y) = \frac{1}{2}(x, y^2, y^2).
+\end{equation}
+Then
+\[
+(x, y, y^2)y \stackrel{(*7)}{=} 2(xy, y, y)y \stackrel{(**)}{\equiv} (xy, y, y^2).
+\]
+Using the commutativity $[R_y, R_{y^2}] = 0$, we have
+\[
+0 = [R_y, R_{y^2}](xy, y^2, y) \stackrel{(*8)}{=} \frac{1}{2}(x, y^2, y^2),
+\]
+so $(x, y^2, y^2) = 0$. Then
+\[
+(x, y, y)(x, y, y) = (x, y(x, y, y), y) - y(x, (x, y, y), y) \stackrel{(**)}{\equiv} \frac{1}{2}(x, (x, y, y^2), y). \tag{*10}
+\]
+From one side,
+\[
+(x, (x, y, y^2))y \underset{(****)}{=} \frac{1}{2}(x^2, y, y^2)y \underset{(*9)}{=} \frac{1}{4}(x^2, y^
+
+\begin{proof}
+Prove it for $x_1,\dots,x_4$ generators of a free Jordan algebra.
+\end{proof}
+
+\begin{theorem}
+Let $J$ be a Jordan algebra with unit element and $K$ be a quadratic ideal of $J$ and $I=\operatorname{id}_J\langle(K:J)^2\rangle$. Then
+\begin{enumerate}
+\item[(i)] For every $a\in I$, there exists $b\in J$ such that $bU_{1-a}\in J+(K:J)$;
+\item[(ii)] If $F$ has more than $\dim F$ elements, then for all $a\in I$, there exists $n=n(a)$ such that $a^n\in(K:J)$.
+\end{enumerate}
+\end{theorem}
+
+\subsection*{Primitive algebras}
+We say that a Jordan algebra with unity is primitive if there exists $K\neq J$ maximal quadratic ideal of $J$, such that for all non-zero ideals $I$ of $J$ we have $K+I=J$. Equivalently, $J$ is primitive if there exists $K\neq J$ maximal quadratic ideal of $J$, which does not contain non-zero ideals of $J$.
+
+\begin{lemma}
+Let $J$ be a Jordan algebra with unit element. Let $K$ be a quadratic ideal of $J$ and $I\sim J$. Then $K+I$ is a quadratic ideal of $J$.
+\end{lemma}
+
+\begin{lemma}
+Let $J$ be a Jordan algebra and suppose that $J$ is primitive and contains unity. Then $J$ is prime and $\operatorname{Nil}(J)=0$.
+\end{lemma}
+
+\begin{proof}
+Suppose there exists $I\neq0$, $I\triangleleft J$, with $I+K=J$, then there exist $k\in K$ and $a\in I$ with $1=k+a$. Then $1-k=a$ is nilpotent $\Rightarrow\exists n>0$ such that $(1-k)^n=0\Rightarrow1\in\operatorname{id}\langle K\rangle\leq K$, thus we get a contradiction. Hence $\operatorname{Nil}(J)=0$.
+
+Suppose now that there exist non-zero ideals $I$ and $L$ of $J$ such that $IL=0$. We have $K+I=J=K+L$. Thus there exist $k,k'\in K$, $a\in I$ and $b\in L$ such that $k+a=1=k'+b$. Since $(1-k)(1-k')=ab\in IL=0$, we have $1=k+k'-kk'\in K$, which is a contradiction. Consequently, $J$ is prime.
+\end{proof}
+
+\begin{lemma}
+Let $J$ be a Jordan algebra, let $J$ be primitive and $K$ a maximal quadratic ideal. Then $K_1^2=0$, where $K_1=(K:J)$.
+\end{lemma}
+
+\begin{proof}
+Let $I=\operatorname{id}_J\langle K_1^2\rangle$. Suppose $K_1^2\neq0$. Then $I\neq0$ and $K+I=J$. Then there exist $k\in K$ and $a\in I$, such that $1=k+a$, that is $1-a=k$. By Theorem 1(i) there exists $b\in J$ such that $bU_{1-a}\in J+K_1$. But $bU_{1-a}=bU_k\in K$. Thus $1\in K$, which is a contradiction. Then $I=0$. In this condition $K_1^2=0$.
+\end{proof}
+
+Let $\Omega$ be the $T$-ideal of all $S$-identities, that is $\Omega=\ker\pi$, where $\pi\colon FJ[x]\to FJ\langle x\rangle$ is a surjective homomorphism of Jordan algebras such that $\pi|_x$ is the identity on $x$. Then $J\in\overline{S\text{-ford}}\Longleftrightarrow S(J)=0$. (Here $S(J)$ is defined as the set $\{f(a_1,\dots,a_n):f\in S,\ a_i\in J\}$.)
+
+\begin{definition}
+Let $J$ be a Jordan algebra. We define $S_0=\bigcap\{0\neq I\triangleleft J\}$ the heart of Jordan algebra $J$.
+\end{definition}
+
+\begin{lemma}
+Let $J$ be a primitive Jordan algebra with unit element such that $F\notin S\text{-ford}$. Then $S_0=S(J)^3\neq0$ is the unique minimal bilateral ideal of $J$.
+\end{lemma}
+
+\begin{proof}
+Since $\operatorname{Nil}(J)=0$ and $S(J)\neq0$, we have $S(J)^3\neq0$. It is enough to show that $S(J)^3$ is contained in every non-zero ideal of $J$.
+
+Let $I\triangleleft J$, $I\neq0$. Then $J=I+K$, where $K$ is a maximal quadratic ideal of $J$. Since $K/K_1$ is special, we have $S(K/K_1)=0$. Then $S(K)\subseteq K_1$. Since $I$ is an ideal, we have
+\[
+S(J)\subseteq I+S(K)\subseteq I+K_1\Rightarrow S(J)^2\subseteq I+K_1^2=I,
+\]
+since $K_1^2=0$. Thus $S(J)^3\subseteq I$.
+\end{proof}
+
+\subsection*{Simple $S$-exceptional algebra}
+Let $J$ be a primitive Jordan algebra with unity. We have seen that $0\neq S_0=S(J)^3$ is the minimal ideal of $J$.
+
+Fix $f=f(x_1,\dots,x_m)\in S^3$ such that $f|_J\neq0$. Let $n=\deg f$.
+
+We define for $s\in S_0$,
+\[
+\operatorname{Spec}(s)=\{\alpha\in F:1-\alpha^{-1}s\text{ not invertible}\},
+\]
+and for $K\triangleleft J$, we denote $\check{K}$ as the maximal bilateral ideal of $J$ contained in $K$.
+
+\begin{lemma}
+Let $s\in S_0$ and $\alpha\in\operatorname{Spec}(s)$, $\alpha\neq0$. If $P=JU_{s-\alpha1}$, then $f|_P=0$.
+\end{lemma}
+
+\begin{proof}
+$P\neq J$ since otherwise we would have $aU_{s-\alpha1}=1$ for some $a\in J$, and thus $s-\alpha1$ is invertible, which contradicts the hypothesis.
+
+By a former lemma, there exists a maximal ideal which contains $P$.
+
+If $K^*\neq0$ then $S_0\subseteq K^*$ and then $s(s-\alpha^{-1}1)=1U_{s-\alpha1}\in P\subseteq K$, which implies that $1\in K$. Thus we have $K=0$.
+
+Since $f\in S^3$ we will write
+\[
+f=\sum_i(f_i,f_i)f_i\quad\text{where }f_{ij}\in S.
+\]
+Moreover $K/K_1$ is special. Then
+\[
+f_{ij}(K/K_1)=0\Rightarrow f_{ij}(K)\subseteq K_1,\ \forall i,j.
+\]
+Then
+\[
+f(K)\subseteq\sum(f_i(K)f_i(K))f_i(K)\subseteq K_1^3\subseteq K_1^2=0.
+\]
+Since $P\subseteq K$, we have $f|_P=0$.
+\end{proof}
+
+\begin{lemma}
+For any $s \in S_0$ the set $\operatorname{spec}(s) \setminus \{0\}$ has at least $2n$ elements, where $n = \deg f$.
+\end{lemma}
+
+\begin{proof}
+Suppose there exist $\alpha_1,\dots,\alpha_{2n+1} \in \operatorname{spec}(s)$ nonzero and $\alpha_i \neq \alpha_j$ if $i \neq j$.
+Let $P_i = J U_{s-\alpha_i 1}$. Then $P_i$ is an ideal, $P_i$ is quadratic and by a previous lemma $f|_{P_i}=0$ for all $i=1,\dots,2n+1$.
+Consider $g(x)=\prod_{i=1}^{2n+1}(x-\alpha_i)$, $g_i(x)=\frac{g(x)}{x-\alpha_i}$.
+The polynomials $g_i(x)$ are pairwise prime. Then there exist $h_1,\dots,h_{2n+1} \in F[x]$ such that $\sum_{i=1}^{2n+1} h_i(x)g_i(x)=1$.
+In particular, $\sum_{i=1}^{2n+1} h_i(s)g_i(s)=1$.
+Then $1 = \sum_{i,j} U_{h_i(s)g_i(s),h_j(s)g_j(s)}$.
+Let $x^{(1)},\dots,x^{(m)} \in J$ be arbitrary elements. Then $x^{(k)}=\sum_{i,j} x_{ij}^{(k)}$ with $x_{ij}^{(k)} \in J U_{h_i(s)g_i(s),h_j(s)g_j(s)}$.
+Since the field $F$ is infinite, we may assume $f$ is homogeneous. Let $\sum_k f_k$ be the linearization of $f$, then
+\[
+f\left(x^{(1)},\dots,x^{(m)}\right)=f\left(\sum_{i,j} x_{ij}^{(1)},\dots,\sum_{i,j} x_{ij}^{(m)}\right)=\sum_k f_k\left(x_{i_1j_1}^{(1)},\dots,x_{i_mj_m}^{(m)}\right).
+\]
+Since $m \leq n$, there exists $r \leq 2n+1$ such that $r \notin \{i_1,j_1,\dots,i_m,j_m\}$. We show that $x_{i_1j_1}^{(1)},\dots,x_{i_mj_m}^{(m)} \in P_r$.
+We have $P_r = J U_{s-\alpha_r 1}$ and $(x-\alpha_r 1)$ divides $g_i(x)$ for all $i \neq r$.
+Now, $U_{ab,ac}=U_{b,c}U_a = U_a U_{b,c}$ for all $a,b,c \in F[x]$. In fact, since the algebra generated by $x$ is special, we have
+\[
+y U_{ab,ac} = \frac{1}{2}\big((ab)y(ac)+(ac)y(ab)\big) = \frac{1}{2}\big(a(byc+cyb)a\big) = \frac{1}{2}(byc+cyb)U_a = y U_{b,c}U_a.
+\]
+Thus $U_{ab,ac}=U_{b,c}U_a$. Moreover, since the operators commute we have $U_{b,c}U_a = U_a U_{b,c}$.
+Writing $h_i(x)g_i(x) = (x-\alpha_r 1)f_i(x)$, we have
+\[
+x_{ij}^{(k)} \in J U_{h_i(s)g_i(s),h_j(s)g_j(s)} = J U_{(s-\alpha_r 1)f_i(s),(s-\alpha_r 1)f_j(s)} \stackrel{(*)}{=} J U_{f_i(s),f_j(s)}U_{s-\alpha_r 1} \subseteq P_r.
+\]
+Since $f|_{P_r}=0$, it implies that $\sum_k f_k\left(x_{i_1j_1}^{(1)},\dots,x_{i_mj_m}^{(m)}\right)$ is zero. Since $x^{(1)},\dots,x^{(m)}$ are arbitrary, we get $f|_J=0$, a contradiction. Hence $\operatorname{spec}(s)\setminus\{0\}$ has at most $2n$ elements.
+\end{proof}
+
+\begin{lemma}
+The set $S_0$ is algebraic over $F$.
+\end{lemma}
+
+\begin{proof}
+Let $s \in S_0$. By the previous lemma $\operatorname{spec}(s)$ is finite. Since $F$ is infinite, $F \setminus \operatorname{spec}(s)$ is infinite and for every $\alpha \notin \operatorname{spec}(s)$ we have $s-\alpha 1$ is invertible.
+Consider the set $\{(s-\alpha 1)^{-1} : \alpha \in F \setminus \operatorname{spec}(s)\}$.
+This set is linearly dependent since $\#F > \dim J$. Thus there exist $\alpha_1,\dots,\alpha_m \in F \setminus \operatorname{spec}(s)$ and $\beta_i \in F$, $\beta_i \neq 0$, $i=1,\dots,m$ such that $\sum_{i=1}^m \beta_i (s-\alpha_i 1)^{-1}=0$.
+Multiplying by $(s-\alpha_1 1)\cdots(s-\alpha_m 1)$ we have
+\[
+0 = (s-\alpha_1 1)\cdots(s-\alpha_m 1) \sum_{i=1}^m \beta_i (s-\alpha_i 1)^{-1} = \sum_{i=1}^m \beta_i f_i(s),
+\]
+where $f_i(s) = \frac{(s-\alpha_1 1)\cdots(s-\alpha_m 1)}{s-\alpha_i 1}$, $i=1,\dots,m$.
+We have $g(x)=\sum_{i=1}^m \beta_i f_i(x) \neq 0$ since $x-\alpha_i$ divides all summands except one. On the other hand $g(s)=0$, so $s$ is algebraic over $F$.
+\end{proof}
+
+\begin{lemma}
+The algebra $S_0$ is simple.
+\end{lemma}
+
+\begin{proof}
+Let $I$ be a nonzero ideal of $S_0$. Since $\operatorname{Nil}(J)=0$, we have $\operatorname{Nil}(S_0)=0$. Then $I$ is not nil, is algebraic and thus contains an idempotent $e \neq 0$ (since any nonzero element in an algebraic algebra generates a finite-dimensional associative algebra).
+Let $I_1 = I$, $I_{k+1} = (I_k)^3$ for all $k \geq 1$. Then for any $k \geq 1$ we have $I_k$ an ideal of $S_0$. Set $\tilde{I} = \bigcup_k I_k \subseteq S_0$.
+We prove that $\tilde{I}$ is an ideal of $J$. It is enough to show that $I_{k+1} J \subseteq I_k$.
+By induction, $k=1$: if $a,b,c \in I_k$ and $x \in J$, then
+\[
+((ab)c)x = (ab)(cx) + (ab,c,x),
+\]
+with $(ab)(cx) \in (I_k)^2 I_{k-1} \subseteq (I_{k-1})^3 = I_k$ and
+\[
+(ab,c,x) = -(ax,c,b) - (bx,c,a) \in (I_{k-1},I_k,I_k) \subseteq (I_{k-1})^3 = I_k.
+\]
+Then $\tilde{I} \triangleleft J$ is an ideal containing a nonzero idempotent. Thus $S_0 \subseteq \tilde{I}$. Then $S_0 \subseteq \tilde{I} \subseteq I \subseteq S_0$, so $I = S_0$.
+\end{proof}
+
+\begin{lemma}
+If $F = \bar{F}$, then $S_0$ is an Albert algebra.
+\end{lemma}
+
+\begin{proof}
+We have $S_0$ an algebraic algebra.
+Let $e_1,\dots,e_m$ be pairwise orthogonal idempotents in $S_0$. We will show that $m \leq 2n$.
+Let $s = \alpha_1 e_1 + \cdots + \alpha_m e_m \in S_0$ with $\alpha_i \neq 0$ and $\alpha_i \neq \alpha_j$ if $i \neq j$. Observe that $\alpha_i \in \operatorname{spec}(s)$ (since $s-\alpha_i 1$ is not invertible: $e_i U_{s-\alpha_i 1} = (s-\alpha_i 1)e_i(s-\alpha_i 1)=0$). Then $m \leq 2n$, where $n = \deg f$.
+Since $F$ is algebraically closed, any idempotent can be decomposed into a sum of absolutely primitive idempotents, pairwise orthogonal. Let $m$ be maximal with $e = e_1+\cdots+e_m$, $e_i$ pairwise orthogonal, absolutely primitive. Then
+\[
+J = J_1(e) \oplus J_{1/2}(e) \oplus J_0(e)
+\]
+with $J_0(e)$ nil (otherwise there exists another idempotent). Thus $J_0(e)=0$.
+Analogously we prove that $J_{1/2}(e)=0$. Then $J = J_1(e)$, so $e=1$.
+Since $S_0$ is simple, $e_1,\dots,e_m$ are connected $\Rightarrow$ for all $i,j$ there exists $a_{ij} \in J_{ij}$ with $a_{ij}^2 = e_i + e_j$.
+By the coordinatization theorem $S_0 \cong H_4(D,*)$ with $(D,*)$ alternative with involution.
+If $D$ is associative, then $S_0$ is special, which does not happen since $f|_{S_0} \neq 0$. Hence $n=3$, and $(D,*)$ is simple alternative non-associative, so $S_0$ is an Albert algebra.
+\end{proof}
+
+\begin{theorem}
+Let $J$ be a primitive Jordan algebra with unit over $F = \bar{F}$, and $\#F > \dim J$. If $J$ is not special, then $J$ is an Albert algebra.
+\end{theorem}
+
+\begin{proof}
+We will show that $S_0 = J$.
+We know $1_{S_0} = e \in S_0$. We prove next that $e \in Z(J)$ and equivalently $e \in N(J)$, since $J$ is commutative.
+Let $a,b \in J$. We have
+\[
+(e,a,b) = (e^2,a,b) = 2(e,a,be) = 2(e^2,a,be) = 4(e,a(be),e).
+\]
+From $2(e,a,be)=4(e,a(be),e)$ it follows that $(e,a,be)=0$, hence $(e,a,b)=0$.
+By the flexibility law $(b,a,e)=0$ as well, and since $(a,b,c)+(b,c,a)+(c,a,b)=0$, we get $(a,e,b)=0$, so $e \in Z(J)$.
+For any $a \in J$ we have $a = ae + (a - ae)$; $ae \in J e$ (which is an ideal since $e \in Z(J)$) and $a-ae \in I$, with $I := \{a-ae : a \in J\}$.
+We show that $I$ is an ideal of $J$: for $a,b \in J$ we have $(a-ae)b = ab - (ae)b \stackrel{e \in Z(J)}{=} ab - a(be) = a(b-be) \in I$.
+Moreover $J e \cap I = 0$ because if $x = ae = b - be$, then $xe = ae = be - b(e e)=0$, so $ae=0$ and $x=0$.
+Then $J = J e \oplus I$. If $I \neq 0$, $I$ would be a nonzero ideal, so $I=0$ and $J = J e = S_0$.
+\end{proof}
+
+\begin{corollary}
+If $J$ is a Jordan algebra with unity, simple central over $F$ and $J$ is not special, then $J$ is an Albert algebra.
+\end{corollary}
+
+\begin{definition}
+A Jordan algebra $\mathcal{J}$ over a field $F$ is said to be of \emph{Albert type} if there exists an extension field $K \supseteq F$ such that $\mathcal{J}_K = K \otimes_F \mathcal{J}$ is an Albert algebra over $K$.
+\end{definition}
+
+\begin{lemma}
+Let $I$ be an ideal of a Jordan algebra $J$. Define the annihilator of $I$ by
+\[
+\operatorname{Ann}(I) = \{ b \in J : \{b a x\} = 0 \text{ for all } a \in I, x \in J \} = \{ b \in J : bI = \{bIJ\} = 0 \}.
+\]
+Then $\operatorname{Ann}(I)$ is an ideal of $J$.
+\end{lemma}
+
+\begin{proof}
+Observe that $b \in \operatorname{Ann}(I)$ if and only if $b I = 0$ and $(b J) I = 0$. Indeed, if $b I = 0$, then for any $a \in I$ and $x \in J$,
+\[
+\{b, a, x\} = (ba)x + (xa)b - (bx)a = 0,
+\]
+since $ba=0$ and $xa \in I$ so $(xa)b = b(xa)=0$. Thus $\{b a x\} = 0$ is equivalent to $(b x) a = 0$, so $(b x) I = 0$ for all $x \in J$. Hence $(b J) I = 0$. Conversely, if $b I = 0$ and $(b J) I = 0$, then clearly $\{b a x\} = 0$ for all $a \in I$, $x \in J$.
+
+To show $\operatorname{Ann}(I)$ is an ideal, take $b \in \operatorname{Ann}(I)$ and $x \in J$. We need to show that $b x \in \operatorname{Ann}(I)$. First, $(b x) I = 0$ by the above. Next, for any $y \in J$ and $a \in I$,
+\begin{align*}
+((b x) y) a &= (b (x y)) a + (b, x, y) a \\
+&= 0 + (b, a x, y) - (b, a, y) x \in (b, I, y) + (b, I, y) \subseteq 0,
+\end{align*}
+since $(b, I, y) = 0$ because $b \in \operatorname{Ann}(I)$. Thus $((b x) y) I = 0$, so $b x \in \operatorname{Ann}(I)$.
+\end{proof}
+
+For subsets $A, B$ of a Jordan algebra $\mathcal{J}$, denote $V(A, B) = \{ V_{a,b} : a \in A, b \in B \}$.
+
+\begin{lemma}
+Let $H = H(F\langle X \rangle, *)$ be the set of symmetric elements in the free associative algebra with involution. For every $a \in H$, there exists an integer $m \geq 1$ such that
+\[
+a \, V(P, Sy\langle x \rangle^\#)^m \subseteq Sy\langle x \rangle,
+\]
+where $P$ is the T-ideal generated by $\{ t(n_1, n_2, n_3)^+ : n_i \in N_t(Sy\langle x \rangle) \}$.
+\end{lemma}
+
+\begin{proof}
+We first prove by induction on $s$ that for all $x, y, z, t, x_1, \dots, x_s, a \in X$ and $p \in P$,
+\begin{enumerate}
+\item[(i)] $\{x y z t\} R_{x_1} \cdots R_{x_s} V_{p,a} \in Sy\langle x \rangle$;
+\item[(ii)] $\{x y z t\} R_{x_1} \cdots R_{x_s} R_p \in Sy\langle x \rangle$.
+\end{enumerate}
+For $s=0$, (ii) holds by previous results. For (i) modulo $Sy\langle x \rangle$,
+\begin{align*}
+\{x y z t\} V_{p,a} &= \{x y z t\} (D_{p,a} + R_{pa}) \\
+&\equiv \{x y z t\} D_{p,a} \quad (\text{since } pa \in P) \\
+&= (p, \{x y z t\}, a)_+ = \frac{1}{4} [\{x y z t\}, [p, a]] \\
+&= \{x D_{p,a} y z t\} + \{x y D_{p,a} z t\} + \{x y z D_{p,a} t\} + \{x y z t D_{p,a}\} \equiv 0,
+\end{align*}
+because $x D_{p,a}, t D_{p,a} \in D_{p,a}$. So (i) holds for $s=0$.
+
+Assume (i) and (ii) for some $s \geq 0$. Then
+\begin{align*}
+&\{x y z t\} R_{x_1} \cdots R_{x_{s+1}} R_p \\
+&= \{x y z t\} R_{x_1} \cdots R_{x_s} R_p R_{x_{s+1}} - \{x y z t\} R_{x_1} \cdots R_{x_s} [R_p, R_{x_{s+1}}] \\
+&\equiv - \{x y z t\} R_{x_1} \cdots R_{x_s} V_{p, x_{s+1}} \quad (\text{by } (*)) \\
+&\equiv 0 \quad \text{by induction hypothesis,}
+\end{align*}
+proving (ii) for $s+1$. Next,
+\begin{align*}
+&\{x y z t\} R_{x_1} \cdots R_{x_{s+1}} V_{p,a} \\
+&= \{x y z t\} R_{x_1} \cdots R_{x_{s+1}} (D_{p,a} + R_{pa}) \\
+&= \{x y z t\} R_{x_1} \cdots R_{x_s} D_{p,a} R_{x_{s+1}} + \{x y z t\} R_{x_1} \cdots R_{x_s} [R_{x_{s+1}}, D_{p,a}] \\
+&\quad + \{x y z t\} R_{x_1} \cdots R_{x_{s+1}} R_{pa}.
+\end{align*}
+The first term is zero by induction, the second term involves $[R_{x_{s+1}}, D_{p,a}] = R_{x_{s+1} D_{p,a}}$, and the third term is in $Sy\langle x \rangle$ by (ii). Hence (i) holds for $s+1$.
+
+Now let $a \in H$. By Cohn's theorem, $a = j(t_1, \dots, t_r, x_1, \dots, x_l)$ with $t_i$ tetrads and $x_j \in X$. Let $d(a)$ denote the degree of $a$ in tetrads. We prove the lemma by induction on $d(a)$. If $d(a)=0$, then $a$ is already a Jordan element. Suppose $d(a) \geq 1$. Then $a$ is a sum of terms of the form $t R_{a_1} \cdots R_{a_k}$ with $t$ a tetrad and each $a_i$ a monomial in the $t_j$ and $x_j$. Without loss of generality, assume $a = t R_{a_1} \cdots R_{a_k}$ with $\sum_{i=1}^k d(a_i) = d(a)-1$. For any $p \in P$ and $x \in J$,
+\[
+a V_{p,x} = t R_{a_1} \cdots R_{a_k} V_{p,x} = \sum W_i,
+\]
+where each $W_i$ is of the form $j(a_1, \dots, a_k, x)$ and satisfies $d(W_i) < d(a)$. By the induction hypothesis, there exists $m_i$ such that $W_i V(P, Sy\langle x \rangle^\#)^{m_i} \subseteq Sy\langle x \rangle$. Taking $m = \max_i m_i$, we get $a V(P, Sy\langle x \rangle^\#)^{m+1} \subseteq Sy\langle x \rangle$.
+\end{proof}
+
+\begin{theorem}
+Let $J = Sy\langle x \rangle / I$ with $P(J) = 0$ and $J$ prime. Let $\hat{I}$ be the ideal of $F\langle x \rangle$ generated by $I$, and let $f \in Sy\langle x \rangle \cap \hat{I}$. Then $f \in I$.
+\end{theorem}
+
+\begin{proof}
+Write $f = \sum_{k=1}^l \{ i_k a_1^{(k)} \cdots a_{n_k}^{(k)} \}$ with $i_k \in I$. Introduce new variables $Y = \{y_1, \dots, y_s\}$ and consider the algebra $F\langle Y \cup X \rangle$. Define
+\[
+\tilde{f} = \sum_{k=1}^l \{ y_k a_1^{(k)} \cdots a_{n_k}^{(k)} \} \in H\langle Y \cup X \rangle.
+\]
+By the previous lemma, there exists $m \geq 1$ such that
+\[
+\tilde{f} \, V(P, Sy\langle Y \cup x \rangle^\#)^m \subseteq Sy\langle Y \cup x \rangle.
+\]
+Let $\varphi: Sy\langle Y \cup x \rangle \to Sy\langle x \rangle$ be the homomorphism fixing $X$ and sending $y_k$ to $i_k$. Applying $\varphi$, we obtain
+\[
+\varphi(\tilde{f}) = f \quad \text{and} \quad f V(P, Sy\langle Y \cup x \rangle^\#)^m \subseteq \operatorname{id}_{Sy\langle x \rangle}\langle i_1, \dots, i_l \rangle \subseteq I.
+\]
+Thus in $J$,
+\[
+\bar{f} V(P(J), J^\#)^m = 0.
+\]
+Since $J$ is prime and $P(J) \neq 0$, we have $\bar{f} V(P(J), J^\#)^{m-1} = 0$. Repeating, we eventually get $\bar{f} = 0$ in $J$, so $f \in I$.
+\end{proof}
+
+\begin{corollary}
+Let $J$ be a simple Jordan algebra. Then one of the following holds:
+\begin{enumerate}
+\item $J \cong H(A,*)$ for some $*$-simple associative algebra $A$.
+\item $P(J) = 0$ and $J$ satisfies additional conditions (e.g., $J$ is either a Jordan algebra of a quadratic form or associative if nondegenerate).
+\end{enumerate}
+\end
+
+\begin{theorem}
+Let $J$ be a prime Jordan algebra satisfying $f=0$. Suppose $[x, y]^2 = 0$ for all $x, y \in J$. Then $J \simeq J(v, f)$.
+\end{theorem}
+
+\begin{remark}
+The difference between prime, nondegenerate, and primitive algebras: the class of prime and nondegenerate Jordan algebras is much larger than the class of primitive algebras. Primitivity imposes additional conditions related to the existence of specific types of inner ideals. Over a field of characteristic $\neq 2$, primitive Jordan algebras satisfying a polynomial identity must be simple and unital (e.g., finite-dimensional over their centers or Jordan algebras of a nondegenerate quadratic form).
+\end{remark}
+
+\begin{definition}
+Inner (or quadratic) ideals serve as the counterpart to one-sided ideals in associative algebras. Unlike standard ideals, which are closed under multiplication by any element of the algebra, inner ideals are closed under the sandwich operation: for $b \in J$, the set $U_b(J) = \{ U_b(x) \mid x \in J \}$ is an inner ideal.
+\end{definition}
+
+\begin{remark}
+The McCrimmon radical is locally nilpotent. In particular, a simple degenerate algebra is locally nilpotent.
+\end{remark}

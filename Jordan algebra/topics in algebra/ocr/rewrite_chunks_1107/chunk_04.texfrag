@@ -1,0 +1,87 @@
+We may suppose \(F\) algebraically closed.
+
+Consider \(\bar{J} = \bar{F} \otimes_F J\) with \(\bar{F}\) the algebraic closure of \(F\); then \(\bar{J}\) is simple, central, finite-dimensional over \(\bar{F}\). If \(\bar{J} = \bar{F}\) or \(\bar{J} = J(V,f)\), the same is valid for \(J\).
+
+We know that \(1 = e_1 + \dots + e_n\), with \(e_1, \dots, e_n\) primitive pairwise orthogonal idempotents. It is enough to prove that \(n \leq 2\).
+
+Suppose \(n \geq 3\); then \(H_3(F) \subseteq J\) (since \(J = H_n(D)\), \(D\) a composition algebra, and \(H_n(D) \supseteq H_n(F) \supseteq H_3(F)\)). We will show that \(H_3(F)\) does not satisfy the identity \(f = 0\).
+
+Denote \(u_{ij} = 1[i j]\) (elementary matrix) for \(1 \leq i < j \leq 3\), and denote \(e_i = e_{ii}\) for \(i = 1,2,3\). Then \(u_{ij}^2 = e_i + e_j\), and \(2u_{ij}u_{jk} = u_{ik}\).
+
+Let \(a = e_2 - e_3\) and \(b = u_{12} + u_{13}\). Then we have \([a,b]^2 = -2\bigl((a^2,b,b)_+ - 2a \cdot (a,b,b)_+\bigr)\). Observe that
+\[
+\begin{aligned}
+(e_2,b,b)_+ &= (e_2, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}u_{12}(u_{12}+u_{13}) - e_2\bigl(e_1+e_2+e_1+e_3+u_{23}\bigr) \\
+&= \frac{1}{2}\bigl(e_1+e_2+\frac{1}{2}u_{23}\bigr) - e_2 - \frac{1}{2}u_{23} = \frac{1}{2}(e_1-e_2) - \frac{1}{4}u_{23}.
+\end{aligned}
+\]
+Analogously, \((e_3,b,b)_+ = \frac{1}{2}(e_1-e_3) - \frac{1}{4}u_{23}\). Then
+\[
+\begin{aligned}
+(a^2,b,b)_+ &= (e_2+e_3,b,b)_+ = e_1 - \frac{1}{2}(e_2+e_3) - \frac{1}{2}u_{23} \\
+&= \frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr), \\
+(a,b,b)_+ &= (e_2-e_3,b,b)_+ = -\frac{1}{2}(e_2-e_3),
+\end{aligned}
+\]
+and
+\[
+2a \cdot (a,b,b)_+ = -(e_2-e_3)^2 = -e_2-e_3.
+\]
+Therefore
+\[
+\begin{aligned}
+[a,b]^2 &= -2\Bigl(\frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr) + e_2+e_3\Bigr) \\
+&= -\bigl(1+e_1-u_{23}\bigr). \\
+\Rightarrow \bigl[[a,b]^2,b\bigr]^2 &= [e_1-u_{23},b]^2.
+\end{aligned}
+\]
+Now we need to calculate
+\[
+\begin{aligned}
+[e_1-u_{23},b]^2 &= -2\Bigl(\bigl((e_1-u_{23})^2,b,b\bigr)_+ - 2(e_1-u_{23})(e_1-u_{23},b,b)_+\Bigr).
+\end{aligned}
+\]
+We have \((e_1-u_{23})^2 = e_1+e_2+e_3 = 1\), therefore \(\bigl((e_1-u_{23})^2,b,b\bigr)_+ = 0\). Next,
+\[
+\begin{aligned}
+(e_1,b,b)_+ &= (e_1, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}(u_{12}+u_{13})^2 - e_1(u_{12}+u_{13})^2 \\
+&= \frac{1}{2}\bigl(e_1+e_2+e_1+e_3+u_{23}\bigr) - \frac{1}{2}(2e_1) = \frac{1}{2}\bigl(e_2+e_3+u_{23}\bigr), \\
+(u_{23},b,b)_+ &= (u_{23}, u_{12}+u_{13}, u_{12}+u_{13}) \\
+&= \frac{1}{2}(u_{13}+u_{12})^2 - u_{23}(u_{13}+u_{12})^2 \\
+&= \frac{1}{2}\bigl(1+e_1+u_{23}\bigr) - u_{23}\bigl(1+e_1+u_{23}\bigr) \\
+&= \frac{1}{2}\bigl(1+e_1+u_{23}\bigr) - u_{23} - e_2 - e_3 \\
+&= \frac{1}{2}\bigl(-1+3e_1-u_{23}\bigr).
+\end{aligned}
+\]
+Then
+\[
+\begin{aligned}
+2(e_1-u_{23})(e_1,b,b)_+ &= -e_2-e_3-u_{23}, \\
+2(e_1-u_{23})(u_{23},b,b)_+ &= -e_1+u_{23}+3e_1+u_{23}^2.
+\end{aligned}
+\]
+Hence
+\[
+\bigl[[a,b]^2,b\bigr]^2 = 2\bigl(-e_2-e_3-u_{23} -1 - e_1 - u_{23}\bigr) = -4\bigl(1+u_{23}\bigr).
+\]
+Set
+\[
+\begin{aligned}
+n_1 &= \bigl[[e_2-e_3, u_{12}+u_{13}], u_{12}+u_{13}\bigr] = -4\bigl(1+u_{23}\bigr), \\
+n_2 &= \bigl[[e_1-e_3, u_{12}+u_{23}], u_{12}+u_{23}\bigr] = -4\bigl(1+u_{13}\bigr), \\
+n_3 &= \bigl[[e_1-e_2, u_{12}+u_{23}], u_{13}+u_{23}\bigr] = -4\bigl(1+u_{12}\bigr).
+\end{aligned}
+\]
+Since \((u_{23},u_{13},u_{12}) = \frac{1}{2}u_{12}^2 - \frac{1}{2}u_{23}^2 = \frac{1}{2}\bigl(e_1+e_2 - e_2 - e_3\bigr) = \frac{1}{2}(e_1-e_3) \neq 0\), it follows that \((n_1,n_2,n_3)_+ \neq 0\).
+
+\begin{theorem}[Posner]
+Let \(R\) be an associative prime PI-algebra over \(F\) with center \(Z\), and let \(S = Z \setminus \{0\}\). Then \(S^{-1}R\) is an \(S^{-1}Z\)-algebra which is central, simple and of finite dimension.
+\end{theorem}
+
+\begin{theorem}[Amitsur]
+Let \(R\) be a ring with involution \(*\) and let \(H(R,*)\) be the set of symmetric elements. If \(H(R,*)\) satisfies a polynomial identity, then \(R\) also satisfies a polynomial identity.
+\end{theorem}
+
+We want to show an analogue of Posner's theorem for Jordan algebras.

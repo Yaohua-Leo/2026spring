@@ -1,0 +1,312 @@
+\documentclass{article}
+
+\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015,gbalign=left,sorting=gb7714-2015]{biblatex}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+
+\tcbuselibrary{breakable}
+
+\addbibresource{references.bib}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=White}
+
+\declaretheoremstyle[name=Definition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=White}
+
+\declaretheoremstyle[name=Lemma,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=White}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+\def\E{\mathop{\mathcal E}}
+\def\D{\mathop{\mathcal D}}
+\def\lhdeq{\mathop{\trianglelefteq}}
+\def\<{\mathop{\langle}}
+\def\>{\mathop{\rangle}}
+\def\l{\mathop{\ell}}
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+
+
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ----------------------------------------------------------------------
+\section{Midterm}
+
+\begin{exercise}
+Let $A$ be a simple associative algebra. Show that $A^+$ is a simple Jordan algebra.  
+\end{exercise}
+
+\begin{proof} 
+Let $ I $ be an ideal of $ A^{(+)} $. $\forall x,y \in I $ ($ x=y $ is allowed so we can always pick elements in this way). $ \forall a \in A $. 
+\[
+[a,x\circ y ]=x \circ[a,y]-[x,a] \circ y \in I
+\]  
+Since $ x \circ y \in I $, $ a \circ(x \circ y) \in I $. Hence 
+\[
+2a(x \circ y)=[a,x\circ y ]+a \circ(x \circ y) \in I
+\] 
+Now $ \forall b \in A$, $ (2a(x \circ y)) \circ b \in I$. Since $ b((2a(x \circ y))) =2ba (x \circ y) $. Recall in the last step, $ a $ is arbitrary in $ A $, we have $2ba (x \circ y)\in I  $. Hence 
+\[
+2a(x \circ y)b=(2a(x \circ y)) \circ b- b((2a(x \circ y))) \in I
+\] 
+Since $ a,b $ are arbitrary in $ A $. Denote $ (x \circ y)=z $. Rewrite it into $ 2Az A \subseteq I $.   
+
+Now $ 2AzA $ is an ideal of $ A $. If $ 2AzA =A $, then $ A =2AzA \subseteq I \subseteq A^{(+)} \subseteq A $.  Hence $ I=A^{(+)} $. 
+
+If $ 2AzA =0 $, since $ \operatorname{char} \neq 2 $, $ AzA=0 $. Then $ Az $ and $ zA $ are two double sided ideal of $ A $. But $ z $ can not be $ 1 $. Since If $ z=1 $ then $ AzA=A^2=0 $ contradict to $ A $ is simple. (If $ A^2 =0$ then $ \forall a \in A $, $ \mathbb{Z}a $ is a double sided ideal of $ A $). 
+
+Then it forces $ z=0 $. If not, $ \mathbb{Z} z$ is a double sided ideal of $ A $. 
+
+Conclusion: we now show that if $ \exists x,y \in I $ such that $ x \circ y \neq 0 $ then $ AzA $ can not be $ 0 $ and hence $ AzA=I=A^{(+)} $. We want to show in the second case $ \forall x,y \in I $, $ x \circ y =0 $ implies $ I=0 $.
+
+Suppose $ \exists 0 \neq x \in I $. $ \forall a \in A $, $ x\circ (x \circ a)=0 $. i.e. $ x^2a+ax^2+2xax=0 $. since $ x\circ x=2x^2=0 $ and $ \operatorname{char} \neq 2 $ forces $ x^2 = 0 $. Hence $ 2xax=0 $, i.e. $ xax=0 $, in other words $ xAx=0 $. Then $ (AxA)^2 \subseteq AxAxA=0 $. Since $ AxA $ is an ideal, $ AxA=A $ or $ AxA=0 $, but $ A^2 \neq 0 $ as we discussed before. Hence $ AxA=0 , \forall x \in I$. And as we talked before it forces $ x =0$. Thus, $ I=0 $.
+
+Therefore, $ I=A^{(+)} $ or $ I=0 $, i.e. $ A^{(+)} $ is a simple Jordan algebra.   
+\end{proof}
+
+
+\begin{exercise}
+Let $A$ be a commutative associative algebra with a derivation $D$ satisfying $D^3 = 0$. Define a new multiplication in $A$  
+    \[ a \ast b = D(a)D(b). \]  
+    Show that $(A, \ast)$ is a Jordan algebra.  
+\end{exercise}
+
+\begin{proof}  Since $A$ is commutative and $D$ is linear, we have  
+    \[ a \star b = D(a)D(b) = D(b)D(a) = b \star a, \]  
+    and $\star$ is bilinear.  
+
+    Let $x,y \in A$. Write products in $A$ multiplicatively and use that $D$ is a derivation:  
+    \[ D(uv) = D(u)v + uD(v). \]  
+
+    Compute the right-hand side:  
+    \begin{align*}  
+        (x \star x) \star (y \star x)  
+        &= D(x \star x) \cdot D(y \star x) \\
+        &= D(D(x)^2) \cdot D(D(y)D(x)) \\
+        &= [2 D(x)D^2(x)] \cdot [D^2(y)D(x) + D(y)D^2(x)] \\
+        &= 2 D(x)^2 D^2(x) D^2(y) + 2 D(x)[D^2(x)]^2 D(y).  
+    \end{align*}  
+
+    Compute the left-hand side:  
+    \begin{align*}  
+        ((x \star x) \star y) \star x  
+        &= D(((x \star x) \star y)) \cdot D(x) \\
+        &= D(D(x \star x) \cdot D(y)) \cdot D(x) \\
+        &= D(2 D(x)D^2(x) D(y)) \cdot D(x) \\
+        &= 2 D(D(x)D^2(x)D(y)) \cdot D(x).  
+    \end{align*}  
+
+    Using $D(uvw) = D(u)vw + uD(v)w + uvD(w)$ with  
+    $u = D(x)$, $v = D^2(x)$, $w = D(y)$, and $D^3(x)=0$,  
+    we get  
+    \begin{align*}  
+        D(uvw) &= D^2(x) \cdot D^2(x) \cdot D(y) + D(x) \cdot 0 \cdot D(y) + D(x) \cdot D^2(x) \cdot D^2(y) \\
+               &= [D^2(x)]^2 D(y) + D(x) D^2(x) D^2(y).  
+    \end{align*}  
+    Hence  
+    \begin{align*}  
+        ((x \star x) \star y) \star x  
+        &= 2([D^2(x)]^2 D(y) + D(x) D^2(x) D^2(y)) \cdot D(x) \\
+        &= 2 D(x)[D^2(x)]^2 D(y) + 2 D(x)^2 D^2(x) D^2(y).  
+    \end{align*}  
+
+    This matches the right-hand side exactly, so the Jordan identity holds.  
+
+Therefore $(A, \star)$ is a commutative algebra satisfying the Jordan identity, hence a Jordan algebra.  
+\end{proof}
+
+\begin{exercise}
+Let $J$ be a Jordan algebra. Show that for any $a, b \in J$ the operator $[R_a, R_b]$ is a derivation of $J$.  
+\end{exercise}
+
+\begin{proof} 
+For any algebra $ A $, Let $ D $ be a linear operator $ D: A\rightarrow A $. $ D $ is a derivation if and only if
+\[
+D(ab)=D(a)b+aD(b), \forall a,b \in A
+\]
+Write it into operators on $ b $ we have $[R_a,D]=R_{aD}, \forall a \in A$. 
+
+Recall linearization:
+\[
+R_{(bc)a}-R_{(ac)b}+R_bR_aR_c+R_cR_aR_b-R_aR_bR_c-R_cR_bR_a=0
+\]
+i.e.
+\[
+R_{(bc)a}-R_{(ac)b}+[R_b,R_a]R_c+R_c[R_a,R_b]=0
+\]
+i.e.
+\[
+R_{(a,c,b)}+[[R_a,R_b],R_c]=0
+\]
+Or
+\[
+R_{(a,c,b)}=[R_c,[R_a,R_b]] \tag{IV}
+\]
+We can write $ (a,c,b)=(ac)b-a(cb)=cR_aR_b-cR_bR_a=c[R_a,R_b]$. Thus we have $ [R_c,[R_a,R_b]]=R_{(a,c,b)}=R_{c[R_a,R_b]} $. Hence $ [R_a,R_b] $ is a derivation.
+
+\end{proof}
+
+\begin{exercise}
+Let $J$ be a Jordan algebra and let $e$ be an idempotent in $J$. Show that $U_e$ is a projection on $J_1$, where $J_1$ is the Peirce decomposition component with respect to $e$.  
+\end{exercise}
+
+\begin{proof}  
+First, we show that the image of $U_e$ is $J_1$. Let $a \in \mathrm{Im}(U_e)$, so $a = bU_e$ for some $b \in J$. By definition, $bU_e = 2(eb)e - e^2b = 2(be)e - be$.  
+We check if $ae = a$:  
+\begin{align*}  
+    ae &= (2(be)e - be)e = 2((be)e)e - (be)e  
+\end{align*}  
+$ 2((be)e)e=2(be)(ee)+2(be,e,e) $ where $ (be,e,e)=-(e,e,b)-(be,e,e) $ hence $ (be,e,e)=-\frac{1}{2}(e,e,b) $. We have $2(be)(ee)+2(be,e,e)= 2(be)e-(e,e,b)=2(be)e-eb+e(eb)=3(be)e - be $. Thus,    
+\begin{align*}  
+    ae &= (3(be)e - be) - (be)e \\
+    &= 2(be)e - be \\
+    &= a  
+\end{align*}  
+Since $ae=a$, $a$ is in $J_1$. Thus, $\mathrm{Im}(U_e) \subseteq J_1$.  
+
+Conversely, let $a \in J_1$. By definition, $ae = a$. We apply $U_e$:  
+\[ aU_e = 2(ea)e - e^2a = 2ae - ea = 2a - a = a. \]  
+This shows that $a \in \mathrm{Im}(U_e)$. Thus, $J_1 \subseteq \mathrm{Im}(U_e)$.  
+Combining both inclusions, we have $\mathrm{Im}(U_e) = J_1$.  
+
+Moreover, for any $a \in J$, let $b=aU_e$. We have shown $b \in J_1$. Applying $U_e$ again, $bU_e = b$. So, $aU_eU_e = aU_e$, which means $U_e^2 = U_e$. Thus, $U_e$ is a projection operator.  
+
+Next, we find the kernel of $U_e$. Let $t \in J_0$. By definition, $te=0$. Then $tU_e = 2(te)e - e^2t = 0$. So, $J_0 \subseteq \ker(U_e)$.  
+
+Let $t \in J_{1/2}$. By definition, $te = \frac{1}{2}t$. Then  
+\[ tU_e = 2(te)e - e^2t = 0. \]  
+So, $J_{1/2} \subseteq \ker(U_e)$.  
+
+Therefore, $J_0 \oplus J_{1/2} \subseteq \ker(U_e)$. Since the image is $J_1$ and $J=J_1 \oplus J_{1/2} \oplus J_0$, the kernel must be exactly $J_0 \oplus J_{1/2}$.  
+\end{proof}  
+
+\begin{exercise}
+Let $J$ be a Jordan algebra with a unit element. Define an invertible element in $J$. Prove that $a$ is invertible in $J$ if and only if $U_a$ is invertible in $\text{Mult}J$.  
+\end{exercise}
+
+\begin{proof} 
+Let $a$ be invertible with inverse $b$. Then  
+\begin{align*}  
+ bU_a &= 2(ba)a - ba^2 = 2a-a=a \\
+ b^2U_a &= 2(b^2a)a - b^2a^2 = 2ba-1 = 1  
+\end{align*}  
+Observe that $U_1 = \text{Id}_J$, the identity operator in $J$. Then  
+\[ \text{Id}_J = U_1 =U_{U_a(b^2)} = U_a U_{b^2} U_a \]  
+this means that $U_a$ is invertible. 
+
+Conversely, suppose that $U_a$ is invertible and let $b = a U_a^{-1}$. Then $b U_a = a$.  
+Since $[U_a, R_a]=0$ we also have $[U_a^{-1}, R_a]=0$. ($ [U_a^{-1}, R_a]=U_a^{-1}[R_a, U_a] U_a^{-1}=0$). Then  
+\begin{align*}  
+    ba &= a U_a^{-1} R_a = a R_a U_a^{-1} = a^2 U_a^{-1} \\
+       &= 1 U_a U_a^{-1} = 1  
+\end{align*}  
+and  
+\[ a = b U_a = 2(ba)a - ba^2 = 2a - ba^2. \]  
+Thus $ba^2=a \implies a$ is invertible.  
+\end{proof}
+
+\begin{exercise}
+Let $J$ be a Jordan algebra. Show that if $(\text{Mult}(J))^n = 0$ then $J^{2n-1} = 0$ ($ n \ge 1 $).  
+\end{exercise}
+
+\begin{proof}
+Consider a word $ x_1, \ldots x_{2n-1} \in J^{2n-1} $. It may have arbitrary order of operations. For example, when $ n=2 $, $ abcd $ or $ ab(cd) $ or $ a((bc)d) $ and so on. All we know is the ``length'' of this word is $ 2n-1 $. We rewrite it into:
+\[
+x_i R_{x_1, \ldots , \hat{x_i}, \ldots, x_{2n-1}}
+\]      
+Now since $R_{x_1, \ldots , \hat{x_i}, \ldots, x_{2n-1}} \in \operatorname{Mult}J  $ and $  \operatorname{Mult}J  $ is generated by $ R_a $ where $ a $ is a word of length 1 or 2. We have 
+\[
+R_{x_1, \ldots , \hat{x_i}, \ldots, x_{2n-1}}=\sum_i \alpha_i R_{x_{i_1}}, \ldots R_{x_{i_{k_i}}}
+\]    
+And $ k_i \ge \lceil\frac{2n-2}{2}\rceil=n-1 $. If there exist $ x_i R_{x_{i_1}}, \ldots R_{x_{i_{k_i}}}$ where $ k_i=n-1 $, then it is a word of the form:
+\[
+x_i(a_1b_1)(a_2b_2) \ldots (a_{n-1}b_{n-1})
+\]
+Write it into operator on $ a_1 $, then we get
+\[
+x_i(a_1b_1)(a_2b_2) \ldots (a_{n-1}b_{n-1})=a_1R_1 \ldots R_n=0
+\]  
+Therefore, if $(\text{Mult}(J))^n = 0$ then $J^{2n-1} = 0$.  
+\end{proof}
+
+\begin{exercise}
+Show that Peirce decomposition components satisfy the following relations:  
+    \[ J_{ii}^2 \subseteq J_{ii}, \quad J_{ij}^2 \subseteq J_{ii} + J_{jj}, \quad J_{ij}J_{jk} \subseteq J_{ik} \quad (i, j, k \text{ distinct}). \]  
+\end{exercise}
+
+\begin{proof} 
+(1). Let $i \ne j$ and put $e = e_i + e_j$, $B = JU_e$. Then $B = J_{ii} + J_{ij} + J_{jj}$ is the Peirce decomposition of $B$ relative to $e_i, e_j$. We have $J_{ii} = B_1(e_i)$, $J_{jj} = B_0(e_i) = J_{jj} = B_1(e_j)$, $J_{ij} = B_{1/2}(e_i) = J_{ji} = B_{1/2}(e_j)$. Hence $J_{ii}^2 = B_1^2(e_i) \subseteq B_1(e_i) = J_{ii}$ and $J_{ij}^2 = B_{1/2}^2(e_i) \subseteq B_1(e_i) + B_0(e_i) = J_{ii} + J_{jj}$.
+
+(2). let $i,j,k$ be distinct and put $f = e_i + e_j + e_k$, $C = JU_f$. Then $C = J_{ii} + J_{jj} + J_{kk} + J_{ij} + J_{ik} + J_{jk}$ is the Peirce decomposition of $C$ relative to $e_i, e_j, e_k$ ($J_{pq} = C_{pq}$). Also let $e = e_i + e_j$. Then $e$ is an idempotent contained in $C$ and $C_1(e) = J_{ii} + J_{ij} + J_{jj}$, $C_0(e) = J_{kk}$ and $C_{1/2}(e) = J_{ik} + J_{jk}$. Since $C_{1/2}(e)C_1(e) \subseteq C_{1/2}(e)$ we have $J_{ij}J_{jk} \subseteq J_{ik} + J_{jk}$ and since $J_{ij}=J_{ji}$, $J_{jk}=J_{kj}$ we have also $J_{ij}J_{jk} = J_{kj}J_{ji} \subseteq J_{ki} + J_{ji}$. Hence $J_{ij}J_{jk} \subseteq (J_{ik} + J_{jk}) \cap (J_{ki} + J_{ji}) = J_{ik}$. 
+\end{proof}
+
+\begin{exercise}
+Show that for any finite-dimensional Jordan algebra $J$, its nil-radical is hereditary, namely for any ideal $I$ of $J$ we have $\text{Nil}I = I \cap \text{Nil}J$.  
+\end{exercise}
+
+\begin{proof} 
+($\supseteq$) We have $I \cap \operatorname{Nil} J \subseteq \operatorname{Nil} I$ since $I \cap \operatorname{Nil} J$ is a nil ideal of $I$.  
+
+($\subseteq$) For the other inclusion, consider $\bar{J} = J/\operatorname{Nil} J$. Then we have $\operatorname{Nil} \bar{J} = 0$.  
+Let $\bar{I} = (I + \operatorname{Nil} J) / \operatorname{Nil} J$, which is an ideal of $\bar{J}$.  
+By the previous corollary, since $\operatorname{Nil} \bar{J} = 0$, we must have $\operatorname{Nil} \bar{I} = 0$.  
+
+The canonical projection of $\operatorname{Nil} I$ into $\bar{J}$ is $(\operatorname{Nil} I + \operatorname{Nil} J) / \operatorname{Nil} J$. This is a nil ideal of $\bar{I}$. Since $\operatorname{Nil} \bar{I} = 0$, we must have  
+\[ (\operatorname{Nil} I + \operatorname{Nil} J) / \operatorname{Nil} J = \{0\} \]  
+This implies $\operatorname{Nil} I \subseteq \operatorname{Nil} J$.  
+Since by definition $\operatorname{Nil} I \subseteq I$, we can conclude that $\operatorname{Nil} I \subseteq I \cap \operatorname{Nil} J$.  
+\end{proof}
+
+\begin{exercise}
+Prove that for the octonion algebra $\mathbb{O}$ (over real numbers), $\mathbb{O}^+$ is isomorphic to a Jordan algebra of a symmetric nondegenerate bilinear form.  
+\end{exercise}
+
+\begin{proof} 
+
+\end{proof}
+
+
+
+% ------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,59 @@
+\begin{theorem}
+Let $\mathcal{J}$ be a nondegenerate Jordan algebra which satisfies the identity $[x, y]^2 = 0$. Then $\mathcal{J}$ is associative and therefore is a domain.
+\end{theorem}
+
+\begin{proof}
+We show that $(a, b, c)$ is an absolute zero divisor for any $a, b, c \in \mathcal{J}$. Since $\mathcal{J}$ is nondegenerate, this will imply that $(a, b, c) = 0$ for all $a, b, c \in \mathcal{J}$. From the identity $[x, y]^2 = 0$, we have $(x^2, y, y) = 2x(x, y, y)$. Since the associator in the second entry is a derivation, we have $2(x, y, y)y = (x, y^2, y)x$, and since $[R_y, R_{y^2}] = 0$, it follows that $(x, y^2, y) = (x, y, y^2)$.
+
+Linearizing the identity $(x^2, y, y) = 2x(x, y, y)$ in $y$, we obtain
+\[
+(x^2, y, z) + (x^2, z, y) = 2x(x, y, z) + 2x(x, z, y).
+\]
+In particular,
+\begin{equation} \tag{***}
+(x^2, y, y^2) + (x^2, y^2, y) = 2x\left((x, y, y^2) + (x, y, y^2)\right).
+\end{equation}
+Again, since $[R_y, R_{y^2}] = 0$, we have
+\begin{equation} \tag{****}
+2(x^2, y, y^2) = 4x(x, y, y^2).
+\end{equation}
+Observe that
+\[
+4(x, (x, y, y), y) = 4(x(x, y, y))y - 4x((x, y, y)y) = 2(x^2, y, y)y - 2x(x, y, y^2).
+\]
+Using the identity $2(x^2, y, y)y = (x^2, y, y^2)$ (from (**)?), we obtain
+\[
+4(x, (x, y, y), y) = (x^2, y, y^2) - (x^2, y, y^2) = 0.
+\]
+Thus
+\begin{equation} \tag{*v}
+(x, (x, y, y), y) = 0 \quad \text{for all } x, y \in \mathcal{J}.
+\end{equation}
+
+Linearizing the identity $(x^2, y, y) = 2x(x, y, y)$ in $x$, we get
+\[
+(xz, y, y) = x(z, y, y) + z(x, y, y)
+\]
+and
+\[
+(xy, y, y) = x(y, y, y) + y(x, y, y) = \frac{1}{2}(x, y, y^2). \tag{*7}
+\]
+Linearizing (****) in $x$ yields
+\begin{equation} \tag{*8}
+(xy, y^2, y) = \frac{1}{2}(x, y^2, y^2).
+\end{equation}
+Then
+\[
+(x, y, y^2)y \stackrel{(*7)}{=} 2(xy, y, y)y \stackrel{(**)}{\equiv} (xy, y, y^2).
+\]
+Using the commutativity $[R_y, R_{y^2}] = 0$, we have
+\[
+0 = [R_y, R_{y^2}](xy, y^2, y) \stackrel{(*8)}{=} \frac{1}{2}(x, y^2, y^2),
+\]
+so $(x, y^2, y^2) = 0$. Then
+\[
+(x, y, y)(x, y, y) = (x, y(x, y, y), y) - y(x, (x, y, y), y) \stackrel{(**)}{\equiv} \frac{1}{2}(x, (x, y, y^2), y). \tag{*10}
+\]
+From one side,
+\[
+(x, (x, y, y^2))y \underset{(****)}{=} \frac{1}{2}(x^2, y, y^2)y \underset{(*9)}{=} \frac{1}{4}(x^2, y^

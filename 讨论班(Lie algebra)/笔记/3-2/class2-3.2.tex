@@ -1,0 +1,307 @@
+\documentclass{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+\usepackage[UTF8]{ctex}
+\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015,gbalign=left,sorting=gb7714-2015]{biblatex}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{tikz} 
+
+\tcbuselibrary{breakable}
+
+\addbibresource{references.bib}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=White}
+
+\declaretheoremstyle[name=Definition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=White}
+
+\declaretheoremstyle[name=Lemma,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=White}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+\def\E{\mathop{\mathcal E}}
+\def\D{\mathop{\mathcal D}}
+\def\lhdeq{\mathop{\trianglelefteq}}
+\def\<{\mathop{\langle}}
+\def\>{\mathop{\rangle}}
+\def\l{\mathop{\ell}}
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+
+\newcommand{\slC}{\mathfrak{sl}(2, \mathbb{C})}
+\newcommand{\vir}{\mathfrak{vir}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\N}{\mathbb{N}}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ----------------------------------------------------------------------
+
+\section*{About ideal structure of Weyl algebra and introduction to differential operators.}
+
+\begin{center}
+Xinyuan. Zhang
+\end{center}
+
+Let $ K[x_1, \ldots , x_n]: = K[X] $. Denote $ \hat{x_i}f=x_i \cdot f $ for $ f \in K[x_1, \ldots , x_n] $. The Weyl algebra $ A_n $ is defined as
+\[
+A_n= < \hat{x_1}, \ldots, \hat{x_n}, \partial_1, \ldots, \partial_n  >
+\]
+The relation is $ [\partial_i, x_j] = \delta_{ij} $.
+
+This algebra has a $ K $-basis 
+\[
+x^{\alpha} \partial^{\beta}=
+\] 
+
+We begin with the ideal of $ A_n $.
+
+For any $ D \in A_n $. $ \deg (D)=|\alpha|+|\beta| $. 
+
+\begin{theorem} 
+$ \forall D,D' \in A_n $, we have:
+\begin{enumerate}
+    \item $ \deg(D+D') \le \mathrm{max}\{ \deg(D), \deg(D') \} $.
+    \item $ \deg(D \cdot D') = \deg(D) + \deg(D') $.
+    \item $ \deg ([DD']) \le \deg (D) + \deg (D')-2 $. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} 
+1
+\end{proof}
+
+\begin{theorem} 
+$A_n$ is simple (as associative algebra).
+\end{theorem}
+
+\begin{proof} 
+2
+\end{proof}
+
+
+\begin{corollary}
+All non-zero elements in $ \operatorname{End}(A_n)  $ are injective. 
+\end{corollary}
+
+For characteristic $ p > 0 $. 
+
+\section{Rings of differential operators}
+
+Let $ R $ be a commutative $ k $-algebra. For any $ a\ in K $ Define map $ v \mapsto av $. order 0-n.
+
+\begin{lemma}
+Let $ D'=\operatorname{Der}(R)+R $ 
+\end{lemma}
+
+\begin{proof} 
+3
+\end{proof}
+
+\begin{definition} 
+$ D(R) = \bigcup_{} $ 
+\end{definition}
+
+\begin{proposition}
+If $ P \in D^n $ and $ Q \in D^m $, then $ PQ \in D^{m+n} $.   
+\end{proposition}
+
+\begin{proof} 
+4
+\end{proof}
+
+\begin{proposition}
+$ \operatorname{Der}(K[X]) $ 
+\end{proposition}
+
+\begin{proof} 
+5
+\end{proof}
+
+We want to prove $ A_n=D(K[X]) $.
+
+\begin{lemma}
+$ P \in D(K[X]) $, $ \forall i, [P,x_i]=0 $, then $ P \in K[X] $.   
+\end{lemma}
+
+\begin{proof} 
+6
+\end{proof}
+
+\begin{definition} 
+$C_r$
+\end{definition}
+
+\begin{lemma}
+For $ P_1, \ldots, P_n \in C_{r-1} $, $ \forall [P_i,x_j]=[P_j, x_i] $  
+\end{lemma}
+
+\begin{proof} 
+7
+\end{proof}
+
+\begin{theorem} 
+$ D(K[X])=A_n $ 
+\end{theorem}
+
+\begin{proof} 
+8
+\end{proof}
+
+\section{$ A_n $-modules}
+
+\begin{definition} 
+torsion elements
+\end{definition}
+
+\begin{definition} 
+torsion module
+\end{definition}
+
+\begin{lemma}
+If $ M $ is an irreducible $ R $-module.
+\begin{enumerate}
+    \item $ M \cong R/\operatorname{Ann}(u) $.
+    \item If $ R $ is not a division ring, then $ M $ is a torsion module.
+\end{enumerate}
+\end{lemma}
+
+\begin{proposition}
+$ K[X] $ is an irreducible torsion $ A_n $-module. Further more, $ K[X] \cong A_n / \sum_{i=1}^n A_n \partial_i $. 
+\end{proposition}
+
+\begin{proof} 
+
+\end{proof}
+
+We also have $ A_n/ \sum A_n x_i \cong K[\partial_1, \ldots, \partial_n]$.
+
+\begin{proposition}
+Twisting $ R $-mod $ M $.  
+\end{proposition}
+
+\begin{proposition}
+(1) M irr $ \Leftrightarrow $ M twis irr 
+(2) tor $ \Leftrightarrow $ twis tor
+(3) $ J $ is a left ideal of $ R $ so is $ \sigma(J) $.   
+\end{proposition}
+
+Let $ F: A_n \to A_n $, $ x_i \mapsto \partial_i $, $ \partial_i \mapsto -x_i $. We call $ M_F $ the $ F $-transform of $ M $.
+
+\begin{proposition}
+$ (K[X])_F=K[\partial_1, \ldots, \partial_n]=K[\partial] $ 
+\end{proposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

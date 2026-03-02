@@ -1,0 +1,181 @@
+      office hours              12 30 14 00              Monday
+
+         grade          midterm           presence
+                                                          homework
+                                                                         final term
+                          30                    107           20                 40
+                        midterm               Apr 13th    Monday         8th week
+
+Recall     Representation       of quiver                Vi iEQo         42       EQ
+
+   Vsca             V10                  Yy E Hom Used            Vera
+
+  M       Vi Ya EQ              EQ
+
+
+Example
+
+
+ Consider        representation                 M                        k        M    Vi 42
+
+
+
+                                                N         k                  K    N    4,42
+                                                               1
+                                                              M    to    N
+ Consider     f      M          N       morphism from
+
+
+      f      fi         Q               f E Hom Vi Ui
+                            i            in     Q         the following diagram commute
+ for each           α
+                                    j
+                                V                   Vj
+                            f                        fg
+                                U                   Uj
+                                          F
+We use           RepQ denote the category of representations of Q
+For our   example            f   M       N           f if fr
+
+                                                         i
+
+            f 19                                                if     f
+
+                         k                               k
+                                     ti
+
+          fT                         1               5
+
+      1    11                            T.fi
+check
+                                     a       b
+
+
+                    1 11 19
+                    c   d f      atb
+                             e   b
+                                         ʰ
+ Hence
+           f 1 9                                 b            dimHomlm.nl 2
+
+
+  Direct sum and         indecomposable              representations
+
+
+
+ If     M and N         are representations           of Q
+  then       MON is a                   representation         with vector spaces             Vit U 4212
+   M N                Vi       4
+                                                   p
+  Inductively we can consider                              M              Me
+   If N is a representation can it be decomposed
+                                                                                        into direct sum
+            non zero representation
+    of the
+  Rank       In       our      ilass we may face with indecomposable                              irnedu.is
+
+
+  which is        a       bit different from               Group representation course
+
+
+ Example              I        1   2               3
+
+  consider        representation
+                                                       M            kt        k
+
+                                                   N           k               k         k
+
+                                         m         N
+                                                                   k k                  Kok         ook
+
+                                    indeed
+                                                                     R                   is a         k
+
+                                         M indecomposable                      it can not be written
+Definition        We call                                                if
+ as a    direct sum                of        two       non zero      representations    of Q
+Example               P                      A BC          are      non       maps
+
+C is      an isomorphism
+                                                                                    v
+                                                           l
+                                                                B
+                                                                               at         11
+                                                                                   v1
+ We have                   A            Be
+Here the             isomorphism classes        is corresponding to          JNF
+
+                                          describe               all       isomorphism classes
+To       describe    RepQ we will need to
+
+of       indecomposable     representations
+
+
+Knell Schmicht theorem                   Any ME Repa             finite
+can be decomposed                into    finite number of          indecomposables      and
+
+its       deomposation      is unique          up to order
+ Kernel and cokernel representations
+
+                                    VEV fool 04            Imf               veU
+     f          a         kerf                                         a
+                                                                                   finny
+                      Cokerf        Imf
+                                                                                       M Vi921
+ Let f          M N         be morphism from M to N                M.NERQQ             N la.tt
+
+ Define        Kerf       RepQ      as         Li 12    where      L        kerf
+ X _42 L
+
+                    421Vi               Viel
+     Xylvi
+                                                                                       L
+ We         want to show that kerf
+                                   indead in RepQ i.e
+                                                                                              Lj
+                                    7 14
+           to show that     Viel                α i
+                                                           elf                if
+              Vith          f wit       o
+
+
+                                                       f     f Wil
+                    fj kevin fg laevis
+             acute kerfy L
+Then inclusion              Li            V          defines injective morphism from kerf to
+M
+               4              Lj
+              1                   I
+ Cokerf                          Imef                   72          α       ing
+
+                   V2                                                                   12m
+    where
+                            nitf.IM                       Ya ni             fj Mj                       Imt
+ We need to show that Us is well defined
+
+     Let       nitfi.mil              n             f   mi      then           ni   ni e film
+                                                                              1 mi     f.im     n   n
+
+    faint      nil          Half              mil
+
+                            fy Yasmin                     E    Imf           fjimj
+                        pani              E
+            sail                              fjcmj
+                                                  N          Cobert          it is a   surjective
+ Consider the projection
+                                                         N              N
+morphism
+              in    RepQ                      prog                          Imf
+
+Equivalent definition of Kerf
+              be morphism
+ Let   f    M N we call                       g         LN      the kernel representation of
+
+                            and    for any h                    x       M with         tho
+  f if fg          o
+
+                                                                                  the following
+ there exist            a     x           L             s.thegu.ie
+            unique
+                                                        diagram commute
+If
