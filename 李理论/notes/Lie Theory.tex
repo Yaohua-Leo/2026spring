@@ -194,6 +194,114 @@
 %----------------------------------------------------------------------------------------
 \chapter{Lecture 1}
 
+Lie algebras were originally introduced by Sophus Lie in the 1870s to study the concept of continuous transformation groups. Lie's motivation was to develop a theory for differential equations analogous to Galois theory for algebraic equations. He discovered that the infinitesimal transformations of a continuous group form a linear space equipped with a bracket operation, now known as a Lie algebra. This linearization allows complex global geometric problems to be translated into algebraic problems, making them more tractable.
+
+Let $ F $ be a field (mostly $ \operatorname{char}F =0$, even $ F=\mathbb{C} $). 
+
+\begin{definition} 
+A linear algebra $ A $ is a vector space over $ F $, with a binary bilinear operation:
+\begin{itemize}
+    \item binary operation: $ A \times A \to A $, $ (a,b) \mapsto ab $.
+    \item bilinear: this operation is linear in each variable. In orther word, $ \forall \alpha \in F $ and $ a,a',a'',b,b',b'' \in A $, we have:
+    \begin{align*}
+    (\alpha a)b=a(\alpha b) = \alpha (ab) \\
+    (a'+a'')b = a'b+a''b \\
+    a(b'+b'')=ab'+ab''
+    \end{align*}
+\end{itemize}
+The algebra $ A $ is associative if $ \forall a,b,c \in A $, $ (ab)c=a(bc) $.
+\end{definition}
+
+\begin{example} 
+$ M_n(F) $, the algebra of $ n \times n $ matrices over $ F $.
+\end{example}
+
+\begin{example} 
+Let $ V $ be a vector space, $ \operatorname{End}_F (V) =\{ \text{linear transformations } \varphi: V\to V \}$ is an associative algebra with the composition operation$ (\phi \psi) (v)=\phi(\psi(v))$. 
+
+If $ \dim V < \infty $, when we fix a basis, then we fet a matrix representation of $ \varphi $ in our fix basis.
+\end{example}
+
+The most imprtant thing everyone shoul know is Wedderburn's theorem.
+
+待补充
+
+\begin{definition} 
+Suppose $ F $ is algebraically closed. An algebra $ A $ is simple if 
+\begin{enumerate}
+    \item $ \nexists \  I \triangleleft A $ and $ I \neq 0 $. 
+    \item $ A\cdot  A \neq (0)$.   
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}
+Any simple finite dimensional associative algebra is isomorphic to $ M_n(F) $ for some $ n $.
+\end{corollary}
+
+\begin{corollary}
+Radical
+\end{corollary}
+
+\section{Where do Lie algebras come from?}
+
+\begin{definition} 
+A Lie algebra is a vector space $ L $ over a field $ F $, with a binary operation $ [a,b] \in L $, such that
+\begin{enumerate}
+    \item $ [a,b] $ is bilinear. 
+    \item $ [a,b] = -[b,a] $.
+    \item $ [a,[b,c]] + [c,[a,b]] + [b,[c,a]] = 0 $, this is called Jacobi identity. 
+\end{enumerate}
+\end{definition}
+
+\subsection{They come from associative algebras}
+
+Let $ A $ be an associative algebra. $ \forall a,b \in A $, define $ [a,b]=ab-ba $. Check that $ (A,[ \ ,\  ]) $ is a Lie algebra:
+
+\begin{proof}
+    Bilinearity and skew-symmetry are clear. For Jacobi identity:
+    \begin{align*}
+        [a,[b,c]] & + [b,[c,a]] + [c,[a,b]] \\ 
+        &= a(bc-cb) - (bc-cb)a + b(ca-ac) - (ca-ac)b + c(ab-ba) - (ab-ba)c \\
+        &= abc - acb - bca + cba + bca - bac - cab + acb + cab - cba - abc + bac \\
+        &= 0.
+    \end{align*}
+\end{proof}
+
+We denote this new algebra $ (A,[ \ ,\  ]) $ by $ A^{(-)} $. 
+
+Suppose that $ L \subseteq A $ and $ [L,L] \subseteq L $. Then $ L \le A^{(-)} $。
+
+\begin{example} 
+$ M_n(F)^{(-)}=\mathfrak{gl}(n) $. We call it the general linear Lie algebra.
+
+$ [L,L]=\{ \sum_{i} [a_i,b_i] \} \trianglelefteq L $. Clearly $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] \neq \mathfrak{gl}(n) $ and for $ n \ge 2 $, $ [\mathfrak{gl}(n),\mathfrak{gl}(n)]\neq 0 $.    
+\end{example}
+
+\begin{example} 
+Focus on $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] $, all matrices are of trace 0. This is called the special linear Lie algebra, denoted by $ \mathfrak{sl}(n) $.
+\end{example}
+
+\begin{definition} 
+$ Z $ is the center of Lie algrbra $ L $ if $ Z=\{ z \in L | [z,L]=0 \} $.   
+\end{definition}
+
+We can also find Lie algebras from the involution of an associative algebra. Let $ A $ be an associative algebra. $ *: \to A $ is a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \chapter{Lecture 2}
 
@@ -257,5 +365,3 @@ claim $ \mathrm{ad}(S_1) \ldots \mathrm{ad}(S_n)=(0) $.
 
 
 \end{document}
-
-

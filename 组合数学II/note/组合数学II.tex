@@ -1337,44 +1337,217 @@ Remove $E_1$ from $G$. In $G' = (V, E \setminus E_1)$, every vertex still has ev
 \end{proof}
 
 \begin{example} 
-Figure 3
+Consider the graph below. On the left is the original connected graph; on the right we redraw the three edge-disjoint cycles that appear in the proof of Hierholzer's theorem.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.0, every node/.style={font=\small}, line cap=round]
+        % Original graph
+        \coordinate (p) at (0,2.6);
+        \coordinate (u) at (-1.2,1.4);
+        \coordinate (v) at (1.2,1.4);
+        \coordinate (x) at (-1.2,0);
+        \coordinate (y) at (1.2,0);
+        \coordinate (q) at (0,-1.2);
+
+        \draw (p) -- (u) -- (v) -- (p);
+        \draw (u) -- (x) -- (y) -- (v);
+        \draw (u) -- (y);
+        \draw (x) -- (v);
+        \draw (x) -- (q) -- (y);
+
+        \node[vertex, label=above:$p$] at (p) {};
+        \node[vertex, label=left:$u$] at (u) {};
+        \node[vertex, label=right:$v$] at (v) {};
+        \node[vertex, label=left:$x$] at (x) {};
+        \node[vertex, label=right:$y$] at (y) {};
+        \node[vertex, label=below:$q$] at (q) {};
+        \node at (0,-1.9) {original graph};
+
+        % Top triangle
+        \coordinate (p1) at (5.5,2.5);
+        \coordinate (u1) at (4.7,1.7);
+        \coordinate (v1) at (6.3,1.7);
+        \draw (p1) -- (u1) -- (v1) -- (p1);
+        \node[vertex, label=above:$p$] at (p1) {};
+        \node[vertex, label=left:$u$] at (u1) {};
+        \node[vertex, label=right:$v$] at (v1) {};
+
+        % Bottom triangle
+        \coordinate (x1) at (4.7,0.3);
+        \coordinate (y1) at (6.3,0.3);
+        \coordinate (q1) at (5.5,-0.8);
+        \draw (x1) -- (y1) -- (q1) -- (x1);
+        \node[vertex, label=left:$x$] at (x1) {};
+        \node[vertex, label=right:$y$] at (y1) {};
+        \node[vertex, label=below:$q$] at (q1) {};
+
+        % First closed trail C_1
+        \coordinate (u2) at (4.6,-2.4);
+        \coordinate (x2) at (5.1,-3.5);
+        \coordinate (y2) at (6.3,-3.0);
+        \coordinate (v2) at (6.0,-1.8);
+        \draw (u2) -- (x2) -- (v2) -- (y2) -- (u2);
+        \node[vertex, label=left:$u$] at (u2) {};
+        \node[vertex, label=below:$x$] at (x2) {};
+        \node[vertex, label=right:$y$] at (y2) {};
+        \node[vertex, label=above:$v$] at (v2) {};
+        \node at (5.5,-4.2) {$C_1=(u,x,v,y,u)$ redrawn};
+    \end{tikzpicture}
+\end{center}
+
+Choose the first closed trail to be
+\[
+C_1 = (u,x,v,y,u),
+\]
+which uses the four edges $ux$, $xv$, $vy$, and $yu$. This is the closed trail: start at $u$, keep following unused edges, and because every time we enter a vertex we can also leave it again, the trail cannot get stuck anywhere except at the starting vertex. Hence the walk comes back to $u$ and closes up.
+
+Now remove the edge set $E_1 = \{ux, xv, vy, yu\}$. The remaining graph $G' = (V, E \setminus E_1)$ has exactly two non-trivial components: the top triangle $(u,p,v,u)$ and the bottom triangle $(x,q,y,x)$. Every vertex in these components still has even degree, so by the induction hypothesis each component has its own Eulerian cycle. 
+
+Finally, splice those smaller cycles into $C_1$. Start to traverse $C_1$ at $u$, but before leaving $u$ for the edge $ux$, first run through the top triangle $(u,p,v,u)$. When the tour later reaches $x$, run through the bottom triangle $(x,q,y,x)$, and then continue along the original trail. One Eulerian cycle of the whole graph is therefore
+\[
+(u,p,v,u,x,q,y,x,v,y,u).
+\]
+This illustrates the sentence ``traverse $C_1$ until $v$, then traverse all of $C_2$, then continue $C_1$ from $v$'': each smaller Eulerian cycle is inserted at a shared vertex, and after all insertions every edge of the original graph has been used exactly once. 
 \end{example}
 
 \begin{definition} 
 A Hamiltonion cycle is a closed walk which uses every vertex precisely once. A graph is called Hamiltonian if it contains a Hamiltonian cycle.
 \end{definition}
 
-If all degrees $ \ge \frac{n+1}{2}$, then $ G $ is Hamiltonian.
+\begin{theorem}
+Let $G = (V, E)$ be a simple graph on $n \ge 3$ vertices. If for every vertex $v \in V$, $\deg(v) \ge \frac{n+1}{2}$, then $G$ is Hamiltonian.
+\end{theorem}
 
-Random graphs are Hamiltonion. 
+\begin{proof}
+First, we show that $G$ is connected. Suppose for a contradiction that $G$ is disconnected. Let $C$ be the smallest connected component of $G$. The number of vertices in $C$ is at most $\lfloor \frac{n}{2} \rfloor$. Thus, the maximum degree of any vertex in $C$ is at most $\lfloor \frac{n}{2} \rfloor - 1 < \frac{n+1}{2}$, which contradicts the degree condition. Hence, $G$ is connected.
 
-In general, problem of NP-complete.
+We proceed by contradiction. Assume that $G$ is not Hamiltonian. Let $P = v_1 v_2 \dots v_k$ be a longest path in $G$. Since $G$ is connected and $n \ge 3$, we have $k \ge 3$. 
 
-P: det-turing machine can solve in polynomial time. NP: non-deterministic turing machine can solve in polynomial time.
+Because $P$ is a longest path, all neighbors of its endpoints $v_1$ and $v_k$ must lie within the set $\{v_1, v_2, \dots, v_k\}$. If they had neighbors outside $P$, we could extend $P$ to a longer path, contradicting its maximality.
 
-NP-complete: any problem in NP can be reduced to an NP-complete in polynomial time.
+Consider the sets of indices of the neighbors of $v_1$ and $v_k$ on the path $P$:
+\begin{align*}
+    S &= \{ i \in \{1, 2, \dots, k-1\} \mid \{v_1, v_{i+1}\} \in E \} \\
+    T &= \{ i \in \{1, 2, \dots, k-1\} \mid \{v_i, v_k\} \in E \}
+\end{align*}
+Note that $|S| = \deg(v_1)$ and $|T| = \deg(v_k)$. By the given condition, we have:
+$$|S| + |T| = \deg(v_1) + \deg(v_k) \ge \frac{n+1}{2} + \frac{n+1}{2} = n + 1$$
+Since both $S$ and $T$ are subsets of $\{1, 2, \dots, k-1\}$, and $k \le n$, the maximum possible size of their union is $k - 1 \le n - 1$. 
 
-Graph theory: structure graph theory, algorithmic graph theory, extremal graph theory\dots
+By the Principle of Inclusion-Exclusion (or the Pigeonhole Principle), we have:
+$$|S \cap T| = |S| + |T| - |S \cup T| \ge (n + 1) - (n - 1) = 2 > 0$$
+Therefore, the intersection $S \cap T$ is non-empty. There exists some index $i$ ($1 \le i < k$) such that $\{v_1, v_{i+1}\} \in E$ and $\{v_i, v_k\} \in E$.
 
-Now we talk about trees.
+Using these two edges, we can construct a cycle $C$ containing exactly the vertices of $P$:
+$$C = v_1 v_2 \dots v_i v_k v_{k-1} \dots v_{i+1} v_1$$
+Since we assumed $G$ is not Hamiltonian, $C$ does not contain all vertices of $G$, so $k < n$. Because $G$ is connected, there must exist a vertex $u \notin V(C)$ that is adjacent to some vertex $v_j \in V(C)$. 
+
+Since $v_j$ is on the cycle $C$, we can break the cycle by removing one of the edges incident to $v_j$ in $C$, say $\{v_{j-1}, v_j\}$. We then add the edge $\{u, v_j\}$ to form a new path:
+$$P' = u v_j v_{j+1} \dots v_k \dots v_1 \dots v_{j-1}$$
+The length of $P'$ is $k+1$, which strictly exceeds the length of $P$. This contradicts the assumption that $P$ is a longest path in $G$.
+
+Thus, our assumption that $G$ is not Hamiltonian must be false. $G$ contains a Hamiltonian cycle.
+\end{proof}
+
+
+
+\begin{remark}
+    The statement ``Random graphs are Hamiltonian'' asserts that a random graph $G(n, p)$ contains a Hamiltonian cycle asymptotically almost surely (a.a.s.) provided the edge probability $p$ exceeds a sharp threshold. Specifically, if
+    \[
+    p \ge \frac{\ln n + \ln \ln n + \omega(1)}{n},
+    \]
+    then
+    \[
+    \lim_{n \to \infty} \mathbb{P}(G(n, p) \text{ is Hamiltonian}) = 1.
+    \]
+    This contrasts with the NP-completeness of the Hamiltonian cycle problem for general graphs.
+\end{remark}
+
+The Hamiltonian cycle problem is a fundamental example of an \textbf{NP-complete} problem. In the context of computational complexity:
+\begin{itemize}
+    \item \textbf{P (Polynomial time)} represents the class of problems that can be solved efficiently (in polynomial time) by a deterministic computer (Turing machine).
+    \item \textbf{NP (Nondeterministic Polynomial time)} consists of problems where a solution, once guessed, can be verified efficiently. Equivalently, these are solvable by a non-deterministic Turing machine in polynomial time.
+    \item \textbf{NP-complete} problems are the ``hardest'' problems in NP. A problem is NP-complete if it is in NP and every other problem in NP can be transformed (reduced) into it in polynomial time.
+\end{itemize}
+If an efficient algorithm exists for any NP-complete problem, then efficient algorithms exist for all problems in NP (i.e., $\text{P} = \text{NP}$).
+
+\textbf{Graph theory} is a fundamental branch of mathematics that studies the properties of graphs, which are mathematical structures used to model pairwise relations between objects. A graph consists of vertices (also called nodes or points) connected by edges (also called links or lines). The field has grown tremendously since Euler's solution to the Königsberg bridge problem in 1736, and now encompasses numerous subdisciplines:
+
+\begin{itemize}
+    \item \textbf{Structural graph theory} investigates the intrinsic properties and structural characterizations of graphs. Central topics include graph decompositions, minors, and the celebrated Graph Minor Theorem of Robertson and Seymour. This area explores fundamental questions about graph embeddings, planarity, and forbidden subgraph characterizations.
+
+    \item \textbf{Algorithmic graph theory} focuses on the design and analysis of algorithms for graph problems. It addresses computational complexity, approximation algorithms, and efficient data structures for graph representation. Classic problems include shortest paths, maximum flow, graph coloring, and graph isomorphism. The interplay between structural properties and algorithmic efficiency is a key theme.
+
+    \item \textbf{Extremal graph theory} studies the extremal (maximum or minimum) values of graph invariants under given constraints. A prototypical question is: what is the maximum number of edges in a graph on $n$ vertices that does not contain a specified subgraph? The foundational Turán's theorem and the Erdős--Stone theorem are cornerstones of this field.
+
+    \item \textbf{Spectral graph theory} explores connections between graph properties and the eigenvalues and eigenvectors of associated matrices (adjacency matrix, Laplacian matrix). It provides powerful algebraic tools for studying graph connectivity, expansion properties, and random walks on graphs.
+
+    \item \textbf{Random graph theory} investigates properties of graphs generated by random processes, such as the Erdős--Rényi model $G(n,p)$. It studies phase transitions, threshold phenomena, and the typical behavior of graph parameters.
+
+    \item \textbf{Algebraic graph theory} applies algebraic methods---including group theory, linear algebra, and representation theory---to study graphs. Topics include graph automorphisms, Cayley graphs, and association schemes.
+\end{itemize}
+
+These subfields are deeply interconnected and find applications across computer science, physics, biology, social network analysis, and numerous other disciplines.
+
+\section{Tree}
 
 \begin{definition} 
 A connected graph with no cycles is called a tree.
 \end{definition}
 
-Figure 4
+\begin{example} 
+This is an example of a tree. It is "木" in Chinese.
+\begin{center}
+    \begin{tikzcd}
+                           & \bullet \arrow[d, no head]                                                             &         \\
+\bullet \arrow[r, no head] & \bullet \arrow[r, no head] \arrow[ld, no head] \arrow[rd, no head] \arrow[dd, no head] & \bullet \\
+\bullet                    &                                                                                        & \bullet \\
+                           & \bullet                                                                                &        
+\end{tikzcd}
+\end{center}
+\end{example}
 
 \begin{definition} 
-Disjoint unioin of trees is called forest.
+Disjoint unioin of trees is called a forest.
 \end{definition}
 
-Figure 5
+\begin{example} 
+    This is an example of a forest. It is "林" in Chinese.
+\begin{center}
+\begin{tikzcd}
+                           & \bullet \arrow[d, no head]                                                             &         &                            & \bullet \arrow[d, no head]                                          &                            \\
+\bullet \arrow[r, no head] & \bullet \arrow[r, no head] \arrow[ld, no head] \arrow[rd, no head] \arrow[dd, no head] & \bullet & \bullet \arrow[r, no head] & \bullet \arrow[ld, no head] \arrow[rd, no head] \arrow[dd, no head] & \bullet \arrow[l, no head] \\
+\bullet                    &                                                                                        & \bullet & \bullet                    &                                                                     & \bullet                    \\
+                           & \bullet                                                                                &         &                            & \bullet                                                             &                           
+\end{tikzcd}
+\end{center}    
+\end{example}
 
-\begin{definition} 
-For a connected graph $ G=(V,E) $, a subgraph $ T=(V,E') $ a tree is called the spanning tree of $ G $.
+\begin{definition}[Spanning tree]
+Let $G=(V,E)$ be a connected (finite) graph. A \emph{spanning tree} of $G$ is a subgraph
+$T=(V,E_T)$ of $G$ such that
+\begin{enumerate}
+    \item $V(T)=V(G)$ (so $T$ is spanning), and
+    \item $T$ is a tree (equivalently: $T$ is connected and contains no cycles).
+\end{enumerate}
+Equivalently, a spanning tree is a spanning, connected, acyclic subgraph of $G$ (hence $|E_T|=|V|-1$).
 \end{definition}
 
-The spanning tree of $ G$ always exists.
+\begin{proposition}
+Every connected (finite) graph $G=(V,E)$ has a spanning tree.
+\end{proposition}
+
+\begin{proof}
+Let $G=(V,E)$ be connected. Among all spanning subgraphs $H=(V,E_H)$ of $G$ that are connected,
+choose one with $|E_H|$ minimal (such an $H$ exists since $E$ is finite and $G$ itself is admissible).
+We claim that $H$ is acyclic.
+
+Indeed, if $H$ contains a cycle $C$, pick an edge $e\in E(C)$ and let $H':=(V,E_H\setminus\{e\})$.
+Then $H'$ is still connected, because the endpoints of $e$ remain joined by the rest of the cycle,
+and any path using $e$ can be rerouted along $C\setminus\{e\}$. This contradicts the minimality of $|E_H|$.
+
+Hence $H$ is connected and acyclic, so $H$ is a tree. Since $V(H)=V(G)$, $H$ is a spanning tree of $G$.
+\end{proof}
 
 \begin{theorem} 
 The followings are equivalent:
@@ -1386,17 +1559,16 @@ The followings are equivalent:
 \end{theorem}
 
 \begin{proof} 
-($ (1) \Rightarrow (2) $): If $ x,y $ are connected by two distinct paths, then we find a cycle.
-
-($ (2) \Rightarrow (1) $): If $ G $ contains a cycle, then two vertices on the cycle are connected by two distinct paths. (The connectivity is clear).
-
-($ (1) \Rightarrow (3) $): $ |V|=1 $, true. Now $ |V|>1 $, let $ P=(u,u_1, \ldots , u_l) $ be a longest path in $ G $, then all neighbors of $ u $ are in $ P $ and $ u $ must be a leaf. Remove the leaf, by induction we prove it.
-
-()($ (3) \Rightarrow (1) $): $ G $ is connected so $ G $ has a spanning tree $ T $, then $ 1=|V(G)|-|E(T)| \ge |V(G)|-|E(G)|=1 $, hence $ E(G)=E(T) $ which implies $ G=T $ is a tree.     
+\begin{description}
+    \item[$(1) \implies (2)$] If two vertices $x, y$ are connected by two distinct paths, then their union contains a cycle.
+    \item[$(2) \implies (1)$] If $G$ contains a cycle, then any two distinct vertices on the cycle are connected by at least two different paths. Connectivity is given.
+    \item[$(1) \implies (3)$] We proceed by induction on $|V|$. The base case $|V|=1$ is trivial. For $|V|>1$, let $P=(u, u_1, \dots, u_l)$ be a longest path. Since $G$ is a tree, all neighbors of the endpoint $u$ must lie on $P$, which implies $u$ is a leaf (degree 1). Removing this leaf and its incident edge leaves a tree on $|V|-1$ vertices, and the result follows by induction.
+    \item[$(3) \implies (1)$] Since $G$ is connected, it has a spanning tree $T$. We know $|E(T)| = |V(T)| - 1 = |V(G)| - 1$. The given condition is $|E(G)| = |V(G)| - 1$. Since $T$ is a subgraph of $G$, we must have $E(G) = E(T)$, which implies $G=T$. Thus, $G$ is a tree.
+\end{description}
 \end{proof}
 
 \begin{corollary}
-$ G $ forest, $ \sharp $ connected components of $ G =|V(G)|-|E(G)|$ .  
+Let $ G $ be a forest, then $ \sharp $ connected components of $ G =|V(G)|-|E(G)|$ .  
 \end{corollary}
 
 \begin{corollary}
@@ -1693,6 +1865,129 @@ Let $Q=\{1, \ldots, q\}$ be the graph with vertex set $Q^n$, two vertices adjace
 Find the six nonisomorphic trees on 6 vertices, and for each compute the number of distinct spanning trees in $K_6$ isomorphic to it.
 \end{exercise}
 
+\begin{proof} 
+One complete list of the six nonisomorphic trees on $6$ vertices is shown below.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.0, every path/.style={line width=0.9pt}, line cap=round]
+        % T1: path P6
+        \coordinate (t1a) at (0.0,0.0);
+        \coordinate (t1b) at (0.8,0.0);
+        \coordinate (t1c) at (1.6,0.0);
+        \coordinate (t1d) at (2.4,0.0);
+        \coordinate (t1e) at (3.2,0.0);
+        \coordinate (t1f) at (4.0,0.0);
+        \draw (t1a) -- (t1b) -- (t1c) -- (t1d) -- (t1e) -- (t1f);
+        \foreach \p in {t1a,t1b,t1c,t1d,t1e,t1f} { \node[vertex] at (\p) {}; }
+        \node at (2.0,-0.8) {$T_1$};
+
+        % T2: star K_{1,5}
+        \coordinate (t2c) at (6.6,0.0);
+        \coordinate (t2a) at (5.8,0.9);
+        \coordinate (t2b) at (5.7,-0.7);
+        \coordinate (t2d) at (6.6,1.2);
+        \coordinate (t2e) at (7.5,0.8);
+        \coordinate (t2f) at (7.6,-0.6);
+        \draw (t2c) -- (t2a);
+        \draw (t2c) -- (t2b);
+        \draw (t2c) -- (t2d);
+        \draw (t2c) -- (t2e);
+        \draw (t2c) -- (t2f);
+        \foreach \p in {t2a,t2b,t2c,t2d,t2e,t2f} { \node[vertex] at (\p) {}; }
+        \node at (6.6,-1.1) {$T_2$};
+
+        % T3: degree sequence (4,2,1,1,1,1)
+        \coordinate (t3c) at (11.2,0.0);
+        \coordinate (t3a) at (10.4,0.9);
+        \coordinate (t3b) at (10.3,-0.7);
+        \coordinate (t3d) at (11.2,1.2);
+        \coordinate (t3e) at (12.0,0.0);
+        \coordinate (t3f) at (12.8,0.0);
+        \draw (t3c) -- (t3a);
+        \draw (t3c) -- (t3b);
+        \draw (t3c) -- (t3d);
+        \draw (t3c) -- (t3e) -- (t3f);
+        \foreach \p in {t3a,t3b,t3c,t3d,t3e,t3f} { \node[vertex] at (\p) {}; }
+        \node at (11.6,-1.1) {$T_3$};
+
+        % T4: degree sequence (3,3,1,1,1,1)
+        \coordinate (t4a) at (0.8,-3.3);
+        \coordinate (t4b) at (2.0,-3.3);
+        \coordinate (t4c) at (0.1,-2.4);
+        \coordinate (t4d) at (0.1,-4.2);
+        \coordinate (t4e) at (2.7,-2.4);
+        \coordinate (t4f) at (2.7,-4.2);
+        \draw (t4a) -- (t4b);
+        \draw (t4a) -- (t4c);
+        \draw (t4a) -- (t4d);
+        \draw (t4b) -- (t4e);
+        \draw (t4b) -- (t4f);
+        \foreach \p in {t4a,t4b,t4c,t4d,t4e,t4f} { \node[vertex] at (\p) {}; }
+        \node at (1.4,-5.0) {$T_4$};
+
+        % T5: branch lengths 3,1,1
+        \coordinate (t5c) at (6.6,-3.0);
+        \coordinate (t5a) at (5.8,-2.2);
+        \coordinate (t5b) at (7.4,-2.2);
+        \coordinate (t5d) at (6.6,-3.9);
+        \coordinate (t5e) at (6.6,-4.8);
+        \coordinate (t5f) at (6.6,-5.7);
+        \draw (t5c) -- (t5a);
+        \draw (t5c) -- (t5b);
+        \draw (t5c) -- (t5d) -- (t5e) -- (t5f);
+        \foreach \p in {t5a,t5b,t5c,t5d,t5e,t5f} { \node[vertex] at (\p) {}; }
+        \node at (6.6,-6.5) {$T_5$};
+
+        % T6: branch lengths 2,2,1
+        \coordinate (t6c) at (11.2,-3.0);
+        \coordinate (t6a) at (11.2,-1.9);
+        \coordinate (t6b) at (10.4,-3.8);
+        \coordinate (t6d) at (9.6,-4.6);
+        \coordinate (t6e) at (12.0,-3.8);
+        \coordinate (t6f) at (12.8,-4.6);
+        \draw (t6c) -- (t6a);
+        \draw (t6c) -- (t6b) -- (t6d);
+        \draw (t6c) -- (t6e) -- (t6f);
+        \foreach \p in {t6a,t6b,t6c,t6d,t6e,t6f} { \node[vertex] at (\p) {}; }
+        \node at (11.2,-5.4) {$T_6$};
+    \end{tikzpicture}
+\end{center}
+\medskip
+
+For the counting part, every spanning tree of $K_6$ is a labeled tree on the vertex set $\{1,2,3,4,5,6\}$. Hence for each isomorphism type $T_i$,
+\[
+N(T_i)=\frac{6!}{|\mathrm{Aut}(T_i)|},
+\]
+where $\mathrm{Aut}(T_i)$ is the automorphism group of the unlabeled tree $T_i$.
+
+Therefore:
+\begin{align*}
+N(T_1) &= \frac{6!}{2}=360,
+&&\text{since }T_1=P_6\text{ has only the reversal symmetry;}\\
+N(T_2) &= \frac{6!}{5!}=6,
+&&\text{since }T_2=K_{1,5}\text{ allows an arbitrary permutation of its five leaves;}\\
+N(T_3) &= \frac{6!}{3!}=120,
+&&\text{since the three leaves adjacent to the degree-4 vertex may be permuted;}\\
+N(T_4) &= \frac{6!}{2\cdot 2\cdot 2}=90,
+&&\text{swap the two leaves on either side, interchange the two degree-3 vertices;}\\
+N(T_5) &= \frac{6!}{2}=360,
+&&\text{since the two short branches at the degree-3 vertex may be interchanged;}\\
+N(T_6) &= \frac{6!}{2}=360,
+&&\text{since the two branches of length $2$ may be interchanged.}
+\end{align*}
+
+So the numbers of spanning trees in $K_6$ isomorphic to $T_1,T_2,T_3,T_4,T_5,T_6$ are
+\[
+360,\ 6,\ 120,\ 90,\ 360,\ 360.
+\]
+As a check,
+\[
+360+6+120+90+360+360=1296=6^{6-2},
+\]
+which agrees with Cayley's formula for the total number of spanning trees of $K_6$.
+\end{proof}
+
+
 \begin{exercise}
 \begin{enumerate}
     \item[(a)] Suppose a tree $G$ has exactly one vertex of degree $i$ for $2 \leq i \leq m$ and all other vertices have degree 1 . How many vertices does $G$ have?
@@ -1700,6 +1995,112 @@ Find the six nonisomorphic trees on 6 vertices, and for each compute the number 
 \end{enumerate}
 \end{exercise}
 
+\begin{proof}
+(a) Let $G$ have $n$ vertices, where $m-1$ vertices have degrees $2, 3, \ldots, m$ respectively (each degree appears exactly once), and all other vertices have degree 1. Let $k$ be the number of vertices of degree 1, then $n = (m-1) + k$.
+
+By the Handshaking Lemma, the sum of degrees equals twice the number of edges. For a tree, the number of edges is $n-1$, so:
+\[
+\sum_{v \in V} \deg(v) = 2(n-1)
+\]
+
+Calculate the sum of degrees:
+\[
+\sum_{v \in V} \deg(v) = 2 + 3 + \cdots + m + k \cdot 1 = \frac{m(m+1)}{2} - 1 + k
+\]
+
+Therefore:
+\[
+\frac{m(m+1)}{2} - 1 + k = 2(n-1) = 2(m + k - 2)
+\]
+
+Solving this equation:
+\begin{align*}
+\frac{m(m+1)}{2} - 1 + k &= 2m + 2k - 4 \\
+\frac{m(m+1)}{2} - 1 + 4 &= 2m + k \\
+k &= \frac{m(m+1)}{2} - 2m + 3 \\
+  &= \frac{m^2 + m - 4m + 6}{2} \\
+  &= \frac{m^2 - 3m + 6}{2} \\
+  &= \frac{m(m-3)}{2} + 3
+\end{align*}
+
+Thus the total number of vertices is:
+\[
+n = (m-1) + k = m - 1 + \frac{m(m-3)}{2} + 3 = \frac{m^2 - m + 4}{2}
+\]
+
+\textbf{Answer:} $G$ has $\dfrac{m^2 - m + 4}{2}$ vertices.
+
+(b) 
+Let $G = (V, E)$ be a simple undirected graph with $n$ vertices. According to the problem statement, $G$ has exactly one vertex of degree $i$ for each $2 \leq i \leq m$, and $k$ vertices of degree $1$. We want to show that $k \geq \lfloor \frac{m+3}{2} \rfloor$.
+
+Order the vertices $v_1, v_2, \dots, v_n$ in non-increasing order of their degrees. Thus, for $1 \leq i \leq m-1$, we have $\deg(v_i) = m - i + 1$, and the remaining $k$ vertices have degree $1$. 
+
+Let $c \geq 1$ be an integer. Define $H = \{v_1, v_2, \dots, v_c\}$ as the set of the $c$ vertices with the highest degrees. The sum of the degrees of the vertices in $H$ is:
+\begin{align*}
+S_H = \sum_{j=1}^c \deg(v_j) &= m + (m-1) + \dots + (m-c+1) \\
+&= \frac{c(2m - c + 1)}{2}
+\end{align*}
+
+The degrees of vertices in $H$ are contributed by edges within $H$ and edges between $H$ and $V \setminus H$. Let $E(H)$ be the number of edges with both endpoints in $H$, and $E(H, \bar{H})$ be the number of edges with one endpoint in $H$ and the other in $V \setminus H$. By double counting, we have:
+\[
+S_H = 2|E(H)| + |E(H, \bar{H})|
+\]
+
+Since $G$ is a simple graph, the number of internal edges is at most $|E(H)| \leq \frac{c(c-1)}{2}$. Furthermore, any vertex $u \in V \setminus H$ can be adjacent to at most $\min(\deg(u), c)$ vertices in $H$. Therefore:
+\[
+S_H \leq 2 \cdot \frac{c(c-1)}{2} + \sum_{u \in V \setminus H} \min(\deg(u), c)
+\]
+
+We choose $c = \lfloor \frac{m+1}{2} \rfloor$. Under this choice, the maximum degree in $V \setminus H$ is $m-c \leq c$. Thus, for every $u \in V \setminus H$, we have $\min(\deg(u), c) = \deg(u)$. The sum of degrees of vertices in $V \setminus H$ splits into the remaining higher-degree vertices and the $k$ leaves:
+\[
+\sum_{u \in V \setminus H} \deg(u) = \sum_{j=c+1}^{m-1} (m-j+1) + k \cdot 1 = \frac{(m-c-1)(m-c+2)}{2} + k
+\]
+
+Substituting the expressions for $S_H$ and the upper bounds into our inequality yields:
+\[
+\frac{c(2m - c + 1)}{2} \leq c(c-1) + \frac{(m-c-1)(m-c+2)}{2} + k
+\]
+
+Multiplying by $2$ and expanding both sides:
+\[
+2cm - c^2 + c \leq 2c^2 - 2c + (m^2 - 2cm + c^2 + m - c - 2) + 2k
+\]
+
+Isolating $2k$, we obtain a quadratic inequality in terms of $c$:
+\[
+2k \geq -4c^2 + 4(m+1)c - (m^2 + m - 2)
+\]
+
+By completing the square for the quadratic expression in $c$, we get:
+\[
+2k \geq -4\left(c - \frac{m+1}{2}\right)^2 + m + 3
+\]
+
+We now evaluate this lower bound based on the parity of $m$:
+\begin{itemize}
+    \item \textbf{Case 1: $m$ is odd.} We chose $c = \lfloor \frac{m+1}{2} \rfloor = \frac{m+1}{2}$. Substituting this into the inequality gives:
+    \[
+    2k \geq 0 + m + 3 \implies k \geq \frac{m+3}{2} = \left\lfloor \frac{m+3}{2} \right\rfloor
+    \]
+    
+    \item \textbf{Case 2: $m$ is even.} We chose $c = \lfloor \frac{m+1}{2} \rfloor = \frac{m}{2}$. Substituting this yields $c - \frac{m+1}{2} = -\frac{1}{2}$, so:
+    \[
+    2k \geq -4\left(-\frac{1}{2}\right)^2 + m + 3 = m + 2 \implies k \geq \frac{m+2}{2} = \left\lfloor \frac{m+3}{2} \right\rfloor
+    \]
+\end{itemize}
+
+In both cases, we conclude that $k \geq \lfloor \frac{m+3}{2} \rfloor$. This completes the proof.
+
+Besides, an example can be constructed as following ($ m=4 $):
+\begin{center}
+\begin{tikzcd}
+                            &                                                 & \bullet \arrow[rd, no head] &                                                &         \\
+                            & \bullet \arrow[ru, no head] \arrow[rr, no head] &                             & \bullet \arrow[r, no head] \arrow[rd, no head] & \bullet \\
+\bullet \arrow[ru, no head] &                                                 &                             &                                                & \bullet
+\end{tikzcd}
+\end{center}
+
+\end{proof}
 
 
 
