@@ -1,10 +1,8 @@
-\documentclass[11pt, a4paper]{report}
+\documentclass[11pt, a4paper]{ctexrep}
 %----------------------------------------------------------------------------------------
 %	PACKAGES (宏包管理)
 %----------------------------------------------------------------------------------------
-% 1. 编码与语言
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
+% 1. 编码与语言（ctex 已提供中文与 UTF-8 支持，使用 XeLaTeX 或 LuaLaTeX 编译）
 % 2. 页面布局与排版
 \usepackage{geometry}
 \geometry{
@@ -1264,7 +1262,51 @@ Let $ G=(V,E) $ be a graph. A \emph{$ k $-walk} in $ G $ is a sequence of vertic
 
 \chapter{Lecture 2}
 
-引入 哥尼斯堡问题 一笔画问题 图一图二
+\begin{topic}[The Seven Bridges of Königsberg]
+In Königsberg (now Kaliningrad), the river Pregel passed through the city with two islands and seven bridges connecting the islands and the two banks (see figure). The problem: can one start at some place, cross each bridge exactly once, and return to the start? Euler (1736) abstracted the two banks and two islands as four vertices and the seven bridges as seven edges, obtaining the graph $G$; he proved that such a closed trail exists if and only if every vertex has even degree. In $G$ all four vertices have odd degree, so no solution exists. This problem is regarded as the origin of graph theory and Eulerian trails.
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\small}, line cap=round]
+  % Riverbanks: C (top), D (bottom) as thick horizontal strips; river in between
+  \draw[line width=4pt] (-1.8,1.4) -- (1.8,1.4);
+  \node[font=\bfseries] at (0,1.65) {$C$};
+  \draw[line width=4pt] (-1.8,-1.4) -- (1.8,-1.4);
+  \node[font=\bfseries] at (0,-1.65) {$D$};
+  % River (middle band)
+  \draw[fill=black!6] (-1.8,1.2) rectangle (1.8,-1.2);
+  % Island A: large oval, center-left
+  \draw[line width=1.2pt] (-0.25,0) ellipse (0.75 and 0.5);
+  \node[font=\bfseries] at (-0.25,0) {$A$};
+  % Island B: smaller, to the right of A
+  \draw[line width=1.2pt] (1.15,-0.15) ellipse (0.35 and 0.28);
+  \node[font=\bfseries] at (1.15,-0.15) {$B$};
+  % Seven bridges (thick black lines)
+  \draw[line width=2.5pt] (-0.67,0.48) -- (-0.67,1.15);
+  \draw[line width=2.5pt] (0.17,0.48) -- (0.17,1.15);
+  \draw[line width=2.5pt] (-0.67,-0.48) -- (-0.67,-1.15);
+  \draw[line width=2.5pt] (0.17,-0.48) -- (0.17,-1.15);
+  \draw[line width=2.5pt] (0.47,0.05) -- (0.78,-0.12);
+  \draw[line width=2.5pt] (0.98,-0.02) -- (1.15,1.0);
+  \draw[line width=2.5pt] (0.98,-0.28) -- (1.15,-1.0);
+  \node[below] at (0,-1.95) {\textbf{Schematic of the seven bridges}};
+\end{tikzpicture}
+\hspace{1.2cm}
+\begin{tikzpicture}[scale=1.05, xscale=2, every node/.style={font=\small}]
+  % Abstract graph: A,B = islands, C,D = banks; edges A--C(2), A--D(2), A--B(1), B--C(1), B--D(1)
+  \node[vertex, label=below:$A$] (A) at (1.2,-0.3) {};
+  \node[vertex, label=below:$B$] (B) at (2.4,-0.3) {};
+  \node[vertex, label=above:$C$] (C) at (1.8,1.3) {};
+  \node[vertex, label=below:$D$] (D) at (1.8,-1.3) {};
+  \draw (A) to [bend left=15] (C);
+  \draw (A) to [bend right=15] (C);
+  \draw (A) to [bend left=15] (D);
+  \draw (A) to [bend right=15] (D);
+  \draw (A) to [bend left=12] (B);
+  \draw (B) -- (C);
+  \draw (B) -- (D);
+  \node[below] at (1.8,-1.75) {\textbf{Abstract graph $G$}};
+\end{tikzpicture}
+\end{center}
+\end{topic}
 
 \begin{definition} 
 An Eulerian path is a walk which contains each edge of a graph exactly once. 
@@ -1274,28 +1316,28 @@ An Eulerian path is a walk which contains each edge of a graph exactly once.
 An Eulerian cycle is a closed Eulerian path. A graph is called Eulerian if it contains an Eulerian cycle.
 \end{definition}
 
+\begin{lemma}
+Let $G = (V,E)$ be a graph with $|E| \ge 1$. If every vertex has degree at least $2$ (i.e., $\deg(v) \ge 2$ for all $v \in V$), then $G$ contains a cycle.
+\end{lemma}
+
+\begin{proof}
+Take a maximal path $P = (v_0, v_1, \ldots, v_k)$ in $G$ (so no edge extends $P$ at either end). Since $|E| \ge 1$, we have $k \ge 1$. The vertex $v_k$ has $\deg(v_k) \ge 2$, so $v_k$ has a neighbor other than $v_{k-1}$. Any such neighbor must lie on $P$: if $v_k$ were adjacent to some $u \notin \{v_0,\ldots,v_{k-1}\}$, then $P$ could be extended to $v_0 \cdots v_k u$, contradicting maximality. So $v_k$ is adjacent to $v_i$ for some $i$ with $0 \le i \le k-2$. Then $(v_i, v_{i+1}, \ldots, v_k, v_i)$ is a cycle in $G$.
+\end{proof}
+
 \begin{theorem} 
 A finite connected graph is Eulerian if and only if every vertex has even degree.
 \end{theorem}
 
-\begin{proof} 
-($ \Rightarrow $): If $ C=(x_0, \ldots, x_n) $ is an Eulerian cycle of $ G=(V,E) $ and a vertex $ y $ occurs $ t $ tinmes, then $ \deg (y)=2t $.
+\begin{proof}
+\emph{Necessity ($\Rightarrow$).} Let $C = (x_0, x_1, \ldots, x_n)$ be an Eulerian cycle with $x_0 = x_n$. Each edge is used exactly once. For any vertex $y \in V$, each time $C$ passes through $y$ it uses one edge to enter and one to leave; so the number of edges incident to $y$ used by $C$ is twice the number of times $y$ appears in $(x_1,\ldots,x_{n-1})$. The start/end vertex $x_0 = x_n$ is left once and entered once, contributing $2$ more. Thus $\deg(y)$ is even for all $y$.
 
-($ \Leftarrow $): Hierbolzer (1873). Algorithm: 
+\emph{Sufficiency ($\Leftarrow$).} (Hierholzer, 1873.) We use induction on $|E|$. If $|E|=0$, then $G$ is a single vertex and the trivial closed walk is an Eulerian cycle. Suppose $|E| \ge 1$. Since $G$ is connected and every vertex has even degree, $\delta(G) \ge 2$, so $G$ contains a cycle by the lemma above. Start at any vertex $x$ and take a maximal walk that does not repeat any edge. Whenever the walk enters a vertex other than $x$, it has used an odd number of edges at that vertex so far, so an odd number (hence at least one) remains; thus the walk cannot get stuck except at $x$. So the walk returns to $x$, forming a closed trail $C_1$ with edge set $E_1 \subseteq E$.
 
-(1) Choose starting vertex $ x $.
-\begin{itemize}
-    \item take a walk from $ x $ without reusing $ x $  
-    \item continue till stuck
-    \item remove this walk with edges $ E_1 $, then graph $ (V,E \setminus E') $ still has only even degrees
-    \item If $ E\setminus E' \neq \emptyset $, then repeat.
-    \item If $ E\setminus E' = \emptyset $, then glue cycles together.
-\end{itemize}
-Complexity: $ O(|E|) $. 
+Remove $E_1$ from $G$. In $G' = (V, E \setminus E_1)$, every vertex still has even degree (each vertex on $C_1$ lost 0 or 2 incident edges). So every non-trivial component of $G'$ has an Eulerian cycle by the induction hypothesis. If $E_1 = E$, then $C_1$ is an Eulerian cycle. Otherwise, pick a vertex $v$ that lies on $C_1$ and belongs to a component $H$ of $G'$ with at least one edge. That component has an Eulerian cycle $C_2$ (starting and ending at $v$). Splice $C_2$ into $C_1$ at $v$: traverse $C_1$ until $v$, then traverse all of $C_2$, then continue $C_1$ from $v$. Repeating this for every such component yields an Eulerian cycle of $G$. The algorithm runs in $O(|E|)$ time.
 \end{proof}
 
 \begin{example} 
-图3
+Figure 3
 \end{example}
 
 \begin{definition} 
@@ -1320,13 +1362,13 @@ Now we talk about trees.
 A connected graph with no cycles is called a tree.
 \end{definition}
 
-图4
+Figure 4
 
 \begin{definition} 
 Disjoint unioin of trees is called forest.
 \end{definition}
 
-图5
+Figure 5
 
 \begin{definition} 
 For a connected graph $ G=(V,E) $, a subgraph $ T=(V,E') $ a tree is called the spanning tree of $ G $.
@@ -1358,12 +1400,12 @@ $ G $ forest, $ \sharp $ connected components of $ G =|V(G)|-|E(G)|$ .
 \end{corollary}
 
 \begin{corollary}
-Let $ T $ be a tree, $ n:= |V(T)| \ge 2 $ with degree sequence $(d_1, \ldots, d_n)$. 图5 
+Let $ T $ be a tree, $ n:= |V(T)| \ge 2 $ with degree sequence $(d_1, \ldots, d_n)$. Figure 5 
 \end{corollary}
 
 What is the number of trees on n vertices? $ t(n) $. Cayley's formula.
 
-图6
+Figure 6
 
 $ t(4)=16 $
 
@@ -1376,7 +1418,7 @@ Goal: find a bijection between trees on sets $ [n] $ and $ [n]^{n-2} $.
 
 Let $ T $ be a tree 
 
-图7
+Figure 7
 
 \begin{enumerate}
 \item $ u_1 \in u= \mathrm{min}\{ v \in V: \deg (v)=1  \} $, $ a_1 :=  $ unique neighbor of $ u_1 $.
@@ -1573,18 +1615,79 @@ is a famous open problem; for all other $d$ equality is impossible.
 Let $Q=\{1, \ldots, q\}$ be the graph with vertex set $Q^n$, two vertices adjacent if they differ in exactly one coordinate. Show that $Q$ is Hamiltonian.
 \end{exercise}
 
-\begin{definition}[Hamiltonian graph]
-A (finite) graph $G=(V,E)$ is called \emph{Hamiltonian} if it contains a \emph{Hamiltonian cycle},
-i.e., there exists a cycle that visits every vertex of $G$ exactly once (except that the starting
-vertex is repeated at the end).
-Equivalently, $G$ is Hamiltonian if there exist distinct vertices
-$v_1,\dots,v_n\in V$ with $n=|V|$ such that
-\[
-\{v_i,v_{i+1}\}\in E \ \text{for } i=1,\dots,n-1,
-\qquad\text{and}\qquad
-\{v_n,v_1\}\in E .
-\]
-\end{definition}
+\begin{proof}
+    We prove the statement by induction on $n$.
+    
+    \medskip
+    \noindent\textbf{Base case $n=2$.}
+    The vertices are pairs $(a,b)\in Q^2$. Consider the cycle
+    \[
+    (1,1),(2,1),\dots,(q,1),(q,2),(q-1,2),\dots,(1,2),(1,3),(2,3),\dots,
+    \]
+    continuing in this ``serpentine'' fashion through the rows $b=1,2,\dots,q$,
+    and finally ending at $(1,q)$ and returning to $(1,1)$.
+    Consecutive vertices differ in exactly one coordinate, and every vertex of $Q^2$
+    appears exactly once, so this is a Hamilton cycle in $H(2,q)$.
+    
+    \medskip
+    \noindent\textbf{Inductive step.}
+    Assume $H(n-1,q)$ is Hamiltonian for some $n\ge 3$.
+    Fix a Hamilton cycle in $H(n-1,q)$ and write it as
+    \[
+    w_1,w_2,\dots,w_m,w_1,
+    \qquad \text{where } m=q^{\,n-1},
+    \]
+    so that $w_i,w_{i+1}$ differ in exactly one coordinate for each $i$
+    (indices modulo $m$).
+    
+    We now construct an explicit Hamilton cycle in $H(n,q)$.
+    For each $i=1,\dots,m$, define a path $P_i$ inside the fiber
+    $\{(a,w_i):a\in Q\}\subseteq Q\times Q^{n-1}$ by
+    \[
+    P_i :=
+    \begin{cases}
+    (1,w_i),(2,w_i),\dots,(q-1,w_i), & \text{if $i$ is odd},\\[2mm]
+    (q-1,w_i),(q-2,w_i),\dots,(1,w_i), & \text{if $i$ is even}.
+    \end{cases}
+    \]
+    Thus $P_i$ visits exactly the vertices $(a,w_i)$ with $a\in\{1,\dots,q-1\}$,
+    each exactly once, and consecutive vertices in $P_i$ differ only in the first
+    coordinate, hence are adjacent in $H(n,q)$.
+    
+    Next, concatenate these paths in the order $P_1,P_2,\dots,P_m$.
+    The last vertex of $P_i$ and the first vertex of $P_{i+1}$ have the same
+    first coordinate (both are $(q-1,\ast)$ or both are $(1,\ast)$ by construction),
+    and their $Q^{n-1}$-parts are $w_i$ and $w_{i+1}$, which differ in exactly one
+    coordinate. Hence the connecting edge between $P_i$ and $P_{i+1}$ is also an
+    edge of $H(n,q)$ (it changes only one of the last $n-1$ coordinates).
+    
+    So far we have produced a Hamilton \emph{path} through all vertices
+    $(a,w)$ with $a\in\{1,\dots,q-1\}$ and $w\in Q^{n-1}$, i.e.\ through
+    $(q-1)q^{n-1}$ vertices.
+    
+    Finally, append the remaining $q^{n-1}$ vertices with first coordinate $q$
+    in the order
+    \[
+    (q,w_m),(q,w_{m-1}),\dots,(q,w_1),
+    \]
+    and then close the cycle by returning to $(1,w_1)$.
+    This works because:
+    \begin{itemize}
+    \item The last vertex of $P_m$ is either $(1,w_m)$ or $(q-1,w_m)$, and in either
+    case it is adjacent to $(q,w_m)$ since only the first coordinate changes.
+    \item For each $j$, the vertices $(q,w_j)$ and $(q,w_{j-1})$ are adjacent because
+    $w_j$ and $w_{j-1}$ differ in exactly one coordinate in $H(n-1,q)$.
+    \item The vertex $(q,w_1)$ is adjacent to $(1,w_1)$ since only the first coordinate changes.
+    \end{itemize}
+    Thus we obtain a cycle in $H(n,q)$.
+    
+    Moreover, every vertex of $Q^n$ appears \emph{exactly once} in this cycle:
+    each $(a,w_i)$ with $a\le q-1$ appears exactly once in the concatenation of the
+    $P_i$, and each $(q,w_i)$ appears exactly once in the final appended segment.
+    Hence the cycle is Hamiltonian.
+    
+    This completes the induction and the proof.
+    \end{proof}
 
 \begin{exercise}
 Find the six nonisomorphic trees on 6 vertices, and for each compute the number of distinct spanning trees in $K_6$ isomorphic to it.
