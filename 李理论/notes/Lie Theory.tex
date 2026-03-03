@@ -2,10 +2,9 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES (宏包管理)
 %----------------------------------------------------------------------------------------
-% 1. 编码与语言
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
+% 1. 编码与语言（中文支持）
+\usepackage[UTF8, scheme=plain]{ctex}
+% scheme=plain 保持定理/章节等名称为英文；若需全中文改为 scheme=chinese
 % 2. 页面布局与排版
 \usepackage{geometry}
 \geometry{
@@ -285,7 +284,13 @@ Focus on $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] $, all matrices are of trace 0. T
 $ Z $ is the center of Lie algrbra $ L $ if $ Z=\{ z \in L | [z,L]=0 \} $.   
 \end{definition}
 
-We can also find Lie algebras from the involution of an associative algebra. Let $ A $ be an associative algebra. $ *: \to A $ is a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+We can also find Lie algebras from the involution of an associative algebra. Let $ A $ be an associative algebra. $ *: A \to A $ is a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+
+\begin{example}
+ The Quatanion algebra is an associative algebra with the involution $ a \mapsto \overline{a} $. It is 4 dimensional over the base field with standard basis $ 1,i,j,k $. We use $ \mathbb{H} $ to denote the Quatanion algebra when we choose $ \mathbb{R} $ as the base field. i.e. $ \mathbb{H}=\{ a_0 1 + a_1 i + a_2 j + a_3 k | a_0,a_1,a_2,a_3 \in \mathbb{R} \} $. 
+
+
+\end{example}
 
 
 
