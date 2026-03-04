@@ -195,7 +195,7 @@
 %----------------------------------------------------------------------------------------
 \chapter{Lecture 1: Modules}
 
-Message: QQ, bb. HW 30\%, Mid 20\%, Final 50\%
+Message: QQ, BB. HW 30\%, Mid 20\%, Final 50\%
 
 \section{Basic Definitions and Examples}
 
@@ -263,10 +263,25 @@ K[x] \times V \rightarrow V, \quad (f(x), v) \mapsto f(A)v.
 
 (3) If $|M| = 1$, then $M$ is called the zero module.
 
+(4) Let $ R $ be a ringg with 1 and $ A \in M_n(R) $. The solution of $ AX=0 $ where $ X \in R^n $ is a righ t $ R $-module.   
+\end{example}
+
+\begin{definition}[$R$-submodule]
+Let $R$ be a ring (with $1$) and let $M$ be a left $R$-module. A subset $N\subseteq M$
+is called an \emph{$R$-submodule} of $M$ if:
+\begin{enumerate}
+  \item $0\in N$;
+  \item $n_1,n_2\in N \implies n_1+n_2\in N$;
+  \item $n\in N \implies -n\in N$;
+  \item $r\in R,\ n\in N \implies rn\in N$.
+\end{enumerate}
+Equivalently, $N$ is a subgroup of the abelian group $(M,+)$ that is closed under the
+$R$-action.
+\end{definition}
+
 \textbf{Question:} Are submodules of a finitely generated $R$-module finitely generated?
 
 \textbf{Answer:} No, not in general. This property holds if and only if the ring $R$ is left Noetherian.
-\end{example}
 
 \begin{definition} 
 Let $ M $ be an $ R $-module. A subgroup $ N $ of $ M $ is called a submodule of $ M $ if $ N $ is closed under scalar multiplication by elements of $ R $. In other words, $ rn \in N $ for all $ r \in R $ and $ n \in N $.

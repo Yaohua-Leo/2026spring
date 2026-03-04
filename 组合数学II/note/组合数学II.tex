@@ -1843,10 +1843,131 @@ Hence, we have a bijection between trees on sets $ [n] $ and $ [n]^{n-2} $.
     \]
     This is Cayley's formula.
     \end{proof}
+\chapter{Lecture 3}
+
+\section{Chrometic number}
+
+\begin{definition} 
+Let $G=(V,E)$ be a graph, proper colors is a map: $f: V\to C$ such that $ x \sim y \Rightarrow f(x) \neq f(y)$
+
+If exists a proper coloring of G with $k=|C|$ colors, then G is k-colored.
+
+$\chi(G) = \text{min } \sharp $ colors needed for coloring G
+\end{definition}
+
+\begin{example} 
+tu1
+\end{example}
+
+cor: G is biparitite if and only if $\chi(G)=2$.
+
+\begin{example} 
+tu2
+\end{example}
+
+If G is plannar then $ \chi(G) \le 4 $.
+
+$\chi(K_n)=n$.
+
+cycle 2 even 3 odd
+
+\begin{example} 
+tu3
+\end{example}
+
+\begin{theorem} 
+Let $d \ge 3$, G be a graph with max degree d, $K_{d+1}$ is not subgraph of $G$. Then $\chi (G) \le d$.
+\end{theorem}
+
+\begin{proof} 
+Suppose that $G$ is a counterexample ($\chi(G)=d+!$) minimal number of vertices. Let $x \in V(G)$. Then $N(x) =\{ x_1, \ldots, x_l \} $ where $l \le d$.If $l \le d$. Let $H=G$ with x deleted. Since G is minimal, $\chi(H)=d$. If one color is not used in $N(x)$ then we can color x with it, which shoes $\chi(G)=d$, controdiction
+
+Hence for all x $|N(x)|=d$ and $d$ olors in $N(x)$.
+
+$C=\{ 1,\ldots, d+1 \}$, x has color d+!, $x_i$ has color $i$.
+
+tu4
+
+$H_{ij}$ = induced subgraph on vertices with colors $i$ and $j$.
+
+If $x_i$ and $x_j$ are in different components of $H_{ij}$ then we can switch i,j in the component of $x_i$ but not $x_j$. Then $N(x)$ has only $d$ olors, controdictino.
+ 
+tu5
+
+Thus $x_i$ $x_j$ are in same component $C_{ij}$. $C_{ij}$ has to be simple path. Otherwide $\deg(y)>2 \in C_{ij}$ , $N(y)$ has only d-1 colors, contradiction.
 
 
+\end{proof}
 
+Similar argument: $C_{ij}$ and $C_{ik}, j\neq k$ only have $x_i$ in ommon. 
 
+tu6
+
+As $K_{d+1}$ is not a subgraph. WLOG, $x_1 \nsim x_2$.
+
+tu 7
+
+Recolor by changing 1 and 3 in $C_{13}$, New: $a \in C_{23}'$, but also $a \in C_{12}'$. Thus contradicts $C_{12}' \sim C_{13}'=\{ x_3\}$. 
+
+\section{Ramsey theorem}
+
+now olor edges. 引入：1950  3 know each other, 3 do not. x has atmost 2 neighbors. 
+
+tu 8
+
+$R(s,t)$ is the smallest integer n such that all edge colorings with 2 colors $\{ c_1,c_2 \}$ of $K_n$ contain a monochromatic $K_s$ in color $c_1$ or a monochromatic $K_t$ in color $c_2$= smallest integer n suh that all graphs G on $2n$ vertices satisfies 
+
+(1) $K_s$ is a subgraph of G or
+
+(2) $K_t$ is subgraph of $\bar{G}$
+
+Claim $R(3,3)=6$。 $\ge 6$ 
+
+tu9
+
+$R(2,t)=R(t,2)=t$ lower bound $\bar{K_{t-1}}$.
+
+\begin{proposition}
+$R(s,t) \le R(s-1,t)+R(s,t-1)$
+\end{proposition}
+
+\begin{proof} 
+Consider a grph $G$ with n verices without $K_s$ in G and $K_t$ in $\bar{G}$.
+
+Let x be vertex
+
+tu10
+
+Then $N(X)$ CAN NOT CONTAIN  any $K_{s-1}$. so $|N(x)| \le R(s-1,t)+1$. Also $\bar{N(x)}$ can not ontain induced $\bar{K}_{t-1}$ so $|\bar{N(x)}| \le R(s,t-1)-1$. Hence $R(s,t)-1 \le ...$
+ \end{proof}
+
+cor: $R(r,s) \le \binom{r+s-2}{r-1}$.
+
+\begin{proof} 
+by induction
+\end{proof}
+
+$R(r:m) := R(r_1, \ldots r_m)$.
+
+Diagonal Ramsey numbers. 
+
+\begin{theorem} 
+$C \cdot 2^{s/2} \le R(s,s) \le D \cdot 4^{s-1}$.
+
+Erdos 1947 lower bound; Erdos sekeres 1935 upper bound.provement of upper bound: $\le (4-\epsilon)^{s}$ Morris, Campos, Griffiths 2024. coulan 2005 $\le s^{-(log s)/(loglogs)} 4^s$. other people imporve $\epsilon = 2^{-7}$
+
+Jie Ma 2025 show $R(s,cs) $ improvement lower bound. 
+\end{theorem}
+
+\begin{proof} 
+$R(s,s) \le \binom{2s-2}{s-1} \le \frac{(2s-2)!}{((s-1)!)^2} \le 4^{s-1}$. check it
+
+To show $C \cdot 2^{3/2} \le R(s,s)$. Color each edge red/blue with prod. 1/2 Then a random subset of size s  is  monochromatic with prod $2 \cdot (1/2)^{\binom{s}{2}}$. By the union bound $Pr(ex. mao K_s) \le \binom{n}{s} 2 (1/2)^{\binom{s}{2}}$ for n=$2^{s/2 -2}$ , $Pr \le 2 \binom{2^{s/2}-2}{s} (1/2)^{s/2}$. ... <1 for s ge 3
+\end{proof}
+
+Off-diagonal Ramsey Numbers. Fix s 
+
+$R(s,t) \le s^t$.
 
 
 
