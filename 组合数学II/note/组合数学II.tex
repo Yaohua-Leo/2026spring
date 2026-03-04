@@ -4,7 +4,9 @@
 %----------------------------------------------------------------------------------------
 % 1. 编码与语言（ctex 已提供中文与 UTF-8 支持，使用 XeLaTeX 或 LuaLaTeX 编译）
 % 2. 页面布局与排版
+\usepackage{booktabs}
 \usepackage{geometry}
+
 \geometry{
     textwidth=6in, % 稍微加宽以便放入更好的box
     top=1in,
@@ -47,6 +49,7 @@
 % 7. 交互 (最后加载)
 \usepackage[hidelinks]{hyperref}
 \usepackage{array}
+\usepackage{tabularx}
 %----------------------------------------------------------------------------------------
 %	CUSTOM COLORS (自定义配色方案)
 %----------------------------------------------------------------------------------------
@@ -1847,129 +1850,516 @@ Hence, we have a bijection between trees on sets $ [n] $ and $ [n]^{n-2} $.
 
 \section{Chrometic number}
 
-\begin{definition} 
-Let $G=(V,E)$ be a graph, proper colors is a map: $f: V\to C$ such that $ x \sim y \Rightarrow f(x) \neq f(y)$
-
-If exists a proper coloring of G with $k=|C|$ colors, then G is k-colored.
-
-$\chi(G) = \text{min } \sharp $ colors needed for coloring G
-\end{definition}
-
-\begin{example} 
-tu1
-\end{example}
-
-cor: G is biparitite if and only if $\chi(G)=2$.
-
-\begin{example} 
-tu2
-\end{example}
-
-If G is plannar then $ \chi(G) \le 4 $.
-
-$\chi(K_n)=n$.
-
-cycle 2 even 3 odd
+\begin{definition}
+    Let $G=(V,E)$ be a graph and let $C$ be a set of colors.  
+    A \emph{proper coloring} of $G$ is a map
+    \[
+    f: V \to C
+    \]
+    such that for every edge $ \{x,y\} \in E$ (equivalently, for every pair of adjacent
+    vertices $x \sim y$) we have
+    \[
+    f(x) \neq f(y).
+    \]
+    
+    If $G$ admits a proper coloring using at most $k$ colors (that is, $|C|=k$),
+    then $G$ is called \emph{$k$-colorable}.
+    
+    The \emph{chromatic number} of $G$, denoted by $\chi(G)$, is the minimum number
+    of colors needed for a proper coloring of $G$:
+    \[
+    \chi(G) = \min \{\, k : G \text{ is } k\text{-colorable} \}.
+    \]
+    \end{definition}
 
 \begin{example} 
-tu3
+Consider following graph:
+\begin{center}
+    \begin{tikzpicture}[
+      vertex/.style={circle, draw=black, inner sep=2pt, minimum size=6pt},
+      vertex mag/.style={vertex, fill=magenta},
+      vertex red/.style={vertex, fill=red},
+      vertex blue/.style={vertex, fill=blue},
+      vertex green/.style={vertex, fill=green}]
+      % 屋顶顶点 (顶端)
+      \node[vertex mag] (top) at (0.5, 1.5) {};
+      % 正方形上边两顶点
+      \node[vertex red]  (tl) at (0, 1) {};
+      \node[vertex blue] (tr) at (1, 1) {};
+      % 正方形下边两顶点
+      \node[vertex mag] (bl) at (0, 0) {};
+      \node[vertex green] (br) at (1, 0) {};
+      % 屋顶三角形（顶端洋红 top 与右上蓝 tr 的边显式画出）
+      \draw (top) -- (tl) -- (tr) -- cycle;
+      \draw (top) -- (tr);
+      % 正方形周长
+      \draw (tl) -- (bl) -- (br) -- (tr);
+      % 正方形两条对角线
+      \draw (tl) -- (br) (tr) -- (bl);
+    \end{tikzpicture}
+    \end{center}
+    We have $\chi(G)=4$.
 \end{example}
 
-\begin{theorem} 
-Let $d \ge 3$, G be a graph with max degree d, $K_{d+1}$ is not subgraph of $G$. Then $\chi (G) \le d$.
+\begin{corollary}
+    A graph $G$ is bipartite if and only if $\chi(G)=2$.
+    \end{corollary}
+    
+    \begin{proof}
+    ($\Rightarrow$) Suppose $G$ is bipartite. Then $V(G)$ can be written as a disjoint union
+    \[
+    V(G)=A\cup B,
+    \]
+    where every edge of $G$ has one endpoint in $A$ and the other in $B$.
+    Define a coloring $f:V(G)\to\{1,2\}$ by
+    \[
+    f(v)=
+    \begin{cases}
+    1, & v\in A,\\
+    2, & v\in B.
+    \end{cases}
+    \]
+    If $\{u,v\} \in E(G)$, then $u$ and $v$ lie in different parts, hence $f(u)\neq f(v)$.
+    Thus this is a proper coloring using two colors, so $\chi(G)\le 2$.
+    Since $G$ contains an edge, at least two colors are required, hence $\chi(G)=2$.
+    
+    ($\Leftarrow$) Suppose $\chi(G)=2$. Then there exists a proper coloring
+    \[
+    f:V(G)\to\{1,2\}.
+    \]
+    Let
+    \[
+    A=f^{-1}(1), \qquad B=f^{-1}(2).
+    \]
+    Then $V(G)=A\cup B$ and $A\cap B=\varnothing$.
+    Since the coloring is proper, every edge $\{u,v\} \in E(G)$ satisfies $f(u)\neq f(v)$,
+    so one endpoint lies in $A$ and the other in $B$.
+    Hence there are no edges inside $A$ or inside $B$, and $G$ is bipartite.
+    \end{proof}
+
+\begin{example} 
+Complete bipartite graph $K_{2,3}$:
+\begin{center}
+\begin{tikzpicture}[
+  vertex/.style={circle, draw=black, inner sep=2pt, minimum size=6pt},
+  vertex red/.style={vertex, fill=red},
+  vertex blue/.style={vertex, fill=blue}]
+  % 左侧 2 个红点
+  \node[vertex red] (r1) at (0, 0.5) {};
+  \node[vertex red] (r2) at (0, -0.5) {};
+  % 右侧 3 个蓝点
+  \node[vertex blue] (b1) at (1.2, 1) {};
+  \node[vertex blue] (b2) at (1.2, 0) {};
+  \node[vertex blue] (b3) at (1.2, -1) {};
+  % 左部与右部之间全部连边
+  \draw (r1) -- (b1) (r1) -- (b2) (r1) -- (b3);
+  \draw (r2) -- (b1) (r2) -- (b2) (r2) -- (b3);
+\end{tikzpicture}
+\end{center}
+\end{example}
+
+\begin{theorem}
+    If $G$ is planar then $ \chi(G) \le 4 $.
 \end{theorem}
 
-\begin{proof} 
-Suppose that $G$ is a counterexample ($\chi(G)=d+!$) minimal number of vertices. Let $x \in V(G)$. Then $N(x) =\{ x_1, \ldots, x_l \} $ where $l \le d$.If $l \le d$. Let $H=G$ with x deleted. Since G is minimal, $\chi(H)=d$. If one color is not used in $N(x)$ then we can color x with it, which shoes $\chi(G)=d$, controdiction
+\begin{corollary}
+    $\chi(K_n)=n$.
+\end{corollary}
 
-Hence for all x $|N(x)|=d$ and $d$ olors in $N(x)$.
-
-$C=\{ 1,\ldots, d+1 \}$, x has color d+!, $x_i$ has color $i$.
-
-tu4
-
-$H_{ij}$ = induced subgraph on vertices with colors $i$ and $j$.
-
-If $x_i$ and $x_j$ are in different components of $H_{ij}$ then we can switch i,j in the component of $x_i$ but not $x_j$. Then $N(x)$ has only $d$ olors, controdictino.
- 
-tu5
-
-Thus $x_i$ $x_j$ are in same component $C_{ij}$. $C_{ij}$ has to be simple path. Otherwide $\deg(y)>2 \in C_{ij}$ , $N(y)$ has only d-1 colors, contradiction.
-
-
+\begin{proof}
+    In the complete graph $K_n$, every pair of distinct vertices is adjacent.
+    Hence in any proper coloring, adjacent vertices must receive different
+    colors, so all $n$ vertices must have distinct colors. Thus $\chi(K_n)\ge n$.
+    
+    On the other hand, assigning a different color to each vertex gives a
+    proper coloring with $n$ colors. Hence $\chi(K_n)\le n$.
+    
+    Therefore $\chi(K_n)=n$.
 \end{proof}
 
-Similar argument: $C_{ij}$ and $C_{ik}, j\neq k$ only have $x_i$ in ommon. 
+\begin{corollary}
+    For a cycle $C_n$, 
+    \[
+    \chi(C_n)=
+    \begin{cases}
+    2, & \text{if } n \text{ is even},\\
+    3, & \text{if } n \text{ is odd}.
+    \end{cases}
+    \]
+\end{corollary}
+    
+\begin{proof}
+    Let $V(C_n)=\{v_1,\ldots,v_n\}$ where $v_i\sim v_{i+1}$ for $1\le i<n$ and
+    $v_n\sim v_1$.
+    
+    If $n$ is even, color the vertices alternately by two colors along the cycle:
+    \[
+    f(v_i)=
+    \begin{cases}
+    1, & i \text{ odd},\\
+    2, & i \text{ even}.
+    \end{cases}
+    \]
+    Since $n$ is even, $v_n$ and $v_1$ receive different colors, so this is a proper
+    coloring. Hence $\chi(C_n)\le2$. Since $C_n$ has an edge, $\chi(C_n)\ge2$,
+    thus $\chi(C_n)=2$.
+    
+    If $n$ is odd, alternating two colors along the cycle forces $v_n$ and $v_1$
+    to have the same color, contradicting that they are adjacent. Hence
+    $\chi(C_n)\ge3$. Coloring the vertices alternately with two colors and giving
+    $v_n$ a third color yields a proper coloring with three colors, so
+    $\chi(C_n)\le3$. Therefore $\chi(C_n)=3$.
+\end{proof}
 
-tu6
+\begin{example} 
+    consider the following graphs:
+\begin{center}
+\begin{tikzpicture}[
+  vertex/.style={circle, draw=black, inner sep=2pt, minimum size=6pt},
+  vertex blue/.style={vertex, fill=blue},
+  vertex mag/.style={vertex, fill=magenta},
+  vertex green/.style={vertex, fill=green}]
+  % 左图：三角形（上蓝，左下洋红，右下绿）
+  \node[vertex blue] (t1) at (0, 1) {};
+  \node[vertex mag]  (t2) at (-0.6, 0) {};
+  \node[vertex green] (t3) at (0.6, 0) {};
+  \draw (t1) -- (t2) -- (t3) -- (t1) -- cycle;
+  % 右图：正方形（左上洋红，右上绿，左下绿，右下洋红），仅四边
+  \node[vertex mag]  (s1) at (2.5, 1) {};
+  \node[vertex green] (s2) at (3.5, 1) {};
+  \node[vertex green] (s3) at (2.5, 0) {};
+  \node[vertex mag]  (s4) at (3.5, 0) {};
+  \draw (s1) -- (s2) -- (s4) -- (s3) -- (s1) -- cycle;
+\end{tikzpicture}
+\end{center}
+\end{example}
 
-As $K_{d+1}$ is not a subgraph. WLOG, $x_1 \nsim x_2$.
-
-tu 7
-
-Recolor by changing 1 and 3 in $C_{13}$, New: $a \in C_{23}'$, but also $a \in C_{12}'$. Thus contradicts $C_{12}' \sim C_{13}'=\{ x_3\}$. 
+\begin{theorem}[Brooks' Theorem]
+    Let $d \ge 3$ and let $G$ be a graph with maximum degree $d$.
+    If $K_{d+1}$ is not a subgraph of $G$, then
+    \[
+    \chi(G) \le d .
+    \]
+\end{theorem}
+    
+\begin{proof}
+    Suppose, for a contradiction, that the theorem is false.
+    Let $G$ be a counterexample with the minimum number of vertices.
+    Then $\chi(G) = d+1$.
+    
+    Let $x \in V(G)$ and let $N(x) = \{x_1, \dots, x_\ell\}$, where $\ell \le d$.
+    Let $H = G - x$. By the minimality of $G$, we have $\chi(H) \le d$.
+    Take a proper $d$-coloring of $H$.
+    
+    If fewer than $d$ colors appear in $N(x)$, then we can color $x$
+    with a color not used by its neighbors, obtaining a $d$-coloring of $G$,
+    a contradiction. Hence $\ell = d$ and the vertices $x_1, \dots, x_d$
+    receive pairwise distinct colors $1, \dots, d$.
+    
+    For $1 \le i < j \le d$, let $H_{ij}$ be the subgraph of $H$
+    induced by the vertices colored $i$ or $j$.
+    If $x_i$ and $x_j$ lie in different components of $H_{ij}$,
+    then exchanging the colors $i$ and $j$ in the component containing $x_i$
+    changes the color of $x_i$ to $j$ but leaves $x_j$ unchanged.
+    Thus color $i$ disappears from $N(x)$, and we may color $x$ with $i$,
+    again obtaining a $d$-coloring of $G$, a contradiction.
+    
+    Therefore, $x_i$ and $x_j$ lie in the same component of $H_{ij}$
+    for all $i \ne j$. In particular, there exists an $i$--$j$ path between them
+    using only colors $i$ and $j$.
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+      \node[vertex] (x) at (0,0) {$x$};
+      \node[vertex] (x1) at (-1.2, 0.8) {$x_1$};
+      \node[vertex] (x2) at (1.2, 0.8) {$x_2$};
+      \node[vertex] (x3) at (0, -1) {$x_3$};
+      \draw (x) -- (x1) (x) -- (x2) (x) -- (x3);
+      \draw[thick, gray] (x1) to[bend right=25] (x2);
+      \node[above, gray, font=\footnotesize] at (0, 1.35) {$H_{12}$ path};
+      \node[above left] at (-1.35, 0.9) {\scriptsize 1};
+      \node[above right] at (1.35, 0.9) {\scriptsize 2};
+      \node[below] at (0, -1.25) {\scriptsize 3};
+    \end{tikzpicture}
+    \end{center}
+    
+    If some vertex $y$ in such a component had three neighbors in it, 
+    it would have at most $d-3$ neighbors of other colors in $H$. 
+    Consequently, $y$ is adjacent to at most $d-2$ distinct colors in total. 
+    We can recolor $y$ with a missing color $k \notin \{i, j\}$, which removes $y$ from $H_{ij}$. 
+    Since $x_i$ must have exactly one neighbor of color $j$ in $H_{ij}$ (otherwise its total degree in $G$ would exceed $d$), 
+    the component of $H_{ij}$ containing $x_i$ and $x_j$ must be a simple path (a Kempe chain); 
+    otherwise, recoloring a vertex of degree $\ge 3$ would disconnect $x_i$ and $x_j$, yielding the previous contradiction.
+    
+    Since $K_{d+1}$ is not a subgraph of $G$, the vertices in $N(x)$ cannot form a clique. 
+    Assume without loss of generality that $x_1$ and $x_2$ are not adjacent. 
+    The path $H_{12}$ connecting $x_1$ and $x_2$ must contain at least one intermediate vertex. 
+    Let $y$ be the neighbor of $x_1$ on $H_{12}$. The color of $y$ is 2. 
+    Let $z$ be the other neighbor of $y$ on $H_{12}$, which has color 1.
+    \begin{center}
+    \begin{tikzpicture}[scale=0.95, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+      \node[vertex] (x1) at (0,0) {$x_1$};
+      \node[vertex] (y) at (1.2,0) {$y$};
+      \node[vertex] (z) at (2.4,0) {$z$};
+      \node at (3.2,0) {$\cdots$};
+      \node[vertex] (x2) at (4,0) {$x_2$};
+      \draw (x1) -- (y) -- (z) -- (3.2,0) -- (x2);
+      \node[above] at (0, 0.35) {\scriptsize color 1};
+      \node[above] at (1.2, 0.35) {\scriptsize 2};
+      \node[above] at (2.4, 0.35) {\scriptsize 1};
+      \node[above] at (4, 0.35) {\scriptsize 2};
+      \node[below, font=\footnotesize] at (2, -0.5) {path $H_{12}$};
+    \end{tikzpicture}
+    \end{center}
+    
+    Now, consider the Kempe chain $H_{13}$ connecting $x_1$ and $x_3$. 
+    We interchange the colors 1 and 3 on $H_{13}$. 
+    After this swap, $x_1$ receives color 3. The vertex $y$ retains color 2, as it is not in $H_{13}$. 
+    To avoid a contradiction, $x_1$ and $x_2$ must still be connected by a new simple path $H'_{23}$. 
+    This path must start with the edge $x_1y$, meaning $y$ must now have a second neighbor of color 3 to continue the path.
+    
+    In the original coloring, $y$ has exactly two neighbors of color 1 ($x_1$ and $z$) 
+    and exactly one neighbor of each remaining color $3, \dots, d$. 
+    For $y$ to gain a second neighbor of color 3 after the swap on $H_{13}$, 
+    its neighbor $z$ must have belonged to $H_{13}$ and changed its color from 1 to 3.
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+      \node[vertex] (y) at (0,0) {$y$};
+      \node[vertex] (x1) at (-1, 0.6) {$x_1$};
+      \node[vertex] (z) at (-1, -0.6) {$z$};
+      \draw (y) -- (x1) (y) -- (z);
+      \node[above] at (-1, 0.95) {\scriptsize 1};
+      \node[below] at (-1, -0.95) {\scriptsize 1};
+      \node[right] at (0.4, 0) {\scriptsize 2};
+      \node[below, font=\footnotesize] at (0, -1.1) {before: $y$'s neighbors in $H_{12}$};
+    \end{tikzpicture}
+    \qquad
+    \begin{tikzpicture}[scale=0.9, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+      \node[vertex] (y) at (0,0) {$y$};
+      \node[vertex] (x1) at (-1, 0.6) {$x_1$};
+      \node[vertex] (z) at (-1, -0.6) {$z$};
+      \draw (y) -- (x1) (y) -- (z);
+      \node[above] at (-1, 0.95) {\scriptsize 3};
+      \node[below] at (-1, -0.95) {\scriptsize 3};
+      \node[right] at (0.4, 0) {\scriptsize 2};
+      \node[below, font=\footnotesize] at (0, -1.1) {after swap on $H_{13}$};
+    \end{tikzpicture}
+    \end{center}
+    
+    However, if $z \in H_{13}$, then $z$ must have at least two neighbors of color 3 (to be in $H_{13}$), 
+    two neighbors of color 2 (to be in $H_{12}$), and at least one neighbor of each of the remaining $d-3$ colors 
+    (to prevent it from being easily recolored). 
+    This requires $\deg(z) \ge 2 + 2 + (d-3) = d+1$, which contradicts $\max_{v \in V(G)} \deg(v) = d$.
+    
+    This final contradiction demonstrates that no such minimal counterexample $G$ can exist, completing the proof.
+\end{proof}
 
 \section{Ramsey theorem}
 
-now olor edges. 引入：1950  3 know each other, 3 do not. x has atmost 2 neighbors. 
+A classical motivation for Ramsey theory comes from the following social
+question posed in the 1950s: in any group of six people, there must exist
+either three people who all know each other or three people who are
+pairwise strangers.
 
-tu 8
+This can be modeled using graph theory. Consider the complete graph
+$K_6$ whose vertices represent the six people. Color an edge red if the
+two corresponding people know each other and blue otherwise. Pick any
+vertex $x$. Among the five edges incident with $x$, at least three must
+have the same color (since $5=3+2$). Suppose, without loss of generality,
+that $x$ has at least three red neighbors $a,b,c$.
+\begin{center}
+\begin{tikzpicture}[scale=0.85, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+  \node[vertex] (x) at (0,0) {$x$};
+  \node[vertex] (a) at (1.4, 0.9) {$a$};
+  \node[vertex] (b) at (1.5, -0.3) {$b$};
+  \node[vertex] (c) at (1.2, -1) {$c$};
+  \draw[red, thick] (x) -- (a) (x) -- (b) (x) -- (c);
+  \node[below, font=\footnotesize] at (0.75, -1.35) {three red neighbors};
+\end{tikzpicture}
+\end{center}
 
-$R(s,t)$ is the smallest integer n such that all edge colorings with 2 colors $\{ c_1,c_2 \}$ of $K_n$ contain a monochromatic $K_s$ in color $c_1$ or a monochromatic $K_t$ in color $c_2$= smallest integer n suh that all graphs G on $2n$ vertices satisfies 
+If any pair among $\{a,b,c\}$ is joined by a red edge, say $ab$, then
+$\{x,a,b\}$ forms a red triangle. Otherwise the edges $ab,bc,ca$ are all
+blue, and $\{a,b,c\}$ forms a blue triangle. Hence every red--blue
+coloring of the edges of $K_6$ contains a monochromatic triangle.
+\begin{center}
+\begin{tikzpicture}[scale=0.9, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+  \node[vertex] (x) at (0,0) {$x$};
+  \node[vertex] (a) at (1.2, 0.7) {$a$};
+  \node[vertex] (b) at (1.2, -0.7) {$b$};
+  \draw[red, thick] (x) -- (a) -- (b) -- (x);
+  \node[below, font=\footnotesize] at (0.6, -1) {red triangle $\{x,a,b\}$};
+\end{tikzpicture}
+\hspace{2cm}
+\begin{tikzpicture}[scale=0.9, vertex/.style={circle, draw=black, inner sep=1.2pt}, every node/.style={font=\small}]
+  \node[vertex] (a) at (90:0.8) {$a$};
+  \node[vertex] (b) at (210:0.8) {$b$};
+  \node[vertex] (c) at (330:0.8) {$c$};
+  \draw[blue, thick] (a) -- (b) -- (c) -- (a);
+  \node[below, font=\footnotesize] at (0, -1.15) {blue triangle $\{a,b,c\}$};
+\end{tikzpicture}
+\end{center}
+
+This result is written as
+\[
+R(3,3)=6,
+\]
+where $R(s,t)$ denotes the smallest integer $n$ such that every
+red--blue coloring of the edges of $K_n$ contains either a red $K_s$
+or a blue $K_t$. The study of such unavoidable patterns in sufficiently
+large structures forms the basis of \emph{Ramsey theory}.
+
+$R(s,t)$ is the smallest integer n such that all edge colorings with 2 colors $\{ c_1,c_2 \}$ of $K_n$ contain a monochromatic $K_s$ in color $c_1$ or a monochromatic $K_t$ in color $c_2$= smallest integer such that all graphs G on $n$ vertices satisfies 
 
 (1) $K_s$ is a subgraph of G or
 
 (2) $K_t$ is subgraph of $\bar{G}$
 
-Claim $R(3,3)=6$。 $\ge 6$ 
+\begin{corollary}
+    $R(2,t)=R(t,2)=t$ for all $t \ge 2$.
+\end{corollary}
 
-tu9
-
-$R(2,t)=R(t,2)=t$ lower bound $\bar{K_{t-1}}$.
+\begin{proof}
+    We prove $R(2,t)=t$; the equality $R(t,2)=t$ follows by symmetry.
+    
+    \emph{Upper bound.} In any red--blue coloring of $E(K_t)$, either there is a red edge, which is a red $K_2$, or else there are no red edges, in which case all edges are blue and the whole vertex set forms a blue $K_t$. Hence $R(2,t)\le t$.
+    
+    \emph{Lower bound.} Consider $K_{t-1}$ with all edges colored blue. Then there is no red $K_2$, and also no blue $K_t$ (since there are only $t-1$ vertices). Thus $R(2,t)\ge t$.
+    
+    Therefore $R(2,t)=t$, and hence $R(t,2)=t$.
+\end{proof}
 
 \begin{proposition}
 $R(s,t) \le R(s-1,t)+R(s,t-1)$
 \end{proposition}
 
-\begin{proof} 
-Consider a grph $G$ with n verices without $K_s$ in G and $K_t$ in $\bar{G}$.
-
-Let x be vertex
-
-tu10
-
-Then $N(X)$ CAN NOT CONTAIN  any $K_{s-1}$. so $|N(x)| \le R(s-1,t)+1$. Also $\bar{N(x)}$ can not ontain induced $\bar{K}_{t-1}$ so $|\bar{N(x)}| \le R(s,t-1)-1$. Hence $R(s,t)-1 \le ...$
- \end{proof}
-
-cor: $R(r,s) \le \binom{r+s-2}{r-1}$.
-
-\begin{proof} 
-by induction
+\begin{proof}
+    Let
+    \[
+    n:=R(s-1,t)+R(s,t-1),
+    \]
+    and consider any red--blue coloring of the edges of $K_n$.
+    Fix a red vertex $x$. Let $A$ be the set of red neighbors of $x$ and $B$ the
+    set of blue neighbors of $x$. Then $|A|+|B|=n-1$.
+    
+    If $|A|\ge R(s-1,t)$, then the induced subgraph on $A$ contains either a
+    red $K_{s-1}$ or a blue $K_t$. In the first case, together with $x$ this
+    forms a red $K_s$; in the second case we already have a blue $K_t$.
+    
+    If $|A|<R(s-1,t)$, then
+    \[
+    |B|=n-1-|A|\ge n-1-(R(s-1,t)-1)=R(s,t-1).
+    \]
+    as $n=R(s-1,t)+R(s,t-1)$
+    Hence the induced subgraph on $B$ contains either a red $K_s$ or a blue
+    $K_{t-1}$. In the first case we already have a red $K_s$; in the second
+    case, together with $x$ this forms a blue $K_t$.
+    
+    Thus every coloring of $K_n$ contains a red $K_s$ or a blue $K_t$, so
+    $R(s,t)\le n$.
 \end{proof}
 
-$R(r:m) := R(r_1, \ldots r_m)$.
+\begin{corollary}
+    $R(r,s) \le \binom{r+s-2}{r-1}$.
+\end{corollary}
 
-Diagonal Ramsey numbers. 
+\begin{proof}   
+    By induction on $r+s$. The base case $r+s=3$ is trivial. For the inductive step,
+    assume the inequality holds for all $r+s'<r+s$. Then
+    \[
+    R(r,s)\le R(r-1,s)+R(r,s-1)\le \binom{r+s-3}{r-2}+\binom{r+s-3}{s-2}.
+    \]
+    By the inductive hypothesis,
+    \[
+    \binom{r+s-3}{r-2}\le \binom{r+s-2}{r-1} \quad \text{and} \quad \binom{r+s-3}{s-2}\le \binom{r+s-2}{s-1}.
+    \]
+    Hence $R(r,s)\le \binom{r+s-2}{r-1}$.
+\end{proof}
 
-\begin{theorem} 
-$C \cdot 2^{s/2} \le R(s,s) \le D \cdot 4^{s-1}$.
+We first establish a recursive upper bound for the general Ramsey number $R(r, s)$, from which the diagonal bound follows.
 
-Erdos 1947 lower bound; Erdos sekeres 1935 upper bound.provement of upper bound: $\le (4-\epsilon)^{s}$ Morris, Campos, Griffiths 2024. coulan 2005 $\le s^{-(log s)/(loglogs)} 4^s$. other people imporve $\epsilon = 2^{-7}$
-
-Jie Ma 2025 show $R(s,cs) $ improvement lower bound. 
+\begin{theorem}[Erd\H{o}s-Szekeres Upper Bound]
+For any integers $s \ge 2$, the diagonal Ramsey number satisfies
+$$ R(s, s) \le \binom{2s - 2}{s - 1}. $$
+Consequently, as $s \to \infty$, we have the asymptotic bound
+$$ R(s, s) \le (1 + o(1)) \frac{4^{s-1}}{\sqrt{\pi s}}. $$
 \end{theorem}
 
-\begin{proof} 
-$R(s,s) \le \binom{2s-2}{s-1} \le \frac{(2s-2)!}{((s-1)!)^2} \le 4^{s-1}$. check it
+\begin{proof}
+The first part follows from the proof of the general bound $R(r, s) \le \binom{r+s-2}{r-1}$.
 
-To show $C \cdot 2^{3/2} \le R(s,s)$. Color each edge red/blue with prod. 1/2 Then a random subset of size s  is  monochromatic with prod $2 \cdot (1/2)^{\binom{s}{2}}$. By the union bound $Pr(ex. mao K_s) \le \binom{n}{s} 2 (1/2)^{\binom{s}{2}}$ for n=$2^{s/2 -2}$ , $Pr \le 2 \binom{2^{s/2}-2}{s} (1/2)^{s/2}$. ... <1 for s ge 3
+\textbf{Asymptotic Analysis:} To derive the asymptotic behavior, we apply Stirling's approximation, $n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n$:
+$$ \binom{2s - 2}{s - 1} = \frac{(2s-2)!}{((s-1)!)^2} \sim \frac{\sqrt{2\pi(2s-2)} \left(\frac{2s-2}{e}\right)^{2s-2}}{2\pi(s-1) \left(\frac{s-1}{e}\right)^{2s-2}} = \frac{4^{s-1}}{\sqrt{\pi(s-1)}}. $$
+As $s \to \infty$, $\frac{1}{\sqrt{s-1}} = \frac{1}{\sqrt{s}}(1+o(1))$, yielding the desired asymptotic form:
+$$ R(s, s) \le (1 + o(1)) \frac{4^{s-1}}{\sqrt{\pi s}}. $$
 \end{proof}
 
-Off-diagonal Ramsey Numbers. Fix s 
+This following theorem introduces the probabilistic method to combinatorics, demonstrating the existence of specific graphs by showing that the probability of their existence is strictly positive.
 
-$R(s,t) \le s^t$.
+\begin{theorem}[Erd\H{o}s Exponential Lower Bound]
+For any integer $n \ge s \ge 2$, if 
+$$ \binom{n}{s} 2^{1 - \binom{s}{2}} < 1, $$
+then $R(s, s) > n$. Consequently, we have the asymptotic lower bound:
+$$ R(s, s) \ge (1 + o(1)) \frac{s}{e\sqrt{2}} 2^{s/2}. $$
+\end{theorem}
 
+\begin{proof}
+Consider a complete graph $K_n$. We assign colors (red or blue) to each edge of $K_n$ independently and uniformly at random with probability $\frac{1}{2}$. 
 
+Let $S$ be a fixed subset of $V(K_n)$ of size $s$. Let $A_S$ denote the event that the complete subgraph induced by $S$ (i.e., $K_s$) is monochromatic (either all red or all blue). The probability of $A_S$ occurring is:
+$$ \mathbb{P}(A_S) = 2 \cdot \left(\frac{1}{2}\right)^{\binom{s}{2}} = 2^{1 - \binom{s}{2}}. $$
+
+Let $X$ be the random variable counting the total number of monochromatic $K_s$ subgraphs in $K_n$. We can express $X$ as the sum of indicator variables: $X = \sum_{|S|=s} \mathbf{1}_{A_S}$.
+By the linearity of expectation, the expected number of monochromatic $s$-cliques is:
+$$ \mathbb{E}[X] = \sum_{|S|=s} \mathbb{P}(A_S) = \binom{n}{s} 2^{1 - \binom{s}{2}}. $$
+
+If $\mathbb{E}[X] < 1$, then by the properties of random variables, there must exist at least one point in the sample space (i.e., at least one specific 2-coloring of $K_n$) for which $X = 0$. Such a coloring contains strictly zero monochromatic $K_s$ subgraphs. By definition, this implies that the Ramsey number $R(s, s)$ must be strictly greater than $n$.
+
+\textbf{Asymptotic Analysis:} We seek the largest $n$ such that the strict inequality holds. Using the standard upper bound for binomial coefficients $\binom{n}{s} \le \frac{n^s}{s!}$, it is sufficient to satisfy:
+$$ \frac{n^s}{s!} 2^{1 - s(s-1)/2} < 1 \implies n^s < s! \cdot 2^{s(s-1)/2 - 1}. $$
+Taking the $s$-th root of both sides gives:
+$$ n < (s!)^{1/s} \cdot 2^{(s-1)/2} \cdot 2^{-1/s}. $$
+Applying Stirling's approximation $(s!)^{1/s} \sim \frac{s}{e} (\sqrt{2\pi s})^{1/s} \sim \frac{s}{e}$, and noting that $2^{(s-1)/2} = \frac{1}{\sqrt{2}} 2^{s/2}$, we obtain:
+$$ n \approx \frac{s}{e} \cdot \frac{1}{\sqrt{2}} 2^{s/2} = \frac{s}{e\sqrt{2}} 2^{s/2}. $$
+Therefore, setting $n$ to be slightly less than this value guarantees the existence of a valid coloring, establishing the asymptotic lower bound:
+$$ R(s, s) \ge (1 + o(1)) \frac{s}{e\sqrt{2}} 2^{s/2}. $$
+\end{proof}
+    
+\textbf{Historical and Recent Progress}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}p{3.2cm} r p{4.5cm} X@{}}
+\toprule
+\textbf{Result Type} & \textbf{Year} & \textbf{Researchers} & \textbf{Key Breakthrough} \\
+\midrule
+Classic Upper Bound & 1935 & Erd\H{o}s, Szekeres & $R(s,s) \le D \cdot 4^{s-1}$ (based on combinatorics). \\
+Upper Bound Impr. & 2009 & David Conlon & Sub-exponential improvement: $R(s,s) \le s^{-c \frac{\log s}{\log \log s}} 4^s$. \\
+Upper Bound Brkthr. & 2023/24 & Campos, Griffiths, Morris, et al. & First exponential improvement: $R(s,s) \le (4-\epsilon)^s$ ($\epsilon \approx 2^{-7}$). \\
+Classic Lower Bound & 1947 & Paul Erd\H{o}s & $R(s,s) >C \cdot 2^{s/2}$ (dawn of the probabilistic method). \\
+Lower Bound Brkthr. & 2025 & Jie Ma, W. Shen, S. Xie & Improvement for the off-diagonal Ramsey numbers $R(s, Cs)$. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For off-diagonal Ramsey numbers, we introduct the following results:
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}p{3.2cm} r p{4.5cm} X@{}}
+\toprule
+\textbf{Result Type} & \textbf{Year} & \textbf{Researchers} & \textbf{Key Contribution} \\
+\midrule
+Classic Upper Bound & 1935 & Erd\H{o}s, Szekeres & $r(s,t) = O(t^{s-1})$ for all fixed $s \ge 3$ and $t \to \infty$. \\
+Upper Bound Impr. & 1980 & Ajtai, Koml\'os, Szemer\'edi & First improvement to the upper bound on $r(s,t)$ by analyzing a randomized greedy algorithm for producing large independent sets. \\
+Lower Bound & 2010 & Bohman, Keevash & Lower bound by analyzing the random $K_s$-free graph process, improving on earlier results of Spencer. \\
+Upper Bound Impr. & 2001 & Li, Rousseau, Zang & Extending ideas of Shearer, showed that $r(s,t) \le (1+o(1))\frac{t^{s-1}}{(\log t)^{s-2}}$ as $t \to \infty$. \\
+Lower Bound Brkthr. & 1995 & Kim & $r(3,t) = \Omega(t^2/\log t)$, matching previous upper bounds by Ajtai, Koml\'os and Szemer\'edi and Shearer, and improving earlier bounds of Spencer. \\
+Asymptotic Result & 2020 & Fiz Pontiveros, Griffiths, Morris; Bohman, Keevash & $r(3,t)$ is determined asymptotically up to a factor of four. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 
 
