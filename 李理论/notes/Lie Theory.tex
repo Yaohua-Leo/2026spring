@@ -166,7 +166,7 @@
     \textsc{\Large Course Notes}\\[0.5cm]
 
     \HRule{1.5pt} \\[0.5cm]
-    { \huge \bfseries TOPICS IN ALGEBRA: \\[0.3cm] GROUP THEORY }\\[0.4cm] 
+    { \huge \bfseries Lie Theory }\\[0.4cm] 
     \HRule{1.5pt} \\[1.5cm]
     
     \vspace{3cm}
@@ -192,6 +192,8 @@
 %    CONTENT STRUCTURE TEMPLATE
 %----------------------------------------------------------------------------------------
 \chapter{Lecture 1}
+
+\section{Introduction}
 
 Lie algebras were originally introduced by Sophus Lie in the 1870s to study the concept of continuous transformation groups. Lie's motivation was to develop a theory for differential equations analogous to Galois theory for algebraic equations. He discovered that the infinitesimal transformations of a continuous group form a linear space equipped with a bracket operation, now known as a Lie algebra. This linearization allows complex global geometric problems to be translated into algebraic problems, making them more tractable.
 
@@ -223,7 +225,64 @@ If $ \dim V < \infty $, when we fix a basis, then we fet a matrix representation
 
 The most imprtant thing everyone shoul know is Wedderburn's theorem.
 
-待补充
+\begin{theorem}[Wedderburn-Artin]
+    Let $A$ be a semisimple Artinian ring (with 1). Then $A$ is a direct sum of matrix rings over division rings. 
+    
+    Specifically, if ${}_A A \simeq S_1^{n_1} \oplus \dots \oplus S_r^{n_r}$ where $S_1, \dots, S_r$ are non-isomorphic simple modules occurring with multiplicities $n_1, \dots, n_r$, then
+    \[
+    A \simeq M_{n_1}(D_1) \oplus \dots \oplus M_{n_r}(D_r) \quad 
+    \]
+    where $D_i = \operatorname{End}_A(S_i)^{op}$. This is a ring isomorphism, and each $M_{n_i}(D_i)$ is a 2-sided ideal.
+    \end{theorem}
+    
+    \begin{proof}
+    First, since $A$ is a semisimple ring, its left regular module ${}_A A$ can be decomposed into a direct sum of simple left $A$-modules:
+    \[
+    {}_A A \simeq S_1^{n_1} \oplus \dots \oplus S_r^{n_r} \quad 
+    \]
+    where $S_1, \dots, S_r$ are pairwise non-isomorphic simple modules.
+    
+    By Schur's lemma, the endomorphism ring of a simple module is a division ring, so $D_i = \operatorname{End}_A(S_i)^{op}$ is a division ring.
+    
+    Next, we compute the endomorphism ring of the left regular module $\operatorname{End}_A({}_A A)$. On one hand, for any ring $A$ with 1, we have the ring isomorphism $\operatorname{End}_A({}_A A) \simeq A^{op}$. On the other hand, using our direct sum decomposition:
+    \[
+    \operatorname{End}_A({}_A A) \simeq \operatorname{End}_A(S_1^{n_1}) \oplus \dots \oplus \operatorname{End}_A(S_r^{n_r}) \quad 
+    \]
+    This decomposition holds because $\operatorname{Hom}_A(S_i^{n_i}, S_j^{n_j}) = 0$ whenever $i \neq j$. 
+    
+    For each component in the direct sum, we can rewrite the endomorphism ring using matrices over $D_i$:
+    \[
+    \operatorname{End}_A(S_i^{n_i}) \simeq M_{n_i}(D_i)^{op} \simeq M_{n_i}(D_i^{op}) \quad 
+    \]
+    Substituting this back into our equation for $A^{op}$, we obtain:
+    \[
+    A^{op} \simeq M_{n_1}(D_1^{op}) \oplus \dots \oplus M_{n_r}(D_r^{op})
+    \]
+    
+    To recover the ring $A$, we take the opposite ring on both sides. Recall the property that $M_n(R)^{op} \simeq M_n(R^{op})$. Applying this to each block yields:
+    \[
+    A \simeq (A^{op})^{op} \simeq \left( \bigoplus_{i=1}^r M_{n_i}(D_i^{op}) \right)^{op} \simeq \bigoplus_{i=1}^r M_{n_i}(D_i)
+    \]
+    Thus, the isomorphism is established.
+\end{proof}
+    
+    \begin{remark}
+    If the base field $F$ is algebraically closed, every finite-dimensional
+    division algebra over $F$ is equal to $F$. Hence the theorem simplifies to
+    \[
+    A \cong \prod_{i=1}^{r} M_{n_i}(F).
+    \]
+    \end{remark}
+    
+    \begin{example}
+    Let $G$ be a finite group and let $\mathbb{C}[G]$ be its group algebra.
+    By Maschke's theorem $\mathbb{C}[G]$ is semisimple. Therefore
+    \[
+    \mathbb{C}[G] \cong \prod_{i=1}^{r} M_{n_i}(\mathbb{C}),
+    \]
+    where $n_i$ are the dimensions of the irreducible complex representations
+    of $G$.
+    \end{example}
 
 \begin{definition} 
 Suppose $ F $ is algebraically closed. An algebra $ A $ is simple if 
@@ -237,9 +296,58 @@ Suppose $ F $ is algebraically closed. An algebra $ A $ is simple if
 Any simple finite dimensional associative algebra is isomorphic to $ M_n(F) $ for some $ n $.
 \end{corollary}
 
-\begin{corollary}
-Radical
-\end{corollary}
+\begin{definition}[Jacobson Radical]
+    Let $A$ be an associative algebra with identity over a field $F$.
+    The \emph{Jacobson radical} of $A$, denoted by $\operatorname{Rad}(A)$
+    or $J(A)$, is defined as the intersection of all maximal left ideals of $A$:
+    \[
+    \operatorname{Rad}(A)
+    =
+    \bigcap_{M \text{ maximal left ideal of } A} M.
+    \]
+    \end{definition}
+    
+    
+    \begin{proposition}
+    Let $A$ be an associative algebra with identity. Then
+    \[
+    \operatorname{Rad}(A)
+    =
+    \bigcap_{S \text{ simple left } A\text{-module}}
+    \operatorname{Ann}_A(S),
+    \]
+    where
+    \[
+    \operatorname{Ann}_A(S)
+    =
+    \{a\in A \mid aS=0\}
+    \]
+    is the annihilator of $S$ in $A$.
+    \end{proposition}
+    
+    
+    \begin{proposition}[Equivalent Characterization]
+    Let $A$ be an associative algebra with identity.
+    Then an element $a\in A$ lies in $\operatorname{Rad}(A)$
+    if and only if for every $x\in A$ the element
+    \[
+    1-ax
+    \]
+    is invertible in $A$.
+    \end{proposition}
+    
+    
+    \begin{proposition}
+    The Jacobson radical $\operatorname{Rad}(A)$ is a two-sided ideal of $A$.
+    \end{proposition}
+    
+    
+    \begin{definition}[Semisimple Algebra]
+    An associative algebra $A$ is called \emph{semisimple} if
+    \[
+    \operatorname{Rad}(A)=0.
+    \]
+    \end{definition}
 
 \section{Where do Lie algebras come from?}
 
@@ -252,7 +360,7 @@ A Lie algebra is a vector space $ L $ over a field $ F $, with a binary operatio
 \end{enumerate}
 \end{definition}
 
-\subsection{They come from associative algebras}
+\subsection{They come from associative (central simple) algebras}
 
 Let $ A $ be an associative algebra. $ \forall a,b \in A $, define $ [a,b]=ab-ba $. Check that $ (A,[ \ ,\  ]) $ is a Lie algebra:
 
@@ -284,15 +392,108 @@ Focus on $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] $, all matrices are of trace 0. T
 $ Z $ is the center of Lie algrbra $ L $ if $ Z=\{ z \in L | [z,L]=0 \} $.   
 \end{definition}
 
-We can also find Lie algebras from the involution of an associative algebra. Let $ A $ be an associative algebra. $ *: A \to A $ is a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+\subsection{They come from involutions of central simple algebras}
+
+We can also find Lie algebras from the involution of a central simple algebra. Let $ A $ be central simple algebra and $ *: A \to A $ be a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+
+\begin{proposition}
+    Let $A$ be a central simple algebra over a field $F$ equipped with an involution
+    $\sigma : A \to A$. Then the set
+    \[
+    L=\{x\in A \mid \sigma(x)=-x\}
+    \]
+    forms a Lie algebra under the commutator bracket
+    \[
+    [x,y]=xy-yx .
+    \]
+    \end{proposition}
+    
+    \begin{proof}
+    First observe that any associative algebra $A$ becomes a Lie algebra
+    with the commutator bracket
+    \[
+    [x,y]=xy-yx .
+    \]
+    
+    Let
+    \[
+    L=\{x\in A\mid \sigma(x)=-x\}.
+    \]
+    We show that $L$ is closed under the Lie bracket.
+    
+    Take $x,y\in L$. Then
+    \[
+    \sigma(x)=-x,\qquad \sigma(y)=-y.
+    \]
+    
+    Since $\sigma$ is an involution, it satisfies
+    \[
+    \sigma(xy)=\sigma(y)\sigma(x).
+    \]
+    
+    Hence
+    \[
+    \sigma([x,y])
+    =\sigma(xy-yx)
+    =\sigma(y)\sigma(x)-\sigma(x)\sigma(y).
+    \]
+    
+    Substituting $\sigma(x)=-x$ and $\sigma(y)=-y$, we obtain
+    \[
+    \sigma([x,y])
+    =(-y)(-x)-(-x)(-y)
+    =yx-xy
+    =-[x,y].
+    \]
+    
+    Thus $[x,y]\in L$. Therefore $L$ is closed under the commutator bracket.
+    
+    Since the commutator bracket in any associative algebra satisfies
+    bilinearity, antisymmetry, and the Jacobi identity,
+    it follows that $L$ is a Lie algebra.
+    \end{proof}
+
+
+
+
+
+
 
 \begin{example}
- The Quatanion algebra is an associative algebra with the involution $ a \mapsto \overline{a} $. It is 4 dimensional over the base field with standard basis $ 1,i,j,k $. We use $ \mathbb{H} $ to denote the Quatanion algebra when we choose $ \mathbb{R} $ as the base field. i.e. $ \mathbb{H}=\{ a_0 1 + a_1 i + a_2 j + a_3 k | a_0,a_1,a_2,a_3 \in \mathbb{R} \} $. 
-
-
+ The Quatanion algebra is an associative algebra with the involution $ a \mapsto a^* $. It is 4 dimensional central simple algebra with standard basis $ 1,i,j,k $, where the relations are $ i^2 = j^2 = k^2  = -1, ij=k, jk=i, ki=j $ as the following graph:
+ \[
+    \begin{tikzcd}
+        i \arrow[r] & j \arrow[d]  \\
+                    & k \arrow[lu]
+        \end{tikzcd}
+ \]
+  We use $ \mathbb{H} $ to denote the Quatanion algebra when we choose $ \mathbb{R} $ as the base field. i.e. $ \mathbb{H}=\{ a_0 1 + a_1 i + a_2 j + a_3 k | a_0,a_1,a_2,a_3 \in \mathbb{R} \} $. $ \forall x \in \mathbb{H} $ where $ x=a_0 1 + a_1 i + a_2 j + a_3 k $, $ * $ is defined as $ x^* = a_0 1 - a_1 i - a_2 j - a_3 k $ and $ x^{-1}= \frac{1}{a_0^2 + a_1^2 + a_2^2 + a_3^2} (a_0 1 - a_1 i - a_2 j - a_3 k) $. Hence $ \mathbb{H} $ is a division algebra. 
+ 
+ If the base field is algebraically closed, $F =\overline{F}$. We can denote the Quatanion algebra by $ 2 \times 2 $ matrices 
+ \[
+ \begin{pmatrix}
+    \alpha & \beta \\
+    \gamma & \xi \\
+ \end{pmatrix}
+ \]    
+Where $ \alpha, \beta, \gamma, \xi \in F $. In this case it is no longer a division algebra ($a_0^2 + a_1^2 + a_2^2 + a_3^2$ may equal to 0), but just $ M_2(F) $. And in this case the involution $ * $ is defined as:
+\[
+\begin{pmatrix}
+    \alpha & \beta \\
+    \gamma & \xi \\
+ \end{pmatrix}
+ \mapsto
+ \begin{pmatrix}
+    \xi & -\beta \\
+    -\gamma & \alpha \\
+ \end{pmatrix}
+\]   
+Which is the Simplectic involution.
 \end{example}
 
+\begin{example} 
 
+\end{example}
 
 
 
