@@ -191,7 +191,7 @@
 %----------------------------------------------------------------------------------------
 %    CONTENT STRUCTURE TEMPLATE
 %----------------------------------------------------------------------------------------
-\chapter{Lecture 1}
+\chapter{Lecture 1 Where Lie algebras come from}
 
 \section{Introduction}
 
@@ -360,7 +360,7 @@ A Lie algebra is a vector space $ L $ over a field $ F $, with a binary operatio
 \end{enumerate}
 \end{definition}
 
-\subsection{They come from associative (central simple) algebras}
+\subsection{They come from associative algebras}
 
 Let $ A $ be an associative algebra. $ \forall a,b \in A $, define $ [a,b]=ab-ba $. Check that $ (A,[ \ ,\  ]) $ is a Lie algebra:
 
@@ -388,6 +388,12 @@ $ [L,L]=\{ \sum_{i} [a_i,b_i] \} \trianglelefteq L $. Clearly $ [\mathfrak{gl}(n
 Focus on $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] $, all matrices are of trace 0. This is called the special linear Lie algebra, denoted by $ \mathfrak{sl}(n) $.
 \end{example}
 
+\begin{example}
+    If the base field changed, some properties of the Lie algebra may change. For example, if $\operatorname{char}F=2$, then $[a,b]=[b,a]$. The Lie bracket is no longer skew-symmetric but actually symmetric.
+
+    Consider $ [\mathfrak{gl}(n),\mathfrak{gl}(n)]=\mathfrak{sl}(n) $. If $\operatorname{char}F=0$ or $\operatorname{char}F \nmid n$, then $\mathfrak{sl}(n)$ is a simple Lie algebra. If $\operatorname{char}F\mid n$, then $\mathfrak{sl}(n)$ is not simple.
+\end{example}
+
 \begin{definition} 
 $ Z $ is the center of Lie algrbra $ L $ if $ Z=\{ z \in L | [z,L]=0 \} $.   
 \end{definition}
@@ -398,9 +404,9 @@ We can also find Lie algebras from the involution of a central simple algebra. L
 
 \begin{proposition}
     Let $A$ be a central simple algebra over a field $F$ equipped with an involution
-    $\sigma : A \to A$. Then the set
+    $* : A \to A$. Then the set
     \[
-    L=\{x\in A \mid \sigma(x)=-x\}
+    L=\{x\in A \mid *(x)=-x\}
     \]
     forms a Lie algebra under the commutator bracket
     \[
@@ -417,30 +423,30 @@ We can also find Lie algebras from the involution of a central simple algebra. L
     
     Let
     \[
-    L=\{x\in A\mid \sigma(x)=-x\}.
+    L=\{x\in A\mid *(x)=-x\}.
     \]
     We show that $L$ is closed under the Lie bracket.
     
     Take $x,y\in L$. Then
     \[
-    \sigma(x)=-x,\qquad \sigma(y)=-y.
+    *(x)=-x,\qquad *(y)=-y.
     \]
     
-    Since $\sigma$ is an involution, it satisfies
+    Since $*$ is an involution, it satisfies
     \[
-    \sigma(xy)=\sigma(y)\sigma(x).
+    *(xy)=*(y)*(x).
     \]
     
     Hence
     \[
-    \sigma([x,y])
-    =\sigma(xy-yx)
-    =\sigma(y)\sigma(x)-\sigma(x)\sigma(y).
+    *([x,y])
+    =*(xy-yx)
+    =*(y)*(x)-*(x)*(y).
     \]
     
-    Substituting $\sigma(x)=-x$ and $\sigma(y)=-y$, we obtain
+    Substituting $*(x)=-x$ and $*(y)=-y$, we obtain
     \[
-    \sigma([x,y])
+    *([x,y])
     =(-y)(-x)-(-x)(-y)
     =yx-xy
     =-[x,y].
@@ -453,11 +459,81 @@ We can also find Lie algebras from the involution of a central simple algebra. L
     it follows that $L$ is a Lie algebra.
     \end{proof}
 
-
-
-
-
-
+    This construction explains why many classical Lie algebras arise from
+    central simple algebras with involution.  In particular, the classical
+    Lie algebras of Cartan--Killing type can be obtained in this way.
+    
+    \begin{example}[Orthogonal involution]
+    Let
+    \[
+    A=M_n(F)
+    \]
+    and define the involution
+    \[
+    *(X)=X^{T}.
+    \]
+    Then
+    \[
+    L=\{X\in M_n(F)\mid X^T=-X\}.
+    \]
+    This is the Lie algebra of skew-symmetric matrices, which is the
+    orthogonal Lie algebra
+    \[
+    \mathfrak{so}_n(F).
+    \]
+    \end{example}
+    
+    \begin{example}[Symplectic involution]
+    Let
+    \[
+    A=M_{2n}(F)
+    \]
+    and let
+    \[
+    J=
+    \begin{pmatrix}
+    0 & I_n\\
+    -I_n & 0
+    \end{pmatrix}.
+    \]
+    Define
+    \[
+    *(X)=J^{-1}X^{T}J.
+    \]
+    Then
+    \[
+    L=\{X\in M_{2n}(F)\mid *(X)=-X\}
+    \]
+    is the symplectic Lie algebra
+    \[
+    \mathfrak{sp}_{2n}(F).
+    \]
+    \end{example}
+    
+    \begin{example}[Unitary involution]
+    Let $K/F$ be a quadratic field extension with Galois involution
+    $a\mapsto \overline{a}$.  Consider
+    \[
+    A=M_n(K)
+    \]
+    with involution
+    \[
+    *(X)=\overline{X}^{\,T}.
+    \]
+    Then
+    \[
+    L=\{X\in M_n(K)\mid *(X)=-X\}
+    \]
+    is the unitary Lie algebra
+    \[
+    \mathfrak{su}_n .
+    \]
+    \end{example}
+    
+    Therefore classical Lie algebras arise from pairs $(A,*)$ where
+    $A$ is a central simple algebra and $*$ is an involution.  This
+    provides an algebraic framework for the Cartan--Killing classification
+    of classical Lie algebras.
 
 \begin{example}
  The Quatanion algebra is an associative algebra with the involution $ a \mapsto a^* $. It is 4 dimensional central simple algebra with standard basis $ 1,i,j,k $, where the relations are $ i^2 = j^2 = k^2  = -1, ij=k, jk=i, ki=j $ as the following graph:
@@ -492,80 +568,1204 @@ Which is the Simplectic involution.
 \end{example}
 
 \begin{example} 
-
-\end{example}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\chapter{Lecture 2}
-
-Recall last time: 
-
-1. Matrix Lie algebras, e.g. $ \mathfrak{sl}(n) $. Consider involution $ * : M_n(F) \to M_n(F) $ skew-symmetric matrices.
-
-2. Derivation, $ \operatorname{Der}(A) $. e.g. $ A=F[t_1,\ldots ,t_n] $, $ \mathrm{d}=\sum_{min}^{max} f_i() \partial $
-
-A non-associative algebra, $ \mathrm{d}: x \mapsto [a,x] $ is a derivation. 
-
-Let $ L $ a Lie algebra, inner derivation
-
-Q: $ \mathrm{d} $ a derivation and $ \operatorname{exp}(\mathrm{d}) $. It need convergence.
-
-\begin{example} 
-$ \mathrm{d}=t_1t_2 \frac{\partial}{\partial t_1} $.  
-\end{example}
-
-3. Brackets: 
-
-\section{Engel Theorem}
-
-$ L^n $: span of products of elements of length $ n $. Recall $ \mathrm{ad}([a,b])=[\mathrm{ad}(a),\mathrm{ad}(b)] $. $ L \to \operatorname{End}_F(L)^{(-)} , a \mapsto \mathrm{ad}(a)$. 
-
-$ [I,J] $ is again an ideal.
-
-Decending chain:
+From what we discussd. For a $2n \times 2n$ matrix $ A =\begin{pmatrix} A_1 & A_2 \\ A_3 & A_4 \end{pmatrix}$ in which $ A_1, A_2, A_3, A_4 $ are $ n \times n $ matrices, the unitary involution is defined as:
 \[
-L=L^1 \supseteq L^2 \supseteq \ldots
+A^*=
+\begin{pmatrix}
+    A_4^t & -A_3^t \\
+    -A_2^t & A_1^t \\
+\end{pmatrix}
 \]
-L is nilpotent if....
+And the unitary involution is defined as:
+\[
+A^*=\overline{A}^t
+\]
+When $n=1$ we have two different type, and we will get two different Lie algebras. But they are isomorphic.
+\end{example}
 
-eg: strict upper matrix
+\begin{proposition}
+    Let $F$ be a field of characteristic $\neq 2$, and let
+    \[
+    J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\in M_{2}(F).
+    \]
+    Define an involution $*$ on $M_{2}(F)$ by
+    \[
+    X^{*}=J^{-1}X^{t}J .
+    \]
+    Then the Lie algebra of $*$-skew elements,
+    \[
+    K(M_{2}(F),*)=\{X\in M_{2}(F)\mid X^{*}=-X\},
+    \]
+    is exactly $\mathfrak{sl}_{2}(F)$.
+    \end{proposition}
+    
+    \begin{proof}
+    Let
+    \[
+    X=\begin{pmatrix}a&b\\ c&d\end{pmatrix}\in M_{2}(F).
+    \]
+    Since
+    \[
+    J^{-1}=-J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},
+    \]
+    we compute
+    \[
+    X^{*}
+    =J^{-1}X^{t}J
+    =\begin{pmatrix}0&-1\\1&0\end{pmatrix}
+    \begin{pmatrix}a&c\\ b&d\end{pmatrix}
+    \begin{pmatrix}0&1\\-1&0\end{pmatrix}
+    =\begin{pmatrix}d&-b\\-c&a\end{pmatrix}.
+    \]
+    Now the condition $X^{*}=-X$ becomes
+    \[
+    \begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+    =
+    \begin{pmatrix}-a&-b\\-c&-d\end{pmatrix}.
+    \]
+    Hence $d=-a$, while $b$ and $c$ are arbitrary. Therefore
+    \[
+    K(M_{2}(F),*)
+    =
+    \left\{
+    \begin{pmatrix}
+    a&b\\
+    c&-a
+    \end{pmatrix}
+    \,\middle|\,
+    a,b,c\in F
+    \right\}.
+    \]
+    But this is precisely the set of all $2\times 2$ matrices of trace $0$, namely
+    \[
+    \mathfrak{sl}_{2}(F)
+    =
+    \left\{
+    \begin{pmatrix}
+    a&b\\
+    c&-a
+    \end{pmatrix}
+    \,\middle|\,
+    a,b,c\in F
+    \right\}.
+    \]
+    Thus
+    \[
+    K(M_{2}(F),*)=\mathfrak{sl}_{2}(F).
+    \]
+    Since $K(M_{2}(F),*)$ is closed under the commutator bracket, it follows that the Lie algebra obtained from the symplectic involution on $M_{2}(F)$ is $\mathfrak{sl}_{2}(F)$.
+    \end{proof}
 
-Another decending chain: $ L^{[1]}=[L,L] $, $ L^{[n+1]}=[L^{[n]},L^{[n]}] $  
+\begin{example}
+        Let $K/F$ be a quadratic field extension, and let $a \mapsto \overline{a}$ denote the nontrivial
+        $F$-automorphism of $K$. Consider the algebra $M_2(K)$ and define an involution $*$ by
+        \[
+        X^* = \overline{X}^{\,t}.
+        \]
+        Then $*$ is a unitary involution on $M_2(K)$.
+        
+        The Lie algebra of $*$-skew elements is
+        \[
+        K(M_2(K),*)=\{X\in M_2(K)\mid X^*=-X\}.
+        \]
+        If
+        \[
+        X=\begin{pmatrix} a & b \\ c & d \end{pmatrix},
+        \]
+        then
+        \[
+        X^*=\overline{X}^{\,t}
+        =
+        \begin{pmatrix}
+        \overline{a} & \overline{c}\\
+        \overline{b} & \overline{d}
+        \end{pmatrix}.
+        \]
+        Thus the condition $X^*=-X$ is equivalent to
+        \[
+        \overline{a}=-a,\qquad \overline{d}=-d,\qquad \overline{c}=-b.
+        \]
+        Hence every element of $K(M_2(K),*)$ has the form
+        \[
+        X=
+        \begin{pmatrix}
+        a & b\\
+        -\overline{b} & d
+        \end{pmatrix},
+        \qquad \text{with } \overline{a}=-a,\ \overline{d}=-d.
+        \]
+        This is the unitary Lie algebra associated with the standard hermitian form.
+        
+        Its derived Lie algebra consists of those elements with trace $0$, namely
+        \[
+        \mathfrak{su}_2(K/F)
+        =
+        \left\{
+        \begin{pmatrix}
+        a & b\\
+        -\overline{b} & -a
+        \end{pmatrix}
+        \,\middle|\,
+        a,b\in K,\ \overline{a}=-a
+        \right\}.
+        \]
+        After extending scalars to a splitting field (for instance to an algebraic closure of $F$),
+        this Lie algebra becomes isomorphic to $\mathfrak{sl}_2$. Therefore the Lie algebra arising
+        from a unitary involution in the $2\times 2$ case is of type $A_1$.
+\end{example}
+        
+\begin{remark}
+        Why does this Lie algebra become $\mathfrak{sl}_2$? The reason is that unitary Lie algebras are
+        forms of special linear Lie algebras. In the present $2\times 2$ case, the corresponding type is
+        $A_1$. Over a field where the quadratic extension splits, the involution becomes equivalent to the
+        ordinary transpose situation, and the resulting special unitary Lie algebra becomes the split simple
+        Lie algebra of type $A_1$, namely
+        \[
+        \mathfrak{sl}_2.
+        \]
+        Thus, although over the ground field one naturally writes the Lie algebra as $\mathfrak{su}_2$,
+        its split form is precisely $\mathfrak{sl}_2$.
+\end{remark}
 
-L is solvable if .....
+\begin{example}[The unitary involution on $M_{2}(\mathbb{C})$ and the Lie algebra $\mathfrak{su}_{2}$]
+    Let $F=\mathbb{R}$ and $K=\mathbb{C}$, and let $\overline{\phantom{x}}$ denote complex conjugation.
+    Consider the algebra $M_{2}(\mathbb{C})$ equipped with the involution
+    \[
+    X^{*}=\overline{X}^{\,t}.
+    \]
+    This is the standard unitary involution on $M_{2}(\mathbb{C})$ relative to the extension
+    $\mathbb{C}/\mathbb{R}$.
+    
+    We first determine the Lie algebra of $*$-skew elements:
+    \[
+    K(M_{2}(\mathbb{C}),*)=\{X\in M_{2}(\mathbb{C})\mid X^{*}=-X\}.
+    \]
+    Let
+    \[
+    X=\begin{pmatrix}a&b\\ c&d\end{pmatrix}\in M_{2}(\mathbb{C}).
+    \]
+    Then
+    \[
+    X^{*}
+    =
+    \overline{X}^{\,t}
+    =
+    \begin{pmatrix}
+    \overline{a} & \overline{c}\\
+    \overline{b} & \overline{d}
+    \end{pmatrix}.
+    \]
+    Thus the condition $X^{*}=-X$ is equivalent to
+    \[
+    \overline{a}=-a,\qquad \overline{d}=-d,\qquad \overline{c}=-b.
+    \]
+    Hence $a$ and $d$ are purely imaginary, and $c=-\overline{b}$. Therefore
+    \[
+    K(M_{2}(\mathbb{C}),*)
+    =
+    \left\{
+    \begin{pmatrix}
+    a&b\\
+    -\overline{b}&d
+    \end{pmatrix}
+    \,\middle|\,
+    a,d\in i\mathbb{R},\ b\in\mathbb{C}
+    \right\}.
+    \]
+    This is the unitary Lie algebra $\mathfrak{u}_{2}$.
+    
+    Its derived Lie algebra is the trace-zero part, namely
+    \[
+    \mathfrak{su}_{2}
+    =
+    \left\{
+    \begin{pmatrix}
+    a&b\\
+    -\overline{b}&-a
+    \end{pmatrix}
+    \,\middle|\,
+    a\in i\mathbb{R},\ b\in\mathbb{C}
+    \right\}.
+    \]
+    Indeed, $\operatorname{tr}([X,Y])=0$ for all $X,Y\in M_{2}(\mathbb{C})$, so every commutator in
+    $\mathfrak{u}_{2}$ has trace $0$. Conversely, in this $2\times2$ case, the trace-zero subspace is
+    generated by commutators, and hence it is exactly the derived Lie algebra.
+    
+    To see that $\mathfrak{su}_{2}$ is $3$-dimensional over $\mathbb{R}$, write
+    \[
+    a=it,\qquad b=u+iv,
+    \qquad t,u,v\in\mathbb{R}.
+    \]
+    Then every element of $\mathfrak{su}_{2}$ has the form
+    \[
+    \begin{pmatrix}
+    it & u+iv\\
+    -u+iv & -it
+    \end{pmatrix},
+    \qquad t,u,v\in\mathbb{R}.
+    \]
+    Therefore
+    \[
+    \dim_{\mathbb{R}}\mathfrak{su}_{2}=3.
+    \]
+    A convenient real basis is
+    \[
+    H=
+    \begin{pmatrix}
+    i&0\\
+    0&-i
+    \end{pmatrix},
+    \qquad
+    X=
+    \begin{pmatrix}
+    0&1\\
+    -1&0
+    \end{pmatrix},
+    \qquad
+    Y=
+    \begin{pmatrix}
+    0&i\\
+    i&0
+    \end{pmatrix}.
+    \]
+    One checks directly that
+    \[
+    [H,X]=2Y,\qquad [H,Y]=-2X,\qquad [X,Y]=2H,
+    \]
+    so $\mathfrak{su}_{2}$ is a $3$-dimensional real Lie algebra.
+    
+    Now we explain why this Lie algebra becomes $\mathfrak{sl}_{2}(\mathbb{C})$ after extending scalars
+    from $\mathbb{R}$ to $\mathbb{C}$. Consider the complexification
+    \[
+    \mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}.
+    \]
+    Since $H,X,Y$ form a real basis of $\mathfrak{su}_{2}$, they also form a complex basis of
+    $\mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}$. Define
+    \[
+    h=-iH=
+    \begin{pmatrix}
+    1&0\\
+    0&-1
+    \end{pmatrix},
+    \qquad
+    e=\frac{1}{2}(X-iY)=
+    \begin{pmatrix}
+    0&1\\
+    0&0
+    \end{pmatrix},
+    \qquad
+    f=\frac{1}{2}(-X-iY)=
+    \begin{pmatrix}
+    0&0\\
+    -1&0
+    \end{pmatrix}.
+    \]
+    These elements lie in $\mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}$ and satisfy
+    \[
+    [h,e]=2e,\qquad [h,f]=-2f,\qquad [e,f]=h.
+    \]
+    Thus they form a standard $\mathfrak{sl}_{2}$-triple, and therefore
+    \[
+    \mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}\cong \mathfrak{sl}_{2}(\mathbb{C}).
+    \]
+    
+    In other words, $\mathfrak{su}_{2}$ is a real form of $\mathfrak{sl}_{2}(\mathbb{C})$. Hence the Lie
+    algebra arising from the unitary involution on $M_{2}(\mathbb{C})$ is of type $A_{1}$.
+    \end{example}
 
-e.g. 2 dimentional sovable non nilpotent Lie alg.
+\begin{remark}
+    This explains why, in the $2\times 2$ case, the Lie algebra arising from a symplectic involution is isomorphic to the one of type $A_{1}$. Equivalently, in this lowest-rank case one has the accidental isomorphism
+    \[
+    C_{1}\cong A_{1}.
+    \]
+\end{remark}
 
-$ A $ associa. $ L \subseteq A^{(-)} $. Suppose $ A = <L> $ as an associa alge. Then A is an enveloping algebra of $ L $.
+\subsection{They come from the derivation of any algebra}
+
+Let $A$ be any algebra.
+
+\begin{definition}
+    A derivation of $A$ is a linear map $\mathrm{d}: A \to A$ such that $\mathrm{d}(ab)=\mathrm{d}(a)b+a\mathrm{d}(b)$ for all $a,b \in A$.
+\end{definition}
+
+\begin{example}
+    Let $A=F[t_1,\ldots ,t_n]$ be the polynomial algebra. We have the formal derivative $ \partial $ where $\partial(t_i^n)=nt_i^{n-1}$ and $\partial(fg)=f\partial(g)+\partial(f)g$.
+
+    Let $\mathrm{d}=\sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial}{\partial t_i} $, this is a derivation of $A$.
+    \[
+    \mathrm{d}(f)=\sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial f}{\partial t_i}
+    \]
+   If $\mathrm{d}_1,\mathrm{d}_2$ are derivations of $A$, then $[\mathrm{d}_1,\mathrm{d}_2]$ is again a derivation of $A$. We can check it by the following calculation:
+   \begin{align*}
+   [\mathrm{d}_1,\mathrm{d}_2](ab)&=\mathrm{d}_1(\mathrm{d}_2(ab))-\mathrm{d}_2(\mathrm{d}_1(ab)) \\
+   &=\mathrm{d}_1(\mathrm{d}_2(a)b+a\mathrm{d}_2(b))-\mathrm{d}_2(\mathrm{d}_1(a)b+a\mathrm{d}_1(b)) \\
+   &=\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_1(a\mathrm{d}_2(b))+\mathrm{d}_2(\mathrm{d}_1(a))b+\mathrm{d}_2(a\mathrm{d}_1(b)) \\
+   &=\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_2(\mathrm{d}_1(a))b+\mathrm{d}_1(a\mathrm{d}_2(b))+\mathrm{d}_2(a\mathrm{d}_1(b)) \\
+   &=\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_2(\mathrm{d}_1(a))b+a[\mathrm{d}_1,\mathrm{d}_2](b) \\
+   &=[\mathrm{d}_1,\mathrm{d}_2](a)b+a[\mathrm{d}_1,\mathrm{d}_2](b) \\
+   &=[\mathrm{d}_1,\mathrm{d}_2](ab)
+   \end{align*}
+   Therefore $[\mathrm{d}_1,\mathrm{d}_2]$ is a derivation of $A$.
+\end{example}
+
+The above example means that:
+\[
+\operatorname{Der}(A)=\{\ \mathrm{d}: A \to A \mid \mathrm{d} \text{ is a derivation} \} < \operatorname{End}_F(A)^{(-)}
+\]
+In particular, when $A=F[t_1,\ldots ,t_n]$, we have:
+\[
+\operatorname{Der}(A)=\{\ \sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial}{\partial t_i} \mid f_i(t_1,\ldots ,t_n) \in A \} < \operatorname{End}_F(A)^{(-)}
+\]
+We denote this algebra by $W(n)$. It is called the $n$-th Witt algebra. It is a simple, infinite dimensional Lie algebra (when $\operatorname{char}F=0$).
+
+Thus every element of $W(n)$ has the form
+\[
+D=\sum_{i=1}^n f_i\,\partial_i,
+\qquad f_i\in A.
+\]
+
+\begin{definition}
+    The divergence map is defined by
+\[
+\operatorname{div}:W(n)\to A,
+\qquad
+\operatorname{div}\!\left(\sum_{i=1}^n f_i\partial_i\right)
+=\sum_{i=1}^n \partial_i(f_i).
+\]
+Its kernel is the \emph{special} Lie algebra
+\[
+S(n):=\ker(\operatorname{div})
+     =\left\{
+        \sum_{i=1}^n f_i\partial_i\in W(n)
+        \;\middle|\;
+        \sum_{i=1}^n \partial_i(f_i)=0
+      \right\}.
+\]
+Equivalently, $S(n)$ is the Lie algebra of polynomial vector fields preserving
+the standard volume form
+\[
+\omega=dx_1\wedge\cdots\wedge dx_n.
+\]
+\end{definition}
+
+
+A basic family of elements of $S(n)$ is given by
+\[
+D_{ij}(f):=\partial_j(f)\partial_i-\partial_i(f)\partial_j,
+\qquad
+1\le i<j\le n,\quad f\in A,
+\]
+since
+\[
+\operatorname{div}(D_{ij}(f))
+=
+\partial_i\partial_j(f)-\partial_j\partial_i(f)=0.
+\]
+One can check
+\[
+S(n)=< D_{ij}(f) \mid 1\le i<j\le n, f\in A >_{Lie}
+\]
+These elements generate $S(n)$ as a Lie algebra.
+
+\begin{definition}
+    The grading of $W(n)$ is defined by
+Give $A$ its standard grading by declaring $\deg x_i=1$. Then $W(n)$ becomes a
+$\mathbb Z$-graded Lie algebra with
+\[
+\deg(x^a\partial_i)=|a|-1,
+\qquad
+|a|:=a_1+\cdots+a_n,
+\]
+so that
+\[
+W(n)=\bigoplus_{k\ge -1} W(n)_k.
+\]
+
+and
+\[
+W(n)_0
+=
+\operatorname{span}_F\{x_j\partial_i\mid 1\le i,j\le n\}
+\cong \mathfrak{gl}_n(F).
+\]
+\end{definition}
+    
+
+Since the divergence map is homogeneous of degree $0$, the subalgebra $S(n)$ is
+graded:
+\[
+S(n)=\bigoplus_{k\ge -1} S(n)_k,
+\qquad
+S(n)_k=S(n)\cap W(n)_k.
+\]
+Moreover,
+\[
+S(n)_{-1}=W(n)_{-1},
+\]
+and
+\[
+S(n)_0
+=
+\left\{
+\sum_{i,j} a_{ij}x_j\partial_i
+\;\middle|\;
+\sum_i a_{ii}=0
+\right\}
+\cong \mathfrak{sl}_n(F),
+\]
+because
+\[
+\operatorname{div}\!\left(\sum_{i,j} a_{ij}x_j\partial_i\right)
+=
+\sum_i a_{ii}.
+\]
+
+In characteristic $0$, the special algebra is perfect:
+\[
+[S(n),S(n)]=S(n).
+\]
+Hence
+\[
+S(n)^{(1)}=S(n).
+\]
+For $n\ge 2$, the Lie algebra $S(n)$ is simple. Therefore, in characteristic
+$0$ one has
+\[
+W(n)\supset S(n)=S(n)^{(1)},
+\]
+where both algebras are infinite-dimensional, $W(n)$ is the full Lie algebra of
+polynomial vector fields, and $S(n)$ is its simple divergence-zero subalgebra.
+
+\begin{remark}
+    In characteristic $0$, the chain $W(n)\supset S(n)\supset S(n)^{(1)}$ is thus
+less informative than in positive characteristic, since the last inclusion is an
+equality.
+\end{remark}
+
+Let $A$ be an associative algerba. Fix an element $a \in A$, we define : $\mathrm{ad}(a): A \to A : b\mapsto [a,b]$. This is a derivation of $A$. 
+
+\begin{definition}
+    Let $L$ be a Lie algebra. The adjoint map is defined as:
+    \[
+    \mathrm{ad}: L \to \operatorname{End}_F(L)^{(-)}, a \mapsto \mathrm{ad}(a)
+    \]
+    where $\mathrm{ad}(a): L \to L : b\mapsto [a,b]$ is an inner derivation of $L$. We also call $\mathrm{ad}(a)$ an adjoint operator.
+ \end{definition}
+
+ Note that $\mathrm{ad}(a) \in \operatorname{Der}(L)$ check it by the following calculation:
+ \begin{align*}
+ \mathrm{ad}(a)([b,c])&=\mathrm{ad}(a)(bc-cb) \\
+ &=[a,bc]-[a,cb] \\
+ &=[a,b]c+b[a,c]-[a,c]b-c[a,b] \\
+ &=[\mathrm{ad}(a)(b),c]+[b,\mathrm{ad}(a)(c)]
+ \end{align*}
+
+"Inner" here comes from that $\mathrm{ad}(L) \triangleleft \operatorname{Der}(L)$ since $\forall \mathrm{d} \in \operatorname{Der}(L)$, we have $[\mathrm{d},\mathrm{ad}(a)]=  \mathrm{ad}(\mathrm{d}(a))$. Check it by the following calculation:
+\begin{align*}
+    [d,\operatorname{ad}(a)](x)
+    &= d\bigl([a,x]\bigr)-[a,d(x)] \\
+    &= [d(a),x]+[a,d(x)]-[a,d(x)] \\
+    &= [d(a),x] \\
+    &= \operatorname{ad}(d(a))(x).
+\end{align*}
+
+\begin{remark}[Exponentials of nilpotent inner derivations]
+    Let $L$ be a Lie algebra over a field $F$, and let
+    \[
+    d \in \operatorname{ad}(L) \subseteq \operatorname{Der}(L).
+    \]
+    Thus there exists $a \in L$ such that
+    \[
+    d=\operatorname{ad}(a), \qquad d(x)=[a,x] \quad \text{for all } x\in L.
+    \]
+    
+    Assume that $d$ is nilpotent, so that $d^N=0$ for some integer $N\ge 1$.
+    Then one defines the exponential of $d$ by
+    \[
+    \exp(d):=\sum_{n=0}^{\infty}\frac{d^n}{n!}.
+    \]
+    Since $d$ is nilpotent, this is actually a finite sum:
+    \[
+    \exp(d)=I+d+\frac{d^2}{2!}+\cdots+\frac{d^{N-1}}{(N-1)!}.
+    \]
+    Hence $\exp(d)$ is a well-defined linear endomorphism of $L$.
+    
+    Moreover, $\exp(d)$ is invertible, with inverse
+    \[
+    \exp(d)^{-1}=\exp(-d).
+    \]
+    Since $d$ is a derivation, $\exp(d)$ is in fact a Lie algebra automorphism:
+    \[
+    \exp(d)([x,y])=[\exp(d)(x),\exp(d)(y)]
+    \qquad \text{for all } x,y\in L.
+    \]
+    Therefore
+    \[
+    \exp(d)\in \operatorname{Aut}(L).
+    \]
+    
+    In particular, if $d=\operatorname{ad}(a)$, then
+    \[
+    \exp(\operatorname{ad}(a))(x)
+    =
+    x+[a,x]+\frac{1}{2!}[a,[a,x]]+\frac{1}{3!}[a,[a,[a,x]]]+\cdots.
+    \]
+    When $\operatorname{ad}(a)$ is nilpotent, this sum is finite. The automorphism
+    \[
+    \exp(\operatorname{ad}(a))
+    \]
+    is called an inner automorphism arising from the nilpotent inner derivation $\operatorname{ad}(a)$.
+    
+    A fundamental example is the matrix Lie algebra $L=\mathfrak{gl}_n(F)$. For $A\in \mathfrak{gl}_n(F)$, one has
+    \[
+    \operatorname{ad}(A)(X)=[A,X]=AX-XA,
+    \]
+    and
+    \[
+    \exp(\operatorname{ad}(A))(X)=e^A X e^{-A}.
+    \]
+    Thus, in the matrix case, the exponential of an inner derivation is exactly conjugation by the matrix exponential.
+\end{remark}
+
+\begin{proposition}
+    Let $L$ be a Lie algebra over a field $F$, and let $d\in \operatorname{Der}(L)$ be nilpotent. Then
+    \[
+    \exp(d):=\sum_{n=0}^{\infty}\frac{d^n}{n!}
+    \]
+    is a Lie algebra automorphism of $L$.
+    \end{proposition}
+    
+    \begin{proof}
+    Since $d$ is nilpotent, there exists $N\ge 1$ such that $d^N=0$. Hence
+    \[
+    \exp(d)=I+d+\frac{d^2}{2!}+\cdots+\frac{d^{N-1}}{(N-1)!}
+    \]
+    is a finite sum, so it is a well-defined linear endomorphism of $L$.
+    
+    Moreover,
+    \[
+    \exp(d)\exp(-d)=\exp(-d)\exp(d)=I,
+    \]
+    because $d$ commutes with itself and the usual exponential identity holds for polynomials in $d$.
+    Thus $\exp(d)$ is invertible, with inverse $\exp(-d)$.
+    
+    It remains to show that $\exp(d)$ preserves the Lie bracket. Define
+    \[
+    \phi_t:=\exp(td)=\sum_{n=0}^{\infty}\frac{t^n d^n}{n!},
+    \]
+    where the sum is again finite since $d$ is nilpotent. For $x,y\in L$, set
+    \[
+    F(t):=\phi_t([x,y]), \qquad G(t):=[\phi_t(x),\phi_t(y)].
+    \]
+    We show that $F(t)=G(t)$.
+    
+    First,
+    \[
+    F'(t)=d(\phi_t([x,y]))=\phi_t(d([x,y])).
+    \]
+    Since $d$ is a derivation,
+    \[
+    d([x,y])=[d(x),y]+[x,d(y)].
+    \]
+    Therefore
+    \[
+    F'(t)=\phi_t([d(x),y]+[x,d(y)])
+          =[\phi_t(d(x)),\phi_t(y)]+[\phi_t(x),\phi_t(d(y))].
+    \]
+    On the other hand,
+    \[
+    G'(t)=[\phi_t'(x),\phi_t(y)]+[\phi_t(x),\phi_t'(y)]
+         =[\phi_t(d(x)),\phi_t(y)]+[\phi_t(x),\phi_t(d(y))].
+    \]
+    Hence
+    \[
+    F'(t)=G'(t).
+    \]
+    Also,
+    \[
+    F(0)=[x,y]=G(0).
+    \]
+    It follows that $F(t)=G(t)$ for all $t$, and in particular at $t=1$ we get
+    \[
+    \exp(d)([x,y])=[\exp(d)(x),\exp(d)(y)].
+    \]
+    Thus $\exp(d)$ is a Lie algebra automorphism of $L$.
+\end{proof}
+
+\subsection{They come from brackets}
+
+\begin{definition}[Poisson bracket]
+    Let $A$ be a commutative associative algebra over a field $\Bbbk$.
+    A \emph{Poisson bracket} on $A$ is a bilinear map
+    \[
+    \{\cdot,\cdot\}:A\times A\to A
+    \]
+    such that for all $f,g,h\in A$ the following conditions hold:
+    \begin{enumerate}
+        \item \textbf{Skew-symmetry:}
+        \[
+        \{f,g\}=-\{g,f\}.
+        \]
+        \item \textbf{Jacobi identity:}
+        \[
+        \{f,\{g,h\}\}+\{g,\{h,f\}\}+\{h,\{f,g\}\}=0.
+        \]
+        \item \textbf{Leibniz rule:}
+        \[
+        \{f,gh\}=\{f,g\}h+g\{f,h\}.
+        \]
+    \end{enumerate}
+    In other words, $(A,\{\cdot,\cdot\})$ is a Lie algebra, and for each fixed
+    $f\in A$, the map
+    \[
+    \mathrm{ad}_f:A\to A,\qquad \mathrm{ad}_f(g)=\{f,g\},
+    \]
+    is a derivation of the algebra $A$.
+    An algebra $A$ equipped with such a bracket is called a \emph{Poisson algebra}.
+    \end{definition}
+    
+    \begin{remark}
+    The Leibniz rule in the second variable follows automatically from skew-symmetry:
+    \[
+    \{fg,h\}=f\{g,h\}+g\{f,h\}.
+    \]
+    Thus a Poisson bracket is precisely a Lie bracket compatible with the
+    commutative multiplication on $A$ by the derivation property.
+    \end{remark}
+    
+    \begin{example}[Canonical Poisson bracket on $\mathbb{R}^{2n}$]
+    Let
+    \[
+    A=C^\infty(\mathbb{R}^{2n}),
+    \qquad
+    (q_1,\dots,q_n,p_1,\dots,p_n)
+    \]
+    be the standard coordinates. Define
+    \[
+    \{f,g\}
+    =
+    \sum_{i=1}^n
+    \left(
+    \frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}
+    -
+    \frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}
+    \right).
+    \]
+    Then $\{\cdot,\cdot\}$ is a Poisson bracket on $A$.
+    In particular,
+    \[
+    \{q_i,q_j\}=0,\qquad
+    \{p_i,p_j\}=0,\qquad
+    \{q_i,p_j\}=\delta_{ij}.
+    \]
+    \end{example}
+    
+    \begin{definition}
+        Let $F$ be a field of characteristic $0$, and let $\mathcal{A}$ be an algebra of differentiable functions in one variable $x$.
+        For $f,g\in \mathcal{A}$, define
+        \[
+        [f,g]:=fg'-f'g,
+        \]
+        where $f'=\dfrac{df}{dx}$ and $g'=\dfrac{dg}{dx}$.
+        \end{definition}
+        
+        \begin{definition}
+        To each $f\in \mathcal{A}$, associate the vector field
+        \[
+        X_f:=f(x)\frac{d}{dx}.
+        \]
+        \end{definition}
+        
+        \begin{proposition}
+        For $f,g\in \mathcal{A}$, one has
+        \[
+        [X_f,X_g]=X_{[f,g]}.
+        \]
+        Equivalently,
+        \[
+        [X_f,X_g]=\left(fg'-gf'\right)\frac{d}{dx}.
+        \]
+        \end{proposition}
+        
+        \begin{proof}
+        For any test function $u$, we have
+        \[
+        X_f(u)=fu', \qquad X_g(u)=gu'.
+        \]
+        Thus
+        \[
+        X_f(X_g(u))=f(gu')'=fg'u'+fgu'',
+        \]
+        and similarly
+        \[
+        X_g(X_f(u))=g(fu')'=gf'u'+gfu''.
+        \]
+        Subtracting, we obtain
+        \[
+        [X_f,X_g](u)=X_f(X_g(u))-X_g(X_f(u))=(fg'-gf')u'.
+        \]
+        Therefore
+        \[
+        [X_f,X_g]=\left(fg'-gf'\right)\frac{d}{dx}=X_{[f,g]}.
+        \]
+        \end{proof}
+        
+        \begin{proposition}
+        The operation
+        \[
+        [f,g]=fg'-f'g
+        \]
+        is bilinear and skew-symmetric.
+        \end{proposition}
+        
+        \begin{proof}
+        Bilinearity follows immediately from the linearity of differentiation. Also,
+        \[
+        [g,f]=gf'-g'f=-(fg'-f'g)=-[f,g].
+        \]
+        Hence the bracket is skew-symmetric.
+        \end{proof}
+        
+        \begin{theorem}
+        The bracket
+        \[
+        [f,g]=fg'-f'g
+        \]
+        defines a Lie algebra structure on $\mathcal{A}$.
+        \end{theorem}
+        
+        \begin{proof}
+        By the previous proposition, it remains only to verify the Jacobi identity. This follows from the fact that the map
+        \[
+        f\longmapsto X_f=f\frac{d}{dx}
+        \]
+        identifies this bracket with the usual Lie bracket of vector fields on the line, and the latter always satisfies the Jacobi identity. Hence
+        \[
+        [f,[g,h]]+[g,[h,f]]+[h,[f,g]]=0
+        \]
+        for all $f,g,h\in \mathcal{A}$.
+ \end{proof}
+
+\subsection{They come from Lie groups}
+
+\begin{definition}
+    Let \(G\) be a Lie group with identity element \(e\). The \emph{Lie algebra} of \(G\), denoted by \(\operatorname{Lie}(G)\) or \(\mathfrak g\), is the tangent space
+    \[
+    \mathfrak g:=T_eG
+    \]
+    equipped with the bracket induced by left-invariant vector fields.
+    \end{definition}
+    
+    \begin{definition}
+    For each \(X\in T_eG\), the corresponding \emph{left-invariant vector field} \(\widetilde X\) on \(G\) is defined by
+    \[
+    \widetilde X_g:=(dL_g)_e(X),
+    \qquad g\in G,
+    \]
+    where \(L_g:G\to G\) is left translation, \(L_g(h)=gh\).
+    \end{definition}
+    
+    \begin{proposition}
+    The assignment \(X\mapsto \widetilde X\) gives a bijection between \(T_eG\) and the space of left-invariant vector fields on \(G\).
+    \end{proposition}
+    
+    \begin{definition}
+    For \(X,Y\in \mathfrak g=T_eG\), define
+    \[
+    [X,Y]:=[\widetilde X,\widetilde Y](e),
+    \]
+    where on the right-hand side \([\widetilde X,\widetilde Y]\) is the usual Lie bracket of vector fields on \(G\).
+    \end{definition}
+    
+    \begin{proposition}
+    The bracket defined above makes \(T_eG\) into a Lie algebra. In particular, it is bilinear, alternating, and satisfies the Jacobi identity.
+    \end{proposition}
+    
+    \begin{example}
+    If \(G=GL_n(F)\), where \(F=\mathbb R\) or \(\mathbb C\), then
+    \[
+    \operatorname{Lie}(G)=T_IGL_n(F)\cong M_n(F),
+    \]
+    and the Lie bracket is
+    \[
+    [X,Y]=XY-YX.
+    \]
+    Hence
+    \[
+    \operatorname{Lie}(GL_n(F))=\mathfrak{gl}_n(F).
+    \]
+    \end{example}
+    
+    \begin{example}
+    If \(G=SL_n(F)\), then
+    \[
+    \operatorname{Lie}(SL_n(F))=\mathfrak{sl}_n(F)
+    =\{X\in M_n(F)\mid \operatorname{tr}(X)=0\}.
+    \]
+    Indeed, differentiating the defining equation \(\det(g)=1\) at the identity gives the trace-zero condition.
+    \end{example}
+    
+    \begin{example}
+    If \(G=O_n(\mathbb R)\), then
+    \[
+    \operatorname{Lie}(O_n(\mathbb R))=\mathfrak{so}_n(\mathbb R)
+    =\{X\in M_n(\mathbb R)\mid X^T=-X\}.
+    \]
+    This follows by differentiating the relation \(g^Tg=I\) at the identity.
+    \end{example}
+
+\section{Basic concepts of Lie algebra}
+
+Let \(L\) be a Lie algebra over a field \(F\).
+
+\begin{definition}
+The \emph{derived series} of \(L\) is defined inductively by
+\[
+L^{(0)}=L, \qquad L^{(1)}=[L,L], \qquad L^{(i)}=[L^{(i-1)},L^{(i-1)}]\quad (i\ge 1).
+\]
+The Lie algebra \(L\) is called \emph{solvable} if
+\[
+L^{(n)}=0
+\]
+for some integer \(n\ge 0\).
+\end{definition}
+
+\begin{definition}
+The \emph{descending central series} of \(L\) is defined by
+\[
+L^1=L, \qquad L^2=[L,L], \qquad L^i=[L,L^{i-1}]\quad (i\ge 2).
+\]
+The Lie algebra \(L\) is called \emph{nilpotent} if
+\[
+L^n=0
+\]
+for some integer \(n\ge 1\).
+\end{definition}
+
+\begin{proposition}
+If \(L\) is nilpotent, then \(L\) is solvable.
+\end{proposition}
+
+\begin{proof}
+It is enough to show that
+\[
+L^{(i)}\subseteq L^{2^i}\qquad (i\ge 0).
+\]
+We argue by induction on \(i\). The case \(i=0\) is clear. If
+\[
+L^{(i)}\subseteq L^{2^i},
+\]
+then
+\[
+L^{(i+1)}
+=
+[L^{(i)},L^{(i)}]
+\subseteq
+[L^{2^i},L^{2^i}]
+\subseteq
+L^{2^{i+1}}.
+\]
+Hence the claim follows for all \(i\). If \(L^n=0\) for some \(n\), then for \(i\) sufficiently large one has \(2^i\ge n\), so
+\[
+L^{(i)}\subseteq L^{2^i}=0.
+\]
+Therefore \(L\) is solvable.
+\end{proof}
+
+\begin{definition}
+A \emph{solvable ideal} of \(L\) is an ideal which is solvable as a Lie algebra in its own right. Since the sum of two solvable ideals is again solvable, there exists a unique maximal solvable ideal of \(L\), called the \emph{radical} of \(L\), denoted by
+\[
+\operatorname{Rad}(L).
+\]
+The Lie algebra \(L\) is called \emph{semisimple} if
+\[
+\operatorname{Rad}(L)=0.
+\]
+\end{definition}
+
+\begin{remark}
+Thus the three notions fit into the chain
+\[
+\text{nilpotent} \;\Longrightarrow\; \text{solvable},
+\]
+while semisimplicity means that \(L\) has no nonzero solvable ideals. In particular, a semisimple Lie algebra cannot contain any nonzero abelian ideal.
+\end{remark}
+
+\begin{example}
+Any abelian Lie algebra is nilpotent, hence solvable. On the other hand, the Lie algebra of upper triangular matrices is solvable in general, but need not be nilpotent.
+\end{example}
+
+\begin{example}
+    Let
+    \[
+    L=
+    \left\{
+    \begin{pmatrix}
+    a & b\\
+    0 & 0
+    \end{pmatrix}
+    \,\middle|\,
+    a,b\in F
+    \right\}
+    \subseteq \mathfrak{gl}_2(F),
+    \]
+    Then \(L\) is solvable but not nilpotent.
+    
+    Indeed, if
+    \[
+    x=
+    \begin{pmatrix}
+    a & b\\
+    0 & 0
+    \end{pmatrix},
+    \qquad
+    y=
+    \begin{pmatrix}
+    c & d\\
+    0 & 0
+    \end{pmatrix},
+    \]
+    then
+    \[
+    [x,y]
+    =
+    \begin{pmatrix}
+    0 & ad-bc\\
+    0 & 0
+    \end{pmatrix}.
+    \]
+    Hence
+    \[
+    [L,L]
+    =
+    \left\{
+    \begin{pmatrix}
+    0 & t\\
+    0 & 0
+    \end{pmatrix}
+    \,\middle|\,
+    t\in F
+    \right\},
+    \qquad
+   [[L,L],[L,L]]=0.
+    \]
+    Thus the derived series terminates:
+    \[
+    L^{(1)}=[L,L],\qquad L^{(2)}=[L^{(1)},L^{(1)}]=0,
+    \]
+    so \(L\) is solvable.
+    
+    On the other hand, \(L\) is not nilpotent, since its descending central series does not reach \(0\). In fact,
+    \[
+    L^2=[L,L]
+    =
+    \left\{
+    \begin{pmatrix}
+    0 & t\\
+    0 & 0
+    \end{pmatrix}
+    \,\middle|\,
+    t\in F
+    \right\},
+    \]
+    and for any
+    \[
+    x=
+    \begin{pmatrix}
+    a & b\\
+    0 & 0
+    \end{pmatrix}\in L,\qquad
+    y=
+    \begin{pmatrix}
+    0 & t\\
+    0 & 0
+    \end{pmatrix}\in L^2,
+    \]
+    we have
+    \[
+    [x,y]
+    =
+    \begin{pmatrix}
+    0 & at\\
+    0 & 0
+    \end{pmatrix}\in L^2.
+    \]
+    Therefore
+    \[
+    L^3=[L,L^2]=L^2,
+    \]
+    and inductively
+    \[
+    L^n=L^2\neq 0\qquad (n\ge 2).
+    \]
+    So \(L\) is not nilpotent.
+    \end{example}
+
+\chapter{Lecture 2 Engel Theorem}
+
+\section{Engel Theorem the first type}
+
+\begin{definition}
+    Let \(L\) be a Lie algebra over a field \(F\). An \emph{enveloping algebra} of \(L\) is an associative \(F\)-algebra \(A\) together with a Lie algebra homomorphism
+    \[
+    \iota:L\to A^{-},
+    \]
+    where \(A^{-}\) denotes the Lie algebra obtained from \(A\) by equipping the underlying vector space of \(A\) with the bracket
+    \[
+    [x,y]=xy-yx,
+    \]
+    such that the associative algebra \(A\) is generated by \(\iota(L)\) (or just writting $A=<L>_{assoc}$ or simply $A=<L>$).
+    
+    If, in addition, the pair \((A,\iota)\) satisfies the following universal property: for every associative \(F\)-algebra \(B\) and every Lie algebra homomorphism
+    \[
+    \varphi:L\to B^{-},
+    \]
+    there exists a unique associative algebra homomorphism
+    \[
+    \widetilde{\varphi}:A\to B
+    \]
+    such that
+    \[
+    \varphi=\widetilde{\varphi}\circ \iota,
+    \]
+    then \(A\) is called the \emph{universal enveloping algebra} of \(L\).
+\end{definition}
 
 \begin{theorem} 
-Let $ A $ be a finite dimensional associative algebra, $ L\subseteq A^{(-)} $, $ A = <L> $. $ \exists n \ge 1 $, $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.       
+Let $ A $ be a finite dimensional enveloping algebra of $L$, i.e. $ L\subseteq A^{(-)} $, $ A = <L> $.If $ \exists n \ge 1 $ such that $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.       
 \end{theorem}
 
-We say that a subset $S \subseteq L$ is a Lie subset if $ \forall a,b \in S $, $ [a,b] \in S $.
+\section{Engel Theorem the second type}
 
-\begin{theorem} 
-Let $ A $ be a finite dimensional associative algebra, $ L\subseteq A^{(-)} $, $ A = <L> $. Let $ S $ be a Lie subset of $ L $. $ L = \mathrm{span}(S) $, $ \forall a \in S $, $ a^n=0 $.    
-\end{theorem}
+In fact we can prove a stronger version.
 
-Choose a maximal Lie subset $ S_1 \subset S $ such that the associative $ <S_1> $ is nilpotent. So $ \exists n $ such that $ S_1 \ldots S_1 =(0) $ (n times)   (existance?)
+\begin{definition}
+    A subset $S\subseteq L$ is called a \emph{Lie subset} if
+    \[
+    [a,b]\in S
+    \qquad
+    \text{for all } a,b\in S.
+    \]
+    Note that a Lie subset need not be a subspace, and hence need not be a Lie subalgebra.
+    \end{definition}
+    
+    \begin{theorem}
+    Let $A$ be a finite-dimensional associative algebra over $F$, and let
+    \[
+    L\subseteq A^{(-)}
+    \]
+    be a Lie subalgebra such that $A$ is generated by $L$ as an associative algebra. Suppose that
+    \[
+    L=\mathrm{span}(S)
+    \]
+    for some Lie subset $S\subseteq L$, and that every element of $S$ is nilpotent in $A$. Then $A$ is a nilpotent associative algebra.
+    \end{theorem}
 
-claim $ \mathrm{ad}(S_1) \ldots \mathrm{ad}(S_n)=(0) $.
+    \begin{remark}
+        In the finite-dimensional situation, the existence of a uniform exponent $n$ is automatic once every element of $S$ is nilpotent in $A$. Indeed, let
+        \[
+        m=\dim_F A,
+        \]
+        and let $a\in A$ be nilpotent. Consider the left multiplication operator
+        \[
+        L_a:A\to A,\qquad x\mapsto ax.
+        \]
+        Since $a$ is nilpotent, $L_a$ is a nilpotent linear transformation on the $m$-dimensional vector space $A$. Hence
+        \[
+        L_a^m=0.
+        \]
+        But
+        \[
+        L_a^m=L_{a^m},
+        \]
+        so $a^m=0$. Therefore every nilpotent element of $A$ has nilpotency index at most $\dim_F A$. In particular, if every element of $S$ is nilpotent in $A$, then one may take
+        \[
+        n=\dim_F A
+        \]
+        and obtain
+        \[
+        a^n=0
+        \qquad
+        \text{for all } a\in S.
+        \]
+        Thus, in the theorem above, the hypothesis that every element of $S$ is nilpotent in $A$ already implies the existence of a common exponent $n$.
+\end{remark}
 
-  
+\begin{theorem}[Zorn's Lemma]
+    Let $(P,\leq)$ be a partially ordered set. Assume that every chain in $P$ has an upper bound in $P$. Then $P$ contains a maximal element.
+    \end{theorem}
+    
+    \begin{proof}
+    We prove the result assuming the Well-Ordering Theorem.
+    
+    Suppose, for contradiction, that $P$ has no maximal element. Then for every $x\in P$ there exists some $y\in P$ such that
+    \[
+    x<y.
+    \]
+    By the Well-Ordering Theorem, we may choose a well-ordering $\preceq$ on $P$. For each $x\in P$, let $f(x)$ be the $\preceq$-least element of the set
+    \[
+    \{y\in P: x<y\}.
+    \]
+    Then
+    \[
+    x<f(x)\qquad \text{for all }x\in P.
+    \]
+    
+    We now define, by transfinite recursion, a family $(x_\alpha)$ indexed by ordinals. Suppose that for all $\beta<\alpha$ the elements $x_\beta$ have been defined and form a chain. By hypothesis, the chain
+    \[
+    C_\alpha:=\{x_\beta:\beta<\alpha\}
+    \]
+    has an upper bound $u_\alpha\in P$. Define
+    \[
+    x_\alpha:=f(u_\alpha).
+    \]
+    Since $u_\alpha$ is an upper bound of $C_\alpha$, for every $\beta<\alpha$ we have
+    \[
+    x_\beta\leq u_\alpha < x_\alpha.
+    \]
+    Hence $(x_\alpha)$ is a strictly increasing family:
+    \[
+    \beta<\alpha \implies x_\beta<x_\alpha.
+    \]
+    
+    Therefore the map
+    \[
+    \alpha\longmapsto x_\alpha
+    \]
+    is injective from the class of all ordinals into the set $P$. This is impossible, since there is no injection from the class of all ordinals into a set.
+    
+    This contradiction shows that $P$ must contain a maximal element.
+\end{proof}
+
+\begin{lemma}
+    Let
+    \[
+    \mathcal P
+    =
+    \left\{
+    T\subseteq L \;\middle|\;
+    T \text{ is a Lie subset and } a^n=0 \text{ for all } a\in T
+    \right\},
+    \]
+    partially ordered by inclusion. Then $\mathcal P$ has a maximal element.
+    \end{lemma}
+    
+    \begin{proof}
+    We apply Zorn's lemma. Let $\{T_i\}_{i\in I}$ be a chain in $\mathcal P$, and set
+    \[
+    T=\bigcup_{i\in I}T_i.
+    \]
+    We claim that $T\in\mathcal P$.
+    
+    First, $T$ is a Lie subset. Indeed, if $a,b\in T$, then $a\in T_i$ and $b\in T_j$ for some $i,j\in I$. Since $\{T_i\}_{i\in I}$ is a chain, one of $T_i,T_j$ is contained in the other; say $T_i\subseteq T_j$. Then $a,b\in T_j$, and since $T_j$ is a Lie subset,
+    \[
+    [a,b]\in T_j\subseteq T.
+    \]
+    
+    Second, if $a\in T$, then $a\in T_i$ for some $i\in I$, so $a^n=0$ because $T_i\in\mathcal P$.
+    
+    Thus $T\in\mathcal P$, and clearly $T$ is an upper bound of the chain. Therefore every chain in $\mathcal P$ has an upper bound. By Zorn's lemma, $\mathcal P$ has a maximal element.
+\end{proof}
 
 
 
