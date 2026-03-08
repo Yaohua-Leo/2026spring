@@ -213,20 +213,29 @@
 ]
 \textbf{\textcolor{TopicColor}{Main topic:}} Representation theory of quivers.
 
-\textbf{\textcolor{TopicColor}{Office hours:}} During Mon-Wed: 9:00-16:00, we can discuss for 2 hours of office hours.
+\textbf{\textcolor{TopicColor}{Office hours:}} Mon: 12:30-14:30.
 
 \textbf{\textcolor{TopicColor}{Main book:}} \textit{Ralf Schiffler, Quiver Representations}, Cambridge University Press.
 
 \textbf{\textcolor{TopicColor}{References:}}
 \begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
     \item \textit{Assem, Simons, Skowronski, Elements of the Representation Theory of Associative Algebras}, Cambridge University Press.
-    \item \textit{Coelho, modules, algebras and quivers}.
+    \item \textit{Ibrahim Assem, basic representation theory of algebras}.
     \item \textit{Michel Brion, Representations of quivers}.
     \item \textit{Henning Krause, Representations of quivers via reflection functor}.
     \item \textit{W.Crawley-Boevey, Lectures on representations of quivers}.
     \item \textit{W.Crawley-Boevey, More on representations of quivers}.
+    \item \textit{Alexander Kirillov Jr. - Quiver Representations and Quiver Varieties (2016, American Mathematical Society)}.
     \item Other Reference: \url{www.math.uni-bielefeld.de}
 \end{itemize}
+\textbf{\textcolor{TopicColor}{Grading:}}
+\begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
+    \item Midterm: 30\%
+    \item Presentation: 10\%
+    \item Homework: 20\%
+    \item Final: 40\%
+\end{itemize}
+Midterm will be on April 13th, Monday, 2026 (the 8th week). 
 \end{tcolorbox}
 
 \section{Introduction}
@@ -657,6 +666,8 @@ $ A:V\to V $, the matrix representation of $ A $ is similar to a Jordan normal f
 
 \chapter{Lecture 2}
 
+Recall the definition:
+
 \begin{definition}
 Let $Q=(Q_0,Q_1)$ be a quiver. A representation of $Q$ is a collection
 \[
@@ -678,19 +689,44 @@ Consider the $2$-Kronecker quiver
 and the representations
 \[
 M:\quad
-k \xrightarrow{\left(\begin{bmatrix}1\\0\end{bmatrix},\,\begin{bmatrix}0\\1\end{bmatrix}\right)} k^2
+\begin{tikzcd}
+    k \arrow[r, "\begin{bmatrix}1\\0\end{bmatrix}", shift left] \arrow[r, "\begin{bmatrix}0\\1\end{bmatrix}"', shift right] & k^2
+\end{tikzcd}
 \]
 and
 \[
 N:\quad
-k^2 \xrightarrow{\left(\begin{bmatrix}1&1\\0&1\end{bmatrix},\,\begin{bmatrix}1&1\\1&1\end{bmatrix}\right)} k^2.
+\begin{tikzcd}[ampersand replacement=\&]
+    k^2 \arrow[r, "{\begin{bmatrix}1 & 1\\0 & 1\end{bmatrix}}", shift left] \arrow[r, "{\begin{bmatrix}1 & 1\\1 & 1\end{bmatrix}}"', shift right] \& k^2
+\end{tikzcd}
 \]
+Denote $M=(V_i, \varphi_\alpha)_{i \in Q_0, \alpha \in Q_1}$ and $N=(U_i, \psi_\alpha)_{i \in Q_0, \alpha \in Q_1}$. Consider the morphism $f:M \to N$. $f=(f_i)_{i \in Q_0}$. $f_i:V_i \to U_i$ and for each $\alpha: i \to j$ in $Q$, the following diagram commutes:
+\[
+\begin{tikzcd}
+    V_i \arrow[r, "\varphi_\alpha"] \arrow[d, "f_i"'] & V_j \arrow[d, "f_j"] \\
+    U_i \arrow[r, "\psi_\alpha"'] & U_j
+\end{tikzcd}
+\]
+We use $\operatorname{Rep}(Q)$ to denote the category of representations of $Q$. For our example, we have
+\[
+f:M \to N: f=(f_1,f_2):
+\]
+
 Let $f=(f_1,f_2):M \to N$ be a morphism. Write
 \[
 f_1=\begin{bmatrix}a\\b\end{bmatrix},
 \qquad
 f_2=\begin{bmatrix}c&d\\e&f\end{bmatrix}.
 \]
+Then the following diagram commutes:
+\[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=6em, row sep=6em]
+        k \arrow[r, "{\begin{bmatrix}1\\0\end{bmatrix}}", shift left] \arrow[d, "f_1={\begin{bmatrix}a\\b\end{bmatrix}}"'] \arrow[r, "{\begin{bmatrix}0\\1\end{bmatrix}}"', shift right] \& k^2 \arrow[d, "f_2={\begin{bmatrix}c&d\\e&f\end{bmatrix}    }"] \\
+        k^2 \arrow[r, "{\begin{bmatrix}1 & 1\\0 & 1\end{bmatrix}}", shift left] \arrow[r, "{\begin{bmatrix}1 & 1\\1 & 1\end{bmatrix}}"', shift right]                                  \& k^2                                                      
+        \end{tikzcd}
+\]
+
+
 Commutativity along the two arrows gives
 \[
 f_2\begin{bmatrix}1\\0\end{bmatrix}
@@ -698,7 +734,7 @@ f_2\begin{bmatrix}1\\0\end{bmatrix}
 \begin{bmatrix}c\\e\end{bmatrix}
 =
 \begin{bmatrix}1&1\\0&1\end{bmatrix}
-\begin{bmatrix}a\\b\end{bmatrix}
+f_1
 =
 \begin{bmatrix}a+b\\b\end{bmatrix},
 \]
@@ -709,7 +745,7 @@ f_2\begin{bmatrix}0\\1\end{bmatrix}
 \begin{bmatrix}d\\f\end{bmatrix}
 =
 \begin{bmatrix}1&1\\1&1\end{bmatrix}
-\begin{bmatrix}a\\b\end{bmatrix}
+f_1
 =
 \begin{bmatrix}a+b\\a+b\end{bmatrix}.
 \]
@@ -732,7 +768,8 @@ f=
 This illustrates how morphisms in $\operatorname{Rep}(Q)$ are determined by commutative diagrams.
 \end{example}
 
-If $M=(V_i,\varphi_\alpha)$ and $N=(U_i,\psi_\alpha)$ are representations of $Q$, then their direct sum is
+\begin{definition}
+    If $M=(V_i,\varphi_\alpha)$ and $N=(U_i,\psi_\alpha)$ are representations of $Q$, then their direct sum is
 \[
 M \oplus N=
 \left(
@@ -744,6 +781,7 @@ V_i \oplus U_i,
 \right).
 \]
 Inductively, one may form finite direct sums $M_1 \oplus \cdots \oplus M_r$.
+\end{definition}
 
 \begin{definition}
 A representation $M$ is called indecomposable if it cannot be written as a direct sum of two non-zero representations of $Q$.
@@ -754,12 +792,117 @@ For quiver representations, indecomposable and irreducible are different notions
 \end{remark}
 
 \begin{example}
-For the Jordan quiver, a representation is a pair $(V,A)$ with $A:V \to V$. Two such representations are isomorphic if and only if the corresponding matrices are similar. Therefore the isomorphism classes are controlled by Jordan normal form, and the indecomposable representations correspond exactly to single Jordan blocks.
+    Consider the quiver
+    \[
+    \begin{tikzcd}[column sep=large]
+    1 \arrow[r] & 2 & 3 \arrow[l]
+    \end{tikzcd}
+    \]
+    
+    and the following representations:
+    \[
+    M:\quad
+    \begin{tikzcd}[column sep=large]
+    k \arrow[r, "1"] & k & 0 \arrow[l, "0"']
+    \end{tikzcd}
+    \]
+    
+    \[
+    N:\quad
+    \begin{tikzcd}[column sep=large]
+    k^2 \arrow[r, "{\begin{bmatrix}0\\1\end{bmatrix}}"] &
+    k^2 &
+    k \arrow[l, "{\begin{bmatrix}1\\1\end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    
+    Then
+    \[
+    M\oplus N:\quad
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+    k\oplus k^2 \arrow[r, "{\begin{bmatrix}
+    1 & 0 & 0\\
+    0 & 1 & 1\\
+    0 & 0 & 1\\
+    \end{bmatrix}}"] \&
+    k\oplus k^2 \&
+    0\oplus k \arrow[l, "{\begin{bmatrix}
+    0 & 0\\
+    0 & 1\\
+    0 & 1\\
+    \end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    
+    Indeed, identifying
+    \[
+    k\oplus k^2 \cong k^3,\qquad
+    k\oplus k^2 \cong k^3,\qquad
+    0\oplus k \cong k,
+    \]
+    we may rewrite this as
+    \[
+    \begin{tikzcd}[ampersand replacement=\&,column sep=large]
+    k^3 \arrow[r, "{\begin{bmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 1\\
+        0 & 0 & 1\\
+        \end{bmatrix}}"] \&
+    k^3 \&
+    k \arrow[l, "{\begin{bmatrix}
+    0\\
+    1\\
+    1
+    \end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    \end{example}
+
+\begin{example}
+Consider the Jordan quiver:
+\[
+\begin{tikzcd}
+\bullet \arrow[loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\]
+Let $A,B,C$ be three $n \times n$ matrices. Where $C$ denotes an isomorphism ($C$ is invertible). We have the following diagram:
+\[
+    \begin{tikzcd}
+        \overset{\bullet}{V} \arrow["A"', loop, distance=2em, in=125, out=55] \arrow[d, "C"'] \\
+        \overset{\bullet}{V} \arrow["B"', loop, distance=2em, in=305, out=235]               
+        \end{tikzcd}
+\ \ \ 
+\begin{tikzcd}
+    V \arrow[r, "A"] \arrow[d, "C"'] & V \arrow[d, "C"] \\
+    V \arrow[r, "B"']                & V               
+    \end{tikzcd}
+\]
+Which shows that $A$ and $B$ are similar: $A = C^{-1} B C$. Hence the isomorphism classes are controlled by Jordan normal form, and the indecomposable representations correspond exactly to single Jordan blocks.
 \end{example}
 
+To describe $\operatorname{Rep}Q$ we will need to describe all isomorphism classes of indecomposable representations.
+
 \begin{theorem}[Krull--Schmidt]
-Every finite-dimensional representation in $\operatorname{Rep}(Q)$ can be decomposed as a finite direct sum of indecomposable representations. Moreover, this decomposition is unique up to reordering and isomorphism of the summands.
+Any finite representation $M \in \operatorname{Rep}Q$ can be decomposed into finite number of indecomposable representations and its decomposition is unique up to order.
 \end{theorem}
+
+\section{Kernel and Cokernel}
+
+Recall in linear algebra, we have the following definitions:
+\begin{definition}
+    Let $f: V \to W$ be a linear map. The kernel of $f$ is the set of all vectors $v \in V$ such that $f(v) = 0$.
+\end{definition}
+\begin{definition}
+    Let $f: V \to W$ be a linear map. The image of $f$ is the set of all vectors $w \in W$ such that $f(v) = w$ for some $v \in V$.
+\end{definition}
+\begin{definition}
+    Let $f: V \to W$ be a linear map. The cokernel of $f$ is the quotient space $W / \operatorname{Im} f$.
+\end{definition}
+
+Let $f:M\to N$ ba a morphism from $M$ to $N$ where $M,N \in \operatorname{Rep}Q$. $M=(V_i, \varphi_\alpha)$ and $N=(U_i, \psi_\alpha)$. Define $\operatorname{ker}f \in \operatorname{Rep}Q$ as $(L_i, \chi_\alpha)$ where $L_i=\operatorname{ker}f_i$ and $\chi_\alpha=\varphi_\alpha|_{L_i}$. $\forall v_i \in L_i$, $\chi_\alpha(v_i)=\varphi_\alpha(v_i)$.
+
+We want to show that $\operatorname{ker}f$ is a representation in $\operatorname{Rep}Q$. i.e. $X_{\alpha}: L_i \to L_j$ for $\alpha: i \to j$ 
+
 
 
 
