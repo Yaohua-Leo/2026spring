@@ -1,0 +1,3204 @@
+\documentclass[11pt, a4paper]{report}
+% !TeX root = Lie Theory.tex
+%----------------------------------------------------------------------------------------
+%	PACKAGES (宏包管理)
+%----------------------------------------------------------------------------------------
+% 1. 编码与语言（中文支持）
+\usepackage[UTF8, scheme=plain]{ctex}
+% scheme=plain 保持定理/章节等名称为英文；若需全中文改为 scheme=chinese
+% 2. 页面布局与排版
+\usepackage{geometry}
+% 不设 textheight，由 a4 页高与上下边距自动算出，避免 v 方向过指定
+\geometry{
+    textwidth=6in, % 稍微加宽以便放入更好的box
+    top=1in,
+    bottom=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{float}
+\usepackage{enumitem} % 更好的列表控制
+\usepackage{tocloft}  % 加载目录控制宏包
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % 强制让 section 后面显示点号
+% 3. 数学支持
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{thmtools} % 定理环境增强
+\usepackage{extarrows}
+% 4. 图形与颜色
+\usepackage{graphicx}
+\usepackage[dvipsnames, svgnames]{xcolor} % 加载更多颜色名
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ytableau} % 杨表
+\usetikzlibrary{decorations.pathreplacing, calc, shadows}
+% 5. 漂亮的文本框
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+% 6. 参考文献
+%\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015]{biblatex}
+%\addbibresource{references.bib}
+% 7. 交互 (最后加载)
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+%----------------------------------------------------------------------------------------
+%	CUSTOM COLORS (自定义配色方案)
+%----------------------------------------------------------------------------------------
+% 定理色系 - 蓝色
+\definecolor{ThmColor}{RGB}{0, 71, 171}        % 深钴蓝
+\definecolor{ThmBg}{RGB}{240, 244, 255}        % 极浅蓝
+% 定义色系 - 绿色
+\definecolor{DefColor}{RGB}{0, 100, 0}         % 深绿
+\definecolor{DefBg}{RGB}{240, 255, 240}        % 蜜瓜绿
+% 引理/命题色系 - 橙色
+\definecolor{LemColor}{RGB}{204, 85, 0}        % 焦橙色
+\definecolor{LemBg}{RGB}{255, 248, 240}        % 极浅橙
+% 示例/注记色系 - 灰色/紫色
+\definecolor{ExColor}{RGB}{105, 105, 105}      % 暗灰
+\definecolor{ExBg}{RGB}{250, 250, 250}         % 极浅灰
+% 专题/话题色系 - 靛紫色
+\definecolor{TopicColor}{RGB}{75, 0, 130}      % 靛蓝色 (Indigo)
+\definecolor{TopicBg}{RGB}{248, 245, 255}      % 极浅紫
+%----------------------------------------------------------------------------------------
+%	THEOREM ENVIRONMENTS (环境美化核心)
+%----------------------------------------------------------------------------------------
+% 1. Theorem (蓝色风格)
+\declaretheorem[name=Theorem, numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{
+    enhanced jigsaw,
+    colframe=ThmColor,       % 边框颜色
+    colback=ThmBg,           % 背景颜色
+    coltitle=white,          
+    boxrule=0.5pt,           % 边框粗细
+    leftrule=2pt,            % 左边框加粗
+    sharp corners=downhill,  % 样式
+    breakable,               % 允许跨页
+    drop shadow=black!5!white % 轻微阴影
+}
+% Corollary 使用与 Theorem 相同的风格，但通常紧随其后
+\declaretheorem[name=Corollary, numberlike=theorem]{corollary}
+\tcolorboxenvironment{corollary}{
+    enhanced jigsaw,
+    colframe=ThmColor!80!white, 
+    colback=ThmBg,
+    boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
+    breakable
+}
+% 2. Definition (绿色风格)
+\declaretheorem[name=Definition, numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{
+    enhanced jigsaw,
+    colframe=DefColor,
+    colback=DefBg,
+    boxrule=0.5pt, leftrule=2pt,
+    sharp corners=downhill,
+    breakable,
+    drop shadow=black!5!white
+}
+% 3. Lemma & Proposition (橙色风格)
+\declaretheorem[name=Lemma, numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition, numberlike=theorem]{proposition}
+\tcolorboxenvironment{lemma}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+\tcolorboxenvironment{proposition}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+% 4. Example & Remark (简约风格)
+\declaretheorem[name=Example, numberlike=theorem]{example}
+\declaretheorem[name=Remark, numberlike=theorem]{remark}
+\declaretheorem[name=Exercise, numberlike=theorem]{exercise}
+\tcolorboxenvironment{example}{
+    enhanced jigsaw,
+    colframe=ExColor,
+    colback=ExBg,
+    leftrule=2pt, boxrule=0pt,
+    frame hidden, % 隐藏其他三边
+    breakable
+}
+% 5. Topic (靛紫色风格，带标题支持)
+\declaretheorem[name=Topic, numberlike=theorem]{topic}
+\tcolorboxenvironment{topic}{
+    enhanced jigsaw,
+    breakable,
+    colframe=TopicColor,        % 边框为靛紫色
+    colback=TopicBg,           % 背景为极浅紫
+    boxrule=0.5pt,             % 细边框
+    leftrule=2pt,              % 左侧加粗线
+    sharp corners=downhill,    % 与你其他环境一致的切角样式
+    drop shadow=black!5!white, % 轻微阴影
+    before skip=15pt,
+    after skip=15pt
+}
+%----------------------------------------------------------------------------------------
+%	MATH MACROS (保留你的常用定义)
+%----------------------------------------------------------------------------------------
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\der}{\mathrm{d}} 
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    \textsc{\Large Course Notes}\\[0.5cm]
+
+    \HRule{1.5pt} \\[0.5cm]
+    { \huge \bfseries Lie Theory }\\[0.4cm]
+    \HRule{1.5pt} \\[1.5cm]
+
+    \vspace{3cm}
+
+    % 人员信息区域：垂直排列并区分字号
+    \begin{spacing}{1.8}
+        {\Large \textbf{Instructor:}} \\
+        {\Large Prof. Efilm \textsc{Zelmanov}} \\[0.8cm]
+
+        {\normalsize \textit{Student:}} \\
+        {\normalsize Leo}
+    \end{spacing}
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%    CONTENT STRUCTURE TEMPLATE
+%----------------------------------------------------------------------------------------
+\chapter{Lecture 1 Where Lie algebras come from}
+
+\section{Introduction}
+
+Lie algebras were originally introduced by Sophus Lie in the 1870s to study the concept of continuous transformation groups. Lie's motivation was to develop a theory for differential equations analogous to Galois theory for algebraic equations. He discovered that the infinitesimal transformations of a continuous group form a linear space equipped with a bracket operation, now known as a Lie algebra. This linearization allows complex global geometric problems to be translated into algebraic problems, making them more tractable.
+
+Let $ F $ be a field (mostly $ \operatorname{char}F =0$, even $ F=\mathbb{C} $).
+
+\begin{definition}
+    A linear algebra $ A $ is a vector space over $ F $, with a binary bilinear operation:
+    \begin{itemize}
+        \item binary operation: $ A \times A \to A $, $ (a,b) \mapsto ab $.
+        \item bilinear: this operation is linear in each variable. In other word, $ \forall \alpha \in F $ and $ a,a',a'',b,b',b'' \in A $, we have:
+              \begin{align*}
+                  (\alpha a)b=a(\alpha b) = \alpha (ab) \\
+                  (a'+a'')b = a'b+a''b                  \\
+                  a(b'+b'')=ab'+ab''
+              \end{align*}
+    \end{itemize}
+    The algebra $ A $ is associative if $ \forall a,b,c \in A $, $ (ab)c=a(bc) $.
+\end{definition}
+
+\begin{example}
+    $ M_n(F) $, the algebra of $ n \times n $ matrices over $ F $.
+\end{example}
+
+\begin{example}
+    Let $ V $ be a vector space, $ \operatorname{End}_F (V) =\{ \text{linear transformations } \varphi: V\to V \}$ is an associative algebra with the composition operation$ (\phi \psi) (v)=\phi(\psi(v))$.
+
+    If $ \dim V < \infty $, when we fix a basis, then we fet a matrix representation of $ \varphi $ in our fix basis.
+\end{example}
+
+The most important thing everyone should know is Wedderburn's theorem.
+
+\begin{theorem}[Wedderburn-Artin]
+    Let $A$ be a semisimple Artinian ring (with 1). Then $A$ is a direct sum of matrix rings over division rings.
+
+    Specifically, if ${}_A A \simeq S_1^{n_1} \oplus \dots \oplus S_r^{n_r}$ where $S_1, \dots, S_r$ are non-isomorphic simple modules occurring with multiplicities $n_1, \dots, n_r$, then
+    \[
+        A \simeq M_{n_1}(D_1) \oplus \dots \oplus M_{n_r}(D_r) \quad
+    \]
+    where $D_i = \operatorname{End}_A(S_i)^{op}$. This is a ring isomorphism, and each $M_{n_i}(D_i)$ is a 2-sided ideal.
+\end{theorem}
+
+\begin{proof}
+    First, since $A$ is a semisimple ring, its left regular module ${}_A A$ can be decomposed into a direct sum of simple left $A$-modules:
+    \[
+        {}_A A \simeq S_1^{n_1} \oplus \dots \oplus S_r^{n_r} \quad
+    \]
+    where $S_1, \dots, S_r$ are pairwise non-isomorphic simple modules.
+
+    By Schur's lemma, the endomorphism ring of a simple module is a division ring, so $D_i = \operatorname{End}_A(S_i)^{op}$ is a division ring.
+
+    Next, we compute the endomorphism ring of the left regular module $\operatorname{End}_A({}_A A)$. On one hand, for any ring $A$ with 1, we have the ring isomorphism $\operatorname{End}_A({}_A A) \simeq A^{op}$. On the other hand, using our direct sum decomposition:
+    \[
+        \operatorname{End}_A({}_A A) \simeq \operatorname{End}_A(S_1^{n_1}) \oplus \dots \oplus \operatorname{End}_A(S_r^{n_r}) \quad
+    \]
+    This decomposition holds because $\operatorname{Hom}_A(S_i^{n_i}, S_j^{n_j}) = 0$ whenever $i \neq j$.
+
+    For each component in the direct sum, we can rewrite the endomorphism ring using matrices over $D_i$:
+    \[
+        \operatorname{End}_A(S_i^{n_i}) \simeq M_{n_i}(D_i)^{op} \simeq M_{n_i}(D_i^{op}) \quad
+    \]
+    Substituting this back into our equation for $A^{op}$, we obtain:
+    \[
+        A^{op} \simeq M_{n_1}(D_1^{op}) \oplus \dots \oplus M_{n_r}(D_r^{op})
+    \]
+
+    To recover the ring $A$, we take the opposite ring on both sides. Recall the property that $M_n(R)^{op} \simeq M_n(R^{op})$. Applying this to each block yields:
+    \[
+        A \simeq (A^{op})^{op} \simeq \left( \bigoplus_{i=1}^r M_{n_i}(D_i^{op}) \right)^{op} \simeq \bigoplus_{i=1}^r M_{n_i}(D_i)
+    \]
+    Thus, the isomorphism is established.
+\end{proof}
+
+\begin{remark}
+    If the base field $F$ is algebraically closed, every finite-dimensional
+    division algebra over $F$ is equal to $F$. Hence the theorem simplifies to
+    \[
+        A \cong \prod_{i=1}^{r} M_{n_i}(F).
+    \]
+\end{remark}
+
+\begin{example}
+    Let $G$ be a finite group and let $\mathbb{C}[G]$ be its group algebra.
+    By Maschke's theorem $\mathbb{C}[G]$ is semisimple. Therefore
+    \[
+        \mathbb{C}[G] \cong \prod_{i=1}^{r} M_{n_i}(\mathbb{C}),
+    \]
+    where $n_i$ are the dimensions of the irreducible complex representations
+    of $G$.
+\end{example}
+
+\begin{definition}
+    Suppose $ F $ is algebraically closed. An algebra $ A $ is simple if
+    \begin{enumerate}
+        \item $ \nexists \  I \triangleleft A $ and $ I \neq 0 $.
+        \item $ A\cdot  A \neq (0)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{corollary}
+    Any simple finite dimensional associative algebra is isomorphic to $ M_n(F) $ for some $ n $.
+\end{corollary}
+
+\begin{definition}[Jacobson Radical]
+    Let $A$ be an associative algebra with identity over a field $F$.
+    The \emph{Jacobson radical} of $A$, denoted by $\operatorname{Rad}(A)$
+    or $J(A)$, is defined as the intersection of all maximal left ideals of $A$:
+    \[
+        \operatorname{Rad}(A)
+        =
+        \bigcap_{M \text{ maximal left ideal of } A} M.
+    \]
+\end{definition}
+
+
+\begin{proposition}
+    Let $A$ be an associative algebra with identity. Then
+    \[
+        \operatorname{Rad}(A)
+        =
+        \bigcap_{S \text{ simple left } A\text{-module}}
+        \operatorname{Ann}_A(S),
+    \]
+    where
+    \[
+        \operatorname{Ann}_A(S)
+        =
+        \{a\in A \mid aS=0\}
+    \]
+    is the annihilator of $S$ in $A$.
+\end{proposition}
+
+
+\begin{proposition}[Equivalent Characterization]
+    Let $A$ be an associative algebra with identity.
+    Then an element $a\in A$ lies in $\operatorname{Rad}(A)$
+    if and only if for every $x\in A$ the element
+    \[
+        1-ax
+    \]
+    is invertible in $A$.
+\end{proposition}
+
+
+\begin{proposition}
+    The Jacobson radical $\operatorname{Rad}(A)$ is a two-sided ideal of $A$.
+\end{proposition}
+
+
+\begin{definition}[Semisimple Algebra]
+    An associative algebra $A$ is called \emph{semisimple} if
+    \[
+        \operatorname{Rad}(A)=0.
+    \]
+\end{definition}
+
+\section{Where do Lie algebras come from?}
+
+\begin{definition}
+    A Lie algebra is a vector space $ L $ over a field $ F $, with a binary operation $ [a,b] \in L $, such that
+    \begin{enumerate}
+        \item $ [a,b] $ is bilinear.
+        \item $ [a,b] = -[b,a] $.
+        \item $ [a,[b,c]] + [c,[a,b]] + [b,[c,a]] = 0 $, this is called Jacobi identity.
+    \end{enumerate}
+\end{definition}
+
+\subsection{They come from associative algebras}
+
+Let $ A $ be an associative algebra. $ \forall a,b \in A $, define $ [a,b]=ab-ba $. Check that $ (A,[ \ ,\  ]) $ is a Lie algebra:
+
+\begin{proof}
+    Bilinearity and skew-symmetry are clear. For Jacobi identity:
+    \begin{align*}
+        [a,[b,c]] & + [b,[c,a]] + [c,[a,b]]                                                 \\
+                  & = a(bc-cb) - (bc-cb)a + b(ca-ac) - (ca-ac)b + c(ab-ba) - (ab-ba)c       \\
+                  & = abc - acb - bca + cba + bca - bac - cab + acb + cab - cba - abc + bac \\
+                  & = 0.
+    \end{align*}
+\end{proof}
+
+We denote this new algebra $ (A,[ \ ,\  ]) $ by $ A^{(-)} $.
+
+Suppose that $ L \subseteq A $ and $ [L,L] \subseteq L $. Then $ L \le A^{(-)} $。
+
+\begin{example}
+    $ M_n(F)^{(-)}=\mathfrak{gl}(n) $. We call it the general linear Lie algebra.
+
+    $ [L,L]=\{ \sum_{i} [a_i,b_i] \} \trianglelefteq L $. Clearly $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] \neq \mathfrak{gl}(n) $ and for $ n \ge 2 $, $ [\mathfrak{gl}(n),\mathfrak{gl}(n)]\neq 0 $.
+\end{example}
+
+\begin{example}
+    Focus on $ [\mathfrak{gl}(n),\mathfrak{gl}(n)] $, all matrices are of trace 0. This is called the special linear Lie algebra, denoted by $ \mathfrak{sl}(n) $.
+\end{example}
+
+\begin{example}
+    If the base field changed, some properties of the Lie algebra may change. For example, if $\operatorname{char}F=2$, then $[a,b]=[b,a]$. The Lie bracket is no longer skew-symmetric but actually symmetric.
+
+    Consider $ [\mathfrak{gl}(n),\mathfrak{gl}(n)]=\mathfrak{sl}(n) $. If $\operatorname{char}F=0$ or $\operatorname{char}F \nmid n$, then $\mathfrak{sl}(n)$ is a simple Lie algebra. If $\operatorname{char}F\mid n$, then $\mathfrak{sl}(n)$ is not simple.
+\end{example}
+
+\begin{definition}
+    $ Z $ is the center of Lie algebra $ L $ if $ Z=\{ z \in L | [z,L]=0 \} $.
+\end{definition}
+
+\subsection{They come from involutions of central simple algebras}
+
+We can also find Lie algebras from the involution of a central simple algebra. Let $ A $ be central simple algebra and $ *: A \to A $ be a linear transformation. $ * $ is called a an involution if $ (a^*)^* =a $ and $ (ab)^*=b^*a^* $, $ \forall a,b \in A $.
+
+\begin{proposition}
+    Let $A$ be a central simple algebra over a field $F$ equipped with an involution
+    $* : A \to A$. Then the set
+    \[
+        L=\{x\in A \mid *(x)=-x\}
+    \]
+    forms a Lie algebra under the commutator bracket
+    \[
+        [x,y]=xy-yx .
+    \]
+\end{proposition}
+
+\begin{proof}
+    First observe that any associative algebra $A$ becomes a Lie algebra
+    with the commutator bracket
+    \[
+        [x,y]=xy-yx .
+    \]
+
+    Let
+    \[
+        L=\{x\in A\mid *(x)=-x\}.
+    \]
+    We show that $L$ is closed under the Lie bracket.
+
+    Take $x,y\in L$. Then
+    \[
+        *(x)=-x,\qquad *(y)=-y.
+    \]
+
+    Since $*$ is an involution, it satisfies
+    \[
+        *(xy)=*(y)*(x).
+    \]
+
+    Hence
+    \[
+        *([x,y])
+        =*(xy-yx)
+        =*(y)*(x)-*(x)*(y).
+    \]
+
+    Substituting $*(x)=-x$ and $*(y)=-y$, we obtain
+    \[
+        *([x,y])
+        =(-y)(-x)-(-x)(-y)
+        =yx-xy
+        =-[x,y].
+    \]
+
+    Thus $[x,y]\in L$. Therefore $L$ is closed under the commutator bracket.
+
+    Since the commutator bracket in any associative algebra satisfies
+    bilinearity, antisymmetry, and the Jacobi identity,
+    it follows that $L$ is a Lie algebra.
+\end{proof}
+
+This construction explains why many classical Lie algebras arise from
+central simple algebras with involution.  In particular, the classical
+Lie algebras of Cartan--Killing type can be obtained in this way.
+
+\begin{example}[Orthogonal involution]
+    Let
+    \[
+        A=M_n(F)
+    \]
+    and define the involution
+    \[
+        *(X)=X^{T}.
+    \]
+    Then
+    \[
+        L=\{X\in M_n(F)\mid X^T=-X\}.
+    \]
+    This is the Lie algebra of skew-symmetric matrices, which is the
+    orthogonal Lie algebra
+    \[
+        \mathfrak{so}_n(F).
+    \]
+\end{example}
+
+\begin{example}[Symplectic involution]
+    Let
+    \[
+        A=M_{2n}(F)
+    \]
+    and let
+    \[
+        J=
+        \begin{pmatrix}
+            0    & I_n \\
+            -I_n & 0
+        \end{pmatrix}.
+    \]
+    Define
+    \[
+        *(X)=J^{-1}X^{T}J.
+    \]
+    Then
+    \[
+        L=\{X\in M_{2n}(F)\mid *(X)=-X\}
+    \]
+    is the symplectic Lie algebra
+    \[
+        \mathfrak{sp}_{2n}(F).
+    \]
+\end{example}
+
+\begin{example}[Unitary involution]
+    Let $K/F$ be a quadratic field extension with Galois involution
+    $a\mapsto \overline{a}$.  Consider
+    \[
+        A=M_n(K)
+    \]
+    with involution
+    \[
+        *(X)=\overline{X}^{\,T}.
+    \]
+    Then
+    \[
+        L=\{X\in M_n(K)\mid *(X)=-X\}
+    \]
+    is the unitary Lie algebra
+    \[
+        \mathfrak{su}_n .
+    \]
+\end{example}
+
+Therefore classical Lie algebras arise from pairs $(A,*)$ where
+$A$ is a central simple algebra and $*$ is an involution.  This
+provides an algebraic framework for the Cartan--Killing classification
+of classical Lie algebras.
+
+\begin{example}
+    The Quaternion algebra is an associative algebra with the involution $ a \mapsto a^* $. It is 4 dimensional central simple algebra with standard basis $ 1,i,j,k $, where the relations are $ i^2 = j^2 = k^2  = -1, ij=k, jk=i, ki=j $ as the following graph:
+    \[
+        \begin{tikzcd}
+            i \arrow[r] & j \arrow[d]  \\
+            & k \arrow[lu]
+        \end{tikzcd}
+    \]
+    We use $ \mathbb{H} $ to denote the Quaternion algebra when we choose $ \mathbb{R} $ as the base field. i.e. $ \mathbb{H}=\{ a_0 1 + a_1 i + a_2 j + a_3 k | a_0,a_1,a_2,a_3 \in \mathbb{R} \} $. $ \forall x \in \mathbb{H} $ where $ x=a_0 1 + a_1 i + a_2 j + a_3 k $, $ * $ is defined as $ x^* = a_0 1 - a_1 i - a_2 j - a_3 k $ and $ x^{-1}= \frac{1}{a_0^2 + a_1^2 + a_2^2 + a_3^2} (a_0 1 - a_1 i - a_2 j - a_3 k) $. Hence $ \mathbb{H} $ is a division algebra.
+
+    If the base field is algebraically closed, $F =\overline{F}$. We can denote the Quaternion algebra by $ 2 \times 2 $ matrices
+    \[
+        \begin{pmatrix}
+            \alpha & \beta \\
+            \gamma & \xi   \\
+        \end{pmatrix}
+    \]
+    Where $ \alpha, \beta, \gamma, \xi \in F $. In this case it is no longer a division algebra ($a_0^2 + a_1^2 + a_2^2 + a_3^2$ may equal to 0), but just $ M_2(F) $. And in this case the involution $ * $ is defined as:
+    \[
+        \begin{pmatrix}
+            \alpha & \beta \\
+            \gamma & \xi   \\
+        \end{pmatrix}
+        \mapsto
+        \begin{pmatrix}
+            \xi     & -\beta \\
+            -\gamma & \alpha \\
+        \end{pmatrix}
+    \]
+    Which is the Symplectic involution.
+\end{example}
+
+\begin{example}
+    From what we discussed. For a $2n \times 2n$ matrix $ A =\begin{pmatrix} A_1 & A_2 \\ A_3 & A_4 \end{pmatrix}$ in which $ A_1, A_2, A_3, A_4 $ are $ n \times n $ matrices, the unitary involution is defined as:
+    \[
+        A^*=
+        \begin{pmatrix}
+            A_4^t  & -A_3^t \\
+            -A_2^t & A_1^t  \\
+        \end{pmatrix}
+    \]
+    And the unitary involution is defined as:
+    \[
+        A^*=\overline{A}^t
+    \]
+    When $n=1$ we have two different type, and we will get two different Lie algebras. But they are isomorphic.
+\end{example}
+
+\begin{proposition}
+    Let $F$ be a field of characteristic $\neq 2$, and let
+    \[
+        J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\in M_{2}(F).
+    \]
+    Define an involution $*$ on $M_{2}(F)$ by
+    \[
+        X^{*}=J^{-1}X^{t}J .
+    \]
+    Then the Lie algebra of $*$-skew elements,
+    \[
+        K(M_{2}(F),*)=\{X\in M_{2}(F)\mid X^{*}=-X\},
+    \]
+    is exactly $\mathfrak{sl}_{2}(F)$.
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        X=\begin{pmatrix}a&b\\ c&d\end{pmatrix}\in M_{2}(F).
+    \]
+    Since
+    \[
+        J^{-1}=-J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},
+    \]
+    we compute
+    \[
+        X^{*}
+        =J^{-1}X^{t}J
+        =\begin{pmatrix}0&-1\\1&0\end{pmatrix}
+        \begin{pmatrix}a&c\\ b&d\end{pmatrix}
+        \begin{pmatrix}0&1\\-1&0\end{pmatrix}
+        =\begin{pmatrix}d&-b\\-c&a\end{pmatrix}.
+    \]
+    Now the condition $X^{*}=-X$ becomes
+    \[
+        \begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+        =
+        \begin{pmatrix}-a&-b\\-c&-d\end{pmatrix}.
+    \]
+    Hence $d=-a$, while $b$ and $c$ are arbitrary. Therefore
+    \[
+        K(M_{2}(F),*)
+        =
+        \left\{
+        \begin{pmatrix}
+            a & b  \\
+            c & -a
+        \end{pmatrix}
+        \,\middle|\,
+        a,b,c\in F
+        \right\}.
+    \]
+    But this is precisely the set of all $2\times 2$ matrices of trace $0$, namely
+    \[
+        \mathfrak{sl}_{2}(F)
+        =
+        \left\{
+        \begin{pmatrix}
+            a & b  \\
+            c & -a
+        \end{pmatrix}
+        \,\middle|\,
+        a,b,c\in F
+        \right\}.
+    \]
+    Thus
+    \[
+        K(M_{2}(F),*)=\mathfrak{sl}_{2}(F).
+    \]
+    Since $K(M_{2}(F),*)$ is closed under the commutator bracket, it follows that the Lie algebra obtained from the symplectic involution on $M_{2}(F)$ is $\mathfrak{sl}_{2}(F)$.
+\end{proof}
+
+\begin{example}
+    Let $K/F$ be a quadratic field extension, and let $a \mapsto \overline{a}$ denote the nontrivial
+    $F$-automorphism of $K$. Consider the algebra $M_2(K)$ and define an involution $*$ by
+    \[
+        X^* = \overline{X}^{\,t}.
+    \]
+    Then $*$ is a unitary involution on $M_2(K)$.
+
+    The Lie algebra of $*$-skew elements is
+    \[
+        K(M_2(K),*)=\{X\in M_2(K)\mid X^*=-X\}.
+    \]
+    If
+    \[
+        X=\begin{pmatrix} a & b \\ c & d \end{pmatrix},
+    \]
+    then
+    \[
+        X^*=\overline{X}^{\,t}
+        =
+        \begin{pmatrix}
+            \overline{a} & \overline{c} \\
+            \overline{b} & \overline{d}
+        \end{pmatrix}.
+    \]
+    Thus the condition $X^*=-X$ is equivalent to
+    \[
+        \overline{a}=-a,\qquad \overline{d}=-d,\qquad \overline{c}=-b.
+    \]
+    Hence every element of $K(M_2(K),*)$ has the form
+    \[
+        X=
+        \begin{pmatrix}
+            a             & b \\
+            -\overline{b} & d
+        \end{pmatrix},
+        \qquad \text{with } \overline{a}=-a,\ \overline{d}=-d.
+    \]
+    This is the unitary Lie algebra associated with the standard hermitian form.
+
+    Its derived Lie algebra consists of those elements with trace $0$, namely
+    \[
+        \mathfrak{su}_2(K/F)
+        =
+        \left\{
+        \begin{pmatrix}
+            a             & b  \\
+            -\overline{b} & -a
+        \end{pmatrix}
+        \,\middle|\,
+        a,b\in K,\ \overline{a}=-a
+        \right\}.
+    \]
+    After extending scalars to a splitting field (for instance to an algebraic closure of $F$),
+    this Lie algebra becomes isomorphic to $\mathfrak{sl}_2$. Therefore the Lie algebra arising
+    from a unitary involution in the $2\times 2$ case is of type $A_1$.
+\end{example}
+
+\begin{remark}
+    Why does this Lie algebra become $\mathfrak{sl}_2$? The reason is that unitary Lie algebras are
+    forms of special linear Lie algebras. In the present $2\times 2$ case, the corresponding type is
+    $A_1$. Over a field where the quadratic extension splits, the involution becomes equivalent to the
+    ordinary transpose situation, and the resulting special unitary Lie algebra becomes the split simple
+    Lie algebra of type $A_1$, namely
+    \[
+        \mathfrak{sl}_2.
+    \]
+    Thus, although over the ground field one naturally writes the Lie algebra as $\mathfrak{su}_2$,
+    its split form is precisely $\mathfrak{sl}_2$.
+\end{remark}
+
+\begin{example}[The unitary involution on $M_{2}(\mathbb{C})$ and the Lie algebra $\mathfrak{su}_{2}$]
+    Let $F=\mathbb{R}$ and $K=\mathbb{C}$, and let $\overline{\phantom{x}}$ denote complex conjugation.
+    Consider the algebra $M_{2}(\mathbb{C})$ equipped with the involution
+    \[
+        X^{*}=\overline{X}^{\,t}.
+    \]
+    This is the standard unitary involution on $M_{2}(\mathbb{C})$ relative to the extension
+    $\mathbb{C}/\mathbb{R}$.
+
+    We first determine the Lie algebra of $*$-skew elements:
+    \[
+        K(M_{2}(\mathbb{C}),*)=\{X\in M_{2}(\mathbb{C})\mid X^{*}=-X\}.
+    \]
+    Let
+    \[
+        X=\begin{pmatrix}a&b\\ c&d\end{pmatrix}\in M_{2}(\mathbb{C}).
+    \]
+    Then
+    \[
+        X^{*}
+        =
+        \overline{X}^{\,t}
+        =
+        \begin{pmatrix}
+            \overline{a} & \overline{c} \\
+            \overline{b} & \overline{d}
+        \end{pmatrix}.
+    \]
+    Thus the condition $X^{*}=-X$ is equivalent to
+    \[
+        \overline{a}=-a,\qquad \overline{d}=-d,\qquad \overline{c}=-b.
+    \]
+    Hence $a$ and $d$ are purely imaginary, and $c=-\overline{b}$. Therefore
+    \[
+        K(M_{2}(\mathbb{C}),*)
+        =
+        \left\{
+        \begin{pmatrix}
+            a             & b \\
+            -\overline{b} & d
+        \end{pmatrix}
+        \,\middle|\,
+        a,d\in i\mathbb{R},\ b\in\mathbb{C}
+        \right\}.
+    \]
+    This is the unitary Lie algebra $\mathfrak{u}_{2}$.
+
+    Its derived Lie algebra is the trace-zero part, namely
+    \[
+        \mathfrak{su}_{2}
+        =
+        \left\{
+        \begin{pmatrix}
+            a             & b  \\
+            -\overline{b} & -a
+        \end{pmatrix}
+        \,\middle|\,
+        a\in i\mathbb{R},\ b\in\mathbb{C}
+        \right\}.
+    \]
+    Indeed, $\operatorname{tr}([X,Y])=0$ for all $X,Y\in M_{2}(\mathbb{C})$, so every commutator in
+    $\mathfrak{u}_{2}$ has trace $0$. Conversely, in this $2\times2$ case, the trace-zero subspace is
+    generated by commutators, and hence it is exactly the derived Lie algebra.
+
+    To see that $\mathfrak{su}_{2}$ is $3$-dimensional over $\mathbb{R}$, write
+    \[
+        a=it,\qquad b=u+iv,
+        \qquad t,u,v\in\mathbb{R}.
+    \]
+    Then every element of $\mathfrak{su}_{2}$ has the form
+    \[
+        \begin{pmatrix}
+            it    & u+iv \\
+            -u+iv & -it
+        \end{pmatrix},
+        \qquad t,u,v\in\mathbb{R}.
+    \]
+    Therefore
+    \[
+        \dim_{\mathbb{R}}\mathfrak{su}_{2}=3.
+    \]
+    A convenient real basis is
+    \[
+        H=
+        \begin{pmatrix}
+            i & 0  \\
+            0 & -i
+        \end{pmatrix},
+        \qquad
+        X=
+        \begin{pmatrix}
+            0  & 1 \\
+            -1 & 0
+        \end{pmatrix},
+        \qquad
+        Y=
+        \begin{pmatrix}
+            0 & i \\
+            i & 0
+        \end{pmatrix}.
+    \]
+    One checks directly that
+    \[
+        [H,X]=2Y,\qquad [H,Y]=-2X,\qquad [X,Y]=2H,
+    \]
+    so $\mathfrak{su}_{2}$ is a $3$-dimensional real Lie algebra.
+
+    Now we explain why this Lie algebra becomes $\mathfrak{sl}_{2}(\mathbb{C})$ after extending scalars
+    from $\mathbb{R}$ to $\mathbb{C}$. Consider the complexification
+    \[
+        \mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}.
+    \]
+    Since $H,X,Y$ form a real basis of $\mathfrak{su}_{2}$, they also form a complex basis of
+    $\mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}$. Define
+    \[
+        h=-iH=
+        \begin{pmatrix}
+            1 & 0  \\
+            0 & -1
+        \end{pmatrix},
+        \
+        e=\frac{1}{2}(X-iY)=
+        \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix},
+        \
+        f=\frac{1}{2}(-X-iY)=
+        \begin{pmatrix}
+            0  & 0 \\
+            -1 & 0
+        \end{pmatrix}.
+    \]
+    These elements lie in $\mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}$ and satisfy
+    \[
+        [h,e]=2e,\qquad [h,f]=-2f,\qquad [e,f]=h.
+    \]
+    Thus they form a standard $\mathfrak{sl}_{2}$-triple, and therefore
+    \[
+        \mathfrak{su}_{2}\otimes_{\mathbb{R}}\mathbb{C}\cong \mathfrak{sl}_{2}(\mathbb{C}).
+    \]
+
+    In other words, $\mathfrak{su}_{2}$ is a real form of $\mathfrak{sl}_{2}(\mathbb{C})$. Hence the Lie
+    algebra arising from the unitary involution on $M_{2}(\mathbb{C})$ is of type $A_{1}$.
+\end{example}
+
+\begin{remark}
+    This explains why, in the $2\times 2$ case, the Lie algebra arising from a symplectic involution is isomorphic to the one of type $A_{1}$. Equivalently, in this lowest-rank case one has the accidental isomorphism
+    \[
+        C_{1}\cong A_{1}.
+    \]
+\end{remark}
+
+\subsection{They come from the derivation of any algebra}
+
+Let $A$ be any algebra.
+
+\begin{definition}
+    A derivation of $A$ is a linear map $\mathrm{d}: A \to A$ such that $\mathrm{d}(ab)=\mathrm{d}(a)b+a\mathrm{d}(b)$ for all $a,b \in A$.
+\end{definition}
+
+\begin{example}
+    Let $A=F[t_1,\ldots ,t_n]$ be the polynomial algebra. We have the formal derivative $ \partial $ where $\partial(t_i^n)=nt_i^{n-1}$ and $\partial(fg)=f\partial(g)+\partial(f)g$.
+
+    Let $\mathrm{d}=\sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial}{\partial t_i} $, this is a derivation of $A$.
+    \[
+        \mathrm{d}(f)=\sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial f}{\partial t_i}
+    \]
+    If $\mathrm{d}_1,\mathrm{d}_2$ are derivations of $A$, then $[\mathrm{d}_1,\mathrm{d}_2]$ is again a derivation of $A$. We can check it by the following calculation:
+    \begin{align*}
+        [\mathrm{d}_1,\mathrm{d}_2](ab) & =\mathrm{d}_1(\mathrm{d}_2(ab))-\mathrm{d}_2(\mathrm{d}_1(ab))                                                               \\
+                                        & =\mathrm{d}_1(\mathrm{d}_2(a)b+a\mathrm{d}_2(b))-\mathrm{d}_2(\mathrm{d}_1(a)b+a\mathrm{d}_1(b))                             \\
+                                        & =\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_1(a\mathrm{d}_2(b))+\mathrm{d}_2(\mathrm{d}_1(a))b+\mathrm{d}_2(a\mathrm{d}_1(b)) \\
+                                        & =\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_2(\mathrm{d}_1(a))b+\mathrm{d}_1(a\mathrm{d}_2(b))+\mathrm{d}_2(a\mathrm{d}_1(b)) \\
+                                        & =\mathrm{d}_1(\mathrm{d}_2(a))b+\mathrm{d}_2(\mathrm{d}_1(a))b+a[\mathrm{d}_1,\mathrm{d}_2](b)                               \\
+                                        & =[\mathrm{d}_1,\mathrm{d}_2](a)b+a[\mathrm{d}_1,\mathrm{d}_2](b)                                                             \\
+                                        & =[\mathrm{d}_1,\mathrm{d}_2](ab)
+    \end{align*}
+    Therefore $[\mathrm{d}_1,\mathrm{d}_2]$ is a derivation of $A$.
+\end{example}
+
+The above example means that:
+\[
+    \operatorname{Der}(A)=\{\ \mathrm{d}: A \to A \mid \mathrm{d} \text{ is a derivation} \} < \operatorname{End}_F(A)^{(-)}
+\]
+In particular, when $A=F[t_1,\ldots ,t_n]$, we have:
+\[
+    \operatorname{Der}(A)=\{\ \sum_{i=1}^n f_i(t_1,\ldots ,t_n) \frac{\partial}{\partial t_i} \mid f_i(t_1,\ldots ,t_n) \in A \} < \operatorname{End}_F(A)^{(-)}
+\]
+We denote this algebra by $W(n)$. It is called the $n$-th Witt algebra. It is a simple, infinite dimensional Lie algebra (when $\operatorname{char}F=0$).
+
+Thus every element of $W(n)$ has the form
+\[
+    D=\sum_{i=1}^n f_i\,\partial_i,
+    \qquad f_i\in A.
+\]
+
+\begin{definition}
+    The divergence map is defined by
+    \[
+        \operatorname{div}:W(n)\to A,
+        \qquad
+        \operatorname{div}\!\left(\sum_{i=1}^n f_i\partial_i\right)
+        =\sum_{i=1}^n \partial_i(f_i).
+    \]
+    Its kernel is the \emph{special} Lie algebra
+    \[
+        S(n):=\ker(\operatorname{div})
+        =\left\{
+        \sum_{i=1}^n f_i\partial_i\in W(n)
+        \;\middle|\;
+        \sum_{i=1}^n \partial_i(f_i)=0
+        \right\}.
+    \]
+    Equivalently, $S(n)$ is the Lie algebra of polynomial vector fields preserving
+    the standard volume form
+    \[
+        \omega=dx_1\wedge\cdots\wedge dx_n.
+    \]
+\end{definition}
+
+
+A basic family of elements of $S(n)$ is given by
+\[
+    D_{ij}(f):=\partial_j(f)\partial_i-\partial_i(f)\partial_j,
+    \qquad
+    1\le i<j\le n,\quad f\in A,
+\]
+since
+\[
+    \operatorname{div}(D_{ij}(f))
+    =
+    \partial_i\partial_j(f)-\partial_j\partial_i(f)=0.
+\]
+One can check
+\[
+    S(n)=< D_{ij}(f) \mid 1\le i<j\le n, f\in A >_{Lie}
+\]
+These elements generate $S(n)$ as a Lie algebra.
+
+\begin{definition}
+    The grading of $W(n)$ is defined by
+    Give $A$ its standard grading by declaring $\deg x_i=1$. Then $W(n)$ becomes a
+    $\mathbb Z$-graded Lie algebra with
+    \[
+        \deg(x^a\partial_i)=|a|-1,
+        \qquad
+        |a|:=a_1+\cdots+a_n,
+    \]
+    so that
+    \[
+        W(n)=\bigoplus_{k\ge -1} W(n)_k.
+    \]
+
+    and
+    \[
+        W(n)_0
+        =
+        \operatorname{span}_F\{x_j\partial_i\mid 1\le i,j\le n\}
+        \cong \mathfrak{gl}_n(F).
+    \]
+\end{definition}
+
+
+Since the divergence map is homogeneous of degree $0$, the subalgebra $S(n)$ is
+graded:
+\[
+    S(n)=\bigoplus_{k\ge -1} S(n)_k,
+    \qquad
+    S(n)_k=S(n)\cap W(n)_k.
+\]
+Moreover,
+\[
+    S(n)_{-1}=W(n)_{-1},
+\]
+and
+\[
+    S(n)_0
+    =
+    \left\{
+    \sum_{i,j} a_{ij}x_j\partial_i
+    \;\middle|\;
+    \sum_i a_{ii}=0
+    \right\}
+    \cong \mathfrak{sl}_n(F),
+\]
+because
+\[
+    \operatorname{div}\!\left(\sum_{i,j} a_{ij}x_j\partial_i\right)
+    =
+    \sum_i a_{ii}.
+\]
+
+In characteristic $0$, the special algebra is perfect:
+\[
+    [S(n),S(n)]=S(n).
+\]
+Hence
+\[
+    S(n)^{(1)}=S(n).
+\]
+For $n\ge 2$, the Lie algebra $S(n)$ is simple. Therefore, in characteristic
+$0$ one has
+\[
+    W(n)\supset S(n)=S(n)^{(1)},
+\]
+where both algebras are infinite-dimensional, $W(n)$ is the full Lie algebra of
+polynomial vector fields, and $S(n)$ is its simple divergence-zero subalgebra.
+
+\begin{remark}
+    In characteristic $0$, the chain $W(n)\supset S(n)\supset S(n)^{(1)}$ is thus
+    less informative than in positive characteristic, since the last inclusion is an
+    equality.
+\end{remark}
+
+Let $A$ be an associative algebra. Fix an element $a \in A$, we define : $\mathrm{ad}(a): A \to A : b\mapsto [a,b]$. This is a derivation of $A$.
+
+\begin{definition}
+    Let $L$ be a Lie algebra. The adjoint map is defined as:
+    \[
+        \mathrm{ad}: L \to \operatorname{End}_F(L)^{(-)}, a \mapsto \mathrm{ad}(a)
+    \]
+    where $\mathrm{ad}(a): L \to L : b\mapsto [a,b]$ is an inner derivation of $L$. We also call $\mathrm{ad}(a)$ an adjoint operator.
+\end{definition}
+
+Note that $\mathrm{ad}(a) \in \operatorname{Der}(L)$ check it by the following calculation:
+\begin{align*}
+    \mathrm{ad}(a)([b,c]) & =\mathrm{ad}(a)(bc-cb)                       \\
+                          & =[a,bc]-[a,cb]                               \\
+                          & =[a,b]c+b[a,c]-[a,c]b-c[a,b]                 \\
+                          & =[\mathrm{ad}(a)(b),c]+[b,\mathrm{ad}(a)(c)]
+\end{align*}
+
+"Inner" here comes from that $\mathrm{ad}(L) \triangleleft \operatorname{Der}(L)$ since $\forall \mathrm{d} \in \operatorname{Der}(L)$, we have $[\mathrm{d},\mathrm{ad}(a)]=  \mathrm{ad}(\mathrm{d}(a))$. Check it by the following calculation:
+\begin{align*}
+    [d,\operatorname{ad}(a)](x)
+     & = d\bigl([a,x]\bigr)-[a,d(x)] \\
+     & = [d(a),x]+[a,d(x)]-[a,d(x)]  \\
+     & = [d(a),x]                    \\
+     & = \operatorname{ad}(d(a))(x).
+\end{align*}
+
+\begin{remark}[Exponentials of nilpotent inner derivations]
+    Let $L$ be a Lie algebra over a field $F$, and let
+    \[
+        d \in \operatorname{ad}(L) \subseteq \operatorname{Der}(L).
+    \]
+    Thus there exists $a \in L$ such that
+    \[
+        d=\operatorname{ad}(a), \qquad d(x)=[a,x] \quad \text{for all } x\in L.
+    \]
+
+    Assume that $d$ is nilpotent, so that $d^N=0$ for some integer $N\ge 1$.
+    Then one defines the exponential of $d$ by
+    \[
+        \exp(d):=\sum_{n=0}^{\infty}\frac{d^n}{n!}.
+    \]
+    Since $d$ is nilpotent, this is actually a finite sum:
+    \[
+        \exp(d)=I+d+\frac{d^2}{2!}+\cdots+\frac{d^{N-1}}{(N-1)!}.
+    \]
+    Hence $\exp(d)$ is a well-defined linear endomorphism of $L$.
+
+    Moreover, $\exp(d)$ is invertible, with inverse
+    \[
+        \exp(d)^{-1}=\exp(-d).
+    \]
+    Since $d$ is a derivation, $\exp(d)$ is in fact a Lie algebra automorphism:
+    \[
+        \exp(d)([x,y])=[\exp(d)(x),\exp(d)(y)]
+        \qquad \text{for all } x,y\in L.
+    \]
+    Therefore
+    \[
+        \exp(d)\in \operatorname{Aut}(L).
+    \]
+
+    In particular, if $d=\operatorname{ad}(a)$, then
+    \[
+        \exp(\operatorname{ad}(a))(x)
+        =
+        x+[a,x]+\frac{1}{2!}[a,[a,x]]+\frac{1}{3!}[a,[a,[a,x]]]+\cdots.
+    \]
+    When $\operatorname{ad}(a)$ is nilpotent, this sum is finite. The automorphism
+    \[
+        \exp(\operatorname{ad}(a))
+    \]
+    is called an inner automorphism arising from the nilpotent inner derivation $\operatorname{ad}(a)$.
+
+    A fundamental example is the matrix Lie algebra $L=\mathfrak{gl}_n(F)$. For $A\in \mathfrak{gl}_n(F)$, one has
+    \[
+        \operatorname{ad}(A)(X)=[A,X]=AX-XA,
+    \]
+    and
+    \[
+        \exp(\operatorname{ad}(A))(X)=e^A X e^{-A}.
+    \]
+    Thus, in the matrix case, the exponential of an inner derivation is exactly conjugation by the matrix exponential.
+\end{remark}
+
+\begin{proposition}
+    Let $L$ be a Lie algebra over a field $F$, and let $d\in \operatorname{Der}(L)$ be nilpotent. Then
+    \[
+        \exp(d):=\sum_{n=0}^{\infty}\frac{d^n}{n!}
+    \]
+    is a Lie algebra automorphism of $L$.
+\end{proposition}
+
+\begin{proof}
+    Since $d$ is nilpotent, there exists $N\ge 1$ such that $d^N=0$. Hence
+    \[
+        \exp(d)=I+d+\frac{d^2}{2!}+\cdots+\frac{d^{N-1}}{(N-1)!}
+    \]
+    is a finite sum, so it is a well-defined linear endomorphism of $L$.
+
+    Moreover,
+    \[
+        \exp(d)\exp(-d)=\exp(-d)\exp(d)=I,
+    \]
+    because $d$ commutes with itself and the usual exponential identity holds for polynomials in $d$.
+    Thus $\exp(d)$ is invertible, with inverse $\exp(-d)$.
+
+    It remains to show that $\exp(d)$ preserves the Lie bracket. Define
+    \[
+        \phi_t:=\exp(td)=\sum_{n=0}^{\infty}\frac{t^n d^n}{n!},
+    \]
+    where the sum is again finite since $d$ is nilpotent. For $x,y\in L$, set
+    \[
+        F(t):=\phi_t([x,y]), \qquad G(t):=[\phi_t(x),\phi_t(y)].
+    \]
+    We show that $F(t)=G(t)$.
+
+    First,
+    \[
+        F'(t)=d(\phi_t([x,y]))=\phi_t(d([x,y])).
+    \]
+    Since $d$ is a derivation,
+    \[
+        d([x,y])=[d(x),y]+[x,d(y)].
+    \]
+    Therefore
+    \[
+        F'(t)=\phi_t([d(x),y]+[x,d(y)])
+        =[\phi_t(d(x)),\phi_t(y)]+[\phi_t(x),\phi_t(d(y))].
+    \]
+    On the other hand,
+    \[
+        G'(t)=[\phi_t'(x),\phi_t(y)]+[\phi_t(x),\phi_t'(y)]
+        =[\phi_t(d(x)),\phi_t(y)]+[\phi_t(x),\phi_t(d(y))].
+    \]
+    Hence
+    \[
+        F'(t)=G'(t).
+    \]
+    Also,
+    \[
+        F(0)=[x,y]=G(0).
+    \]
+    It follows that $F(t)=G(t)$ for all $t$, and in particular at $t=1$ we get
+    \[
+        \exp(d)([x,y])=[\exp(d)(x),\exp(d)(y)].
+    \]
+    Thus $\exp(d)$ is a Lie algebra automorphism of $L$.
+\end{proof}
+
+\subsection{They come from brackets}
+
+\begin{definition}[Poisson bracket]
+    Let $A$ be a commutative associative algebra over a field $\Bbbk$.
+    A \emph{Poisson bracket} on $A$ is a bilinear map
+    \[
+        \{\cdot,\cdot\}:A\times A\to A
+    \]
+    such that for all $f,g,h\in A$ the following conditions hold:
+    \begin{enumerate}
+        \item \textbf{Skew-symmetry:}
+              \[
+                  \{f,g\}=-\{g,f\}.
+              \]
+        \item \textbf{Jacobi identity:}
+              \[
+                  \{f,\{g,h\}\}+\{g,\{h,f\}\}+\{h,\{f,g\}\}=0.
+              \]
+        \item \textbf{Leibniz rule:}
+              \[
+                  \{f,gh\}=\{f,g\}h+g\{f,h\}.
+              \]
+    \end{enumerate}
+    In other words, $(A,\{\cdot,\cdot\})$ is a Lie algebra, and for each fixed
+    $f\in A$, the map
+    \[
+        \mathrm{ad}_f:A\to A,\qquad \mathrm{ad}_f(g)=\{f,g\},
+    \]
+    is a derivation of the algebra $A$.
+    An algebra $A$ equipped with such a bracket is called a \emph{Poisson algebra}.
+\end{definition}
+
+\begin{remark}
+    The Leibniz rule in the second variable follows automatically from skew-symmetry:
+    \[
+        \{fg,h\}=f\{g,h\}+g\{f,h\}.
+    \]
+    Thus a Poisson bracket is precisely a Lie bracket compatible with the
+    commutative multiplication on $A$ by the derivation property.
+\end{remark}
+
+\begin{example}[Canonical Poisson bracket on $\mathbb{R}^{2n}$]
+    Let
+    \[
+        A=C^\infty(\mathbb{R}^{2n}),
+        \qquad
+        (q_1,\dots,q_n,p_1,\dots,p_n)
+    \]
+    be the standard coordinates. Define
+    \[
+        \{f,g\}
+        =
+        \sum_{i=1}^n
+        \left(
+        \frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}
+        -
+        \frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}
+        \right).
+    \]
+    Then $\{\cdot,\cdot\}$ is a Poisson bracket on $A$.
+    In particular,
+    \[
+        \{q_i,q_j\}=0,\qquad
+        \{p_i,p_j\}=0,\qquad
+        \{q_i,p_j\}=\delta_{ij}.
+    \]
+\end{example}
+
+\begin{definition}
+    Let $F$ be a field of characteristic $0$, and let $\mathcal{A}$ be an algebra of differentiable functions in one variable $x$.
+    For $f,g\in \mathcal{A}$, define
+    \[
+        [f,g]:=fg'-f'g,
+    \]
+    where $f'=\dfrac{df}{dx}$ and $g'=\dfrac{dg}{dx}$.
+\end{definition}
+
+\begin{definition}
+    To each $f\in \mathcal{A}$, associate the vector field
+    \[
+        X_f:=f(x)\frac{d}{dx}.
+    \]
+\end{definition}
+
+\begin{proposition}
+    For $f,g\in \mathcal{A}$, one has
+    \[
+        [X_f,X_g]=X_{[f,g]}.
+    \]
+    Equivalently,
+    \[
+        [X_f,X_g]=\left(fg'-gf'\right)\frac{d}{dx}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    For any test function $u$, we have
+    \[
+        X_f(u)=fu', \qquad X_g(u)=gu'.
+    \]
+    Thus
+    \[
+        X_f(X_g(u))=f(gu')'=fg'u'+fgu'',
+    \]
+    and similarly
+    \[
+        X_g(X_f(u))=g(fu')'=gf'u'+gfu''.
+    \]
+    Subtracting, we obtain
+    \[
+        [X_f,X_g](u)=X_f(X_g(u))-X_g(X_f(u))=(fg'-gf')u'.
+    \]
+    Therefore
+    \[
+        [X_f,X_g]=\left(fg'-gf'\right)\frac{d}{dx}=X_{[f,g]}.
+    \]
+\end{proof}
+
+\begin{proposition}
+    The operation
+    \[
+        [f,g]=fg'-f'g
+    \]
+    is bilinear and skew-symmetric.
+\end{proposition}
+
+\begin{proof}
+    Bilinearity follows immediately from the linearity of differentiation. Also,
+    \[
+        [g,f]=gf'-g'f=-(fg'-f'g)=-[f,g].
+    \]
+    Hence the bracket is skew-symmetric.
+\end{proof}
+
+\begin{theorem}
+    The bracket
+    \[
+        [f,g]=fg'-f'g
+    \]
+    defines a Lie algebra structure on $\mathcal{A}$.
+\end{theorem}
+
+\begin{proof}
+    By the previous proposition, it remains only to verify the Jacobi identity. This follows from the fact that the map
+    \[
+        f\longmapsto X_f=f\frac{d}{dx}
+    \]
+    identifies this bracket with the usual Lie bracket of vector fields on the line, and the latter always satisfies the Jacobi identity. Hence
+    \[
+        [f,[g,h]]+[g,[h,f]]+[h,[f,g]]=0
+    \]
+    for all $f,g,h\in \mathcal{A}$.
+\end{proof}
+
+\subsection{They come from Lie groups}
+
+\begin{definition}
+    Let \(G\) be a Lie group with identity element \(e\). The \emph{Lie algebra} of \(G\), denoted by \(\operatorname{Lie}(G)\) or \(\mathfrak g\), is the tangent space
+    \[
+        \mathfrak g:=T_eG
+    \]
+    equipped with the bracket induced by left-invariant vector fields.
+\end{definition}
+
+\begin{definition}
+    For each \(X\in T_eG\), the corresponding \emph{left-invariant vector field} \(\widetilde X\) on \(G\) is defined by
+    \[
+        \widetilde X_g:=(dL_g)_e(X),
+        \qquad g\in G,
+    \]
+    where \(L_g:G\to G\) is left translation, \(L_g(h)=gh\).
+\end{definition}
+
+\begin{proposition}
+    The assignment \(X\mapsto \widetilde X\) gives a bijection between \(T_eG\) and the space of left-invariant vector fields on \(G\).
+\end{proposition}
+
+\begin{definition}
+    For \(X,Y\in \mathfrak g=T_eG\), define
+    \[
+        [X,Y]:=[\widetilde X,\widetilde Y](e),
+    \]
+    where on the right-hand side \([\widetilde X,\widetilde Y]\) is the usual Lie bracket of vector fields on \(G\).
+\end{definition}
+
+\begin{proposition}
+    The bracket defined above makes \(T_eG\) into a Lie algebra. In particular, it is bilinear, alternating, and satisfies the Jacobi identity.
+\end{proposition}
+
+\begin{example}
+    If \(G=GL_n(F)\), where \(F=\mathbb R\) or \(\mathbb C\), then
+    \[
+        \operatorname{Lie}(G)=T_IGL_n(F)\cong M_n(F),
+    \]
+    and the Lie bracket is
+    \[
+        [X,Y]=XY-YX.
+    \]
+    Hence
+    \[
+        \operatorname{Lie}(GL_n(F))=\mathfrak{gl}_n(F).
+    \]
+\end{example}
+
+\begin{example}
+    If \(G=SL_n(F)\), then
+    \[
+        \operatorname{Lie}(SL_n(F))=\mathfrak{sl}_n(F)
+        =\{X\in M_n(F)\mid \operatorname{tr}(X)=0\}.
+    \]
+    Indeed, differentiating the defining equation \(\det(g)=1\) at the identity gives the trace-zero condition.
+\end{example}
+
+\begin{example}
+    If \(G=O_n(\mathbb R)\), then
+    \[
+        \operatorname{Lie}(O_n(\mathbb R))=\mathfrak{so}_n(\mathbb R)
+        =\{X\in M_n(\mathbb R)\mid X^T=-X\}.
+    \]
+    This follows by differentiating the relation \(g^Tg=I\) at the identity.
+\end{example}
+
+\section{Basic concepts of Lie algebra}
+
+Let \(L\) be a Lie algebra over a field \(F\).
+
+\begin{definition}
+    The \emph{derived series} of \(L\) is defined inductively by
+    \[
+        L^{(0)}=L, \qquad L^{(1)}=[L,L], \qquad L^{(i)}=[L^{(i-1)},L^{(i-1)}]\quad (i\ge 1).
+    \]
+    The Lie algebra \(L\) is called \emph{solvable} if
+    \[
+        L^{(n)}=0
+    \]
+    for some integer \(n\ge 0\).
+\end{definition}
+
+\begin{definition}
+    The \emph{descending central series} of \(L\) is defined by
+    \[
+        L^1=L, \qquad L^2=[L,L], \qquad L^i=[L,L^{i-1}]\quad (i\ge 2).
+    \]
+    The Lie algebra \(L\) is called \emph{nilpotent} if
+    \[
+        L^n=0
+    \]
+    for some integer \(n\ge 1\).
+\end{definition}
+
+\begin{proposition}
+    If \(L\) is nilpotent, then \(L\) is solvable.
+\end{proposition}
+
+\begin{proof}
+    It is enough to show that
+    \[
+        L^{(i)}\subseteq L^{2^i}\qquad (i\ge 0).
+    \]
+    We argue by induction on \(i\). The case \(i=0\) is clear. If
+    \[
+        L^{(i)}\subseteq L^{2^i},
+    \]
+    then
+    \[
+        L^{(i+1)}
+        =
+        [L^{(i)},L^{(i)}]
+        \subseteq
+        [L^{2^i},L^{2^i}]
+        \subseteq
+        L^{2^{i+1}}.
+    \]
+    Hence the claim follows for all \(i\). If \(L^n=0\) for some \(n\), then for \(i\) sufficiently large one has \(2^i\ge n\), so
+    \[
+        L^{(i)}\subseteq L^{2^i}=0.
+    \]
+    Therefore \(L\) is solvable.
+\end{proof}
+
+\begin{definition}
+    A \emph{solvable ideal} of \(L\) is an ideal which is solvable as a Lie algebra in its own right. Since the sum of two solvable ideals is again solvable, there exists a unique maximal solvable ideal of \(L\), called the \emph{radical} of \(L\), denoted by
+    \[
+        \operatorname{Rad}(L).
+    \]
+    The Lie algebra \(L\) is called \emph{semisimple} if
+    \[
+        \operatorname{Rad}(L)=0.
+    \]
+\end{definition}
+
+\begin{remark}
+    Thus the three notions fit into the chain
+    \[
+        \text{nilpotent} \;\Longrightarrow\; \text{solvable},
+    \]
+    while semisimplicity means that \(L\) has no nonzero solvable ideals. In particular, a semisimple Lie algebra cannot contain any nonzero abelian ideal.
+\end{remark}
+
+\begin{example}
+    Any abelian Lie algebra is nilpotent, hence solvable. On the other hand, the Lie algebra of upper triangular matrices is solvable in general, but need not be nilpotent.
+\end{example}
+
+\begin{example}
+    Let
+    \[
+        L=
+        \left\{
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        a,b\in F
+        \right\}
+        \subseteq \mathfrak{gl}_2(F),
+    \]
+    Then \(L\) is solvable but not nilpotent.
+
+    Indeed, if
+    \[
+        x=
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix},
+        \qquad
+        y=
+        \begin{pmatrix}
+            c & d \\
+            0 & 0
+        \end{pmatrix},
+    \]
+    then
+    \[
+        [x,y]
+        =
+        \begin{pmatrix}
+            0 & ad-bc \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Hence
+    \[
+        [L,L]
+        =
+        \left\{
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        t\in F
+        \right\},
+        \qquad
+        [[L,L],[L,L]]=0.
+    \]
+    Thus the derived series terminates:
+    \[
+        L^{(1)}=[L,L],\qquad L^{(2)}=[L^{(1)},L^{(1)}]=0,
+    \]
+    so \(L\) is solvable.
+
+    On the other hand, \(L\) is not nilpotent, since its descending central series does not reach \(0\). In fact,
+    \[
+        L^2=[L,L]
+        =
+        \left\{
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        t\in F
+        \right\},
+    \]
+    and for any
+    \[
+        x=
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix}\in L,\qquad
+        y=
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}\in L^2,
+    \]
+    we have
+    \[
+        [x,y]
+        =
+        \begin{pmatrix}
+            0 & at \\
+            0 & 0
+        \end{pmatrix}\in L^2.
+    \]
+    Therefore
+    \[
+        L^3=[L,L^2]=L^2,
+    \]
+    and inductively
+    \[
+        L^n=L^2\neq 0\qquad (n\ge 2).
+    \]
+    So \(L\) is not nilpotent.
+\end{example}
+
+\chapter{Lecture 2 Engel Theorem}
+
+\section{Engel Theorem the first type}
+
+\begin{definition}
+    Let \(L\) be a Lie algebra over a field \(F\). An \emph{enveloping algebra} of \(L\) is an associative \(F\)-algebra \(A\) together with a Lie algebra homomorphism
+    \[
+        \iota:L\to A^{-},
+    \]
+    where \(A^{-}\) denotes the Lie algebra obtained from \(A\) by equipping the underlying vector space of \(A\) with the bracket
+    \[
+        [x,y]=xy-yx,
+    \]
+    such that the associative algebra \(A\) is generated by \(\iota(L)\) (or just writing $A=<L>_{assoc}$ or simply $A=<L>$).
+
+    If, in addition, the pair \((A,\iota)\) satisfies the following universal property: for every associative \(F\)-algebra \(B\) and every Lie algebra homomorphism
+    \[
+        \varphi:L\to B^{-},
+    \]
+    there exists a unique associative algebra homomorphism
+    \[
+        \widetilde{\varphi}:A\to B
+    \]
+    such that
+    \[
+        \varphi=\widetilde{\varphi}\circ \iota,
+    \]
+    then \(A\) is called the \emph{universal enveloping algebra} of \(L\).
+\end{definition}
+
+\begin{theorem}
+    Let $ A $ be a finite dimensional enveloping algebra of $L$, i.e. $ L\subseteq A^{(-)} $, $ A = <L> $.If $ \exists n \ge 1 $ such that $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.
+\end{theorem}
+
+\section{Engel Theorem the second type}
+
+In fact we can prove a stronger version.
+
+\begin{definition}
+    A subset $S\subseteq L$ is called a \emph{Lie subset} if
+    \[
+        [a,b]\in S
+        \qquad
+        \text{for all } a,b\in S.
+    \]
+    Note that a Lie subset need not be a subspace, and hence need not be a Lie subalgebra.
+\end{definition}
+
+\begin{theorem}
+    Let $A$ be a finite-dimensional associative algebra over $F$, and let
+    \[
+        L\subseteq A^{(-)}
+    \]
+    be a Lie subalgebra such that $A$ is generated by $L$ as an associative algebra. Suppose that
+    \[
+        L=\mathrm{span}(S)
+    \]
+    for some Lie subset $S\subseteq L$, and that every element of $S$ is nilpotent in $A$. Then $A$ is a nilpotent associative algebra.
+\end{theorem}
+
+\begin{remark}
+    In the finite-dimensional situation, the existence of a uniform exponent $n$ is automatic once every element of $S$ is nilpotent in $A$. Indeed, let
+    \[
+        m=\dim_F A,
+    \]
+    and let $a\in A$ be nilpotent. Consider the left multiplication operator
+    \[
+        L_a:A\to A,\qquad x\mapsto ax.
+    \]
+    Since $a$ is nilpotent, $L_a$ is a nilpotent linear transformation on the $m$-dimensional vector space $A$. Hence
+    \[
+        L_a^m=0.
+    \]
+    But
+    \[
+        L_a^m=L_{a^m},
+    \]
+    so $a^m=0$. Therefore every nilpotent element of $A$ has nilpotency index at most $\dim_F A$. In particular, if every element of $S$ is nilpotent in $A$, then one may take
+    \[
+        n=\dim_F A
+    \]
+    and obtain
+    \[
+        a^n=0
+        \qquad
+        \text{for all } a\in S.
+    \]
+    Thus, in the theorem above, the hypothesis that every element of $S$ is nilpotent in $A$ already implies the existence of a common exponent $n$.
+\end{remark}
+
+\begin{theorem}[Zorn's Lemma]
+    Let $(P,\leq)$ be a partially ordered set. Assume that every chain in $P$ has an upper bound in $P$. Then $P$ contains a maximal element.
+\end{theorem}
+
+\begin{proof}
+    We prove the result assuming the Well-Ordering Theorem.
+
+    Suppose, for contradiction, that $P$ has no maximal element. Then for every $x\in P$ there exists some $y\in P$ such that
+    \[
+        x<y.
+    \]
+    By the Well-Ordering Theorem, we may choose a well-ordering $\preceq$ on $P$. For each $x\in P$, let $f(x)$ be the $\preceq$-least element of the set
+    \[
+        \{y\in P: x<y\}.
+    \]
+    Then
+    \[
+        x<f(x)\qquad \text{for all }x\in P.
+    \]
+
+    We now define, by transfinite recursion, a family $(x_\alpha)$ indexed by ordinals. Suppose that for all $\beta<\alpha$ the elements $x_\beta$ have been defined and form a chain. By hypothesis, the chain
+    \[
+        C_\alpha:=\{x_\beta:\beta<\alpha\}
+    \]
+    has an upper bound $u_\alpha\in P$. Define
+    \[
+        x_\alpha:=f(u_\alpha).
+    \]
+    Since $u_\alpha$ is an upper bound of $C_\alpha$, for every $\beta<\alpha$ we have
+    \[
+        x_\beta\leq u_\alpha < x_\alpha.
+    \]
+    Hence $(x_\alpha)$ is a strictly increasing family:
+    \[
+        \beta<\alpha \implies x_\beta<x_\alpha.
+    \]
+
+    Therefore the map
+    \[
+        \alpha\longmapsto x_\alpha
+    \]
+    is injective from the class of all ordinals into the set $P$. This is impossible, since there is no injection from the class of all ordinals into a set.
+
+    This contradiction shows that $P$ must contain a maximal element.
+\end{proof}
+
+\begin{lemma}
+    Let
+    \[
+        \mathcal P
+        =
+        \left\{
+        T\subseteq S \;\middle|\;
+        T \text{ is a Lie subset and } a^n=0 \text{ for all } a\in T
+        \right\},
+    \]
+    partially ordered by inclusion. Then $\mathcal P$ has a maximal element.
+\end{lemma}
+
+\begin{proof}
+    We apply Zorn's lemma. Let $\{T_i\}_{i\in I}$ be a chain in $\mathcal P$, and set
+    \[
+        T=\bigcup_{i\in I}T_i.
+    \]
+    We claim that $T\in\mathcal P$.
+
+    First, $T$ is a Lie subset. Indeed, if $a,b\in T$, then $a\in T_i$ and $b\in T_j$ for some $i,j\in I$. Since $\{T_i\}_{i\in I}$ is a chain, one of $T_i,T_j$ is contained in the other; say $T_i\subseteq T_j$. Then $a,b\in T_j$, and since $T_j$ is a Lie subset,
+    \[
+        [a,b]\in T_j\subseteq T.
+    \]
+
+    Second, if $a\in T$, then $a\in T_i$ for some $i\in I$, so $a^n=0$ because $T_i\in\mathcal P$.
+
+    Thus $T\in\mathcal P$, and clearly $T$ is an upper bound of the chain. Therefore every chain in $\mathcal P$ has an upper bound. By Zorn's lemma, $\mathcal P$ has a maximal element.
+\end{proof}
+
+\begin{proof}[Proof of the theorem]
+    Consider the collection
+    \[
+        \mathcal P=
+        \left\{
+        T\subseteq S
+        \;\middle|\;
+        T \text{ is a Lie subset of }L
+        \text{ and }
+        \langle T\rangle \text{ is a nilpotent associative subalgebra of }A
+        \right\},
+    \]
+    partially ordered by inclusion. Here $\langle T\rangle$ denotes the associative subalgebra of $A$
+    generated by $T$.
+
+    We first show that every chain in $\mathcal P$ has an upper bound. Let $\{T_i\}_{i\in I}$ be a chain
+    in $\mathcal P$, and set
+    \[
+        T=\bigcup_{i\in I}T_i.
+    \]
+    Since the $T_i$ form a chain, $T$ is again a Lie subset of $L$. Let $N=\dim_F A$. Since each
+    $\langle T_i\rangle$ is a nilpotent subalgebra of the finite-dimensional algebra $A$, we have
+    \[
+        \langle T_i\rangle^N=0
+        \qquad
+        \text{for all }i\in I.
+    \]
+    Now take any $x_1,\dots,x_N\in \langle T\rangle$. Each $x_j$ belongs to $\langle T_{i_j}\rangle$
+    for some $i_j\in I$. Since the family $\{T_i\}$ is totally ordered, there exists $k\in I$ such that
+    \[
+        T_{i_1}\cup\cdots\cup T_{i_N}\subseteq T_k.
+    \]
+    Hence
+    \[
+        x_1,\dots,x_N\in \langle T_k\rangle,
+    \]
+    and therefore
+    \[
+        x_1\cdots x_N=0.
+    \]
+    Thus $\langle T\rangle^N=0$, so $T\in\mathcal P$. By Zorn's lemma, $\mathcal P$ has a maximal
+    element, say $S_1$.
+
+    Set
+    \[
+        B=\langle S_1\rangle.
+    \]
+    Then $B$ is nilpotent, so there exists $t\ge 1$ such that
+    \[
+        B^t=0.
+    \]
+
+    We claim that if $S_1\ne S$, then there exists $s\in S\setminus S_1$ such that
+    \[
+        [S_1,s]\subseteq S_1.
+    \]
+    Assume the contrary. Choose $s_1\in S\setminus S_1$. By assumption, there exists $x_1\in S_1$ such that
+    \[
+        s_2=[x_1,s_1]\notin S_1.
+    \]
+    Since $S$ is a Lie subset, $s_2\in S$. Repeating this argument, we construct inductively elements
+    \[
+        x_1,x_2,\dots \in S_1,
+        \qquad
+        s_1,s_2,\dots \in S\setminus S_1
+    \]
+    such that
+    \[
+        s_{r+1}=[x_r,s_r]
+        \qquad
+        (r\ge 1).
+    \]
+    Thus
+    \[
+        s_{r+1}=\operatorname{ad}(x_r)\cdots \operatorname{ad}(x_1)(s_1).
+    \]
+
+    We now show that this process cannot continue for $2t$ steps. Indeed, for any $y_1,\dots,y_r\in B$,
+    the iterated commutator
+    \[
+        \operatorname{ad}(y_r)\cdots \operatorname{ad}(y_1)(s_1)
+    \]
+    is a sum of terms of the form
+    \[
+        \pm u\, s_1\, v,
+    \]
+    where $u,v\in B$ and the total number of factors from $B$ occurring in $u$ and $v$ is $r$.
+    Therefore, if $r\ge 2t$, then in each such term either $u\in B^t$ or $v\in B^t$, so the term is $0$.
+    Hence
+    \[
+        \operatorname{ad}(y_r)\cdots \operatorname{ad}(y_1)(s_1)=0
+        \qquad
+        \text{for all } r\ge 2t.
+    \]
+    Applying this with $y_i=x_i\in S_1\subseteq B$, we obtain
+    \[
+        s_{2t+1}=0,
+    \]
+    which is impossible since $0\in S_1$. This contradiction proves the claim.
+
+    Choose $s\in S\setminus S_1$ such that
+    \[
+        [S_1,s]\subseteq S_1.
+    \]
+    Let
+    \[
+        S_2=S_1\cup\{s\}.
+    \]
+    Then $S_2$ is a Lie subset of $L$: indeed, brackets of elements of $S_1$ remain in $S_1$,
+    \([S_1,s]\subseteq S_1\), \([s,S_1]\subseteq S_1\) by antisymmetry, and \([s,s]=0\in S_1\).
+
+    We next show that $\langle S_2\rangle$ is nilpotent. Since $[S_1,s]\subseteq S_1$, we have
+    \[
+        [B,s]\subseteq B.
+    \]
+    Hence for every $b\in B$,
+    \[
+        bs=sb+[b,s],
+        \qquad
+        [b,s]\in B.
+    \]
+    By repeated use of this identity, every product in the algebra generated by $B$ and $s$ can be written
+    as a linear combination of terms of the form
+    \[
+        s^r b,
+        \qquad
+        b\in B,
+    \]
+    with $r\ge 0$. Since $s^m=0$, we may assume $0\le r\le m-1$.
+
+    Now consider a product of length $mt$ in $\langle S_2\rangle$. After rewriting it as above, each term
+    has the form $s^r b$ with $0\le r\le m-1$. Since the original length is $mt$, such a term must contain
+    at least
+    \[
+        mt-r\ge mt-(m-1)\ge t
+    \]
+    factors coming from $B$. Therefore $b\in B^t=0$, and every such term is zero. It follows that
+    \[
+        \langle S_2\rangle^{\,mt}=0.
+    \]
+    Thus $\langle S_2\rangle$ is nilpotent.
+
+    But $S_1\subsetneq S_2$ and $S_2\in\mathcal P$, contradicting the maximality of $S_1$. Hence
+    $S_1=S$. Therefore
+    \[
+        A=\langle L\rangle=\langle S\rangle=\langle S_1\rangle
+    \]
+    is nilpotent.
+\end{proof}
+
+\section{Engel Theorem the third type}
+
+\begin{definition}
+    Let $L$ be a Lie algebra over a field $F$. An $L$-module is a vector space $V$ over $F$ together with a bilinear map
+    \[
+        L\times V \to V,\qquad (x,v)\mapsto x\cdot v,
+    \]
+    such that
+    \[
+        [x,y]\cdot v = x\cdot (y\cdot v)-y\cdot (x\cdot v)
+    \]
+    for all $x,y\in L$ and $v\in V$. In other words, $V$ is an $L$-module if and only if there exists a Lie algebra homomorphism
+    \[
+        \phi:L\to \mathfrak{gl}(V).
+    \]
+    such that
+    \[
+        \phi(x)(v) = x\cdot v
+    \]
+    for all $x\in L$ and $v\in V$.
+\end{definition}
+
+\begin{proposition}
+    Let $L$ be a Lie algebra over a field $F$, and let $M$ be a vector space over $F$. Suppose a bilinear operation
+    \[
+        L\times M\to M,\qquad (a,m)\mapsto a\cdot m
+    \]
+    is given. Then the following conditions are equivalent:
+
+    \begin{enumerate}
+        \item The vector space $L\oplus M$ becomes a Lie algebra under the bracket defined by
+              \[
+                  [a+m,\ b+n]=[a,b]+a\cdot n-b\cdot m
+                  \qquad (a,b\in L,\ m,n\in M),
+              \]
+              equivalently,
+              \[
+                  [a,m]=a\cdot m,\qquad [m,a]=-\,a\cdot m
+              \]
+              for all $a\in L$, $m\in M$, and
+              \[
+                  [m,n]=0
+              \]
+              for all $m,n\in M$.
+
+        \item For all $a,b\in L$ and $m\in M$,
+              \[
+                  [a,b]\cdot m=a\cdot (b\cdot m)-b\cdot (a\cdot m).
+              \]
+
+        \item The map
+              \[
+                  \rho:L\to \mathfrak{gl}_F(M),\qquad \rho(a)(m)=a\cdot m,
+              \]
+              is a Lie algebra homomorphism.
+    \end{enumerate}
+
+    When these equivalent conditions hold, we say that $M$ is an $L$-module.
+\end{proposition}
+
+\begin{proof}
+    We prove $(1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(1)$.
+
+    \medskip
+
+    $(1)\Rightarrow(2)$. Assume that $L\oplus M$ is a Lie algebra with the stated bracket. Since every Lie algebra satisfies the Jacobi identity, for any $a,b\in L$ and $m\in M$ we have
+    \[
+        [a,[b,m]]+[b,[m,a]]+[m,[a,b]]=0.
+    \]
+    Now
+    \[
+        [b,m]=b\cdot m,\qquad [m,a]=-\,a\cdot m,\qquad [a,b]\in L.
+    \]
+    Because $M$ is abelian, this gives
+    \[
+        [a,b\cdot m]+[b,-\,a\cdot m]+[m,[a,b]]=0.
+    \]
+    Using again the definition of the bracket,
+    \[
+        a\cdot (b\cdot m)-b\cdot (a\cdot m)-[a,b]\cdot m=0.
+    \]
+    Hence
+    \[
+        [a,b]\cdot m=a\cdot (b\cdot m)-b\cdot (a\cdot m).
+    \]
+
+    \medskip
+
+    $(2)\Rightarrow(3)$. Define
+    \[
+        \rho:L\to \mathfrak{gl}_F(M),\qquad \rho(a)(m)=a\cdot m.
+    \]
+    Since the action is bilinear, $\rho$ is linear. For any $a,b\in L$ and $m\in M$, condition (2) gives
+    \[
+        \rho([a,b])(m)=[a,b]\cdot m
+        =a\cdot (b\cdot m)-b\cdot (a\cdot m)
+        =\rho(a)\rho(b)(m)-\rho(b)\rho(a)(m).
+    \]
+    Therefore
+    \[
+        \rho([a,b])=[\rho(a),\rho(b)],
+    \]
+    so $\rho$ is a Lie algebra homomorphism.
+
+    \medskip
+
+    $(3)\Rightarrow(1)$. Assume that $\rho:L\to \mathfrak{gl}_F(M)$ is a Lie algebra homomorphism, and define a bracket on $L\oplus M$ by
+    \[
+        [a+m,\ b+n]=[a,b]+\rho(a)(n)-\rho(b)(m).
+    \]
+    This bracket is bilinear and skew-symmetric. It remains to verify the Jacobi identity.
+
+    Take $a,b,c\in L$ and $m,n,p\in M$. Write
+    \[
+        x=a+m,\qquad y=b+n,\qquad z=c+p.
+    \]
+    A direct calculation shows that the $L$-component of
+    \[
+        [x,[y,z]]+[y,[z,x]]+[z,[x,y]]
+    \]
+    is
+    \[
+        [a,[b,c]]+[b,[c,a]]+[c,[a,b]],
+    \]
+    which is zero because $L$ is a Lie algebra.
+
+    For the $M$-component, expanding the definition of the bracket yields
+    \[
+        \rho(a)\rho(b)(p)-\rho(a)\rho(c)(n)-\rho([b,c])(m)
+        +\rho(b)\rho(c)(m)-\rho(b)\rho(a)(p)-\rho([c,a])(n)
+    \]
+    \[
+        +\rho(c)\rho(a)(n)-\rho(c)\rho(b)(m)-\rho([a,b])(p).
+    \]
+    Grouping the terms by $m,n,p$, we obtain
+    \[
+        \bigl(\rho(b)\rho(c)-\rho(c)\rho(b)-\rho([b,c])\bigr)(m)
+    \]
+    \[
+        +\bigl(\rho(c)\rho(a)-\rho(a)\rho(c)-\rho([c,a])\bigr)(n)
+    \]
+    \[
+        +\bigl(\rho(a)\rho(b)-\rho(b)\rho(a)-\rho([a,b])\bigr)(p).
+    \]
+    Since $\rho$ is a Lie algebra homomorphism, each bracketed expression is zero. Hence the $M$-component also vanishes, so the Jacobi identity holds.
+
+    Therefore $L\oplus M$ is a Lie algebra with the stated bracket.
+
+    This proves that the three conditions are equivalent.
+\end{proof}
+
+\begin{theorem}
+    Let $L$ be a finite dimensional Lie algebra over a field $F$. If $\forall a \in L$, $\operatorname{ad}(a) $ is nilpotent, then $L$ is nilpotent.
+\end{theorem}
+
+\begin{proof}
+    Note that since $L$ is finite-dimensional, say $\dim L=n<\infty$, and for every $a\in L$ we have
+    \[
+        (\operatorname{ad} a)^n=0.
+    \]
+    Hence we may apply the previous theorem: if for all $a\in L$,
+    \[
+        (\operatorname{ad} a)^n=0,
+    \]
+    then
+    \[
+        (\operatorname{ad} L)^{\,n}=0,
+    \]
+    and therefore
+    \[
+        L^{n+1}=0.
+    \]
+    So $L$ is nilpotent.
+\end{proof}
+
+\begin{remark}
+    If $L$ is infinite-dimensional, one should distinguish two cases:
+    \[
+        \left\{
+        \begin{array}{l}
+            \operatorname{ad} a \text{ nilpotent with a uniform bound } n
+            \ \Longrightarrow\
+            L \text{ nilpotent}, \\[4pt]
+            \text{no uniform bound on the nilpotency indices}
+            \ \nRightarrow\
+            L \text{ nilpotent}.
+        \end{array}
+        \right.
+    \]
+\end{remark}
+
+\begin{remark}
+    There are three related versions, with
+    \[
+        \text{type }(2)\Longrightarrow \text{type }(1)\Longrightarrow \text{type }(3).
+    \]
+
+    Type (2): Let $S\subseteq L$ be a Lie subset. And $S$ generates $L$ as a Lie algebra. Assume there exists $n$ such that for every $a\in S$
+    \[
+        a^n =0.
+    \]
+    Then $A=<L>$ is a nilpotent algebra. (When $A$ is a finite-dimensional associative algebra).
+
+    In particular, if we choose $S$ to be $L$, then we get type (1).
+
+    Type (1): Let $ A $ be a finite dimensional enveloping algebra of $L$, i.e. $ L\subseteq A^{(-)} $, $ A = <L> $.If $ \exists n \ge 1 $ such that $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.
+
+    And consider $A$ as $\operatorname{ad}(L)$, we get type (3).
+
+    Type (3):    Let $L$ be a finite dimensional Lie algebra over a field $F$. If $\forall a \in L$, $\operatorname{ad}(a) $ is nilpotent, then $L$ is nilpotent.
+\end{remark}
+
+We also have the following truth:
+
+\begin{corollary}
+    \ Let $M$ be an $L$-module with $\dim M<\infty$, that is, let
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    be a representation. Assume that for every $a\in L$, the operator $\varphi(a)$ is nilpotent. Equivalently, for every $a\in L$ there exists $n$ such that
+    \[
+        \underbrace{a\bigl(a(\cdots(a}_{n\text{ times}}\,M)\cdots)\bigr)=0.
+    \]
+    Then there exists $N$ such that
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0.
+    \]
+    In other words, if every $\varphi(a)$ is nilpotent, then the Lie algebra $\varphi(L)$ is nilpotent. Hence there exists a basis of $M$ in which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix:
+    \[
+        \varphi(L)\subseteq
+        \left\{
+        \begin{pmatrix}
+            0      & *      & \cdots & *      \\
+            0      & 0      & \cdots & *      \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0      & 0      & \cdots & 0
+        \end{pmatrix}
+        \right\}.
+    \]
+\end{corollary}
+
+\begin{remark}
+    This corollary is the module-theoretic form of Engel's theorem. Indeed, the representation
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    has image $\varphi(L)$, which is a Lie subalgebra of $\mathfrak{gl}_F(M)$. By assumption, every element of $\varphi(L)$ is a nilpotent endomorphism of the finite-dimensional vector space $M$. Hence, by Engel's theorem, the Lie algebra $\varphi(L)$ is nilpotent.
+
+    The conclusion
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0
+    \]
+    means that there exists a uniform integer $N$ such that for all $a_1,\dots,a_N\in L$ and all $m\in M$,
+    \[
+        a_1\bigl(a_2(\cdots(a_Nm)\cdots)\bigr)=0.
+    \]
+    Thus the action is nilpotent not only for each fixed $a\in L$, but uniformly for all sufficiently long iterated actions.
+
+    A further consequence of Engel's theorem is that there exists a basis of $M$ with respect to which every operator $\varphi(a)$ is represented by a strictly upper triangular matrix. Equivalently, $M$ admits a chain of subspaces
+    \[
+        0=M_0\subset M_1\subset \cdots \subset M_r=M,
+        \qquad \dim M_i=i,
+    \]
+    such that
+    \[
+        L\cdot M_i\subseteq M_{i-1}
+        \qquad (1\le i\le r).
+    \]
+
+    Explanation: By Engel's theorem, $\varphi(L)$ is nilpotent. Hence
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0
+    \]
+    Take the minimal $N$ such that $L^N M=0$ and $L^{N-1}M \neq 0$. Then we have a non-zero vector $v_1$ in $L^{N-1}M$ which is killed by $\varphi(L)$. Denote $M_1 = \operatorname{span}(v_1)$. Then $L\cdot M_1 \subseteq M_0$. Now consider $M/M_1$. By Engel's theorem and by induction hypothesis, $\varphi(L)$ is nilpotent on $M/M_1$. Hence there exists a basis of $M/M_1$ with respect to which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix. Equivalently, $M/M_1$ admits a chain of subspaces
+    \[
+        0=M_1/M_1\subset M_2/M_1\subset \cdots \subset M_r/M_1=M/M_1,
+        \qquad \dim M_i/M_1=i,
+    \]
+    such that
+    \[
+        L\cdot (M_i/M_1)\subseteq M_{i-1}/M_1
+        \qquad (1\le i\le r).
+    \]
+    Now we can take a basis of $M_1$ and $M/M_1$ to get a basis of $M$ with respect to which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix.
+
+    In particular, this corollary reduces to the usual form of Engel's theorem when one takes $M=L$ and $\varphi=\operatorname{ad}$.
+\end{remark}
+
+\begin{remark}
+    According to this corollary and type (2), we can rewrite it as:
+
+    Let $M$ be an $L$-module with $\dim M<\infty$, that is, let
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    be a representation. Assume that for every $a\in S$, where $S$ is a Lie subset of $L$ and $<S>=L$, the operator $\varphi(a)$ is nilpotent. Equivalently, for every $a\in S$ there exists $n$ such that
+    \[
+        \underbrace{a\bigl(a(\cdots(a}_{n\text{ times}}\,M)\cdots)\bigr)=0.
+    \]
+    Then there exists $N$ such that
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0.
+    \]
+    For this result, we do not need $L$ or the enveloping algebra $A=<L>$ to be finite-dimensional now, we only need such $n$ is a universal bound.
+\end{remark}
+
+\chapter{Lecture 3: Lie's theorem and Jordan-Chevalley decomposition}
+
+\section{Lie's theorem}
+
+\begin{lemma}
+    Let $F$ be a field with $\operatorname{char} F=0$ or $\operatorname{char} F>n$.
+    Let $a,b\in M_n(F)$ satisfy
+    \[
+        [a,[a,b]]=0.
+    \]
+    Then $[a,b]$ is nilpotent. In fact,
+    \[
+        [a,b]^n=0.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Set
+    \[
+        \delta:=\operatorname{ad}(a),\qquad \delta(x)=[a,x].
+    \]
+    Since $\delta$ is an inner derivation of the associative algebra $M_n(F)$, we have
+    \[
+        \delta(xy)=\delta(x)y+x\delta(y)
+        \qquad\text{for all }x,y\in M_n(F).
+    \]
+    Our assumption is precisely
+    \[
+        \delta^2(b)=0.
+    \]
+
+    Now let us prove the following two facts:
+
+    \medskip
+    \noindent
+    \textit{Claim 1.} For every $m\ge 1$ and every $r>m$,
+    \[\operatorname{End}
+        \delta^r(b^m)=0.
+    \]
+
+    \noindent
+    Indeed, each application of $\delta$ to the product $b^m$ differentiates one of the $m$
+    factors. Since $\delta^2(b)=0$, no factor can be differentiated twice. Hence after more
+    than $m$ applications, every term vanishes.
+
+    \medskip
+    \noindent
+    \textit{Claim 2.} For every $m\ge 1$,
+    \[
+        \delta^m(b^m)=m!\,\delta(b)^m=m!\,[a,b]^m.
+    \]
+
+    \noindent
+    We prove this by induction on $m$. The case $m=1$ is clear. Assume the formula holds
+    for $m-1$. Using the derivation rule,
+    \[
+        \delta(b^m)=\delta(b)b^{m-1}+b\,\delta(b^{m-1}).
+    \]
+    Applying $\delta^{m-1}$ and using Leibniz repeatedly, together with $\delta^2(b)=0$,
+    one finds that the only surviving terms are those in which each of the $m$ copies of $b$
+    is hit exactly once. There are exactly $m!$ such terms, and each contributes
+    \[
+        \delta(b)^m.
+    \]
+    Hence
+    \[
+        \delta^m(b^m)=m!\,\delta(b)^m.
+    \]
+
+    \medskip
+    Now apply Cayley--Hamilton to $b$:
+    \[
+        b^n+\beta_{n-1}b^{n-1}+\cdots+\beta_1 b+\beta_0 I=0.
+    \]
+    Apply $\delta^n$ to both sides. By Claim 1, for every $i<n$ we have
+    \[
+        \delta^n(b^i)=0,
+    \]
+    and also $\delta^n(I)=0$. Therefore
+    \[
+        \delta^n(b^n)=0.
+    \]
+    By Claim 2 with $m=n$, this becomes
+    \[
+        n!\,[a,b]^n=0.
+    \]
+    Since $\operatorname{char} F=0$ or $\operatorname{char} F>n$, we have $n!\neq 0$ in $F$.
+    Hence
+    \[
+        [a,b]^n=0.
+    \]
+    Therefore $[a,b]$ is nilpotent.
+\end{proof}
+
+\begin{theorem}[Lie's theorem]
+    Assume that $\operatorname{char} F = 0$ or $\operatorname{char} F > \dim_F M$. $F$ is algebraically closed.
+    Let $L$ be a solvable Lie algebra and let $M$ be an $L$-module with
+    \[
+        \dim_F M = n < \infty.
+    \]
+    Then there exists a basis of $M$ such that, relative to this basis, the image of $L$ (from here when talk about $L$ acting on its module $M$, we simply use $L$ instead of $\varphi(L)$)
+    consists of upper triangular matrices; that is,
+    \[
+        L \subseteq
+        \left\{
+        \begin{pmatrix}
+            *      & *      & \cdots & *      \\
+            0      & *      & \cdots & *      \\
+            \vdots & \ddots & \ddots & \vdots \\
+            0      & \cdots & 0      & *
+        \end{pmatrix}
+        \right\}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We argue first that $M$ has a common eigenvector for the action of $L$.
+
+    Assume first that $M$ is irreducible as an $L$-module. Since we are mainly concerned
+    with the image of
+    \[
+        L \to \mathfrak{gl}_F(M),
+    \]
+    we may replace $L$ by its image and assume that $L \subseteq \mathfrak{gl}_F(M)$.
+
+    Because $L$ is solvable, its derived series
+    \[
+        L \supseteq L^{[1]} \supseteq L^{[2]} \supseteq \cdots
+    \]
+    terminates at $0$. Hence there exists an integer $s \ge 0$ such that
+    \[
+        L^{[s]} \neq 0,
+        \qquad
+        L^{[s+1]} = [L^{[s]},L^{[s]}]=0.
+    \]
+    If $s=0$, then $L$ is abelian, and since $F$ is algebraically closed, there exists
+    an eigenvector $v \in M$ for some $x \in L$. As $L$ is abelian, every element of $L$
+    preserves the eigenspace of $x$, and by irreducibility this gives a common eigenvector
+    for all $x \in L$.
+
+    Now assume $s \ge 1$. Choose $a \in L^{[s]}$ and $b \in L$. Then
+    \[
+        [a,[a,b]] \in [L^{[s]},L^{[s]}] = L^{[s+1]} = 0,
+    \]
+    so
+    \[
+        (\operatorname{ad} a)^2(b)=0.
+    \]
+    Consider the set
+    \[
+        S=\{[a,b]\mid a\in L^{[s]},\ b\in L\}.
+    \]
+    This is a Lie subset of $L$, and every element of $S$ is nilpotent in $\mathfrak{gl}_F(M)$.
+    By Engel's theorem,
+    \[
+        \operatorname{span}_F(S)=[L^{[s]},L]
+    \]
+    is a nilpotent Lie algebra of linear transformations on $M$.
+
+    Now let $I$ be any ideal of $L$. Then $IM$ is an $L$-submodule of $M$, because for
+    $x\in L$, $y\in I$, and $m\in M$,
+    \[
+        x\cdot (y\cdot m)=y\cdot (x\cdot m)+[x,y]\cdot m \in IM,
+    \]
+    since $[x,y]\in I$. As $M$ is irreducible, it follows that
+    \[
+        IM=0 \quad \text{or} \quad IM=M.
+    \]
+    Applying this to the ideal $I=L^{[s]}$, we cannot have $L^{[s]}M=M$, because
+    $L^{[s]}$ acts nilpotently on $M$. Hence
+    \[
+        L^{[s]}M=0,
+    \]
+    that is, $L^{[s]}$ acts trivially on $M$.
+
+    Thus every element of $L^{[s]}$ commutes with the action of $L$ on $M$. In particular,
+    for any $c\in L^{[s-1]}$ and $d\in L^{[s-1]}$,
+    \[
+        [c,d]\in L^{[s]}
+    \]
+    acts as $0$ on $M$. Therefore $L^{[s]}=0$ in the image of $L$ in $\mathfrak{gl}_F(M)$,
+    contrary to the choice of $s$. This contradiction shows that $s=0$, so $L$ is abelian
+    (on $M$), and hence $M$ contains a common eigenvector for all elements of $L$.
+
+    Now let $0\neq v_1\in M$ be such a common eigenvector. Then $Fv_1$ is a one-dimensional
+    $L$-submodule of $M$. Consider the quotient $M/Fv_1$, which is again a finite-dimensional
+    $L$-module. By induction on $\dim_F M$, there exists a basis of $M/Fv_1$ with respect to
+    which the induced action of $L$ is upper triangular. Lifting this basis to $M$ and adjoining
+    $v_1$, we obtain a basis of $M$ relative to which every element of $L$ is represented by an
+    upper triangular matrix.
+
+    Therefore there exists a basis of $M$ such that the image of $L$ consists of upper triangular
+    matrices.
+\end{proof}
+
+\begin{proposition}
+    Let $L$ be a solvable Lie algebra over $F$ with $\operatorname{char} F = 0$ or $\operatorname{char} F > \dim_F M$. $F$ is algebraically closed. Then the followings are equivalent:
+    \begin{enumerate}
+        \item Any irreducible finite dimensional $L$-module is 1-dimensional.
+        \item If $M$ is a finite dimensional $L$-module, then there exist a basis of $M$ such that the image of $L$ consists of upper triangular matrices.
+        \item If $M$ is any finite dimensional $L$-module. Then $[L,L]$ acts nilpotently on $M$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove
+    \[
+        (2)\Rightarrow(1),\qquad (1)\Rightarrow(2),\qquad (2)\Rightarrow(3),\qquad (3)\Rightarrow(1).
+    \]
+
+    $(2)\Rightarrow(1)$.
+    Let $M$ be an irreducible finite-dimensional $L$-module. By (2), there exists a basis of $M$ relative to which every operator in the image of $L$ is upper triangular. Then the subspace spanned by the first basis vector is stable under $L$, hence is a nonzero submodule of $M$. Since $M$ is irreducible, this submodule must be all of $M$. Therefore $\dim_F M=1$.
+
+    $(1)\Rightarrow(2)$.
+    We argue by induction on $\dim_F M$.
+
+    If $\dim_F M=1$, there is nothing to prove. Assume $\dim_F M>1$, and suppose the statement is known for all modules of smaller dimension. Since $M$ is finite-dimensional, it contains an irreducible submodule $N$. By (1), we have $\dim_F N=1$.
+
+    Choose $0\neq v_1\in N$, so that $N=Fv_1$. Then $N$ is an $L$-submodule, and hence $M/N$ is again a finite-dimensional $L$-module. By the induction hypothesis, there exists a basis
+    \[
+        \overline{v_2},\dots,\overline{v_n}
+    \]
+    of $M/N$ such that the induced action of $L$ on $M/N$ is given by upper triangular matrices. Choose representatives $v_2,\dots,v_n\in M$ of these cosets. Then
+    \[
+        v_1,v_2,\dots,v_n
+    \]
+    is a basis of $M$.
+
+    Since $Fv_1$ is $L$-stable, every element of $L$ sends $v_1$ into $Fv_1$. Since the induced action on $M/Fv_1$ is upper triangular with respect to
+    \[
+        \overline{v_2},\dots,\overline{v_n},
+    \]
+    it follows that the action of $L$ on $M$ is upper triangular with respect to
+    \[
+        v_1,v_2,\dots,v_n.
+    \]
+    Thus (2) holds.
+
+    $(2)\Rightarrow(3)$.
+    Let $M$ be a finite-dimensional $L$-module, and choose a basis of $M$ such that every element of the image of $L$ is represented by an upper triangular matrix. Then for any $x,y\in L$,
+    \[
+        \rho([x,y])=[\rho(x),\rho(y)].
+    \]
+    Since the commutator of two upper triangular matrices has zero diagonal entries, $\rho([x,y])$ is strictly upper triangular. Hence every element of $\rho([L,L])$ is strictly upper triangular, and therefore nilpotent. Thus $[L,L]$ acts nilpotently on $M$.
+
+    $(3)\Rightarrow(1)$.
+    Let $M$ be an irreducible finite-dimensional $L$-module. By (3), every element of $[L,L]$ acts nilpotently on $M$. Hence the Lie algebra $\rho([L,L])\subseteq \mathfrak{gl}(M)$ consists entirely of nilpotent endomorphisms. By Engel's theorem, there exists a nonzero vector $v\in M$ such that
+    \[
+        \rho([L,L])v=0.
+    \]
+    Thus $[L,L]$ annihilates $v$.
+
+    Let $N=U(L)v$ be the submodule generated by $v$. Since $[L,L]v=0$, the action of $L$ on $N$ factors through the abelian Lie algebra $L/[L,L]$. Therefore $N$ is a finite-dimensional module for the abelian Lie algebra $L/[L,L]$.
+
+    Because $F$ is algebraically closed, every irreducible finite-dimensional module over an abelian Lie algebra is $1$-dimensional. Hence $N$ contains a $1$-dimensional submodule. Since $M$ is irreducible and $0\neq N\subseteq M$, we have $N=M$. Therefore $M$ itself contains a $1$-dimensional submodule, and irreducibility forces $\dim_F M=1$.
+
+    This proves (1).
+
+    \smallskip
+
+    Therefore
+    \[
+        (1)\Longleftrightarrow(2)\Longleftrightarrow(3).
+    \]
+\end{proof}
+
+\begin{remark}
+    The assumption that $F$ is algebraically closed is used in the last step of the proof of $(3)\Rightarrow(1)$, namely in the fact that every irreducible finite-dimensional module over the abelian Lie algebra $L/[L,L]$ is $1$-dimensional. Equivalently, one needs the existence of eigenvalues and eigenvectors for commuting linear operators.
+\end{remark}
+
+\begin{example}
+    Assume that $\operatorname{char} F = 2$. Then $\mathfrak{gl}(2,F)$ is solvable.
+
+    Indeed, every element of $\mathfrak{gl}(2,F)$ has the form
+    \[
+        \begin{pmatrix}
+            \alpha & \gamma \\
+            \beta  & \delta
+        \end{pmatrix},
+        \qquad \alpha,\beta,\gamma,\delta \in F.
+    \]
+    A direct computation shows that the commutator of two such matrices is always of the form
+    \[
+        \left[
+            \begin{pmatrix}
+                \alpha & \gamma \\
+                \beta  & \delta
+            \end{pmatrix},
+            \begin{pmatrix}
+                \alpha' & \gamma' \\
+                \beta'  & \delta'
+            \end{pmatrix}
+            \right]
+        =
+        \begin{pmatrix}
+            d & x \\
+            y & d
+        \end{pmatrix},
+    \]
+    for some $d,x,y \in F$.
+    Hence
+    \[
+        \mathfrak{gl}(2,F)^{(1)}=[\mathfrak{gl}(2,F),\mathfrak{gl}(2,F)]
+        \subseteq
+        \left\{
+        \begin{pmatrix}
+            d & x \\
+            y & d
+        \end{pmatrix}
+        :\ d,x,y\in F
+        \right\}.
+    \]
+
+    Now if
+    \[
+        A
+        =
+        \begin{pmatrix}
+            \alpha & \gamma \\
+            \beta  & \alpha
+        \end{pmatrix}
+        \qquad (\text{since } \operatorname{char} F=2),
+    \]
+    and similarly
+    \[
+        B=
+        \begin{pmatrix}
+            \alpha' & \gamma' \\
+            \beta'  & \alpha'
+        \end{pmatrix},
+    \]
+    then their commutator is of the form
+    \[
+        [A,B]=
+        \begin{pmatrix}
+            d & 0 \\
+            0 & d
+        \end{pmatrix}
+    \]
+    for some $d\in F$.
+    Therefore
+    \[
+        \mathfrak{gl}(2,F)^{(2)}
+        \subseteq
+        \left\{
+        \begin{pmatrix}
+            d & 0 \\
+            0 & d
+        \end{pmatrix}
+        :\ d\in F
+        \right\},
+    \]
+    and so
+    \[
+        \mathfrak{gl}(2,F)^{(3)}=0.
+    \]
+    Thus $\mathfrak{gl}(2,F)$ is solvable.
+\end{example}
+
+\section{Generalized eigenvectors and generalized eigenspaces}
+
+\begin{definition}
+    Let $V$ be a finite-dimensional vector space over a field $F$ where $F$ is algebraically closed, and let
+    \[
+        T\in \operatorname{End}_F(V).
+    \]
+    Suppose that the characteristic polynomial of $T$ splits as
+    \[
+        f(x)=(x-\lambda_1)^{a_1}\cdots (x-\lambda_k)^{a_k},
+    \]
+    where $\lambda_1,\dots,\lambda_k$ are distinct. For each $i$, define
+    \[
+        V_{\lambda_i}:=\ker (T-\lambda_i I)^{a_i}.
+    \]
+    This is called the generalized eigenspace of $T$ corresponding to $\lambda_i$.
+\end{definition}
+
+\begin{theorem}
+    With the notation above,
+    \[
+        V=V_{\lambda_1}\oplus \cdots \oplus V_{\lambda_k}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    For each $i$, let
+    \[
+        P_i(x)=\frac{f(x)}{(x-\lambda_i)^{a_i}}
+        =\prod_{j\ne i}(x-\lambda_j)^{a_j}.
+    \]
+    Since the polynomials $P_1(x),\dots,P_k(x)$ have greatest common divisor $1$, there exist polynomials
+    \[
+        Q_1(x),\dots,Q_k(x)\in F[x]
+    \]
+    such that
+    \[
+        Q_1(x)P_1(x)+\cdots+Q_k(x)P_k(x)=1.
+    \]
+    Replacing $x$ by $T$, we obtain
+    \[
+        Q_1(T)P_1(T)+\cdots+Q_k(T)P_k(T)=I_V.
+    \]
+    Hence every $v\in V$ can be written as
+    \[
+        v=\sum_{i=1}^k Q_i(T)P_i(T)v.
+    \]
+    Now
+    \[
+        (T-\lambda_i I)^{a_i}Q_i(T)P_i(T)
+        =Q_i(T)f(T)=0,
+    \]
+    because $f(T)=0$ by the Cayley--Hamilton theorem. Therefore
+    \[
+        Q_i(T)P_i(T)v\in \ker (T-\lambda_i I)^{a_i}=V_{\lambda_i},
+    \]
+    and so
+    \[
+        V=V_{\lambda_1}+\cdots+V_{\lambda_k}.
+    \]
+
+    To show that the sum is direct, let
+    \[
+        v_1+\cdots+v_k=0,
+        \qquad v_i\in V_{\lambda_i}.
+    \]
+    Fix $i$. Since $P_i(\lambda_i)\ne 0$, the polynomial $P_i(x)$ is relatively prime to $(x-\lambda_i)^{a_i}$. Hence there exist polynomials $A_i(x),B_i(x)\in F[x]$ such that
+    \[
+        A_i(x)P_i(x)+B_i(x)(x-\lambda_i)^{a_i}=1.
+    \]
+    Replacing $x$ by $T$ and applying to $v_i\in V_{\lambda_i}$, we get
+    \[
+        A_i(T)P_i(T)v_i=v_i,
+    \]
+    because $(T-\lambda_i I)^{a_i}v_i=0$. Thus $P_i(T)$ is invertible on $V_{\lambda_i}$.
+
+    On the other hand, if $j\ne i$, then
+    \[
+        P_i(T)v_j=0,
+    \]
+    because $P_i(x)$ contains the factor $(x-\lambda_j)^{a_j}$ and
+    \[
+        (T-\lambda_j I)^{a_j}v_j=0.
+    \]
+    Applying $P_i(T)$ to the relation
+    \[
+        v_1+\cdots+v_k=0,
+    \]
+    we obtain
+    \[
+        P_i(T)v_i=0.
+    \]
+    Since $P_i(T)$ is invertible on $V_{\lambda_i}$, it follows that $v_i=0$. As $i$ was arbitrary, all $v_i$ are zero. Therefore the sum is direct.
+\end{proof}
+
+\chapter{Homework}
+
+\section{Homework week 1}
+
+\begin{exercise}
+    Prove the simplicity of Lie algebras $\mathfrak{sl}_n$, $\mathfrak{o}_n$, $\mathfrak{sp}_{2n}$ and $W(n)$.
+\end{exercise}
+
+I can only prove when base field is of characteristic 0 and $\neq 2$. (Or $\operatorname{Char}F \nmid n$, which is essentially the same. If $\operatorname{Char}F \mid n$ or $\operatorname{Char}F = 2$, then either $I$ will contained in the center of $L$, or the alternativity become symmetry, things could be more complicated).
+
+\textbf{The simplicity of $\mathfrak{sl}_n$}
+
+\begin{proof}
+    Let $I\neq 0$ be an ideal of $\mathfrak{sl}_n(F)$. We prove that $I=\mathfrak{sl}_n(F)$.
+
+    Write
+    \[
+    \mathfrak{sl}_n(F)=\mathfrak{h}\oplus \bigoplus_{i\neq j}Fe_{ij},
+    \]
+    where $\mathfrak{h}$ is the subalgebra of diagonal trace-zero matrices. Choose $0\neq x\in I$ and write
+    \[
+    x=y+\sum_{t=1}^s c_t e_{i_tj_t},
+    \qquad y\in\mathfrak{h},
+    \]
+    where the pairs $(i_t,j_t)$ are distinct and $c_t\neq 0$ for all $t$.
+
+    We first show that $I$ contains some off-diagonal matrix unit $e_{kl}$.
+
+    If $s=0$, then $x=y\in\mathfrak{h}$ is non-zero. Writing
+    \[
+    y=\operatorname{diag}(d_1,\dots,d_n),
+    \]
+    we can choose $k\neq l$ such that $d_k\neq d_l$. Then
+    \[
+    [y,e_{kl}]=(d_k-d_l)e_{kl}\in I,
+    \]
+    hence $e_{kl}\in I$.
+
+    Assume now that $s\geq 1$. For
+    \[
+    h=\operatorname{diag}(\lambda_1,\dots,\lambda_n)\in\mathfrak{h},
+    \]
+    define
+    \[
+    \alpha_{ij}(h)=\lambda_i-\lambda_j.
+    \]
+    Since $\operatorname{char}F=0$, the field $F$ is infinite, so we may choose $h\in\mathfrak{h}$ such that
+    \[
+    \mu_t:=\alpha_{i_tj_t}(h)\neq 0
+    \qquad\text{and}\qquad
+    \mu_1,\dots,\mu_s
+    \text{ are pairwise distinct.}
+    \]
+    Because $\mathfrak{h}$ is abelian, for every $r\geq 1$,
+    \[
+    (\operatorname{ad}h)^r(x)=\sum_{t=1}^s c_t\mu_t^r e_{i_tj_t}.
+    \]
+    Put
+    \[
+    z_r:=(\operatorname{ad}h)^r(x)\in I,
+    \qquad r=1,\dots,s.
+    \]
+    Then
+    \[
+    \begin{pmatrix}
+    z_1\\
+    z_2\\
+    \vdots\\
+    z_s
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    \mu_1 & \mu_2 & \cdots & \mu_s\\
+    \mu_1^2 & \mu_2^2 & \cdots & \mu_s^2\\
+    \vdots & \vdots & \ddots & \vdots\\
+    \mu_1^s & \mu_2^s & \cdots & \mu_s^s
+    \end{pmatrix}
+    \begin{pmatrix}
+    c_1e_{i_1j_1}\\
+    c_2e_{i_2j_2}\\
+    \vdots\\
+    c_se_{i_sj_s}
+    \end{pmatrix}.
+    \]
+    The coefficient matrix is invertible: it is the product of $\operatorname{diag}(\mu_1,\dots,\mu_s)$ and a Vandermonde matrix in $\mu_1,\dots,\mu_s$. Therefore each $c_t e_{i_tj_t}$ is a linear combination of $z_1,\dots,z_s$, so $e_{i_tj_t}\in I$ for every $t$. In particular, $I$ contains some $e_{kl}$ with $k\neq l$.
+
+    Fix such an element $e_{kl}\in I$. Since $I$ is an ideal,
+    \[
+    h_{kl}:=[e_{kl},e_{lk}]=e_{kk}-e_{ll}\in I.
+    \]
+    For every $j\neq k$,
+    \[
+    [h_{kl},e_{kj}]=
+    \begin{cases}
+        2e_{kl}, & j=l,\\
+        e_{kj}, & j\neq l,
+    \end{cases}
+    \]
+    so $e_{kj}\in I$ for all $j\neq k$. Similarly, for every $i\neq k$,
+    \[
+    [e_{ik},h_{kl}]=
+    \begin{cases}
+        2e_{lk}, & i=l,\\
+        e_{ik}, & i\neq l,
+    \end{cases}
+    \]
+    hence $e_{ik}\in I$ for all $i\neq k$.
+
+    Now let $i\neq j$. If $i=k$ or $j=k$, then we already know $e_{ij}\in I$. If $i,j\neq k$, then
+    \[
+    e_{ij}=[e_{ik},e_{kj}]\in I.
+    \]
+    Thus every off-diagonal matrix unit $e_{ij}$ belongs to $I$.
+
+    Finally, for $i\neq j$,
+    \[
+    [e_{ij},e_{ji}]=e_{ii}-e_{jj}\in I.
+    \]
+    These elements span $\mathfrak{h}$, hence $\mathfrak{h}\subseteq I$. Therefore
+    \[
+    \mathfrak{sl}_n(F)=\mathfrak{h}\oplus \bigoplus_{i\neq j}Fe_{ij}\subseteq I,
+    \]
+    so $I=\mathfrak{sl}_n(F)$. Hence $\mathfrak{sl}_n(F)$ is simple.
+\end{proof}
+
+\textbf{The simplicity of $\mathfrak{o}_n$}
+9`='
+\begin{proof}
+Let $\mathfrak{g}=\mathfrak{o}_n(F)$. For $i\neq j$, set
+\[
+X_{ij}=E_{ij}-E_{ji},
+\]
+so $X_{ji}=-X_{ij}$ and $\{X_{ij}\mid 1\le i<j\le n\}$ is a basis of $\mathfrak{g}$. The bracket is
+\[
+[X_{ij},X_{kl}]=\delta_{jk}X_{il}-\delta_{ik}X_{jl}-\delta_{jl}X_{ik}+\delta_{il}X_{jk}.
+\]
+
+If $n=1$ or $n=2$, then $\mathfrak{g}$ is abelian, hence not simple. For $n=4$, let
+\[
+I_+=\operatorname{span}\{X_{12}+X_{34},\,X_{13}-X_{24},\,X_{14}+X_{23}\},
+\]
+\[
+I_-=\operatorname{span}\{X_{12}-X_{34},\,X_{13}+X_{24},\,X_{14}-X_{23}\}.
+\]
+A direct computation shows that $I_+$ and $I_-$ are ideals, $[I_+,I_-]=0$, and
+\[
+\mathfrak{o}_4=I_+\oplus I_-.
+\]
+Therefore $\mathfrak{o}_4$ is not simple.
+
+Now assume $n=3$ or $n\ge5$, and let $I\neq0$ be an ideal of $\mathfrak{g}$. It is enough to show that $I$ contains some basis element $X_{pq}$. Indeed, if $X_{pq}\in I$ and $r\notin\{p,q\}$, then
+\[
+[X_{pq},X_{qr}]=X_{pr},\qquad [X_{rp},X_{pq}]=X_{rq},
+\]
+so repeated bracketing gives every basis element of $\mathfrak{g}$.
+
+For $i\neq j$, define
+\[
+P_{ij}(x)=-[X_{ij},[X_{ij},x]].
+\]
+Since $I$ is an ideal, $P_{ij}(I)\subseteq I$. Moreover,
+\[
+P_{ij}(X_{kl})=-[X_{ij},[X_{ij},X_{kl}]]
+\]
+and this can be computed directly from the bracket formula.
+
+If $|\{i,j\}\cap\{k,l\}|=0$, then all Kronecker deltas vanish, so
+\[
+[X_{ij},X_{kl}]=0,
+\qquad\text{hence}\qquad
+P_{ij}(X_{kl})=0.
+\]
+
+If $|\{i,j\}\cap\{k,l\}|=2$, then $\{k,l\}=\{i,j\}$, so $X_{kl}=\pm X_{ij}$. Hence
+\[
+[X_{ij},X_{kl}]=0,
+\qquad\text{and again}\qquad
+P_{ij}(X_{kl})=0.
+\]
+
+Now assume $|\{i,j\}\cap\{k,l\}|=1$. There are four possibilities:
+\[
+[X_{ij},X_{jl}]=X_{il}, \qquad
+P_{ij}(X_{jl})=-[X_{ij},X_{il}]=X_{jl},
+\]
+\[
+[X_{ij},X_{il}]=-X_{jl}, \qquad
+P_{ij}(X_{il})=-[X_{ij},-X_{jl}]=X_{il},
+\]
+\[
+[X_{ij},X_{ki}]=X_{jk}, \qquad
+P_{ij}(X_{ki})=-[X_{ij},X_{jk}]=-X_{ik}=X_{ki},
+\]
+\[
+[X_{ij},X_{kj}]=-X_{ki}, \qquad
+P_{ij}(X_{kj})=-[X_{ij},-X_{ki}]=X_{kj}.
+\]
+Therefore
+\[
+P_{ij}(X_{kl})=
+\begin{cases}
+X_{kl}, & |\{i,j\}\cap\{k,l\}|=1, \\
+0,      & |\{i,j\}\cap\{k,l\}|=0 \text{ or } 2.
+\end{cases}
+\]
+
+If $n=3$, write
+\[
+x=c_{12}X_{12}+c_{13}X_{13}+c_{23}X_{23}\in I,\qquad x\neq0.
+\]
+Then
+\[
+x-P_{12}(x)=c_{12}X_{12},\qquad
+x-P_{13}(x)=c_{13}X_{13},\qquad
+x-P_{23}(x)=c_{23}X_{23}.
+\]
+Since not all $c_{ij}$ vanish, one of these is a non-zero scalar multiple of a basis element. Hence $I$ contains a basis element, so $I=\mathfrak{o}_3$.
+
+Assume now $n\ge5$. Choose
+\[
+0\neq x=\sum_{1\le a<b\le n} c_{ab}X_{ab}\in I,
+\]
+and relabel indices so that $c_{12}\neq0$. Set
+\[
+x_1=P_{13}(x),\qquad x_2=P_{24}(x_1),\qquad x_3=P_{15}(x_2),\qquad x_4=P_{25}(x_3).
+\]
+By the description of $P_{ij}$,
+\[
+x_2\in \operatorname{span}\{X_{12},X_{14},X_{23},X_{34}\},
+\]
+\[
+x_3\in \operatorname{span}\{X_{12},X_{14}\},
+\]
+and therefore
+\[
+x_4=c_{12}X_{12}\in I.
+\]
+Thus $X_{12}\in I$, hence $I=\mathfrak{o}_n$.
+
+Therefore $\mathfrak{o}_n$ is simple exactly when $n=3$ or $n\ge5$.
+\end{proof}
+
+\textbf{The simplicity of $\mathfrak{sp}_{2n}$}
+
+\begin{proof}
+    If $n=1$, then $\mathfrak{sp}_2(F)\cong \mathfrak{sl}_2(F)$, which is simple. So assume $n\ge2$, and let
+    \[
+        \mathfrak{g}=\mathfrak{sp}_{2n}(F)=\left\{\begin{pmatrix} A & B \\ C & -A^T \end{pmatrix} \;\middle|\; B^T=B,\ C^T=C \right\}.
+    \]
+    For $1\le i,j\le n$, define
+    \[
+        A_{ij}=E_{ij}-E_{n+j,n+i},\qquad
+        B_{ij}=E_{i,n+j}+E_{j,n+i},\qquad
+        C_{ij}=E_{n+i,j}+E_{n+j,i}.
+    \]
+    Then $B_{ij}=B_{ji}$ and $C_{ij}=C_{ji}$, and a basis of $\mathfrak{g}$ is
+    \[
+        \{A_{ij}\mid i\neq j\}\cup \{H_i:=A_{ii}\mid 1\le i\le n\}\cup \{B_{ij},C_{ij}\mid 1\le i\le j\le n\}.
+    \]
+    Let $\mathfrak{h}=\operatorname{span}\{H_1,\dots,H_n\}$. A direct computation gives
+    \[
+        [H_r,A_{ij}]=(\delta_{ri}-\delta_{rj})A_{ij},
+    \]
+    \[
+        [H_r,B_{ij}]=(\delta_{ri}+\delta_{rj})B_{ij},
+        \qquad
+        [H_r,C_{ij}]=-(\delta_{ri}+\delta_{rj})C_{ij}.
+    \]
+    Thus every basis element outside $\mathfrak{h}$ is a common eigenvector for $\operatorname{ad}\mathfrak{h}$.
+
+    Let $I\neq0$ be an ideal of $\mathfrak{g}$. Choose $0\neq x\in I$. If $x\notin \mathfrak{h}$, then exactly as in the proof for $\mathfrak{sl}_n$, a Vandermonde argument with a suitable $h\in\mathfrak{h}$ isolates a non-zero basis vector in $I$. If $x\in \mathfrak{h}$, write
+    \[
+        x=\lambda_1H_1+\cdots+\lambda_nH_n,
+    \]
+    and choose $i$ with $\lambda_i\neq0$. Then
+    \[
+        [x,B_{ii}]=2\lambda_i B_{ii}\in I.
+    \]
+    Hence in all cases $I$ contains one of the basis elements $A_{ij}$ $(i\neq j)$, $B_{ij}$, or $C_{ij}$.
+
+    We now show that this already implies $I=\mathfrak{g}$.
+
+    First suppose that $B_{ii}\in I$ for some $i$. Then for every $j\neq i$,
+    \[
+        A_{ij}=\frac{1}{2}[B_{ii},C_{ij}]\in I,\qquad
+        B_{ij}=\frac{1}{2}[A_{ij},B_{jj}]\in I,\qquad
+        C_{ij}=-\frac{1}{2}[A_{ij},C_{ii}]\in I.
+    \]
+    Also,
+    \[
+        H_i=\frac{1}{4}[B_{ii},C_{ii}]\in I.
+    \]
+    For $p,q\neq i$ with $p\neq q$, we then have
+    \[
+        A_{pq}=[B_{pi},C_{iq}]\in I,\qquad
+        B_{pq}=[A_{pi},B_{iq}]\in I,\qquad
+        C_{pq}=-[A_{ip},C_{iq}]\in I.
+    \]
+    For $p\neq i$, the same computations give
+    \[
+        B_{pp}=[A_{pi},B_{ip}]\in I,\qquad C_{pp}=-[A_{ip},C_{ip}]\in I.
+    \]
+    Finally, for $p\neq i$,
+    \[
+        H_i+H_p=[B_{ip},C_{ip}]\in I,
+    \]
+    so $H_p\in I$. Therefore every basis element of $\mathfrak{g}$ lies in $I$, and hence $I=\mathfrak{g}$.
+
+    If $B_{ij}\in I$ with $i\neq j$, then
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I,
+    \]
+    and hence
+    \[
+        B_{ii}=\frac{1}{2}[H_i+H_j,B_{ii}]\in I.
+    \]
+    So we again reduce to the first case.
+
+    If $A_{ij}\in I$ with $i\neq j$, then
+    \[
+        B_{ij}=\frac{1}{2}[A_{ij},B_{jj}]\in I,
+    \]
+    and so
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I.
+    \]
+    Consequently,
+    \[
+        B_{ii}=\frac{1}{2}[H_i+H_j,B_{ii}]\in I,
+    \]
+    and we reduce to the previous case.
+
+    If $C_{ii}\in I$, then
+    \[
+        H_i=-\frac{1}{4}[C_{ii},B_{ii}]\in I,
+    \]
+    so
+    \[
+        B_{ii}=\frac{1}{2}[H_i,B_{ii}]\in I.
+    \]
+    Again we reduce to the first case.
+
+    If $C_{ij}\in I$ with $i\neq j$, then
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I,
+    \]
+    hence
+    \[
+        C_{ii}=-\frac{1}{2}[H_i+H_j,C_{ii}]\in I.
+    \]
+    Also,
+    \[
+        H_i=-\frac{1}{4}[C_{ii},B_{ii}]\in I,
+    \]
+    so
+    \[
+        B_{ii}=\frac{1}{2}[H_i,B_{ii}]\in I.
+    \]
+    Again we reduce to the first case.
+
+    Therefore every non-zero ideal of $\mathfrak{g}$ is equal to $\mathfrak{g}$, so $\mathfrak{sp}_{2n}(F)$ is simple.
+\end{proof}
+
+\textbf{The simplicity of $W(n)$}
+
+\begin{proof}
+    Let
+    \[
+        W(n)=\operatorname{Der}\bigl(F[x_1,\dots,x_n]\bigr)
+        =\left\{\sum_{i=1}^n f_i\partial_i \;\middle|\; f_i\in F[x_1,\dots,x_n]\right\},
+        \qquad \partial_i=\frac{\partial}{\partial x_i},
+    \]
+    where $\operatorname{char}F=0$. This Lie algebra is non-abelian, since
+    \[
+        [\partial_i,x_i]=1\neq0.
+    \]
+    Let $I\neq0$ be an ideal of $W(n)$. We prove that $I=W(n)$.
+
+    Choose
+    \[
+        0\neq D=\sum_{i=1}^n f_i\partial_i\in I.
+    \]
+    By replacing $D$ with repeated brackets $[\partial_k,D]$, we may successively differentiate the coefficients. Since $\operatorname{char}F=0$, differentiating a non-constant polynomial lowers its degree without annihilating its highest term. Hence, after finitely many such brackets, we obtain a non-zero constant vector field
+    \[
+        C=\sum_{i=1}^n c_i\partial_i\in I.
+    \]
+    Choose $k$ with $c_k\neq0$. Then for every $j$,
+    \[
+        [x_k\partial_j,C]
+        =\sum_{i=1}^n c_i[x_k\partial_j,\partial_i]
+        =-c_k\partial_j\in I.
+    \]
+    Therefore $\partial_j\in I$ for all $j=1,\dots,n$.
+
+    Now let $\alpha=(\alpha_1,\dots,\alpha_n)\in \mathbb{N}^n$ and fix $j$. Since $\operatorname{char}F=0$, the scalar $\alpha_1+1$ is invertible in $F$. Set
+    \[
+        E=-\frac{1}{\alpha_1+1}x_1^{\alpha_1+1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}\partial_j\in W(n).
+    \]
+    Because $\partial_1\in I$ and $I$ is an ideal,
+    \[
+        [E,\partial_1]
+        =-\partial_1\!\left(-\frac{1}{\alpha_1+1}x_1^{\alpha_1+1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}\right)\partial_j
+        =x_1^{\alpha_1}\cdots x_n^{\alpha_n}\partial_j
+        \in I.
+    \]
+    Thus every monomial derivation $x^\alpha\partial_j$ lies in $I$. These elements form a basis of $W(n)$, so $I=W(n)$.
+
+    Therefore $W(n)$ is simple.
+\end{proof}
+
+\section{Homework week 2}
+
+\begin{exercise}
+    Prove that if $A$ is a finite-dimensional associative algebra and for every element $a \in A$ one has $a^n = 0$ for some $n$, then the algebra $A$ is nilpotent. Do not use Wedderburn's theorems. Use Engel's theorem.
+\end{exercise}
+
+\begin{proof}
+    Let $A$ be a finite-dimensional associative algebra over a field, such that every element $a \in A$ is nilpotent. We want to show that $A$ is nilpotent as an algebra, meaning there exists some integer $N > 0$ such that $A^N = 0$.
+    
+    Consider the left regular representation of $A$ on itself. For each $a \in A$, define the left multiplication map $L_a : A \to A$ by $L_a(x) = ax$ for all $x \in A$. Since $A$ is an associative algebra, the mapping $a \mapsto L_a$ is an algebra homomorphism from $A$ to the algebra of endomorphisms $\mathrm{End}(A)$.
+    
+    We can view $\mathrm{End}(A)$ as a Lie algebra $\mathfrak{gl}(A)$ with the standard commutator bracket $[T, S] = T \circ S - S \circ T$. The set of all left multiplication maps $\mathfrak{g} = \{ L_a \mid a \in A \}$ forms a Lie subalgebra of $\mathfrak{gl}(A)$, because
+    \[ [L_a, L_b] = L_a \circ L_b - L_b \circ L_a = L_{ab} - L_{ba} = L_{[a,b]}, \]
+    and $a, b \in A \implies [a, b] \in A$, so $L_{[a,b]} \in \mathfrak{g}$.
+    
+    By hypothesis, for every $a \in A$, there exists an integer $n > 0$ such that $a^n = 0$. Consequently, the endomorphism $L_a$ is strictly nilpotent, since $L_a^n(x) = a^n x = 0$ for all $x \in A$. Therefore, $\mathfrak{g}$ is a Lie subalgebra of $\mathfrak{gl}(A)$ consisting entirely of nilpotent endomorphisms.
+    
+    According to Engel's Theorem, if a Lie subalgebra of $\mathfrak{gl}(V)$ (where $V$ is a non-zero finite-dimensional vector space) consists of nilpotent elements, then there exists a flag of subspaces
+    \[ 0 = V_0 \subset V_1 \subset V_2 \subset \dots \subset V_k = A \]
+    such that $\mathfrak{g}(V_i) \subseteq V_{i-1}$ for all $1 \le i \le k$.
+    
+    Translating this back to the associative algebra $A$, we have $L_a(V_i) \subseteq V_{i-1}$ for all $a \in A$, which is precisely equivalent to the statement $A \cdot V_i \subseteq V_{i-1}$.
+    
+    Using this property repeatedly, we obtain:
+    \[ A \cdot V_k \subseteq V_{k-1} \]
+    \[ A^2 \cdot V_k = A \cdot (A \cdot V_k) \subseteq A \cdot V_{k-1} \subseteq V_{k-2} \]
+    \[ \dots \]
+    \[ A^k \cdot V_k \subseteq V_0 = 0. \]
+    
+    Since $V_k = A$, we conclude that $A^{k+1} = A^k \cdot A \subseteq 0$. Thus, $A$ is a nilpotent associative algebra.
+    \end{proof}
+
+\begin{exercise}
+    Let $\operatorname{char} F = 0$; let $L$ be a finite-dimensional solvable Lie algebra; let $e_1, \dots, e_m$ be a basis of the algebra $L$. Let $M$ be a finite-dimensional $L$-module. Suppose that every element $e_i$, for $1 \le i \le m$, acts on $M$ nilpotently. Prove that the algebra $L$ acts on $M$ nilpotently.
+\end{exercise}
+
+\begin{proof}
+    Let $\bar{F}$ be the algebraic closure of $F$. We consider the scalar extensions of the Lie algebra and the module: $\bar{L} = L \otimes_F \bar{F}$ and $\bar{M} = M \otimes_F \bar{F}$.
+    
+    Since $L$ is a finite-dimensional solvable Lie algebra over $F$, its scalar extension $\bar{L}$ remains a solvable Lie algebra over $\bar{F}$. Furthermore, the elements $e_1, \dots, e_m$ naturally form a basis for $\bar{L}$ as a vector space over $\bar{F}$.
+    
+    Because $\operatorname{char} \bar{F} = 0$ and $\bar{F}$ is algebraically closed, we can apply Lie's Theorem to the finite-dimensional $\bar{L}$-module $\bar{M}$. Lie's Theorem guarantees the existence of a basis for $\bar{M}$ such that the representation $\rho: \bar{L} \to \operatorname{gl}(\bar{M})$ maps every element of $\bar{L}$ to an upper triangular matrix.
+    
+    Consequently, for each $x \in \bar{L}$, the diagonal entries of the matrix $\rho(x)$ are given by a set of linear functionals $\lambda_1(x), \dots, \lambda_n(x)$, where $n = \dim_{\bar{F}} \bar{M}$ and $\lambda_k \in \bar{L}^*$.
+    
+    We are given that each basis element $e_i$ ($1 \le i \le m$) acts nilpotently on $M$. This property is preserved under scalar extension, so each $e_i$ also acts nilpotently on $\bar{M}$. An upper triangular matrix that is nilpotent must have all its diagonal entries equal to zero. Thus, for each $i \in \{1, \dots, m\}$ and each $k \in \{1, \dots, n\}$, we have:
+    \[
+    \lambda_k(e_i) = 0.
+    \]
+    
+    Since the linear functionals $\lambda_k$ vanish on the basis $e_1, \dots, e_m$, and linear transformations are determined by their action on a basis, they must vanish identically on the entire Lie algebra $\bar{L}$. That is, $\lambda_k(x) = 0$ for all $x \in \bar{L}$.
+    
+    This implies that for any $x \in \bar{L}$, the matrix $\rho(x)$ is strictly upper triangular. Consequently, every $x \in \bar{L}$ acts as a nilpotent endomorphism on $\bar{M}$. 
+    
+    Restricting this result back to the original base field $F$ and the original module $M$, we conclude that every element $x \in L$ acts nilpotently on $M$. By Engel's Theorem, a Lie algebra of nilpotent endomorphisms acts nilpotently, which completes the proof.
+    \end{proof}
+
+\begin{exercise}
+    For every prime $p$, find an example showing that Lie's theorem fails.
+\end{exercise}
+
+\begin{proof}
+    Let $F$ be an algebraically closed field of characteristic $p > 0$. We will construct a finite-dimensional solvable Lie algebra $\mathfrak{g}$ and a finite-dimensional representation $V$ over $F$ such that $\mathfrak{g}$ has no common eigenvector in $V$, thus showing that Lie's theorem fails.
+    
+    Let $V$ be a $p$-dimensional vector space over $F$ with a chosen basis $v_0, v_1, \dots, v_{p-1}$. 
+    We define two linear transformations $x, y \in \mathfrak{gl}(V)$ by defining their actions on the basis vectors:
+    \begin{align*}
+    x(v_i) &= v_{i-1} \quad \text{for } 0 \le i \le p-1, \\
+    y(v_i) &= i v_i \quad \text{for } 0 \le i \le p-1,
+    \end{align*}
+    where the subscripts for the action of $x$ are taken modulo $p$ (so $x(v_0) = v_{p-1}$).
+    
+    Let $\mathfrak{g}$ be the Lie subalgebra of $\mathfrak{gl}(V)$ generated by $x$ and $y$. First, we compute the commutator $[x, y]$ acting on an arbitrary basis vector $v_i$:
+    \[
+    [x, y](v_i) = x(y(v_i)) - y(x(v_i)) = x(i v_i) - y(v_{i-1}) = i v_{i-1} - (i-1) v_{i-1} = v_{i-1} = x(v_i).
+    \]
+    Since this holds for all basis vectors, we have $[x, y] = x$. 
+    This shows that the vector space spanned by $x$ and $y$ is closed under the Lie bracket, so $\mathfrak{g} = \text{span}_F\{x, y\}$ is a 2-dimensional Lie algebra. 
+    Furthermore, its derived algebra is $\mathfrak{g}' = [\mathfrak{g}, \mathfrak{g}] = \text{span}_F\{x\}$. Since $\mathfrak{g}'$ is 1-dimensional, it is abelian, which implies that $\mathfrak{g}$ is a solvable Lie algebra.
+    
+    Next, we show that $\mathfrak{g}$ has no common eigenvector in $V$. 
+    Suppose, for the sake of contradiction, that $v = \sum_{i=0}^{p-1} c_i v_i$ is a common non-zero eigenvector for both $x$ and $y$.
+    Since $v$ is an eigenvector of $y$, and the eigenvalues of $y$ are exactly $0, 1, \dots, p-1$ (which are all distinct in $F$ because the characteristic is $p$), $v$ must belong to one of the 1-dimensional eigenspaces of $y$. 
+    Thus, $v$ must be a non-zero scalar multiple of $v_k$ for some $0 \le k \le p-1$.
+    
+    However, $v$ must also be an eigenvector for $x$. We check the action of $x$ on $v_k$:
+    \[
+    x(v_k) = v_{k-1} \pmod p.
+    \]
+    Because $p$ is a prime (and thus $p \ge 2$), $v_{k-1}$ is linearly independent from $v_k$. Therefore, $v_k$ is not an eigenvector for $x$, which is a contradiction.
+    
+    Consequently, the solvable Lie algebra $\mathfrak{g}$ has no common eigenvector in the representation $V$, demonstrating that Lie's theorem does not hold in characteristic $p$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
