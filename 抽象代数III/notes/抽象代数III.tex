@@ -1,3 +1,4 @@
+% !TeX program = xelatex
 \documentclass[11pt, a4paper]{report}
 %----------------------------------------------------------------------------------------
 %	PACKAGES (宏包管理)
@@ -6,7 +7,9 @@
 \usepackage[english]{babel}
 \usepackage{fontspec}
 \usepackage{xeCJK}
-\setmainfont{Latin Modern Roman}
+\setmainfont{Latin Modern Roman}[
+    SmallCapsFont={lmromancaps10-regular.otf}
+]
 \setCJKmainfont{Microsoft YaHei}[AutoFakeSlant=0.2, AutoFakeBold=2]
 % 2. 页面布局与排版
 \usepackage{geometry}
@@ -4779,7 +4782,185 @@ $\operatorname{char} k = p$, $G$ a $p$-group. Then
 \end{theorem}
 % --- End rewritten content from 抽代3.md ---
 
+\chapter{Homework}
 
+\section{Homework week 1}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ be an $R$-module. Suppose that $S$ is a ring and
+    \[
+        \theta : S \to R
+    \]
+    is a ring homomorphism satisfying $\theta(1_S)=1_R$. Let $S$ act on $M$ by
+    \[
+        sx=\theta(s)x,
+    \]
+    where $x\in M$ and $s\in S$. Prove that $M$ is an $S$-module.
+\end{exercise}
+
+\begin{proof}
+    This action is well-defined because $\forall s \in S$, $\theta(s) \in R$ and
+    $\theta(s)x \in M$ for all $x \in M$. We need to verify the module axioms, for all
+    $s, t \in S$ and $x, y \in M$:
+    \begin{itemize}
+        \item $s(x+y) = \theta(s)(x+y) = \theta(s)x + \theta(s)y = sx + sy$
+        \item $(s+t)x = \theta(s+t)x = \theta(s)x + \theta(t)x = sx + tx$
+        \item $(st)x=\theta(st)x=\theta(s)\theta(t)x=\theta(s)(\theta(t)x)=s(tx)$.
+        \item $1_S x = \theta(1_S)x = 1_R x = x$
+    \end{itemize}
+    Hence $M$ is an $S$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ and $N$ be two right $R$-modules. Let
+    $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ be the set of group homomorphisms from $M$ to
+    $N$ (as abelian groups). The action of $R$ on
+    $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is given as follows: for any $a\in R$ and
+    $\varphi\in \operatorname{Hom}_{\mathbb{Z}}(M,N)$, define
+    \[
+        (\varphi a)(x)=\varphi(xa), \qquad \forall x\in M.
+    \]
+    Prove that $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is a left $R$-module.
+\end{exercise}
+
+\begin{proof}
+    This action is well-defined. $\forall r \in R$, $\varphi r \in
+    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ for all $\varphi \in
+    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ as $(\varphi r)(x) = \varphi(xr) \in N$ for all
+    $x \in M$. We need to verify the module axioms, for all $r_1, r_2 \in R$ and
+    $\varphi, \psi \in \operatorname{Hom}_{\mathbb{Z}}(M,N)$, $\forall x \in M$:
+    \begin{itemize}
+        \item $((\varphi + \psi)r)(x) = (\varphi + \psi)(xr) = \varphi(xr) + \psi(xr) = (\varphi r)(x) + (\psi r)(x)$
+        \item $(\varphi(r_1 + r_2))(x) = \varphi(x(r_1 + r_2)) = \varphi(xr_1 + xr_2) = \varphi(xr_1) + \varphi(xr_2) = (\varphi r_1)(x) + (\varphi r_2)(x)$
+        \item $((\varphi r_1)r_2)(x) = (\varphi r_2)(xr_1) = \varphi(xr_2r_1) = (\varphi r_2 r_1)(x)$
+        \item $( \varphi 1_R)(x) =  \varphi(x 1_R) = \varphi(x) $
+    \end{itemize}
+    Hence $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is a left $R$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ be an $R$-module. Denote
+    \[
+        \operatorname{Ann}_R M=\{r\in R \mid rm=0,\ \forall m\in M\}.
+    \]
+    We call $M$ a faithful $R$-module if $\operatorname{Ann}_R M=\{0\}$. Define the action
+    of the quotient ring $R/\operatorname{Ann}_R M$ on $M$ by
+    \[
+        \overline{r}\,x=rx,
+    \]
+    where $x\in M$, $r\in R$, and $\overline{r}=r+\operatorname{Ann}_R M$. Prove that $M$
+    is a faithful $R/\operatorname{Ann}_R M$-module.
+\end{exercise}
+
+\begin{proof}
+    First we show that the action is well-defined. Suppose
+    \[
+        \bar r=\bar r' \in R/\operatorname{Ann}_R M.
+    \]
+    Then $r-r'\in \operatorname{Ann}_R M$, so for every $x\in M$,
+    \[
+        (r-r')x=0.
+    \]
+    Hence $rx=r'x$, so $\bar r\,x$ does not depend on the choice of representative.
+
+    The module axioms follow immediately from those of the $R$-module structure on $M$.
+
+    Now we prove faithfulness. Suppose $\bar r\in R/\operatorname{Ann}_R M$ acts trivially on
+    $M$, that is,
+    \[
+        \bar r\,x=0 \qquad \forall x\in M.
+    \]
+    By definition, this means
+    \[
+        rx=0 \qquad \forall x\in M.
+    \]
+    Therefore $r\in \operatorname{Ann}_R M$, so $\bar r=\bar 0$ in the quotient ring. Hence
+    \[
+        \operatorname{Ann}_{R/\operatorname{Ann}_R M}(M)=\{\bar 0\},
+    \]
+    and $M$ is faithful as an $R/\operatorname{Ann}_R M$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $\varphi : M \to M$ be a homomorphism of $R$-modules such that
+    \[
+        \varphi\varphi=\varphi.
+    \]
+    Prove that
+    \[
+        M=\ker\varphi \oplus \operatorname{im}\varphi.
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let $x \in M$. Then $x = \varphi(x) + (x - \varphi(x))$. Where $\varphi(x) \in
+    \operatorname{im}\varphi$ and $x - \varphi(x) \in \ker\varphi$. Hence $M =
+    \operatorname{im}\varphi + \ker\varphi$. We only need to show that $\ker\varphi \cap
+    \operatorname{im}\varphi = \{0\}$.
+    Suppose $x \in \ker\varphi \cap \operatorname{im}\varphi$. Then $x = \varphi(y)$ for some
+    $y \in M$ and $\varphi(x) = 0$. Then $\varphi(x) = \varphi \varphi(y) = \varphi(y)=x=0$,
+    so $x = 0$. Hence $\ker\varphi \cap \operatorname{im}\varphi = \{0\}$.
+\end{proof}
+
+\begin{exercise}
+    Show that any $R$-module is a homomorphism image of some free $R$-module.
+\end{exercise}
+
+\begin{proof}
+    Let $M$ be a left $R$-module. Consider the free $R$-module
+    \[
+        F=\bigoplus_{x\in M} Re_x
+    \]
+    with basis $\{e_x\}_{x\in M}$ indexed by the underlying set of $M$.
+    Define an $R$-module homomorphism
+    \[
+        \pi:F\to M
+    \]
+    by
+    \[
+        \pi(e_x)=x \qquad (x\in M),
+    \]
+    and extend $R$-linearly. Thus
+    \[
+        \pi\Bigl(\sum_{i=1}^n r_i e_{x_i}\Bigr)=\sum_{i=1}^n r_i x_i.
+    \]
+    This is well-defined and $R$-linear.
+
+    For any $m\in M$, we have
+    \[
+        \pi(e_m)=m,
+    \]
+    so $\pi$ is surjective. Therefore $M$ is a homomorphic image of the free module $F$.
+    Equivalently,
+    \[
+        M\cong F/\ker\pi.
+    \]
+\end{proof}
+
+\begin{exercise}
+    Let $\mathbb{Q}$ be the field of rational numbers. Is the additive group
+    $(\mathbb{Q},+)$ a free $\mathbb{Z}$-module?
+\end{exercise}
+
+\begin{proof}
+    Claim: any two non-zero element of $\mathbb{Q}$ are linearly dependent over
+    $\mathbb{Z}$. Hence if $\mathbb{Q}$ is a free $\mathbb{Z}$-module, then it must have a
+    basis of cardinality 1.
+
+    Proof of claim: let $0 \neq x = \frac{a}{b}$ and $0 \neq y =\frac{c}{d}$ be two
+    elements of $\mathbb{Q}$. Then $dcx - aby=0$. If $a=0$ or $c=0$, then $x=0$ or $y=0$,
+    which contradicts the assumption. Hence $a, c \neq 0$ which means $dc,ab$ are two
+    non-zero integer coefficients. Hence $x$ and $y$ are linearly dependent over
+    $\mathbb{Z}$. And if $\mathbb{Q}$ is a free $\mathbb{Z}$-module, then it must have a
+    basis of cardinality 1.
+
+    But if $\mathbb{Q}$ is a cyclic $\mathbb{Z}$-module, then it has only one generator.
+    Suppose it is $z=\frac{e}{f}$. Then $\mathbb{Q}=\{n \frac{e}{f} \mid n \in \mathbb{Z}\}$.
+    But this is not possible because we can easily pick $\frac{1}{2f} \notin \mathbb{Q}$,
+    which is absurd.
+
+    Therefore $\mathbb{Q}$ is not a free $\mathbb{Z}$-module.
+\end{proof}
 
 
 \end{document}
