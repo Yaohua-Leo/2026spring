@@ -1,0 +1,1168 @@
+% !TeX program = xelatex
+\documentclass[11pt, a4paper]{report}
+%----------------------------------------------------------------------------------------
+%	PACKAGES (宏包管理)
+%----------------------------------------------------------------------------------------
+% 1. 编码与语言
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont{Latin Modern Roman}[
+    SmallCapsFont={Latin Modern Roman Caps}
+]
+\setCJKmainfont{Microsoft YaHei}[AutoFakeSlant=0.2, AutoFakeBold=2]
+% 2. 页面布局与排版
+\usepackage{geometry}
+\geometry{
+    textwidth=6in, % 稍微加宽以便放入更好的box
+    top=1in,
+    bottom=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{float}
+\usepackage[shortlabels]{enumitem} % 更好的列表控制
+\usepackage{tocloft}  % 加载目录控制宏包
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % 强制让 section 后面显示点号
+% 3. 数学支持
+\usepackage{amsmath, amsthm, amssymb, amsfonts, amscd}
+\usepackage{mathtools}
+\usepackage{thmtools} % 定理环境增强
+\usepackage{extarrows}
+% 4. 图形与颜色
+\usepackage{graphicx}
+\usepackage[dvipsnames, svgnames]{xcolor} % 加载更多颜色名
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ytableau} % 杨表
+\usetikzlibrary{decorations.pathreplacing, calc, shadows}
+% 5. 漂亮的文本框
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+% 6. 参考文献
+%\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015]{biblatex}
+%\addbibresource{references.bib}
+% 7. 交互 (最后加载)
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+%----------------------------------------------------------------------------------------
+%	CUSTOM COLORS (自定义配色方案)
+%----------------------------------------------------------------------------------------
+% 定理色系 - 蓝色
+\definecolor{ThmColor}{RGB}{0, 71, 171}        % 深钴蓝
+\definecolor{ThmBg}{RGB}{240, 244, 255}        % 极浅蓝
+% 定义色系 - 绿色
+\definecolor{DefColor}{RGB}{0, 100, 0}         % 深绿
+\definecolor{DefBg}{RGB}{240, 255, 240}        % 蜜瓜绿
+% 引理/命题色系 - 橙色
+\definecolor{LemColor}{RGB}{204, 85, 0}        % 焦橙色
+\definecolor{LemBg}{RGB}{255, 248, 240}        % 极浅橙
+% 示例/注记色系 - 灰色/紫色
+\definecolor{ExColor}{RGB}{105, 105, 105}      % 暗灰
+\definecolor{ExBg}{RGB}{250, 250, 250}         % 极浅灰
+% 专题/话题色系 - 靛紫色
+\definecolor{TopicColor}{RGB}{75, 0, 130}      % 靛蓝色 (Indigo)
+\definecolor{TopicBg}{RGB}{248, 245, 255}      % 极浅紫
+%----------------------------------------------------------------------------------------
+%	THEOREM ENVIRONMENTS (环境美化核心)
+%----------------------------------------------------------------------------------------
+% 1. Theorem (蓝色风格)
+\declaretheorem[name=Theorem, numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{
+    enhanced jigsaw,
+    colframe=ThmColor,       % 边框颜色
+    colback=ThmBg,           % 背景颜色
+    coltitle=white,          
+    boxrule=0.5pt,           % 边框粗细
+    leftrule=2pt,            % 左边框加粗
+    sharp corners=downhill,  % 样式
+    breakable,               % 允许跨页
+    drop shadow=black!5!white % 轻微阴影
+}
+% Corollary 使用与 Theorem 相同的风格，但通常紧随其后
+\declaretheorem[name=Corollary, numberlike=theorem]{corollary}
+\tcolorboxenvironment{corollary}{
+    enhanced jigsaw,
+    colframe=ThmColor!80!white, 
+    colback=ThmBg,
+    boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
+    breakable
+}
+% 2. Definition (绿色风格)
+\declaretheorem[name=Definition, numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{
+    enhanced jigsaw,
+    colframe=DefColor,
+    colback=DefBg,
+    boxrule=0.5pt, leftrule=2pt,
+    sharp corners=downhill,
+    breakable,
+    drop shadow=black!5!white
+}
+% 3. Lemma & Proposition (橙色风格)
+\declaretheorem[name=Lemma, numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition, numberlike=theorem]{proposition}
+\tcolorboxenvironment{lemma}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+\tcolorboxenvironment{proposition}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+% 4. Example & Remark (简约风格)
+\declaretheorem[name=Example, numberlike=theorem]{example}
+\declaretheorem[name=Remark, numberlike=theorem]{remark}
+\declaretheorem[name=Exercise, numberlike=theorem]{exercise}
+\tcolorboxenvironment{example}{
+    enhanced jigsaw,
+    colframe=ExColor,
+    colback=ExBg,
+    leftrule=2pt, boxrule=0pt,
+    frame hidden, % 隐藏其他三边
+    breakable
+}
+% 5. Topic (靛紫色风格，带标题支持)
+\declaretheorem[name=Topic, numberlike=theorem]{topic}
+\tcolorboxenvironment{topic}{
+    enhanced jigsaw,
+    breakable,
+    colframe=TopicColor,        % 边框为靛紫色
+    colback=TopicBg,           % 背景为极浅紫
+    boxrule=0.5pt,             % 细边框
+    leftrule=2pt,              % 左侧加粗线
+    sharp corners=downhill,    % 与你其他环境一致的切角样式
+    drop shadow=black!5!white, % 轻微阴影
+    before skip=15pt,
+    after skip=15pt
+}
+%----------------------------------------------------------------------------------------
+%	MATH MACROS (保留你的常用定义)
+%----------------------------------------------------------------------------------------
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\der}{\mathrm{d}} 
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    \textsc{\Large Course Notes}\\[0.5cm]
+
+    \HRule{1.5pt} \\[0.5cm]
+    { \huge \bfseries Abstract Algebra III }\\[0.4cm] 
+    \HRule{1.5pt} \\[1.5cm]
+    
+    \vspace{3cm}
+
+    % 人员信息区域：垂直排列并区分字号
+    \begin{spacing}{1.8}
+        {\Large \textbf{Instructor:}} \\
+        {\Large Prof. Zhicheng \textsc{Feng}} \\[0.8cm]
+        
+        {\normalsize \textit{Student:}} \\
+        {\normalsize Leo}
+    \end{spacing}
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%    CONTENT STRUCTURE TEMPLATE
+%----------------------------------------------------------------------------------------
+\chapter{Lecture 1: Modules}
+
+Message: QQ, BB. HW 30\%, Mid 20\%, Final 50\%
+
+\section{Basic Definitions and Examples}
+
+% --- Begin rewritten content from 抽代3.md ---
+\begin{definition}
+Let $R$ be a ring with $1$, and let $M$ be an abelian group. We say that $M$ is a left $R$-module if $R$ ``left acts'' on $M$:
+\[
+R \times M \rightarrow M, \quad (r, m) \mapsto rm
+\]
+such that
+\[
+\begin{aligned}
+r(m+n) &= rm + rn, \\
+(r+s)m &= rm + sm, \\
+(rs)m &= r(sm), \\
+1m &= m.
+\end{aligned}
+\quad \text{for any } r, s \in R, m,n \in M
+\]
+
+A \textbf{right $R$-module} is defined by $(r, m) \mapsto mr$ with the axiom $m(rs) = (mr)s$. If $R$ is commutative, left-modules and right-modules coincide. Otherwise, one can transform using the opposite ring $R^{\mathrm{op}}$.
+\end{definition}
+
+Consider $ M $ an $ R $-module, then $ \forall r \in R $, $ \varphi_r: M \rightarrow M $ by $ \varphi_r(m) = rm $ is an abelian group homomorphism. Let
+\[
+\operatorname{End}(M) = \{ \varphi: M \rightarrow M \text{ is a abelian group homomorphism } \}
+\]        
+Then $ \operatorname{End}(M) $ is a ring with composition as the multiplication.
+
+\begin{theorem}
+Let $M$ be an abelian group. Then $M$ is an $R$-module if and only if there is a ring homomorphism $R \rightarrow \operatorname{End}(M)$.
+\end{theorem}
+
+\begin{proof}
+$(\Rightarrow)$ Suppose $M$ is an $R$-module. Define $\rho: R \rightarrow \operatorname{End}(M)$ by
+\[
+\rho(r)(m) = rm, \quad \forall r \in R, m \in M.
+\]
+For each $r \in R$, the map $\rho(r): M \rightarrow M$ is a group homomorphism since $r(m_1 + m_2) = rm_1 + rm_2$. Moreover, $\rho$ is a ring homomorphism:
+\begin{itemize}
+    \item $\rho(r + s)(m) = (r + s)m = rm + sm = \rho(r)(m) + \rho(s)(m)$, so $\rho(r + s) = \rho(r) + \rho(s)$.
+    \item $\rho(rs)(m) = (rs)m = r(sm) = \rho(r)(\rho(s)(m))$, so $\rho(rs) = \rho(r) \circ \rho(s)$.
+    \item $\rho(1)(m) = 1m = m$, so $\rho(1) = \operatorname{id}_M$.
+\end{itemize}
+
+$(\Leftarrow)$ Suppose $\rho: R \rightarrow \operatorname{End}(M)$ is a ring homomorphism. Define the scalar multiplication $R \times M \rightarrow M$ by
+\[
+(r, m) \mapsto \rho(r)(m).
+\]
+We verify the module axioms:
+\begin{itemize}
+    \item $r(m_1 + m_2) = \rho(r)(m_1 + m_2) = \rho(r)(m_1) + \rho(r)(m_2) = rm_1 + rm_2$.
+    \item $(r + s)m = \rho(r + s)(m) = (\rho(r) + \rho(s))(m) = \rho(r)(m) + \rho(s)(m) = rm + sm$.
+    \item $(rs)m = \rho(rs)(m) = (\rho(r) \circ \rho(s))(m) = \rho(r)(\rho(s)(m)) = r(sm)$.
+    \item $1m = \rho(1)(m) = \operatorname{id}_M(m) = m$.
+\end{itemize}
+Hence $M$ is an $R$-module.
+\end{proof}
+
+\begin{example}
+(1) A vector space is a module over a field.
+
+(2) An abelian group is a module over the ring of integers $\mathbb{Z}$.
+\[
+\mathbb{Z} \times M \rightarrow M, \quad (n, m) \mapsto n \cdot m := m+m+\cdots+m \text{ (n times)}
+\]
+
+(3) An ideal $ I $ of a ring $ R $ is a module over $ R $.
+
+(4) Let $M$ be an abelian group. Then $M$ is an $\operatorname{End}(M)$-module via
+\[
+\operatorname{End}(M) \times M \rightarrow M, \quad (\varphi, m) \mapsto \varphi(m).
+\]
+
+(5) Let $V$ be a vector space over a field $K$, and let $A: V \rightarrow V$ be a linear transformation. Then $V$ is a $K[x]$-module via
+\[
+K[x] \times V \rightarrow V, \quad (f(x), v) \mapsto f(A)v.
+\]
+
+(6) If $|M| = 1$, then $M$ is called the zero module.
+
+(7) Let $ R $ be a ring with 1 and $ A \in M_n(R) $. The solution of $ AX=0 $ where $ X \in R^n $ is a right $ R $-module.   
+\end{example}
+
+\begin{definition}[$R$-submodule]
+Let $R$ be a ring (with $1$) and let $M$ be a left $R$-module. A subset $N\subseteq M$
+is called an \emph{$R$-submodule} of $M$ if:
+\begin{enumerate}
+  \item $0\in N$;
+  \item $n_1,n_2\in N \implies n_1+n_2\in N$;
+  \item $n\in N \implies -n\in N$;
+  \item $r\in R,\ n\in N \implies rn\in N$.
+\end{enumerate}
+Equivalently, $N$ is a subgroup of the abelian group $(M,+)$ that is closed under the
+$R$-action.
+\end{definition}
+
+\begin{example} 
+(1) Let $ V $ be a vector space over a field $ K $, then any subspace of $ V $ is a $ k $-submodule of $ V $.
+
+(2) Let $ G $ be an abelian group, then any subgroup of $ G $ is a $ \mathbb{Z} $-submodule of $ G $.
+
+(3) Let $ R $ be a ring, $ {}_RR $ is a left (regular) $ R $-module. Then any left ideal of $ R $ is a $ R $-submodule of $ {}_RR $.
+
+(4) Let $ G $ be an abelian group, which is an $ \operatorname{End}(G) $-module. Then any full invariant subgroup of $ G $ is a $ \operatorname{End}(G) $-submodule of $ G $.
+\end{example}
+
+\textbf{Question:} Are submodules of a finitely generated $R$-module finitely generated?
+
+\textbf{Answer:} No, not in general. This property holds if and only if the ring $R$ is Noetherian.
+
+\begin{example}[Submodule of a f.g. module that is not f.g.]
+Let $k$ be a field and consider the polynomial ring $R = k[x_1, x_2, x_3, \dots]$ in infinitely many variables.
+\begin{itemize}
+    \item The ring $R$ itself can be viewed as a left $R$-module, which we denote by $M=R$. $M$ is finitely generated, for instance by the single element $1 \in R$.
+    \item Consider the ideal $I = \langle x_1, x_2, x_3, \dots \rangle$ generated by all the variables. This ideal $I$ is a submodule of $M=R$.
+    \item This submodule $I$ is not finitely generated. To see this, suppose for contradiction that $I$ is finitely generated by a set of polynomials $\{f_1, \dots, f_n\}$. Let $N$ be the largest index of any variable appearing in any of the polynomials $f_1, \dots, f_n$. Then any element in the ideal generated by $\{f_1, \dots, f_n\}$ must be a polynomial in variables $x_1, \dots, x_N$. However, the polynomial $x_{N+1}$ is in $I$ but cannot be expressed as a combination of $f_1, \dots, f_n$. This is a contradiction.
+\end{itemize}
+Therefore, the ideal $I$ is a submodule of the finitely generated $R$-module $R$ which is not itself finitely generated. This shows that the ring $R$ is not Noetherian.
+\end{example}
+
+\begin{definition} 
+    Let $ M $ be an $ R $-module, $ M_i, i\in I $ are $ R $-submodules of $ M $. Then 
+    \[
+    \bigcap_{i\in I} M_i
+    \]     
+is an $ R $-submodule of $ M $.   
+\[
+\sum_{i\in I} = \{ \sum_{i \in I \text{ finite }} m_i | m_i \in M_i\} 
+\]
+is an $ R $-submodule of $ M $.
+\end{definition}
+
+\begin{definition} 
+Let $M$ be an $R$-module, $ S \subseteq M $ a subset. 
+\[
+<S> = \{ \sum_{finite} {a_is_i} | a_i \in R, s_i \in S \}
+\]
+or
+\[
+<S>=\bigcap_{N \text{is an } R -\text{submodule of }  M,   \   S \subseteq N } N
+\]
+is an $ R $-submodule of $ M $, called the $ R $-submodule of $ M $ generated by $ S $.   
+
+If $ M=<S> $, then we say $ M $ is generated by $ S $. In particular, if $ |S|=1 $ then we call $ M $ a cyclic module. If $ |S| < \infty $ then we call $ M $ a finite generated module.    
+\end{definition}
+
+\begin{definition}
+    Let $R$ be a ring and let $M$ be a left $R$-module. We say that $M$ is a \emph{Noetherian module} if every ascending chain of submodules
+    \[
+    M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots
+    \]
+    stabilizes; that is, there exists $n \ge 1$ such that
+    \[
+    M_n = M_{n+1} = M_{n+2} = \cdots.
+    \]
+    Equivalently, $M$ is Noetherian if every submodule of $M$ is finitely generated.
+\end{definition}
+
+
+
+\section{Quotient Modules and Homomorphism Theorems}
+
+\begin{definition}
+    Let $R$ be a ring, let $M$ be a left $R$-module, and let $N$ be a submodule of $M$. The \emph{quotient module} (or \emph{factor module}) of $M$ by $N$ is the quotient abelian group
+    \[
+    M/N=\{\,x+N \mid x\in M\,\},
+    \]
+    with scalar multiplication defined by
+    \[
+    r(x+N)=rx+N
+    \qquad
+    (r\in R,\ x\in M).
+    \]
+    This is well-defined, and with this operation $M/N$ becomes a left $R$-module.
+\end{definition}
+
+\begin{example} 
+(1) Let $ R $ be a ring and an $ R $-module, $ I $ be an ideal of $ R $, then $ R/I $ is a quotient $ R $-module of $ R $ by $ I $.
+
+(2) Consider the ring $ \mathbb{Z} $ and the module $ \mathbb{Z} $ over $ \mathbb{Z} $, then for $ n \in \mathbb{Z} $, $ n \mathbb{Z} $ is a submodule of $ \mathbb{Z} $, and $ \mathbb{Z}/n\mathbb{Z} $ is a quotient $ \mathbb{Z} $-module of $ \mathbb{Z} $ by $ n\mathbb{Z} $. Furthermore, $ \mathbb{Z}/n\mathbb{Z} $ is a cyclic module.
+\end{example}
+
+\begin{definition}
+    Let $R$ be a ring, and let $M$ and $N$ be left $R$-modules. A group homomorphism
+    \[
+    f:M\to N
+    \]
+    is called an \emph{$R$-module homomorphism} (or \emph{$R$-linear map}) if for all $x,y\in M$ and all $r\in R$, one has
+    \[
+    f(rx)=rf(x) \quad \forall r \in R, x \in M.
+    \]
+\end{definition}
+
+\begin{definition} 
+Let $ f $ be an $ R $-module homomorphism. The \emph{kernel} of $ f $ is the set
+\[
+\ker(f) = \{ x \in M \mid f(x) = 0 \}.
+\]
+$ \ker(f) $ is a submodule of $ M $.
+The \emph{image} of $ f $ is the set
+\[
+\operatorname{im}(f) = \{ f(x) \in N \mid x \in M \}.
+\]
+$ \operatorname{im}(f) $ is a submodule of $ N $.
+
+If $ \ker(f) = 0 $, then $ f $ is injective.
+If $ \operatorname{im}(f) = N $, then $ f $ is surjective.
+If $ \ker(f) = 0 $ and $ \operatorname{im}(f) = N $, then $ f $ is bijective.
+
+A bijective $ R $-module homomorphism is called an \emph{isomorphism}.
+\end{definition}
+
+\begin{example} 
+Let $ R $ be a ring and $ M,N $ be an $ R $-modules. Then $ \operatorname{Hom}_R(M,N) $ is an $ R $-module when $ R $ is commutative.     
+\end{example}
+
+\begin{theorem} 
+If $ f: M\to N $ is an $ R $-module homomorphism, then we have a canonical $ R $-module isomorphism:
+\[
+M/ \ker(f) \rightarrow \operatorname{im}(f)
+\]   
+\end{theorem}
+
+\begin{theorem} 
+Let $ N $ be an $ R $-submodule of $ M $, $ \pi_N: M \to M/N $ be a quotient map. Then $ \pi_N $ induces a natural bijection:
+\[
+\{R-\text{submodules of } M \text{ containing } N\} \rightarrow \{R-\text{submodules of } M/N\}
+\]    
+\end{theorem}
+
+\begin{theorem} 
+If $ N\subseteq H$ are two $ R $-submodules of $ M $, then 
+\[
+M/H \cong M/N / (H/N), 
+\]
+\end{theorem}
+
+\begin{theorem} 
+If $ N,H $ are $ R $-submodules of $ M $, then
+\[
+\frac{H+N}{N} \cong \frac{H}{H \cap N} 
+\] 
+\end{theorem} 
+
+\begin{proposition}
+Let $M$ be an $R$-module, $N$ a submodule of $M$, $M'$ an $R$-module, and $\varphi: M \rightarrow M'$ a morphism such that $N \subseteq \ker(\varphi)$. Then there exists a unique morphism
+\[
+\varphi_{N}: M/N \rightarrow M'
+\]
+such that the following diagram commutes. Moreover, $\ker(\varphi_{N}) = \ker\varphi / N$.
+\[
+\begin{tikzcd}
+M \arrow[r, "\varphi"] \arrow[d, "\pi_{N}"'] & M' \\
+M/N \arrow[ru, "\varphi_{N}"', dashed]
+\end{tikzcd}
+\]
+\end{proposition}
+
+\begin{remark}
+The pair $(M/N, \pi_{N})$ is unique in the following sense: if $(S, \theta)$ is a pair such that
+\begin{itemize}
+\item $S$ is an $R$-module,
+\item $\theta: M \rightarrow S$ is a surjective morphism satisfying the property of $(M/N, \pi_{N})$ described in the above proposition,
+\end{itemize}
+then there exists a unique isomorphism $\psi: M/N \rightarrow S$ such that the following diagram commutes.
+\[
+\begin{tikzcd}[row sep=2.8em, column sep=3.8em]
+M \arrow[r, two heads, "\theta"] \arrow[d, two heads, "\pi_{N}"'] & S \\
+M/N \arrow[ur, dashed, "\exists!\,\psi"'] &
+\end{tikzcd}
+\]
+\end{remark}
+
+\begin{proof}
+    Since $(S,\theta)$ satisfies the same universal property as $(M/N,\pi_N)$, we may apply that property to the canonical projection
+    \[
+    \pi_N : M \to M/N.
+    \]
+    Because $N \subseteq \ker(\pi_N)$, there exists a unique morphism
+    \[
+    u:S\to M/N
+    \]
+    such that
+    \[
+    u\circ \theta=\pi_N.
+    \]
+    
+    On the other hand, since $(M/N,\pi_N)$ has the universal property of the quotient by $N$, and since $N \subseteq \ker(\theta)$, there exists a unique morphism
+    \[
+    \psi:M/N\to S
+    \]
+    such that
+    \[
+    \psi\circ \pi_N=\theta.
+    \]
+    
+    We now show that $\psi$ and $u$ are inverse to each other.
+    
+    First, compute
+    \[
+    (u\circ \psi)\circ \pi_N
+    = u\circ (\psi\circ \pi_N)
+    = u\circ \theta
+    = \pi_N.
+    \]
+    But the identity morphism $\operatorname{id}_{M/N}:M/N\to M/N$ also satisfies
+    \[
+    \operatorname{id}_{M/N}\circ \pi_N=\pi_N.
+    \]
+    By the uniqueness part of the universal property of $(M/N,\pi_N)$, it follows that
+    \[
+    u\circ \psi=\operatorname{id}_{M/N}.
+    \]
+    
+    Similarly,
+    \[
+    (\psi\circ u)\circ \theta
+    = \psi\circ (u\circ \theta)
+    = \psi\circ \pi_N
+    = \theta.
+    \]
+    But the identity morphism $\operatorname{id}_S:S\to S$ also satisfies
+    \[
+    \operatorname{id}_S\circ \theta=\theta.
+    \]
+    By the uniqueness part of the universal property of $(S,\theta)$, we obtain
+    \[
+    \psi\circ u=\operatorname{id}_S.
+    \]
+    
+    Therefore $\psi$ is an isomorphism, with inverse $u$.
+    
+    Finally, the uniqueness of $\psi$ follows directly from the universal property of $(M/N,\pi_N)$: indeed, $\psi$ is the unique morphism
+    \[
+    \psi:M/N\to S
+    \]
+    such that
+    \[
+    \psi\circ \pi_N=\theta.
+    \]
+    Hence there exists a unique isomorphism
+    \[
+    \psi:M/N\to S
+    \]
+    for which the diagram commutes.
+\end{proof}
+
+\begin{proposition}
+There is a unique isomorphism $\bar{\varphi}: \operatorname{coim}\varphi \rightarrow \operatorname{im}\varphi$ such that the following diagram commutes:
+\begin{center}
+\begin{tikzcd}
+M \arrow[rr, "\varphi"] \arrow[dd, "\pi_{\operatorname{ker}(\varphi)}"'] &  & M'                                          \\
+                                                                         &  &                                             \\
+\operatorname{coim}(\varphi) \arrow[rr, "\overline{\varphi}"]            &  & \operatorname{im}(\varphi) \arrow[uu, hook]
+\end{tikzcd}
+\end{center}
+Recall:
+\[
+\begin{aligned}
+& \varphi: M \rightarrow M', \quad R\text{-morphism} \\
+& \operatorname{coker}(\varphi)=M'/\operatorname{im}(\varphi) \\
+& \operatorname{coim}(\varphi)=M/\ker \varphi
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{definition}
+Let $M$ be an $R$-module and $I$ an ideal of $R$. Denote by $IM$ the submodule of $M$ generated by all elements $am$ where $a \in I$, $m \in M$.
+\[
+IM = \left\{ \sum_{\text{finite}} a_{i} m_{i} \mid a_{i} \in I, \; m_{i} \in M \right\}
+\]
+\end{definition}
+
+\begin{proposition}
+Let $M$ be an $R$-module. Then $R \rightarrow \operatorname{End}(M)$ is a ring homomorphism.
+\begin{enumerate}
+\item $R \rightarrow \operatorname{End}(M)$ factors through the natural surjection $R \rightarrow R/I$ if and only if $IM = 0$:
+\[
+\begin{tikzcd}[row sep=2.8em, column sep=4.2em]
+R \arrow[rr, "\rho"] \arrow[dr, two heads, "\pi_{I}"'] && \operatorname{End}(M) \\
+& R/I \arrow[ur, dashed, "\exists\,\rho_{I}"'] &
+\end{tikzcd}
+\]
+Where $\rho$ factors through $\pi_I$ means $\exists \rho_{I}: R/I \rightarrow \operatorname{End}(M)$ such that the diagram above commutes.
+\item The module $M/IM$ is naturally endowed with a structure of $R/I$-module.
+\item Let $\varphi: M \rightarrow M'$ be an $R$-homomorphism. Then $\varphi(IM) \subseteq IM'$, so $\varphi$ induces a morphism of $R/I$-modules
+\[
+M/IM \rightarrow M'/IM'.
+\]
+\item If $M=M_1 \oplus \cdots \oplus M_n$, then $M/IM = M_1/IM_1 \oplus \cdots \oplus M_n/IM_n$.
+\item $R^n/IR^n \cong (R/IR)^n$.
+\end{enumerate}
+\end{proposition}
+
+    \begin{proof}
+    \textbf{(1)} Suppose first that $\rho$ factors through $\pi_I$. Then there exists a ring homomorphism
+    \[
+    \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+    \]
+    such that
+    \[
+    \rho=\rho_I\circ \pi_I.
+    \]
+    If $a\in I$, then $\pi_I(a)=0$, so
+    \[
+    \rho(a)=\rho_I(0)=0.
+    \]
+    Therefore $am=0$ for every $m\in M$. Since $IM$ is generated by elements of the form $am$ with $a\in I$ and $m\in M$, it follows that
+    \[
+    IM=0.
+    \]
+    
+    Conversely, assume that $IM=0$. Then for every $a\in I$ and every $m\in M$ we have
+    \[
+    \rho(a)(m)=am=0.
+    \]
+    Thus $\rho(a)=0$, so $I\subseteq \ker \rho$. Hence $\rho$ factors uniquely through the quotient ring $R/I$: there exists a unique ring homomorphism
+    \[
+    \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+    \]
+    such that
+    \[
+    \rho=\rho_I\circ \pi_I.
+    \]
+
+    \textbf{(2)} Define an action of $R/I$ on $M/IM$ by
+    \[
+    (r+I)\cdot (m+IM):=rm+IM.
+    \]
+    We must show that this is well-defined.
+    
+    If $r+I=r'+I$, then $r-r'\in I$, so
+    \[
+    (r-r')m\in IM,
+    \]
+    hence
+    \[
+    rm+IM=r'm+IM.
+    \]
+    If $m+IM=m'+IM$, then $m-m'\in IM$. Since $IM$ is a submodule of $M$, we have
+    \[
+    r(m-m')\in IM,
+    \]
+    so
+    \[
+    rm+IM=rm'+IM.
+    \]
+    Thus the action is well-defined. The module axioms follow immediately from the module axioms on $M$. Therefore $M/IM$ is naturally an $R/I$-module.
+    
+    \textbf{(3)} Let $\varphi:M\to M'$ be an $R$-module homomorphism. Take any element of $IM$, say
+    \[
+    x=\sum_{j=1}^t a_j m_j
+    \qquad (a_j\in I,\; m_j\in M).
+    \]
+    Then
+    \[
+    \varphi(x)=\sum_{j=1}^t \varphi(a_jm_j)=\sum_{j=1}^t a_j\varphi(m_j).
+    \]
+    Since each $a_j\in I$ and each $\varphi(m_j)\in M'$, it follows that
+    \[
+    a_j\varphi(m_j)\in IM'.
+    \]
+    Hence $\varphi(x)\in IM'$, and therefore
+    \[
+    \varphi(IM)\subseteq IM'.
+    \]
+    
+    Thus we may define
+    \[
+    \overline{\varphi}:M/IM\to M'/IM',
+    \qquad
+    \overline{\varphi}(m+IM)=\varphi(m)+IM'.
+    \]
+    This is well-defined: if $m+IM=m'+IM$, then $m-m'\in IM$, so
+    \[
+    \varphi(m)-\varphi(m')=\varphi(m-m')\in IM',
+    \]
+    hence
+    \[
+    \varphi(m)+IM'=\varphi(m')+IM'.
+    \]
+    
+    Finally, $\overline{\varphi}$ is $R/I$-linear, since
+    \[
+    \overline{\varphi}\bigl((r+I)\cdot (m+IM)\bigr)
+    =\overline{\varphi}(rm+IM)
+    =\varphi(rm)+IM'
+    =r\varphi(m)+IM'
+    =(r+I)\cdot \overline{\varphi}(m+IM).
+    \]
+
+    \textbf{(4)} Assume that
+    \[
+    M=M_1\oplus\cdots\oplus M_n.
+    \]
+    We first show that
+    \[
+    IM=IM_1\oplus\cdots\oplus IM_n.
+    \]
+    
+    If $x\in IM$, then $x$ is a finite sum of elements of the form $am$ with $a\in I$ and $m\in M$. Writing
+    \[
+    m=m_1+\cdots+m_n
+    \qquad (m_i\in M_i),
+    \]
+    we get
+    \[
+    am=am_1+\cdots+am_n,
+    \]
+    and each $am_i\in IM_i$. Hence $x\in IM_1+\cdots+IM_n$, so
+    \[
+    IM\subseteq IM_1+\cdots+IM_n.
+    \]
+    The reverse inclusion is immediate because each $M_i\subseteq M$, hence each $IM_i\subseteq IM$. Therefore
+    \[
+    IM=IM_1+\cdots+IM_n.
+    \]
+    
+    To see that the sum is direct, suppose
+    \[
+    x_1+\cdots+x_n=0
+    \qquad\text{with } x_i\in IM_i\subseteq M_i.
+    \]
+    Since
+    \[
+    M=M_1\oplus\cdots\oplus M_n
+    \]
+    is a direct sum, we must have $x_i=0$ for all $i$. Thus
+    \[
+    IM=IM_1\oplus\cdots\oplus IM_n.
+    \]
+    
+    Now define
+    \[
+    \Psi:M_1/IM_1\oplus\cdots\oplus M_n/IM_n\to M/IM
+    \]
+    by
+    \[
+    \Psi(m_1+IM_1,\dots,m_n+IM_n)
+    =(m_1+\cdots+m_n)+IM.
+    \]
+    This map is well-defined and $R/I$-linear. It is surjective because every element of $M$ can be written as $m_1+\cdots+m_n$. It is injective because
+    \[
+    (m_1+\cdots+m_n)+IM=IM
+    \]
+    means that
+    \[
+    m_1+\cdots+m_n\in IM=IM_1\oplus\cdots\oplus IM_n,
+    \]
+    so each $m_i\in IM_i$. Hence
+    \[
+    m_i+IM_i=IM_i
+    \]
+    for all $i$, and the kernel is trivial. Therefore $\Psi$ is an isomorphism:
+    \[
+    M/IM \cong M_1/IM_1 \oplus \cdots \oplus M_n/IM_n.
+    \]
+ 
+    \textbf{(5)} Since
+    \[
+    R^n=R\oplus\cdots\oplus R
+    \]
+    ($n$ copies), part (4) yields
+    \[
+    R^n/IR^n \cong R/IR \oplus \cdots \oplus R/IR.
+    \]
+    Therefore
+    \[
+    R^n/IR^n \cong (R/IR)^n.
+    \]
+    
+    This completes the proof.
+\end{proof}
+
+\section{Direct Sums and Free Modules}
+
+\begin{definition}
+Direct sum and direct product $\left(\bigoplus_{i \in I} M_i \; \& \; \prod_{i \in I} M_i\right)$.
+
+Let $ (M_i)_{i \in I} $ be a family of $ R $-modules. The direct product of $ (M_i)_{i \in I} $ is the module
+\[
+\prod_{i \in I} M_i = \{ \varphi: I \to \cup_{i \in I}M_i | \forall i \in I, \varphi(i) \in M_i \}
+\]
+with the componentwise addition and scalar multiplication. i.e.
+\[
+R \times \prod_{i \in I} M_i \to \prod_{i \in I} M_i, \quad (r, \varphi) \mapsto (r \varphi(i))_{i \in I}
+\]
+The direct sum of $ (M_i)_{i \in I} $ is the module
+\[
+\bigoplus_{i \in I} M_i = \{ \varphi \in \prod_{i \in I} M_i | \sharp \{ i \in I | \varphi(i) \neq 0 \} < \infty \}
+\]
+Equal when $|I| < \infty$. In a module category, direct product $=$ product, direct sum $=$ coproduct. 
+\end{definition}
+
+\begin{theorem} 
+Suppose that $ M_1, \ldots , M_n $ are $ R $-submodules of $ M $ in which $ M = M_1 + \cdots + M_n $, $ I=[n] $. Then the followings are equivalent:
+\begin{enumerate}
+\item The map $ \varphi:  \sum_{i \in I} M_i \to M $ by $ \varphi( (m_i)_{i \in I} ) = \sum_{i \in I} m_i, m_i \in M_i $ is an isomorphism.
+\item Any element of $ M $ can be uniquely written as a sum of elements of $ M_i $.
+\item $ 0 $ can be uniquely written as a sum of elements of $ M_i $. More precisely, $ 0 = 0 + \ldots + 0 $. 
+\item For $ i \in I $, $ M_i \cap (\sum_{j \neq i} M_j) = 0 $. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} 
+    We prove
+    \[
+    (1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(4)\Rightarrow(1).
+    \]
+    
+   $(1)\Rightarrow(2)$.
+    If $\varphi$ is an isomorphism, then for every $m\in M$ there exists a unique
+    \[
+    (m_1,\ldots,m_n)\in \sum_{i=1}^n M_i
+    \]
+    such that
+    \[
+    m=\varphi(m_1,\ldots,m_n)=m_1+\cdots+m_n.
+    \]
+    Hence every element of $M$ can be written uniquely as a sum of elements of the $M_i$.
+    
+   $(2)\Rightarrow(3)$.
+    Apply $(2)$ to the element $0\in M$.
+    
+    $(3)\Rightarrow(4)$.
+    Fix $i\in I$, and let
+    \[
+    x\in M_i\cap \sum_{j\ne i} M_j.
+    \]
+    Then $x\in M_i$, and there exist $m_j\in M_j$ for $j\ne i$ such that
+    \[
+    x=\sum_{j\ne i} m_j.
+    \]
+    Therefore
+    \[
+    0=x-\sum_{j\ne i} m_j
+    \]
+    is a decomposition of $0$ as a sum of elements from the submodules $M_1,\ldots,M_n$.
+    By the uniqueness in $(3)$, this decomposition must be the trivial one. In particular,
+    \[
+    x=0.
+    \]
+    Hence
+    \[
+    M_i\cap \sum_{j\ne i} M_j=0.
+    \]
+    
+  $(4)\Rightarrow(1)$.
+    Since
+    \[
+    M=M_1+\cdots+M_n,
+    \]
+    the map $\varphi$ is surjective. It remains to show that $\varphi$ is injective.
+    
+    Suppose that
+    \[
+    \varphi(m_1,\ldots,m_n)=0,
+    \]
+    that is,
+    \[
+    m_1+\cdots+m_n=0
+    \qquad\text{with } m_i\in M_i.
+    \]
+    For each $i\in I$, we have
+    \[
+    m_i=-\sum_{j\ne i} m_j\in \sum_{j\ne i} M_j.
+    \]
+    Since also $m_i\in M_i$, it follows that
+    \[
+    m_i\in M_i\cap \sum_{j\ne i} M_j=0.
+    \]
+    Thus $m_i=0$ for all $i$, so
+    \[
+    \ker\varphi=0.
+    \]
+    Therefore $\varphi$ is injective, and hence an isomorphism.
+    
+    This proves that the four conditions are equivalent.
+\end{proof}
+
+\begin{definition}[free module]
+Let $M$ be an $R$-module.
+\begin{enumerate}
+\item $x_{1}, \dots, x_{n} \in M$ are linearly independent if
+\[
+a_{1} x_{1} + a_{2} x_{2} + \cdots + a_{n} x_{n} = 0 \Rightarrow a_{1} = a_{2} = \cdots = a_{n} = 0.
+\]
+\item $M$ is called free if it is generated by a linearly independent subset. This subset is called a basis of $M$.
+\item If $M$ is an $R$-module with a basis $x_{1}, \ldots, x_{n}$, then $M = \langle x_{1} \rangle \oplus \cdots \oplus \langle x_{n} \rangle$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$R \oplus \cdots \oplus R = R^{n}$.
+\end{example}
+
+\begin{theorem}
+Let $R$ be a commutative ring with $1$. Let $M$ be a finitely generated free $R$-module. Then any basis of $M$ has the same cardinality. The number of elements in a basis is called the rank of the free module.
+\end{theorem}
+
+\begin{proof}
+Let $B=\{x_i\}_{i\in I}$ be a basis of $M$. We first show that any basis is finite. Since $M$ is finitely generated, choose
+generators $y_1,\dots,y_n$ of $M$. Each $y_k$ is a finite $R$--linear combination of elements
+of $B$, so there exists a finite subset $I_0\subset I$ such that
+$y_1,\dots,y_n\in \sum_{i\in I_0}Rx_i$. Hence
+\[
+M=\sum_{k=1}^n Ry_k \subseteq \sum_{i\in I_0}Rx_i \subseteq M,
+\]
+so $M=\sum_{i\in I_0}Rx_i$. If $I\setminus I_0\neq\varnothing$, pick $j\in I\setminus I_0$.
+Then $x_j\in M=\sum_{i\in I_0}Rx_i$, contradicting that $B$ is linearly independent.
+Thus $I=I_0$ is finite.
+
+Now let $x_1,\dots,x_r$ and $y_1,\dots,y_s$ be two bases of $M$.
+Let $J\subset R$ be a maximal ideal and set $F:=R/J$, a field. Then $M/JM$ is naturally an $F$-vector space.
+Write $\overline{m}$ for the class of
+$m\in M$ in $M/JM$, and $\overline{a}$ for the class of $a\in R$ in $F$.
+We claim that $\overline{x_1},\dots,\overline{x_r}$ form an $F$--basis of $M/JM$.
+
+\emph{Spanning.} For any $m\in M$, write $m=\sum_{i=1}^r a_i x_i$. Then
+$\overline{m}=\sum_{i=1}^r \overline{a_i}\,\overline{x_i}$, so $\overline{x_1},\dots,\overline{x_r}$
+span $M/JM$.
+
+\emph{Linear independence.} Suppose $\sum_{i=1}^r \overline{a_i}\,\overline{x_i}=0$ in $M/JM$.
+Then $\sum_{i=1}^r a_i x_i\in JM$, so there exist $a'_1,\dots,a'_r\in J$ such that
+$\sum_{i=1}^r a_i x_i=\sum_{i=1}^r a'_i x_i$. Hence $\sum_{i=1}^r (a_i-a'_i)x_i=0$.
+By linear independence of $x_1,\dots,x_r$, we get $a_i-a'_i=0$ for all $i$, so $a_i\in J$,
+thus $\overline{a_i}=0$ for all $i$. Therefore $\overline{x_1},\dots,\overline{x_r}$ are
+$F$-linearly independent, and form an $F$--basis of $M/JM$.
+
+By the same argument, $\overline{y_1},\dots,\overline{y_s}$ also form an $F$--basis
+of $M/JM$. Hence $r=\dim_F(M/JM)=s$. Therefore any two
+bases of $M$ have the same cardinality.
+\end{proof}
+
+\chapter{Lecture 2}
+
+\begin{definition}
+    Let $M$ be an $R$-module, $m \in M$, $Rm=<m>=\{ rm \mid r \in R \}$. Define the annihilator of $m$ in $R$ as:
+\[
+\operatorname{Ann}_R(m)=\{ r \in R \mid rm=0 \}.
+\]
+It is a left ideal of $R$.
+\end{definition}
+
+Then we have $R/\operatorname{Ann}_R(m) \cong Rm$ is an isomorphism. Which shows that all cyclic modules are isomorphic to a quotient of $R$.
+
+\begin{definition}
+    An element $m \in M$ is called
+    \begin{itemize}
+        \item \textbf{torsion-free} if $\operatorname{Ann}_R(m)=0$.
+        \item \textbf{torsion} if $\operatorname{Ann}_R(m)\neq 0$.
+    \end{itemize}
+    A module is called torsion-free if all its elements are torsion-free.
+\end{definition}
+
+\begin{definition}
+    The torsion part of $M$ is defined as:
+    \[
+    \operatorname{Tor}(M)=\{ m \in M \mid \operatorname{Ann}_R(m)\neq 0 \}.
+    \]
+\end{definition}
+
+\begin{lemma}
+    If $R$ is an integral domain, then the torsion submodule of $M$ is a submodule of $M$.
+\end{lemma}
+
+\begin{proof}
+    Let $m,n \in \operatorname{Tor}(M)$, then since by definition $\operatorname{Ann}_R(m)\neq 0$ and $\operatorname{Ann}_R(n)\neq 0$, we have $\lambda m = \mu n$ for some $\lambda, \mu \neq 0 \in R$. Then $\lambda m = \mu n = 0$. Furthermore, $(\lambda \mu)(m+n)=0$. Since $R$ is an integral domain, we have $\lambda \mu \neq 0$, hence $m+n \in \operatorname{Tor}(M)$.
+
+    Therefore $\operatorname{Tor}(M)$ is a submodule of $M$.
+\end{proof}
+
+\begin{example}
+    (1) $0 \in M$ is torsion.
+    (2) Let $R$ be a commutative ring with $1$. Then $R$ is an integral domain if and only if ${}_RR$ is torsion-free. In this case $\operatorname{Tor}({}_RR)=0$, $\operatorname{Tor}(R^n)=0$ for all $n \geq 1$.
+    (3) If $I$ is a nonzero ideal of $R$, then $\operatorname{Tor}(R/I)=R/I$ where $R/I$ is regarded as an $R$-module. If we regard $R/I$ as an $R/I$-module, then it is torsion-free if and only if $I$ is a prime ideal.
+    (4) More generally, let $I$ be any non-zero ideal of $R$, and $M$ be an $R$-module. Then $\operatorname{Tor}(M/IM)=M/IM$ where $M/IM$ is regarded as an $R$-module. 
+\end{example}
+
+
+
+
+
+
+\chapter{Homework}
+
+\section{Homework week 1}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ be an $R$-module. Suppose that $S$ is a ring and
+    \[
+        \theta : S \to R
+    \]
+    is a ring homomorphism satisfying $\theta(1_S)=1_R$. Let $S$ act on $M$ by
+    \[
+        sx=\theta(s)x,
+    \]
+    where $x\in M$ and $s\in S$. Prove that $M$ is an $S$-module.
+\end{exercise}
+
+\begin{proof}
+    This action is well-defined because $\forall s \in S$, $\theta(s) \in R$ and
+    $\theta(s)x \in M$ for all $x \in M$. We need to verify the module axioms, for all
+    $s, t \in S$ and $x, y \in M$:
+    \begin{itemize}
+        \item $s(x+y) = \theta(s)(x+y) = \theta(s)x + \theta(s)y = sx + sy$
+        \item $(s+t)x = \theta(s+t)x = \theta(s)x + \theta(t)x = sx + tx$
+        \item $(st)x=\theta(st)x=\theta(s)\theta(t)x=\theta(s)(\theta(t)x)=s(tx)$.
+        \item $1_S x = \theta(1_S)x = 1_R x = x$
+    \end{itemize}
+    Hence $M$ is an $S$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ and $N$ be two right $R$-modules. Let
+    $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ be the set of group homomorphisms from $M$ to
+    $N$ (as abelian groups). The action of $R$ on
+    $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is given as follows: for any $a\in R$ and
+    $\varphi\in \operatorname{Hom}_{\mathbb{Z}}(M,N)$, define
+    \[
+        (\varphi a)(x)=\varphi(xa), \qquad \forall x\in M.
+    \]
+    Prove that $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is a left $R$-module.
+\end{exercise}
+
+\begin{proof}
+    This action is well-defined. $\forall r \in R$, $\varphi r \in
+    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ for all $\varphi \in
+    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ as $(\varphi r)(x) = \varphi(xr) \in N$ for all
+    $x \in M$. We need to verify the module axioms, for all $r_1, r_2 \in R$ and
+    $\varphi, \psi \in \operatorname{Hom}_{\mathbb{Z}}(M,N)$, $\forall x \in M$:
+    \begin{itemize}
+        \item $((\varphi + \psi)r)(x) = (\varphi + \psi)(xr) = \varphi(xr) + \psi(xr) = (\varphi r)(x) + (\psi r)(x)$
+        \item $(\varphi(r_1 + r_2))(x) = \varphi(x(r_1 + r_2)) = \varphi(xr_1 + xr_2) = \varphi(xr_1) + \varphi(xr_2) = (\varphi r_1)(x) + (\varphi r_2)(x)$
+        \item $((\varphi r_1)r_2)(x) = (\varphi r_2)(xr_1) = \varphi(xr_2r_1) = (\varphi r_2 r_1)(x)$
+        \item $( \varphi 1_R)(x) =  \varphi(x 1_R) = \varphi(x) $
+    \end{itemize}
+    Hence $\operatorname{Hom}_{\mathbb{Z}}(M,N)$ is a left $R$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $R$ be a ring, and let $M$ be an $R$-module. Denote
+    \[
+        \operatorname{Ann}_R M=\{r\in R \mid rm=0,\ \forall m\in M\}.
+    \]
+    We call $M$ a faithful $R$-module if $\operatorname{Ann}_R M=\{0\}$. Define the action
+    of the quotient ring $R/\operatorname{Ann}_R M$ on $M$ by
+    \[
+        \overline{r}\,x=rx,
+    \]
+    where $x\in M$, $r\in R$, and $\overline{r}=r+\operatorname{Ann}_R M$. Prove that $M$
+    is a faithful $R/\operatorname{Ann}_R M$-module.
+\end{exercise}
+
+\begin{proof}
+    First we show that the action is well-defined. Suppose
+    \[
+        \bar r=\bar r' \in R/\operatorname{Ann}_R M.
+    \]
+    Then $r-r'\in \operatorname{Ann}_R M$, so for every $x\in M$,
+    \[
+        (r-r')x=0.
+    \]
+    Hence $rx=r'x$, so $\bar r\,x$ does not depend on the choice of representative.
+
+    The module axioms follow immediately from those of the $R$-module structure on $M$.
+
+    Now we prove faithfulness. Suppose $\bar r\in R/\operatorname{Ann}_R M$ acts trivially on
+    $M$, that is,
+    \[
+        \bar r\,x=0 \qquad \forall x\in M.
+    \]
+    By definition, this means
+    \[
+        rx=0 \qquad \forall x\in M.
+    \]
+    Therefore $r\in \operatorname{Ann}_R M$, so $\bar r=\bar 0$ in the quotient ring. Hence
+    \[
+        \operatorname{Ann}_{R/\operatorname{Ann}_R M}(M)=\{\bar 0\},
+    \]
+    and $M$ is faithful as an $R/\operatorname{Ann}_R M$-module.
+\end{proof}
+
+\begin{exercise}
+    Let $\varphi : M \to M$ be a homomorphism of $R$-modules such that
+    \[
+        \varphi\varphi=\varphi.
+    \]
+    Prove that
+    \[
+        M=\ker\varphi \oplus \operatorname{im}\varphi.
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let $x \in M$. Then $x = \varphi(x) + (x - \varphi(x))$. Where $\varphi(x) \in
+    \operatorname{im}\varphi$ and $x - \varphi(x) \in \ker\varphi$. Hence $M =
+    \operatorname{im}\varphi + \ker\varphi$. We only need to show that $\ker\varphi \cap
+    \operatorname{im}\varphi = \{0\}$.
+    Suppose $x \in \ker\varphi \cap \operatorname{im}\varphi$. Then $x = \varphi(y)$ for some
+    $y \in M$ and $\varphi(x) = 0$. Then $\varphi(x) = \varphi \varphi(y) = \varphi(y)=x=0$,
+    so $x = 0$. Hence $\ker\varphi \cap \operatorname{im}\varphi = \{0\}$.
+\end{proof}
+
+\begin{exercise}
+    Show that any $R$-module is a homomorphism image of some free $R$-module.
+\end{exercise}
+
+\begin{proof}
+    Let $M$ be a left $R$-module. Consider the free $R$-module
+    \[
+        F=\bigoplus_{x\in M} Re_x
+    \]
+    with basis $\{e_x\}_{x\in M}$ indexed by the underlying set of $M$.
+    Define an $R$-module homomorphism
+    \[
+        \pi:F\to M
+    \]
+    by
+    \[
+        \pi(e_x)=x \qquad (x\in M),
+    \]
+    and extend $R$-linearly. Thus
+    \[
+        \pi\Bigl(\sum_{i=1}^n r_i e_{x_i}\Bigr)=\sum_{i=1}^n r_i x_i.
+    \]
+    This is well-defined and $R$-linear.
+
+    For any $m\in M$, we have
+    \[
+        \pi(e_m)=m,
+    \]
+    so $\pi$ is surjective. Therefore $M$ is a homomorphic image of the free module $F$.
+    Equivalently,
+    \[
+        M\cong F/\ker\pi.
+    \]
+\end{proof}
+
+\begin{exercise}
+    Let $\mathbb{Q}$ be the field of rational numbers. Is the additive group
+    $(\mathbb{Q},+)$ a free $\mathbb{Z}$-module?
+\end{exercise}
+
+\begin{proof}
+    Claim: any two non-zero element of $\mathbb{Q}$ are linearly dependent over
+    $\mathbb{Z}$. Hence if $\mathbb{Q}$ is a free $\mathbb{Z}$-module, then it must have a
+    basis of cardinality 1.
+
+    Proof of claim: let $0 \neq x = \frac{a}{b}$ and $0 \neq y =\frac{c}{d}$ be two
+    elements of $\mathbb{Q}$. Then $dcx - aby=0$. If $a=0$ or $c=0$, then $x=0$ or $y=0$,
+    which contradicts the assumption. Hence $a, c \neq 0$ which means $dc,ab$ are two
+    non-zero integer coefficients. Hence $x$ and $y$ are linearly dependent over
+    $\mathbb{Z}$. And if $\mathbb{Q}$ is a free $\mathbb{Z}$-module, then it must have a
+    basis of cardinality 1.
+
+    But if $\mathbb{Q}$ is a cyclic $\mathbb{Z}$-module, then it has only one generator.
+    Suppose it is $z=\frac{e}{f}$. Then $\mathbb{Q}=\{n \frac{e}{f} \mid n \in \mathbb{Z}\}$.
+    But this is not possible because we can easily pick $\frac{1}{2f} \notin \mathbb{Q}$,
+    which is absurd.
+
+    Therefore $\mathbb{Q}$ is not a free $\mathbb{Z}$-module.
+\end{proof}
+
+
+\end{document}
