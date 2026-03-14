@@ -213,20 +213,19 @@
 ]
 \textbf{\textcolor{TopicColor}{Main topic:}} Representation theory of quivers.
 
-\textbf{\textcolor{TopicColor}{Office hours:}} Mon: 12:30-14:30.
+\textbf{\textcolor{TopicColor}{Office hours:}} Mon: 12:30-14:30. Office 218, Taizhou Building.
 
-\textbf{\textcolor{TopicColor}{Main book:}} \textit{Ralf Schiffler, Quiver Representations}, Cambridge University Press.
+\textbf{\textcolor{TopicColor}{Main book:}} \textit{Rqalf Schiffler, Quiver Representations}
 
 \textbf{\textcolor{TopicColor}{References:}}
 \begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
-    \item \textit{Assem, Simons, Skowronski, Elements of the Representation Theory of Associative Algebras}, Cambridge University Press.
-    \item \textit{Ibrahim Assem, basic representation theory of algebras}.
-    \item \textit{Michel Brion, Representations of quivers}.
-    \item \textit{Henning Krause, Representations of quivers via reflection functor}.
-    \item \textit{W.Crawley-Boevey, Lectures on representations of quivers}.
-    \item \textit{W.Crawley-Boevey, More on representations of quivers}.
-    \item \textit{Alexander Kirillov Jr. - Quiver Representations and Quiver Varieties (2016, American Mathematical Society)}.
-    \item Other Reference: \url{www.math.uni-bielefeld.de}
+    \item \textit{Assem, Simson, Skowroński, Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory}, Cambridge University Press.
+    \item \textit{Ibrahim Assem, Basic Representation Theory of Algebras}.
+    \item \textit{Michel Brion, Representations of Quivers}.
+    \item \textit{Henning Krause, Representations of Quivers via Reflection Functor}.
+    \item \textit{W. Crawley-Boevey, Lectures on Representations of Quivers}.
+    \item \textit{Ralf Schiffler, Quiver Representations}.
+    \item \textit{Alexander Kirillov Jr., Quiver Representations and Quiver Varieties}, Graduate Studies in Mathematics, American Mathematical Society, 2016.
 \end{itemize}
 \textbf{\textcolor{TopicColor}{Grading:}}
 \begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
@@ -272,7 +271,7 @@ The $r$-Kronecker quiver has two vertices, say 1 and 2, and $r$ arrows $\alpha_1
 It is named after Leopold Kronecker. In the case $r=2$, the representations correspond to pairs of linear maps between two vector spaces, which can be represented by matrix pencils. Kronecker solved the classification problem for these pencils.
 \begin{center}
     \begin{tikzcd}
-\bullet \arrow[r, "1", bend left=49] \arrow[r, "\ldots", no head, dashed] \arrow[r, "r"', bend right=49] & \bullet
+1 \arrow[r, "1", bend left=49] \arrow[r, "\ldots", no head, dashed] \arrow[r, "r"', bend right=49] & 2
 \end{tikzcd}
 \end{center}
 \end{example}
@@ -290,10 +289,10 @@ It is called the $n$-subspace quiver because its representations are related to 
 \end{center}
 \end{example}
 
-\begin{example} 
-Finite quivers.
-A quiver $Q=(Q_0, Q_1, s, t)$ is called finite if both the set of vertices $Q_0$ and the set of arrows $Q_1$ are finite sets.
-\end{example}
+\begin{definition} 
+    Finite quivers.
+    A quiver $Q=(Q_0, Q_1, s, t)$ is called finite if both the set of vertices $Q_0$ and the set of arrows $Q_1$ are finite sets.
+\end{definition}
 
 For the base field we assume $ k=\bar{k} $. Usually we take $ k=\C $. 
 
@@ -385,7 +384,7 @@ Let $ M=(M_i, \phi_{\alpha})_{i \in Q_0, \alpha \in Q_1} $ and $ N=(N_i, \psi_{\
 \end{definition}
 
 \begin{example} 
-In example of 1-Kronecker quiver, let $ f: M \to M'' $, $ f_1: k \to k $ such that $ f_1(1)=a $, and $ f_2: k \to 0 $ is the zero map. We can check that $ f $ is a morphism. Check the following diagram:
+In example of 1-Kronecker quiver, let $ f: M \to M'' $, $ f_1: k \to k $ such that $ f_1(1)=a $, and $ f_2: k \to 0 $ is the zero map. We can check that $ f $ is a morphism. Only need to check the commutativity of the following diagram:
 \begin{center}
     \begin{tikzcd}
 k \arrow[r, "1"] \arrow[d, "f_1 \ \ \ a"'] & k \arrow[d, "0 \ \ \ f_2"] \\
@@ -397,7 +396,7 @@ Now we establish $ g: M'' \to M $. If $ g $ is a morphism, then we have $ g_1: k
 \begin{center}
 \begin{tikzcd}
 k \arrow[r, "0"] \arrow[d, "g_1 \ \ \ b"'] & 0 \arrow[d, "0 \ \ \ g_2"] \\
-k \arrow[r, "1"']                          & 0                         
+k \arrow[r, "1"']                          & k                         
 \end{tikzcd}
 \end{center}
 
@@ -521,9 +520,9 @@ Let us check $ \mathrm{Hom}(M,M'') $:
 k \arrow[rd, "\begin{bmatrix} 1 \\ 0 \end{bmatrix}"] \arrow[ddd, "c"', bend right] &                                &                                                                                  \\
                                                                                    & k^2 \arrow[ddd, "{[a \ \ b]}"] & k \arrow[l, "\begin{bmatrix} 1 \\ 1 \end{bmatrix}"'] \arrow[ddd, "e", bend left] \\
 k \arrow[ru, "\begin{bmatrix} 0 \\ 1 \end{bmatrix}"] \arrow[ddd, "d"', bend right] &                                &                                                                                  \\
-0 \arrow[rd, "0"]                                                                  &                                &                                                                                  \\
-                                                                                   & k                              & 0 \arrow[l, "0"]                                                                 \\
-0 \arrow[ru, "0"]                                                                  &                                &                                                                                 
+k \arrow[rd, "1"]                                                                  &                                &                                                                                  \\
+                                                                                   & k                              & k \arrow[l, "1"]                                                                 \\
+k \arrow[ru, "1"]                                                                  &                                &                                                                                 
 \end{tikzcd}
 \end{center}
 Let the morphism be given by $g_1 = [c]$, $g_2 = [d]$, $g_4 = [e]$, and $g_3 = \begin{bmatrix} a & b \end{bmatrix}$. The commutativity conditions are:
@@ -718,7 +717,7 @@ Denote $M=(V_i, \varphi_\alpha)_{i \in Q_0, \alpha \in Q_1}$ and $N=(U_i, \psi_\
     U_i \arrow[r, "\psi_\alpha"'] & U_j
 \end{tikzcd}
 \]
-We use $\operatorname{Rep}(Q)$ to denote the category of representations of $Q$. For our example, we have
+We use $\operatorname{Rep}Q$ to denote the category of representations of $Q$. For our example, we have
 \[
 f:M \to N: f=(f_1,f_2):
 \]
@@ -776,7 +775,7 @@ f=
 \qquad
 \dim \operatorname{Hom}(M,N)=2.
 \]
-This illustrates how morphisms in $\operatorname{Rep}(Q)$ are determined by commutative diagrams.
+This illustrates how morphisms in $\operatorname{Rep}Q$ are determined by commutative diagrams.
 \end{example}
 
 \begin{definition}
@@ -820,9 +819,9 @@ For quiver representations, indecomposable and irreducible are different notions
     
     \[
     N:\quad
-    \begin{tikzcd}[column sep=large]
-    k^2 \arrow[r, "{\begin{bmatrix}0\\1\end{bmatrix}}"] &
-    k^2 &
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+    k^2 \arrow[r, "{\begin{bmatrix}1 & 1\\0 & 1\end{bmatrix}}"] \&
+    k^2 \&
     k \arrow[l, "{\begin{bmatrix}1\\1\end{bmatrix}}"']
     \end{tikzcd}
     \]
@@ -986,11 +985,11 @@ Any finite representation $M \in \operatorname{Rep}Q$ can be decomposed into fin
     \[
     \pi'_j\varphi\iota_i : M_i \to N_j
     \]
-    is a split monomorphism, and
+    is a split monomorphism (i.e. a monomorphism that has a left inverse), and
     \[
     \pi_i\varphi^{-1}\iota'_j : N_j \to M_i
     \]
-    is a split epimorphism. Therefore \(M_i\) is isomorphic to a direct summand of \(N_j\). Since \(N_j\) is indecomposable, we conclude that
+    is a split epimorphism (i.e. a epimorphism that has a right inverse). Therefore \(M_i\) is isomorphic to a direct summand of \(N_j\). (For example, let $ c $ be the left inverse of $ a $, then $ \forall y \in N_j $ we have $ y=a(c(y))+(y-a(c(y))) $ and $ a(c(y)) \in a(M_i) $ and $ y-a(c(y)) \in \operatorname{ker}(c) $. Furthermore, $ a(M_i) \cap \operatorname{ker}(c) = 0 $). Since \(N_j\) is indecomposable, we conclude that
     \[
     M_i \cong N_j.
     \]
@@ -1016,7 +1015,7 @@ Any finite representation $M \in \operatorname{Rep}Q$ can be decomposed into fin
     \]
     
     Therefore the decomposition of \(M\) into indecomposable representations is unique up to permutation and isomorphism of the summands.
-    \end{proof}
+\end{proof}
 
 \section{Kernel and Cokernel in \texorpdfstring{$\operatorname{Rep}Q$}{Rep Q}}
 
@@ -1025,16 +1024,19 @@ Recall in linear algebra:
     Let \(f: V \to W\) be a linear map. The \emph{kernel} of \(f\) is \(\operatorname{ker}f = \{ v \in V : f(v) = 0 \}\).
 \end{definition}
 \begin{definition}
-    Let \(f: V \to W\) be a linear map. The \emph{image} of \(f\) is \(\operatorname{Im}f = \{ w \in W : w = f(v) \text{ for some } v \in V \}\).
+    Let \(f: V \to W\) be a linear map. The \emph{image} of \(f\) is \(\operatorname{im}f = \{ w \in W : w = f(v) \text{ for some } v \in V \}\).
 \end{definition}
 \begin{definition}
-    Let \(f: V \to W\) be a linear map. The \emph{cokernel} of \(f\) is the quotient space \(\operatorname{coker}f = W / \operatorname{Im}f\).
+    Let \(f: V \to W\) be a linear map. The \emph{cokernel} of \(f\) is the quotient space \(\operatorname{coker}f = W / \operatorname{im}f\).
 \end{definition}
-The cokernel is defined using the image; below we will use \(\operatorname{Im}f_i\) in the same way for representations.
+\begin{definition} 
+    Let \(f: V \to W\) be a linear map. The \emph{coimage} of \(f\) is the quotient space \(\operatorname{coim}f = V / \operatorname{ker}f\).
+\end{definition}
+The cokernel is defined using the image; below we will use \(\operatorname{im}f_i\) in the same way for representations.
 
 From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
 
-\medskip\noindent\textbf{Kernel in \(\operatorname{Rep}Q\).}
+\subsection{Kernel in \(\operatorname{Rep}Q\).}
 
 \begin{definition}
     Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{kernel} of \(f\) is the representation \(\operatorname{ker}f = (L_i, \chi_\alpha)\) where
@@ -1045,14 +1047,14 @@ From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
 \end{definition}
 
 \begin{lemma}
-    With the notation above, \(\operatorname{ker}f\) is a representation of \(Q\), i.e.\ for each arrow \(\alpha: i \to j\) we have \(\chi_\alpha: L_i \to L_j\).
+    With the notation above, \(\operatorname{ker}f\) is a representation of \(Q\), i.e.\ for each arrow \(\alpha: i \to j\) we have \(\chi_\alpha: L_i \to L_j\) is well-defined.
 \end{lemma}
 \begin{proof}
     For any \(v_i \in L_i\) we have \(f_i(v_i) = 0\). By commutativity of the morphism \(f\),
     \[
     f_j\bigl(\chi_\alpha(v_i)\bigr) = f_j\bigl(\varphi_\alpha(v_i)\bigr) = \psi_\alpha\bigl(f_i(v_i)\bigr) = \psi_\alpha(0) = 0.
     \]
-    Hence \(\chi_\alpha(v_i) \in \operatorname{ker}f_j = L_j\), so \(\chi_\alpha: L_i \to L_j\).
+    Hence \(\chi_\alpha(v_i) \in \operatorname{ker}f_j = L_j\), so \(\chi_\alpha: L_i \to L_j\) is well-defined.
 \end{proof}
 
 \begin{remark}
@@ -1065,7 +1067,7 @@ From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
     \]
 \end{remark}
 
-\medskip\noindent\textbf{Cokernel in \(\operatorname{Rep}Q\).}
+\subsection{Cokernel in \(\operatorname{Rep}Q\).}
 
 \begin{definition}
     Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{cokernel} of \(f\) is the representation \(\operatorname{coker}f = (R_i, \nu_\alpha)\) where \(R_i = N_i / \operatorname{Im}f_i\), and for each arrow \(\alpha: i \to j\) the map \(\nu_\alpha: R_i \to R_j\) is defined by
@@ -1082,7 +1084,7 @@ From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
     \[
     \psi_\alpha(n_i - n_i') = \psi_\alpha\bigl(f_i(v_i)\bigr) = f_j\bigl(\varphi_\alpha(v_i)\bigr) \in f_j(V_j).
     \]
-    Hence \(\psi_\alpha(n_i) - \psi_\alpha(n_i') \in f_j(V_j)\), so \(\psi_\alpha(n_i) + f_j(V_j) = \psi_\alpha(n_i') + f_j(V_j)\). Thus \(\nu_\alpha\) is well-defined. The commutativity of the representation maps for \(\operatorname{coker}f\) follows from that of \(N\).
+    Hence \(\psi_\alpha(n_i) - \psi_\alpha(n_i') \in f_j(V_j)\), so \(\psi_\alpha(n_i) + f_j(V_j) = \psi_\alpha(n_i') + f_j(V_j)\). Thus \(\nu_\alpha\) is well-defined. 
 \end{proof}
 
 \begin{remark}
@@ -1188,14 +1190,6 @@ Let us show that previous definition $ \operatorname{ker}f=(\operatorname{ker}f_
     \[
     \psi_\alpha:=\varphi_\alpha|_{L_i}:L_i\to L_j.
     \]
-    This is well-defined, because if $x\in L_i$, then $f_i(x)=0$, and since $f$ is a morphism of representations, we have
-    \[
-    f_j(\varphi_\alpha(x))
-    =\rho_\alpha(f_i(x))
-    =\rho_\alpha(0)
-    =0.
-    \]
-    Hence $\varphi_\alpha(x)\in \ker f_j=L_j$.
     
     Therefore
     \[
@@ -1287,33 +1281,101 @@ Let us show that previous definition $ \operatorname{ker}f=(\operatorname{ker}f_
     L=(\ker f_i,\varphi_\alpha|_{\ker f_i})
     \]
     with the inclusion morphism $g:L\to M$ is precisely the kernel of $f$.
-    \end{proof}
+
+    Conversely, suppose that $(L,g)$ is a kernel of $f$ in the sense of the
+    universal property. Thus
+    \[
+    g=(g_i):L=(L_i,\chi_\alpha)\to M
+    \]
+    satisfies
+    \[
+    f\circ g=0.
+    \]
+    Since
+    \[
+    f_i\circ g_i=0
+    \]
+    for every vertex $i$, we have
+    \[
+    g_i(L_i)\subseteq \ker f_i=K_i.
+    \]
+    Hence the morphism $g:L\to M$ factors through the inclusion
+    \[
+    \iota:K\to M.
+    \]
+    By the universal property of $(K,\iota)$ already proved above, there exists a
+    unique morphism
+    \[
+    \theta:L\to K
+    \]
+    such that
+    \[
+    \iota\circ \theta=g.
+    \]
+
+    On the other hand, since
+    \[
+    f\circ \iota=0,
+    \]
+    the universal property of $(L,g)$ implies that there exists a unique morphism
+    \[
+    \eta:K\to L
+    \]
+    such that
+    \[
+    g\circ \eta=\iota.
+    \]
+
+    We now show that $\theta$ and $\eta$ are inverse isomorphisms. Indeed,
+    \[
+    \iota\circ (\theta\circ \eta)
+    =(\iota\circ \theta)\circ \eta
+    =g\circ \eta
+    =\iota.
+    \]
+    But also
+    \[
+    \iota\circ 1_K=\iota.
+    \]
+    Since $(K,\iota)$ satisfies the universal property, the morphism from $K$ to
+    $K$ factoring $\iota$ through $\iota$ is unique. Therefore
+    \[
+    \theta\circ \eta=1_K.
+    \]
+
+    Similarly,
+    \[
+    g\circ (\eta\circ \theta)
+    =(g\circ \eta)\circ \theta
+    =\iota\circ \theta
+    =g,
+    \]
+    and also
+    \[
+    g\circ 1_L=g.
+    \]
+    By the universal property of $(L,g)$, the factorization of $g$ through $g$ is
+    unique, hence
+    \[
+    \eta\circ \theta=1_L.
+    \]
+    Thus $\theta$ and $\eta$ are inverse isomorphisms, so
+    \[
+    L\cong K.
+    \]
+
+    Therefore any kernel of $f$ defined by the universal property is isomorphic to
+    the representation
+    \[
+    (\ker f_i,\varphi_\alpha|_{\ker f_i}),
+    \]
+    and the two definitions of the kernel are equivalent.
+\end{proof}
 
 Analogously we have equivalent definition of $ \operatorname{coker}f $.
 
-\begin{definition}[Cokernel of a morphism]
-    Let
-    \[
-    f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
-    \]
-    be a morphism of representations.
-    
-    For each vertex $i\in Q_0$, set
-    \[
-    H_i:=N_i/f_i(M_i).
-    \]
-    For each arrow $\alpha:i\to j$, define
-    \[
-    \chi_\alpha:H_i\to H_j,\qquad
-    \chi_\alpha\bigl(n_i+f_i(M_i)\bigr)
-    :=\psi_\alpha(n_i)+f_j(M_j).
-    \]
-    Then
-    \[
-    \operatorname{coker}f:=(H_i,\chi_\alpha).
-    \]
-    
-    Equivalently, a cokernel of $f$ is a morphism
+\begin{definition}[Universal property of cokernel]
+   A cokernel of $f$ is a morphism
     \[
     g:N\to H
     \]
@@ -1351,34 +1413,6 @@ Prove the equivalence of the two definitions of $ \operatorname{coker}f $.
     \[
     \chi_\alpha\bigl(n_i+f_i(M_i)\bigr):=\psi_\alpha(n_i)+f_j(M_j).
     \]
-    
-    We first check that $\chi_\alpha$ is well-defined. Suppose
-    \[
-    n_i+f_i(M_i)=n_i'+f_i(M_i).
-    \]
-    Then
-    \[
-    n_i-n_i'=f_i(m_i)
-    \]
-    for some $m_i\in M_i$. Hence
-    \[
-    \psi_\alpha(n_i)-\psi_\alpha(n_i')
-    =\psi_\alpha(f_i(m_i)).
-    \]
-    Since $f$ is a morphism of representations, we have
-    \[
-    \psi_\alpha\circ f_i=f_j\circ \varphi_\alpha.
-    \]
-    Therefore
-    \[
-    \psi_\alpha(f_i(m_i))
-    =f_j(\varphi_\alpha(m_i))\in f_j(M_j).
-    \]
-    So
-    \[
-    \psi_\alpha(n_i)+f_j(M_j)=\psi_\alpha(n_i')+f_j(M_j),
-    \]
-    and thus $\chi_\alpha$ is well-defined.
     
     Hence
     \[
@@ -1476,10 +1510,8 @@ Prove the equivalence of the two definitions of $ \operatorname{coker}f $.
     \bigl(N_i/f_i(M_i),\chi_\alpha\bigr)
     \]
     with the natural projection $g:N\to H$ satisfies the universal property of the cokernel.
-    \end{proof}
-
-    \begin{proof}
-        Suppose
+  
+        On the other hand, suppose
         \[
         g=(g_i):N=(N_i,\psi_\alpha)\to H=(H_i,\chi_\alpha)
         \]
@@ -1680,7 +1712,7 @@ These all together shows that $ \operatorname{Rep}Q $ is an abelian category.
 \begin{definition} 
 Let $ \begin{tikzcd}
 M \arrow[r] & N \arrow[r] & P
-\end{tikzcd} $ be a sequence of morphisms in $ \operatorname{Rep}Q $. We say that this sequence is exact if $ \operatorname{ker}p = \operatorname{im}f $.
+\end{tikzcd} $ be a sequence of morphisms in $ \operatorname{Rep}Q $. We say that this sequence is exact (at $ N $) if $ \operatorname{ker}p = \operatorname{im}f $.
 \end{definition}
 
 \begin{definition} 
@@ -1753,12 +1785,28 @@ splits if $ f $ has a retraction or equivalently $ f $ is a section.
 \begin{example}
     In the example before, the second sequence splits.
 
-    In the second short exact sequence the middle term is the \emph{direct sum} $S_1 \oplus S_2$, with $f = (0,1)$ the inclusion of the second summand and $g = (1,0)$ the projection onto the first. Take the projection $h: S_1 \oplus S_2 \to S_2$ onto the second factor (at each vertex). Then $(hf)(s_2) = h(0,s_2) = s_2$ for all $s_2 \in S_2$, so $hf = 1_{S_2}$. Thus $f$ has a retraction and the sequence splits. Equivalently, the inclusion $h': S_1 \to S_1 \oplus S_2$ of the first summand satisfies $gh' = 1_{S_1}$, so $g$ has a section.
+    Take the first short exact sequence: the middle term is the \emph{direct sum} $S_1 \oplus S_2$, with
+    \[
+        f = (0,1) \text{ (inclusion of the second summand)}, 
+        g = (1,0) \text{ (projection onto the first)}.
+    \]
+    Take the projection $h \colon S_1 \oplus S_2 \to S_2$ onto the second factor (at each vertex). Then
+    \[
+        (hf)(s_2) = h(0,s_2) = s_2 \quad \forall s_2 \in S_2,
+        \qquad \text{so } hf = 1_{S_2}.
+    \]
+    Thus $f$ has a retraction and the sequence splits. Equivalently, the inclusion $h' \colon S_1 \to S_1 \oplus S_2$ of the first summand satisfies $gh' = 1_{S_1}$, so $g$ has a section.
 
-    By contrast, in the first sequence the middle term is $M$ (the representation $k \xrightarrow{1} k$), which is indecomposable and not isomorphic to $S_1 \oplus S_2$. There is no morphism from $M$ to $S_2$ giving a retraction of $f$, so the first sequence does not split.
+    By contrast, take the second short exact sequence: the middle term here is $M$, the representation
+    \[
+        k \xrightarrow{1} k,
+    \]
+    which is indecomposable and not isomorphic to $S_1 \oplus S_2$. There is no morphism from $M$ to $S_2$ giving a retraction of $f$, so the first sequence does not split.
 \end{example}
 
 \chapter{Lecture 4}
+
+\section{Split Exact Sequences}
 
 Recall short exact sequence:
 \[
@@ -1784,7 +1832,9 @@ Taking a short exact sequence
 \end{theorem}
 
 \begin{proof}[proof of (a)] 
-$ (\Rightarrow )$: Suppose $ f $ is a section. $ \exists h: M\to L $ such that $ hf=1_L $. We will define $ h': N\to M $ and show that $ gh'=1_N $. $ \forall n \in N $, since $ g $ is surjective $ \exists m $ such that $ n =g(m) $. $ h'(n)= m - f(h(m)) $ where $ h': N\to M $. We have to show that $ h' $ is well-defined. Suppose $ m,m' $ such that $ n=g(m)=g(m') $. We have to show that $ m'-f(h(m'))=m-f(h(m)) $. $ m'-m  =f(h(m'))-f(h(m)) \in \operatorname{im}f$, $ \exists l \in L $ such that $ f(l)=m'-m= $. Now: 
+$ (\Rightarrow )$: Suppose $ f $ is a section. $ \exists h: M\to L $ such that $ hf=1_L $. We will define $ h': N\to M $ and show that $ gh'=1_N $. $ \forall n \in N $, since $ g $ is surjective $ \exists m $ such that $ n =g(m) $. $ h'(n)= m - f(h(m)) $ where $ h': N\to M $. We have to show that $ h' $ is well-defined. Suppose $ m,m' $ such that $ n=g(m)=g(m') $. We have to show that $ m'-f(h(m'))=m-f(h(m)) $. 
+
+Since $ g(m)-g(m') = g(m-m')=0 $, $ m-m' \in \operatorname{ker}g = \operatorname{im}f $, $ \exists l \in L $ such that $ f(l)=m-m' $. Hnece $ m-m'=f(l)= f(hf)(l)= f(h(m)-h(m'))=f(h(m))-f(h(m')) $. Hence $ m'-f(h(m'))=m-f(h(m)) $. 
 
 We need to show $ h' $ is a morphism. Let $ M=(M_i,\varphi_\alpha), L=(L_i,\varphi_\alpha'), N=(N_i, \varphi_\alpha'') $. Then $ f,g,h $ are morphisms of representations. We have to show that $ h' $ is a morphism of representations. Let $ \alpha: i \to j $ be an arrow in $ Q $. Then consider the following diagram:
 \[
@@ -1798,23 +1848,24 @@ Take $ n_i \in N_i $, and for $ n_i $ we choose $ m_i $ such that $g_i(m_i)=n_i,
 \begin{align*}
 \varphi_\alpha h_i' (n_i)&=\varphi_\alpha (m_i-f_i(h_i(m_i)))\\
 &=\varphi_\alpha (m_i)-\varphi_\alpha (f_i(h_i(m_i)))\\
-&=\varphi_\alpha (m_i)-f_j(\psi_\alpha' (h_i(m_i)))\\
+&=\varphi_\alpha (m_i)-f_j(\varphi_\alpha' (h_i(m_i)))\\
 &=\varphi_\alpha (m_i)-f_j(h_j(\varphi_\alpha(m_i)))
 \end{align*}
 And 
 \begin{align*}
 h_j'(\varphi_\alpha''(n_i))&=h_j'(\varphi_\alpha''(g_i(m_i)))\\
 &=h_j'(g_j(\varphi_\alpha(m_i)))\\
+&(\text{define $ n_j=g_j(\varphi_\alpha(m_i)) $ })\\
 &=\varphi_\alpha(m_i)-f_j(h_j(\varphi_\alpha(m_i)))\\
 \end{align*}
 Hence $ h' $ is a morphism of representations.
 
-The only thing need to show now is that $ gh'=1_N $. Let $ n_i \in N_i $, then $ \exists m_i \in M_i $ such that $ n_i =g(m_i) $. Then $ g_ih_i'(n_i)=g_i(m-fh(m))=g(m)-g(fh(m))=g_i(m_i)=n_i $. Hence $ gh'=1_N $.
+The only thing need to show now is that $ gh'=1_N $. Let $ n_i \in N_i $, then $ \exists m_i \in M_i $ such that $ n_i =g_i(m_i) $. Then $ g_i(h_i'(n_i))=g_i(m_i-f_i(h_i(m_i)))=g_i(m_i)-g_i(f_i(h_i(m_i)))=g_i(m_i)=n_i $. Hence $ gh'=1_N $. (Since $ f_i(h_i(m_i)) \in \operatorname{im}f_i = \operatorname{ker}g_i $). 
 
 $ (\Leftarrow )$: 
 Suppose $ g $ is a retraction. $ \exists h': N\to M $ such that $ gh'=1_N $. We will define $ h: M\to L $ and show that $ hf=1_L $. 
 
-For any $ m $ we have $ g(m-h'g(m))=g(m)-g(h'g(m))=g(m)-g(m)=0 $. Hence $ m-h'g(m) \in \operatorname{ker}g = \operatorname{im}f $. Hence $ \exists ! l \in L $ such that $ f(l)=m-h'g(m)  $ since $ f $ is injective. Define $ h(m)=l $. Then 
+For any $ m $ we have $ g(m-h'g(m))=g(m)-g(h'g(m))=g(m)-g(m)=0 $. Hence $ m-h'g(m) \in \operatorname{ker}g = \operatorname{im}f $. Hence $ \exists ! l \in L $ such that $ f(l)=m-h'g(m)  $ since $ f $ is injective. Define $ h(m)=l $. 
 
 We have to show that $ h $ is a morphism of representations. Let $ M=(M_i,\varphi_\alpha), L=(L_i,\varphi_\alpha'), N=(N_i, \varphi_\alpha'') $. Then $ f,g,h' $ are morphisms of representations. We have to show that $ h $ is a morphism of representations. Let $ \alpha: i \to j $ be an arrow in $ Q $. Then consider the following diagram:
 \[
@@ -1824,15 +1875,20 @@ We have to show that $ h $ is a morphism of representations. Let $ M=(M_i,\varph
         \overset{N_i}{\bullet} \arrow[r, "\varphi_{\alpha}''"] \arrow[u, "h_i'"', shift right]                             & \overset{NN_j}{\bullet} \arrow[u, "h_j'", shift left]                           
         \end{tikzcd}
 \]
-Take $ m_i \in M_i $, and for $ m_i $ we choose $ l_i \in L_i $ such that $ f(l_i)=m_i-h_i'g_i(m_i) $ and $ h_i(m_i)=l_i $ . Then we have
+Take $ m_i \in M_i $, and for $ m_i $ we choose $ l_i \in L_i $ such that $ f_i(l_i)=m_i-h_i'g_i(m_i) $ and $ h_i(m_i)=l_i $ . Then we have
 \[
-\varphi_\alpha (h_i(m_i))=\varphi_\alpha' (l_i)
+\varphi_\alpha' (h_i(m_i))=\varphi_\alpha' (l_i)
 \]
 On the other hand,
 \begin{align*}
-h_j\varphi_\alpha(m_i) & =h_j\varphi_\alpha(f_i(l_i)+h_i'g_i(m_i))\\
-&= 
+f_j(h_j(\varphi_\alpha(m_i)))& = \varphi_\alpha(m_i)-h_j' g_j(\varphi_\alpha(m_i))\\
+&=\varphi_\alpha(m_i)- h_j' (\varphi_\alpha''(g_i(m_i)))\\
+&= \varphi_\alpha(m_i)- \varphi_\alpha(h_i ' g_i(m_i))\\
+&= \varphi_\alpha(m_i-h_i ' g_i(m_i)) \\
+&= \varphi_\alpha(f_i(l_i)) \\
+&= f_j (\varphi_\alpha' (l_i)) \\
 \end{align*}
+Hence $ f_j(h_j(\varphi_\alpha(m_i)))=f_j(\varphi_\alpha' (l_i)) $. Since $ f_j $ is injective, $ h_j(\varphi_\alpha(m_i))=\varphi_\alpha' (l_i) $. Hence $ h $ is a morphism of representations.
 \end{proof}
 
 \begin{proof}[proof of (b)] 
@@ -1840,7 +1896,7 @@ Suppose $ f $ is a section then $ g $ is a retraction. $ \forall m \in M $, $ \e
 
 Furthermore we need to show that $ \operatorname{ker}g \oplus \operatorname{im}h' $ is a direct sum of representations. i.e. 
 \[
-\varpi_\alpha=\begin{bmatrix}
+\varphi_\alpha=\begin{bmatrix}
 \varphi_\alpha |_{\operatorname{ker}g_i } & 0 \\
 0 & \varphi_\alpha |_{\operatorname{im}h'_i }
 \end{bmatrix}
@@ -1849,9 +1905,9 @@ Let $ m_i \in \operatorname{ker}g_i $, then $ 0=\varphi_\alpha''(g_i(m_i))=g_j \
 
 If $m_i \in \operatorname{im}h'_i$, and therefore 
 \[
-\varphi_\alpha'(m_i)=\varphi_\alpha'(h_i'(n_i))=h_j'(\varphi_\alpha''(n_i))
+\varphi_\alpha(m_i)=\varphi_\alpha(h_i'(n_i))=h_j'(\varphi_\alpha''(n_i))
 \]
-is an element of $\operatorname{im}h_i'$. This shows that the lower left block of the matrix is zero and hence $\varpi_\alpha$ is a block diagonal matrix.
+is an element of $\operatorname{im}h_j'$. This shows that the lower left block of the matrix is zero and hence $\varphi_\alpha$ is a block diagonal matrix.
 \end{proof}
 
 \begin{corollary}
@@ -1912,6 +1968,8 @@ M \arrow[r, "f"] \arrow[rr, "f^*(g)=g \circ f"', bend right=25] & N \arrow[r, "g
 \end{example}
 
 \chapter{Lecture 5}
+
+\section{Hom Functor Acts on Exact Sequences}
 
 \begin{theorem}
     Let $Q$ be a quiver. 
@@ -2106,7 +2164,7 @@ Similarly we have the following theorem:
     0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N \arrow[r] & 0
     \end{tikzcd}
     \]
-    is split exact. By Theorem 1.10, it is enough to show that
+    is split exact. By Theorem above, it is enough to show that
     \[
     g_* : \operatorname{Hom}(X,M) \to \operatorname{Hom}(X,N)
     \]
@@ -2144,7 +2202,7 @@ Similarly we have the following theorem:
     \]
     is exact.
     
-    By Theorem 1.10, it follows that
+    By Theorem above, it follows that
     \[
     \begin{tikzcd}
     0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N
@@ -2220,8 +2278,8 @@ Similarly we have the following theorem:
 \section{First Examples of Auslander--Reiten Quivers}
 
 The goal of the representation theory of a quiver $Q$ is to understand the
-representations in $\operatorname{Rep}(Q)$, the morphisms between them, and, more generally,
-the short exact sequences in $\operatorname{Rep}(Q)$.
+representations in $\operatorname{Rep}Q$, the morphisms between them, and, more generally,
+the short exact sequences in $\operatorname{Rep}Q$.
 
 A first approximation to this structure is given by the \emph{Auslander--Reiten
 quiver}. In the representation-finite case, it encodes all indecomposable
