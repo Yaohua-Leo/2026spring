@@ -1,0 +1,2465 @@
+\documentclass[11pt, a4paper]{report}
+%----------------------------------------------------------------------------------------
+%	PACKAGES (宏包管理)
+%----------------------------------------------------------------------------------------
+% 1. 编码与语言
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+% 2. 页面布局与排版
+\usepackage{geometry}
+\geometry{
+    textwidth=6in, % 稍微加宽以便放入更好的box
+    top=1in,
+    bottom=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{float}
+\usepackage{enumitem} % 更好的列表控制
+\usepackage{tocloft}  % 加载目录控制宏包
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % 强制让 section 后面显示点号
+% 3. 数学支持
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{thmtools} % 定理环境增强
+\usepackage{extarrows}
+% 4. 图形与颜色
+\usepackage{graphicx}
+\usepackage[dvipsnames, svgnames]{xcolor} % 加载更多颜色名
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{ytableau} % 杨表
+\usetikzlibrary{decorations.pathreplacing, calc, shadows}
+
+% Define reusable graph styles
+\tikzset{
+    vertex/.style={circle, fill=black, inner sep=1.5pt, outer sep=0pt},
+    graphlabel/.style={align=center, font=\small}
+}
+
+% 5. 漂亮的文本框
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+% 6. 参考文献
+%\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015]{biblatex}
+%\addbibresource{references.bib}
+% 7. 交互 (最后加载)
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+%----------------------------------------------------------------------------------------
+%	CUSTOM COLORS (自定义配色方案)
+%----------------------------------------------------------------------------------------
+% 定理色系 - 蓝色
+\definecolor{ThmColor}{RGB}{0, 71, 171}        % 深钴蓝
+\definecolor{ThmBg}{RGB}{240, 244, 255}        % 极浅蓝
+% 定义色系 - 绿色
+\definecolor{DefColor}{RGB}{0, 100, 0}         % 深绿
+\definecolor{DefBg}{RGB}{240, 255, 240}        % 蜜瓜绿
+% 引理/命题色系 - 橙色
+\definecolor{LemColor}{RGB}{204, 85, 0}        % 焦橙色
+\definecolor{LemBg}{RGB}{255, 248, 240}        % 极浅橙
+% 示例/注记色系 - 灰色/紫色
+\definecolor{ExColor}{RGB}{105, 105, 105}      % 暗灰
+\definecolor{ExBg}{RGB}{250, 250, 250}         % 极浅灰
+% 专题/话题色系 - 靛紫色
+\definecolor{TopicColor}{RGB}{75, 0, 130}      % 靛蓝色 (Indigo)
+\definecolor{TopicBg}{RGB}{248, 245, 255}      % 极浅紫
+%----------------------------------------------------------------------------------------
+%	THEOREM ENVIRONMENTS (环境美化核心)
+%----------------------------------------------------------------------------------------
+% 1. Theorem (蓝色风格)
+\declaretheorem[name=Theorem, numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{
+    enhanced jigsaw,
+    colframe=ThmColor,       % 边框颜色
+    colback=ThmBg,           % 背景颜色
+    coltitle=white,          
+    boxrule=0.5pt,           % 边框粗细
+    leftrule=2pt,            % 左边框加粗
+    sharp corners=downhill,  % 样式
+    breakable,               % 允许跨页
+    drop shadow=black!5!white % 轻微阴影
+}
+% Corollary 使用与 Theorem 相同的风格，但通常紧随其后
+\declaretheorem[name=Corollary, numberlike=theorem]{corollary}
+\tcolorboxenvironment{corollary}{
+    enhanced jigsaw,
+    colframe=ThmColor!80!white, 
+    colback=ThmBg,
+    boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
+    breakable
+}
+% 2. Definition (绿色风格)
+\declaretheorem[name=Definition, numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{
+    enhanced jigsaw,
+    colframe=DefColor,
+    colback=DefBg,
+    boxrule=0.5pt, leftrule=2pt,
+    sharp corners=downhill,
+    breakable,
+    drop shadow=black!5!white
+}
+% 3. Lemma & Proposition (橙色风格)
+\declaretheorem[name=Lemma, numberlike=theorem]{lemma}
+\declaretheorem[name=Proposition, numberlike=theorem]{proposition}
+\tcolorboxenvironment{lemma}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+\tcolorboxenvironment{proposition}{
+    enhanced jigsaw,
+    colframe=LemColor,
+    colback=LemBg,
+    boxrule=0.5pt, leftrule=2pt,
+    breakable
+}
+% 4. Example & Remark (简约风格)
+\declaretheorem[name=Example, numberlike=theorem]{example}
+\declaretheorem[name=Remark, numberlike=theorem]{remark}
+\declaretheorem[name=Exercise, numberlike=theorem]{exercise}
+\tcolorboxenvironment{example}{
+    enhanced jigsaw,
+    colframe=ExColor,
+    colback=ExBg,
+    leftrule=2pt, boxrule=0pt,
+    frame hidden, % 隐藏其他三边
+    breakable
+}
+% 5. Topic (靛紫色风格，带标题支持)
+\declaretheorem[name=Topic, numberlike=theorem]{topic}
+\tcolorboxenvironment{topic}{
+    enhanced jigsaw,
+    breakable,
+    colframe=TopicColor,        % 边框为靛紫色
+    colback=TopicBg,           % 背景为极浅紫
+    boxrule=0.5pt,             % 细边框
+    leftrule=2pt,              % 左侧加粗线
+    sharp corners=downhill,    % 与你其他环境一致的切角样式
+    drop shadow=black!5!white, % 轻微阴影
+    before skip=15pt,
+    after skip=15pt
+}
+%----------------------------------------------------------------------------------------
+%	MATH MACROS (保留你的常用定义)
+%----------------------------------------------------------------------------------------
+\newcommand{\g}{\mathfrak{g}}  
+\newcommand{\der}{\mathrm{d}} 
+\newcommand{\h}{\mathfrak{h}} 
+\newcommand{\n}{\mathfrak{n}}  
+\newcommand{\U}{\mathcal{U}}  
+\newcommand{\C}{\mathbb{C}} 
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\borel}{\mathfrak{b}}
+\newcommand{\Ind}{\mathrm{Ind}} 
+\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    \textsc{\Large Course Notes}\\[0.5cm]
+
+    \HRule{1.5pt} \\[0.5cm]
+    { \huge \bfseries Applied Abstract Algebra \\[0.3cm] Quiver Theory }\\[0.4cm] 
+    \HRule{1.5pt} \\[1.5cm]
+    
+    \vspace{3cm}
+
+    % 人员信息区域：垂直排列并区分字号
+    \begin{spacing}{1.8}
+        {\Large \textbf{Instructor:}} \\
+        {\Large Prof. Iryna \textsc{Kashuba}} \\[0.8cm]
+        
+        {\normalsize \textit{TA:}} \\
+        {\normalsize Leo}
+    \end{spacing}
+
+    \vfill
+    {\large \today}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%    CONTENT STRUCTURE TEMPLATE
+%----------------------------------------------------------------------------------------
+
+\chapter{Lecture 1}
+
+\begin{tcolorbox}[
+    enhanced,
+    title=\textbf{Course Information},
+    colframe=TopicColor,
+    colback=TopicBg,
+    coltitle=white,
+    boxrule=0.5pt,
+    leftrule=2pt,
+    sharp corners=downhill,
+    drop shadow=black!5!white
+]
+\textbf{\textcolor{TopicColor}{Main topic:}} Representation theory of quivers.
+
+\textbf{\textcolor{TopicColor}{Office hours:}} Mon: 12:30-14:30.
+
+\textbf{\textcolor{TopicColor}{Main book:}} \textit{Ralf Schiffler, Quiver Representations}, Cambridge University Press.
+
+\textbf{\textcolor{TopicColor}{References:}}
+\begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
+    \item \textit{Assem, Simons, Skowronski, Elements of the Representation Theory of Associative Algebras}, Cambridge University Press.
+    \item \textit{Ibrahim Assem, basic representation theory of algebras}.
+    \item \textit{Michel Brion, Representations of quivers}.
+    \item \textit{Henning Krause, Representations of quivers via reflection functor}.
+    \item \textit{W.Crawley-Boevey, Lectures on representations of quivers}.
+    \item \textit{W.Crawley-Boevey, More on representations of quivers}.
+    \item \textit{Alexander Kirillov Jr. - Quiver Representations and Quiver Varieties (2016, American Mathematical Society)}.
+    \item Other Reference: \url{www.math.uni-bielefeld.de}
+\end{itemize}
+\textbf{\textcolor{TopicColor}{Grading:}}
+\begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
+    \item Midterm: 30\%
+    \item Attendance: 10\%
+    \item Homework: 20\%
+    \item Final: 40\%
+\end{itemize}
+Midterm will be on April 13th, Monday, 2026 (the 8th week). 
+\end{tcolorbox}
+
+\section{Quivers}
+
+\begin{definition} 
+A quiver $Q$ is a quadruple $(Q_0, Q_1, s, t)$, where $Q_0$ is a set of vertices, $Q_1$ is a set of arrows, and $s, t: Q_1 \to Q_0$ are two maps. For any arrow $\alpha \in Q_1$, $s(\alpha)$ is called the source of $\alpha$ and $t(\alpha)$ is called the target of $\alpha$. For example, if $ \alpha: 1 \to 2 $, then $ s(\alpha)=1 $ and $ t(\alpha)=2 $.
+\end{definition}
+
+\begin{example} 
+Let $ Q_0=\{ 1,2,3 \} $, $ Q_1=\{ \alpha,\beta, \gamma, \delta \} $.
+We have $ s(\alpha)=2, t(\alpha)=2 $; $ s(\beta)=3, t(\beta)=1 $; $ s(\gamma)=s(\delta)=1, t(\gamma)=t(\delta)=2 $.
+\begin{center}
+\begin{tikzcd}
+\underset{\bullet}{1} \arrow[r, "\gamma", bend left] \arrow[r, "\delta"', bend right] & \underset{\bullet}{2} \arrow["\alpha"', loop, distance=2em, in=305, out=235] & \underset{\bullet}{3} \arrow[ll, "\beta"', bend right=49]
+\end{tikzcd}
+\end{center}
+Let path $ \xi=\alpha \gamma \beta $, then we have $ s(\xi)=s(\beta)=3 $ and $ t(\xi)=t(\alpha)=2 $.  
+\end{example}
+
+\begin{example} 
+Jordan quiver.
+The Jordan quiver consists of a single vertex and a single arrow starting and ending at this vertex. Formally, $Q_0 = \{1\}$ and $Q_1 = \{\alpha\}$ with $s(\alpha) = t(\alpha) = 1$.
+It is called the Jordan quiver because its representations correspond to vector spaces equipped with a linear endomorphism. The classification of such representations up to isomorphism is equivalent to the classification of square matrices up to similarity, which is given by the Jordan normal form theorem (over an algebraically closed field).
+\begin{center}
+\begin{tikzcd}
+\bullet \arrow[loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{example} 
+$ r $-Kronecker quiver.
+The $r$-Kronecker quiver has two vertices, say 1 and 2, and $r$ arrows $\alpha_1, \dots, \alpha_r$ from 1 to 2. Thus $Q_0 = \{1, 2\}$, $Q_1 = \{\alpha_1, \dots, \alpha_r\}$, with $s(\alpha_i) = 1$ and $t(\alpha_i) = 2$ for all $i=1, \dots, r$.
+It is named after Leopold Kronecker. In the case $r=2$, the representations correspond to pairs of linear maps between two vector spaces, which can be represented by matrix pencils. Kronecker solved the classification problem for these pencils.
+\begin{center}
+    \begin{tikzcd}
+\bullet \arrow[r, "1", bend left=49] \arrow[r, "\ldots", no head, dashed] \arrow[r, "r"', bend right=49] & \bullet
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{example} 
+$ n $-subspace quiver. 
+The $n$-subspace quiver consists of $n+1$ vertices $\{0, 1, \dots, n\}$ and $n$ arrows $\alpha_1, \dots, \alpha_n$ such that $s(\alpha_i) = i$ and $t(\alpha_i) = 0$ for all $i=1, \dots, n$.
+It is called the $n$-subspace quiver because its representations are related to configurations of subspaces. If the linear maps associated with the arrows are injective, a representation corresponds to a collection of $n$ subspaces of the vector space associated with the central vertex.
+\begin{center}
+\begin{tikzcd}
+                                  & \underset{\bullet}{0}            &        &                                    \\
+                                  &                                  &        &                                    \\
+\underset{\bullet}{1} \arrow[ruu] & \underset{\bullet}{2} \arrow[uu] & \ldots & \underset{\bullet}{n} \arrow[lluu]
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{example} 
+Finite quivers.
+A quiver $Q=(Q_0, Q_1, s, t)$ is called finite if both the set of vertices $Q_0$ and the set of arrows $Q_1$ are finite sets.
+\end{example}
+
+For the base field we assume $ k=\bar{k} $. Usually we take $ k=\C $. 
+
+\section{Representations}
+
+\begin{definition} 
+A representation $M$ of a quiver $Q$ consists of a vector space $M_i$ for each vertex $i \in Q_0$ and a linear map $\phi_{\alpha}: M_{s(\alpha)} \to M_{t(\alpha)}$ for each arrow $\alpha \in Q_1$. We denote this representation by $M=(M_i, \phi_{\alpha})_{i \in Q_0, \alpha \in Q_1}$.
+\end{definition}
+
+\begin{example} 
+For example 1: 
+\begin{center}
+\begin{tikzcd}
+\underset{\bullet}{M_1} \arrow[r, "\phi_\gamma", bend left] \arrow[r, "\phi_\delta"', bend right] & \underset{\bullet}{M_2} \arrow["\phi_\alpha"', loop, distance=2em, in=305, out=235] & \underset{\bullet}{M_3} \arrow[ll, "\phi_\beta"', bend right=49]
+\end{tikzcd}
+\end{center}
+Then $M=(M_1, M_2, M_3, \phi_\gamma, \phi_\delta, \phi_\alpha, \phi_\beta)$ is a representation of the quiver $Q$.
+\end{example}
+
+\begin{definition} 
+A representation $M$ is called \textbf{finite dimensional} if $\dim M_i < \infty$ for all $i \in Q_0$. The tuple $\dim M = \{\dim M_i\}_{i \in Q_0}$ is called the \textbf{dimension vector} of $M$. An element $m \in M$ is a tuple $\{m_i\}_{i \in Q_0}$ where $m_i \in M_i$ for each $i \in Q_0$.
+\end{definition}
+
+\begin{example} 
+$ 1 $-Kronecker quiver:
+\begin{center}
+    \begin{tikzcd}
+1 \arrow[r] & 2
+\end{tikzcd}
+\end{center}
+
+Take $ k $ to be a field. Some representations of this quiver are:
+\[
+M:\;
+\begin{tikzcd}[ampersand replacement=\&, column sep=large]
+k \arrow[r, "1"] \& k
+\end{tikzcd}
+\qquad
+M':\;
+\begin{tikzcd}[ampersand replacement=\&, column sep=large]
+k \arrow[r, "0"] \& k
+\end{tikzcd}
+\qquad
+M'':\;
+\begin{tikzcd}[ampersand replacement=\&, column sep=large]
+k \arrow[r, "0"] \& 0
+\end{tikzcd}
+\]
+
+Another example is
+\[
+\widetilde{M}:\;
+\begin{tikzcd}[ampersand replacement=\&, column sep=huge]
+k^2 \arrow[r, "{\begin{bmatrix}1 & 0 \\ 1 & 0 \\ 0 & 0\end{bmatrix}}"] \& k^3
+\end{tikzcd}.
+\]
+For $ v=(1,0) \in k^2 $, we have
+\[
+\begin{bmatrix}
+1 & 0 \\
+1 & 0 \\
+0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \\
+1 \\
+0
+\end{bmatrix}.
+\]
+The dimension vectors are $\underline{\operatorname{dim}}M=(1,1)$, $\underline{\operatorname{dim}}M'=(1,1)$, $\underline{\operatorname{dim}}M''=(1,0)$ and $\underline{\operatorname{dim}}\widetilde{M}=(2,3)$.
+\end{example}
+
+\section{Morphisms and the Category \texorpdfstring{$\operatorname{Rep}Q$}{Rep Q}}
+
+\begin{definition}[A Morphism between two representations of $ Q $] 
+Let $ M=(M_i, \phi_{\alpha})_{i \in Q_0, \alpha \in Q_1} $ and $ N=(N_i, \psi_{\alpha})_{i \in Q_0, \alpha \in Q_1} $ be two representations of $ Q $. A morphism $ f: M \to N $ is a collection of linear maps $ f_i: M_i \to N_i $ such that for every $ \phi_{\alpha}: M_i \to M_j $, $ \alpha \in Q_1 $ the following diagram commutes:
+    \begin{center}
+    \begin{tikzcd}
+    M_i \arrow[r, "\phi_{\alpha}"] \arrow[d, "f_i"'] & M_j \arrow[d, "f_j"] \\
+    N_i \arrow[r, "\psi_{\alpha}"']                  & N_j                 
+    \end{tikzcd}
+    \end{center}
+    A morphism $f=(f_i)_{i \in Q_0}: M\to N$ is called an \textbf{isomorphism of representations} if each $f_i$ is an isomorphism. The class of all representations that are isomorphic to a given representation $M$ is called the \textbf{isomorphism class} of $M$.
+\end{definition}
+
+\begin{example} 
+In example of 1-Kronecker quiver, let $ f: M \to M'' $, $ f_1: k \to k $ such that $ f_1(1)=a $, and $ f_2: k \to 0 $ is the zero map. We can check that $ f $ is a morphism. Check the following diagram:
+\begin{center}
+    \begin{tikzcd}
+k \arrow[r, "1"] \arrow[d, "f_1 \ \ \ a"'] & k \arrow[d, "0 \ \ \ f_2"] \\
+k \arrow[r, "0"']                          & 0                         
+\end{tikzcd}
+\end{center}
+
+Now we establish $ g: M'' \to M $. If $ g $ is a morphism, then we have $ g_1: k \to k $ such that $ g_1(1)=b $, and $ g_2: 0 \to k $ is the zero map. To make the target diagram commute it forces $ g_1=0 $. Hence there are only $ 0 $ morphism form $ M'' $ to $ M $.
+\begin{center}
+\begin{tikzcd}
+k \arrow[r, "0"] \arrow[d, "g_1 \ \ \ b"'] & 0 \arrow[d, "0 \ \ \ g_2"] \\
+k \arrow[r, "1"']                          & 0                         
+\end{tikzcd}
+\end{center}
+
+\[ 1 \circ g_1 = 0 \Rightarrow g_1=0 \]
+\end{example}
+
+Recall the definition of category:
+
+\begin{definition} 
+A category $\mathcal{C}$ consists of the following data:
+\begin{itemize}
+    \item A class of objects, denoted by $\mathrm{Ob}(\mathcal{C})$.
+    \item For any pair of objects $X, Y \in \mathrm{Ob}(\mathcal{C})$, a set of morphisms from $X$ to $Y$, denoted by $\mathrm{Hom}_{\mathcal{C}}(X, Y)$. If $f \in \mathrm{Hom}_{\mathcal{C}}(X, Y)$, we write $f: X \to Y$.
+    \item For any three objects $X, Y, Z \in \mathrm{Ob}(\mathcal{C})$, a composition map:
+    \[
+    \circ: \mathrm{Hom}_{\mathcal{C}}(Y, Z) \times \mathrm{Hom}_{\mathcal{C}}(X, Y) \to \mathrm{Hom}_{\mathcal{C}}(X, Z), \quad (g, f) \mapsto g \circ f.
+    \]
+\end{itemize}
+These data must satisfy the following axioms:
+\begin{enumerate}
+    \item \textbf{Associativity}: For any morphisms $f: X \to Y$, $g: Y \to Z$, and $h: Z \to W$, we have
+    \[
+    h \circ (g \circ f) = (h \circ g) \circ f.
+    \]
+    \item \textbf{Identity}: For every object $X \in \mathrm{Ob}(\mathcal{C})$, there exists an identity morphism $\mathrm{id}_X \in \mathrm{Hom}_{\mathcal{C}}(X, X)$ such that for any $f: X \to Y$ and $g: Z \to X$,
+    \[
+    f \circ \mathrm{id}_X = f \quad \text{and} \quad \mathrm{id}_X \circ g = g.
+    \]
+\end{enumerate}
+\end{definition}
+
+Denote $ \mathrm{Rep}Q $ the category of representations of $ Q $. Then $ \mathrm{Ob}(\mathrm{Rep}Q) $ is the class of representations of $ Q $: $M=(M_i, \phi_{\alpha})$, and $ \mathrm{Hom}_{\mathrm{Rep}Q} $ is the class of morphisms $  \mathrm{Hom}_{\mathrm{Rep}Q}(M,N) $ from $ M $ to $ N $.
+
+Let $ M,N \in \mathrm{Ob}(\mathrm{Rep}Q) $. Then $ \mathrm{Hom}(M,N):= \mathrm{Hom}_{\mathrm{Rep}Q}(M,N) $ is a vector space over $k$ with operations defined component-wise: for $ f,g \in \mathrm{Hom}(M,N) $ and $ \lambda \in k $, let $(f+g)_i = f_i + g_i$ and $(\lambda f)_i = \lambda f_i$ for all $ i \in Q_0 $.
+
+\textbf{Verification:} Let $ M=(M_i, \phi_\alpha) $ and $ N=(N_i, \psi_\alpha) $. Since $ f,g $ are morphisms, for any arrow $ \alpha: i \to j $, we have $ \psi_\alpha f_i = f_j \phi_\alpha $ and $ \psi_\alpha g_i = g_j \phi_\alpha $.
+\begin{enumerate}
+    \item \textbf{Addition:}
+    \[
+    \psi_\alpha (f+g)_i = \psi_\alpha (f_i + g_i) = \psi_\alpha f_i + \psi_\alpha g_i = f_j \phi_\alpha + g_j \phi_\alpha = (f_j + g_j) \phi_\alpha = (f+g)_j \phi_\alpha.
+    \]
+    Thus $ f+g \in \mathrm{Hom}(M,N) $.
+    \item \textbf{Scalar Multiplication:}
+    \[
+    \psi_\alpha (\lambda f)_i = \psi_\alpha (\lambda f_i) = \lambda (\psi_\alpha f_i) = \lambda (f_j \phi_\alpha) = (\lambda f_j) \phi_\alpha = (\lambda f)_j \phi_\alpha.
+    \]
+    Thus $ \lambda f \in \mathrm{Hom}(M,N) $.
+\end{enumerate}
+The zero morphism $ 0=(0)_{i \in Q_0} $ clearly satisfies the commutativity condition. The vector space axioms follow from the structure of linear maps between vector spaces.
+
+\begin{example} 
+Consider 
+ \begin{center}
+    \begin{tikzcd}
+1 \arrow[r] & 2
+\end{tikzcd}
+\end{center}
+$ \mathrm{Hom}(M,M'') =\{ (a,0) | a \in k \} \simeq k $. $\mathrm{Hom}(M'',M) =\{ 0\} $. 
+\end{example}
+
+\begin{example} 
+Let $ Q $ be a quiver:
+\begin{center}
+\begin{tikzcd}
+1 \arrow[rd, "\alpha"] &   &                        \\
+                       & 3 & 4 \arrow[l, "\gamma"'] \\
+2 \arrow[ru, "\beta"]  &   &                       
+\end{tikzcd}
+\end{center}
+Let $ M $:
+\begin{center}
+    \begin{tikzcd}
+k \arrow[rd, "\begin{bmatrix} 1 \\ 0 \end{bmatrix}"] &     &                                                      \\
+                                                     & k^2 & k \arrow[l, "\begin{bmatrix} 1 \\ 1 \end{bmatrix}"'] \\
+k \arrow[ru, "\begin{bmatrix} 0 \\ 1 \end{bmatrix}"] &     &                                                     
+\end{tikzcd}
+\end{center}
+
+$ M' $:
+\begin{center}
+\begin{tikzcd}
+0 \arrow[rd, "0"] &   &                   \\
+                  & k & 0 \arrow[l, "0"'] \\
+0 \arrow[ru, "0"] &   &                  
+\end{tikzcd}
+\end{center}
+
+$ M'' $:
+\begin{center}
+\begin{tikzcd}
+k \arrow[rd, "1"] &   &                   \\
+                  & k & k \arrow[l, "1"'] \\
+k \arrow[ru, "1"] &   &                  
+\end{tikzcd}
+\end{center}
+
+Let us check $ \mathrm{Hom}(M,M') $:
+\begin{center}
+\begin{tikzcd}
+k \arrow[rd, "\begin{bmatrix} 1 \\ 0 \end{bmatrix}"] \arrow[ddd, "0"', bend right] &                                &                                                                                  \\
+                                                                                   & k^2 \arrow[ddd, "{[a \ \ b]}"] & k \arrow[l, "\begin{bmatrix} 1 \\ 1 \end{bmatrix}"'] \arrow[ddd, "0", bend left] \\
+k \arrow[ru, "\begin{bmatrix} 0 \\ 1 \end{bmatrix}"] \arrow[ddd, "0"', bend right] &                                &                                                                                  \\
+0 \arrow[rd, "0"]                                                                  &                                &                                                                                  \\
+                                                                                   & k                              & 0 \arrow[l, "0"]                                                                 \\
+0 \arrow[ru, "0"]                                                                  &                                &                                                                                 
+\end{tikzcd}
+\end{center}
+
+Since $M'_1=M'_2=M'_4=0$, the maps $f_1, f_2, f_4$ are zero. Let $f_3 = \begin{bmatrix} a & b \end{bmatrix}$. The commutativity conditions impose:
+\[
+\begin{cases}
+f_3 \phi_\alpha = \psi_\alpha f_1 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = 0 \implies a = 0, \\
+f_3 \phi_\beta = \psi_\beta f_2 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} = 0 \implies b = 0.
+\end{cases}
+\]
+Thus $f_3 = 0$, and $\mathrm{Hom}(M, M') = 0$.
+
+Let us check $ \mathrm{Hom}(M,M'') $:
+\begin{center}
+\begin{tikzcd}
+k \arrow[rd, "\begin{bmatrix} 1 \\ 0 \end{bmatrix}"] \arrow[ddd, "c"', bend right] &                                &                                                                                  \\
+                                                                                   & k^2 \arrow[ddd, "{[a \ \ b]}"] & k \arrow[l, "\begin{bmatrix} 1 \\ 1 \end{bmatrix}"'] \arrow[ddd, "e", bend left] \\
+k \arrow[ru, "\begin{bmatrix} 0 \\ 1 \end{bmatrix}"] \arrow[ddd, "d"', bend right] &                                &                                                                                  \\
+0 \arrow[rd, "0"]                                                                  &                                &                                                                                  \\
+                                                                                   & k                              & 0 \arrow[l, "0"]                                                                 \\
+0 \arrow[ru, "0"]                                                                  &                                &                                                                                 
+\end{tikzcd}
+\end{center}
+Let the morphism be given by $g_1 = [c]$, $g_2 = [d]$, $g_4 = [e]$, and $g_3 = \begin{bmatrix} a & b \end{bmatrix}$. The commutativity conditions are:
+\[
+\begin{cases}
+g_3 \phi_\alpha = \psi_\alpha g_1 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = c \implies a = c, \\
+g_3 \phi_\beta = \psi_\beta g_2 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} = d \implies b = d, \\
+g_3 \phi_\gamma = \psi_\gamma g_4 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = e \implies a + b = e.
+\end{cases}
+\]
+The morphism is uniquely determined by the parameters $a, b \in k$. Hence $\mathrm{Hom}(M, M'') \cong k^2$.
+\end{example}
+
+\section{Dynkin Diagrams and Classical Quivers}
+
+\begin{example} 
+Dynkin Diagrams:
+
+\begin{center}
+$A_l \ (l \ge 1)$:\quad
+\begin{tikzpicture}[baseline=-0.5ex]
+\fill (0,0) circle (2pt);
+\fill (1.5,0) circle (2pt);
+\fill (3.0,0) circle (2pt);
+\fill (6.0,0) circle (2pt);
+\fill (7.5,0) circle (2pt);
+\draw (0,0)--(1.5,0)--(3.0,0);
+\draw (6.0,0)--(7.5,0);
+\node at (4.5,0.35) {$\cdots$};
+\node[below] at (0,0) {$1$};
+\node[below] at (1.5,0) {$2$};
+\node[below] at (3.0,0) {$3$};
+\node[below] at (6.0,0) {$l-1$};
+\node[below] at (7.5,0) {$l$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+$D_l \ (l \ge 4)$:\quad
+\begin{tikzpicture}[baseline=-0.5ex]
+\fill (0,0) circle (2pt);
+\fill (1.5,0) circle (2pt);
+\fill (4.5,0) circle (2pt);
+\fill (6.0,0) circle (2pt);
+\fill (8.2,1.5) circle (2pt);
+\fill (8.2,-1.5) circle (2pt);
+\draw (0,0)--(1.5,0);
+\node at (3.0,0.35) {$\cdots$};
+\draw (4.5,0)--(6.0,0);
+\draw (6.0,0)--(8.2,1.5);
+\draw (6.0,0)--(8.2,-1.5);
+\node[below] at (0,0) {$1$};
+\node[below] at (1.5,0) {$2$};
+\node[below] at (4.5,0) {$l-3$};
+\node[below] at (6.0,0) {$l-2$};
+\node[right] at (8.2,1.5) {$l-1$};
+\node[right] at (8.2,-1.5) {$l$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+$E_6$:\quad
+\begin{tikzpicture}[baseline=-0.5ex]
+\foreach \x in {0,1.5,3.0,4.5,6.0}{
+  \fill (\x,0) circle (2pt);
+}
+\fill (3.0,1.5) circle (2pt);
+\draw (0,0)--(1.5,0)--(3.0,0)--(4.5,0)--(6.0,0);
+\draw (3.0,0)--(3.0,1.5);
+\node[below] at (0,0) {$1$};
+\node[below] at (1.5,0) {$3$};
+\node[below] at (3.0,0) {$4$};
+\node[below] at (4.5,0) {$5$};
+\node[below] at (6.0,0) {$6$};
+\node[above] at (3.0,1.5) {$2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+$E_7$:\quad
+\begin{tikzpicture}[baseline=-0.5ex]
+\foreach \x in {0,1.5,3.0,4.5,6.0,7.5}{
+  \fill (\x,0) circle (2pt);
+}
+\fill (3.0,1.5) circle (2pt);
+\draw (0,0)--(1.5,0)--(3.0,0)--(4.5,0)--(6.0,0)--(7.5,0);
+\draw (3.0,0)--(3.0,1.5);
+\node[below] at (0,0) {$1$};
+\node[below] at (1.5,0) {$3$};
+\node[below] at (3.0,0) {$4$};
+\node[below] at (4.5,0) {$5$};
+\node[below] at (6.0,0) {$6$};
+\node[below] at (7.5,0) {$7$};
+\node[above] at (3.0,1.5) {$2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+$E_8$:\quad
+\begin{tikzpicture}[baseline=-0.5ex]
+\foreach \x in {0,1.5,3.0,4.5,6.0,7.5,9.0}{
+  \fill (\x,0) circle (2pt);
+}
+\fill (3.0,1.5) circle (2pt);
+\draw (0,0)--(1.5,0)--(3.0,0)--(4.5,0)--(6.0,0)--(7.5,0)--(9.0,0);
+\draw (3.0,0)--(3.0,1.5);
+\node[below] at (0,0) {$1$};
+\node[below] at (1.5,0) {$3$};
+\node[below] at (3.0,0) {$4$};
+\node[below] at (4.5,0) {$5$};
+\node[below] at (6.0,0) {$6$};
+\node[below] at (7.5,0) {$7$};
+\node[below] at (9.0,0) {$8$};
+\node[above] at (3.0,1.5) {$2$};
+\end{tikzpicture}
+\end{center}
+\end{example}
+
+\begin{example} 
+$ 2 $-Kronecker quiver:
+\begin{center}
+    \begin{tikzcd}
+1 \arrow[r, bend left] \arrow[r, bend right] & 2
+\end{tikzcd}
+\end{center}
+Representations of this quiver:
+\begin{center}
+    \begin{tikzcd}
+V \arrow[r, bend left, "A"] \arrow[r, bend right, "B"'] & W
+\end{tikzcd}
+\end{center}
+\end{example}
+
+\begin{example} 
+Jordan quiver:
+\begin{center}
+\begin{tikzcd}
+1 \arrow[loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\end{center}
+Representations of this quiver:
+\begin{center}
+\begin{tikzcd}
+V \arrow["A"', loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\end{center}
+$ A:V\to V $, the matrix representation of $ A $ is similar to a Jordan normal form (when $ k=\bar{k} $).  
+\end{example}
+
+\chapter{Lecture 2}
+
+\section{Morphisms and Decompositions}
+
+Recall the definition:
+
+\begin{definition}
+Let $Q=(Q_0,Q_1)$ be a quiver. A representation of $Q$ is a collection
+\[
+M=(V_i,\varphi_\alpha)_{i \in Q_0,\alpha \in Q_1},
+\]
+where each $V_i$ is a vector space and each arrow $\alpha:i \to j$ is assigned a linear map
+\[
+\varphi_\alpha \in \operatorname{Hom}(V_i,V_j).
+\]
+\end{definition}
+
+\begin{example}
+Consider the $2$-Kronecker quiver
+\[
+\begin{tikzcd}
+1 \arrow[r, bend left] \arrow[r, bend right] & 2
+\end{tikzcd}
+\]
+and the representations
+\[
+M:\quad
+\begin{tikzcd}
+    k \arrow[r, "\begin{bmatrix}1\\0\end{bmatrix}", shift left] \arrow[r, "\begin{bmatrix}0\\1\end{bmatrix}"', shift right] & k^2
+\end{tikzcd}
+\]
+and
+\[
+N:\quad
+\begin{tikzcd}[ampersand replacement=\&]
+    k^2 \arrow[r, "{\begin{bmatrix}1 & 1\\0 & 1\end{bmatrix}}", shift left] \arrow[r, "{\begin{bmatrix}1 & 1\\1 & 1\end{bmatrix}}"', shift right] \& k^2
+\end{tikzcd}
+\]
+Denote $M=(V_i, \varphi_\alpha)_{i \in Q_0, \alpha \in Q_1}$ and $N=(U_i, \psi_\alpha)_{i \in Q_0, \alpha \in Q_1}$. Consider the morphism $f:M \to N$. $f=(f_i)_{i \in Q_0}$. $f_i:V_i \to U_i$ and for each $\alpha: i \to j$ in $Q$, the following diagram commutes:
+\[
+\begin{tikzcd}
+    V_i \arrow[r, "\varphi_\alpha"] \arrow[d, "f_i"'] & V_j \arrow[d, "f_j"] \\
+    U_i \arrow[r, "\psi_\alpha"'] & U_j
+\end{tikzcd}
+\]
+We use $\operatorname{Rep}(Q)$ to denote the category of representations of $Q$. For our example, we have
+\[
+f:M \to N: f=(f_1,f_2):
+\]
+
+Let $f=(f_1,f_2):M \to N$ be a morphism. Write
+\[
+f_1=\begin{bmatrix}a\\b\end{bmatrix},
+\qquad
+f_2=\begin{bmatrix}c&d\\e&f\end{bmatrix}.
+\]
+Then the following diagram commutes:
+\[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=6em, row sep=6em]
+        k \arrow[r, "{\begin{bmatrix}1\\0\end{bmatrix}}", shift left] \arrow[d, "f_1={\begin{bmatrix}a\\b\end{bmatrix}}"'] \arrow[r, "{\begin{bmatrix}0\\1\end{bmatrix}}"', shift right] \& k^2 \arrow[d, "f_2={\begin{bmatrix}c&d\\e&f\end{bmatrix}    }"] \\
+        k^2 \arrow[r, "{\begin{bmatrix}1 & 1\\0 & 1\end{bmatrix}}", shift left] \arrow[r, "{\begin{bmatrix}1 & 1\\1 & 1\end{bmatrix}}"', shift right]                                  \& k^2                                                      
+        \end{tikzcd}
+\]
+
+
+Commutativity along the two arrows gives
+\[
+f_2\begin{bmatrix}1\\0\end{bmatrix}
+=
+\begin{bmatrix}c\\e\end{bmatrix}
+=
+\begin{bmatrix}1&1\\0&1\end{bmatrix}
+f_1
+=
+\begin{bmatrix}a+b\\b\end{bmatrix},
+\]
+and
+\[
+f_2\begin{bmatrix}0\\1\end{bmatrix}
+=
+\begin{bmatrix}d\\f\end{bmatrix}
+=
+\begin{bmatrix}1&1\\1&1\end{bmatrix}
+f_1
+=
+\begin{bmatrix}a+b\\a+b\end{bmatrix}.
+\]
+Hence
+\[
+c=d=f=a+b,
+\qquad
+e=b,
+\]
+so
+\[
+f=
+\left(
+\begin{bmatrix}a\\b\end{bmatrix},
+\begin{bmatrix}a+b&a+b\\b&a+b\end{bmatrix}
+\right),
+\qquad
+\dim \operatorname{Hom}(M,N)=2.
+\]
+This illustrates how morphisms in $\operatorname{Rep}(Q)$ are determined by commutative diagrams.
+\end{example}
+
+\begin{definition}
+    If $M=(V_i,\varphi_\alpha)$ and $N=(U_i,\psi_\alpha)$ are representations of $Q$, then their direct sum is
+\[
+M \oplus N=
+\left(
+V_i \oplus U_i,
+\begin{bmatrix}
+\varphi_\alpha & 0 \\
+0 & \psi_\alpha
+\end{bmatrix}
+\right).
+\]
+Inductively, one may form finite direct sums $M_1 \oplus \cdots \oplus M_r$.
+\end{definition}
+
+\begin{definition}
+A representation $M$ is called indecomposable if it cannot be written as a direct sum of two non-zero representations of $Q$.
+\end{definition}
+
+\begin{remark}
+For quiver representations, indecomposable and irreducible are different notions; they do not have to coincide.
+\end{remark}
+
+\begin{example}
+    Consider the quiver
+    \[
+    \begin{tikzcd}[column sep=large]
+    1 \arrow[r] & 2 & 3 \arrow[l]
+    \end{tikzcd}
+    \]
+    
+    and the following representations:
+    \[
+    M:\quad
+    \begin{tikzcd}[column sep=large]
+    k \arrow[r, "1"] & k & 0 \arrow[l, "0"']
+    \end{tikzcd}
+    \]
+    
+    \[
+    N:\quad
+    \begin{tikzcd}[column sep=large]
+    k^2 \arrow[r, "{\begin{bmatrix}0\\1\end{bmatrix}}"] &
+    k^2 &
+    k \arrow[l, "{\begin{bmatrix}1\\1\end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    
+    Then
+    \[
+    M\oplus N:\quad
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+    k\oplus k^2 \arrow[r, "{\begin{bmatrix}
+    1 & 0 & 0\\
+    0 & 1 & 1\\
+    0 & 0 & 1\\
+    \end{bmatrix}}"] \&
+    k\oplus k^2 \&
+    0\oplus k \arrow[l, "{\begin{bmatrix}
+    0 & 0\\
+    0 & 1\\
+    0 & 1\\
+    \end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    
+    Indeed, identifying
+    \[
+    k\oplus k^2 \cong k^3,\qquad
+    k\oplus k^2 \cong k^3,\qquad
+    0\oplus k \cong k,
+    \]
+    we may rewrite this as
+    \[
+    \begin{tikzcd}[ampersand replacement=\&,column sep=large]
+    k^3 \arrow[r, "{\begin{bmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 1\\
+        0 & 0 & 1\\
+        \end{bmatrix}}"] \&
+    k^3 \&
+    k \arrow[l, "{\begin{bmatrix}
+    0\\
+    1\\
+    1
+    \end{bmatrix}}"']
+    \end{tikzcd}
+    \]
+    \end{example}
+
+\begin{example}
+Consider the Jordan quiver:
+\[
+\begin{tikzcd}
+\bullet \arrow[loop, distance=2em, in=125, out=55]
+\end{tikzcd}
+\]
+Let $A,B,C$ be three $n \times n$ matrices. Where $C$ denotes an isomorphism ($C$ is invertible). We have the following diagram:
+\[
+    \begin{tikzcd}
+        \overset{\bullet}{V} \arrow["A"', loop, distance=2em, in=125, out=55] \arrow[d, "C"'] \\
+        \overset{\bullet}{V} \arrow["B"', loop, distance=2em, in=305, out=235]               
+        \end{tikzcd}
+\ \ \ 
+\begin{tikzcd}
+    V \arrow[r, "A"] \arrow[d, "C"'] & V \arrow[d, "C"] \\
+    V \arrow[r, "B"']                & V               
+    \end{tikzcd}
+\]
+Which shows that $A$ and $B$ are similar: $A = C^{-1} B C$. Hence the isomorphism classes are controlled by Jordan normal form, and the indecomposable representations correspond exactly to single Jordan blocks.
+\end{example}
+
+To describe $\operatorname{Rep}Q$ we will need to describe all isomorphism classes of indecomposable representations.
+
+\begin{theorem}[Krull--Schmidt]
+Any finite representation $M \in \operatorname{Rep}Q$ can be decomposed into finite number of indecomposable representations and its decomposition is unique up to order.
+\end{theorem}
+
+\begin{proof}
+    For a finite-dimensional representation \(M=(M_i,\varphi_\alpha)\), define
+    \[
+    |M|:=\sum_{i\in Q_0}\dim_k M_i.
+    \]
+    
+    We first prove the existence of a decomposition into indecomposable representations by induction on \(|M|\).
+    
+    If \(|M|=0\), then \(M=0\), and there is nothing to prove. If \(M\neq 0\) is already indecomposable, then again there is nothing to prove. Suppose now that \(M\) is decomposable. Then there exist nonzero representations \(M'\) and \(M''\) such that
+    \[
+    M \cong M' \oplus M''.
+    \]
+    Since both \(M'\) and \(M''\) are nonzero, we have
+    \[
+    |M'|<|M| \qquad \text{and} \qquad |M''|<|M|.
+    \]
+    By the induction hypothesis, both \(M'\) and \(M''\) decompose as finite direct sums of indecomposable representations. Hence \(M\) also decomposes as a finite direct sum of indecomposable representations. This proves existence.
+    
+    We now prove uniqueness. The key point is the following claim:
+    
+    \medskip
+    
+    \noindent \emph{Claim.} Let \(X\) be a finite-dimensional indecomposable representation. Then every endomorphism \(f\in \operatorname{End}(X)\) is either invertible or nilpotent.
+    
+    \medskip
+    
+    Indeed, since \(X\) is finite-dimensional, Fitting's lemma applies to \(f\). Thus for \(n\gg 0\),
+    \[
+    X=\ker(f^n)\oplus \operatorname{im}(f^n).
+    \]
+    Both \(\ker(f^n)\) and \(\operatorname{im}(f^n)\) are subrepresentations of \(X\). Since \(X\) is indecomposable, one of them must be zero. If \(\ker(f^n)=0\), then \(f^n\) is injective, hence bijective, and therefore \(f\) is invertible. If \(\operatorname{im}(f^n)=0\), then \(f^n=0\), so \(f\) is nilpotent. This proves the claim.
+    
+    \medskip
+    
+    Now suppose that
+    \[
+    M \cong M_1\oplus \cdots \oplus M_r
+    \qquad\text{and}\qquad
+    M \cong N_1\oplus \cdots \oplus N_s,
+    \]
+    where all \(M_i\) and \(N_j\) are indecomposable. We must show that \(r=s\) and, after a permutation, \(M_i\cong N_i\) for all \(i\).
+    
+    Fix an isomorphism
+    \[
+    \varphi:\bigoplus_{i=1}^r M_i \longrightarrow \bigoplus_{j=1}^s N_j.
+    \]
+    Let
+    \[
+    \iota_i:M_i\to \bigoplus_{i=1}^r M_i,
+    \quad
+    \pi_i:\bigoplus_{i=1}^r M_i\to M_i,
+    \]
+    and
+    \[
+    \iota'_j:N_j\to \bigoplus_{j=1}^s N_j,
+    \quad
+    \pi'_j:\bigoplus_{j=1}^s N_j\to N_j
+    \]
+    be the canonical injections and projections.
+    
+    For a fixed \(i\), we have
+    \[
+    1_{M_i}
+    =
+    \pi_i \varphi^{-1}\varphi \iota_i
+    =
+    \sum_{j=1}^s
+    \bigl(\pi_i\varphi^{-1}\iota'_j\bigr)\bigl(\pi'_j\varphi\iota_i\bigr).
+    \]
+    Thus
+    \[
+    1_{M_i}=u_1+\cdots+u_s,
+    \]
+    where
+    \[
+    u_j:=
+    \bigl(\pi_i\varphi^{-1}\iota'_j\bigr)\bigl(\pi'_j\varphi\iota_i\bigr)
+    \in \operatorname{End}(M_i).
+    \]
+    
+    By the claim, every endomorphism of \(M_i\) is either invertible or nilpotent. If all \(u_j\) were nilpotent, then their sum could not be the identity. Hence at least one \(u_j\) is invertible. Fix such a \(j\). Then
+    \[
+    u_j=
+    \bigl(\pi_i\varphi^{-1}\iota'_j\bigr)\bigl(\pi'_j\varphi\iota_i\bigr)
+    \]
+    is an automorphism of \(M_i\). It follows that
+    \[
+    \pi'_j\varphi\iota_i : M_i \to N_j
+    \]
+    is a split monomorphism, and
+    \[
+    \pi_i\varphi^{-1}\iota'_j : N_j \to M_i
+    \]
+    is a split epimorphism. Therefore \(M_i\) is isomorphic to a direct summand of \(N_j\). Since \(N_j\) is indecomposable, we conclude that
+    \[
+    M_i \cong N_j.
+    \]
+    
+    Thus each \(M_i\) is isomorphic to some \(N_j\). By symmetry, each \(N_j\) is isomorphic to some \(M_i\). After reordering, we may assume
+    \[
+    M_1 \cong N_1.
+    \]
+    Cancelling these isomorphic summands, we obtain
+    \[
+    M_2\oplus \cdots \oplus M_r
+    \cong
+    N_2\oplus \cdots \oplus N_s.
+    \]
+    Repeating the argument inductively, we obtain
+    \[
+    r=s
+    \]
+    and, after a suitable permutation,
+    \[
+    M_i \cong N_i
+    \qquad \text{for all } 1\le i\le r.
+    \]
+    
+    Therefore the decomposition of \(M\) into indecomposable representations is unique up to permutation and isomorphism of the summands.
+    \end{proof}
+
+\section{Kernel and Cokernel in \texorpdfstring{$\operatorname{Rep}Q$}{Rep Q}}
+
+Recall in linear algebra:
+\begin{definition}
+    Let \(f: V \to W\) be a linear map. The \emph{kernel} of \(f\) is \(\operatorname{ker}f = \{ v \in V : f(v) = 0 \}\).
+\end{definition}
+\begin{definition}
+    Let \(f: V \to W\) be a linear map. The \emph{image} of \(f\) is \(\operatorname{Im}f = \{ w \in W : w = f(v) \text{ for some } v \in V \}\).
+\end{definition}
+\begin{definition}
+    Let \(f: V \to W\) be a linear map. The \emph{cokernel} of \(f\) is the quotient space \(\operatorname{coker}f = W / \operatorname{Im}f\).
+\end{definition}
+The cokernel is defined using the image; below we will use \(\operatorname{Im}f_i\) in the same way for representations.
+
+From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
+
+\medskip\noindent\textbf{Kernel in \(\operatorname{Rep}Q\).}
+
+\begin{definition}
+    Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{kernel} of \(f\) is the representation \(\operatorname{ker}f = (L_i, \chi_\alpha)\) where
+    \[
+    L_i = \operatorname{ker}f_i, \qquad \chi_\alpha = \varphi_\alpha|_{L_i} \quad \text{for each arrow } \alpha: i \to j.
+    \]
+    So for each \(v_i \in L_i\), \(\chi_\alpha(v_i) = \varphi_\alpha(v_i)\).
+\end{definition}
+
+\begin{lemma}
+    With the notation above, \(\operatorname{ker}f\) is a representation of \(Q\), i.e.\ for each arrow \(\alpha: i \to j\) we have \(\chi_\alpha: L_i \to L_j\).
+\end{lemma}
+\begin{proof}
+    For any \(v_i \in L_i\) we have \(f_i(v_i) = 0\). By commutativity of the morphism \(f\),
+    \[
+    f_j\bigl(\chi_\alpha(v_i)\bigr) = f_j\bigl(\varphi_\alpha(v_i)\bigr) = \psi_\alpha\bigl(f_i(v_i)\bigr) = \psi_\alpha(0) = 0.
+    \]
+    Hence \(\chi_\alpha(v_i) \in \operatorname{ker}f_j = L_j\), so \(\chi_\alpha: L_i \to L_j\).
+\end{proof}
+
+\begin{remark}
+    The inclusion \(L_i \hookrightarrow V_i\) at each vertex defines a morphism \(\operatorname{ker}f \to M\) (i.e.\ a monomorphism). The following diagram commutes:
+    \[
+    \begin{tikzcd}
+    L_i \arrow[r, "\chi_\alpha"] \arrow[d, "\mathrm{incl.}"] & L_j \arrow[d, "\mathrm{incl.}"] \\
+    V_i \arrow[r, "\varphi_\alpha"] & V_j
+    \end{tikzcd}
+    \]
+\end{remark}
+
+\medskip\noindent\textbf{Cokernel in \(\operatorname{Rep}Q\).}
+
+\begin{definition}
+    Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{cokernel} of \(f\) is the representation \(\operatorname{coker}f = (R_i, \nu_\alpha)\) where \(R_i = N_i / \operatorname{Im}f_i\), and for each arrow \(\alpha: i \to j\) the map \(\nu_\alpha: R_i \to R_j\) is defined by
+    \[
+    \nu_\alpha\bigl(n_i + f_i(V_i)\bigr) = \psi_\alpha(n_i) + f_j(V_j).
+    \]
+\end{definition}
+
+\begin{lemma}
+    The maps \(\nu_\alpha\) above are well-defined, and \((R_i, \nu_\alpha)\) is a representation of \(Q\).
+\end{lemma}
+\begin{proof}
+    Suppose \(n_i + f_i(V_i) = n_i' + f_i(V_i)\). Then \(n_i - n_i' \in f_i(V_i)\), so \(n_i - n_i' = f_i(v_i)\) for some \(v_i \in V_i\). By commutativity of \(f\),
+    \[
+    \psi_\alpha(n_i - n_i') = \psi_\alpha\bigl(f_i(v_i)\bigr) = f_j\bigl(\varphi_\alpha(v_i)\bigr) \in f_j(V_j).
+    \]
+    Hence \(\psi_\alpha(n_i) - \psi_\alpha(n_i') \in f_j(V_j)\), so \(\psi_\alpha(n_i) + f_j(V_j) = \psi_\alpha(n_i') + f_j(V_j)\). Thus \(\nu_\alpha\) is well-defined. The commutativity of the representation maps for \(\operatorname{coker}f\) follows from that of \(N\).
+\end{proof}
+
+\begin{remark}
+    The quotient maps \(N_i \to R_i\) define a morphism \(N \to \operatorname{coker}f\) (i.e.\ a surjective morphism). The following diagram commutes:
+    \[
+    \begin{tikzcd}
+    N_i \arrow[r, "\psi_\alpha"] \arrow[d, "\mathrm{proj.}"] & N_j \arrow[d, "\mathrm{proj.}"] \\
+    R_i \arrow[r, "\nu_\alpha"] & R_j
+    \end{tikzcd}
+    \]
+\end{remark}
+
+\chapter{Lecture 3}
+
+\section{Subrepresentations and Indecomposability}
+
+\begin{definition} 
+    Recall that for a morphism $ f: M \to N $, we have a representation 
+    \[
+    \begin{tikzcd}
+    \operatorname{ker} f \arrow[r, "incl.", hook] & M
+    \end{tikzcd}
+    \]
+    A subrepresentation of $ M $ is representation $ L $ such that $ f: L \to M $ is a monomorphism. 
+\end{definition}
+
+\begin{example} 
+    For the quiver
+\begin{tikzcd}
+1 \arrow[r] & 2
+\end{tikzcd} We have trivial representation 
+\[
+\begin{tikzcd}
+0 \arrow[r, "0"] & 0
+\end{tikzcd}
+\]
+The following 3 representations are non-trivial
+\[
+\begin{tikzcd}
+k \arrow[r, "0"] & 0
+\end{tikzcd}
+\begin{tikzcd}
+0 \arrow[r, "0"] & k
+\end{tikzcd}
+\begin{tikzcd}
+k \arrow[r, "1"] & k
+\end{tikzcd}
+\]
+Denoted by $ S_1, S_2, M $.
+
+First two representations are irreducible and indecomposable, the last one is reducible but indecomposable. 
+
+To check it, first it is obvious that if $ M $ has non-trivial subrepresentations, the only possible ones are $ S_1 $ and $ S_2 $. For $ S_1 $ consider the following diagram:
+\[
+\begin{tikzcd}
+k \arrow[r, "0"] \arrow[d, "a"'] & 0 \arrow[d, "b"] \\
+k \arrow[r, "1"]                 & k               
+\end{tikzcd}
+\]
+Then a=b=0, it is impossible to construct inclusion.
+
+But if we consider $ S_2 $: 
+\[
+\begin{tikzcd}
+0 \arrow[r, "0"] \arrow[d, "a"'] & k \arrow[d, "b"] \\
+k \arrow[r, "1"]                 & k               
+\end{tikzcd}
+\]
+Then $ a=b \cdot 0=0 $ and $ b $ is arbitrary (then we have a monomorphism). Hence we come to the conclusion that $ \operatorname{Hom}(S_1,M)=0 $ and $ \operatorname{Hom}(S_2,M)=k $. In other words $ S_2 $ is a subrepresentation of $ M $ and hence $ M $ is reducible.
+
+But if $ S_2 $ is a direct summand of $ M $, then since $ S_1 $ is not a submodule, we can not have $ M = S_1 \oplus S_2 $. Hence $ M $ is indecomposable.
+\end{example}
+
+\section{Kernel, Cokernel, and the First Isomorphism Theorem}
+
+\begin{definition}[Universal property of the kernel]
+    Let $f:M\to N$ be a morphism of representations. A kernel of $f$ is a morphism
+    $g:L\to M$ such that $f\circ g=0$ and such that, for every morphism $h:X\to M$
+    with $f\circ h=0$, there exists a unique morphism $u:X\to L$ making the diagram
+    commute:
+    \begin{center}
+    \begin{tikzcd}
+    X \arrow[r, dashed, "u"] \arrow[rd, "h"'] & L \arrow[d, "g"] \\
+    & M \arrow[r, "f"] & N.
+    \end{tikzcd}
+    \end{center}
+\end{definition}
+
+Let us show that previous definition $ \operatorname{ker}f=(\operatorname{ker}f_i=L_i, \varphi_{\alpha}|_{L_i}) $ is equivalent to the universal property definition with $ L=\operatorname{ker}f , g_i=incl.$ i.e. $ \begin{tikzcd}
+\operatorname{ker}f_i \arrow[r, "incl.", hook] & M_i
+\end{tikzcd} $ where $ f_ig_i=0 $.
+
+\begin{proof}
+    Let
+    \[
+    f=(f_i):M=(M_i,\varphi_\alpha)\longrightarrow N=(N_i,\rho_\alpha)
+    \]
+    be a morphism of representations. For each vertex $i$, set
+    \[
+    L_i:=\ker f_i \subseteq M_i.
+    \]
+    For each arrow $\alpha:i\to j$, define
+    \[
+    \psi_\alpha:=\varphi_\alpha|_{L_i}:L_i\to L_j.
+    \]
+    This is well-defined, because if $x\in L_i$, then $f_i(x)=0$, and since $f$ is a morphism of representations, we have
+    \[
+    f_j(\varphi_\alpha(x))
+    =\rho_\alpha(f_i(x))
+    =\rho_\alpha(0)
+    =0.
+    \]
+    Hence $\varphi_\alpha(x)\in \ker f_j=L_j$.
+    
+    Therefore
+    \[
+    L=(L_i,\psi_\alpha)
+    \]
+    is a representation. Let
+    \[
+    g=(g_i):L\to M
+    \]
+    be given by the inclusion maps
+    \[
+    g_i:L_i=\ker f_i \hookrightarrow M_i.
+    \]
+    Then for each vertex $i$,
+    \[
+    f_i\circ g_i=0,
+    \]
+    so
+    \[
+    f\circ g=0.
+    \]
+    
+    We now show that $(L,g)$ satisfies the universal property of the kernel.
+    
+    Let
+    \[
+    h=(h_i):X=(X_i,\nu_\alpha)\to M
+    \]
+    be any morphism of representations such that
+    \[
+    f\circ h=0.
+    \]
+    Then for every vertex $i$,
+    \[
+    f_i\circ h_i=0.
+    \]
+    Thus, for every $x_i\in X_i$,
+    \[
+    f_i(h_i(x_i))=0,
+    \]
+    which means that
+    \[
+    h_i(x_i)\in \ker f_i=L_i.
+    \]
+    Hence each $h_i$ factors through $L_i$, so we may define a linear map
+    \[
+    u_i:X_i\to L_i,\qquad u_i(x_i):=h_i(x_i).
+    \]
+    By construction,
+    \[
+    g_i\circ u_i=h_i
+    \]
+    for every vertex $i$.
+    
+    It remains to check that $u=(u_i):X\to L$ is a morphism of representations. Let $\alpha:i\to j$ be an arrow and let $x_i\in X_i$. Then
+    \[
+    \psi_\alpha(u_i(x_i))
+    =\psi_\alpha(h_i(x_i))
+    =\varphi_\alpha(h_i(x_i))
+    =h_j(\nu_\alpha(x_i))
+    =u_j(\nu_\alpha(x_i)).
+    \]
+    Therefore
+    \[
+    \psi_\alpha\circ u_i=u_j\circ \nu_\alpha
+    \]
+    for every arrow $\alpha$, so $u$ is indeed a morphism of representations.
+    
+    Finally, uniqueness is clear. If
+    \[
+    u'=(u_i'):X\to L
+    \]
+    is another morphism such that
+    \[
+    g\circ u'=h,
+    \]
+    then for each vertex $i$,
+    \[
+    g_i\circ u_i'=h_i.
+    \]
+    Since $g_i:L_i\hookrightarrow M_i$ is just the inclusion map, it follows that
+    \[
+    u_i'(x_i)=h_i(x_i)=u_i(x_i)
+    \]
+    for all $x_i\in X_i$. Hence $u_i'=u_i$ for all $i$, and so $u'=u$.
+    
+    Thus $(L,g)$ satisfies the universal property of the kernel. Therefore the representation
+    \[
+    L=(\ker f_i,\varphi_\alpha|_{\ker f_i})
+    \]
+    with the inclusion morphism $g:L\to M$ is precisely the kernel of $f$.
+    \end{proof}
+
+Analogously we have equivalent definition of $ \operatorname{coker}f $.
+
+\begin{definition}[Cokernel of a morphism]
+    Let
+    \[
+    f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
+    \]
+    be a morphism of representations.
+    
+    For each vertex $i\in Q_0$, set
+    \[
+    H_i:=N_i/f_i(M_i).
+    \]
+    For each arrow $\alpha:i\to j$, define
+    \[
+    \chi_\alpha:H_i\to H_j,\qquad
+    \chi_\alpha\bigl(n_i+f_i(M_i)\bigr)
+    :=\psi_\alpha(n_i)+f_j(M_j).
+    \]
+    Then
+    \[
+    \operatorname{coker}f:=(H_i,\chi_\alpha).
+    \]
+    
+    Equivalently, a cokernel of $f$ is a morphism
+    \[
+    g:N\to H
+    \]
+    such that $g\circ f=0$ and satisfying the following universal property:
+    
+    for every representation $Y$ and every morphism $h:N\to Y$ with $h\circ f=0$,
+    there exists a unique morphism $u:H\to Y$ such that
+    \[
+    u\circ g=h.
+    \]
+    
+    Equivalently, the following diagram commutes:
+    \begin{center}
+    \begin{tikzcd}
+    M \arrow[r, "f"] & N \arrow[r, "g"] \arrow[rd, "h"'] & H \arrow[d, dashed, "u"] \\
+    & & Y
+    \end{tikzcd}
+    \end{center}
+    \end{definition}
+
+\begin{exercise}
+Prove the equivalence of the two definitions of $ \operatorname{coker}f $.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+    f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
+    \]
+    be a morphism of representations. For each vertex $i$, define
+    \[
+    H_i:=N_i/f_i(M_i).
+    \]
+    For each arrow $\alpha:i\to j$, define
+    \[
+    \chi_\alpha\bigl(n_i+f_i(M_i)\bigr):=\psi_\alpha(n_i)+f_j(M_j).
+    \]
+    
+    We first check that $\chi_\alpha$ is well-defined. Suppose
+    \[
+    n_i+f_i(M_i)=n_i'+f_i(M_i).
+    \]
+    Then
+    \[
+    n_i-n_i'=f_i(m_i)
+    \]
+    for some $m_i\in M_i$. Hence
+    \[
+    \psi_\alpha(n_i)-\psi_\alpha(n_i')
+    =\psi_\alpha(f_i(m_i)).
+    \]
+    Since $f$ is a morphism of representations, we have
+    \[
+    \psi_\alpha\circ f_i=f_j\circ \varphi_\alpha.
+    \]
+    Therefore
+    \[
+    \psi_\alpha(f_i(m_i))
+    =f_j(\varphi_\alpha(m_i))\in f_j(M_j).
+    \]
+    So
+    \[
+    \psi_\alpha(n_i)+f_j(M_j)=\psi_\alpha(n_i')+f_j(M_j),
+    \]
+    and thus $\chi_\alpha$ is well-defined.
+    
+    Hence
+    \[
+    H=(H_i,\chi_\alpha)
+    \]
+    is a representation.
+    
+    Now let
+    \[
+    g=(g_i):N\to H
+    \]
+    be the natural quotient morphism, where
+    \[
+    g_i:N_i\to N_i/f_i(M_i),\qquad g_i(n_i)=n_i+f_i(M_i).
+    \]
+    Then for every vertex $i$ and every $m_i\in M_i$,
+    \[
+    (g_i\circ f_i)(m_i)=f_i(m_i)+f_i(M_i)=0.
+    \]
+    Thus
+    \[
+    g\circ f=0.
+    \]
+    
+    We now prove the universal property. Let
+    \[
+    h=(h_i):N\to Y=(Y_i,\eta_\alpha)
+    \]
+    be a morphism such that
+    \[
+    h\circ f=0.
+    \]
+    Then for each vertex $i$,
+    \[
+    h_i\circ f_i=0.
+    \]
+    Hence $h_i$ vanishes on $f_i(M_i)$, so it factors uniquely through the quotient
+    $N_i/f_i(M_i)$. Therefore there exists a unique linear map
+    \[
+    u_i:H_i=N_i/f_i(M_i)\to Y_i
+    \]
+    such that
+    \[
+    u_i(n_i+f_i(M_i)):=h_i(n_i).
+    \]
+    This is well-defined because if
+    \[
+    n_i+f_i(M_i)=n_i'+f_i(M_i),
+    \]
+    then $n_i-n_i'=f_i(m_i)$ for some $m_i\in M_i$, and hence
+    \[
+    h_i(n_i)-h_i(n_i')=h_i(f_i(m_i))=0.
+    \]
+    
+    By construction,
+    \[
+    u_i\circ g_i=h_i
+    \]
+    for every vertex $i$.
+    
+    It remains to check that $u=(u_i):H\to Y$ is a morphism of representations.
+    Let $\alpha:i\to j$ be an arrow and let $n_i+f_i(M_i)\in H_i$. Then
+    \begin{align*}
+    \eta_\alpha\bigl(u_i(n_i+f_i(M_i))\bigr)
+    &=\eta_\alpha(h_i(n_i))
+    =h_j(\psi_\alpha(n_i))
+    =u_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)\\
+    &=u_j\bigl(\chi_\alpha(n_i+f_i(M_i))\bigr).
+    \end{align*}
+    Therefore
+    \[
+    \eta_\alpha\circ u_i=u_j\circ \chi_\alpha,
+    \]
+    so $u$ is a morphism of representations.
+    
+    Finally, uniqueness is clear: if
+    \[
+    u'=(u_i'):H\to Y
+    \]
+    also satisfies
+    \[
+    u'\circ g=h,
+    \]
+    then for each $i$,
+    \[
+    u_i'(n_i+f_i(M_i))
+    =u_i'(g_i(n_i))
+    =h_i(n_i)
+    =u_i(n_i+f_i(M_i)).
+    \]
+    Thus $u_i'=u_i$ for all $i$, so $u'=u$.
+    
+    Therefore the quotient representation
+    \[
+    \bigl(N_i/f_i(M_i),\chi_\alpha\bigr)
+    \]
+    with the natural projection $g:N\to H$ satisfies the universal property of the cokernel.
+    \end{proof}
+
+    \begin{proof}
+        Suppose
+        \[
+        g=(g_i):N=(N_i,\psi_\alpha)\to H=(H_i,\chi_\alpha)
+        \]
+        is a cokernel of
+        \[
+        f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
+        \]
+        in the sense of the universal property.
+        
+        Let
+        \[
+        C:=\bigl(N_i/f_i(M_i),\ \overline{\psi}_\alpha\bigr)
+        \]
+        be the pointwise cokernel representation, where
+        \[
+        \overline{\psi}_\alpha(n_i+f_i(M_i))
+        :=\psi_\alpha(n_i)+f_j(M_j).
+        \]
+        Let
+        \[
+        \pi=(\pi_i):N\to C
+        \]
+        be the natural quotient morphism. As shown above,
+        \[
+        \pi\circ f=0.
+        \]
+        
+        Since $g:N\to H$ is a cokernel of $f$, applying its universal property to the morphism
+        \[
+        \pi:N\to C
+        \]
+        with $\pi\circ f=0$, there exists a unique morphism
+        \[
+        a:H\to C
+        \]
+        such that
+        \[
+        a\circ g=\pi.
+        \]
+        
+        On the other hand, since $g\circ f=0$, for each vertex $i$ we have
+        \[
+        g_i\circ f_i=0.
+        \]
+        Thus $g_i$ vanishes on $f_i(M_i)$, so it factors uniquely through the quotient
+        \[
+        N_i/f_i(M_i).
+        \]
+        Hence for each $i$ there exists a unique linear map
+        \[
+        b_i:C_i=N_i/f_i(M_i)\to H_i
+        \]
+        given by
+        \[
+        b_i(n_i+f_i(M_i)):=g_i(n_i).
+        \]
+        These maps assemble into a morphism
+        \[
+        b:C\to H,
+        \]
+        because for any arrow $\alpha:i\to j$,
+        \[
+        \chi_\alpha\bigl(b_i(n_i+f_i(M_i))\bigr)
+        =\chi_\alpha(g_i(n_i))
+        =g_j(\psi_\alpha(n_i))
+        =b_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)
+        =b_j\bigl(\overline{\psi}_\alpha(n_i+f_i(M_i))\bigr).
+        \]
+        So
+        \[
+        b\circ \pi=g.
+        \]
+        
+        We now show that $a$ and $b$ are inverse isomorphisms.
+        
+        First,
+        \[
+        (a\circ b)\circ \pi
+        =a\circ (b\circ \pi)
+        =a\circ g
+        =\pi.
+        \]
+        Also,
+        \[
+        \operatorname{id}_C\circ \pi=\pi.
+        \]
+        Since $\pi:N\to C$ is a cokernel of $f$, the uniqueness part of its universal property implies
+        \[
+        a\circ b=\operatorname{id}_C.
+        \]
+        
+        Similarly,
+        \[
+        (b\circ a)\circ g
+        =b\circ (a\circ g)
+        =b\circ \pi
+        =g,
+        \]
+        and also
+        \[
+        \operatorname{id}_H\circ g=g.
+        \]
+        Since $g:N\to H$ is a cokernel of $f$, the uniqueness part of its universal property implies
+        \[
+        b\circ a=\operatorname{id}_H.
+        \]
+        
+        Therefore $a$ and $b$ are inverse isomorphisms, and hence
+        \[
+        H\cong C=\bigl(N_i/f_i(M_i),\ \overline{\psi}_\alpha\bigr).
+        \]
+        
+        In particular, for each vertex $i$ we have
+        \[
+        H_i\cong N_i/f_i(M_i),
+        \]
+        and under these identifications, for every arrow $\alpha:i\to j$,
+        \[
+        \chi_\alpha
+        =
+        a_j^{-1}\circ \overline{\psi}_\alpha\circ a_i.
+        \]
+        Thus any cokernel given by the universal property is isomorphic to the pointwise quotient representation
+        \[
+        \bigl(N_i/f_i(M_i),\ \psi_\alpha \text{ induced on the quotients}\bigr).
+        \]
+        \end{proof}
+
+
+
+\begin{theorem}[the first isomorphism theorem] 
+If $ f: M\to N $ is a morphism of representations, then $ \operatorname{im}f \cong M/\operatorname{ker}f $. 
+\end{theorem}
+
+\begin{proof} 
+Write
+\[
+M=(M_i,\varphi_\alpha), \qquad N=(N_i,\psi_\alpha).
+\]
+Then
+\[
+\operatorname{im}f=(\operatorname{im}f_i,\psi_\alpha|_{\operatorname{im}f_i}).
+\]
+This is a representation, since for every arrow $\alpha:i\to j$ and every $m_i\in M_i$,
+\[
+\psi_\alpha(f_i(m_i))=f_j(\varphi_\alpha(m_i))\in \operatorname{im}f_j.
+\]
+Also,
+\[
+M/\operatorname{ker}f=\bigl(M_i/\operatorname{ker}f_i,\overline{\varphi}_\alpha\bigr),
+\]
+where for $\alpha:i\to j$,
+\[
+\overline{\varphi}_\alpha(m_i+\operatorname{ker}f_i)=\varphi_\alpha(m_i)+\operatorname{ker}f_j.
+\]
+
+For each vertex $i$, the first isomorphism theorem for vector spaces gives an isomorphism
+\[
+\overline{f}_i:M_i/\operatorname{ker}f_i\longrightarrow \operatorname{im}f_i,
+\qquad
+\overline{f}_i(m_i+\operatorname{ker}f_i)=f_i(m_i).
+\]
+We claim that $\overline{f}=(\overline{f}_i)$ is a morphism of representations. Consider the diagram
+\[
+\begin{tikzcd}
+M_i/\operatorname{ker}f_i \arrow[r, "\overline{\varphi}_\alpha"] \arrow[d, "\overline{f}_i"'] & M_j/\operatorname{ker}f_j \arrow[d, "\overline{f}_j"] \\
+\operatorname{im}f_i \arrow[r, "\psi_\alpha|_{\operatorname{im}f_i}"] & \operatorname{im}f_j
+\end{tikzcd}
+\]
+For any $m_i\in M_i$,
+\[
+\overline{f}_j\bigl(\overline{\varphi}_\alpha(m_i+\operatorname{ker}f_i)\bigr)
+=\overline{f}_j\bigl(\varphi_\alpha(m_i)+\operatorname{ker}f_j\bigr)
+=f_j(\varphi_\alpha(m_i))
+=\psi_\alpha(f_i(m_i))
+=\psi_\alpha|_{\operatorname{im}f_i}\bigl(\overline{f}_i(m_i+\operatorname{ker}f_i)\bigr).
+\]
+Hence the diagram commutes for every arrow $\alpha$, so $\overline{f}:M/\operatorname{ker}f\to \operatorname{im}f$ is a morphism in $\operatorname{Rep}Q$. Since each $\overline{f}_i$ is an isomorphism, $\overline{f}$ is an isomorphism of representations.
+Therefore
+\[
+M/\operatorname{ker}f\cong \operatorname{im}f.
+\]
+\end{proof}
+
+These all together shows that $ \operatorname{Rep}Q $ is an abelian category. 
+
+\begin{definition} 
+    We call a category $ \mathcal{C} $ abelian $ k $-category if the following conditions are satisfied:
+    \begin{enumerate}
+        \item $\mathcal{C} $ is $ k $-category, for any $ X,Y \in \mathrm{Ob}(\mathcal{C}) $, $ \operatorname{Hom}_{\mathcal{C}}(X,Y) $ is a vector space over $ k $.
+        \item $ \mathcal{C} $ is a additive category, $ \mathcal{C} $ has direct sums and zero object.
+        \item Each morphism $ f: X \to Y $ has kernel $ K $ and cokernel $ H $. $ f: M\to N $, $ i : K\to M $, $ p: N\to H $. and $ \operatorname{coker}i \cong \operatorname{ker}p $.    
+    \end{enumerate}
+    \end{definition}
+
+\section{Exact and Split Exact Sequences}
+
+\begin{definition} 
+Let $ \begin{tikzcd}
+M \arrow[r] & N \arrow[r] & P
+\end{tikzcd} $ be a sequence of morphisms in $ \operatorname{Rep}Q $. We say that this sequence is exact if $ \operatorname{ker}p = \operatorname{im}f $.
+\end{definition}
+
+\begin{definition} 
+We call a sequence of morphisms in $ \operatorname{Rep}Q $ a short exact sequence if it is exact and of the form
+\[
+\begin{tikzcd}
+0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N \arrow[r] & 0
+\end{tikzcd}
+\]
+Where $ f $ is injective, $ g $ is surjective, $ \operatorname{im}f = \operatorname{ker}g $  
+\end{definition}
+
+For $ f: M\to N $ we have exact sequence:
+\[
+\begin{tikzcd}
+0 \arrow[r] & \operatorname{ker}f \arrow[r, "i"] & M \arrow[r, "f"] & N \arrow[r, "p"] & \operatorname{coker}f \arrow[r] & 0
+\end{tikzcd}
+\] 
+Where $ i $ is an inclusion and $ p $ is a projection.
+
+Or we have short exact sequence:
+\[
+\begin{tikzcd}
+0 \arrow[r] & \operatorname{ker}f \arrow[r, "i"] & M \arrow[r, "p"] & M/\operatorname{ker}f \arrow[r] & 0
+\end{tikzcd}
+\]
+
+\begin{example}
+    The quiver is given by:
+    \[
+    1 \longrightarrow 2
+    \]
+    
+    Consider the following representations:
+    \begin{itemize}
+        \item $S_1$: $k \xrightarrow{0} 0$
+        \item $S_2$: $0 \xrightarrow{0} k$
+        \item $M$: $k \xrightarrow{1} k$
+    \end{itemize}
+    
+    \textbf{Exact Sequences:}
+    The following short exact sequences are presented:
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & S_2 \arrow[r, "{(0,1)}"] & M \arrow[r, "{(1,0)}"] & S_1 \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & S_2 \arrow[r, "{(0,1)}"] & S_1 \oplus S_2 \arrow[r, "{(1,0)}"] & S_1 \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    Both sequences are exact.
+    \end{example}
+
+\begin{definition} 
+A morphism $ f: L\to M $ is a section if there exists a morphism $ h: M\to L $ such that $ hf=1_L $. A morphism $ g: M\to N $ is a retraction if there exists a morphism $ h: N\to M $ such that $ gh=1_N $. 
+\end{definition}
+
+\begin{definition} 
+We say that a short exact sequence 
+\begin{center}
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \end{center}
+splits if $ f $ has a retraction or equivalently $ f $ is a section.   
+\end{definition}
+
+\begin{example}
+    In the example before, the second sequence splits.
+
+    In the second short exact sequence the middle term is the \emph{direct sum} $S_1 \oplus S_2$, with $f = (0,1)$ the inclusion of the second summand and $g = (1,0)$ the projection onto the first. Take the projection $h: S_1 \oplus S_2 \to S_2$ onto the second factor (at each vertex). Then $(hf)(s_2) = h(0,s_2) = s_2$ for all $s_2 \in S_2$, so $hf = 1_{S_2}$. Thus $f$ has a retraction and the sequence splits. Equivalently, the inclusion $h': S_1 \to S_1 \oplus S_2$ of the first summand satisfies $gh' = 1_{S_1}$, so $g$ has a section.
+
+    By contrast, in the first sequence the middle term is $M$ (the representation $k \xrightarrow{1} k$), which is indecomposable and not isomorphic to $S_1 \oplus S_2$. There is no morphism from $M$ to $S_2$ giving a retraction of $f$, so the first sequence does not split.
+\end{example}
+
+\chapter{Lecture 4}
+
+Recall short exact sequence:
+\[
+\begin{tikzcd}
+0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N \arrow[r] & 0
+\end{tikzcd}
+\]
+Where $ \operatorname{ker}f = L $, $ \operatorname{im}f = \operatorname{ker}g $, $ \operatorname{im}g = N $.
+
+$ f $ is section if $ \exists h: M\to L $ such that $ hf=1_L $. $ g $ is retraction if $ \exists h': N\to M $ such that $ gh'=1_N $.  
+
+\begin{theorem} 
+Taking a short exact sequence 
+\[
+\begin{tikzcd}
+0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N \arrow[r] & 0
+\end{tikzcd}
+\]
+\begin{enumerate}
+\item $ f $ is a section if and only if $ g $ is a retraction.
+\item If $ f $ is a section then $ \operatorname{ker}g = \operatorname{im}f $ is a direct summand of $ M $.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[proof of (a)] 
+$ (\Rightarrow )$: Suppose $ f $ is a section. $ \exists h: M\to L $ such that $ hf=1_L $. We will define $ h': N\to M $ and show that $ gh'=1_N $. $ \forall n \in N $, since $ g $ is surjective $ \exists m $ such that $ n =g(m) $. $ h'(n)= m - f(h(m)) $ where $ h': N\to M $. We have to show that $ h' $ is well-defined. Suppose $ m,m' $ such that $ n=g(m)=g(m') $. We have to show that $ m'-f(h(m'))=m-f(h(m)) $. $ m'-m  =f(h(m'))-f(h(m)) \in \operatorname{im}f$, $ \exists l \in L $ such that $ f(l)=m'-m= $. Now: 
+
+We need to show $ h' $ is a morphism. Let $ M=(M_i,\varphi_\alpha), L=(L_i,\varphi_\alpha'), N=(N_i, \varphi_\alpha'') $. Then $ f,g,h $ are morphisms of representations. We have to show that $ h' $ is a morphism of representations. Let $ \alpha: i \to j $ be an arrow in $ Q $. Then consider the following diagram:
+\[
+    \begin{tikzcd}
+        \overset{L_i}{\bullet} \arrow[d, "f_i"', shift right] \arrow[r, "\varphi_{\alpha}'"]                               & \overset{L_j}{\bullet} \arrow[d, "f_j", shift left]                              \\
+        \overset{M_i}{\bullet} \arrow[d, "g_i"', shift right] \arrow[r, "\varphi_{\alpha}"] \arrow[u, "h_i"', shift right] & \overset{M_j}{\bullet} \arrow[d, "g_j", shift left] \arrow[u, "h_j", shift left] \\
+        \overset{N_i}{\bullet} \arrow[r, "\varphi_{\alpha}''"] \arrow[u, "h_i'"', shift right]                             & \overset{N_j}{\bullet} \arrow[u, "h_j'", shift left]                           
+        \end{tikzcd}
+\]
+Take $ n_i \in N_i $, and for $ n_i $ we choose $ m_i $ such that $g_i(m_i)=n_i, h_i'(n_i)=m_i-f_i(h_i(m_i)) $. Then we have
+\begin{align*}
+\varphi_\alpha h_i' (n_i)&=\varphi_\alpha (m_i-f_i(h_i(m_i)))\\
+&=\varphi_\alpha (m_i)-\varphi_\alpha (f_i(h_i(m_i)))\\
+&=\varphi_\alpha (m_i)-f_j(\psi_\alpha' (h_i(m_i)))\\
+&=\varphi_\alpha (m_i)-f_j(h_j(\varphi_\alpha(m_i)))
+\end{align*}
+And 
+\begin{align*}
+h_j'(\varphi_\alpha''(n_i))&=h_j'(\varphi_\alpha''(g_i(m_i)))\\
+&=h_j'(g_j(\varphi_\alpha(m_i)))\\
+&=\varphi_\alpha(m_i)-f_j(h_j(\varphi_\alpha(m_i)))\\
+\end{align*}
+Hence $ h' $ is a morphism of representations.
+
+The only thing need to show now is that $ gh'=1_N $. Let $ n_i \in N_i $, then $ \exists m_i \in M_i $ such that $ n_i =g(m_i) $. Then $ g_ih_i'(n_i)=g_i(m-fh(m))=g(m)-g(fh(m))=g_i(m_i)=n_i $. Hence $ gh'=1_N $.
+
+$ (\Leftarrow )$: 
+Suppose $ g $ is a retraction. $ \exists h': N\to M $ such that $ gh'=1_N $. We will define $ h: M\to L $ and show that $ hf=1_L $. 
+
+For any $ m $ we have $ g(m-h'g(m))=g(m)-g(h'g(m))=g(m)-g(m)=0 $. Hence $ m-h'g(m) \in \operatorname{ker}g = \operatorname{im}f $. Hence $ \exists ! l \in L $ such that $ f(l)=m-h'g(m)  $ since $ f $ is injective. Define $ h(m)=l $. Then 
+
+We have to show that $ h $ is a morphism of representations. Let $ M=(M_i,\varphi_\alpha), L=(L_i,\varphi_\alpha'), N=(N_i, \varphi_\alpha'') $. Then $ f,g,h' $ are morphisms of representations. We have to show that $ h $ is a morphism of representations. Let $ \alpha: i \to j $ be an arrow in $ Q $. Then consider the following diagram:
+\[
+    \begin{tikzcd}
+        \overset{L_i}{\bullet} \arrow[d, "f_i"', shift right] \arrow[r, "\varphi_{\alpha}'"]                               & \overset{L_j}{\bullet} \arrow[d, "f_j", shift left]                              \\
+        \overset{M_i}{\bullet} \arrow[d, "g_i"', shift right] \arrow[r, "\varphi_{\alpha}"] \arrow[u, "h_i"', shift right] & \overset{M_j}{\bullet} \arrow[d, "g_j", shift left] \arrow[u, "h_j", shift left] \\
+        \overset{N_i}{\bullet} \arrow[r, "\varphi_{\alpha}''"] \arrow[u, "h_i'"', shift right]                             & \overset{NN_j}{\bullet} \arrow[u, "h_j'", shift left]                           
+        \end{tikzcd}
+\]
+Take $ m_i \in M_i $, and for $ m_i $ we choose $ l_i \in L_i $ such that $ f(l_i)=m_i-h_i'g_i(m_i) $ and $ h_i(m_i)=l_i $ . Then we have
+\[
+\varphi_\alpha (h_i(m_i))=\varphi_\alpha' (l_i)
+\]
+On the other hand,
+\begin{align*}
+h_j\varphi_\alpha(m_i) & =h_j\varphi_\alpha(f_i(l_i)+h_i'g_i(m_i))\\
+&= 
+\end{align*}
+\end{proof}
+
+\begin{proof}[proof of (b)] 
+Suppose $ f $ is a section then $ g $ is a retraction. $ \forall m \in M $, $ \exists h: M\to L $ such that $ hf=1_L $ and $ \exists h': N\to M $ such that $ gh'=1_N $. Then $ m=h'g(m)+(m-h'g(m)) $ where $ h'g(m) \in \operatorname{im}h' $ and $ m-h'g(m) \in \operatorname{ker}g $. And $ \operatorname{im}h' \cap \operatorname{ker}g = 0 $. Thus $ M_i = \operatorname{ker}g \oplus \operatorname{im}h' $ as vector spaces.
+
+Furthermore we need to show that $ \operatorname{ker}g \oplus \operatorname{im}h' $ is a direct sum of representations. i.e. 
+\[
+\varpi_\alpha=\begin{bmatrix}
+\varphi_\alpha |_{\operatorname{ker}g_i } & 0 \\
+0 & \varphi_\alpha |_{\operatorname{im}h'_i }
+\end{bmatrix}
+\]
+Let $ m_i \in \operatorname{ker}g_i $, then $ 0=\varphi_\alpha''(g_i(m_i))=g_j \varphi_\alpha'  (m_i) $ where $ \varphi_\alpha' (m_i) \in \operatorname{ker}g_j $ and hence the upper right block of the matrix is zero. 
+
+If $m_i \in \operatorname{im}h'_i$, and therefore 
+\[
+\varphi_\alpha'(m_i)=\varphi_\alpha'(h_i'(n_i))=h_j'(\varphi_\alpha''(n_i))
+\]
+is an element of $\operatorname{im}h_i'$. This shows that the lower left block of the matrix is zero and hence $\varpi_\alpha$ is a block diagonal matrix.
+\end{proof}
+
+\begin{corollary}
+If 
+\[
+\begin{tikzcd}
+0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N \arrow[r] & 0
+\end{tikzcd}
+\]
+is a short exact split sequence in $ \operatorname{Rep}Q $, then $ M = L \oplus N $ as representations.
+\end{corollary}
+
+\begin{proof} 
+$ f $ is injective, $ L \cong \operatorname{im}f = \operatorname{ker}g $. By isomorphism theorem $ M  / \operatorname{ker}g \cong N$. Since $ g $ is surjective, $ N \cong \operatorname{im}g $. Statement follows from (b) of the previous theorem.
+\end{proof}
+
+\section{Hom Functor}
+
+\begin{definition}
+    Let $ \mathcal{C} $ and $ \mathcal{C}' $ be two categories. A \textbf{covariant functor} $ F: \mathcal{C} \to \mathcal{C}' $ is a map that assigns to each object $ X \in \mathcal{C} $ an object $ F(X) \in \mathcal{C}' $ and to each morphism $ f: X \to Y $ in $ \mathcal{C} $ a morphism $ F(f): F(X) \to F(Y) $ in $ \mathcal{C}' $, satisfying the following conditions:
+\begin{itemize}
+    \item $ F(f \circ g) = F(f) \circ F(g) $ for all morphisms $ f: X \to Y $ and $ g: Y \to Z $ in $ \mathcal{C} $.
+    \item $ F(\mathrm{id}_X) = \mathrm{id}_{F(X)} $ for all objects $ X \in \mathcal{C} $.
+\end{itemize}
+If $ F(f \circ g) =F(g) \circ F(f) $ for all morphisms $ f: X \to Y $ and $ g: Y \to Z $ in $ \mathcal{C} $, then $ F $ is called a \textbf{contravariant functor}.
+\end{definition}
+
+If $ X \in \operatorname{Rep}Q $ then $ \operatorname{Hom}_{\mathcal{C}}(X,-) $ is a covariant functor from $ \operatorname{Rep}Q $ to the category of $ k $-vector spaces where $\operatorname{Hom}_{\mathcal{C}}(-,X) $ is a contravariant functor from $ \operatorname{Rep}Q $ to the category of $ k $-vector spaces.
+
+\begin{example} 
+Fix $ X \in \operatorname{Rep}Q $. Let $ M, N \in \operatorname{Rep}Q $. Then $ \operatorname{Hom}_{\operatorname{Rep}Q}(X,M) $ is a $ k $-vector space. For a morphism $ f:M\to N $, define
+\[
+\operatorname{Hom}(X,f):=f_*:\operatorname{Hom}_{\operatorname{Rep}Q}(X,M)\to \operatorname{Hom}_{\operatorname{Rep}Q}(X,N),
+\qquad
+f_*(g)=f\circ g.
+\]
+This is a $ k $-linear map. This map $f_*$ is called the \textbf{pushforward} of $f$. For $ g \in \operatorname{Hom}_{\operatorname{Rep}Q}(X,M) $, the image $ f_*(g) = f \circ g $ is the composite in $ \operatorname{Rep}Q $; the following diagram commutes:
+\[
+\begin{tikzcd}
+X \arrow[r, "g"] \arrow[rr, "f_*(g)=f \circ g"', bend right=25] & M \arrow[r, "f"] & N
+\end{tikzcd}
+\]
+\end{example}
+
+\begin{example}
+Fix $ X \in \operatorname{Rep}Q $. Let $ M, N \in \operatorname{Rep}Q $. Then $ \operatorname{Hom}_{\operatorname{Rep}Q}(M,X) $ and $ \operatorname{Hom}_{\operatorname{Rep}Q}(N,X) $ are $ k $-vector spaces. For a morphism $ f: M \to N $, define
+\[
+\operatorname{Hom}(f,X):= f^*: \operatorname{Hom}_{\operatorname{Rep}Q}(N,X) \to \operatorname{Hom}_{\operatorname{Rep}Q}(M,X),
+\qquad
+f^*(g)= g \circ f.
+\]
+This is a $ k $-linear map. This map $f^*$ is called the \textbf{pullback} of $f$. For $ g \in \operatorname{Hom}_{\operatorname{Rep}Q}(N,X) $, the image $ f^*(g) = g \circ f $ is the composite in $ \operatorname{Rep}Q $; the following diagram commutes:
+\[
+\begin{tikzcd}
+M \arrow[r, "f"] \arrow[rr, "f^*(g)=g \circ f"', bend right=25] & N \arrow[r, "g"] & X
+\end{tikzcd}
+\]
+\end{example}
+
+\chapter{Lecture 5}
+
+\begin{theorem}
+    Let $Q$ be a quiver. 
+    \[
+        \begin{tikzcd}
+            0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "g"] & N
+            \end{tikzcd}
+    \]
+    a sequence of representations in $\operatorname{Rep}Q$. Then this sequence is exact if and only if for every $X \in \operatorname{Rep}Q$, the sequence
+    \[
+        \begin{tikzcd}
+            0 \arrow[r] & {\operatorname{Hom}(X,L)} \arrow[r, "{\operatorname{Hom}(X,f)}"] & {\operatorname{Hom}(X,M)} \arrow[r, "{\operatorname{Hom}(X,g)}"] & {\operatorname{Hom}(X,N)}
+        \end{tikzcd}
+    \]
+    is exact.
+\end{theorem}
+
+\begin{proof}
+    Assume first that
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N
+    \end{tikzcd}
+    \]
+    is exact in $\operatorname{Rep}Q$. We show that for every $X \in \operatorname{Rep}Q$, the induced sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(X,L)} \arrow[r,"{\operatorname{Hom}(X,f)}"] &
+    {\operatorname{Hom}(X,M)} \arrow[r,"{\operatorname{Hom}(X,g)}"] &
+    \operatorname{Hom}(X,N)
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    Since $f$ is a monomorphism, if $u,v \in \operatorname{Hom}(X,L)$ satisfy
+    \[
+    \operatorname{Hom}(X,f)(u)=\operatorname{Hom}(X,f)(v),
+    \]
+    then $f\circ u=f\circ v$, hence $u=v$. Therefore $\operatorname{Hom}(X,f)$ is injective.
+    
+    Next, since $g\circ f=0$, we have
+    \[
+    \operatorname{Hom}(X,g)\circ \operatorname{Hom}(X,f)
+    =\operatorname{Hom}(X,g\circ f)=0,
+    \]
+    so
+    \[
+    \operatorname{im}\operatorname{Hom}(X,f)\subseteq \ker \operatorname{Hom}(X,g).
+    \]
+    Conversely, let $h \in \operatorname{Hom}(X,M)$ satisfy $\operatorname{Hom}(X,g)(h)=0$, that is, $g\circ h=0$. Since the original sequence is exact, $f:L\to M$ is the kernel of $g$. Hence, by the universal property of the kernel, there exists a unique morphism $u:X\to L$ such that
+    \[
+    f\circ u=h.
+    \]
+    Thus $h=\operatorname{Hom}(X,f)(u)$, so
+    \[
+    \ker \operatorname{Hom}(X,g)\subseteq \operatorname{im}\operatorname{Hom}(X,f).
+    \]
+    Therefore
+    \[
+    \ker \operatorname{Hom}(X,g)=\operatorname{im}\operatorname{Hom}(X,f),
+    \]
+    and the induced sequence is exact.
+    
+    Conversely, assume that for every $X \in \operatorname{Rep}Q$, the sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(X,L)} \arrow[r,"{\operatorname{Hom}(X,f)}"] &
+    {\operatorname{Hom}(X,M)} \arrow[r,"{\operatorname{Hom}(X,g)}"] &
+    \operatorname{Hom}(X,N)
+    \end{tikzcd}
+    \]
+    is exact. We prove that
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    We first show that $g\circ f=0$. Take $X=L$. Since
+    \[
+    \operatorname{Hom}(L,g)\circ \operatorname{Hom}(L,f)=0,
+    \]
+    evaluating at $1_L \in \operatorname{Hom}(L,L)$ gives
+    \[
+    g\circ f=0.
+    \]
+    
+    Next we show that $f$ is a monomorphism. Let $K=\ker f$, and let
+    \[
+    \iota:K\to L
+    \]
+    be the kernel morphism. Then
+    \[
+    f\circ \iota=0,
+    \]
+    so
+    \[
+    \operatorname{Hom}(K,f)(\iota)=0.
+    \]
+    By assumption, the map
+    \[
+    \operatorname{Hom}(K,f):\operatorname{Hom}(K,L)\to \operatorname{Hom}(K,M)
+    \]
+    is injective, hence $\iota=0$. Therefore $K=0$, so $f$ is a monomorphism.
+    
+    Finally, we show that $\ker g=\operatorname{im}f$. Let $K=\ker g$, with kernel morphism
+    \[
+    \kappa:K\to M.
+    \]
+    Since $g\circ \kappa=0$, we have
+    \[
+    \operatorname{Hom}(K,g)(\kappa)=0.
+    \]
+    By the exactness of
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(K,L)} \arrow[r,"{\operatorname{Hom}(K,f)}"] &
+    {\operatorname{Hom}(K,M)} \arrow[r,"{\operatorname{Hom}(K,g)}"] &
+    {\operatorname{Hom}(K,N)},
+    \end{tikzcd}
+    \]
+    there exists a morphism $u:K\to L$ such that
+    \[
+    \operatorname{Hom}(K,f)(u)=\kappa,
+    \]
+    that is,
+    \[
+    f\circ u=\kappa.
+    \]
+    Thus $\kappa$ factors through $f$, which implies
+    \[
+    \ker g \subseteq \operatorname{im}f.
+    \]
+    On the other hand, since $g\circ f=0$, we have
+    \[
+    \operatorname{im}f \subseteq \ker g.
+    \]
+    Hence
+    \[
+    \ker g=\operatorname{im}f.
+    \]
+    
+    Therefore the sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N
+    \end{tikzcd}
+    \]
+    is exact.
+\end{proof}
+
+Similarly we have the following theorem:
+\begin{theorem}
+    Let $Q$ be a quiver. 
+    \[
+        \begin{tikzcd}
+            L \arrow[r,"g"] & M \arrow[r, "f"] & N \arrow[r] & 0
+            \end{tikzcd}
+    \]
+    a sequence of representations in $\operatorname{Rep}Q$. Then this sequence is exact if and only if for every $X \in \operatorname{Rep}Q$, the sequence
+    \[
+        \begin{tikzcd}
+            0 \arrow[r] & {\operatorname{Hom}(N,X)} \arrow[r, "{\operatorname{Hom}(f,X)}"] & {\operatorname{Hom}(M,X)} \arrow[r, "{\operatorname{Hom}(g,X)}"] & {\operatorname{Hom}(L,X)}
+        \end{tikzcd}
+    \]
+    is exact.
+\end{theorem}
+
+\begin{corollary}
+    Let
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    be a sequence in $\operatorname{rep} Q$. Then the sequence is split exact if and only if, for every $X \in \operatorname{rep} Q$, the sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & \operatorname{Hom}(X,L) \arrow[r,"f_*"] &
+    \operatorname{Hom}(X,M) \arrow[r,"g_*"] &
+    \operatorname{Hom}(X,N) \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact.
+    \end{corollary}
+    
+    \begin{proof}
+    Assume first that
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is split exact. By Theorem 1.10, it is enough to show that
+    \[
+    g_* : \operatorname{Hom}(X,M) \to \operatorname{Hom}(X,N)
+    \]
+    is surjective for every $X \in \operatorname{rep} Q$.
+    
+    Since the sequence is split exact, the morphism $g$ is a retraction. Hence there exists
+    \[
+    h \in \operatorname{Hom}(N,M)
+    \]
+    such that
+    \[
+    g h = 1_N.
+    \]
+    Now let $u \in \operatorname{Hom}(X,N)$. Then $h u \in \operatorname{Hom}(X,M)$, and
+    \[
+    g_*(h u)=g \circ h \circ u = 1_N \circ u = u.
+    \]
+    Thus every element of $\operatorname{Hom}(X,N)$ lies in the image of $g_*$, so $g_*$ is surjective. Therefore
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & \operatorname{Hom}(X,L) \arrow[r,"f_*"] &
+    \operatorname{Hom}(X,M) \arrow[r,"g_*"] &
+    \operatorname{Hom}(X,N) \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    Conversely, suppose that for every $X \in \operatorname{rep} Q$, the sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & \operatorname{Hom}(X,L) \arrow[r,"f_*"] &
+    \operatorname{Hom}(X,M) \arrow[r,"g_*"] &
+    \operatorname{Hom}(X,N) \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    By Theorem 1.10, it follows that
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N
+    \end{tikzcd}
+    \]
+    is exact. It remains to show that this exact sequence splits.
+    
+    Take $X=N$. Since
+    \[
+    g_* : \operatorname{Hom}(N,M) \to \operatorname{Hom}(N,N)
+    \]
+    is surjective, there exists
+    \[
+    h \in \operatorname{Hom}(N,M)
+    \]
+    such that
+    \[
+    g_*(h)=1_N.
+    \]
+    By definition of $g_*$, this means
+    \[
+    g \circ h = 1_N.
+    \]
+    Hence $g$ is a retraction, and therefore the exact sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & L \arrow[r,"f"] & M \arrow[r,"g"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is split exact.
+\end{proof}
+
+\begin{example}
+    Let $Q$ be the quiver 
+    \[
+        \begin{tikzcd}
+            1 \arrow[r] & 2
+            \end{tikzcd}
+    \]
+    Consider $S_1$, $S_2$, $M$ defined as before. 
+    \[
+    S_1: \begin{tikzcd}
+        k \arrow[r] & 0
+        \end{tikzcd}
+    \]
+    \[
+    S_2: \begin{tikzcd}
+        0 \arrow[r] & k
+        \end{tikzcd}
+    \]
+    \[
+    M: \begin{tikzcd}
+        k \arrow[r,"1"] & k
+        \end{tikzcd}
+    \]
+    We have the following sequence 
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & S_2 \arrow[r] & M \arrow[r] & S_1 \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact. But non-split.
+
+    Now consider the Hom functor $\operatorname{Hom}(S_1,-)$. Apply to this sequence, we get the following sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(S_1,S_2)} \arrow[r] & {\operatorname{Hom}(S_1,M)} \arrow[r] & {\operatorname{Hom}(S_1,S_1)} \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    Then $\operatorname{Hom}(S_1,S_2)=\operatorname{Hom}(S_1,M)=0$ and $\operatorname{Hom}(S_1,S_1)=k$. Therefore the "Hom-sequence" can never be exact.
+\end{example}
+
+\section{First Examples of Auslander--Reiten Quivers}
+
+The goal of the representation theory of a quiver $Q$ is to understand the
+representations in $\operatorname{Rep}(Q)$, the morphisms between them, and, more generally,
+the short exact sequences in $\operatorname{Rep}(Q)$.
+
+A first approximation to this structure is given by the \emph{Auslander--Reiten
+quiver}. In the representation-finite case, it encodes all indecomposable
+representations, the irreducible morphisms between them, and the basic almost
+split sequences.
+
+In this section we present only the first examples. A systematic treatment will be
+given later.
+
+\subsection*{General idea}
+
+Let $Q$ be a quiver. The \emph{Auslander--Reiten quiver} $\Gamma_Q$ is a quiver
+defined as follows.
+
+\begin{itemize}
+    \item Its vertices are the isomorphism classes of indecomposable
+    representations of $Q$.
+    \item Its arrows correspond to \emph{irreducible morphisms} between
+    indecomposable representations.
+\end{itemize}
+
+Very roughly, an irreducible morphism is a morphism between indecomposable
+representations that does not factor in a nontrivial way through another
+representation.
+
+Thus:
+\begin{itemize}
+    \item indecomposable representations are the building blocks of all
+    representations;
+    \item irreducible morphisms are the basic building blocks of many morphisms;
+    \item almost split sequences appear in the Auslander--Reiten quiver in the
+    form of \emph{meshes}.
+\end{itemize}
+
+\medskip
+
+We now look at the first examples.
+
+\subsection*{Example 1: the quiver $1 \to 2$}
+
+Let
+\[
+Q:\quad 1 \longrightarrow 2.
+\]
+Up to isomorphism, there are exactly three indecomposable representations:
+\[
+S(2)=
+\left(
+0 \longrightarrow k
+\right),
+\qquad
+M=
+\left(
+k \xrightarrow{1} k
+\right),
+\qquad
+S(1)=
+\left(
+k \longrightarrow 0
+\right).
+\]
+
+From direct computations of Hom-spaces, one finds:
+\[
+\Hom(S(1),M)=0,\qquad \Hom(M,S(2))=0,\qquad \Hom(S(2),M)\cong k,
+\]
+\[
+\Hom(S(1),S(2))=0,\qquad \Hom(M,S(1))\cong k,\qquad \Hom(S(2),S(1))=0.
+\]
+
+Hence there is exactly one non-split short exact sequence with indecomposable end
+terms:
+\[
+0 \longrightarrow S(2) \longrightarrow M \longrightarrow S(1) \longrightarrow 0.
+\]
+This sequence is an almost split sequence. Therefore the Auslander--Reiten quiver
+has three vertices, two arrows, and one mesh:
+\[
+\begin{tikzcd}[row sep=2.5em, column sep=3em]
+& M \arrow[dl] \arrow[dr] & \\
+S(2) & & S(1)
+\end{tikzcd}
+\]
+
+\subsection*{A convenient shorthand notation}
+
+It is often useful to encode an indecomposable representation by its dimension
+vector together with the relative position of the vertices.
+
+Suppose
+\[
+Q_0=\{1,2,\dots,n\},
+\qquad
+M=(M_i,\varphi_\alpha)
+\]
+is an indecomposable representation of $Q$, and
+\[
+\dim M=(d_1,d_2,\dots,d_n).
+\]
+We depict $M$ by writing the digit $i$ exactly $d_i$ times. Moreover, if there is
+an arrow $\alpha:i\to j$ such that the map
+\[
+\varphi_\alpha:M_i\to M_j
+\]
+is nonzero, then we place the symbol $i$ above the symbol $j$.
+
+For the quiver $1\to 2$, the representation
+\[
+M=\left(k \xrightarrow{1} k\right)
+\]
+may be represented symbolically by
+\[
+\frac{1}{2},
+\]
+meaning that both vector spaces are one-dimensional and the arrow carries a
+nonzero map.
+
+In this notation, the Auslander--Reiten quiver above becomes
+\[
+\begin{tikzcd}[row sep=2.5em, column sep=3em]
+& \frac{1}{2} \arrow[dl] \arrow[dr] & \\
+2 & & 1
+\end{tikzcd}
+\]
+
+\subsection*{Example 2: the quiver $1 \to 2 \leftarrow 3$}
+
+Let
+\[
+Q:\quad 1 \longrightarrow 2 \longleftarrow 3.
+\]
+In this case there are exactly six isomorphism classes of indecomposable
+representations:
+\[
+S(2)=
+\left(
+0 \longrightarrow k \longleftarrow 0
+\right),
+\qquad
+P(1)=
+\left(
+k \xrightarrow{1} k \longleftarrow 0
+\right),
+\qquad
+P(3)=
+\left(
+0 \longrightarrow k \xleftarrow{1} k
+\right),
+\]
+\[
+I(2)=
+\left(
+k \xrightarrow{1} k \xleftarrow{1} k
+\right),
+\qquad
+S(1)=
+\left(
+k \longrightarrow 0 \longleftarrow 0
+\right),
+\qquad
+S(3)=
+\left(
+0 \longrightarrow 0 \longleftarrow k
+\right).
+\]
+
+Using the symbolic notation, these are
+\[
+S(2)=2,\qquad
+P(1)=\frac{1}{2},\qquad
+P(3)=\frac{3}{2},\qquad
+I(2)=\frac{13}{2},\qquad
+S(1)=1,\qquad
+S(3)=3.
+\]
+
+There are three almost split sequences:
+\[
+0 \longrightarrow 2
+\longrightarrow
+\frac{1}{2}\oplus\frac{3}{2}
+\longrightarrow
+\frac{13}{2}
+\longrightarrow 0,
+\]
+\[
+0 \longrightarrow \frac{1}{2}
+\longrightarrow
+\frac{13}{2}
+\longrightarrow
+3
+\longrightarrow 0,
+\]
+\[
+0 \longrightarrow \frac{3}{2}
+\longrightarrow
+\frac{13}{2}
+\longrightarrow
+1
+\longrightarrow 0.
+\]
+
+Consequently, the Auslander--Reiten quiver has the form
+\[
+\begin{tikzcd}[row sep=2.8em, column sep=3em]
+& & 3 \\
+& \frac{3}{2} \arrow[ur] & \\
+2 \arrow[ur] \arrow[dr] & & \frac{13}{2} \arrow[uu] \arrow[dd] \\
+& \frac{1}{2} \arrow[dr] & \\
+& & 1
+\end{tikzcd}
+\]
+
+\subsection*{Further non-split short exact sequences}
+
+In the quiver $1\to 2 \leftarrow 3$, besides the almost split sequences above, there
+are also two further non-split short exact sequences with indecomposable end terms:
+\[
+0 \longrightarrow 2 \longrightarrow \frac{3}{2} \longrightarrow 3 \longrightarrow 0,
+\]
+\[
+0 \longrightarrow 2 \longrightarrow \frac{1}{2} \longrightarrow 1 \longrightarrow 0.
+\]
+
+These are not themselves almost split sequences, but they may be viewed as being
+obtained by combining meshes in the Auslander--Reiten quiver.
+
+\subsection*{Conclusion}
+
+These examples illustrate the philosophy of Auslander--Reiten theory:
+
+\begin{itemize}
+    \item vertices correspond to indecomposable representations;
+    \item arrows correspond to irreducible morphisms;
+    \item meshes encode almost split sequences.
+\end{itemize}
+
+Thus the Auslander--Reiten quiver provides a compact and highly structured picture
+of the category $\operatorname{Rep}(Q)$.
+
+\end{document}
