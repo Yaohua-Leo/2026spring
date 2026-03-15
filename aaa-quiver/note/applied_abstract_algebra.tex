@@ -215,11 +215,11 @@
 
 \textbf{\textcolor{TopicColor}{Office hours:}} Mon: 12:30-14:30. Office 218, Taizhou Building.
 
-\textbf{\textcolor{TopicColor}{Main book:}} \textit{Rqalf Schiffler, Quiver Representations}
+\textbf{\textcolor{TopicColor}{Main book:}} \textit{Ralf Schiffler, Quiver Representations}
 
 \textbf{\textcolor{TopicColor}{References:}}
 \begin{itemize}[leftmargin=*, nosep, label=\textcolor{TopicColor}{$\bullet$}]
-    \item \textit{Assem, Simson, Skowroński, Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory}, Cambridge University Press.
+    \item \textit{Assem, Simson, Skowro\'{n}ski, Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory}, Cambridge University Press.
     \item \textit{Ibrahim Assem, Basic Representation Theory of Algebras}.
     \item \textit{Michel Brion, Representations of Quivers}.
     \item \textit{Henning Krause, Representations of Quivers via Reflection Functor}.
@@ -533,7 +533,7 @@ g_3 \phi_\beta = \psi_\beta g_2 \implies \begin{bmatrix} a & b \end{bmatrix} \be
 g_3 \phi_\gamma = \psi_\gamma g_4 \implies \begin{bmatrix} a & b \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = e \implies a + b = e.
 \end{cases}
 \]
-The morphism is uniquely determined by the parameters $a, b \in k$. Hence $\mathrm{Hom}(M, M'') \cong k^2$.
+The morphism is uniquely determined by the parameters $a, b \in k$, and hence $\mathrm{Hom}(M, M'') \cong k^2$.
 \end{example}
 
 \section{Dynkin Diagrams and Classical Quivers}
@@ -1036,7 +1036,7 @@ The cokernel is defined using the image; below we will use \(\operatorname{im}f_
 
 From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
 
-\subsection{Kernel in \(\operatorname{Rep}Q\).}
+\subsection{Kernel in \texorpdfstring{\(\operatorname{Rep}Q\)}{Rep Q}.}
 
 \begin{definition}
     Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{kernel} of \(f\) is the representation \(\operatorname{ker}f = (L_i, \chi_\alpha)\) where
@@ -1067,7 +1067,7 @@ From now on we consider kernel and cokernel in \(\operatorname{Rep}Q\).
     \]
 \end{remark}
 
-\subsection{Cokernel in \(\operatorname{Rep}Q\).}
+\subsection{Cokernel in \texorpdfstring{\(\operatorname{Rep}Q\)}{Rep Q}.}
 
 \begin{definition}
     Let \(f: M \to N\) be a morphism in \(\operatorname{Rep}Q\), with \(M = (V_i, \varphi_\alpha)\) and \(N = (N_i, \psi_\alpha)\). The \emph{cokernel} of \(f\) is the representation \(\operatorname{coker}f = (R_i, \nu_\alpha)\) where \(R_i = N_i / \operatorname{Im}f_i\), and for each arrow \(\alpha: i \to j\) the map \(\nu_\alpha: R_i \to R_j\) is defined by
@@ -1638,7 +1638,7 @@ Prove the equivalence of the two definitions of $ \operatorname{coker}f $.
         \[
         \bigl(N_i/f_i(M_i),\ \psi_\alpha \text{ induced on the quotients}\bigr).
         \]
-        \end{proof}
+\end{proof}
 
 
 
@@ -1682,13 +1682,13 @@ M_i/\operatorname{ker}f_i \arrow[r, "\overline{\varphi}_\alpha"] \arrow[d, "\ove
 \end{tikzcd}
 \]
 For any $m_i\in M_i$,
-\[
+\begin{align*}
 \overline{f}_j\bigl(\overline{\varphi}_\alpha(m_i+\operatorname{ker}f_i)\bigr)
-=\overline{f}_j\bigl(\varphi_\alpha(m_i)+\operatorname{ker}f_j\bigr)
-=f_j(\varphi_\alpha(m_i))
-=\psi_\alpha(f_i(m_i))
-=\psi_\alpha|_{\operatorname{im}f_i}\bigl(\overline{f}_i(m_i+\operatorname{ker}f_i)\bigr).
-\]
+&=\overline{f}_j\bigl(\varphi_\alpha(m_i)+\operatorname{ker}f_j\bigr)\\
+&=f_j(\varphi_\alpha(m_i))
+=\psi_\alpha(f_i(m_i))\\
+&=\psi_\alpha|_{\operatorname{im}f_i}\bigl(\overline{f}_i(m_i+\operatorname{ker}f_i)\bigr).
+\end{align*}
 Hence the diagram commutes for every arrow $\alpha$, so $\overline{f}:M/\operatorname{ker}f\to \operatorname{im}f$ is a morphism in $\operatorname{Rep}Q$. Since each $\overline{f}_i$ is an isomorphism, $\overline{f}$ is an isomorphism of representations.
 Therefore
 \[
@@ -1834,7 +1834,7 @@ Taking a short exact sequence
 \begin{proof}[proof of (a)] 
 $ (\Rightarrow )$: Suppose $ f $ is a section. $ \exists h: M\to L $ such that $ hf=1_L $. We will define $ h': N\to M $ and show that $ gh'=1_N $. $ \forall n \in N $, since $ g $ is surjective $ \exists m $ such that $ n =g(m) $. $ h'(n)= m - f(h(m)) $ where $ h': N\to M $. We have to show that $ h' $ is well-defined. Suppose $ m,m' $ such that $ n=g(m)=g(m') $. We have to show that $ m'-f(h(m'))=m-f(h(m)) $. 
 
-Since $ g(m)-g(m') = g(m-m')=0 $, $ m-m' \in \operatorname{ker}g = \operatorname{im}f $, $ \exists l \in L $ such that $ f(l)=m-m' $. Hnece $ m-m'=f(l)= f(hf)(l)= f(h(m)-h(m'))=f(h(m))-f(h(m')) $. Hence $ m'-f(h(m'))=m-f(h(m)) $. 
+Since $ g(m)-g(m') = g(m-m')=0 $, $ m-m' \in \operatorname{ker}g = \operatorname{im}f $, $ \exists l \in L $ such that $ f(l)=m-m' $. Hence $ m-m'=f(l)= f(hf)(l)= f(h(m)-h(m'))=f(h(m))-f(h(m')) $. Hence $ m'-f(h(m'))=m-f(h(m)) $. 
 
 We need to show $ h' $ is a morphism. Let $ M=(M_i,\varphi_\alpha), L=(L_i,\varphi_\alpha'), N=(N_i, \varphi_\alpha'') $. Then $ f,g,h $ are morphisms of representations. We have to show that $ h' $ is a morphism of representations. Let $ \alpha: i \to j $ be an arrow in $ Q $. Then consider the following diagram:
 \[
@@ -2139,6 +2139,141 @@ Similarly we have the following theorem:
     is exact.
 \end{theorem}
 
+\begin{proof}
+    Assume first that
+    \[
+    \begin{tikzcd}
+    L \arrow[r,"g"] & M \arrow[r,"f"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact in $\operatorname{Rep}Q$. We show that for every $X \in \operatorname{Rep}Q$, the induced sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(N,X)} \arrow[r,"{\operatorname{Hom}(f,X)}"] &
+    {\operatorname{Hom}(M,X)} \arrow[r,"{\operatorname{Hom}(g,X)}"] &
+    \operatorname{Hom}(L,X)
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    Since $f$ is an epimorphism, if $u,v \in \operatorname{Hom}(N,X)$ satisfy
+    \[
+    \operatorname{Hom}(f,X)(u)=\operatorname{Hom}(f,X)(v),
+    \]
+    then $u\circ f=v\circ f$, hence $u=v$. Therefore $\operatorname{Hom}(f,X)$ is injective.
+    
+    Next, since $f\circ g=0$, we have
+    \[
+    \operatorname{Hom}(g,X)\circ \operatorname{Hom}(f,X)
+    =\operatorname{Hom}(f\circ g,X)=0,
+    \]
+    so
+    \[
+    \operatorname{im}\operatorname{Hom}(f,X)\subseteq \ker \operatorname{Hom}(g,X).
+    \]
+    Conversely, let $h \in \operatorname{Hom}(M,X)$ satisfy $\operatorname{Hom}(g,X)(h)=0$, that is, $h\circ g=0$. Since the original sequence is exact, $f:M\to N$ is the cokernel of $g$. Hence, by the universal property of the cokernel, there exists a unique morphism $u:N\to X$ such that
+    \[
+    u\circ f=h.
+    \]
+    Thus $h=\operatorname{Hom}(f,X)(u)$, so
+    \[
+    \ker \operatorname{Hom}(g,X)\subseteq \operatorname{im}\operatorname{Hom}(f,X).
+    \]
+    Therefore
+    \[
+    \ker \operatorname{Hom}(g,X)=\operatorname{im}\operatorname{Hom}(f,X),
+    \]
+    and the induced sequence is exact.
+    
+    Conversely, assume that for every $X \in \operatorname{Rep}Q$, the sequence
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(N,X)} \arrow[r,"{\operatorname{Hom}(f,X)}"] &
+    {\operatorname{Hom}(M,X)} \arrow[r,"{\operatorname{Hom}(g,X)}"] &
+    \operatorname{Hom}(L,X)
+    \end{tikzcd}
+    \]
+    is exact. We prove that
+    \[
+    \begin{tikzcd}
+    L \arrow[r,"g"] & M \arrow[r,"f"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact.
+    
+    We first show that $f\circ g=0$. Take $X=N$. Since
+    \[
+    \operatorname{Hom}(g,N)\circ \operatorname{Hom}(f,N)=0,
+    \]
+    evaluating at $1_N \in \operatorname{Hom}(N,N)$ gives
+    \[
+    f\circ g=0.
+    \]
+    
+    Next we show that $f$ is an epimorphism. Let $C=\operatorname{coker}f$, and let
+    \[
+    \pi:N\to C
+    \]
+    be the cokernel morphism. Then
+    \[
+    \pi\circ f=0,
+    \]
+    so
+    \[
+    \operatorname{Hom}(f,C)(\pi)=0.
+    \]
+    By assumption, the map
+    \[
+    \operatorname{Hom}(f,C):\operatorname{Hom}(N,C)\to \operatorname{Hom}(M,C)
+    \]
+    is injective, hence $\pi=0$. Therefore $C=0$, so $f$ is an epimorphism.
+    
+    Finally, we show that $\ker f=\operatorname{im}g$. Let $C=\operatorname{coker}g$, with cokernel morphism
+    \[
+    \gamma:M\to C.
+    \]
+    Since $\gamma\circ g=0$, we have
+    \[
+    \operatorname{Hom}(g,C)(\gamma)=0.
+    \]
+    By the exactness of
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] & {\operatorname{Hom}(N,C)} \arrow[r,"{\operatorname{Hom}(f,C)}"] &
+    {\operatorname{Hom}(M,C)} \arrow[r,"{\operatorname{Hom}(g,C)}"] &
+    {\operatorname{Hom}(L,C)},
+    \end{tikzcd}
+    \]
+    there exists a morphism $u:N\to C$ such that
+    \[
+    \operatorname{Hom}(f,C)(u)=\gamma,
+    \]
+    that is,
+    \[
+    u\circ f=\gamma.
+    \]
+    Thus $\gamma$ factors through $f$, which implies
+    \[
+    \ker f \subseteq \operatorname{im}g.
+    \]
+    On the other hand, since $f\circ g=0$, we have
+    \[
+    \operatorname{im}g \subseteq \ker f.
+    \]
+    Hence
+    \[
+    \ker f=\operatorname{im}g.
+    \]
+    
+    Therefore the sequence
+    \[
+    \begin{tikzcd}
+    L \arrow[r,"g"] & M \arrow[r,"f"] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    is exact.
+\end{proof}
+
 \begin{corollary}
     Let
     \[
@@ -2283,8 +2418,8 @@ the short exact sequences in $\operatorname{Rep}Q$.
 
 A first approximation to this structure is given by the \emph{Auslander--Reiten
 quiver}. In the representation-finite case, it encodes all indecomposable
-representations, the irreducible morphisms between them, and the basic almost
-split sequences.
+representations, the irreducible morphisms between them, and the basic non-split short exact sequences. (In fact almost split sequences, you can check the definition in the book of Schiffler).
+
 
 In this section we present only the first examples. A systematic treatment will be
 given later.
@@ -2358,9 +2493,9 @@ terms:
 This sequence is an almost split sequence. Therefore the Auslander--Reiten quiver
 has three vertices, two arrows, and one mesh:
 \[
-\begin{tikzcd}[row sep=2.5em, column sep=3em]
-& M \arrow[dl] \arrow[dr] & \\
-S(2) & & S(1)
+    \begin{tikzcd}
+        & M \arrow[rd] &      \\
+S(2) \arrow[ru] &              & S(1)
 \end{tikzcd}
 \]
 
@@ -2392,16 +2527,16 @@ M=\left(k \xrightarrow{1} k\right)
 \]
 may be represented symbolically by
 \[
-\frac{1}{2},
+\substack{1 \\ 2},
 \]
 meaning that both vector spaces are one-dimensional and the arrow carries a
 nonzero map.
 
 In this notation, the Auslander--Reiten quiver above becomes
 \[
-\begin{tikzcd}[row sep=2.5em, column sep=3em]
-& \frac{1}{2} \arrow[dl] \arrow[dr] & \\
-2 & & 1
+    \begin{tikzcd}
+        & \substack{1 \\ 2} \arrow[rd] &   \\
+2 \arrow[ru] &                        & 1
 \end{tikzcd}
 \]
 
@@ -2449,9 +2584,9 @@ S(3)=
 Using the symbolic notation, these are
 \[
 S(2)=2,\qquad
-P(1)=\frac{1}{2},\qquad
-P(3)=\frac{3}{2},\qquad
-I(2)=\frac{13}{2},\qquad
+P(1)=\substack{1 \\ 2},\qquad
+P(3)=\substack{3 \\ 2},\qquad
+I(2)=\substack{13 \\ 2},\qquad
 S(1)=1,\qquad
 S(3)=3.
 \]
@@ -2460,23 +2595,23 @@ There are three almost split sequences:
 \[
 0 \longrightarrow 2
 \longrightarrow
-\frac{1}{2}\oplus\frac{3}{2}
+\substack{1 \\ 2}\oplus\substack{3 \\ 2}
 \longrightarrow
-\frac{13}{2}
+\substack{13 \\ 2}
 \longrightarrow 0,
 \]
 \[
-0 \longrightarrow \frac{1}{2}
+0 \longrightarrow \substack{1 \\ 2}
 \longrightarrow
-\frac{13}{2}
+\substack{13 \\ 2}
 \longrightarrow
 3
 \longrightarrow 0,
 \]
 \[
-0 \longrightarrow \frac{3}{2}
+0 \longrightarrow \substack{3 \\ 2}
 \longrightarrow
-\frac{13}{2}
+\substack{13 \\ 2}
 \longrightarrow
 1
 \longrightarrow 0.
@@ -2484,12 +2619,10 @@ There are three almost split sequences:
 
 Consequently, the Auslander--Reiten quiver has the form
 \[
-\begin{tikzcd}[row sep=2.8em, column sep=3em]
-& & 3 \\
-& \frac{3}{2} \arrow[ur] & \\
-2 \arrow[ur] \arrow[dr] & & \frac{13}{2} \arrow[uu] \arrow[dd] \\
-& \frac{1}{2} \arrow[dr] & \\
-& & 1
+    \begin{tikzcd}
+        & \substack{3 \\ 2} \arrow[rd] &                                          & 1 \\
+2 \arrow[ru] \arrow[rd] &                              & \substack{13 \\ 2} \arrow[ru] \arrow[rd] &   \\
+        & \substack{1 \\ 2} \arrow[ru] &                                          & 3
 \end{tikzcd}
 \]
 
@@ -2498,10 +2631,10 @@ Consequently, the Auslander--Reiten quiver has the form
 In the quiver $1\to 2 \leftarrow 3$, besides the almost split sequences above, there
 are also two further non-split short exact sequences with indecomposable end terms:
 \[
-0 \longrightarrow 2 \longrightarrow \frac{3}{2} \longrightarrow 3 \longrightarrow 0,
+0 \longrightarrow 2 \longrightarrow \substack{3 \\ 2} \longrightarrow 3 \longrightarrow 0,
 \]
 \[
-0 \longrightarrow 2 \longrightarrow \frac{1}{2} \longrightarrow 1 \longrightarrow 0.
+0 \longrightarrow 2 \longrightarrow \substack{1 \\ 2} \longrightarrow 1 \longrightarrow 0.
 \]
 
 These are not themselves almost split sequences, but they may be viewed as being
@@ -2518,6 +2651,6 @@ These examples illustrate the philosophy of Auslander--Reiten theory:
 \end{itemize}
 
 Thus the Auslander--Reiten quiver provides a compact and highly structured picture
-of the category $\operatorname{Rep}(Q)$.
+of the category $\operatorname{Rep}Q$.
 
 \end{document}

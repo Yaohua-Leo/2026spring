@@ -48,6 +48,7 @@
 %\addbibresource{references.bib}
 % 7. 交互 (最后加载)
 \usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
 \usepackage{array}
 \usepackage{tabularx}
 %----------------------------------------------------------------------------------------
@@ -768,7 +769,7 @@ Peterson Graph:
         \end{tikzpicture}
     \end{center}
 
-Each vertix has degree 3 so this graph is $ 3 $-regular. Any two vertices linked by an edge has no common neighbor. Any 2 vertices not linked by an edge has a common neighbor.
+Each vertex has degree 3 so this graph is $ 3 $-regular. Any two vertices linked by an edge has no common neighbor. Any 2 vertices not linked by an edge has a common neighbor.
 
 It is a strongly regular graph with parameters $ (10,3,0,1) $.
 \end{example}
@@ -1511,7 +1512,7 @@ This is an example of a tree. It is "木" in Chinese.
 \end{example}
 
 \begin{definition} 
-Disjoint unioin of trees is called a forest.
+Disjoint union of trees is called a forest.
 \end{definition}
 
 \begin{example} 
@@ -1689,7 +1690,7 @@ We pick $u_1=2$, $a_1=1$, and remove $u_1$. Then we pick $u_2=4$, $a_2=3$, and r
 
 After all, we get a sequence $ a=(a_1, \ldots, a_{n-2}) $ in $ [n]^{n-2} $. Next we want to show: For eah sequence $ a $ in $ [n]^{n-2} $, there exists a unique tree $ T $.
 
-Let $ \mathrm{d_i} := \sharp $ degree of vertex $ i $ and $ f_i := \sharp $ occurances of $ i $ in $ a $.
+Let $ \mathrm{d_i} := \sharp $ degree of vertex $ i $ and $ f_i := \sharp $ occurrences of $ i $ in $ a $.
 
 Note that $ f_i \le d_i -1 $ for all $ i $. Hence $ n-2=\sum f_i \le \sum (d_i-1)=(2n-2)-n =n-2 $. Hence $ f_i=d_i -1 $ for all $ i $. 
 
@@ -1848,7 +1849,7 @@ Hence, we have a bijection between trees on sets $ [n] $ and $ [n]^{n-2} $.
     \end{proof}
 \chapter{Lecture 3}
 
-\section{Chrometic number}
+\section{Chromatic number}
 
 \begin{definition}
     Let $G=(V,E)$ be a graph and let $C$ be a set of colors.  
@@ -2326,10 +2327,10 @@ $$ R(s, s) \ge (1 + o(1)) \frac{s}{e\sqrt{2}} 2^{s/2}. $$
     
 \textbf{Historical and Recent Progress}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{@{}p{3.2cm} r p{4.5cm} X@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright}p{3.2cm} r >{\raggedright}p{4.5cm} >{\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Result Type} & \textbf{Year} & \textbf{Researchers} & \textbf{Key Breakthrough} \\
 \midrule
@@ -2342,12 +2343,12 @@ Lower Bound Brkthr. & 2025 & Jie Ma, W. Shen, S. Xie & Improvement for the off-d
 \end{tabularx}
 \end{table}
 
-For off-diagonal Ramsey numbers, we introduct the following results:
+For off-diagonal Ramsey numbers, we introduce the following results:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{@{}p{3.2cm} r p{4.5cm} X@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright}p{3.2cm} r >{\raggedright}p{4.5cm} >{\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Result Type} & \textbf{Year} & \textbf{Researchers} & \textbf{Key Contribution} \\
 \midrule
@@ -2361,13 +2362,129 @@ Asymptotic Result & 2020 & Fiz Pontiveros, Griffiths, Morris; Bohman, Keevash & 
 \end{tabularx}
 \end{table}
 
+\chapter{Lecture 4}
 
+\section{Ramsey Theory on Structures and Spaces}
 
+\begin{theorem}[Schur's Theorem]
+    Let $n$ be a positive integer, and let $s_n$ be the smallest integer such that $[s_n]$ colored in $n$ colors has monochromatic $x+y=z$. Such $s_n$ exists. 
+\end{theorem}
 
+\begin{proof}
+    We identify that $n$ colors with $[n]$. 
+Define a coloring $K_{s_n}$ with $V(K_{s_n})=[s_n]$ with $uv$ in color $x\in [n]$ if $|u-v|$ has color $x$. 
 
+If $s_n\geqslant R(3,\cdots,3)=R(n;3)$, then we find a monochromatic $K_{3}$. 
+That is, $|v-u|$, $|v-w|$, $|u-w|$ is monochromatic. 
+WLOG assume $u>v>w$ and put $x=u-v$, $y=v-w$ and $z=u-w$. 
+Then $x+y=z$.
+\end{proof}
 
+\begin{definition}
+    Define $[q]^n:=\{(x_1,\cdots,x_n):x_i\in [q]\}$. We say $L\subseteq[q]^n$ is a \emph{combinatorial line} if there exists $I\subseteq [n]$ and integers $a_i$ such that 
+ $$
+ L=\{(x_1,\cdots,x_n)\in [q]^n:x_i=a_i\text{ for }i\notin I\text{ and }x_i=x_j\text{ for all }i,j\in I\}.
+ $$ 
+\end{definition}
 
+\begin{theorem}[Hales--Jewett]
+    For all $r,q\in \mathbb{N}_+$, there exists a smallest $n:=HJ(r,q)$ such that any $r$-coloring of $[q]^n$ contains a monochromatic combinatorial line.
+\end{theorem}
 
+\begin{proof}
+    By induction on $q$. The case $q=1$ is trivial, and we now assume that $q\geqslant 2$.
+
+    For a line $L$, we write $L^{-}$ for its first point and $L^+$ for its last point. We call $L_1,\cdots,L_s$ \emph{focused at} $f$ if $L_i^+=f$ for all $i\in [s]$. We call $L_1,\cdots,L_s$ \emph{color-focused} at $f$ if all the truncated lines $L_i\setminus\{L_i^+\}$ are monochromatic and of pairwise different colors. Note that a line is determined by one point and a ``direction''.
+
+    Suppose that $HJ(r,q')$ is finite for all $q'\leqslant q-1$. Our goal is, for each $s\leqslant r$, to show there exists $N=FHJ(r,s,q)$ such that any $r$-coloring of $[q]^N$ either
+    \begin{itemize}
+        \item contains a monochromatic combinatorial line, or
+        \item contains $s$ color-focused lines.
+    \end{itemize}
+    Then $s=r$ will yield the Hales--Jewett theorem by the pigeonhole principle.
+
+    We prove this by induction on $s$.
+
+    \textbf{Base case.} When $s=1$, pick $FHJ(r,1,q)=HJ(r,q-1)$.
+
+    \textbf{Inductive step.} Now suppose that $FHJ(r,s',q)$ is finite for all $s'\leqslant s-1$. We claim that
+    \[
+        FHJ(r,s,q)\leqslant N := FHJ(r,s-1,q)+HJ(r^{q^n},q-1) =: n+n'.
+    \]
+
+    Suppose $\chi$ is an $r$-coloring of $[q]^N$, where $[q]^N=\{(a_1,\cdots,a_N):a_i\in [q]\}$. We write $(a_1,\cdots,a_N)$ as $(a,b)$ where $a=(a_1,\cdots,a_n)\in[q]^n$ and $b=(a_{n+1},\cdots,a_N)\in[q]^{n'}$. Then $\chi$ can be viewed as an $r^{q^n}$-coloring $\chi'$ of $[q]^{n'}$, by associating each point $b\in [q]^{n'}$ with the entire $r$-colored cube $\{(a,b):a\in [q]^n\}$. Formally, for each $b\in [q]^{n'}$, its color under $\chi'$ is the function $f_b:[q]^n\to [r]$, $a\mapsto \chi(a,b)$.
+
+    Since $n'=HJ(r^{q^n},q-1)$, there exists a combinatorial line $L$ in $[q]^{n'}$ with active coordinate set $I'$ such that $L\setminus\{L^+\}$ is monochromatic under $\chi'$. That is, for any $b,b'\in L\setminus \{L^+\}$, we have $\chi'(b)=\chi'(b')$, i.e.\ $f_b=f_{b'}$. Define $\chi''(a):=\chi(a,b)$ for any $b\in L\setminus\{L^+\}$ and all $a\in [q]^n$; this is well-defined and gives an $r$-coloring $\chi''$ on $[q]^n$.
+
+    Since $n=FHJ(r,s-1,q)$, either $[q]^n$ under $\chi''$ contains a monochromatic combinatorial line, or it contains $s-1$ color-focused lines. If the former holds, then we already have a monochromatic combinatorial line in $[q]^N$ under $\chi$ and we are done. We now assume the latter: there exist $s-1$ lines $L_1,\cdots,L_{s-1}$ in $[q]^n$ which are color-focused at some point $f$. Define $L_1',\cdots,L_s'$ in $[q]^N$ as follows:
+    \begin{itemize}
+        \item for $1\leqslant i\leqslant s-1$, let $L_i'$ be the line with first point $(L_i^-,L^-)$ and active coordinates $I_i\cup I'$;
+        \item for $i=s$, let $L_s'$ be the line with first point $(f,L^-)$ and active coordinates $I'$;
+    \end{itemize}
+    where $I_i \subseteq\{1, \ldots, n\}$ is the set of active coordinates for $L_i$ in $[q]^n$, and $I' \subseteq\{n+1, \ldots, n+n'\}$ is the set of active coordinates for $L$ in $[q]^{n'}$.
+
+    It is straightforward to verify that these lines $L_1',\cdots,L_s'$ are color-focused with focus $(f,L^+)$.
+\end{proof}
+
+\section{Tur\'an-type Problems}
+
+\begin{definition}
+    Let $n$ be an integer, and let $H$ be a graph. The \emph{Tur\'an number} $\mathrm{ex}(n,H)$ denotes the maximal number of edges in an $H$-free graph on $n$ vertices. Here $H$-free means $H$ is not a subgraph.
+
+    More generally, define $\mathrm{ex}(n,\{H_1,\cdots,H_k\})$ for all $H_i$ forbidden.
+\end{definition}
+
+\begin{lemma}
+    $\mathrm{ex}(n,\{C_3,C_4,\cdots,C_n\})=n-1$.
+\end{lemma}
+
+\begin{proposition}[Mantel, 1907]
+    $\mathrm{ex}(n,C_3)=\lfloor n^2/4\rfloor$.
+\end{proposition}
+
+\begin{proof}[Proof 1]
+    Let $G=(V,E)$ be $C_3$-free. Define $n=|V|$ and $m=|E|$. For $\{x,y\}\in E$, as $G$ is $C_3$-free, $d(x)+d(y)\leqslant n$. By double-counting walks of length $2$,
+    \[
+        \sum_{x\in V}d(x)^2=\sum_{\{x,y\}\in E}(d(x)+d(y))\leqslant mn.
+    \]
+    By Cauchy--Schwarz and $\sum d(x)=2m$,
+    \[
+        mn\geqslant\sum_{x\in V}d(x)^2\geqslant\frac{\left(\sum d(x)\right)^2}{n}=\frac{4m^2}{n}.
+    \]
+    Hence $m\leqslant n^2/4$.
+\end{proof}
+
+\begin{proof}[Proof 2]
+    Let $A$ be the largest coclique (i.e.\ independent set) of $G$. As $N(x)$ is edge-less, $|A|\geqslant d(x)$ for all $x\in V$. Also, as $A$ is largest, $B:=V\setminus A$ meets every edge. Hence $\sum_{x\in B}d(x)\geqslant |E|$. Therefore
+    \[
+        |E|\leqslant \sum_{x\in B}d(x)\leqslant |B|\cdot |A|\leqslant\left(\frac{|A|+|B|}{2}\right)^2=\frac{n^2}{4}.
+    \]
+\end{proof}
+
+\begin{proof}[Proof 3]
+    For convenience, let $|V|=2n$. By induction, suppose $|V|=2(n+1)$ and $G=(V,E)$ is $C_3$-free. Take $\{x,y\}\in E$; then by the induction hypothesis, the induced subgraph $H$ on $V\setminus\{x,y\}$ has $|E(H)|\leqslant n^2$. Note that $d(x)+d(y)\leqslant 2n+2$, so $|E(G)|\leqslant n^2+2n+1=(n+1)^2$.
+\end{proof}
+
+\begin{theorem}[Tur\'an, 1941]
+    Let $k\geqslant 2$. Then $\mathrm{ex}(n,K_{k+1})=\lfloor(1-\frac{1}{k})\frac{n^2}{2}\rfloor$, and the equality holds if and only if $G$ is the complete $k$-partite graph $K_{\lceil n/k\rceil,\ldots,\lfloor n/k\rfloor}$.
+\end{theorem}
+
+\begin{proof}
+    By induction on $n$. When $n\leqslant k$, the result is trivial. For $k=2$ this is Mantel's theorem.
+
+    Suppose that it holds for $\leqslant n-1$ vertices. Let $G=(V,E)$ with $|V|=n$ and $|E|$ maximal such that $G$ is $K_{k+1}$-free. By maximality, cliques of size $k$ exist. Let $A$ be one such clique, and put $B=V\setminus A$. Then $|E(A)|=\binom{k}{2}$, and by induction
+    \[
+        |E(B)|\leqslant \left(1-\frac{1}{k}\right)\frac{(n-k)^2}{2}=\binom{k}{2}\left(\frac{n-k}{k}\right)^2.
+    \]
+    Also, since each vertex of $B$ can be adjacent to at most $k-1$ vertices of $A$ (otherwise a $K_{k+1}$ would appear), $|E(A,B)|\leqslant (k-1)(n-k)$. Therefore,
+    \[
+        |E|\leqslant |E(A)|+|E(B)|+|E(A,B)|\leqslant \binom{k}{2}+\binom{k}{2}\left(\frac{n-k}{k}\right)^2+(k-1)(n-k)=\left(1-\frac{1}{k}\right)\frac{n^2}{2}.
+    \]
+\end{proof}
+
+\begin{theorem}
+    $\mathrm{ex}(n,\{C_3,C_4\})\leqslant \frac{n\sqrt{n-1}}{2}$.
+\end{theorem}
 
 \chapter{Homework}
 
@@ -2690,20 +2807,20 @@ N(T_i)=\frac{6!}{|\mathrm{Aut}(T_i)|},
 where $\mathrm{Aut}(T_i)$ is the automorphism group of the unlabeled tree $T_i$.
 
 Therefore:
-\begin{align*}
+\begin{alignat*}{2}
 N(T_1) &= \frac{6!}{2}=360,
-&&\text{since }T_1=P_6\text{ has only the reversal symmetry;}\\
+&\quad& \text{($T_1=P_6$: reversal symmetry)}\\
 N(T_2) &= \frac{6!}{5!}=6,
-&&\text{since }T_2=K_{1,5}\text{ allows an arbitrary permutation of its five leaves;}\\
+&& \text{($T_2=K_{1,5}$: permute 5 leaves)}\\
 N(T_3) &= \frac{6!}{3!}=120,
-&&\text{since the three leaves adjacent to the degree-4 vertex may be permuted;}\\
+&& \text{(permute 3 leaves at the degree-4 vertex)}\\
 N(T_4) &= \frac{6!}{2\cdot 2\cdot 2}=90,
-&&\text{swap the two leaves on either side, interchange the two degree-3 vertices;}\\
+&& \text{(swap leaves on each side, swap degree-3 vertices)}\\
 N(T_5) &= \frac{6!}{2}=360,
-&&\text{since the two short branches at the degree-3 vertex may be interchanged;}\\
+&& \text{(swap 2 short branches at the degree-3 vertex)}\\
 N(T_6) &= \frac{6!}{2}=360,
-&&\text{since the two branches of length $2$ may be interchanged.}
-\end{align*}
+&& \text{(swap the two length-$2$ branches)}
+\end{alignat*}
 
 So the numbers of spanning trees in $K_6$ isomorphic to $T_1,T_2,T_3,T_4,T_5,T_6$ are
 \[

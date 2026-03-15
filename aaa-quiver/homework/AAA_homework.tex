@@ -1,0 +1,1162 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{
+    textwidth=6in,
+    top=1in,
+    bottom=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{enumitem}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage[hidelinks]{hyperref}
+
+\title{\textbf{$1^{\underline{st}}$ Part Problem Set for Applied Abstract Algebra} \\ Quivers: Representations and Morphisms}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+%=============================================================================
+% Problem 1
+%=============================================================================
+\item Let $M, M' \in \operatorname{Rep} Q$. Show that the set of morphisms $\operatorname{Hom}(M, M')$ is a $k$-vector space.
+
+\begin{proof}
+Let $ M=(M_i, \phi_\alpha) $ and $ M'=(M_i', \psi_\alpha) $. $\forall f,g \in \operatorname{Hom}(M,M')$ since $ f,g $ are morphisms, for any arrow $ \alpha: i \to j $, we have $ \psi_\alpha f_i = f_j \phi_\alpha $ and $ \psi_\alpha g_i = g_j \phi_\alpha $.
+    \begin{enumerate}
+        \item \textbf{Addition:}
+        \[
+        \psi_\alpha (f+g)_i = \psi_\alpha (f_i + g_i) = \psi_\alpha f_i + \psi_\alpha g_i = f_j \phi_\alpha + g_j \phi_\alpha = (f_j + g_j) \phi_\alpha = (f+g)_j \phi_\alpha.
+        \]
+        Thus $ f+g \in \mathrm{Hom}(M,M') $.
+        \item \textbf{Scalar Multiplication:}
+        \[
+        \psi_\alpha (\lambda f)_i = \psi_\alpha (\lambda f_i) = \lambda (\psi_\alpha f_i) = \lambda (f_j \phi_\alpha) = (\lambda f_j) \phi_\alpha = (\lambda f)_j \phi_\alpha.
+        \]
+        Thus $ \lambda f \in \mathrm{Hom}(M,M') $.
+    \end{enumerate}
+The zero morphism $ 0=(0)_{i \in Q_0} $ clearly satisfies the commutativity condition. The vector space axioms follow from the structure of linear maps between vector spaces.
+\end{proof}
+
+%=============================================================================
+% Problem 2
+%=============================================================================
+\item Let $Q$ be the quiver
+\[
+1 \xrightarrow{\quad} 2 \xleftarrow{\quad} 3
+\]
+and consider the representations
+\[
+M\colon\quad k \xrightarrow{\begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}} k^2 \xleftarrow{\begin{psmallmatrix} 0 \\ 1 \end{psmallmatrix}} k
+\qquad\qquad
+M'\colon\quad k \xrightarrow{\begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}} k^2 \xleftarrow{\begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}} k
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $M$ and $M'$ are not indecomposable.
+    \begin{proof}
+    We exhibit a nontrivial direct sum decomposition for each representation.
+
+    \medskip\noindent\textbf{Decomposition of $M$.}
+    Define subrepresentations
+    \[
+    N_1\colon\quad k \xrightarrow{\begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}} \operatorname{span}(e_1) \xleftarrow{0} 0,
+    \qquad
+    N_2\colon\quad 0 \xrightarrow{0} \operatorname{span}(e_2) \xleftarrow{\begin{psmallmatrix} 0 \\ 1 \end{psmallmatrix}} k.
+    \]
+    At each vertex we have $M(1) = k = N_1(1) \oplus N_2(1)$, $M(2) = k^2 = \operatorname{span}(e_1) \oplus \operatorname{span}(e_2) = N_1(2) \oplus N_2(2)$, and $M(3) = k = N_1(3) \oplus N_2(3)$.
+    The linear maps of $M$ respect this decomposition: the map $\binom{1}{0}\colon k \to k^2$ lands in $\operatorname{span}(e_1) = N_1(2)$, and $\binom{0}{1}\colon k \to k^2$ lands in $\operatorname{span}(e_2) = N_2(2)$.
+    Hence $M = N_1 \oplus N_2 \cong P(1) \oplus P(3)$, so $M$ is not indecomposable.
+
+    \medskip\noindent\textbf{Decomposition of $M'$.}
+    Define subrepresentations
+    \[
+    N_1'\colon\quad k \xrightarrow{1} \operatorname{span}(e_1) \xleftarrow{1} k,
+    \qquad
+    N_2'\colon\quad 0 \xrightarrow{0} \operatorname{span}(e_2) \xleftarrow{0} 0.
+    \]
+    At each vertex: $M'(1) = k = N_1'(1) \oplus N_2'(1)$, $M'(2) = k^2 = \operatorname{span}(e_1) \oplus \operatorname{span}(e_2) = N_1'(2) \oplus N_2'(2)$, and $M'(3) = k = N_1'(3) \oplus N_2'(3)$.
+    Both arrows $\binom{1}{0}\colon M'(1) \to M'(2)$ and $\binom{1}{0}\colon M'(3) \to M'(2)$ land in $\operatorname{span}(e_1) = N_1'(2)$, so the maps respect the decomposition.
+    Hence $M' = N_1' \oplus N_2' \cong I(2) \oplus S(2)$, so $M'$ is not indecomposable.
+    \end{proof}
+    \item Show that $M$ and $M'$ are not isomorphic.
+    \begin{proof}
+    Suppose for contradiction that $f\colon M \to M'$ is an isomorphism, so $f = (f_1, f_2, f_3)$ with $f_i$ invertible. The commutativity conditions give:
+    \[
+    f_2 \begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix} = \begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix} f_1,
+    \qquad
+    f_2 \begin{psmallmatrix} 0 \\ 1 \end{psmallmatrix} = \begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix} f_3.
+    \]
+    Let $f_1 = (a) \in k^*$, $f_3 = (c) \in k^*$, and $f_2 = \begin{psmallmatrix} p & q \\ r & s \end{psmallmatrix} \in \mathrm{GL}_2(k)$.
+
+    From the first equation: $f_2 \binom{1}{0} = \binom{p}{r} = \binom{a}{0}$, so $p = a$ and $r = 0$.
+
+    From the second equation: $f_2 \binom{0}{1} = \binom{q}{s} = \binom{c}{0}$, so $q = c$ and $s = 0$.
+
+    Then $f_2 = \begin{psmallmatrix} a & c \\ 0 & 0 \end{psmallmatrix}$, which has $\det(f_2) = 0$. This contradicts $f_2 \in \mathrm{GL}_2(k)$.
+
+    Therefore $M \not\cong M'$.
+    \end{proof}
+\end{enumerate}
+
+%=============================================================================
+% Problem 3
+%=============================================================================
+\item Let $Q$ be the quiver
+\[
+1 \xrightarrow{\quad} 2 \xleftarrow{\quad} 3
+\]
+and let $M$ be the representation
+\[
+M\colon\quad k^2 \xrightarrow{\begin{psmallmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{psmallmatrix}} k^3 \xleftarrow{\begin{psmallmatrix} 1 \\ 0 \\ 0 \end{psmallmatrix}} k\,.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Write $M$ as a direct sum of the indecomposable representations listed below:
+    \begin{align*}
+        S(1) &\colon\ k \to 0 \leftarrow 0 &
+        S(2) &\colon\ 0 \to k \leftarrow 0 &
+        S(3) &\colon\ 0 \to 0 \leftarrow k \\[6pt]
+        P(1) &\colon\ k \xrightarrow{1} k \leftarrow 0 &
+        I(2) &\colon\ k \xrightarrow{1} k \xleftarrow{1} k &
+        P(3) &\colon\ 0 \to k \xleftarrow{1} k
+    \end{align*}
+    \begin{proof}
+    We claim that
+    \[
+    M \cong I(2) \oplus P(1) \oplus S(2).
+    \]
+    
+    The dimension vectors of the summands are
+    \[
+    \underline{\dim}\,I(2) = (1,1,1),\qquad \underline{\dim}\,P(1) = (1,1,0),\qquad \underline{\dim}\,S(2) = (0,1,0),
+    \]
+    and their sum is
+    \[
+    (1,1,1)+(1,1,0)+(0,1,0) = (2,3,1) = \underline{\dim}\,M.
+    \]
+    
+    We now verify that the maps of $I(2)\oplus P(1)\oplus S(2)$ agree with those of $M$. Order the components at each vertex as:
+    \[
+    \text{Vertex }1\colon\; I(2)(1)\oplus P(1)(1) = k\oplus k = k^2,
+    \]
+    \[
+    \text{Vertex }2\colon\; I(2)(2)\oplus P(1)(2)\oplus S(2)(2) = k\oplus k\oplus k = k^3,
+    \]
+    \[
+    \text{Vertex }3\colon\; I(2)(3) = k.
+    \]
+    
+    \medskip\noindent\textbf{Map at arrow $1\to 2$.}
+    In the direct sum, the map $k^2 \to k^3$ sends
+    \[
+    (a,b) \longmapsto \bigl(I(2)(\alpha)(a),\; P(1)(\alpha)(b),\; 0\bigr) = (a,\,b,\,0),
+    \]
+    since both $I(2)$ and $P(1)$ have identity maps at this arrow, and $S(2)(1)=0$ contributes nothing. In matrix form this gives
+    \[
+    \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix},
+    \]
+    which agrees with the map of $M$.
+    
+    \medskip\noindent\textbf{Map at arrow $3\to 2$.}
+    In the direct sum, the map $k \to k^3$ sends
+    \[
+    c \longmapsto \bigl(I(2)(\beta)(c),\; 0,\; 0\bigr) = (c,\,0,\,0),
+    \]
+    since $I(2)$ has identity map at this arrow, and $P(1)(3)=S(2)(3)=0$ contribute nothing. In matrix form this gives
+    \[
+    \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},
+    \]
+    which agrees with the map of $M$. Therefore $M \cong I(2) \oplus P(1) \oplus S(2)$.
+    \end{proof}
+    \item Show that there is a non-split short exact sequence
+    \[
+        0 \longrightarrow X \longrightarrow Y \longrightarrow Z \longrightarrow 0\,.
+    \]
+    \begin{proof}
+    Consider the representations
+    \[
+    S(2) = (0,\,k,\,0),\qquad P(1) = (k,\,k,\,0)\ \text{with map } \mathrm{id}_k,\qquad S(1) = (k,\,0,\,0).
+    \]
+    
+    Define morphisms $\iota\colon S(2)\to P(1)$ and $p\colon P(1)\to S(1)$ by
+    \[
+    \iota = (\iota_1,\,\iota_2,\,\iota_3) = (0,\;\mathrm{id}_k,\;0),\qquad p = (p_1,\,p_2,\,p_3) = (\mathrm{id}_k,\;0,\;0).
+    \]
+    
+    \medskip\noindent\textbf{Morphism verification.}
+    The only nontrivial arrow is $\alpha\colon 1\to 2$ with $P(1)(\alpha)=\mathrm{id}_k$. For~$\iota$, the commutativity diagram at $\alpha$ is
+    \[
+    \begin{tikzcd}
+    S(2)(1) = 0 \arrow[r, "0"] \arrow[d, "\iota_1=0"'] & S(2)(2) = k \arrow[d, "\iota_2=\mathrm{id}_k"] \\
+    P(1)(1) = k \arrow[r, "\mathrm{id}_k"'] & P(1)(2) = k
+    \end{tikzcd}
+    \]
+    Both compositions give $0$, so the diagram commutes. For~$p$:
+    \[
+    \begin{tikzcd}
+    P(1)(1) = k \arrow[r, "\mathrm{id}_k"] \arrow[d, "p_1=\mathrm{id}_k"'] & P(1)(2) = k \arrow[d, "p_2=0"] \\
+    S(1)(1) = k \arrow[r, "0"'] & S(1)(2) = 0
+    \end{tikzcd}
+    \]
+    Both compositions give $0$, so the diagram commutes.
+    
+    \medskip\noindent\textbf{Exactness.}
+    
+    $\iota$ is injective: the only nontrivial component is $\iota_2=\mathrm{id}_k$, which is injective.
+    
+    $p$ is surjective: $p_1=\mathrm{id}_k$ is surjective, and $p_2\colon k\to 0$, $p_3\colon 0\to 0$ are trivially surjective.
+    
+    Exactness at $P(1)$: we verify $\ker p = \operatorname{im}\iota$ at each vertex.
+    \begin{itemize}
+    \item Vertex~$1$: $\ker(\mathrm{id}_k)=0=\operatorname{im}(0)$.
+    \item Vertex~$2$: $\ker(0\colon k\to 0)=k=\operatorname{im}(\mathrm{id}_k)$.
+    \item Vertex~$3$: both are $0$.
+    \end{itemize}
+    
+    Hence
+    \[
+    0 \longrightarrow S(2) \xrightarrow{\;\iota\;} P(1) \xrightarrow{\;p\;} S(1) \longrightarrow 0
+    \]
+    is a short exact sequence.
+    
+    \medskip\noindent\textbf{Non-split.}
+    If the sequence splits, then
+    \[
+    P(1) \cong S(1) \oplus S(2).
+    \]
+    However, the direct sum $S(1)\oplus S(2) = (k,\,k,\,0)$ has map $0\oplus 0 = 0$ at arrow $1\to 2$, while $P(1)$ has map $\mathrm{id}_k\neq 0$. This is a contradiction, so the sequence does not split.
+    \end{proof}
+\end{enumerate}
+
+%=============================================================================
+% Problem 4
+%=============================================================================
+\item Find all indecomposable representations up to isomorphism of the quiver $1 \rightarrow 2$.
+
+\begin{proof}
+The indecomposable representations of $Q\colon 1\to 2$ are, up to isomorphism:
+\[
+S(1)\colon\ k \xrightarrow{0} 0,\qquad S(2)\colon\ 0 \xrightarrow{0} k,\qquad P(1)\colon\ k \xrightarrow{\mathrm{id}} k.
+\]
+
+\medskip\noindent\textbf{Step 1: Indecomposability.}
+
+$S(1)$ and $S(2)$ have dimension vectors $(1,0)$ and $(0,1)$ respectively. Since no component can be split further, these are clearly indecomposable.
+
+For $P(1)$ with dimension vector $(1,1)$, suppose
+\[
+P(1) = N_1 \oplus N_2
+\]
+is a nontrivial decomposition. Then we must have
+\[
+\underline{\dim}\,N_1 = (1,0),\qquad \underline{\dim}\,N_2 = (0,1)
+\]
+(or vice versa). In this decomposition, the map $\phi\colon P(1)(1)=k \to P(1)(2)=k$ would decompose as
+\[
+\phi = \phi|_{N_1} \oplus \phi|_{N_2} = 0 \oplus 0 = 0,
+\]
+since $\phi|_{N_1}\colon k \to 0$ and $\phi|_{N_2}\colon 0 \to k$ are both the zero map. This contradicts $\phi=\mathrm{id}_k\neq 0$. Hence $P(1)$ is indecomposable.
+
+\medskip\noindent\textbf{Step 2: Completeness.}
+
+Let
+\[
+M = (V_1,\,V_2,\,\phi)
+\]
+be any representation with $\phi\colon V_1\to V_2$. Set
+\[
+n_1 = \dim V_1,\qquad n_2 = \dim V_2,\qquad r = \operatorname{rank}(\phi).
+\]
+
+Choose a basis $\{e_1,\ldots,e_{n_1}\}$ of $V_1$ such that $\{e_1,\ldots,e_r\}$ maps to linearly independent vectors in $V_2$ and $\{e_{r+1},\ldots,e_{n_1}\}$ spans $\ker\phi$. Let
+\[
+f_i = \phi(e_i) \quad\text{for } 1\leq i\leq r,
+\]
+and extend $\{f_1,\ldots,f_r\}$ to a basis $\{f_1,\ldots,f_{n_2}\}$ of $V_2$. In these bases,
+\[
+\phi = \begin{pmatrix} I_r & 0 \\ 0 & 0 \end{pmatrix}.
+\]
+
+Then $M$ decomposes as:
+\begin{itemize}
+\item $r$ copies of $P(1)$: the $i$-th copy is spanned by $e_i$ at vertex~$1$ and $f_i$ at vertex~$2$, with $\phi(e_i)=f_i$, for $1\leq i\leq r$.
+\item $(n_1-r)$ copies of $S(1)$: spanned by $e_{r+j}$ at vertex~$1$, with $\phi(e_{r+j})=0$.
+\item $(n_2-r)$ copies of $S(2)$: spanned by $f_{r+l}$ at vertex~$2$.
+\end{itemize}
+
+Hence
+\[
+M \cong P(1)^{\oplus r} \oplus S(1)^{\oplus(n_1-r)} \oplus S(2)^{\oplus(n_2-r)}.
+\]
+Since every representation decomposes into copies of $S(1)$, $S(2)$, and $P(1)$, these are all the indecomposable representations up to isomorphism.
+\end{proof}
+
+%=============================================================================
+% Problem 5
+%=============================================================================
+\item Let $Q$ be the quiver
+\[
+    \begin{tikzcd}
+        1 \arrow[rd, "\alpha"] &   &                       \\
+                               & 3 & 4 \arrow[l, "\gamma"] \\
+        2 \arrow[ru, "\beta"]  &   &                      
+        \end{tikzcd}
+\]
+and consider the following representations
+\[
+M\colon\quad
+\begin{tikzcd}
+    k \arrow[rd, "\begin{bmatrix} 1 \\ 0 \end{bmatrix}"] &     &                                                     \\
+                                                         & k^2 & k \arrow[l, "\begin{bmatrix} 1 \\ 1 \end{bmatrix}"] \\
+    k \arrow[ru, "\begin{bmatrix} 0 \\ 1 \end{bmatrix}"] &     &                                                    
+    \end{tikzcd}
+\]
+\[
+M'\colon\quad
+\begin{tikzcd}
+    0 \arrow[rd] &   &             \\
+                 & k & 0 \arrow[l] \\
+    0 \arrow[ru] &   &            
+    \end{tikzcd}
+\]  
+\[
+M''\colon\quad
+\begin{tikzcd}
+    k \arrow[rd, "1"] &   &                  \\
+                      & k & k \arrow[l, "1"] \\
+    k \arrow[ru, "1"] &   &                 
+    \end{tikzcd}
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Show that
+    \[
+        \operatorname{Hom}(M, M') = 0, \qquad \operatorname{Hom}(M', M) \cong k^2
+    \]
+    \[
+        \operatorname{Hom}(M, M'') \cong k^2, \qquad \operatorname{Hom}(M'', M) = 0.
+    \]
+    \begin{proof}
+    The quiver $Q$ has arrows $\alpha\colon 1\to 3$, $\beta\colon 2\to 3$, $\gamma\colon 4\to 3$. A morphism $f\colon A\to B$ consists of linear maps $(f_1,f_2,f_3,f_4)$ satisfying
+    \[
+    f_3\circ A(\delta) = B(\delta)\circ f_s
+    \]
+    for each arrow $\delta\colon s\to 3$.
+
+    \medskip\noindent$\boldsymbol{\operatorname{Hom}(M,M')=0.}$
+    
+    A morphism $f\colon M\to M'$ has components
+    \[
+    f_1\colon k\to 0,\qquad f_2\colon k\to 0,\qquad f_3\colon k^2\to k,\qquad f_4\colon k\to 0.
+    \]
+    Since the codomain is $0$, we have $f_1=f_2=f_4=0$. The commutativity condition at $\alpha$ gives
+    \[
+    \begin{tikzcd}
+    M(1) = k \arrow[r, "\binom{1}{0}"] \arrow[d, "f_1=0"'] & M(3) = k^2 \arrow[d, "f_3"] \\
+    M'(1) = 0 \arrow[r, "0"'] & M'(3) = k
+    \end{tikzcd}
+    \qquad\Longrightarrow\qquad
+    f_3\begin{pmatrix}1\\0\end{pmatrix} = 0.
+    \]
+    Similarly, the commutativity condition at $\beta$ gives
+    \[
+    f_3\begin{pmatrix}0\\1\end{pmatrix} = 0.
+    \]
+    Since $\binom{1}{0}$ and $\binom{0}{1}$ form a basis of $k^2$, we conclude $f_3=0$. Therefore $f=0$.
+
+    \medskip\noindent$\boldsymbol{\operatorname{Hom}(M',M)\cong k^2.}$
+    
+    A morphism $f\colon M'\to M$ has components
+    \[
+    f_1\colon 0\to k,\qquad f_2\colon 0\to k,\qquad f_3\colon k\to k^2,\qquad f_4\colon 0\to k.
+    \]
+    Since the domains of $f_1,f_2,f_4$ are $0$, these maps are all zero. For each arrow $\delta\colon s\to 3$, the commutativity condition becomes
+    \[
+    f_3 \circ M'(\delta) = M(\delta)\circ f_s.
+    \]
+    Since $M'(s)=0$ for $s=1,2,4$, both $M'(\delta)$ and $f_s$ are the zero map, so the condition is automatically satisfied. Hence $f$ is completely determined by the arbitrary linear map
+    \[
+    f_3 \in \operatorname{Hom}_k(k,\,k^2) \cong k^2.
+    \]
+
+    \medskip\noindent$\boldsymbol{\operatorname{Hom}(M,M'')\cong k^2.}$
+    
+    A morphism $f\colon M\to M''$ has components
+    \[
+    f_1 = a\colon k\to k,\quad f_2 = b\colon k\to k,\quad f_3 = \begin{pmatrix}c&d\end{pmatrix}\colon k^2\to k,\quad f_4 = e\colon k\to k,
+    \]
+    where $a,b,c,d,e\in k$. The commutativity conditions give:
+    
+    At $\alpha\colon 1\to 3$:
+    \[
+    f_3\circ M(\alpha) = M''(\alpha)\circ f_1 \quad\Longrightarrow\quad \begin{pmatrix}c&d\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix} = 1\cdot a \quad\Longrightarrow\quad c = a.
+    \]
+    
+    At $\beta\colon 2\to 3$:
+    \[
+    f_3\circ M(\beta) = M''(\beta)\circ f_2 \quad\Longrightarrow\quad \begin{pmatrix}c&d\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix} = 1\cdot b \quad\Longrightarrow\quad d = b.
+    \]
+    
+    At $\gamma\colon 4\to 3$:
+    \[
+    f_3\circ M(\gamma) = M''(\gamma)\circ f_4 \quad\Longrightarrow\quad \begin{pmatrix}c&d\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = 1\cdot e \quad\Longrightarrow\quad e = a+b.
+    \]
+    
+    Hence every morphism $f$ is determined by the pair $(a,b)\in k^2$, with $c=a$, $d=b$, $e=a+b$. Therefore
+    \[
+    \operatorname{Hom}(M,M'') \cong k^2.
+    \]
+
+    \medskip\noindent$\boldsymbol{\operatorname{Hom}(M'',M)=0.}$
+    
+    A morphism $f\colon M''\to M$ has components
+    \[
+    f_1 = a\colon k\to k,\quad f_2 = b\colon k\to k,\quad f_3 = \begin{pmatrix}c\\d\end{pmatrix}\colon k\to k^2,\quad f_4 = e\colon k\to k.
+    \]
+    
+    At $\alpha\colon 1\to 3$:
+    \[
+    M(\alpha)\circ f_1 = f_3\circ M''(\alpha) \quad\Longrightarrow\quad \begin{pmatrix}1\\0\end{pmatrix}a = \begin{pmatrix}c\\d\end{pmatrix}\cdot 1 \quad\Longrightarrow\quad c = a,\; d = 0.
+    \]
+    
+    At $\beta\colon 2\to 3$:
+    \[
+    M(\beta)\circ f_2 = f_3\circ M''(\beta) \quad\Longrightarrow\quad \begin{pmatrix}0\\1\end{pmatrix}b = \begin{pmatrix}c\\d\end{pmatrix} = \begin{pmatrix}a\\0\end{pmatrix} \quad\Longrightarrow\quad a = 0,\; b = 0.
+    \]
+    
+    At $\gamma\colon 4\to 3$:
+    \[
+    M(\gamma)\circ f_4 = f_3\circ M''(\gamma) \quad\Longrightarrow\quad \begin{pmatrix}1\\1\end{pmatrix}e = \begin{pmatrix}a\\0\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix} \quad\Longrightarrow\quad e = 0.
+    \]
+    
+    All components vanish, so $\operatorname{Hom}(M'',M) = 0$.
+    \end{proof}
+    \item Show that $M$ is not isomorphic to $M' \oplus M''$.
+    \begin{proof}
+    Suppose for contradiction that
+    \[
+    M \cong M' \oplus M''.
+    \]
+    Then by the additivity of $\operatorname{Hom}$,
+    \[
+    \operatorname{Hom}(M,\,M') \cong \operatorname{Hom}(M'\oplus M'',\, M') \cong \operatorname{Hom}(M',\,M') \oplus \operatorname{Hom}(M'',\,M').
+    \]
+    Since $M'\neq 0$, the identity morphism $\mathrm{id}_{M'}$ is a nonzero element of $\operatorname{Hom}(M',M')$. Hence
+    \[
+    \operatorname{Hom}(M',\,M') \neq 0,
+    \]
+    which implies
+    \[
+    \operatorname{Hom}(M,\,M') \neq 0.
+    \]
+    This contradicts part~(a), where we showed $\operatorname{Hom}(M,M')=0$. Therefore
+    \[
+    M \not\cong M' \oplus M''.
+    \]
+    \end{proof}
+    \item Show that there is a short exact sequence:
+    \[
+        0 \longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0\,.
+    \]
+    \begin{proof}
+    We construct explicit morphisms $\iota\colon M'\to M$ and $p\colon M\to M''$ such that
+    \[
+    0 \longrightarrow M' \xrightarrow{\;\iota\;} M \xrightarrow{\;p\;} M'' \longrightarrow 0
+    \]
+    is exact.
+    
+    \medskip\noindent\textbf{Definition of $\iota\colon M'\to M$.}
+    Since $M'(1)=M'(2)=M'(4)=0$, we set
+    \[
+    \iota_1 = 0\colon 0\to k,\qquad \iota_2 = 0\colon 0\to k,\qquad \iota_4 = 0\colon 0\to k,
+    \]
+    and define
+    \[
+    \iota_3 = \begin{pmatrix}1\\-1\end{pmatrix}\colon k\to k^2.
+    \]
+    Since all maps of $M'$ are zero, for each arrow $\delta\colon s\to 3$, the commutativity condition
+    \[
+    \iota_3 \circ M'(\delta) = M(\delta)\circ \iota_s
+    \]
+    becomes $0 = 0$, which is automatic. Moreover, $\iota_3$ is injective (since $\binom{1}{-1}\neq 0$), so $\iota$ is injective.
+    
+    \medskip\noindent\textbf{Definition of $p\colon M\to M''$.}
+    Define
+    \[
+    p_1 = 1\colon k\to k,\qquad p_2 = 1\colon k\to k,\qquad p_3 = \begin{pmatrix}1&1\end{pmatrix}\colon k^2\to k,\qquad p_4 = 2\colon k\to k.
+    \]
+    We verify commutativity at each arrow.
+    
+    At $\alpha\colon 1\to 3$:
+    \[
+    p_3\circ M(\alpha) = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix} = 1 = 1\cdot 1 = M''(\alpha)\circ p_1.
+    \]
+    
+    At $\beta\colon 2\to 3$:
+    \[
+    p_3\circ M(\beta) = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix} = 1 = 1\cdot 1 = M''(\beta)\circ p_2.
+    \]
+    
+    At $\gamma\colon 4\to 3$:
+    \[
+    p_3\circ M(\gamma) = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = 2 = 1\cdot 2 = M''(\gamma)\circ p_4.
+    \]
+    Each $p_i$ is a nonzero scalar, so $p$ is surjective at every vertex.
+    
+    \medskip\noindent\textbf{Exactness at $M$.}
+    
+    First, $p\circ\iota = 0$: at vertex~$3$,
+    \[
+    p_3\circ\iota_3 = \begin{pmatrix}1&1\end{pmatrix}\begin{pmatrix}1\\-1\end{pmatrix} = 1+(-1) = 0.
+    \]
+    At other vertices, $\iota_i = 0$, so $(p\circ\iota)_i = p_i\circ 0 = 0$.
+    
+    Next, we verify $\ker p = \operatorname{im}\iota$ at each vertex:
+    \begin{itemize}
+    \item Vertices $1,2,4$: each $p_i$ is a nonzero scalar (hence injective), so $\ker p_i = 0$. Also $\iota_i = 0$, so $\operatorname{im}\iota_i = 0$.
+    \item Vertex~$3$:
+    \[
+    \ker p_3 = \left\{(x,y)\in k^2 : x+y = 0\right\} = \left\langle\begin{pmatrix}1\\-1\end{pmatrix}\right\rangle = \operatorname{im}\iota_3.
+    \]
+    \end{itemize}
+    
+    Therefore
+    \[
+    0 \longrightarrow M' \xrightarrow{\;\iota\;} M \xrightarrow{\;p\;} M'' \longrightarrow 0
+    \]
+    is a short exact sequence.
+    \end{proof}
+\end{enumerate}
+
+%=============================================================================
+% Problem 6
+%=============================================================================
+\item Let $Q$ be the quiver
+\[
+\begin{tikzcd}
+1 & 2 \arrow[l, "\alpha"', shift right] \arrow[l, "\beta", shift left]
+\end{tikzcd}
+\]
+For any $\lambda \in k \cup \{\infty\}$, define $M_\lambda$ to be the representation:
+\[
+M_\lambda\colon\quad
+\begin{tikzcd}
+k & k \arrow[l, "\lambda"', shift right] \arrow[l, "1", shift left]
+\end{tikzcd}
+\quad \text{if } \lambda \in k;
+\qquad\qquad
+M_\infty\colon\quad
+\begin{tikzcd}
+k & k \arrow[l, "1"', shift right] \arrow[l, "0", shift left]
+\end{tikzcd}
+\quad \text{if } \lambda = \infty.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Show that each $M_\lambda$ is indecomposable.
+    \begin{proof}
+    Each $M_\lambda$ has dimension vector
+    \[
+    \underline{\dim}\,M_\lambda = (1,1).
+    \]
+    Suppose for contradiction that
+    \[
+    M_\lambda = N_1 \oplus N_2
+    \]
+    is a nontrivial decomposition (both $N_1,N_2\neq 0$). Since $\underline{\dim}\,N_1 + \underline{\dim}\,N_2 = (1,1)$, the only possibility is
+    \[
+    \underline{\dim}\,N_1 = (1,0),\qquad \underline{\dim}\,N_2 = (0,1)
+    \]
+    (or vice versa). The summand $N_2$ with $N_2(1)=0$ and $N_2(2)=k$ must be a subrepresentation. Since both arrows go from vertex~$2$ to vertex~$1$, this requires
+    \[
+    M_\lambda(\alpha)(k) \subseteq N_2(1) = 0 \qquad\text{and}\qquad M_\lambda(\beta)(k) \subseteq N_2(1) = 0.
+    \]
+
+    For $\lambda\in k$: the map $M_\lambda(\beta)=1\colon k\to k$ is nonzero, so
+    \[
+    M_\lambda(\beta)(k) = k \neq 0.
+    \]
+    This is a contradiction.
+
+    For $\lambda=\infty$: the map $M_\infty(\alpha)=1\colon k\to k$ is nonzero, so
+    \[
+    M_\infty(\alpha)(k) = k \neq 0.
+    \]
+    This is again a contradiction.
+
+    In both cases, no such subrepresentation $N_2$ exists, so $M_\lambda$ is indecomposable.
+    \end{proof}
+    \item Show that $M_\lambda \cong M_\mu$ if and only if $\lambda = \mu$. In particular, the number of indecomposable representations depends on the choice of the field $k$.
+    \begin{proof}
+    ($\Leftarrow$) If $\lambda=\mu$, the identity maps $f_1=f_2=\mathrm{id}_k$ give an isomorphism.
+
+    \medskip
+    ($\Rightarrow$) Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be an isomorphism, with
+    \[
+    f_1 = a\in k^*,\qquad f_2 = b\in k^*.
+    \]
+    The commutativity conditions for the two arrows $\alpha,\beta\colon 2\to 1$ are
+    \[
+    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    \]
+
+    \textbf{Case 1:} $\lambda,\mu\in k$. Then $M_\lambda(\alpha)=\lambda$, $M_\lambda(\beta)=1$, $M_\mu(\alpha)=\mu$, $M_\mu(\beta)=1$. The conditions become
+    \[
+    a\lambda = \mu b,\qquad a\cdot 1 = 1\cdot b.
+    \]
+    From the second equation, $a=b$. Substituting into the first:
+    \[
+    a\lambda = \mu a.
+    \]
+    Since $a\neq 0$, we can divide both sides by $a$ to get $\lambda=\mu$.
+
+    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$ and $M_\infty(\beta)=0$. The commutativity at $\beta$ gives
+    \[
+    a\cdot 1 = 0\cdot b = 0,
+    \]
+    so $a=0$, contradicting $a\in k^*$. Hence no isomorphism exists.
+
+    The case $\lambda=\infty$, $\mu\in k$ is symmetric.
+
+    \textbf{Case 3:} $\lambda=\mu=\infty$. Trivially $\lambda=\mu$.
+
+    \medskip
+    In all cases, $M_\lambda\cong M_\mu$ implies $\lambda=\mu$. Since
+    \[
+    |k\cup\{\infty\}| = |k|+1,
+    \]
+    the number of pairwise non-isomorphic indecomposable representations of this form depends on the cardinality of the field $k$.
+    \end{proof}
+    \item Show that $\operatorname{Hom}(M_\lambda, M_\mu) = 0$ if $\lambda \neq \mu$.
+    \begin{proof}
+    Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be a morphism, with $f_1=a$ and $f_2=b$ (scalars). The commutativity conditions are
+    \[
+    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    \]
+
+    \textbf{Case 1:} $\lambda,\mu\in k$. The conditions become
+    \[
+    a\lambda = \mu b,\qquad a = b.
+    \]
+    Substituting $b=a$ into the first equation:
+    \[
+    a\lambda = \mu a \quad\Longrightarrow\quad a(\lambda-\mu) = 0.
+    \]
+    Since $\lambda\neq\mu$, we have $\lambda-\mu\neq 0$, so $a=0$. Then $b=a=0$.
+
+    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$, $M_\infty(\beta)=0$. The condition at $\beta$ gives
+    \[
+    a\cdot 1 = 0\cdot b = 0,
+    \]
+    so $a=0$. The condition at $\alpha$ then gives
+    \[
+    0\cdot\lambda = 1\cdot b \quad\Longrightarrow\quad b = 0.
+    \]
+
+    \textbf{Case 3:} $\lambda=\infty$, $\mu\in k$. Then $M_\infty(\beta)=0$, $M_\mu(\beta)=1$. The condition at $\beta$ gives
+    \[
+    a\cdot 0 = 1\cdot b \quad\Longrightarrow\quad b = 0.
+    \]
+    The condition at $\alpha$ gives
+    \[
+    a\cdot 1 = \mu\cdot 0 = 0 \quad\Longrightarrow\quad a = 0.
+    \]
+
+    In every case, $f_1=f_2=0$, so $f=0$. Therefore $\operatorname{Hom}(M_\lambda,M_\mu) = 0$.
+    \end{proof}
+    \item Show that for each $\lambda$ there is a short exact sequence
+    \[
+        0 \longrightarrow S(1) \longrightarrow M_\lambda \longrightarrow S(2) \longrightarrow 0\,,
+    \]
+    where $S(1)$ and $S(2)$ are the representations
+    \[
+        S(1)\colon\quad
+        \begin{tikzcd}
+        k & 0 \arrow[l, shift right] \arrow[l, shift left]
+        \end{tikzcd}
+        \qquad\qquad
+        S(2)\colon\quad
+        \begin{tikzcd}
+        0 & k \arrow[l, shift right] \arrow[l, shift left]
+        \end{tikzcd}
+    \]
+    \begin{proof}
+    Define $\iota\colon S(1)\to M_\lambda$ and $p\colon M_\lambda\to S(2)$ by
+    \[
+    \iota_1 = \mathrm{id}_k\colon k\to k,\qquad \iota_2 = 0\colon 0\to k,
+    \]
+    \[
+    p_1 = 0\colon k\to 0,\qquad p_2 = \mathrm{id}_k\colon k\to k.
+    \]
+    
+    \medskip\noindent\textbf{Morphism verification.}
+    Both arrows $\alpha,\beta$ go from vertex~$2$ to vertex~$1$. For $\iota$, the commutativity diagram at each arrow $\delta\in\{\alpha,\beta\}$ is
+    \[
+    \begin{tikzcd}
+    S(1)(2) = 0 \arrow[r, "0"] \arrow[d, "\iota_2=0"'] & S(1)(1) = k \arrow[d, "\iota_1=\mathrm{id}_k"] \\
+    M_\lambda(2) = k \arrow[r, "M_\lambda(\delta)"'] & M_\lambda(1) = k
+    \end{tikzcd}
+    \]
+    Both compositions give $0$, so the diagram commutes.
+    
+    For $p$, the commutativity diagram at each arrow $\delta$ is
+    \[
+    \begin{tikzcd}
+    M_\lambda(2) = k \arrow[r, "M_\lambda(\delta)"] \arrow[d, "p_2=\mathrm{id}_k"'] & M_\lambda(1) = k \arrow[d, "p_1=0"] \\
+    S(2)(2) = k \arrow[r, "0"'] & S(2)(1) = 0
+    \end{tikzcd}
+    \]
+    Both compositions give $0$, so the diagram commutes.
+    
+    \medskip\noindent\textbf{Exactness.}
+    
+    $\iota$ is injective: $\iota_1=\mathrm{id}_k$ is injective.
+    
+    $p$ is surjective: $p_2=\mathrm{id}_k$ is surjective.
+    
+    Exactness at $M_\lambda$: we verify $\ker p = \operatorname{im}\iota$ at each vertex.
+    \begin{itemize}
+    \item Vertex~$1$:
+    \[
+    \ker(p_1\colon k\to 0) = k = \operatorname{im}(\iota_1) = \operatorname{im}(\mathrm{id}_k) = k.
+    \]
+    \item Vertex~$2$:
+    \[
+    \ker(p_2) = \ker(\mathrm{id}_k) = 0 = \operatorname{im}(\iota_2) = \operatorname{im}(0) = 0.
+    \]
+    \end{itemize}
+    
+    Hence
+    \[
+    0 \longrightarrow S(1) \xrightarrow{\;\iota\;} M_\lambda \xrightarrow{\;p\;} S(2) \longrightarrow 0
+    \]
+    is a short exact sequence.
+    \end{proof}
+\end{enumerate}
+
+%=============================================================================
+% Problem 7
+%=============================================================================
+\item Let $f \colon M \to N$ be a morphism of representations. Prove that the definition of $\operatorname{coker} f$ is equivalent to the one defined in classroom through universal property (otherwise, see Remark~1.6 in Schiffler's book).
+
+\begin{proof}
+    Let
+    \[
+    f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
+    \]
+    be a morphism of representations. For each vertex $i$, define
+    \[
+    H_i:=N_i/f_i(M_i).
+    \]
+    For each arrow $\alpha:i\to j$, define
+    \[
+    \chi_\alpha\bigl(n_i+f_i(M_i)\bigr):=\psi_\alpha(n_i)+f_j(M_j).
+    \]
+    
+    Hence
+    \[
+    H=(H_i,\chi_\alpha)
+    \]
+    is a representation.
+    
+    Now let
+    \[
+    g=(g_i):N\to H
+    \]
+    be the natural quotient morphism, where
+    \[
+    g_i:N_i\to N_i/f_i(M_i),\qquad g_i(n_i)=n_i+f_i(M_i).
+    \]
+    Then for every vertex $i$ and every $m_i\in M_i$,
+    \[
+    (g_i\circ f_i)(m_i)=f_i(m_i)+f_i(M_i)=0.
+    \]
+    Thus
+    \[
+    g\circ f=0.
+    \]
+    
+    We now prove the universal property. Let
+    \[
+    h=(h_i):N\to Y=(Y_i,\eta_\alpha)
+    \]
+    be a morphism such that
+    \[
+    h\circ f=0.
+    \]
+    Then for each vertex $i$,
+    \[
+    h_i\circ f_i=0.
+    \]
+    Hence $h_i$ vanishes on $f_i(M_i)$, so it factors uniquely through the quotient
+    $N_i/f_i(M_i)$. Therefore there exists a unique linear map
+    \[
+    u_i:H_i=N_i/f_i(M_i)\to Y_i
+    \]
+    such that
+    \[
+    u_i(n_i+f_i(M_i)):=h_i(n_i).
+    \]
+    This is well-defined because if
+    \[
+    n_i+f_i(M_i)=n_i'+f_i(M_i),
+    \]
+    then $n_i-n_i'=f_i(m_i)$ for some $m_i\in M_i$, and hence
+    \[
+    h_i(n_i)-h_i(n_i')=h_i(f_i(m_i))=0.
+    \]
+    
+    By construction,
+    \[
+    u_i\circ g_i=h_i
+    \]
+    for every vertex $i$.
+    
+    It remains to check that $u=(u_i):H\to Y$ is a morphism of representations.
+    Let $\alpha:i\to j$ be an arrow and let $n_i+f_i(M_i)\in H_i$. Then
+    \begin{align*}
+    \eta_\alpha\bigl(u_i(n_i+f_i(M_i))\bigr)
+    &=\eta_\alpha(h_i(n_i))
+    =h_j(\psi_\alpha(n_i))
+    =u_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)\\
+    &=u_j\bigl(\chi_\alpha(n_i+f_i(M_i))\bigr).
+    \end{align*}
+    Therefore
+    \[
+    \eta_\alpha\circ u_i=u_j\circ \chi_\alpha,
+    \]
+    so $u$ is a morphism of representations.
+    
+    Finally, uniqueness is clear: if
+    \[
+    u'=(u_i'):H\to Y
+    \]
+    also satisfies
+    \[
+    u'\circ g=h,
+    \]
+    then for each $i$,
+    \[
+    u_i'(n_i+f_i(M_i))
+    =u_i'(g_i(n_i))
+    =h_i(n_i)
+    =u_i(n_i+f_i(M_i)).
+    \]
+    Thus $u_i'=u_i$ for all $i$, so $u'=u$.
+    
+    Therefore the quotient representation
+    \[
+    \bigl(N_i/f_i(M_i),\chi_\alpha\bigr)
+    \]
+    with the natural projection $g:N\to H$ satisfies the universal property of the cokernel.
+  
+        On the other hand, suppose
+        \[
+        g=(g_i):N=(N_i,\psi_\alpha)\to H=(H_i,\chi_\alpha)
+        \]
+        is a cokernel of
+        \[
+        f=(f_i):M=(M_i,\varphi_\alpha)\to N=(N_i,\psi_\alpha)
+        \]
+        in the sense of the universal property.
+        
+        Let
+        \[
+        C:=\bigl(N_i/f_i(M_i),\ \overline{\psi}_\alpha\bigr)
+        \]
+        be the pointwise cokernel representation, where
+        \[
+        \overline{\psi}_\alpha(n_i+f_i(M_i))
+        :=\psi_\alpha(n_i)+f_j(M_j).
+        \]
+        Let
+        \[
+        \pi=(\pi_i):N\to C
+        \]
+        be the natural quotient morphism. As shown above,
+        \[
+        \pi\circ f=0.
+        \]
+        
+        Since $g:N\to H$ is a cokernel of $f$, applying its universal property to the morphism
+        \[
+        \pi:N\to C
+        \]
+        with $\pi\circ f=0$, there exists a unique morphism
+        \[
+        a:H\to C
+        \]
+        such that
+        \[
+        a\circ g=\pi.
+        \]
+        
+        On the other hand, since $g\circ f=0$, for each vertex $i$ we have
+        \[
+        g_i\circ f_i=0.
+        \]
+        Thus $g_i$ vanishes on $f_i(M_i)$, so it factors uniquely through the quotient
+        \[
+        N_i/f_i(M_i).
+        \]
+        Hence for each $i$ there exists a unique linear map
+        \[
+        b_i:C_i=N_i/f_i(M_i)\to H_i
+        \]
+        given by
+        \[
+        b_i(n_i+f_i(M_i)):=g_i(n_i).
+        \]
+        These maps assemble into a morphism
+        \[
+        b:C\to H,
+        \]
+        because for any arrow $\alpha:i\to j$,
+        \[
+        \chi_\alpha\bigl(b_i(n_i+f_i(M_i))\bigr)
+        =\chi_\alpha(g_i(n_i))
+        =g_j(\psi_\alpha(n_i))
+        =b_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)
+        =b_j\bigl(\overline{\psi}_\alpha(n_i+f_i(M_i))\bigr).
+        \]
+        So
+        \[
+        b\circ \pi=g.
+        \]
+        
+        We now show that $a$ and $b$ are inverse isomorphisms.
+        
+        First,
+        \[
+        (a\circ b)\circ \pi
+        =a\circ (b\circ \pi)
+        =a\circ g
+        =\pi.
+        \]
+        Also,
+        \[
+        \operatorname{id}_C\circ \pi=\pi.
+        \]
+        Since $\pi:N\to C$ is a cokernel of $f$, the uniqueness part of its universal property implies
+        \[
+        a\circ b=\operatorname{id}_C.
+        \]
+        
+        Similarly,
+        \[
+        (b\circ a)\circ g
+        =b\circ (a\circ g)
+        =b\circ \pi
+        =g,
+        \]
+        and also
+        \[
+        \operatorname{id}_H\circ g=g.
+        \]
+        Since $g:N\to H$ is a cokernel of $f$, the uniqueness part of its universal property implies
+        \[
+        b\circ a=\operatorname{id}_H.
+        \]
+        
+        Therefore $a$ and $b$ are inverse isomorphisms, and hence
+        \[
+        H\cong C=\bigl(N_i/f_i(M_i),\ \overline{\psi}_\alpha\bigr).
+        \]
+        
+        In particular, for each vertex $i$ we have
+        \[
+        H_i\cong N_i/f_i(M_i),
+        \]
+        and under these identifications, for every arrow $\alpha:i\to j$,
+        \[
+        \chi_\alpha
+        =
+        a_j^{-1}\circ \overline{\psi}_\alpha\circ a_i.
+        \]
+        Thus any cokernel given by the universal property is isomorphic to the pointwise quotient representation
+        \[
+        \bigl(N_i/f_i(M_i),\ \psi_\alpha \text{ induced on the quotients}\bigr).
+        \]
+\end{proof}
+
+%=============================================================================
+% Problem 8
+%=============================================================================
+\item Let $M$, $M'$ and $N$ be representations of $Q$ and let $f \colon M \to N$, $g \colon M' \to N$ be morphisms. Define the \emph{fiber product} (or \emph{pull back}) of $f$ and $g$ as
+\[
+    X = \{(a, b) \mid a \in M,\; b \in M',\; \text{such that } f(a) = g(b)\},
+\]
+and define the projections $\pi_1(a, b) = a$ and $\pi_2(a, b) = b$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $X$ is a subrepresentation of $M \oplus M'$ and that there is a commutative diagram:
+    \[
+    \begin{tikzcd}
+        X \arrow[r, "\pi_2"] \arrow[d, "\pi_1"'] & M' \arrow[d, "g"] \\
+        M \arrow[r, "f"'] & N
+    \end{tikzcd}
+    \]
+    \begin{proof}
+    \textbf{$X$ is a subrepresentation of $M\oplus M'$.}
+    
+    At each vertex $i$, define
+    \[
+    X_i = \{(a,b)\in M_i\oplus M'_i : f_i(a) = g_i(b)\}.
+    \]
+    This is the kernel of the linear map
+    \[
+    M_i\oplus M'_i \longrightarrow N_i,\qquad (a,b)\longmapsto f_i(a)-g_i(b),
+    \]
+    so $X_i$ is a linear subspace of $M_i\oplus M'_i$.
+
+    We now show that for any arrow $\alpha\colon i\to j$, the map $(M\oplus M')(\alpha)$ sends $X_i$ into $X_j$. Let $(a,b)\in X_i$, so
+    \[
+    f_i(a)=g_i(b).
+    \]
+    We need to show $(M(\alpha)(a),\; M'(\alpha)(b)) \in X_j$, i.e., $f_j(M(\alpha)(a)) = g_j(M'(\alpha)(b))$. Using the commutativity of $f$ and $g$:
+    \[
+    f_j\bigl(M(\alpha)(a)\bigr) = N(\alpha)\bigl(f_i(a)\bigr) = N(\alpha)\bigl(g_i(b)\bigr) = g_j\bigl(M'(\alpha)(b)\bigr).
+    \]
+    Hence $X$ is stable under the maps of $M\oplus M'$ and is therefore a subrepresentation.
+
+    \medskip\noindent\textbf{Commutativity of the diagram.}
+    
+    For any $(a,b)\in X_i$, we have
+    \[
+    (f\circ\pi_1)_i(a,b) = f_i\bigl(\pi_1(a,b)\bigr) = f_i(a) = g_i(b) = g_i\bigl(\pi_2(a,b)\bigr) = (g\circ\pi_2)_i(a,b).
+    \]
+    Hence $f\circ\pi_1 = g\circ\pi_2$, and the diagram
+    \[
+    \begin{tikzcd}
+        X \arrow[r, "\pi_2"] \arrow[d, "\pi_1"'] & M' \arrow[d, "g"] \\
+        M \arrow[r, "f"'] & N
+    \end{tikzcd}
+    \]
+    commutes.
+    \end{proof}
+    \item Show that if $f$ is injective then $\pi_2$ is injective.
+    \begin{proof}
+    Suppose $f$ is injective, i.e., $f_i$ is injective for each vertex $i$.
+    
+    Let $(a,b)\in X_i$ with
+    \[
+    \pi_2(a,b) = b = 0.
+    \]
+    Since $(a,b)\in X_i$, we have $f_i(a)=g_i(b)$. Substituting $b=0$:
+    \[
+    f_i(a) = g_i(0) = 0.
+    \]
+    Since $f_i$ is injective, it follows that
+    \[
+    a = 0.
+    \]
+    Hence $(a,b)=(0,0)$, so $\ker(\pi_2)_i = 0$ at every vertex $i$. Therefore $\pi_2$ is injective.
+    \end{proof}
+    \item Show that if $f$ is surjective then $\pi_2$ is surjective.
+    \begin{proof}
+    Suppose $f$ is surjective, i.e., $f_i$ is surjective for each vertex $i$.
+    
+    Let $b\in M'_i$. We need to find $a\in M_i$ such that $(a,b)\in X_i$, i.e., such that
+    \[
+    f_i(a) = g_i(b).
+    \]
+    The element $g_i(b)\in N_i$. Since $f_i$ is surjective, we have
+    \[
+    N_i = \operatorname{im}(f_i),
+    \]
+    so there exists $a\in M_i$ with $f_i(a) = g_i(b)$. Then $(a,b)\in X_i$ by definition, and
+    \[
+    \pi_2(a,b) = b.
+    \]
+    Since $b\in M'_i$ was arbitrary, $\pi_2$ is surjective at each vertex.
+    \end{proof}
+    \item Suppose $0 \to L \xrightarrow{h} M \xrightarrow{f} N \to 0$ is a short exact sequence, define $h' \colon L \to X$ by $h'(n) = (h(n), 0)$. Show that the following diagram is commutative with exact rows:
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & L \arrow[r, "h'"] \arrow[d, "1_L"'] & X \arrow[r, "\pi_2"] \arrow[d, "\pi_1"'] & M' \arrow[r] \arrow[d, "g"] & 0 \\
+        0 \arrow[r] & L \arrow[r, "h"'] & M \arrow[r, "f"'] & N \arrow[r] & 0
+    \end{tikzcd}
+    \]
+    \begin{proof}
+    \textbf{$h'$ is well-defined.}
+    
+    For $n\in L_i$, we must check that $(h_i(n),\,0)\in X_i$, i.e., that
+    \[
+    f_i(h_i(n)) = g_i(0).
+    \]
+    By exactness of the bottom row at $M$, we have $f\circ h = 0$, so
+    \[
+    f_i(h_i(n)) = 0 = g_i(0).
+    \]
+    Hence $h'_i(n) = (h_i(n),\,0) \in X_i$.
+
+    \medskip\noindent\textbf{$h'$ is a morphism of representations.}
+    
+    For each arrow $\alpha\colon i\to j$ and $n\in L_i$:
+    \begin{align*}
+    X(\alpha)\bigl(h'_i(n)\bigr) &= X(\alpha)\bigl(h_i(n),\,0\bigr) \\
+    &= \bigl(M(\alpha)(h_i(n)),\; M'(\alpha)(0)\bigr) \\
+    &= \bigl(h_j(L(\alpha)(n)),\; 0\bigr) \\
+    &= h'_j\bigl(L(\alpha)(n)\bigr),
+    \end{align*}
+    where the third equality uses the commutativity of $h$, i.e., $M(\alpha)\circ h_i = h_j\circ L(\alpha)$.
+
+    \medskip\noindent\textbf{Commutativity of the diagram.}
+    
+    Left square: for each $n\in L_i$,
+    \[
+    (\pi_1\circ h')_i(n) = \pi_1(h_i(n),\,0) = h_i(n) = (h\circ 1_L)_i(n).
+    \]
+    So $\pi_1\circ h' = h\circ 1_L$.
+    
+    Right square: $f\circ\pi_1 = g\circ\pi_2$ was established in part~(a).
+
+    \medskip\noindent\textbf{Exactness of the top row.}
+
+    \emph{$h'$ is injective:} suppose
+    \[
+    h'_i(n) = (h_i(n),\,0) = (0,\,0).
+    \]
+    Then $h_i(n) = 0$. Since $h$ is injective (from the exactness of the bottom row),
+    \[
+    n = 0.
+    \]
+    Hence $h'$ is injective.
+
+    \emph{$\pi_2$ is surjective:} since $f$ is surjective (from the bottom row), this follows from part~(c).
+
+    \emph{$\operatorname{im}(h') = \ker(\pi_2)$:}
+
+    $(\supseteq)$ For any $n\in L_i$,
+    \[
+    \pi_2(h'_i(n)) = \pi_2(h_i(n),\,0) = 0,
+    \]
+    so $\operatorname{im}(h'_i)\subseteq\ker(\pi_2)_i$.
+    
+    $(\subseteq)$ Let $(a,b)\in X_i$ with $\pi_2(a,b)=b=0$. Then
+    \[
+    f_i(a) = g_i(0) = 0,
+    \]
+    so $a\in\ker f_i$. By exactness of the bottom row at $M$,
+    \[
+    \ker f_i = \operatorname{im}\, h_i.
+    \]
+    Hence there exists $n\in L_i$ with $a=h_i(n)$, and then
+    \[
+    (a,\,0) = (h_i(n),\,0) = h'_i(n) \in \operatorname{im}(h'_i).
+    \]
+    
+    Therefore $\operatorname{im}(h') = \ker(\pi_2)$, and the top row is exact.
+    \end{proof}
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
