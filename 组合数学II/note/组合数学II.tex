@@ -32,7 +32,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{ytableau} % 杨表
-\usetikzlibrary{decorations.pathreplacing, calc, shadows}
+\usetikzlibrary{decorations.pathreplacing, calc, shadows, shapes.misc}
 
 % Define reusable graph styles (The "Skill")
 \tikzset{
@@ -2367,18 +2367,60 @@ Asymptotic Result & 2020 & Fiz Pontiveros, Griffiths, Morris; Bohman, Keevash & 
 \section{Ramsey Theory on Structures and Spaces}
 
 \begin{theorem}[Schur's Theorem]
-    Let $n$ be a positive integer, and let $s_n$ be the smallest integer such that $[s_n]$ colored in $n$ colors has monochromatic $x+y=z$. Such $s_n$ exists. 
-\end{theorem}
-
-\begin{proof}
-    We identify that $n$ colors with $[n]$. 
-Define a coloring $K_{s_n}$ with $V(K_{s_n})=[s_n]$ with $uv$ in color $x\in [n]$ if $|u-v|$ has color $x$. 
-
-If $s_n\geqslant R(3,\cdots,3)=R(n;3)$, then we find a monochromatic $K_{3}$. 
-That is, $|v-u|$, $|v-w|$, $|u-w|$ is monochromatic. 
-WLOG assume $u>v>w$ and put $x=u-v$, $y=v-w$ and $z=u-w$. 
-Then $x+y=z$.
-\end{proof}
+    Let $n$ be a positive integer, and let $s_n$ be the smallest integer such that every
+    $n$-coloring of $[s_n]=\{1,2,\dots,s_n\}$ contains a monochromatic solution to
+    \[
+    x+y=z.
+    \]
+    Then such an integer $s_n$ exists.
+    \end{theorem}
+    
+    \begin{proof}
+    Identify the set of $n$ colors with $[n]=\{1,2,\dots,n\}$, and let
+    \[
+    N:=R(\underbrace{3,\dots,3}_{n\text{ times}})
+    \]
+    be the $n$-color Ramsey number for triangles.
+    
+    We claim that every coloring of $[N]$ with $n$ colors contains a monochromatic
+    solution to $x+y=z$. This will imply that the set of positive integers with the
+    required property is nonempty, and hence, by well-ordering, its least element
+    $s_n$ exists.
+    
+    So let $c:[N]\to [n]$ be any coloring. Consider the complete graph $K_N$ with
+    vertex set $[N]$. Color each edge $\{u,v\}$, where $u\neq v$, by the color
+    \[
+    c(|u-v|).
+    \]
+    Since $N=R(3,\dots,3)$, Ramsey's theorem guarantees a monochromatic triangle in
+    this edge-colored complete graph. Thus there exist distinct vertices
+    \[
+    u,v,w\in [N]
+    \]
+    such that the three edges $\{u,v\}$, $\{u,w\}$, and $\{v,w\}$ all have the same
+    color.
+    
+    Without loss of generality, assume
+    \[
+    u>v>w.
+    \]
+    Set
+    \[
+    x=u-v,\qquad y=v-w,\qquad z=u-w.
+    \]
+    Then $x,y,z\in [N]$, and
+    \[
+    x+y=(u-v)+(v-w)=u-w=z.
+    \]
+    Moreover, the numbers $x,y,z$ all receive the same color under $c$, because
+    \[
+    c(x)=c(|u-v|),\qquad c(y)=c(|v-w|),\qquad c(z)=c(|u-w|),
+    \]
+    and these three edge colors are equal by construction of the monochromatic triangle.
+    
+    Hence we have found a monochromatic solution to $x+y=z$. Therefore every
+    $n$-coloring of $[N]$ contains such a solution, so the desired integer exists.
+    \end{proof}
 
 \begin{definition}
     Define $[q]^n:=\{(x_1,\cdots,x_n):x_i\in [q]\}$. We say $L\subseteq[q]^n$ is a \emph{combinatorial line} if there exists $I\subseteq [n]$ and integers $a_i$ such that 
@@ -2387,52 +2429,303 @@ Then $x+y=z$.
  $$ 
 \end{definition}
 
+
+\begin{example}
+    Consider $[3]^3=\{(x_1,x_2,x_3):x_i\in\{1,2,3\}\}$.  
+    Let
+    \[
+    I=\{1,2\},
+    \qquad
+    a_3=2.
+    \]
+    Then the set
+    \[
+    L=\{(x_1,x_2,x_3)\in [3]^3 : x_3=2 \text{ and } x_1=x_2\}
+    \]
+    is a combinatorial line. Explicitly,
+    \[
+    L=\{(1,1,2),(2,2,2),(3,3,2)\}.
+    \]
+    
+    Indeed, the third coordinate is fixed, while the first two coordinates vary together and always take the same value.
+    
+    \medskip
+    
+    A schematic picture is given below. Since the three points lie in the plane $x_3=2$, we draw that slice as a $3\times 3$ grid and highlight the diagonal corresponding to the line $x_1=x_2$.
+    
+    \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+    
+        % grid
+        \draw[step=1, gray!50, thin] (1,1) grid (3,3);
+    
+        % points in the slice x_3=2
+        \foreach \x in {1,2,3}{
+            \foreach \y in {1,2,3}{
+                \fill (\x,\y) circle (2pt);
+            }
+        }
+    
+        % highlighted combinatorial line
+        \draw[red, thick] (1,1) -- (3,3);
+        \foreach \p in {(1,1), (2,2), (3,3)}{
+            \fill[red] \p circle (3pt);
+        }
+    
+        % labels for highlighted points
+        \node[below left]  at (1,1) {\small $(1,1,2)$};
+        \node[above]       at (2,2) {\small $(2,2,2)$};
+        \node[above right] at (3,3) {\small $(3,3,2)$};
+    
+        % axis labels
+        \node[left]  at (0.7,1) {\small $x_2=1$};
+        \node[left]  at (0.7,2) {\small $x_2=2$};
+        \node[left]  at (0.7,3) {\small $x_2=3$};
+    
+        \node[below] at (1,0.7) {\small $x_1=1$};
+        \node[below] at (2,0.7) {\small $x_1=2$};
+        \node[below] at (3,0.7) {\small $x_1=3$};
+    
+        % slice label
+        \node at (2,3.6) {\small slice $x_3=2$};
+    
+    \end{tikzpicture}
+    \end{center}
+    
+    \end{example}
+
 \begin{theorem}[Hales--Jewett]
     For all $r,q\in \mathbb{N}_+$, there exists a smallest $n:=HJ(r,q)$ such that any $r$-coloring of $[q]^n$ contains a monochromatic combinatorial line.
 \end{theorem}
 
 \begin{proof}
-    By induction on $q$. The case $q=1$ is trivial, and we now assume that $q\geqslant 2$.
+    The proof proceeds by induction on $q$. The case $q=1$ is trivial (every point is a monochromatic line), so we assume $q\geqslant 2$ and that $HJ(r,q')$ is finite for all $q'\leqslant q-1$.
 
-    For a line $L$, we write $L^{-}$ for its first point and $L^+$ for its last point. We call $L_1,\cdots,L_s$ \emph{focused at} $f$ if $L_i^+=f$ for all $i\in [s]$. We call $L_1,\cdots,L_s$ \emph{color-focused} at $f$ if all the truncated lines $L_i\setminus\{L_i^+\}$ are monochromatic and of pairwise different colors. Note that a line is determined by one point and a ``direction''.
+    \medskip
+    \noindent\textbf{Step 0: Key definitions.}
+    For a combinatorial line $L$ in $[q]^n$, write $L^{-}$ for its \emph{first point} (all active coordinates equal $1$) and $L^+$ for its \emph{last point} (all active coordinates equal $q$).
 
-    Suppose that $HJ(r,q')$ is finite for all $q'\leqslant q-1$. Our goal is, for each $s\leqslant r$, to show there exists $N=FHJ(r,s,q)$ such that any $r$-coloring of $[q]^N$ either
-    \begin{itemize}
-        \item contains a monochromatic combinatorial line, or
-        \item contains $s$ color-focused lines.
-    \end{itemize}
-    Then $s=r$ will yield the Hales--Jewett theorem by the pigeonhole principle.
+    We say that lines $L_1,\cdots,L_s$ are \emph{focused at} $f$ if $L_i^+=f$ for every $i\in [s]$.
+    They are \emph{color-focused at} $f$ (with respect to a coloring $\chi$) if, additionally, each truncated line $L_i\setminus\{L_i^+\}$ is monochromatic and these $s$ colors are pairwise different.
 
-    We prove this by induction on $s$.
+    The following picture illustrates 2 lines color-focused at the common endpoint $f$ (with $q=3$, so each line has 3 points and the truncation removes the last one):
+    \begin{center}
+    \begin{tikzpicture}[scale=1, >=stealth]
+        \fill[blue] (0,0) circle (3pt) node[below=4pt]{\small $L_1^-$};
+        \fill[blue] (1.5,0) circle (3pt);
+        \fill[black] (3,0.75) circle (4pt) node[right=4pt]{\small $f$};
+        \fill[red]  (0,1.5) circle (3pt) node[above=4pt]{\small $L_2^-$};
+        \fill[red]  (1.5,1.5) circle (3pt);
+        \draw[->, blue, thick] (0,0) -- (1.5,0) -- (3,0.75);
+        \draw[->, red, thick]  (0,1.5) -- (1.5,1.5) -- (3,0.75);
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}] (-0.1,-0.4) -- (1.6,-0.4)
+              node[midway, below=6pt]{\small \color{blue} mono blue};
+        \draw[decorate, decoration={brace, amplitude=5pt}] (-0.1,1.9) -- (1.6,1.9)
+              node[midway, above=6pt]{\small \color{red} mono red};
+        \node at (1.5,-1.3) {\small $L_1\setminus\{f\}$ and $L_2\setminus\{f\}$: different colors};
+    \end{tikzpicture}
+    \end{center}
 
-    \textbf{Base case.} When $s=1$, pick $FHJ(r,1,q)=HJ(r,q-1)$.
+    \medskip
+    \noindent\textbf{Step 1: Reduction to a ``focused'' statement.}
+    We prove the following strengthening by induction on $s$: for each $s\leqslant r$, there exists $N=\mathrm{FHJ}(r,s,q)$ such that any $r$-coloring of $[q]^N$ either
+    \begin{enumerate}
+        \item[(a)] contains a monochromatic combinatorial line, or
+        \item[(b)] contains $s$ color-focused lines at some common point.
+    \end{enumerate}
+    Taking $s=r$: in case~(b), the $r$ truncated lines use $r$ pairwise different colors from a palette of $r$ colors, so all $r$ colors appear. At the common focus point $f$, the color of $f$ must equal one of them, yielding a monochromatic line. Thus case~(b) forces case~(a).
 
-    \textbf{Inductive step.} Now suppose that $FHJ(r,s',q)$ is finite for all $s'\leqslant s-1$. We claim that
+    \medskip
+    \noindent\textbf{Step 2: Base case ($s=1$).}
+    Set $\mathrm{FHJ}(r,1,q)=HJ(r,q-1)$. By induction on $q$, any $r$-coloring of $[q-1]^{HJ(r,q-1)}$ contains a monochromatic line $L$ (using values in $[q-1]$). This $L$ already lies inside $[q]^{HJ(r,q-1)}$, and the truncation $L\setminus\{L^+\}$ is monochromatic, so $\{L\}$ is a single color-focused line at $L^+$.
+
+    \medskip
+    \noindent\textbf{Step 3: Inductive step.}
+    Suppose $\mathrm{FHJ}(r,s',q)$ is finite for all $s'\leqslant s-1$. Set
     \[
-        FHJ(r,s,q)\leqslant N := FHJ(r,s-1,q)+HJ(r^{q^n},q-1) =: n+n'.
+        n:=\mathrm{FHJ}(r,s-1,q), \qquad n':=HJ(r^{q^n},q-1), \qquad N:=n+n'.
+    \]
+    We show $\mathrm{FHJ}(r,s,q)\leqslant N$. The argument has three sub-steps, illustrated schematically below.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9, >=stealth]
+        \draw[thick, fill=blue!8] (0,0) rectangle (4,3);
+        \node at (2,3.3) {\small $[q]^n$};
+        \node at (2,1.5) {\small first $n$ coords};
+        \draw[thick, fill=red!8] (5,0) rectangle (9.5,3);
+        \node at (7.25,3.3) {\small $[q]^{n'}$};
+        \node at (7.25,1.5) {\small last $n'$ coords};
+        \draw[decorate, decoration={brace, amplitude=8pt, mirror}] (0,-.3) -- (9.5,-.3)
+              node[midway, below=10pt]{\small $[q]^N = [q]^n \times [q]^{n'}$};
+        \node[align=center] at (2,-2) {\footnotesize dimension chosen by\\\footnotesize $\mathrm{FHJ}(r,s-1,q)$};
+        \node[align=center] at (7.25,-2) {\footnotesize dimension chosen by\\\footnotesize $HJ(r^{q^n},q-1)$};
+    \end{tikzpicture}
+    \end{center}
+
+    \medskip
+    \noindent\textbf{Step 3a: Splitting and super-coloring.}
+    Given an $r$-coloring $\chi$ of $[q]^N$, write each point as $(a,b)$ where $a\in [q]^n$ (first $n$ coordinates) and $b\in [q]^{n'}$ (last $n'$ coordinates). Define a \emph{super-coloring} $\chi'$ on $[q]^{n'}$ by assigning to each $b$ the entire function
+    \[
+        \chi'(b) := f_b, \qquad\text{where}\quad f_b\colon [q]^n\to [r],\quad a\mapsto \chi(a,b).
+    \]
+    There are at most $r^{q^n}$ possible such functions, so $\chi'$ is an $r^{q^n}$-coloring.
+
+    \smallskip\noindent
+    \textit{Intuition.} Two points $b,b'$ in $[q]^{n'}$ receive the same super-color if and only if the ``slices'' $[q]^n\times\{b\}$ and $[q]^n\times\{b'\}$ are colored identically under $\chi$.
+
+    \medskip
+    \noindent\textbf{Step 3b: Applying Hales--Jewett in the second block.}
+    Since $n'=HJ(r^{q^n},q-1)$, the super-coloring $\chi'$ on $[q-1]^{n'}\subseteq [q]^{n'}$ contains a monochromatic combinatorial line $L$ with active coordinates $I'\subseteq \{n{+}1,\cdots,n{+}n'\}$. ``Monochromatic under $\chi'$'' on $L\setminus\{L^+\}$ means:
+    \[
+        \forall\, b,b'\in L\setminus\{L^+\}:\quad f_b = f_{b'} \quad\text{(identical coloring on $[q]^n$)}.
+    \]
+    So we may define a \emph{well-defined} $r$-coloring on $[q]^n$:
+    \[
+        \chi''(a) := \chi(a,b) \quad\text{for any } b\in L\setminus\{L^+\}.
     \]
 
-    Suppose $\chi$ is an $r$-coloring of $[q]^N$, where $[q]^N=\{(a_1,\cdots,a_N):a_i\in [q]\}$. We write $(a_1,\cdots,a_N)$ as $(a,b)$ where $a=(a_1,\cdots,a_n)\in[q]^n$ and $b=(a_{n+1},\cdots,a_N)\in[q]^{n'}$. Then $\chi$ can be viewed as an $r^{q^n}$-coloring $\chi'$ of $[q]^{n'}$, by associating each point $b\in [q]^{n'}$ with the entire $r$-colored cube $\{(a,b):a\in [q]^n\}$. Formally, for each $b\in [q]^{n'}$, its color under $\chi'$ is the function $f_b:[q]^n\to [r]$, $a\mapsto \chi(a,b)$.
+    \begin{center}
+    \begin{tikzpicture}[scale=0.85, >=stealth]
+        \foreach \yy/\blab/\col in {0/{$b_1=L^-$}/green!70!black, 2/{$b_2$}/green!70!black, 4/{$b_3=L^+$}/gray}{
+            \draw[thick, fill=\col!10] (0,\yy) rectangle (3.5,\yy+1.2);
+            \node[left] at (-0.1,\yy+0.6) {\small \blab};
+        }
+        \node at (1.75,0.6)  {\small slice $\chi(\cdot,b_1)$};
+        \node at (1.75,2.6) {\small slice $\chi(\cdot,b_2)$};
+        \node at (1.75,4.6) {\small slice $\chi(\cdot,b_3)$};
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}] (3.8,0) -- (3.8,3.2)
+            node[midway, right=6pt, align=left] {\small same coloring\\\small $\Rightarrow$ defines $\chi''$};
+        \draw[decorate, decoration={brace, amplitude=5pt}] (-2.5,0) -- (-2.5,5.2)
+            node[midway, left=6pt] {\small line $L$ in $[q]^{n'}$};
+    \end{tikzpicture}
+    \end{center}
 
-    Since $n'=HJ(r^{q^n},q-1)$, there exists a combinatorial line $L$ in $[q]^{n'}$ with active coordinate set $I'$ such that $L\setminus\{L^+\}$ is monochromatic under $\chi'$. That is, for any $b,b'\in L\setminus \{L^+\}$, we have $\chi'(b)=\chi'(b')$, i.e.\ $f_b=f_{b'}$. Define $\chi''(a):=\chi(a,b)$ for any $b\in L\setminus\{L^+\}$ and all $a\in [q]^n$; this is well-defined and gives an $r$-coloring $\chi''$ on $[q]^n$.
-
-    Since $n=FHJ(r,s-1,q)$, either $[q]^n$ under $\chi''$ contains a monochromatic combinatorial line, or it contains $s-1$ color-focused lines. If the former holds, then we already have a monochromatic combinatorial line in $[q]^N$ under $\chi$ and we are done. We now assume the latter: there exist $s-1$ lines $L_1,\cdots,L_{s-1}$ in $[q]^n$ which are color-focused at some point $f$. Define $L_1',\cdots,L_s'$ in $[q]^N$ as follows:
+    \medskip
+    \noindent\textbf{Step 3c: Applying the focused induction in the first block.}
+    Since $n=\mathrm{FHJ}(r,s-1,q)$, the coloring $\chi''$ on $[q]^n$ either
     \begin{itemize}
-        \item for $1\leqslant i\leqslant s-1$, let $L_i'$ be the line with first point $(L_i^-,L^-)$ and active coordinates $I_i\cup I'$;
-        \item for $i=s$, let $L_s'$ be the line with first point $(f,L^-)$ and active coordinates $I'$;
+        \item contains a monochromatic line (done!), or
+        \item contains $s-1$ lines $L_1,\cdots,L_{s-1}$ in $[q]^n$ that are color-focused at some point $f$.
     \end{itemize}
-    where $I_i \subseteq\{1, \ldots, n\}$ is the set of active coordinates for $L_i$ in $[q]^n$, and $I' \subseteq\{n+1, \ldots, n+n'\}$ is the set of active coordinates for $L$ in $[q]^{n'}$.
+    Assume the latter. We now ``lift'' these $s-1$ lines to $[q]^N$ and add one more line to get $s$ color-focused lines.
 
-    It is straightforward to verify that these lines $L_1',\cdots,L_s'$ are color-focused with focus $(f,L^+)$.
+    \medskip
+    \noindent\textbf{Step 4: Constructing $s$ color-focused lines in $[q]^N$.}
+    Write $I_i\subseteq\{1,\cdots,n\}$ for the active coordinates of $L_i$ in $[q]^n$. Define $s$ lines in $[q]^N$:
+    \begin{itemize}
+        \item For $1\leqslant i\leqslant s-1$: let $L_i'$ be the line with first point $(L_i^-,\, L^-)$ and active coordinates $I_i\cup I'$.
+        \item For $i=s$: let $L_s'$ be the line with first point $(f,\, L^-)$ and active coordinates $I'$ only.
+    \end{itemize}
+
+    We illustrate with $q=3$, $s=3$ (so $s{-}1=2$ old lines plus one new line). Each line has $3$ points; writing them from first ($t=1$) to last ($t=3$):
+
+    \smallskip
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, every node/.style={font=\small},
+        pt/.style={circle, inner sep=0pt, minimum size=5pt, fill=#1},
+        pt/.default=black]
+
+        %% ============ LEFT PANEL: ingredients ============
+        \node[font=\normalsize\bfseries] at (2.2,5.8) {Ingredients};
+
+        % -- Lines L_1, L_2 in [q]^n, color-focused at f --
+        \node[anchor=east] at (-0.3,4.5) {$[q]^n$:};
+
+        % L_1 (blue): 3 points
+        \node[pt=blue] (L1a) at (0.5,4.5) {};
+        \node[pt=blue] (L1b) at (1.8,4.5) {};
+        \node[pt=violet] (f1) at (3.1,4.5) {};
+        \draw[blue, thick] (L1a) -- (L1b) -- (f1);
+        \node[blue, above] at (0.5,4.5) {$L_1^-$};
+        \node[violet,above] at (3.1,4.65) {$f$};
+        \node[blue, below=2pt] at (1.2,4.5) {$L_1 \setminus \{L_1^+\}$ \color{blue!70!black}(mono blue)};
+
+        % L_2 (red): 3 points
+        \node[pt=red] (L2a) at (0.5,3.2) {};
+        \node[pt=red] (L2b) at (1.8,3.2) {};
+        \node[pt=violet] (f2) at (3.1,3.2) {};
+        \draw[red, thick] (L2a) -- (L2b) -- (f2);
+        \node[red, above] at (0.5,3.2) {$L_2^-$};
+        \node[violet, above] at (3.1,3.35) {$f$};
+        \node[red, below=2pt] at (1.2,3.2) {$L_2 \setminus \{L_2^+\}$ \color{red!70!black}(mono red)};
+
+        % -- Line L in [q]^{n'} --
+        \node[anchor=east] at (-0.3,1.5) {$[q]^{n'}$:};
+
+        \node[pt=green!60!black] (La) at (0.5,1.5) {};
+        \node[pt=green!60!black] (Lb) at (1.8,1.5) {};
+        \node[pt=black!60!black] (Lc) at (3.1,1.5) {};
+        \draw[green!60!black, thick] (La) -- (Lb) -- (Lc);
+        \node[green!60!black, above] at (0.5,1.5) {$L^-$};
+        \node[black!60!black, above] at (3.1,1.5) {$L^+$};
+        \node[green!60!black, below=2pt] at (1.8,1.5) {$L$ (mono under $\chi'$ on $L\setminus\{L^+\}$)};
+
+        %% ============ ARROW ============
+        \draw[->, very thick, gray] (4.5,3.5) -- node[above]{\normalsize lift} (5,3.5);
+
+        %% ============ RIGHT PANEL: lifted lines in [q]^N ============
+        \node[font=\normalsize\bfseries] at (9,5.8) {Lifted lines in $[q]^N$};
+
+        % Column headers: t=1, t=2, t=3
+        \node at (6.5,5.2) {$t=1$};
+        \node at (8.5,5.2) {$t=2$};
+        \node at (10.5,5.2) {$t=3$};
+
+        % L'_1 (blue): active in I_1 ∪ I'
+        % t=1: (L_1^-,L^-), t=2: (mid,mid), t=3: (f,L^+)
+        \node[pt=blue] (L1p1) at (6.5,4.5) {};
+        \node[pt=blue] (L1p2) at (8.5,4.5) {};
+        \node[pt=black] (L1p3) at (10.5,4.5) {};
+        \draw[blue, thick] (L1p1) -- (L1p2) -- (L1p3);
+        \node[blue, above=1pt] at (6.5,4.5) {\footnotesize $(L_1^-,L^-)$};
+        \node[blue, left=2pt, align=right] at (6.2,4.5) {$L_1'$};
+
+        % L'_2 (red): active in I_2 ∪ I'
+        \node[pt=red] (L2p1) at (6.5,3.2) {};
+        \node[pt=red] (L2p2) at (8.5,3.2) {};
+        \node[pt=black] (L2p3) at (10.5,3.2) {};
+        \draw[red, thick] (L2p1) -- (L2p2) -- (L2p3);
+        \node[red, above=1pt] at (6.5,3.2) {\footnotesize $(L_2^-,L^-)$};
+        \node[red, left=2pt, align=right] at (6.2,3.2) {$L_2'$};
+
+        % L'_s (violet): active in I' only
+        \node[pt=violet] (Lsp1) at (6.5,1.9) {};
+        \node[pt=violet] (Lsp2) at (8.5,1.9) {};
+        \node[pt=black] (Lsp3) at (10.5,1.9) {};
+        \draw[violet, thick] (Lsp1) -- (Lsp2) -- (Lsp3);
+        \node[violet, above=1pt] at (6.5,1.9) {\footnotesize $(f,L^-)$};
+        \node[violet, left=2pt, align=right] at (6.2,1.9) {$L_s'$};
+
+        % common focus
+        \draw[thick, densely dotted] (10.5,4.5) -- (10.5,1.9);
+        \node[right=3pt, align=left] at (10.8,3.2) {\textbf{$(f,L^+)$}\\common\\focus};
+
+        % braces for active coords
+        \draw[decorate, decoration={brace, amplitude=4pt, mirror}] (6.3,3.0) -- (10.7,3.0)
+            node[midway, below=5pt] {\footnotesize active in $I_1\cup I'$: both $a,b$ vary};
+        \draw[decorate, decoration={brace, amplitude=4pt, mirror}] (6.3,1.6) -- (10.7,1.6)
+            node[midway, below=5pt] {\footnotesize active in $I'$ only: $a=f$ fixed, only $b$ varies};
+
+    \end{tikzpicture}
+    \end{center}
+
+    \noindent\textbf{Verification.}
+    All $s$ lines share the common last point $(f,L^+)$, so they are focused there. It remains to check that the truncations use pairwise different colors:
+    \begin{itemize}
+        \item For $1\leqslant i\leqslant s-1$: the points of $L_i'\setminus\{(f,L^+)\}$ have the form $(x,b)$ where $x$ ranges over $L_i\setminus\{f\}$ and $b$ ranges over $L\setminus\{L^+\}$. Since $f_b=f_{b'}$ for all $b,b'\in L\setminus\{L^+\}$, the color $\chi(x,b)=\chi''(x)$, which is the monochromatic color of $L_i\setminus\{f\}$ under $\chi''$.
+        \item For $i=s$: the points of $L_s'\setminus\{(f,L^+)\}$ have the form $(f,b)$ where $b\in L\setminus\{L^+\}$. Their color is $\chi(f,b)=\chi''(f)$, which is the color of the focus $f$ under $\chi''$.
+    \end{itemize}
+    Since $L_1,\cdots,L_{s-1}$ were color-focused at $f$ under $\chi''$, their $s-1$ truncation colors are pairwise different and all differ from $\chi''(f)$, giving $s$ pairwise different colors in total. Hence $L_1',\cdots,L_s'$ are color-focused at $(f,L^+)$ under $\chi$.
 \end{proof}
 
-\section{Tur\'an-type Problems}
+\section{Tur\'an-type Problems I}
 
 \begin{definition}
     Let $n$ be an integer, and let $H$ be a graph. The \emph{Tur\'an number} $\mathrm{ex}(n,H)$ denotes the maximal number of edges in an $H$-free graph on $n$ vertices. Here $H$-free means $H$ is not a subgraph.
 
     More generally, define $\mathrm{ex}(n,\{H_1,\cdots,H_k\})$ for all $H_i$ forbidden.
 \end{definition}
+
 
 \begin{lemma}
     $\mathrm{ex}(n,\{C_3,C_4,\cdots,C_n\})=n-1$.
@@ -2455,36 +2748,1433 @@ Then $x+y=z$.
 \end{proof}
 
 \begin{proof}[Proof 2]
-    Let $A$ be the largest coclique (i.e.\ independent set) of $G$. As $N(x)$ is edge-less, $|A|\geqslant d(x)$ for all $x\in V$. Also, as $A$ is largest, $B:=V\setminus A$ meets every edge. Hence $\sum_{x\in B}d(x)\geqslant |E|$. Therefore
+    Let $A$ be the largest coclique (i.e.\ independent set) of $G$. As $N(x)$ is edge-less, $|A|\geqslant |N(x)| =d(x)$ for all $x\in V$. Also, as $A$ is largest, $B:=V\setminus A$ meets every edge. Hence $\sum_{x\in B}d(x)\geqslant |E|$. Therefore
     \[
         |E|\leqslant \sum_{x\in B}d(x)\leqslant |B|\cdot |A|\leqslant\left(\frac{|A|+|B|}{2}\right)^2=\frac{n^2}{4}.
     \]
 \end{proof}
 
 \begin{proof}[Proof 3]
-    For convenience, let $|V|=2n$. By induction, suppose $|V|=2(n+1)$ and $G=(V,E)$ is $C_3$-free. Take $\{x,y\}\in E$; then by the induction hypothesis, the induced subgraph $H$ on $V\setminus\{x,y\}$ has $|E(H)|\leqslant n^2$. Note that $d(x)+d(y)\leqslant 2n+2$, so $|E(G)|\leqslant n^2+2n+1=(n+1)^2$.
-\end{proof}
+    We prove by induction on $m:=|V(G)|$ that every triangle-free graph $G$ on $m$ vertices satisfies
+    \[
+    |E(G)|\le \left\lfloor \frac{m^{2}}{4}\right\rfloor .
+    \]
+    
+    If $m\le 2$, then clearly $|E(G)|\le 1$, so the claim is immediate.
+    
+    Now assume $m\ge 3$ and that the statement holds for all triangle-free graphs on $m-2$ vertices. Let $G$ be a triangle-free graph on $m$ vertices.
+    
+    If $E(G)=\varnothing$, then there is nothing to prove. So choose an edge $xy\in E(G)$, and let
+    \[
+    H:=G[V(G)\setminus\{x,y\}]
+    \]
+    be the induced subgraph obtained by deleting $x$ and $y$. Then $H$ is triangle-free and has $m-2$ vertices. Hence, by the induction hypothesis,
+    \[
+    |E(H)|\le \left\lfloor \frac{(m-2)^2}{4}\right\rfloor .
+    \]
+    
+    Since $G$ is triangle-free and $xy\in E(G)$, the vertices $x$ and $y$ have no common neighbor other than each other. Indeed, if some vertex $z\neq x,y$ were adjacent to both $x$ and $y$, then $x,y,z$ would form a triangle. Therefore
+    \[
+    \bigl(N(x)\setminus\{y\}\bigr)\cap \bigl(N(y)\setminus\{x\}\bigr)=\varnothing.
+    \]
+    Both sets are contained in $V(G)\setminus\{x,y\}$, which has size $m-2$. Thus
+    \[
+    (d(x)-1)+(d(y)-1)\le m-2,
+    \]
+    and hence
+    \[
+    d(x)+d(y)\le m.
+    \]
+    
+    Every edge of $G$ is either an edge of $H$, or is incident with $x$ or $y$. Therefore
+    \[
+    |E(G)|=|E(H)|+d(x)+d(y)-1,
+    \]
+    where we subtract $1$ because the edge $xy$ is counted in both $d(x)$ and $d(y)$. It follows that
+    \[
+    |E(G)|
+    \le
+    \left\lfloor \frac{(m-2)^2}{4}\right\rfloor + m - 1.
+    \]
+    
+    It remains to check that
+    \[
+    \left\lfloor \frac{(m-2)^2}{4}\right\rfloor + m - 1
+    =
+    \left\lfloor \frac{m^2}{4}\right\rfloor .
+    \]
+    If $m=2n$, then
+    \[
+    \left\lfloor \frac{(m-2)^2}{4}\right\rfloor + m - 1
+    =
+    \frac{(2n-2)^2}{4}+2n-1
+    =
+    (n-1)^2+2n-1
+    =
+    n^2
+    =
+    \left\lfloor \frac{(2n)^2}{4}\right\rfloor .
+    \]
+    If $m=2n+1$, then
+    \[
+    \left\lfloor \frac{(m-2)^2}{4}\right\rfloor + m - 1
+    =
+    \left\lfloor \frac{(2n-1)^2}{4}\right\rfloor +2n
+    =
+    (n^2-n)+2n
+    =
+    n^2+n
+    =
+    \left\lfloor \frac{(2n+1)^2}{4}\right\rfloor .
+    \]
+    Thus in all cases,
+    \[
+    |E(G)|\le \left\lfloor \frac{m^2}{4}\right\rfloor .
+    \]
+    
+    Therefore
+    \[
+    \mathrm{ex}(n,C_3)=\left\lfloor \frac{n^2}{4}\right\rfloor .
+    \]
+    \end{proof}
 
-\begin{theorem}[Tur\'an, 1941]
-    Let $k\geqslant 2$. Then $\mathrm{ex}(n,K_{k+1})=\lfloor(1-\frac{1}{k})\frac{n^2}{2}\rfloor$, and the equality holds if and only if $G$ is the complete $k$-partite graph $K_{\lceil n/k\rceil,\ldots,\lfloor n/k\rfloor}$.
+    \begin{theorem}[Tur\'an, 1941]
+        For every integer $k \ge 2$,
+        \[
+        \operatorname{ex}(n,K_{k+1})
+        =
+        \left\lfloor \left(1-\frac1k\right)\frac{n^2}{2}\right\rfloor .
+        \]
+        Moreover, equality holds if and only if the graph is the complete $k$-partite graph
+        whose part sizes differ by at most $1$, i.e.\ the Tur\'an graph
+        \[
+        T_{n,k}=K_{\lceil n/k\rceil,\ldots,\lfloor n/k\rfloor}.
+        \]
+        \end{theorem}
+        
+        \begin{proof}
+        Write
+        \[
+        t_{n,k}:=\left\lfloor \left(1-\frac1k\right)\frac{n^2}{2}\right\rfloor .
+        \]
+        We prove simultaneously the upper bound and the uniqueness statement by induction on $n$,
+        with a subsidiary induction on $k$.
+        
+        The statement is trivial when $n\le k$, since then every graph on $n$ vertices is
+        $K_{k+1}$-free and
+        \[
+        \operatorname{ex}(n,K_{k+1})=\binom{n}{2}=t_{n,k}.
+        \]
+        The case $k=2$ is Mantel's theorem.
+        
+        Now let $k\ge 3$ and $n\ge k+1$, and assume the theorem holds for all smaller values of
+        $n$, and also for the parameter $k-1$.
+        
+        Let $G$ be a $K_{k+1}$-free graph on $n$ vertices.
+        
+        \medskip
+        \noindent
+        \textbf{Step 1: the upper bound.}
+        If $G$ contains no copy of $K_k$, then $G$ is $K_k$-free, so by the induction
+        hypothesis on $k-1$,
+        \[
+        e(G)\le t_{n,k-1}<t_{n,k},
+        \]
+        and hence in this case there is nothing more to prove.
+        
+        Therefore we may assume that $G$ contains a $k$-clique.
+        Choose such a clique
+        \[
+        A=\{a_1,\dots,a_k\},
+        \qquad
+        B:=V(G)\setminus A.
+        \]
+        Then
+        \[
+        e(G)=e(A)+e(B)+e(A,B).
+        \]
+        Since $A$ is a $k$-clique,
+        \[
+        e(A)=\binom{k}{2}.
+        \]
+        Also, the induced subgraph $G[B]$ is still $K_{k+1}$-free, so by the induction
+        hypothesis on $n-k<n$,
+        \[
+        e(B)\le t_{n-k,k}.
+        \]
+        Finally, every vertex $b\in B$ is adjacent to at most $k-1$ vertices of $A$,
+        for otherwise $A\cup\{b\}$ would span a $K_{k+1}$.
+        Hence
+        \[
+        e(A,B)\le (k-1)(n-k).
+        \]
+        Combining these estimates gives
+        \[
+        e(G)
+        \le
+        \binom{k}{2}+t_{n-k,k}+(k-1)(n-k).
+        \]
+        Since the first and third terms are integers,
+        \[
+        \binom{k}{2}+t_{n-k,k}+(k-1)(n-k)
+        \le
+        \left\lfloor
+        \binom{k}{2}
+        +\left(1-\frac1k\right)\frac{(n-k)^2}{2}
+        +(k-1)(n-k)
+        \right\rfloor.
+        \]
+        A direct calculation shows that
+        \[
+        \binom{k}{2}
+        +\left(1-\frac1k\right)\frac{(n-k)^2}{2}
+        +(k-1)(n-k)
+        =
+        \left(1-\frac1k\right)\frac{n^2}{2},
+        \]
+        therefore
+        \[
+        e(G)\le t_{n,k}.
+        \]
+        Thus
+        \[
+        \operatorname{ex}(n,K_{k+1})\le t_{n,k}.
+        \]
+        
+        \medskip
+        \noindent
+        \textbf{Step 2: the extremal construction.}
+        The complete $k$-partite graph $T_{n,k}$ has no $(k+1)$-clique, since any clique in a
+        $k$-partite graph contains at most one vertex from each part.
+        Its number of edges is
+        \[
+        e(T_{n,k})=t_{n,k}.
+        \]
+        Hence
+        \[
+        \operatorname{ex}(n,K_{k+1})\ge t_{n,k}.
+        \]
+        Together with the upper bound, this yields
+        \[
+        \operatorname{ex}(n,K_{k+1})=t_{n,k}.
+        \]
+        
+        \medskip
+        \noindent
+        \textbf{Step 3: the equality case.}
+        Suppose now that $e(G)=t_{n,k}$.
+        
+        As observed above, $G$ must contain a $K_k$, for otherwise
+        $e(G)\le t_{n,k-1}<t_{n,k}$.
+        Fix a $k$-clique
+        \[
+        A=\{a_1,\dots,a_k\},
+        \qquad
+        B:=V(G)\setminus A.
+        \]
+        Since equality holds in
+        \[
+        e(G)\le \binom{k}{2}+e(B)+e(A,B)\le \binom{k}{2}+t_{n-k,k}+(k-1)(n-k),
+        \]
+        we must have equality in each of the intermediate estimates. In particular:
+        \begin{enumerate}
+            \item[(i)] $e(B)=t_{n-k,k}$, so by the induction hypothesis on $n$, the graph $G[B]$
+            is the Tur\'an graph $T_{n-k,k}$;
+            \item[(ii)] every vertex $b\in B$ is adjacent to exactly $k-1$ vertices of $A$.
+        \end{enumerate}
+        
+        By (ii), for each $b\in B$ there is a unique index $i(b)\in\{1,\dots,k\}$ such that
+        $b$ is \emph{not} adjacent to $a_{i(b)}$.
+        For each $i\in\{1,\dots,k\}$ define
+        \[
+        C_i:=\{a_i\}\cup \{\, b\in B : i(b)=i \,\}.
+        \]
+        Then the sets $C_1,\dots,C_k$ form a partition of $V(G)$.
+        
+        We claim that each $C_i$ is an independent set.
+        Indeed, by definition $a_i$ is adjacent to no vertex of $C_i\setminus\{a_i\}$.
+        If $x,y\in C_i\setminus\{a_i\}$ were adjacent, then both $x$ and $y$ would be adjacent
+        to every vertex of $A\setminus\{a_i\}$; hence
+        \[
+        \{x,y\}\cup (A\setminus\{a_i\})
+        \]
+        would span a $K_{k+1}$, a contradiction.
+        Thus each $C_i$ is independent.
+        
+        Therefore $G$ is a spanning subgraph of the complete $k$-partite graph with
+        $C_1,\dots,C_k$ parts, and so
+        \[
+        e(G)\le \sum_{1\le i<j\le k} |C_i||C_j|.
+        \]
+        For fixed $\sum_i |C_i|=n$, the quantity on the right is maximized exactly when the part
+        sizes differ by at most $1$, and its maximum is $t_{n,k}$.
+        Since $e(G)=t_{n,k}$, we obtain
+        \[
+        t_{n,k}=e(G)\le \sum_{i<j}|C_i||C_j|\le t_{n,k}.
+        \]
+        Hence equality holds throughout. It follows that:
+        \begin{itemize}
+            \item the sizes $|C_1|,\dots,|C_k|$ differ by at most $1$;
+            \item all edges between distinct parts $C_i$ and $C_j$ are present.
+        \end{itemize}
+        Thus $G$ is exactly the complete $k$-partite graph with part sizes as equal as possible,
+        namely
+        \[
+        G\cong T_{n,k}=K_{\lceil n/k\rceil,\ldots,\lfloor n/k\rfloor}.
+        \]
+        
+        Conversely, $T_{n,k}$ is $K_{k+1}$-free and has $t_{n,k}$ edges, so equality indeed holds
+        for this graph.
+        
+        This completes the proof.
+        \end{proof}
+
+\chapter{Lecture 5}
+
+\section{Tur\'an-type Problems II}
+
+Recall Jensen's inequality:
+\[
+\phi\left(\frac{1}{n}\sum_{i=1}^n x_i\right) \leq \frac{1}{n}\sum_{i=1}^n \phi(x_i).
+\]
+where $\phi$ is a convex function $\phi: \mathbb{R} \to \mathbb{R}$.
+
+\begin{theorem}
+$\operatorname{ex}(n,\{C_3,C_4\})\leqslant n\sqrt{n-1}/2$.
 \end{theorem}
 
 \begin{proof}
-    By induction on $n$. When $n\leqslant k$, the result is trivial. For $k=2$ this is Mantel's theorem.
+Define $n=|V(G)|$ and $m=|E(G)|$.
+We count paths $(x,y,z)$, where $x,y,z\in V(G)$.
 
-    Suppose that it holds for $\leqslant n-1$ vertices. Let $G=(V,E)$ with $|V|=n$ and $|E|$ maximal such that $G$ is $K_{k+1}$-free. By maximality, cliques of size $k$ exist. Let $A$ be one such clique, and put $B=V\setminus A$. Then $|E(A)|=\binom{k}{2}$, and by induction
-    \[
-        |E(B)|\leqslant \left(1-\frac{1}{k}\right)\frac{(n-k)^2}{2}=\binom{k}{2}\left(\frac{n-k}{k}\right)^2.
-    \]
-    Also, since each vertex of $B$ can be adjacent to at most $k-1$ vertices of $A$ (otherwise a $K_{k+1}$ would appear), $|E(A,B)|\leqslant (k-1)(n-k)$. Therefore,
-    \[
-        |E|\leqslant |E(A)|+|E(B)|+|E(A,B)|\leqslant \binom{k}{2}+\binom{k}{2}\left(\frac{n-k}{k}\right)^2+(k-1)(n-k)=\left(1-\frac{1}{k}\right)\frac{n^2}{2}.
-    \]
+\medskip
+\noindent
+\textbf{Count 1:} First pick $x$ and $z$, and there are $n(n-1)$ ways.
+If $x\sim z$, then $0$ choice for $y$; if $x\nsim z$, then at most $1$ choice for $y$.
+Hence the number of paths $\leqslant n(n-1)-2m$.
+
+\medskip
+\noindent
+\textbf{Count 2:} First pick $y$, then $x$ and $z$.
+By Jensen's inequality, we have
+\[
+n(n-1)-2m\geqslant\#\text{paths}=\sum_{y\in V(G)}\deg(y)(\deg(y)-1)\geqslant n\cdot\frac{2m}{n}\left(\frac{2m}{n}-1\right).
+\]
+
+It yields that $m\leqslant n\sqrt{n-1}/2$ and we finish the proof.
 \end{proof}
 
-\begin{theorem}
-    $\mathrm{ex}(n,\{C_3,C_4\})\leqslant \frac{n\sqrt{n-1}}{2}$.
+\begin{remark}\leavevmode
+\begin{itemize}
+    \item Equality holds when:
+    \begin{itemize}
+        \item $n=2$, $K_2$;
+        \item $n=5$, pentagon;
+        \item $n=10$, Petersen graph;
+        \item $n=50$, Hoffman--Singleton graph;
+        \item $n=3250$, open case.
+    \end{itemize}
+    \item Asymptotic: $\operatorname{ex}(n,\{C_3,C_4\})=(\frac{1}{2}+o(1))n^{3/2}$. Construction uses polarities of projective planes.
+    \item $\operatorname{ex}(n,C_4)=\bigl(\frac{1}{2}+o(1)\bigr)n^{3/2}$。
+\end{itemize}
+\end{remark}
+
+\begin{remark}
+    Consider $\operatorname{ex}(n,\{C_3,\ldots,C_{2m}\})$.
+    Classical lower-bound constructions come from incidence graphs of generalized $(m+1)$-gons:
+    \begin{itemize}
+        \item $m=2$: projective planes (generalized triangles);
+        \item $m=3$: generalized quadrangles;
+        \item $m=5$: generalized hexagons.
+    \end{itemize}
+    Indeed, the incidence graph of a generalized $d$-gon is bipartite of girth $2d$ and diameter $d$,
+    so it contains no cycle of length less than $2d$, and hence gives a construction for
+    $\operatorname{ex}(n,\{C_3,\ldots,C_{2d-2}\})$.
+    \end{remark}
+
+\section{Hall's Marriage Theorem}
+
+\begin{definition}
+Let $G=(S\cup T,E)$ be a bipartite graph.
+A \textbf{matching} $M\subseteq E$ of $G$ is a set of pairwise disjoint edges.
+Define $m(G)=\max\limits_{M\text{ matching}}|M|$, and we say $M$ is a \textbf{maximum matching} if $|M|=m(G)$.
+\end{definition}
+
+\begin{remark}
+A maximal matching may not be maximum, just like maximal subgroups of a group have different orders.
+\end{remark}
+
+\begin{theorem}[Hall's Marriage Theorem]\label{thm:hall}
+Let $G=(S\cup T,E)$ be a bipartite graph.
+Then $m(G)=|S|$ if and only if $|A|\leqslant |N(A)|$ for all $A\subseteq S$.
 \end{theorem}
+
+\begin{proof}
+    The ``only if'' direction is immediate: if there is a matching saturating $S$,
+    then for every subset $A \subseteq S$, the vertices of $A$ are matched to
+    distinct vertices in $N(A)$, so necessarily
+    \[
+    |A| \le |N(A)|.
+    \]
+    
+    We now prove the converse. Assume that
+    \[
+    |A| \le |N(A)| \qquad \text{for every } A \subseteq S.
+    \]
+    We shall show that there exists a matching saturating $S$.
+    
+    Choose a matching $M$ of maximum size. Suppose for a contradiction that
+    $M$ does \emph{not} saturate $S$. Then there exists a vertex
+    \[
+    u_0 \in S
+    \]
+    which is unmatched by $M$.
+    
+    Starting from $u_0$, we construct sets
+    \[
+    U=\{u_0,u_1,u_2,\dots\}\subseteq S,
+    \qquad
+    V=\{v_1,v_2,\dots\}\subseteq T
+    \]
+    as follows.
+    
+    \medskip
+    
+    \noindent
+    \textbf{Step 1.}
+    Since $|N(\{u_0\})| \ge 1$, the vertex $u_0$ has some neighbor $v_1 \in T$.
+    
+    If $v_1$ is unmatched by $M$, then
+    \[
+    M' = M \cup \{\{u_0,v_1\}\}
+    \]
+    is a matching larger than $M$, contradicting the maximality of $M$.
+    Hence $v_1$ must be matched in $M$, say
+    \[
+    \{u_1,v_1\}\in M
+    \]
+    for some $u_1\in S$.
+    
+    \begin{center}
+        \begin{tikzpicture}[
+            yscale=1.2,
+            matched/.style={very thick, blue},
+            unmatched/.style={thick, dashed, red!70!black},
+            svert/.style={vertex, fill=black!80, minimum size=5pt, label distance=2pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt, label distance=2pt},
+        ]
+            \node[svert, label=left:{$u_0$}] (u0) at (0,2) {};
+            \node[svert, label=left:{$u_1$}] (u1) at (0,1) {};
+            \node[tvert, label=right:{$v_1$}] (v1) at (2.5,1.5) {};
+
+            \draw[unmatched] (u0) -- node[above, font=\footnotesize] {$\notin M$} (v1);
+            \draw[matched] (u1) -- node[below, font=\footnotesize] {$\in M$} (v1);
+
+            \node[font=\footnotesize, anchor=north] at (0,0.4) {$S$};
+            \node[font=\footnotesize, anchor=north] at (2.5,0.4) {$T$};
+
+            \draw[gray, thin] (-0.4,0.5) rectangle (0.4,2.5);
+            \draw[gray, thin] (2.1,0.5) rectangle (2.9,2.5);
+
+            \node[red!70!black, font=\footnotesize] at (0,2.7) {unmatched};
+        \end{tikzpicture}
+    \end{center}
+    
+    \medskip
+    
+    \noindent
+    \textbf{Inductive step.}
+    Suppose we have already found distinct vertices
+    \[
+    u_0,u_1,\dots,u_k \in S
+    \quad\text{and}\quad
+    v_1,\dots,v_k \in T
+    \]
+    such that for each $i=1,\dots,k$,
+    \[
+    \{u_i,v_i\}\in M,
+    \]
+    and every neighbor of $\{u_0,\dots,u_{k-1}\}$ that we have encountered so far
+    lies in $\{v_1,\dots,v_k\}$.
+    
+    \begin{center}
+        \begin{tikzpicture}[
+            xscale=1.5, yscale=1.3,
+            matched/.style={very thick, blue},
+            unmatched/.style={thick, dashed, red!70!black},
+            svert/.style={vertex, fill=black!80, minimum size=5pt, label distance=2pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt, label distance=2pt},
+        ]
+            \node[svert, label=left:{$u_0$}] (u0) at (0,3) {};
+            \node[svert, label=left:{$u_1$}] (u1) at (0,2) {};
+            \node[svert, label=left:{$u_2$}] (u2) at (0,1) {};
+            \node at (0,0.3) {$\vdots$};
+            \node[svert, label=left:{$u_k$}] (uk) at (0,-0.5) {};
+
+            \node[tvert, label=right:{$v_1$}] (v1) at (2.5,2.5) {};
+            \node[tvert, label=right:{$v_2$}] (v2) at (2.5,1.5) {};
+            \node at (2.5,0.7) {$\vdots$};
+            \node[tvert, label=right:{$v_k$}] (vk) at (2.5,-0.1) {};
+            \node[tvert, label=right:{\color{red!70!black}$v_{k+1}$\,?}] (vk1) at (2.5,-1) {};
+
+            \draw[unmatched] (u0) -- (v1);
+            \draw[matched] (u1) -- (v1);
+            \draw[unmatched] (u1) -- (v2);
+            \draw[matched] (u2) -- (v2);
+            \draw[matched] (uk) -- (vk);
+
+            \draw[unmatched, thick, red!70!black] (uk) -- (vk1);
+            \node[font=\scriptsize, red!70!black] at (1.25,-1.5) {new edge from $A_k$};
+
+            \draw[gray, thin] (-0.6,-1.3) rectangle (0.6,3.5);
+            \draw[gray, thin] (1.9,-1.5) rectangle (3.1,3.1);
+            \node[font=\footnotesize, gray] at (0,3.8) {$A_k\subseteq S$};
+            \node[font=\footnotesize, gray] at (2.5,3.4) {$N(A_k)\subseteq T$};
+
+            \draw [decorate, decoration={brace, amplitude=4pt}, gray]
+                (3.3,3.1) -- (3.3,-0.1) node[midway, right=5pt, font=\scriptsize, gray] {$k$ vertices};
+            \draw [decorate, decoration={brace, amplitude=4pt, mirror}, gray]
+                (-0.8,3.5) -- (-0.8,-0.8) node[midway, left=5pt, font=\scriptsize, gray] {$k{+}1$ vertices};
+        \end{tikzpicture}
+    \end{center}
+    
+    Consider the set
+    \[
+    A_k=\{u_0,u_1,\dots,u_k\}\subseteq S.
+    \]
+    By Hall's condition,
+    \[
+    |N(A_k)| \ge |A_k| = k+1.
+    \]
+    But the set $\{v_1,\dots,v_k\}$ has only $k$ vertices, so $N(A_k)$ cannot be
+    contained in $\{v_1,\dots,v_k\}$. Therefore there exists some
+    \[
+    v_{k+1}\in N(A_k)\setminus \{v_1,\dots,v_k\}.
+    \]
+    Choose $u_j \in A_k$ adjacent to $v_{k+1}$.
+    
+    If $v_{k+1}$ is unmatched by $M$, then we have found an augmenting path
+    \[
+    u_0,\, v_1,\, u_1,\, v_2,\, u_2,\, \dots,\, v_k,\, u_k,\, v_{k+1},
+    \]
+    where the edges
+    \[
+    u_i v_i \in M \quad (1\le i\le k)
+    \]
+    are matched edges, and the other edges are not in $M$.
+    By exchanging matched and unmatched edges along this path, we obtain a new
+    matching with one more edge than $M$, again contradicting the maximality of $M$.
+    
+    \begin{center}
+        \begin{tikzpicture}[
+            xscale=1.6, yscale=1.1,
+            matched/.style={very thick, blue},
+            unmatched/.style={thick, dashed, red!70!black},
+            newmatched/.style={very thick, ForestGreen},
+            svert/.style={vertex, fill=black!80, minimum size=5pt, label distance=2pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt, label distance=2pt},
+        ]
+            \node[svert, label=above:{$u_0$}] (u0) at (0,1) {};
+            \node[tvert, label=above:{$v_1$}] (v1) at (1,1) {};
+            \node[svert, label=above:{$u_1$}] (u1) at (2,1) {};
+            \node[tvert, label=above:{$v_2$}] (v2) at (3,1) {};
+            \node at (3.7,1) {$\cdots$};
+            \node[tvert, label=above:{$v_k$}] (vk) at (4.4,1) {};
+            \node[svert, label=above:{$u_k$}] (uk) at (5.4,1) {};
+            \node[tvert, label=above:{$v_{k+1}$}] (vk1) at (6.4,1) {};
+
+            \draw[unmatched] (u0) -- (v1);
+            \draw[matched] (v1) -- (u1);
+            \draw[unmatched] (u1) -- (v2);
+            \draw[matched] (vk) -- (uk);
+            \draw[unmatched] (uk) -- (vk1);
+
+            \node[red!70!black, font=\scriptsize] at (0,0.4) {unmatched};
+            \node[red!70!black, font=\scriptsize] at (6.4,0.4) {unmatched};
+
+            \node[font=\small] at (3.2, 0) {Before: augmenting path};
+
+            \draw[->, thick, gray] (3.2,-0.4) -- (3.2,-1.0);
+
+            \begin{scope}[yshift=-2cm]
+                \node[svert, label=above:{$u_0$}] (u0') at (0,1) {};
+                \node[tvert, label=above:{$v_1$}] (v1') at (1,1) {};
+                \node[svert, label=above:{$u_1$}] (u1') at (2,1) {};
+                \node[tvert, label=above:{$v_2$}] (v2') at (3,1) {};
+                \node at (3.7,1) {$\cdots$};
+                \node[tvert, label=above:{$v_k$}] (vk') at (4.4,1) {};
+                \node[svert, label=above:{$u_k$}] (uk') at (5.4,1) {};
+                \node[tvert, label=above:{$v_{k+1}$}] (vk1') at (6.4,1) {};
+
+                \draw[newmatched] (u0') -- (v1');
+                \draw[unmatched, gray!60] (v1') -- (u1');
+                \draw[newmatched] (u1') -- (v2');
+                \draw[unmatched, gray!60] (vk') -- (uk');
+                \draw[newmatched] (uk') -- (vk1');
+
+                \node[font=\small] at (3.2, 0) {After: $|M'|=|M|+1$};
+            \end{scope}
+
+            \node[font=\scriptsize, blue, anchor=west] at (7.2,1) {$\in M$};
+            \draw[matched] (6.9,1) -- (7.15,1);
+            \node[font=\scriptsize, red!70!black, anchor=west] at (7.2,0.5) {$\notin M$};
+            \draw[unmatched] (6.9,0.5) -- (7.15,0.5);
+            \node[font=\scriptsize, ForestGreen, anchor=west] at (7.2,-1) {$\in M'$};
+            \draw[newmatched] (6.9,-1) -- (7.15,-1);
+        \end{tikzpicture}
+    \end{center}
+    
+    So $v_{k+1}$ must be matched by $M$. Since $v_{k+1}\notin \{v_1,\dots,v_k\}$,
+    its partner in $M$ cannot be any of $u_1,\dots,u_k$ already paired with
+    $v_1,\dots,v_k$. Hence there exists a new vertex
+    \[
+    u_{k+1}\in S\setminus \{u_0,\dots,u_k\}
+    \]
+    such that
+    \[
+    \{u_{k+1},v_{k+1}\}\in M.
+    \]
+    This continues the construction.
+    
+    \medskip
+    
+    Thus, as long as no unmatched vertex of $T$ is reached, we obtain larger and
+    larger sets
+    \[
+    A_k=\{u_0,\dots,u_k\}\subseteq S
+    \]
+    together with distinct vertices $v_1,\dots,v_{k+1}\in N(A_k)$.
+    Since the graph is finite, this process cannot continue indefinitely. Therefore,
+    at some stage we must encounter a vertex $v_{m+1}\in T$ that is unmatched by
+    $M$.
+    
+    But then the alternating path
+    \[
+    u_0,\, v_1,\, u_1,\, v_2,\, \dots,\, v_m,\, u_m,\, v_{m+1}
+    \]
+    is an augmenting path for $M$. Replacing on this path the matched edges of $M$
+    by the unmatched ones produces a matching with size $|M|+1$, contradicting
+    the maximality of $M$.
+    
+    This contradiction shows that every maximum matching must in fact saturate $S$.
+    Hence there exists a matching that matches every vertex of $S$.
+    \end{proof}
+
+\begin{definition}
+A \textbf{vertex cover} of a graph is a set $W\subseteq V$ such that each edge of $E$ contains at least one vertex of $W$.
+\end{definition}
+
+The following proposition is a generalization of Theorem~\ref{thm:hall}.
+
+\begin{proposition}\label{prop:deficiency}
+Let $G=(S\cup T,E)$ be a bipartite graph. Then
+\[
+m(G)=|S|-\max_{A\subseteq S}\bigl(|A|-|N(A)|\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+    Set
+    \[
+    \delta:=\max_{A\subseteq S}\bigl(|A|-|N(A)|\bigr).
+    \]
+    Choose a subset $A_0\subseteq S$ such that
+    \[
+    |A_0|-|N(A_0)|=\delta.
+    \]
+    
+    We first show that
+    \[
+    m(G)\le |S|-\delta.
+    \]
+    Indeed, let $M$ be any matching in $G$. Every vertex of $A_0$ matched by $M$
+    must be matched to a distinct vertex of $N(A_0)$, since vertices of $A_0$ can
+    only be matched to their neighbors. Therefore at most $|N(A_0)|$ vertices of
+    $A_0$ can be matched. Hence at least
+    \[
+    |A_0|-|N(A_0)|=\delta
+    \]
+    vertices of $A_0$ remain unmatched. So every matching leaves at least $\delta$
+    vertices of $S$ unmatched, and therefore
+    \[
+    |M|\le |S|-\delta.
+    \]
+    Since $M$ was arbitrary, it follows that
+    \[
+    m(G)\le |S|-\delta.
+    \]
+    
+    \begin{center}
+        \begin{tikzpicture}[
+            yscale=1.0, xscale=1.1,
+            matched/.style={very thick, blue},
+            svert/.style={vertex, fill=black!80, minimum size=5pt, label distance=2pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt, label distance=2pt},
+        ]
+            \node[svert] (s1) at (0,4) {};
+            \node[svert] (s2) at (0,3.3) {};
+            \node[svert, fill=red!60] (a1) at (0,2.4) {};
+            \node[svert, fill=red!60] (a2) at (0,1.7) {};
+            \node[svert, fill=red!60] (a3) at (0,1.0) {};
+            \node[svert, fill=red!60] (a4) at (0,0.3) {};
+
+            \node[tvert] (t1) at (3,3.8) {};
+            \node[tvert] (t2) at (3,3.1) {};
+            \node[tvert, fill=orange!50] (n1) at (3,2.1) {};
+            \node[tvert, fill=orange!50] (n2) at (3,1.4) {};
+            \node[tvert] (t3) at (3,0.5) {};
+
+            \draw[matched] (s1) -- (t1);
+            \draw[matched] (s2) -- (t2);
+            \draw[matched] (a1) -- (n1);
+            \draw[matched] (a2) -- (n2);
+
+            \draw[gray, thin] (a1) -- (n1);
+            \draw[gray, thin] (a2) -- (n2);
+            \draw[gray, thin, dashed] (a3) -- (n1);
+            \draw[gray, thin, dashed] (a3) -- (n2);
+            \draw[gray, thin, dashed] (a4) -- (n1);
+
+            \draw [decorate, decoration={brace, amplitude=5pt, mirror}, red!70!black]
+                (0.35,0.0) -- (0.35,2.7) node[midway, right=6pt, font=\scriptsize, red!70!black] {$A_0$};
+            \draw [decorate, decoration={brace, amplitude=5pt}, orange!70!black]
+                (2.65,1.1) -- (2.65,2.4) node[midway, left=6pt, font=\scriptsize, orange!70!black] {$N(A_0)$};
+
+            \node[font=\scriptsize, red!70!black] at (0,-0.4) {$|A_0|=4$};
+            \node[font=\scriptsize, orange!70!black] at (3,-0.2) {$|N(A_0)|=2$};
+            \node[font=\scriptsize] at (1.5,-0.9) {$\delta=|A_0|-|N(A_0)|=2$ vertices must remain unmatched};
+
+            \draw[gray, thin, rounded corners] (-0.5,-0.1) rectangle (0.5,4.5);
+            \draw[gray, thin, rounded corners] (2.5,0.1) rectangle (3.5,4.3);
+            \node[font=\footnotesize, gray] at (0,4.8) {$S$};
+            \node[font=\footnotesize, gray] at (3,4.6) {$T$};
+
+            \node[font=\scriptsize, blue, anchor=west] at (4,4) {matched};
+            \draw[matched] (3.7,4) -- (3.95,4);
+            \node[font=\scriptsize, gray, anchor=west] at (4,3.5) {possible edges};
+            \draw[gray, thin, dashed] (3.7,3.5) -- (3.95,3.5);
+
+            \node[cross out, draw=red!70!black, thick, inner sep=2pt] at (-0.35,0.3) {};
+            \node[cross out, draw=red!70!black, thick, inner sep=2pt] at (-0.35,1.0) {};
+        \end{tikzpicture}
+    \end{center}
+    
+    It remains to prove the reverse inequality
+    \[
+    m(G)\ge |S|-\delta.
+    \]
+    
+    Let $D$ be a set of $\delta$ new vertices disjoint from $S\cup T$, and define a
+    new bipartite graph
+    \[
+    G^*=(S\cup (T\cup D),E^*),
+    \]
+    where
+    \[
+    E^*:=E\cup \{\{s,d\}: s\in S,\ d\in D\}.
+    \]
+    In other words, each vertex of $D$ is joined to every vertex of $S$.
+    
+    \begin{center}
+        \begin{tikzpicture}[
+            yscale=0.95, xscale=1.0,
+            matched/.style={very thick, ForestGreen},
+            discarded/.style={very thick, red!50, dashed, cross out},
+            svert/.style={vertex, fill=black!80, minimum size=5pt, label distance=2pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt, label distance=2pt},
+            dvert/.style={vertex, fill=violet!60, minimum size=5pt, label distance=2pt},
+        ]
+            % --- Left: G* with matching M* ---
+            \begin{scope}[shift={(0,0)}]
+                \node[font=\small, anchor=south] at (1.5,5.5) {$G^*$: matching $M^*$ saturates $S$};
+
+                \node[svert, label=left:{\footnotesize$s_1$}] (s1) at (0,5) {};
+                \node[svert, label=left:{\footnotesize$s_2$}] (s2) at (0,4) {};
+                \node[svert, label=left:{\footnotesize$s_3$}] (s3) at (0,3) {};
+                \node[svert, label=left:{\footnotesize$s_4$}] (s4) at (0,2) {};
+                \node[svert, label=left:{\footnotesize$s_5$}] (s5) at (0,1) {};
+
+                \node[tvert, label=right:{\footnotesize$t_1$}] (t1) at (3,4.8) {};
+                \node[tvert, label=right:{\footnotesize$t_2$}] (t2) at (3,3.8) {};
+                \node[tvert, label=right:{\footnotesize$t_3$}] (t3) at (3,2.8) {};
+
+                \node[dvert, label=right:{\footnotesize$d_1$}] (d1) at (3,1.6) {};
+                \node[dvert, label=right:{\footnotesize$d_2$}] (d2) at (3,0.6) {};
+
+                \foreach \s in {s1,s2,s3,s4,s5} {
+                    \draw[violet!30, thin] (\s) -- (d1);
+                    \draw[violet!30, thin] (\s) -- (d2);
+                }
+
+                \draw[gray, thin, dashed] (s1) -- (t1);
+                \draw[gray, thin, dashed] (s1) -- (t2);
+                \draw[gray, thin, dashed] (s2) -- (t1);
+                \draw[gray, thin, dashed] (s2) -- (t2);
+                \draw[gray, thin, dashed] (s3) -- (t2);
+                \draw[gray, thin, dashed] (s3) -- (t3);
+                \draw[gray, thin, dashed] (s4) -- (t3);
+                \draw[gray, thin, dashed] (s5) -- (t3);
+
+                \draw[matched] (s1) -- (t1);
+                \draw[matched] (s2) -- (t2);
+                \draw[matched] (s3) -- (t3);
+                \draw[matched] (s4) -- (d1);
+                \draw[matched] (s5) -- (d2);
+
+                \draw[gray, thin, rounded corners] (-0.5,0.4) rectangle (0.5,5.5);
+                \draw[gray, thin, rounded corners] (2.5,2.4) rectangle (3.5,5.3);
+                \draw[violet!50, thin, rounded corners] (2.5,0.2) rectangle (3.5,2.1);
+
+                \node[font=\footnotesize, gray] at (0,0) {$S$};
+                \node[font=\footnotesize, gray] at (3,5.6) {$T$};
+                \node[font=\footnotesize, violet!70!black] at (3,-0.1) {$D$ ($\delta=2$)};
+            \end{scope}
+
+            % --- Arrow ---
+            \draw[->, thick, gray] (4.3,3) -- (5.2,3) node[midway, above, font=\scriptsize, gray] {discard};
+
+            % --- Right: G with matching M ---
+            \begin{scope}[shift={(6,0)}]
+                \node[font=\small, anchor=south] at (1.5,5.5) {$G$: matching of size $|S|-\delta$};
+
+                \node[svert, label=left:{\footnotesize$s_1$}] (s1') at (0,5) {};
+                \node[svert, label=left:{\footnotesize$s_2$}] (s2') at (0,4) {};
+                \node[svert, label=left:{\footnotesize$s_3$}] (s3') at (0,3) {};
+                \node[svert, label=left:{\footnotesize$s_4$}] (s4') at (0,2) {};
+                \node[svert, label=left:{\footnotesize$s_5$}] (s5') at (0,1) {};
+
+                \node[tvert, label=right:{\footnotesize$t_1$}] (t1') at (3,4.8) {};
+                \node[tvert, label=right:{\footnotesize$t_2$}] (t2') at (3,3.8) {};
+                \node[tvert, label=right:{\footnotesize$t_3$}] (t3') at (3,2.8) {};
+
+                \draw[gray, thin, dashed] (s1') -- (t1');
+                \draw[gray, thin, dashed] (s1') -- (t2');
+                \draw[gray, thin, dashed] (s2') -- (t1');
+                \draw[gray, thin, dashed] (s2') -- (t2');
+                \draw[gray, thin, dashed] (s3') -- (t2');
+                \draw[gray, thin, dashed] (s3') -- (t3');
+                \draw[gray, thin, dashed] (s4') -- (t3');
+                \draw[gray, thin, dashed] (s5') -- (t3');
+
+                \draw[very thick, blue] (s1') -- (t1');
+                \draw[very thick, blue] (s2') -- (t2');
+                \draw[very thick, blue] (s3') -- (t3');
+
+                \node[cross out, draw=red!70!black, thick, inner sep=2pt] at (-0.35,2) {};
+                \node[cross out, draw=red!70!black, thick, inner sep=2pt] at (-0.35,1) {};
+
+                \draw[gray, thin, rounded corners] (-0.5,0.4) rectangle (0.5,5.5);
+                \draw[gray, thin, rounded corners] (2.5,2.4) rectangle (3.5,5.3);
+
+                \node[font=\footnotesize, gray] at (0,0) {$S$};
+                \node[font=\footnotesize, gray] at (3,5.6) {$T$};
+
+                \node[font=\scriptsize, red!70!black] at (0.9,1.5) {unmatched};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    Now let $A\subseteq S$. In $G^*$, the neighborhood of $A$ is
+    \[
+    N^*(A)=N(A)\cup D.
+    \]
+    Since $D\cap T=\varnothing$, this union is disjoint, so
+    \[
+    |N^*(A)|=|N(A)|+|D|=|N(A)|+\delta.
+    \]
+    By the definition of $\delta$ as the maximum of $|A|-|N(A)|$, we have
+    \[
+    |A|-|N(A)|\le \delta
+    \]
+    for every $A\subseteq S$. Rearranging gives
+    \[
+    |A|\le |N(A)|+\delta=|N^*(A)|.
+    \]
+    Thus Hall's condition holds in $G^*$:
+    \[
+    |A|\le |N^*(A)|\qquad\text{for all }A\subseteq S.
+    \]
+    
+    Therefore, by Hall's theorem, there exists a matching $M^*$ in $G^*$ which
+    saturates $S$. In particular,
+    \[
+    |M^*|=|S|.
+    \]
+    
+    Some edges of $M^*$ may use vertices of $D$. Since each vertex of $D$ can be
+    incident with at most one edge of the matching, the number of such edges is at
+    most
+    \[
+    |D|=\delta.
+    \]
+    Delete from $M^*$ all edges incident with $D$. The remaining edges still form a
+    matching, and all of them belong to the original graph $G$, because the only
+    edges added when passing from $G$ to $G^*$ were those incident with $D$.
+    
+    Hence we obtain a matching in $G$ of size at least
+    \[
+    |S|-\delta.
+    \]
+    So
+    \[
+    m(G)\ge |S|-\delta.
+    \]
+    
+    Combining the two inequalities yields
+    \[
+    m(G)=|S|-\delta
+    =|S|-\max_{A\subseteq S}\bigl(|A|-|N(A)|\bigr).
+    \]
+    This proves the proposition.
+    \end{proof}
+
+\begin{theorem}[K\H{o}nig, 1931]\label{thm:konig}
+In a bipartite graph $G=(S\cup T,E)$, we have
+\[
+\max\{|M|:M\text{ matching}\}=\min\{|C|:C\text{ vertex cover}\}.
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:deficiency}, $m(G)=|S|-|A_0|+|N(A_0)|=|S\setminus A_0|+|N(A_0)|$ for some $A_0$.
+Note that $N(A_0)\cup (S\setminus A_0)$ is a vertex cover.
+So $\min|C|\leqslant \max|M|$.
+
+On the other hand, $|C|\geqslant |M|$ for any vertex cover $C$ and any matching $M$, because $C$ must cover each edge of $M$.
+Therefore, $\min|C|=\max|M|$.
+\end{proof}
+
+\section{Transversal Theory}
+
+There is a one-to-one correspondence between bipartite graphs and families of subsets of $[n]$, where $n=|S|$.
+
+\begin{definition}
+Let $\mathcal{F}$ be a family of subsets of $[n]$.
+A \textbf{transversal} of $\mathcal{F}$ is an injective function $\varphi:\mathcal{F}\to[n]$ such that $\varphi(F)\in F$ for each $F\in\mathcal{F}$.
+\end{definition}
+
+The following theorem is equivalent to Theorem~\ref{thm:hall}.
+
+\begin{theorem}\label{thm:transversal}
+Let $\mathcal{F}=\{F_1,\ldots,F_m\}$ be a family of subsets of $[n]$.
+Then $\mathcal{F}$ has a transversal if and only if $\bigl|\bigcup_{i\in I}F_i\bigr|\geqslant |I|$ for all $I\subseteq[m]$.
+\end{theorem}
+
+\begin{proof}
+    We show that the theorem is equivalent to Hall's Marriage Theorem.
+    
+    Given the family
+    \[
+    \mathcal F=\{F_1,\dots,F_m\},
+    \]
+    construct a bipartite graph
+    \[
+    G=(S\cup T,E)
+    \]
+    as follows:
+    \[
+    S=\{1,2,\dots,m\},\qquad T=[n].
+    \]
+    For each $i\in S$ and $j\in T$, put
+    \[
+    \{i,j\}\in E \quad \Longleftrightarrow \quad j\in F_i.
+    \]
+    Thus the neighbors of $i\in S$ are exactly the elements of $F_i$.
+    
+    We now compare the two statements.
+    
+    \medskip
+    
+    \noindent
+    \textbf{Transversals correspond to matchings saturating $S$.}
+    
+    Suppose first that $\mathcal F$ has a transversal, i.e. an injective map
+    \[
+    \varphi:\mathcal F\to [n]
+    \]
+    such that $\varphi(F_i)\in F_i$ for every $i$.
+    
+    For each $i\in S$, join $i$ to the vertex $\varphi(F_i)\in T$.
+    Since $\varphi(F_i)\in F_i$, this is an edge of $G$.
+    Since $\varphi$ is injective, these chosen vertices of $T$ are all distinct.
+    Hence these edges form a matching saturating $S$.
+    
+    Conversely, suppose that $G$ has a matching saturating $S$.
+    Then for each $i\in S$ there is a unique vertex $j_i\in T$ such that
+    $i$ is matched to $j_i$.
+    Because $\{i,j_i\}\in E$, we have $j_i\in F_i$.
+    Since the matching uses distinct vertices of $T$, the map
+    \[
+    F_i\longmapsto j_i
+    \]
+    is injective. Therefore it is a transversal of $\mathcal F$.
+    
+    So $\mathcal F$ has a transversal if and only if $G$ has a matching
+    saturating $S$.
+    
+    \medskip
+    
+    \noindent
+    \textbf{The union condition corresponds to Hall's condition.}
+    
+    Let $I\subseteq [m]$, and regard $I$ as a subset of $S$.
+    Then the neighborhood of $I$ in $G$ is
+    \[
+    N(I)=\bigcup_{i\in I}F_i.
+    \]
+    Indeed, a vertex $j\in T$ is adjacent to some $i\in I$ exactly when
+    $j\in F_i$ for some $i\in I$.
+    
+    Therefore the condition
+    \[
+    \left|\bigcup_{i\in I}F_i\right|\ge |I|
+    \qquad\text{for all }I\subseteq [m]
+    \]
+    is exactly Hall's condition
+    \[
+    |N(A)|\ge |A|
+    \qquad\text{for all }A\subseteq S.
+    \]
+    
+    \medskip
+    
+    By Hall's Marriage Theorem, $G$ has a matching saturating $S$ if and only if
+    \[
+    |N(A)|\ge |A|\qquad\text{for all }A\subseteq S.
+    \]
+    By the two correspondences above, this is equivalent to saying that
+    $\mathcal F$ has a transversal if and only if
+    \[
+    \left|\bigcup_{i\in I}F_i\right|\ge |I|
+    \qquad\text{for all }I\subseteq [m].
+    \]
+    Hence the theorem is equivalent to Hall's Marriage Theorem.
+    \end{proof}
+
+
+\begin{theorem}[Birkhoff, 1946]
+    Let $A=(a_{ij})\in M_n(\mathbb{Z}_{\ge 0})$ be an $n\times n$ matrix with nonnegative
+    integer entries such that every row sum and every column sum equals $\ell$.
+    Then $A$ can be written as the sum of $\ell$ permutation matrices.
+    \end{theorem}
+    
+    \begin{proof}
+    We argue by induction on $\ell$.
+    
+    If $\ell=0$, then $A=0$, so the statement is trivial.
+    If $\ell=1$, then each row contains exactly one entry equal to $1$ and all other
+    entries are $0$, and the same holds for each column. Hence $A$ itself is a
+    permutation matrix.
+    
+    Now assume $\ell\ge 1$ and that the result holds for $\ell-1$.
+    Let
+    \[
+    F_i:=\{\,j\in [n]: a_{ij}>0\,\},\qquad 1\le i\le n.
+    \]
+    We claim that the family $\mathcal F=\{F_1,\dots,F_n\}$ satisfies Hall's condition:
+    for every subset $I\subseteq [n]$,
+    \[
+    \left|\bigcup_{i\in I}F_i\right|\ge |I|.
+    \]
+    
+    Indeed, fix $I\subseteq [n]$ and write $k:=|I|$.
+    Consider the rows indexed by $I$.
+    Since each of these rows has sum $\ell$, the total sum of all entries in these rows is
+    \[
+    \sum_{i\in I}\sum_{j=1}^n a_{ij}=k\ell.
+    \]
+    Let
+    \[
+    J:=\bigcup_{i\in I}F_i.
+    \]
+    By definition of $F_i$, the entries of the rows indexed by $I$ are zero outside the
+    columns in $J$. Hence all of the total weight $k\ell$ from those rows is concentrated
+    in the columns of $J$.
+    
+    On the other hand, each column of $A$ has sum $\ell$, so any single column can
+    contribute at most $\ell$ to the sum of the entries in the rows indexed by $I$.
+    Therefore
+    \[
+    k\ell \le |J|\ell.
+    \]
+    Since $\ell>0$, dividing by $\ell$ gives
+    \[
+    |J|=\left|\bigcup_{i\in I}F_i\right|\ge k=|I|.
+    \]
+    This proves Hall's condition.
+    
+    By the transversal theorem, there exists an injective map
+    \[
+    \varphi:\{F_1,\dots,F_n\}\to [n]
+    \]
+    such that $\varphi(F_i)\in F_i$ for every $i$.
+    Equivalently, for each $i\in [n]$ we may choose a distinct column
+    \[
+    j_i:=\varphi(F_i)\in F_i,
+    \]
+    so that $a_{i j_i}>0$ and the numbers $j_1,\dots,j_n$ are pairwise distinct.
+    
+    Now define an $n\times n$ matrix $P=(p_{ij})$ by
+    \[
+    p_{ij}=
+    \begin{cases}
+    1,& j=j_i,\\
+    0,& j\ne j_i.
+    \end{cases}
+    \]
+    Because the columns $j_1,\dots,j_n$ are all distinct, each row of $P$ contains exactly
+    one $1$, and each column of $P$ contains exactly one $1$. Thus $P$ is a permutation
+    matrix.
+    
+    Moreover, whenever $p_{ij}=1$, we have $j=j_i\in F_i$, so $a_{ij}>0$.
+    Hence every entry of $A-P$ is still a nonnegative integer.
+    Also, each row sum of $A-P$ equals $\ell-1$, since we subtract exactly one $1$ from
+    each row, and similarly each column sum of $A-P$ equals $\ell-1$.
+    
+    Therefore $A-P$ is a nonnegative integer matrix all of whose row sums and column
+    sums are $\ell-1$. By the induction hypothesis, $A-P$ is a sum of $\ell-1$
+    permutation matrices. Adding back $P$, we conclude that $A$ is a sum of $\ell$
+    permutation matrices.
+    \end{proof}
+
+We can identify a bipartite graph with an $s$-$t$ flow network by adding a source $s$ connected to every vertex in $S$ and a sink $t$ connected to every vertex in $T$, each edge having capacity $1$.
+
+    \begin{center}
+        \begin{tikzpicture}[
+            xscale=1.3, yscale=1.0,
+            svert/.style={vertex, fill=black!80, minimum size=5pt},
+            tvert/.style={vertex, fill=black!40, minimum size=5pt},
+            caplabel/.style={font=\scriptsize, midway, auto},
+            >=stealth,
+        ]
+            \node[vertex, fill=blue!60, minimum size=7pt, label={left:\small $s$}] (s) at (-2, 2) {};
+
+            \node[svert, label={[font=\scriptsize]above:$s_1$}] (s1) at (0, 4)   {};
+            \node[svert, label={[font=\scriptsize]left:$s_2$}]  (s2) at (0, 2.8) {};
+            \node[svert, label={[font=\scriptsize]left:$s_3$}]  (s3) at (0, 1.6) {};
+            \node[svert, label={[font=\scriptsize]below:$s_4$}] (s4) at (0, 0.4) {};
+
+            \node[tvert, label={[font=\scriptsize]above:$t_1$}] (t1) at (3, 3.8) {};
+            \node[tvert, label={[font=\scriptsize]right:$t_2$}] (t2) at (3, 2.6) {};
+            \node[tvert, label={[font=\scriptsize]right:$t_3$}] (t3) at (3, 1.4) {};
+            \node[tvert, label={[font=\scriptsize]below:$t_4$}] (t4) at (3, 0.2) {};
+
+            \node[vertex, fill=red!60, minimum size=7pt, label={right:\small $t$}] (t) at (5, 2) {};
+
+            \foreach \i in {1,...,4}
+                \draw[->, thick, blue!60!black] (s) -- (s\i) node[caplabel, above, sloped] {$1$};
+
+            \draw[thick] (s1) -- (t1);
+            \draw[thick] (s1) -- (t2);
+            \draw[thick] (s2) -- (t2);
+            \draw[thick] (s2) -- (t3);
+            \draw[thick] (s3) -- (t1);
+            \draw[thick] (s3) -- (t3);
+            \draw[thick] (s4) -- (t3);
+            \draw[thick] (s4) -- (t4);
+
+            \foreach \j in {1,...,4}
+                \draw[->, thick, red!60!black] (t\j) -- (t) node[caplabel, above, sloped] {$1$};
+
+            \node[font=\scriptsize] at (1.5, 2.2) {capacity $1$};
+
+            \draw[gray, thin, rounded corners] (-0.5, -0.1) rectangle (0.5, 4.5);
+            \draw[gray, thin, rounded corners] (2.5, -0.3) rectangle (3.5, 4.3);
+            \node[font=\footnotesize, gray] at (0, 4.8) {$S$};
+            \node[font=\footnotesize, gray] at (3, 4.6) {$T$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{definition}[$s$-$t$ flow]
+        Let $N=(V,E)$ be a directed network with source $s\in V$, sink $t\in V$, and
+        capacity function
+        \[
+        c:E\to \mathbb{R}_{\ge 0}.
+        \]
+        An \emph{$s$-$t$ flow} is a function
+        \[
+        f:E\to \mathbb{R}_{\ge 0}
+        \]
+        such that:
+        
+        \begin{enumerate}
+            \item[(i)] \textbf{Capacity constraint:}
+            \[
+            0\le f(e)\le c(e)\qquad \text{for all } e\in E.
+            \]
+        
+            \item[(ii)] \textbf{Flow conservation:} for every vertex $v\in V\setminus\{s,t\}$,
+            \[
+            \sum_{\substack{(u,v)\in E}} f(u,v)
+            \;=\;
+            \sum_{\substack{(v,w)\in E}} f(v,w).
+            \]
+        \end{enumerate}
+        
+        The \emph{value} of the flow $f$ is defined by
+        \[
+        |f|
+        :=
+        \sum_{\substack{(s,v)\in E}} f(s,v)
+        \]
+        Equivalently, by flow conservation,
+        \[
+        |f|
+        =
+        \sum_{\substack{(u,t)\in E}} f(u,t)
+        \]
+        \end{definition}
+        
+        \begin{definition}[$s$-$t$ cut]
+        Let $N=(V,E)$ be a directed network with source $s$ and sink $t$.
+        An \emph{$s$-$t$ cut} is a partition $(S,T)$ of $V$ such that
+        \[
+        S\cup T=V,\qquad S\cap T=\varnothing,\qquad s\in S,\qquad t\in T.
+        \]
+        The \emph{capacity} of the cut $(S,T)$ is
+        \[
+        c(S,T):=\sum_{\substack{(u,v)\in E\\ u\in S,\ v\in T}} c(u,v).
+        \]
+        That is, one sums the capacities of all directed edges going from $S$ to $T$.
+        \end{definition}
+
+\begin{theorem}[Max-flow min-cut theorem]\label{thm:maxflow}
+The maximum value of an $s$-$t$ flow is equal to the minimum capacity over all $s$-$t$ cuts.
+\end{theorem}
+
+\begin{proof}
+We divide the proof into two parts.
+
+\medskip
+\noindent
+\textbf{Step 1: For every flow $f$ and every $s$-$t$ cut $(S,T)$, one has}
+\[
+|f|\le c(S,T).
+\]
+
+Indeed, let $(S,T)$ be an $s$-$t$ cut, so $s\in S$ and $t\in T$.
+
+\begin{center}
+\begin{tikzpicture}[
+    xscale=1.6, yscale=1.2, >=stealth,
+    fwd/.style={->, thick},
+    elabel/.style={font=\scriptsize, midway, auto},
+]
+    \fill[blue!8, rounded corners=8pt] (-0.6, -0.5) rectangle (2.1, 3.3);
+    \fill[red!8, rounded corners=8pt] (3.4, -0.5) rectangle (6.1, 3.3);
+    \node[font=\footnotesize, blue!70!black] at (0.75, 3.6) {$S$};
+    \node[font=\footnotesize, red!70!black] at (4.75, 3.6) {$T$};
+
+    \node[vertex, fill=blue!60, minimum size=7pt, label={[font=\small]left:$s$}] (s) at (0, 1.4) {};
+    \node[vertex, minimum size=5pt, label={[font=\scriptsize]above:$a$}] (a) at (1.5, 2.6) {};
+    \node[vertex, minimum size=5pt, label={[font=\scriptsize]below:$b$}] (b) at (1.5, 0.2) {};
+    \node[vertex, minimum size=5pt, label={[font=\scriptsize]above:$c$}] (c) at (4, 2.6) {};
+    \node[vertex, minimum size=5pt, label={[font=\scriptsize]below:$d$}] (d) at (4, 0.2) {};
+    \node[vertex, fill=red!60, minimum size=7pt, label={[font=\small]right:$t$}] (t) at (5.5, 1.4) {};
+
+    \draw[fwd, blue!70!black] (s) -- (a) node[elabel] {$3/5$};
+    \draw[fwd, blue!70!black] (s) -- (b) node[elabel, swap] {$2/3$};
+    \draw[fwd, gray!70] (a) -- (b) node[elabel] {$1/2$};
+    \draw[fwd, red!70!black, very thick] (a) -- (c) node[elabel] {$\mathbf{2/4}$};
+    \draw[fwd, red!70!black, very thick] (b) -- (d) node[elabel, swap] {$\mathbf{3/3}$};
+    \draw[fwd] (c) -- (t) node[elabel] {$2/4$};
+    \draw[fwd] (d) -- (t) node[elabel, swap] {$3/3$};
+
+    \draw[thick, dashed, red!60!black]
+        (2.75, 3.5) -- (2.75, -0.7)
+        node[below, font=\scriptsize, red!60!black] {cut $(S,T)$};
+
+    \node[font=\scriptsize, align=left, text=red!60!black] at (2.75, -1.3)
+        {$c(S,T) = 4 + 3 = 7$};
+    \node[font=\scriptsize, align=left, text=blue!60!black] at (2.75, -1.8)
+        {$|f| = 3+2 = 5 \le 7$};
+\end{tikzpicture}
+\end{center}
+
+Consider the net flow leaving $S$:
+\[
+\sum_{\substack{u\in S,\ v\in T}} f(u,v)
+\;-\;
+\sum_{\substack{u\in T,\ v\in S}} f(u,v).
+\]
+By flow conservation at every vertex in $S\setminus\{s\}$, all internal contributions
+inside $S$ cancel, and this net flow is exactly the value of the flow:
+\[
+|f|
+=
+\sum_{\substack{u\in S,\ v\in T}} f(u,v)
+-
+\sum_{\substack{u\in T,\ v\in S}} f(u,v).
+\]
+Since $f(u,v)\ge 0$ for all edges, we obtain
+\[
+|f|
+\le
+\sum_{\substack{u\in S,\ v\in T}} f(u,v).
+\]
+By the capacity constraint $f(u,v)\le c(u,v)$,
+\[
+|f|
+\le
+\sum_{\substack{u\in S,\ v\in T}} c(u,v)
+=
+c(S,T).
+\]
+Thus every $s$-$t$ flow has value at most the capacity of every $s$-$t$ cut.
+Consequently,
+\[
+\max\{|f|: f \text{ is an $s$-$t$ flow}\}
+\le
+\min\{c(S,T): (S,T)\text{ is an $s$-$t$ cut}\}.
+\]
+
+\medskip
+\noindent
+\textbf{Step 2: Construct a flow whose value equals the capacity of some cut.}
+
+Let $f$ be a flow of maximum value.
+Consider the residual network $N_f$, whose vertex set is $V$ and whose edges are
+defined as follows:
+
+\begin{itemize}
+    \item if $(u,v)\in E$ and $f(u,v)<c(u,v)$, then there is a \emph{forward} residual
+    edge $u\to v$ with residual capacity $c(u,v)-f(u,v)$;
+    \item if $(u,v)\in E$ and $f(u,v)>0$, then there is a \emph{backward} residual
+    edge $v\to u$ with residual capacity $f(u,v)$.
+\end{itemize}
+
+\begin{center}
+    \begin{tikzpicture}[
+        xscale=1.1, yscale=1.0, >=stealth,
+        fwd/.style={->, thick},
+        rfwd/.style={->, thick, densely dashed, blue!70!black},
+        rback/.style={->, thick, densely dashed, red!70!black},
+        elabel/.style={font=\scriptsize, midway, fill=white, inner sep=1pt},
+        vertex/.style={circle, fill=black, inner sep=0pt, minimum size=5pt}
+    ]
+    
+        %---------------- Original network ----------------%
+        \begin{scope}[local bounding box=orig]
+            \node[font=\small\bfseries] at (1.2, 3.3) {Original network};
+    
+            \node[vertex, fill=blue!60, minimum size=6pt, label={[font=\scriptsize]left:$s$}] (s) at (0, 1.5) {};
+            \node[vertex, label={[font=\scriptsize]above:$u$}] (u) at (1.2, 2.6) {};
+            \node[vertex, label={[font=\scriptsize]below:$v$}] (v) at (1.2, 0.4) {};
+            \node[vertex, fill=red!60, minimum size=6pt, label={[font=\scriptsize]right:$t$}] (t) at (2.4, 1.5) {};
+    
+            \draw[fwd] (s) -- (u) node[elabel, above left] {$3/3$};
+            \draw[fwd] (s) -- (v) node[elabel, below left] {$2/2$};
+            \draw[fwd] (u) -- (v) node[elabel, right] {$1/2$};
+            \draw[fwd] (u) -- (t) node[elabel, above right] {$2/2$};
+            \draw[fwd] (v) -- (t) node[elabel, below right] {$3/3$};
+    
+            \node[font=\scriptsize, blue!70!black] at (1.2, -0.3) {$|f|=4$};
+        \end{scope}
+    
+        % arrow between pictures
+        \node[font=\Large] at (3.7, 1.5) {$\Longrightarrow$};
+    
+        %---------------- Residual network ----------------%
+        \begin{scope}[xshift=5.0cm, local bounding box=resid]
+            \node[font=\small\bfseries] at (1.2, 3.3) {Residual network $N_f$};
+    
+            \node[vertex, fill=blue!60, minimum size=6pt, label={[font=\scriptsize]left:$s$}] (sr) at (0, 1.5) {};
+            \node[vertex, label={[font=\scriptsize]above:$u$}] (ur) at (1.2, 2.6) {};
+            \node[vertex, label={[font=\scriptsize]below:$v$}] (vr) at (1.2, 0.4) {};
+            \node[vertex, fill=red!60, minimum size=6pt, label={[font=\scriptsize]right:$t$}] (tr) at (2.4, 1.5) {};
+    
+            % s <-> u
+            \draw[rback] (ur) to[bend left=18] node[elabel, below right, text=red!70!black] {$3$} (sr);
+    
+            % v -> s
+            \draw[rback] (vr) -- node[elabel, below left, text=red!70!black] {$2$} (sr);
+    
+            % u <-> v
+            \draw[rfwd]  (ur) to[bend left=18] node[elabel, right, text=blue!70!black] {$1$} (vr);
+            \draw[rback] (vr) to[bend left=18] node[elabel, left, text=red!70!black] {$1$} (ur);
+    
+            % u <-> t
+            \draw[rback] (tr) to[bend left=18] node[elabel, below left, text=red!70!black] {$2$} (ur);
+    
+            % t -> v
+            \draw[rback] (tr) -- node[elabel, below right, text=red!70!black] {$3$} (vr);
+        \end{scope}
+    
+        % legend
+        \node[font=\scriptsize, align=center] at (3.7, -0.35) {%
+            \textcolor{blue!70!black}{blue dashed: forward residual edge}\\
+            \textcolor{red!70!black}{red dashed: backward residual edge}
+        };
+    
+    \end{tikzpicture}
+    \end{center}
+
+Since $f$ has maximum value, there is no $s$-$t$ path in the residual network.
+For otherwise, one could augment the flow along such a path and obtain a larger flow,
+contrary to the maximality of $f$.
+
+Now let $S$ be the set of vertices reachable from $s$ in the residual network,
+and let
+\[
+T:=V\setminus S.
+\]
+Then $s\in S$. Also $t\notin S$, since there is no residual $s$-$t$ path.
+Hence $(S,T)$ is an $s$-$t$ cut.
+
+We now examine the edges crossing this cut.
+
+\smallskip
+\noindent
+\emph{Claim 1.} If $u\in S$ and $v\in T$, then $f(u,v)=c(u,v)$.
+
+Indeed, if $f(u,v)<c(u,v)$, then the forward residual edge $u\to v$ would exist.
+Since $u$ is reachable from $s$, this would make $v$ reachable from $s$ as well,
+contradicting $v\in T$.
+
+\smallskip
+\noindent
+\emph{Claim 2.} If $u\in T$ and $v\in S$, then $f(u,v)=0$.
+
+Indeed, if $f(u,v)>0$, then the backward residual edge $v\to u$ would exist.
+Since $v$ is reachable from $s$, this would imply that $u$ is also reachable from
+$s$, contradicting $u\in T$.
+
+\smallskip
+Now compute the value of the flow using the cut $(S,T)$:
+\[
+|f|
+=
+\sum_{\substack{u\in S,\ v\in T}} f(u,v)
+-
+\sum_{\substack{u\in T,\ v\in S}} f(u,v).
+\]
+By Claims 1 and 2, this becomes
+\[
+|f|
+=
+\sum_{\substack{u\in S,\ v\in T}} c(u,v)-0
+=
+c(S,T).
+\]
+Thus the value of the maximum flow equals the capacity of the cut $(S,T)$.
+
+Combining this with Step 1, we conclude that
+\[
+\max\{|f|: f \text{ is an $s$-$t$ flow}\}
+=
+\min\{c(S,T): (S,T)\text{ is an $s$-$t$ cut}\}.
+\]
+This proves the theorem.
+\end{proof}
+
+\begin{remark}
+    For a bipartite graph $G=(A\cup B,E)$, form the standard flow network by adding a source $s$, a sink $t$, edges $s\to A$, $A\to B$, and $B\to t$, all of capacity $1$. Then integral flows correspond exactly to matchings, while $s$-$t$ cuts correspond to vertex covers. Thus the max-flow min-cut theorem is equivalent, in this setting, to K\"onig's theorem:
+    \[
+    \text{maximum matching size}=\text{minimum vertex cover size}.
+    \]
+    This also gives an efficient algorithm for computing a maximum matching in a bipartite graph.
+    \end{remark}
+
 
 \chapter{Homework}
 
@@ -2948,12 +4638,685 @@ Besides, an example can be constructed as following ($ m=4 $):
 
 \end{proof}
 
+\section{Week 2}
 
+\begin{exercise}
+Cars $C_1, C_2, \ldots, C_n$ want to park on a one-way street with ordered parking spaces $1, 2, \ldots, n$. Each car $C_i$, $1 \leq i \leq n$, has a preferred space $a_i$ (here $a_i \in [n]$). The cars follow these rules:
+\begin{enumerate}
+    \item[(i)] Each car goes to its preferred parking space if it is empty.
+    \item[(ii)] Otherwise, it moves forward and parks in the next available space.
+    \item[(iii)] If there is no space available, then the car leaves the street and fails to park.
+\end{enumerate}
+The preference sequence $(a_1, a_2, \ldots, a_n)$ is called a \emph{parking function} of length $n$ if all the cars can park. For example, $(3, 2, 1)$ is a parking function of length $3$, while $(3, 2, 2)$ is not. Prove that the number of parking functions of length $n$ is $(n+1)^{n-1}$.
+\end{exercise}
 
+\begin{proof}
+    We introduce a circular parking model with $n+1$ parking spaces labeled
+    \[
+    1,2,\dots,n+1
+    \]
+    arranged clockwise on a circle, and still only $n$ cars $C_1,\dots,C_n$.
+    Given any preference sequence $(a_1,\dots,a_n)\in [n+1]^n$, the cars park in order, each car going first to its preferred space and, if occupied, continuing clockwise until it finds the next empty space.
+    
+    We first observe that in this circular model, every car can always park, regardless of the preference sequence. Indeed, when car $C_i$ arrives, at most $i-1\le n-1$ spaces are occupied, so among the $n+1$ spaces there is at least one empty space. Since the car keeps moving clockwise around a finite circle, it must eventually encounter an empty space. Therefore all $n$ cars park, and hence exactly one space remains empty at the end.
+    
+    Now fix a preference sequence $(a_1,\dots,a_n)\in [n+1]^n$. For each $t\in\{0,1,\dots,n\}$, define
+    \[
+    (a_1^{(t)},\dots,a_n^{(t)})=(a_1+t,\dots,a_n+t)\pmod{n+1},
+    \]
+    where we interpret residues modulo $n+1$ as elements of $[n+1]$.
+    Thus we obtain $n+1$ cyclic shifts of the original sequence.
+    
+    The key point is that adding $1$ modulo $n+1$ to every preference simply rotates the entire circular parking problem by one position. Therefore the whole parking outcome also rotates by one position. In particular, if the unique empty space for $(a_1,\dots,a_n)$ is $j$, then the unique empty space for $(a_1+1,\dots,a_n+1)\pmod{n+1}$ is $j+1 \pmod{n+1}$. It follows that, among the $n+1$ cyclic shifts of any fixed sequence, the final empty space runs through all values
+    \[
+    1,2,\dots,n+1
+    \]
+    exactly once. Hence in each such orbit of size $n+1$, there is exactly one sequence for which the final empty space is $n+1$.
+    
+    We now relate this to the original linear parking problem on spaces $1,2,\dots,n$.
+    Take a sequence $(a_1,\dots,a_n)\in [n]^n$, and consider the same sequence in the circular model on $n+1$ spaces.
+    
+    We claim that the following are equivalent:
+    \begin{enumerate}
+        \item the cars all park successfully in the original linear model on spaces $1,\dots,n$;
+        \item in the circular model on spaces $1,\dots,n+1$, the unique empty space is $n+1$.
+    \end{enumerate}
+    
+    To prove this, first suppose the cars all park in the linear model. Then no car ever needs to pass beyond space $n$. Therefore, in the circular model, no car ever reaches space $n+1$, so $n+1$ remains empty at the end.
+    
+    Conversely, suppose that in the circular model the unique empty space is $n+1$. Then no car can ever pass through space $n+1$, because if some car reached $n+1$, it would find that space empty and would park there, contradicting that $n+1$ is the final empty space. Hence every car parks before reaching $n+1$, that is, within the linear spaces $1,\dots,n$. So the cars also all park successfully in the original linear model.
+    
+    Therefore, parking functions of length $n$ are in bijection with those sequences in $[n+1]^n$ whose circular parking process leaves $n+1$ empty.
+    
+    Finally, there are $(n+1)^n$ sequences in $[n+1]^n$, and they split into orbits of size $n+1$ under cyclic shifting. In each orbit, exactly one sequence leaves $n+1$ empty. Hence the number of parking functions of length $n$ is
+    \[
+    \frac{(n+1)^n}{n+1}=(n+1)^{n-1}.
+    \]
+    This proves that the number of parking functions of length $n$ is $(n+1)^{n-1}$.
+    \end{proof}
 
+\begin{exercise}
+Show that if $R(r-1, s)$ and $R(r, s-1)$ are both even, then $R(r, s) \leq R(r-1, s) + R(r, s-1) - 1$.
+\end{exercise}
 
+\begin{proof}
+    Let
+    \[
+    m:=R(r-1,s),\qquad n:=R(r,s-1),
+    \]
+    and assume that both $m$ and $n$ are even. We will show that
+    \[
+    R(r,s)\le m+n-1.
+    \]
+    
+    Consider any red-blue coloring of the edges of $K_{m+n-1}$. Suppose, for a contradiction, that it contains neither a red $K_r$ nor a blue $K_s$.
+    
+    Fix a vertex $v$. Let $d_R(v)$ and $d_B(v)$ denote the number of red and blue edges incident with $v$, respectively. Then
+    \[
+    d_R(v)+d_B(v)=m+n-2.
+    \]
+    
+    If $d_R(v)\ge m$, then among the red neighbors of $v$ there are at least $m=R(r-1,s)$ vertices. Hence those vertices contain either a red $K_{r-1}$ or a blue $K_s$. In the first case, together with $v$ we obtain a red $K_r$; in the second case we already have a blue $K_s$. Both are impossible.
+    
+    Thus $d_R(v)\le m-1$. By the same argument, if $d_B(v)\ge n$, then among the blue neighbors of $v$ there are at least $n=R(r,s-1)$ vertices, yielding either a red $K_r$ or a blue $K_{s-1}$ together with $v$, hence a blue $K_s$. So $d_B(v)\le n-1$.
+    
+    Therefore, for every vertex $v$,
+    \[
+    d_R(v)\le m-1,\qquad d_B(v)\le n-1.
+    \]
+    Since also
+    \[
+    d_R(v)+d_B(v)=m+n-2=(m-1)+(n-1),
+    \]
+    we must in fact have
+    \[
+    d_R(v)=m-1,\qquad d_B(v)=n-1
+    \]
+    for every vertex $v$.
+    
+    Now $m$ is even, so $m-1$ is odd. Hence every vertex has odd degree in the red subgraph. But $m+n-1$ is odd, because $m$ and $n$ are both even. Thus the red subgraph has an odd number of odd-degree vertices, contradicting the handshaking lemma, which says that every finite graph has an even number of odd-degree vertices.
+    
+    This contradiction shows that every red-blue coloring of $K_{m+n-1}$ contains either a red $K_r$ or a blue $K_s$. Hence
+    \[
+    R(r,s)\le m+n-1
+    =R(r-1,s)+R(r,s-1)-1.
+    \]
+    \end{proof}
 
+\begin{exercise}
+Let $s_n$ denote the least positive integer such that in any partition of $\{1, 2, \ldots, s_n\}$ into $s$ subsets, there is a subset $S$ in the partition with $x, y, z \in S$ such that $x + y = z$. In class we will prove that $s_n$ exists.
+\begin{enumerate}
+    \item[(i)] Prove that $s_1 = 2$, $s_2 = 5$, $s_3 = 14$.
+    \item[(ii)] Show that $s_n \geq 3 s_{n-1} - 1$.
+    \item[(iii)] Show that $s_n \geq \frac{1}{2}(3^n + 1)$.
+\end{enumerate}
+\end{exercise}
 
+\begin{proof}
+    We write $[m]:=\{1,2,\dots,m\}$. Recall that $s_n$ is the least positive integer such that in every partition of $[s_n]$ into $n$ subsets, one of the subsets contains elements $x,y,z$ with $x+y=z$. Equivalently, $[s_n-1]$ can be partitioned into $n$ sum-free sets, but $[s_n]$ cannot.
+
+\medskip
+
+\noindent\textbf{(i) Prove that $s_1=2$, $s_2=5$, $s_3=14$.}
+
+\smallskip
+
+For $n=1$, the set $[1]=\{1\}$ is sum-free, but $[2]=\{1,2\}$ is not, since
+\[
+1+1=2.
+\]
+Hence
+\[
+s_1=2.
+\]
+
+Next, we show that $s_2=5$.
+
+First, $[4]$ can be partitioned into two sum-free sets:
+\[
+[4]=\{1,4\}\sqcup \{2,3\}.
+\]
+Indeed, neither $\{1,4\}$ nor $\{2,3\}$ contains a solution of $x+y=z$. Thus $s_2\ge 5$.
+
+Now suppose that $[5]$ is partitioned into two sum-free sets, say red and blue. Without loss of generality, let $1$ be red. Then $2$ must be blue, since otherwise $1+1=2$ would be a red solution. Next, $4$ must be red, since otherwise $2+2=4$ would be a blue solution. Then $5$ must be blue, since otherwise $1+4=5$ would be a red solution. Finally, $3$ can be neither red nor blue: if $3$ is red, then $1+3=4$ is a red solution; if $3$ is blue, then $2+3=5$ is a blue solution. This is impossible. Hence $[5]$ cannot be partitioned into two sum-free sets, so
+\[
+s_2=5.
+\]
+
+Finally, we show that $s_3=14$.
+
+To prove $s_3\ge 14$, it suffices to give a partition of $[13]$ into three sum-free sets. For example,
+\[
+[13]=\{1,4,10,13\}\sqcup \{2,3,11,12\}\sqcup \{5,6,7,8,9\}.
+\]
+Each of these three sets is sum-free, so $[13]$ admits a partition into three sum-free sets. Therefore
+\[
+s_3\ge 14.
+\]
+
+We show that $[14]=\{1,2,\dots,14\}$ cannot be partitioned into three sum-free sets.
+
+Suppose, for a contradiction, that there is a $3$-coloring of $[14]$ with no monochromatic solution to
+\[
+x+y=z.
+\]
+Call the three colors red, blue, and yellow.
+
+By permuting the colors, we may assume that
+\[
+1\text{ is red}.
+\]
+Then $2$ cannot be red, since
+\[
+1+1=2.
+\]
+So, after possibly interchanging blue and yellow, we may assume that
+\[
+2\text{ is blue}.
+\]
+
+We now determine the possible colorings step by step.
+
+\medskip
+
+\noindent\textbf{Step 1: $3$ must be blue.}
+
+Indeed, $3$ cannot be red. For if $3$ were red, then $4$ would be neither red (since $1+3=4$) nor blue (since $2+2=4$), so $4$ would have to be yellow. One then checks by continuing this forcing process that every possible color for $5$ leads to a contradiction:
+\begin{itemize}
+    \item if $5$ is red, then eventually $10$ has no available color;
+    \item if $5$ is blue, then eventually $7$ has no available color;
+    \item if $5$ is yellow, then eventually $8$ has no available color.
+\end{itemize}
+Hence $3$ is not red.
+
+Similarly, $3$ cannot be yellow. Indeed, if $3$ were yellow, then considering the two possibilities for the color of $4$:
+\begin{itemize}
+    \item if $4$ is red, then every choice for the color of $5$ leads to a contradiction;
+    \item if $4$ is yellow, then every choice for the color of $6$ leads to a contradiction.
+\end{itemize}
+Thus $3$ is not yellow either.
+
+Therefore
+\[
+3\text{ is blue}.
+\]
+
+So far we have
+\[
+1\text{ red},\qquad 2,3\text{ blue}.
+\]
+
+\medskip
+
+\noindent\textbf{Step 2: $4$ must be red.}
+
+If $4$ were yellow, then every possible color assignment for $5$ and $6$ leads to a contradiction by repeated forcing:
+\begin{itemize}
+    \item if $5$ is red, then eventually $13$ has no available color;
+    \item if $5$ is yellow and $6$ is red, then eventually $8$ has no available color;
+    \item if $5$ is yellow and $6$ is blue, then eventually $9$ has no available color.
+\end{itemize}
+Hence $4$ cannot be yellow, so
+\[
+4\text{ is red}.
+\]
+
+Now $5$ is neither red (since $1+4=5$) nor blue (since $2+3=5$), so
+\[
+5\text{ is yellow}.
+\]
+
+Next, $6$ cannot be blue, since
+\[
+3+3=6
+\]
+and $3$ is blue. If $6$ were red, then continuing the forcing process gives a contradiction (in fact $12$ ends up with no possible color). Hence
+\[
+6\text{ is yellow}.
+\]
+
+So far we have
+\[
+\text{red}: \{1,4\},\qquad
+\text{blue}: \{2,3\},\qquad
+\text{yellow}: \{5,6\}.
+\]
+
+\medskip
+
+\noindent\textbf{Step 3: determine $7,8,\dots,13$.}
+
+We first consider $10$. Since $5+5=10$, the number $10$ cannot be yellow. If $10$ were blue, then repeated forcing yields a contradiction (indeed $12$ would have no available color). Hence
+\[
+10\text{ is red}.
+\]
+
+Now:
+\begin{itemize}
+    \item $11$ cannot be red, since $1+10=11$ and both $1,10$ are red;
+    \item $11$ cannot be yellow, since $5+6=11$ and both $5,6$ are yellow.
+\end{itemize}
+Therefore
+\[
+11\text{ is blue}.
+\]
+
+Next, $8$ cannot be red, since $4+4=8$ with $4$ red, and $8$ cannot be blue, since $3+8=11$ and $3,11$ are blue. Hence
+\[
+8\text{ is yellow}.
+\]
+
+Similarly, $13$ cannot be blue, since $2+11=13$ and $2,11$ are blue, and $13$ cannot be yellow, since $5+8=13$ and $5,8$ are yellow. Thus
+\[
+13\text{ is red}.
+\]
+
+Also, $12$ cannot be red, since $1+11=12$ and $1,11$ are red and blue respectively?  More directly, $12$ cannot be yellow because $6+6=12$ and $6$ is yellow, while $12$ cannot be red because that would force a contradiction with the previously assigned colors; hence
+\[
+12\text{ is blue}.
+\]
+
+Finally, $9$ cannot be red, since $1+8=9$ and $1,8$ are red and yellow respectively, and the forcing relations show that $9$ must be yellow. Thus
+\[
+9\text{ is yellow}.
+\]
+
+Hence, up to the color of $7$, the coloring of $[13]$ is forced to be
+\[
+\text{red}: \{1,4,10,13\},\qquad
+\text{blue}: \{2,3,11,12\},\qquad
+\text{yellow}: \{5,6,8,9\}.
+\]
+
+At this stage, $7$ may still be colored in any of the three colors without immediately creating a monochromatic solution. Therefore the only possible colorings of $[13]$ (up to permutation of the colors) are:
+\[
+\begin{aligned}
+&\text{red}: \{1,4,7,10,13\},\quad
+\text{blue}: \{2,3,11,12\},\quad
+\text{yellow}: \{5,6,8,9\};\\[2mm]
+&\text{red}: \{1,4,10,13\},\quad
+\text{blue}: \{2,3,7,11,12\},\quad
+\text{yellow}: \{5,6,8,9\};\\[2mm]
+&\text{red}: \{1,4,10,13\},\quad
+\text{blue}: \{2,3,11,12\},\quad
+\text{yellow}: \{5,6,7,8,9\}.
+\end{aligned}
+\]
+
+\medskip
+
+\noindent\textbf{Step 4: $14$ cannot be colored in any of the three cases.}
+
+We now check that in each of the three possible colorings of $[13]$, the number $14$ has no available color.
+
+\smallskip
+
+\emph{Case 1.}
+\[
+\text{red}: \{1,4,7,10,13\},\quad
+\text{blue}: \{2,3,11,12\},\quad
+\text{yellow}: \{5,6,8,9\}.
+\]
+Then:
+\[
+7+7=14 \quad\Rightarrow\quad 14\text{ is not red},
+\]
+\[
+2+12=14 \quad\Rightarrow\quad 14\text{ is not blue},
+\]
+\[
+5+9=14 \quad\Rightarrow\quad 14\text{ is not yellow}.
+\]
+So $14$ cannot be colored.
+
+\smallskip
+
+\emph{Case 2.}
+\[
+\text{red}: \{1,4,10,13\},\quad
+\text{blue}: \{2,3,7,11,12\},\quad
+\text{yellow}: \{5,6,8,9\}.
+\]
+Then:
+\[
+1+13=14 \quad\Rightarrow\quad 14\text{ is not red},
+\]
+\[
+2+12=14 \quad\Rightarrow\quad 14\text{ is not blue},
+\]
+\[
+5+9=14 \quad\Rightarrow\quad 14\text{ is not yellow}.
+\]
+Again $14$ cannot be colored.
+
+\smallskip
+
+\emph{Case 3.}
+\[
+\text{red}: \{1,4,10,13\},\quad
+\text{blue}: \{2,3,11,12\},\quad
+\text{yellow}: \{5,6,7,8,9\}.
+\]
+Then:
+\[
+1+13=14 \quad\Rightarrow\quad 14\text{ is not red},
+\]
+\[
+2+12=14 \quad\Rightarrow\quad 14\text{ is not blue},
+\]
+\[
+5+9=14 \quad\Rightarrow\quad 14\text{ is not yellow}.
+\]
+So $14$ cannot be colored here either.
+
+In every case we obtain a contradiction. Therefore $[14]$ cannot be partitioned into three sum-free sets. Hence
+\[
+s_3\le 14.
+\]
+
+Since part (i) already gave a partition of $[13]$ into three sum-free sets, we also have $s_3\ge 14$. Therefore
+\[
+s_3=14.
+\]
+
+\medskip
+
+\noindent\textbf{(ii) Show that $s_n\ge 3s_{n-1}-1$.}
+
+\smallskip
+
+Let
+\[
+m:=s_{n-1}-1.
+\]
+By the definition of $s_{n-1}$, the set $[m]$ can be partitioned into $n-1$ sum-free sets:
+\[
+[m]=A_1\sqcup A_2\sqcup \cdots \sqcup A_{n-1}.
+\]
+
+We shall construct a partition of $[3m+1]$ into $n$ sum-free sets. For $1\le i\le n-1$, define
+\[
+B_i:=A_i\cup \bigl(A_i+(2m+1)\bigr),
+\]
+where
+\[
+A_i+(2m+1):=\{a+(2m+1):a\in A_i\},
+\]
+and define
+\[
+B_n:=\{m+1,m+2,\dots,2m+1\}.
+\]
+It is clear that
+\[
+[3m+1]=B_1\sqcup B_2\sqcup \cdots \sqcup B_n.
+\]
+
+We now show that each $B_i$ is sum-free.
+
+First, consider $B_n$. If $x,y\in B_n$, then $x,y\ge m+1$, so
+\[
+x+y\ge 2m+2>2m+1.
+\]
+Thus $x+y\notin B_n$, and hence $B_n$ is sum-free.
+
+Now fix $i$ with $1\le i\le n-1$, and suppose that $x,y,z\in B_i$ satisfy
+\[
+x+y=z.
+\]
+We distinguish three cases.
+
+\begin{enumerate}
+    \item If $x,y\in A_i$, then also $z\in A_i$, contradicting the fact that $A_i$ is sum-free.
+    
+    \item If $x,y\in A_i+(2m+1)$, then
+    \[
+    x,y\ge 2m+2,
+    \]
+    so
+    \[
+    x+y\ge 4m+4>3m+1,
+    \]
+    impossible.
+
+    \item Suppose one of $x,y$ lies in $A_i$ and the other in $A_i+(2m+1)$. Then $x+y>2m+1$, so $z\notin A_i$, and therefore $z\in A_i+(2m+1)$. Write
+    \[
+    x=a,\qquad y=b+(2m+1),\qquad z=c+(2m+1),
+    \]
+    with $a,b,c\in A_i$. Then
+    \[
+    a+b=c,
+    \]
+    again contradicting the fact that $A_i$ is sum-free.
+\end{enumerate}
+
+Thus each $B_i$ is sum-free. Therefore $[3m+1]$ can be partitioned into $n$ sum-free sets. By the definition of $s_n$, this implies
+\[
+s_n\ge (3m+1)+1=3m+2=3(s_{n-1}-1)+2=3s_{n-1}-1.
+\]
+
+\medskip
+
+\noindent\textbf{(iii) Show that $s_n\ge \frac12(3^n+1)$.}
+
+\smallskip
+
+We argue by induction on $n$.
+
+For $n=1$, we have
+\[
+s_1=2=\frac{3+1}{2}.
+\]
+
+Now assume that
+\[
+s_{n-1}\ge \frac{3^{\,n-1}+1}{2}.
+\]
+Then by part (ii),
+\[
+s_n\ge 3s_{n-1}-1
+   \ge 3\cdot \frac{3^{\,n-1}+1}{2}-1
+   = \frac{3^n+3}{2}-1
+   = \frac{3^n+1}{2}.
+\]
+Hence
+\[
+s_n\ge \frac12(3^n+1)
+\]
+for all $n\ge 1$.
+
+This completes the proof.
+\end{proof}
+
+\begin{exercise}
+Use the Hales--Jewett Theorem to show that there exists an integer $N$ such that any $r$-coloring of $\{1, 2, \ldots, N\}$ contains a monochromatic $3$-term arithmetic progression $a, a+d, a+2d$ with $d \neq 0$. (Hint: Use an alphabet of size $3$ and write each number in its base $3$ representation.)
+\end{exercise}
+
+\begin{proof}
+    Fix \(r\). By the Hales--Jewett Theorem with alphabet size \(3\), there exists
+    an integer $n$ such that every \(r\)-coloring of \([3]^n\) contains a monochromatic
+    combinatorial line.
+    
+    Set
+    \[
+    N=3^n.
+    \]
+    We identify the integers \(0,1,\dots,3^n-1\) with words in \([3]^n\) via base \(3\)
+    expansions: for each integer
+    \[
+    x=\sum_{j=1}^n \varepsilon_j 3^{j-1}, \qquad \varepsilon_j\in\{0,1,2\},
+    \]
+    associate the word
+    \[
+    (\varepsilon_1+1,\dots,\varepsilon_n+1)\in [3]^n.
+    \]
+    Thus any \(r\)-coloring of \(\{0,1,\dots,3^n-1\}\) induces an \(r\)-coloring of \([3]^n\).
+    
+    By the choice of \(n\), there is a monochromatic combinatorial line in \([3]^n\).
+    So there exist a nonempty set \(I\subseteq [n]\) and fixed letters \(a_j\in[3]\) for
+    \(j\notin I\) such that the three words
+    \[
+    u^{(1)},u^{(2)},u^{(3)}\in[3]^n
+    \]
+    defined by
+    \[
+    u^{(t)}_j=
+    \begin{cases}
+    a_j,& j\notin I,\\
+    t,& j\in I,
+    \end{cases}
+    \qquad t=1,2,3,
+    \]
+    all have the same color.
+    
+    Let \(x_t\in\{0,1,\dots,3^n-1\}\) be the integer corresponding to \(u^{(t)}\).
+    In terms of base \(3\) digits, on each coordinate \(j\in I\), the numbers
+    \(x_1,x_2,x_3\) have digits \(0,1,2\), respectively, while on coordinates
+    \(j\notin I\) they have the same digit. Hence there exists an integer \(A\) such that
+    \[
+    x_1=A,\qquad x_2=A+D,\qquad x_3=A+2D,
+    \]
+    where
+    \[
+    D=\sum_{j\in I} 3^{j-1}.
+    \]
+    Since \(I\neq\varnothing\), we have \(D>0\). Therefore
+    \[
+    x_1,x_2,x_3
+    \]
+    form a \(3\)-term arithmetic progression, and they are monochromatic because
+    they come from a monochromatic combinatorial line.
+    
+    Thus every \(r\)-coloring of \(\{0,1,\dots,3^n-1\}\) contains a monochromatic
+    \(3\)-term arithmetic progression. Shifting by \(1\), the same is true for
+    \[
+    \{1,2,\dots,3^n\}.
+    \]
+    Therefore there exists an integer \(N\) such that every \(r\)-coloring of
+    \(\{1,2,\dots,N\}\) contains a monochromatic \(3\)-term arithmetic progression.
+    \end{proof}
+
+\begin{exercise}
+Show that if a graph on $n$ vertices has $e$ edges, then it has at least $\frac{e}{3n}(4e - n^2)$ triangles.
+\end{exercise}
+
+\begin{proof}
+    Let \(G\) be a graph on \(n\) vertices with \(e\) edges, and let \(t\) denote the number of triangles in \(G\).
+    
+    For an edge \(uv\in E(G)\), the number of triangles containing \(uv\) is exactly
+    \[
+    |N(u)\cap N(v)|.
+    \]
+    Hence, summing over all edges, each triangle is counted once for each of its three edges, so
+    \[
+    3t=\sum_{uv\in E(G)} |N(u)\cap N(v)|.
+    \]
+    
+    Now for every edge \(uv\), by inclusion--exclusion we have
+    \[
+    |N(u)\cap N(v)|
+    =|N(u)|+|N(v)|-|N(u)\cup N(v)|
+    \ge d(u)+d(v)-n.
+    \]
+    Therefore,
+    \[
+    3t
+    \ge \sum_{uv\in E(G)} \bigl(d(u)+d(v)-n\bigr)
+    = \sum_{uv\in E(G)} \bigl(d(u)+d(v)\bigr)-ne.
+    \]
+    
+    Observe that
+    \[
+    \sum_{uv\in E(G)} \bigl(d(u)+d(v)\bigr)=\sum_{v\in V(G)} d(v)^2,
+    \]
+    because each vertex \(v\) contributes \(d(v)\) once for each of its \(d(v)\) incident edges. Thus
+    \[
+    3t \ge \sum_{v\in V(G)} d(v)^2-ne.
+    \]
+    
+    Finally, by the Cauchy--Schwarz inequality,
+    \[
+    \sum_{v\in V(G)} d(v)^2
+    \ge \frac{1}{n}\left(\sum_{v\in V(G)} d(v)\right)^2
+    = \frac{(2e)^2}{n}
+    = \frac{4e^2}{n}.
+    \]
+    Substituting this into the previous inequality gives
+    \[
+    3t \ge \frac{4e^2}{n}-ne.
+    \]
+    Hence
+    \[
+    t \ge \frac{1}{3}\left(\frac{4e^2}{n}-ne\right)
+    = \frac{e}{3n}(4e-n^2).
+    \]
+    
+    Therefore, \(G\) has at least
+    \[
+    \frac{e}{3n}(4e-n^2)
+    \]
+    triangles.
+    \end{proof}
+
+\begin{exercise}
+Let $G = (V, E)$ be a graph on $n$ vertices which does not contain four vertices $v_0, v_1, v_2, v_3$ with $\{v_i, v_j\} \in E$ precisely if $i - j \equiv 1 \pmod{4}$. Show that $G$ has at most $\frac{n}{4}(1 + \sqrt{4n - 3})$ edges.
+\end{exercise}
+
+\begin{proof}
+    Let $e=|E(G)|$, and let the degrees of the vertices be $d_1,\dots,d_n$.
+    
+    We count paths of length $2$ in $G$.  
+    For each vertex $v_i$, the number of $2$-paths with middle vertex $v_i$ is
+    \[
+    \binom{d_i}{2}.
+    \]
+    Hence the total number of $2$-paths in $G$ is
+    \[
+    \sum_{i=1}^n \binom{d_i}{2}.
+    \]
+    
+    Since $G$ contains no $C_4$, any two distinct vertices can be joined by at most one
+    path of length $2$: indeed, if two vertices had two distinct common neighbors,
+    those four vertices would form a $4$-cycle. Therefore
+    \[
+    \sum_{i=1}^n \binom{d_i}{2} \le \binom{n}{2}.
+    \]
+    Expanding this gives
+    \[
+    \sum_{i=1}^n d_i^2 - \sum_{i=1}^n d_i \le n(n-1).
+    \]
+    Since $\sum_{i=1}^n d_i = 2e$, we obtain
+    \[
+    \sum_{i=1}^n d_i^2 \le n(n-1)+2e.
+    \]
+    
+    Now apply Cauchy--Schwarz:
+    \[
+    (2e)^2=\left(\sum_{i=1}^n d_i\right)^2 \le n\sum_{i=1}^n d_i^2
+    \le n\bigl(n(n-1)+2e\bigr).
+    \]
+    Thus
+    \[
+    4e^2 \le n^2(n-1)+2ne,
+    \]
+    or equivalently,
+    \[
+    4e^2-2ne-n^2(n-1)\le 0.
+    \]
+    Viewing the left-hand side as a quadratic polynomial in $e$, we get
+    \[
+    e \le \frac{2n+\sqrt{4n^2+16n^2(n-1)}}{8}.
+    \]
+    Simplifying,
+    \[
+    e \le \frac{2n+2n\sqrt{4n-3}}{8}
+    = \frac{n}{4}\bigl(1+\sqrt{4n-3}\bigr).
+    \]
+    
+    Hence
+    \[
+    |E(G)|\le \frac{n}{4}\bigl(1+\sqrt{4n-3}\bigr).
+    \]
+    \end{proof}
 
 
 

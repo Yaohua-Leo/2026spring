@@ -74,3 +74,35 @@ Now we finish the proof.
 > [!theorem]
 > $ex(n,\{C_3,C_4\})\leqslant n\sqrt{n-1}/2$. 
 
+`\begin{proof}`
+Define $n=|V(G)|$ and $m=|E(G)|$. 
+We count paths $(x,y,z)$, where $x,y,z\in V(G)$. 
+
+Count 1: First pick $x$ and $z$, and there are $n(n-1)$ ways. 
+If $x\sim z$, then $0$ choice for $y$; if $x\nsim z$, then at most $1$ choice for $y$. 
+Hence number of paths $\leqslant n(n-1)-2m$. 
+
+Count 2: First pick $y$, then $x$ and $z$. 
+By Jensen's inequality, we have
+
+$$
+n(n-1)-2m\geqslant\#\text{paths}=\sum_{y\in V(G)}\deg(y)(\deg(y)-1)\geqslant n\frac{2m}{n}\left(\frac{2m}{n}-1\right).
+$$
+
+It yields that $m\leqslant n\sqrt{n-1}/2$ and we finish the proof.
+`\end{proof}`
+
+
+**Remark.** 
+- Equality holds when:
+	- $n=2$, $K_2$
+	- $m=5$, pentagon
+	- $n=10$, [[Petersen Graph|Petersen graph]]
+	- $n=50$, Hoffman-Singleton graph
+	- $n=3250$, open case
+- Asymptotic: $ex(n,\{C_3,C_4\})=(1/2+o(1))n^{1.5}$. Construction uses polarities of projective planes. 
+- $ex(n,C_4)\leqslant(\frac{1}{\sqrt 2}+o(1))n^{1.5}$, $ex(n,C_4)\geqslant(\frac{1}{2}+o(1))n^{1.5}$
+- Constructions: (here $m$ is the diameter of the corresponding bipartite graph of [[Generalized Polygons|generalized polygon]].)
+	- $m=2$, projective planes
+	- $m=3$, [[Generalized Quadrangle|generalized quadrangle]]
+	- $m=5$, [[Generalized Hexagons|generalized hexagon]]
