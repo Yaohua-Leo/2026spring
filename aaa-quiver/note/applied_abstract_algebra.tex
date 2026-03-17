@@ -2410,6 +2410,9 @@ Similarly we have the following theorem:
     Then $\operatorname{Hom}(S_1,S_2)=\operatorname{Hom}(S_1,M)=0$ and $\operatorname{Hom}(S_1,S_1)=k$. Therefore the "Hom-sequence" can never be exact.
 \end{example}
 
+\chapter{Lecture 6}
+
+
 \section{First Examples of Auslander--Reiten Quivers}
 
 The goal of the representation theory of a quiver $Q$ is to understand the
@@ -2418,13 +2421,61 @@ the short exact sequences in $\operatorname{Rep}Q$.
 
 A first approximation to this structure is given by the \emph{Auslander--Reiten
 quiver}. In the representation-finite case, it encodes all indecomposable
-representations, the irreducible morphisms between them, and the basic non-split short exact sequences. (In fact almost split sequences, you can check the definition in the book of Schiffler).
+representations, the irreducible morphisms between them, and the basic non-split short exact sequences, i.e. almost split sequences.
+
+\begin{definition}[Almost split sequence]
+    Let $A$ be a finite-dimensional algebra, and let
+    \[
+    0 \longrightarrow L \xrightarrow{\,f\,} M \xrightarrow{\,g\,} N \longrightarrow 0
+    \]
+    be a short exact sequence in $\mathrm{mod}\,A$ (the $A$-module category).
+    We say that this sequence is an \emph{almost split sequence}
+    (or an \emph{Auslander--Reiten sequence}) if
+    \begin{itemize}
+        \item $f$ is a left minimal almost split morphism, and
+        \item $g$ is a right minimal almost split morphism.
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}[Left minimal almost split morphism]
+    A morphism $f \colon L \to M$ in $\mathrm{mod}\,A$ is called
+    \emph{left minimal almost split} if the following conditions hold:
+    \begin{enumerate}
+        \item $f$ is not a section;
+        \item for every morphism $u \colon L \to U$ which is not a section,
+        there exists a morphism $u' \colon M \to U$ such that
+        \[
+        u' f = u;
+        \]
+        \item for every endomorphism $h \colon M \to M$ satisfying
+        \[
+        h f = f,
+        \]
+        the morphism $h$ is an isomorphism.
+    \end{enumerate}
+    \end{definition}
+    
+    \begin{definition}[Right minimal almost split morphism]
+    A morphism $g \colon M \to N$ in $\mathrm{mod}\,A$ is called
+    \emph{right minimal almost split} if the following conditions hold:
+    \begin{enumerate}
+        \item $g$ is not a retraction;
+        \item for every morphism $v \colon V \to N$ which is not a retraction,
+        there exists a morphism $v' \colon V \to M$ such that
+        \[
+        g v' = v;
+        \]
+        \item for every endomorphism $h \colon M \to M$ satisfying
+        \[
+        g h = g,
+        \]
+        the morphism $h$ is an isomorphism.
+    \end{enumerate}
+    \end{definition}
 
 
 In this section we present only the first examples. A systematic treatment will be
 given later.
-
-\subsection*{General idea}
 
 Let $Q$ be a quiver. The \emph{Auslander--Reiten quiver} $\Gamma_Q$ is a quiver
 defined as follows.
@@ -2452,8 +2503,6 @@ Thus:
 \medskip
 
 We now look at the first examples.
-
-\subsection*{Example 1: the quiver $1 \to 2$}
 
 Let
 \[
@@ -2499,8 +2548,6 @@ S(2) \arrow[ru] &              & S(1)
 \end{tikzcd}
 \]
 
-\subsection*{A convenient shorthand notation}
-
 It is often useful to encode an indecomposable representation by its dimension
 vector together with the relative position of the vertices.
 
@@ -2539,8 +2586,6 @@ In this notation, the Auslander--Reiten quiver above becomes
 2 \arrow[ru] &                        & 1
 \end{tikzcd}
 \]
-
-\subsection*{Example 2: the quiver $1 \to 2 \leftarrow 3$}
 
 Let
 \[
@@ -2626,8 +2671,6 @@ Consequently, the Auslander--Reiten quiver has the form
 \end{tikzcd}
 \]
 
-\subsection*{Further non-split short exact sequences}
-
 In the quiver $1\to 2 \leftarrow 3$, besides the almost split sequences above, there
 are also two further non-split short exact sequences with indecomposable end terms:
 \[
@@ -2640,8 +2683,6 @@ are also two further non-split short exact sequences with indecomposable end ter
 These are not themselves almost split sequences, but they may be viewed as being
 obtained by combining meshes in the Auslander--Reiten quiver.
 
-\subsection*{Conclusion}
-
 These examples illustrate the philosophy of Auslander--Reiten theory:
 
 \begin{itemize}
@@ -2652,5 +2693,92 @@ These examples illustrate the philosophy of Auslander--Reiten theory:
 
 Thus the Auslander--Reiten quiver provides a compact and highly structured picture
 of the category $\operatorname{Rep}Q$.
+
+\begin{definition}
+    Let $Q$ be a quiver without oriented cycles. $Q=(Q_0,Q_1,s,t)$. We say that $C=(i | \alpha_1 , \ldots, \alpha_j |j)$ is a path from $i$ to $j$ if $s(\alpha_1)=i$ and $t(\alpha_j)=j$, $s(\alpha_{i+1})=t(\alpha_i)$ for $i=1, \ldots, j-1$ as
+    \[
+        \begin{tikzcd}
+            i \arrow[r, "\alpha_1"] & \ldots \arrow[r, "\alpha_j"] & j
+            \end{tikzcd}
+    \]
+\end{definition}
+
+\begin{example}
+    Consider:
+    \[
+        \begin{tikzcd}
+            1 \arrow[r, "\beta"] \arrow["\alpha"', loop, distance=2em, in=215, out=145] & 2 \arrow[r, "\gamma"] & 3
+            \end{tikzcd}
+    \]
+    Then $(1 | \alpha, \beta,\gamma | 2)$ is not a path.
+\end{example}
+
+\begin{definition}[Oriented cycle]
+    Let \(Q=(Q_0,Q_1,s,t)\) be a quiver.  
+    An \emph{oriented cycle} in \(Q\) is a path
+    \[
+    c=(i \mid \alpha_1,\alpha_2,\ldots,\alpha_\ell \mid i)
+    \]
+    of length \(\ell \ge 1\) such that
+    \[
+    s(\alpha_1)=i,\qquad
+    s(\alpha_{r+1})=t(\alpha_r)\ \text{for } r=1,\dots,\ell-1,\qquad
+    t(\alpha_\ell)=i.
+    \]
+    In other words, it is a path which starts at a vertex \(i\), follows the directions
+    of the arrows, and ends again at the same vertex \(i\).
+    
+    In particular, a loop
+    \[
+    \begin{tikzcd}
+    i \arrow[out=120,in=60,loop, "\alpha"]
+    \end{tikzcd}
+    \]
+    is an oriented cycle of length \(1\).
+    \end{definition}
+
+    \begin{definition}
+        We call $(i|i)$ a constant path or a lazy path.
+    \end{definition}
+
+Let $Q$ be a quiver without oriented cycles.
+
+\begin{definition}
+    For each $i \in Q_0$, we define the representation $S(i)=(S(i)_i, \phi_\alpha)$ as the following:
+    \begin{itemize}
+\item $S(i)_i$
+\item $S(i)_j=0$ for $j \neq i$
+\item $\forall \alpha \in Q_1$, $\varphi_\alpha=0$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    For each $i \in Q_0$, we define the representation $P(i)=(P(i)_i, \psi_\alpha)$ as the following:
+    \begin{itemize}
+\item $P(i)_i=k$, corresponding to lazy path $(i|i)$ in vertex $i$
+\item $P(i)_j$ is a vector space spanned by all paths from $i$ to $j$. In other words, all elements of $P(i)_j$ are of the form $\sum\limits_{c \in \mathcal{P}(i,j)} \lambda_c c$, where $\lambda_c \in k$ and $c$ denotes a path from $i$ to $j$.
+\item Let $\alpha \in Q_1$ be an arrow from $j$ to $l$. Then $\psi_\alpha$ is the linear map from $P(i)_j$ to $P(i)_l$ defined by $\psi_\alpha(c: i \to j) = c' : i \to l$. Or we can write $\psi(c)=c' = \alpha c= (i | \alpha_1, \ldots, \alpha_k, \alpha | l)$ where $c=(i | \alpha_1, \ldots, \alpha_k | j)$
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    Consider the quiver:
+    \[
+        \begin{tikzcd}
+            1 \arrow[r, "\alpha"] & 2 & 3 \arrow[l, "\beta"']
+            \end{tikzcd}
+    \]
+    We construct $P(1)$. First, $P(1)_1=k$. Now we have one path $(1|\alpha|2)$. So $P(1)_2=k$. Then $\psi_\alpha=[a], a\in \mathbb{F}^{\times}$ a 1 by 1 invertible matrix. We have no path from $1$ to $3$. So $P(1)_3=0$. Thus
+    \[
+    P(1)= \begin{tikzcd}
+        k \arrow[r, "1"] & k & 0 \arrow[l]
+        \end{tikzcd}
+    \]
+\end{example}
+
+
+
+
+
 
 \end{document}
