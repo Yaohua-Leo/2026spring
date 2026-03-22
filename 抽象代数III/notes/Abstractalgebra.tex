@@ -168,20 +168,20 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    
+
     \textsc{\Large Course Notes}\\[0.5cm]
 
     \HRule{1.5pt} \\[0.5cm]
-    { \huge \bfseries Abstract Algebra III }\\[0.4cm] 
+    { \huge \bfseries Abstract Algebra III }\\[0.4cm]
     \HRule{1.5pt} \\[1.5cm]
-    
+
     \vspace{3cm}
 
     % 人员信息区域：垂直排列并区分字号
     \begin{spacing}{1.8}
         {\Large \textbf{Instructor:}} \\
         {\Large Prof. Zhicheng \textsc{Feng}} \\[0.8cm]
-        
+
         {\normalsize \textit{Student:}} \\
         {\normalsize Leo}
     \end{spacing}
@@ -205,106 +205,106 @@ Message: QQ, BB. HW 30\%, Mid 20\%, Final 50\%
 
 % --- Begin rewritten content from 抽代3.md ---
 \begin{definition}
-Let $R$ be a ring with $1$, and let $M$ be an abelian group. We say that $M$ is a left $R$-module if $R$ ``left acts'' on $M$:
-\[
-R \times M \rightarrow M, \quad (r, m) \mapsto rm
-\]
-such that
-\[
-\begin{aligned}
-r(m+n) &= rm + rn, \\
-(r+s)m &= rm + sm, \\
-(rs)m &= r(sm), \\
-1m &= m.
-\end{aligned}
-\quad \text{for any } r, s \in R, m,n \in M
-\]
+    Let $R$ be a ring with $1$, and let $M$ be an abelian group. We say that $M$ is a left $R$-module if $R$ ``left acts'' on $M$:
+    \[
+        R \times M \rightarrow M, \quad (r, m) \mapsto rm
+    \]
+    such that
+    \[
+        \begin{aligned}
+            r(m+n) & = rm + rn, \\
+            (r+s)m & = rm + sm, \\
+            (rs)m  & = r(sm),   \\
+            1m     & = m.
+        \end{aligned}
+        \quad \text{for any } r, s \in R, m,n \in M
+    \]
 
-A \textbf{right $R$-module} is defined by $(r, m) \mapsto mr$ with the axiom $m(rs) = (mr)s$. If $R$ is commutative, left-modules and right-modules coincide. Otherwise, one can transform using the opposite ring $R^{\mathrm{op}}$.
+    A \textbf{right $R$-module} is defined by $(r, m) \mapsto mr$ with the axiom $m(rs) = (mr)s$. If $R$ is commutative, left-modules and right-modules coincide. Otherwise, one can transform using the opposite ring $R^{\mathrm{op}}$.
 \end{definition}
 
 Consider $ M $ an $ R $-module, then $ \forall r \in R $, $ \varphi_r: M \rightarrow M $ by $ \varphi_r(m) = rm $ is an abelian group homomorphism. Let
 \[
-\operatorname{End}(M) = \{ \varphi: M \rightarrow M \text{ is a abelian group homomorphism } \}
-\]        
+    \operatorname{End}(M) = \{ \varphi: M \rightarrow M \text{ is a abelian group homomorphism } \}
+\]
 Then $ \operatorname{End}(M) $ is a ring with composition as the multiplication.
 
 \begin{theorem}
-Let $M$ be an abelian group. Then $M$ is an $R$-module if and only if there is a ring homomorphism $R \rightarrow \operatorname{End}(M)$.
+    Let $M$ be an abelian group. Then $M$ is an $R$-module if and only if there is a ring homomorphism $R \rightarrow \operatorname{End}(M)$.
 \end{theorem}
 
 \begin{proof}
-$(\Rightarrow)$ Suppose $M$ is an $R$-module. Define $\rho: R \rightarrow \operatorname{End}(M)$ by
-\[
-\rho(r)(m) = rm, \quad \forall r \in R, m \in M.
-\]
-For each $r \in R$, the map $\rho(r): M \rightarrow M$ is a group homomorphism since $r(m_1 + m_2) = rm_1 + rm_2$. Moreover, $\rho$ is a ring homomorphism:
-\begin{itemize}
-    \item $\rho(r + s)(m) = (r + s)m = rm + sm = \rho(r)(m) + \rho(s)(m)$, so $\rho(r + s) = \rho(r) + \rho(s)$.
-    \item $\rho(rs)(m) = (rs)m = r(sm) = \rho(r)(\rho(s)(m))$, so $\rho(rs) = \rho(r) \circ \rho(s)$.
-    \item $\rho(1)(m) = 1m = m$, so $\rho(1) = \operatorname{id}_M$.
-\end{itemize}
+    $(\Rightarrow)$ Suppose $M$ is an $R$-module. Define $\rho: R \rightarrow \operatorname{End}(M)$ by
+    \[
+        \rho(r)(m) = rm, \quad \forall r \in R, m \in M.
+    \]
+    For each $r \in R$, the map $\rho(r): M \rightarrow M$ is a group homomorphism since $r(m_1 + m_2) = rm_1 + rm_2$. Moreover, $\rho$ is a ring homomorphism:
+    \begin{itemize}
+        \item $\rho(r + s)(m) = (r + s)m = rm + sm = \rho(r)(m) + \rho(s)(m)$, so $\rho(r + s) = \rho(r) + \rho(s)$.
+        \item $\rho(rs)(m) = (rs)m = r(sm) = \rho(r)(\rho(s)(m))$, so $\rho(rs) = \rho(r) \circ \rho(s)$.
+        \item $\rho(1)(m) = 1m = m$, so $\rho(1) = \operatorname{id}_M$.
+    \end{itemize}
 
-$(\Leftarrow)$ Suppose $\rho: R \rightarrow \operatorname{End}(M)$ is a ring homomorphism. Define the scalar multiplication $R \times M \rightarrow M$ by
-\[
-(r, m) \mapsto \rho(r)(m).
-\]
-We verify the module axioms:
-\begin{itemize}
-    \item $r(m_1 + m_2) = \rho(r)(m_1 + m_2) = \rho(r)(m_1) + \rho(r)(m_2) = rm_1 + rm_2$.
-    \item $(r + s)m = \rho(r + s)(m) = (\rho(r) + \rho(s))(m) = \rho(r)(m) + \rho(s)(m) = rm + sm$.
-    \item $(rs)m = \rho(rs)(m) = (\rho(r) \circ \rho(s))(m) = \rho(r)(\rho(s)(m)) = r(sm)$.
-    \item $1m = \rho(1)(m) = \operatorname{id}_M(m) = m$.
-\end{itemize}
-Hence $M$ is an $R$-module.
+    $(\Leftarrow)$ Suppose $\rho: R \rightarrow \operatorname{End}(M)$ is a ring homomorphism. Define the scalar multiplication $R \times M \rightarrow M$ by
+    \[
+        (r, m) \mapsto \rho(r)(m).
+    \]
+    We verify the module axioms:
+    \begin{itemize}
+        \item $r(m_1 + m_2) = \rho(r)(m_1 + m_2) = \rho(r)(m_1) + \rho(r)(m_2) = rm_1 + rm_2$.
+        \item $(r + s)m = \rho(r + s)(m) = (\rho(r) + \rho(s))(m) = \rho(r)(m) + \rho(s)(m) = rm + sm$.
+        \item $(rs)m = \rho(rs)(m) = (\rho(r) \circ \rho(s))(m) = \rho(r)(\rho(s)(m)) = r(sm)$.
+        \item $1m = \rho(1)(m) = \operatorname{id}_M(m) = m$.
+    \end{itemize}
+    Hence $M$ is an $R$-module.
 \end{proof}
 
 \begin{example}
-(1) A vector space is a module over a field.
+    (1) A vector space is a module over a field.
 
-(2) An abelian group is a module over the ring of integers $\mathbb{Z}$.
-\[
-\mathbb{Z} \times M \rightarrow M, \quad (n, m) \mapsto n \cdot m := m+m+\cdots+m \text{ (n times)}
-\]
+    (2) An abelian group is a module over the ring of integers $\mathbb{Z}$.
+    \[
+        \mathbb{Z} \times M \rightarrow M, \quad (n, m) \mapsto n \cdot m := m+m+\cdots+m \text{ (n times)}
+    \]
 
-(3) An ideal $ I $ of a ring $ R $ is a module over $ R $.
+    (3) An ideal $ I $ of a ring $ R $ is a module over $ R $.
 
-(4) Let $M$ be an abelian group. Then $M$ is an $\operatorname{End}(M)$-module via
-\[
-\operatorname{End}(M) \times M \rightarrow M, \quad (\varphi, m) \mapsto \varphi(m).
-\]
+    (4) Let $M$ be an abelian group. Then $M$ is an $\operatorname{End}(M)$-module via
+    \[
+        \operatorname{End}(M) \times M \rightarrow M, \quad (\varphi, m) \mapsto \varphi(m).
+    \]
 
-(5) Let $V$ be a vector space over a field $K$, and let $A: V \rightarrow V$ be a linear transformation. Then $V$ is a $K[x]$-module via
-\[
-K[x] \times V \rightarrow V, \quad (f(x), v) \mapsto f(A)v.
-\]
+    (5) Let $V$ be a vector space over a field $K$, and let $A: V \rightarrow V$ be a linear transformation. Then $V$ is a $K[x]$-module via
+    \[
+        K[x] \times V \rightarrow V, \quad (f(x), v) \mapsto f(A)v.
+    \]
 
-(6) If $|M| = 1$, then $M$ is called the zero module.
+    (6) If $|M| = 1$, then $M$ is called the zero module.
 
-(7) Let $ R $ be a ring with 1 and $ A \in M_n(R) $. The solution of $ AX=0 $ where $ X \in R^n $ is a right $ R $-module.   
+    (7) Let $ R $ be a ring with 1 and $ A \in M_n(R) $. The solution of $ AX=0 $ where $ X \in R^n $ is a right $ R $-module.
 \end{example}
 
 \begin{definition}[$R$-submodule]
-Let $R$ be a ring (with $1$) and let $M$ be a left $R$-module. A subset $N\subseteq M$
-is called an \emph{$R$-submodule} of $M$ if:
-\begin{enumerate}
-  \item $0\in N$;
-  \item $n_1,n_2\in N \implies n_1+n_2\in N$;
-  \item $n\in N \implies -n\in N$;
-  \item $r\in R,\ n\in N \implies rn\in N$.
-\end{enumerate}
-Equivalently, $N$ is a subgroup of the abelian group $(M,+)$ that is closed under the
-$R$-action.
+    Let $R$ be a ring (with $1$) and let $M$ be a left $R$-module. A subset $N\subseteq M$
+    is called an \emph{$R$-submodule} of $M$ if:
+    \begin{enumerate}
+        \item $0\in N$;
+        \item $n_1,n_2\in N \implies n_1+n_2\in N$;
+        \item $n\in N \implies -n\in N$;
+        \item $r\in R,\ n\in N \implies rn\in N$.
+    \end{enumerate}
+    Equivalently, $N$ is a subgroup of the abelian group $(M,+)$ that is closed under the
+    $R$-action.
 \end{definition}
 
-\begin{example} 
-(1) Let $ V $ be a vector space over a field $ K $, then any subspace of $ V $ is a $ k $-submodule of $ V $.
+\begin{example}
+    (1) Let $ V $ be a vector space over a field $ K $, then any subspace of $ V $ is a $ k $-submodule of $ V $.
 
-(2) Let $ G $ be an abelian group, then any subgroup of $ G $ is a $ \mathbb{Z} $-submodule of $ G $.
+    (2) Let $ G $ be an abelian group, then any subgroup of $ G $ is a $ \mathbb{Z} $-submodule of $ G $.
 
-(3) Let $ R $ be a ring, $ {}_RR $ is a left (regular) $ R $-module. Then any left ideal of $ R $ is a $ R $-submodule of $ {}_RR $.
+    (3) Let $ R $ be a ring, $ {}_RR $ is a left (regular) $ R $-module. Then any left ideal of $ R $ is a $ R $-submodule of $ {}_RR $.
 
-(4) Let $ G $ be an abelian group, which is an $ \operatorname{End}(G) $-module. Then any full invariant subgroup of $ G $ is a $ \operatorname{End}(G) $-submodule of $ G $.
+    (4) Let $ G $ be an abelian group, which is an $ \operatorname{End}(G) $-module. Then any full invariant subgroup of $ G $ is a $ \operatorname{End}(G) $-submodule of $ G $.
 \end{example}
 
 \textbf{Question:} Are submodules of a finitely generated $R$-module finitely generated?
@@ -312,49 +312,49 @@ $R$-action.
 \textbf{Answer:} No, not in general. This property holds if and only if the ring $R$ is Noetherian.
 
 \begin{example}[Submodule of a f.g. module that is not f.g.]
-Let $k$ be a field and consider the polynomial ring $R = k[x_1, x_2, x_3, \dots]$ in infinitely many variables.
-\begin{itemize}
-    \item The ring $R$ itself can be viewed as a left $R$-module, which we denote by $M=R$. $M$ is finitely generated, for instance by the single element $1 \in R$.
-    \item Consider the ideal $I = \langle x_1, x_2, x_3, \dots \rangle$ generated by all the variables. This ideal $I$ is a submodule of $M=R$.
-    \item This submodule $I$ is not finitely generated. To see this, suppose for contradiction that $I$ is finitely generated by a set of polynomials $\{f_1, \dots, f_n\}$. Let $N$ be the largest index of any variable appearing in any of the polynomials $f_1, \dots, f_n$. Then any element in the ideal generated by $\{f_1, \dots, f_n\}$ must be a polynomial in variables $x_1, \dots, x_N$. However, the polynomial $x_{N+1}$ is in $I$ but cannot be expressed as a combination of $f_1, \dots, f_n$. This is a contradiction.
-\end{itemize}
-Therefore, the ideal $I$ is a submodule of the finitely generated $R$-module $R$ which is not itself finitely generated. This shows that the ring $R$ is not Noetherian.
+    Let $k$ be a field and consider the polynomial ring $R = k[x_1, x_2, x_3, \dots]$ in infinitely many variables.
+    \begin{itemize}
+        \item The ring $R$ itself can be viewed as a left $R$-module, which we denote by $M=R$. $M$ is finitely generated, for instance by the single element $1 \in R$.
+        \item Consider the ideal $I = \langle x_1, x_2, x_3, \dots \rangle$ generated by all the variables. This ideal $I$ is a submodule of $M=R$.
+        \item This submodule $I$ is not finitely generated. To see this, suppose for contradiction that $I$ is finitely generated by a set of polynomials $\{f_1, \dots, f_n\}$. Let $N$ be the largest index of any variable appearing in any of the polynomials $f_1, \dots, f_n$. Then any element in the ideal generated by $\{f_1, \dots, f_n\}$ must be a polynomial in variables $x_1, \dots, x_N$. However, the polynomial $x_{N+1}$ is in $I$ but cannot be expressed as a combination of $f_1, \dots, f_n$. This is a contradiction.
+    \end{itemize}
+    Therefore, the ideal $I$ is a submodule of the finitely generated $R$-module $R$ which is not itself finitely generated. This shows that the ring $R$ is not Noetherian.
 \end{example}
 
-\begin{definition} 
-    Let $ M $ be an $ R $-module, $ M_i, i\in I $ are $ R $-submodules of $ M $. Then 
+\begin{definition}
+    Let $ M $ be an $ R $-module, $ M_i, i\in I $ are $ R $-submodules of $ M $. Then
     \[
-    \bigcap_{i\in I} M_i
-    \]     
-is an $ R $-submodule of $ M $.   
-\[
-\sum_{i\in I} = \{ \sum_{i \in I \text{ finite }} m_i | m_i \in M_i\} 
-\]
-is an $ R $-submodule of $ M $.
+        \bigcap_{i\in I} M_i
+    \]
+    is an $ R $-submodule of $ M $.
+    \[
+        \sum_{i\in I} = \{ \sum_{i \in I \text{ finite }} m_i | m_i \in M_i\}
+    \]
+    is an $ R $-submodule of $ M $.
 \end{definition}
 
-\begin{definition} 
-Let $M$ be an $R$-module, $ S \subseteq M $ a subset. 
-\[
-<S> = \{ \sum_{finite} {a_is_i} | a_i \in R, s_i \in S \}
-\]
-or
-\[
-<S>=\bigcap_{N \text{is an } R -\text{submodule of }  M,   \   S \subseteq N } N
-\]
-is an $ R $-submodule of $ M $, called the $ R $-submodule of $ M $ generated by $ S $.   
+\begin{definition}
+    Let $M$ be an $R$-module, $ S \subseteq M $ a subset.
+    \[
+        <S> = \{ \sum_{finite} {a_is_i} | a_i \in R, s_i \in S \}
+    \]
+    or
+    \[
+        <S>=\bigcap_{N \text{is an } R -\text{submodule of }  M,   \   S \subseteq N } N
+    \]
+    is an $ R $-submodule of $ M $, called the $ R $-submodule of $ M $ generated by $ S $.
 
-If $ M=<S> $, then we say $ M $ is generated by $ S $. In particular, if $ |S|=1 $ then we call $ M $ a cyclic module. If $ |S| < \infty $ then we call $ M $ a finite generated module.    
+    If $ M=<S> $, then we say $ M $ is generated by $ S $. In particular, if $ |S|=1 $ then we call $ M $ a cyclic module. If $ |S| < \infty $ then we call $ M $ a finite generated module.
 \end{definition}
 
 \begin{definition}
     Let $R$ be a ring and let $M$ be a left $R$-module. We say that $M$ is a \emph{Noetherian module} if every ascending chain of submodules
     \[
-    M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots
+        M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots
     \]
     stabilizes; that is, there exists $n \ge 1$ such that
     \[
-    M_n = M_{n+1} = M_{n+2} = \cdots.
+        M_n = M_{n+1} = M_{n+2} = \cdots.
     \]
     Equivalently, $M$ is Noetherian if every submodule of $M$ is finitely generated.
 \end{definition}
@@ -366,610 +366,610 @@ If $ M=<S> $, then we say $ M $ is generated by $ S $. In particular, if $ |S|=1
 \begin{definition}
     Let $R$ be a ring, let $M$ be a left $R$-module, and let $N$ be a submodule of $M$. The \emph{quotient module} (or \emph{factor module}) of $M$ by $N$ is the quotient abelian group
     \[
-    M/N=\{\,x+N \mid x\in M\,\},
+        M/N=\{\,x+N \mid x\in M\,\},
     \]
     with scalar multiplication defined by
     \[
-    r(x+N)=rx+N
-    \qquad
-    (r\in R,\ x\in M).
+        r(x+N)=rx+N
+        \qquad
+        (r\in R,\ x\in M).
     \]
     This is well-defined, and with this operation $M/N$ becomes a left $R$-module.
 \end{definition}
 
-\begin{example} 
-(1) Let $ R $ be a ring and an $ R $-module, $ I $ be an ideal of $ R $, then $ R/I $ is a quotient $ R $-module of $ R $ by $ I $.
+\begin{example}
+    (1) Let $ R $ be a ring and an $ R $-module, $ I $ be an ideal of $ R $, then $ R/I $ is a quotient $ R $-module of $ R $ by $ I $.
 
-(2) Consider the ring $ \mathbb{Z} $ and the module $ \mathbb{Z} $ over $ \mathbb{Z} $, then for $ n \in \mathbb{Z} $, $ n \mathbb{Z} $ is a submodule of $ \mathbb{Z} $, and $ \mathbb{Z}/n\mathbb{Z} $ is a quotient $ \mathbb{Z} $-module of $ \mathbb{Z} $ by $ n\mathbb{Z} $. Furthermore, $ \mathbb{Z}/n\mathbb{Z} $ is a cyclic module.
+    (2) Consider the ring $ \mathbb{Z} $ and the module $ \mathbb{Z} $ over $ \mathbb{Z} $, then for $ n \in \mathbb{Z} $, $ n \mathbb{Z} $ is a submodule of $ \mathbb{Z} $, and $ \mathbb{Z}/n\mathbb{Z} $ is a quotient $ \mathbb{Z} $-module of $ \mathbb{Z} $ by $ n\mathbb{Z} $. Furthermore, $ \mathbb{Z}/n\mathbb{Z} $ is a cyclic module.
 \end{example}
 
 \begin{definition}
     Let $R$ be a ring, and let $M$ and $N$ be left $R$-modules. A group homomorphism
     \[
-    f:M\to N
+        f:M\to N
     \]
     is called an \emph{$R$-module homomorphism} (or \emph{$R$-linear map}) if for all $x,y\in M$ and all $r\in R$, one has
     \[
-    f(rx)=rf(x) \quad \forall r \in R, x \in M.
+        f(rx)=rf(x) \quad \forall r \in R, x \in M.
     \]
 \end{definition}
 
-\begin{definition} 
-Let $ f $ be an $ R $-module homomorphism. The \emph{kernel} of $ f $ is the set
-\[
-\ker(f) = \{ x \in M \mid f(x) = 0 \}.
-\]
-$ \ker(f) $ is a submodule of $ M $.
-The \emph{image} of $ f $ is the set
-\[
-\operatorname{im}(f) = \{ f(x) \in N \mid x \in M \}.
-\]
-$ \operatorname{im}(f) $ is a submodule of $ N $.
+\begin{definition}
+    Let $ f $ be an $ R $-module homomorphism. The \emph{kernel} of $ f $ is the set
+    \[
+        \ker(f) = \{ x \in M \mid f(x) = 0 \}.
+    \]
+    $ \ker(f) $ is a submodule of $ M $.
+    The \emph{image} of $ f $ is the set
+    \[
+        \operatorname{im}(f) = \{ f(x) \in N \mid x \in M \}.
+    \]
+    $ \operatorname{im}(f) $ is a submodule of $ N $.
 
-If $ \ker(f) = 0 $, then $ f $ is injective.
-If $ \operatorname{im}(f) = N $, then $ f $ is surjective.
-If $ \ker(f) = 0 $ and $ \operatorname{im}(f) = N $, then $ f $ is bijective.
+    If $ \ker(f) = 0 $, then $ f $ is injective.
+    If $ \operatorname{im}(f) = N $, then $ f $ is surjective.
+    If $ \ker(f) = 0 $ and $ \operatorname{im}(f) = N $, then $ f $ is bijective.
 
-A bijective $ R $-module homomorphism is called an \emph{isomorphism}.
+    A bijective $ R $-module homomorphism is called an \emph{isomorphism}.
 \end{definition}
 
-\begin{example} 
-Let $ R $ be a ring and $ M,N $ be an $ R $-modules. Then $ \operatorname{Hom}_R(M,N) $ is an $ R $-module when $ R $ is commutative.     
+\begin{example}
+    Let $ R $ be a ring and $ M,N $ be an $ R $-modules. Then $ \operatorname{Hom}_R(M,N) $ is an $ R $-module when $ R $ is commutative.
 \end{example}
 
-\begin{theorem} 
-If $ f: M\to N $ is an $ R $-module homomorphism, then we have a canonical $ R $-module isomorphism:
-\[
-M/ \ker(f) \rightarrow \operatorname{im}(f)
-\]   
+\begin{theorem}
+    If $ f: M\to N $ is an $ R $-module homomorphism, then we have a canonical $ R $-module isomorphism:
+    \[
+        M/ \ker(f) \rightarrow \operatorname{im}(f)
+    \]
 \end{theorem}
 
-\begin{theorem} 
-Let $ N $ be an $ R $-submodule of $ M $, $ \pi_N: M \to M/N $ be a quotient map. Then $ \pi_N $ induces a natural bijection:
-\[
-\{R-\text{submodules of } M \text{ containing } N\} \rightarrow \{R-\text{submodules of } M/N\}
-\]    
+\begin{theorem}
+    Let $ N $ be an $ R $-submodule of $ M $, $ \pi_N: M \to M/N $ be a quotient map. Then $ \pi_N $ induces a natural bijection:
+    \[
+        \{R-\text{submodules of } M \text{ containing } N\} \rightarrow \{R-\text{submodules of } M/N\}
+    \]
 \end{theorem}
 
-\begin{theorem} 
-If $ N\subseteq H$ are two $ R $-submodules of $ M $, then 
-\[
-M/H \cong M/N / (H/N), 
-\]
+\begin{theorem}
+    If $ N\subseteq H$ are two $ R $-submodules of $ M $, then
+    \[
+        M/H \cong M/N / (H/N),
+    \]
 \end{theorem}
 
-\begin{theorem} 
-If $ N,H $ are $ R $-submodules of $ M $, then
-\[
-\frac{H+N}{N} \cong \frac{H}{H \cap N} 
-\] 
-\end{theorem} 
+\begin{theorem}
+    If $ N,H $ are $ R $-submodules of $ M $, then
+    \[
+        \frac{H+N}{N} \cong \frac{H}{H \cap N}
+    \]
+\end{theorem}
 
 \begin{proposition}
-Let $M$ be an $R$-module, $N$ a submodule of $M$, $M'$ an $R$-module, and $\varphi: M \rightarrow M'$ a morphism such that $N \subseteq \ker(\varphi)$. Then there exists a unique morphism
-\[
-\varphi_{N}: M/N \rightarrow M'
-\]
-such that the following diagram commutes. Moreover, $\ker(\varphi_{N}) = \ker\varphi / N$.
-\[
-\begin{tikzcd}
-M \arrow[r, "\varphi"] \arrow[d, "\pi_{N}"'] & M' \\
-M/N \arrow[ru, "\varphi_{N}"', dashed]
-\end{tikzcd}
-\]
+    Let $M$ be an $R$-module, $N$ a submodule of $M$, $M'$ an $R$-module, and $\varphi: M \rightarrow M'$ a morphism such that $N \subseteq \ker(\varphi)$. Then there exists a unique morphism
+    \[
+        \varphi_{N}: M/N \rightarrow M'
+    \]
+    such that the following diagram commutes. Moreover, $\ker(\varphi_{N}) = \ker\varphi / N$.
+    \[
+        \begin{tikzcd}
+            M \arrow[r, "\varphi"] \arrow[d, "\pi_{N}"'] & M' \\
+            M/N \arrow[ru, "\varphi_{N}"', dashed]
+        \end{tikzcd}
+    \]
 \end{proposition}
 
 \begin{remark}
-The pair $(M/N, \pi_{N})$ is unique in the following sense: if $(S, \theta)$ is a pair such that
-\begin{itemize}
-\item $S$ is an $R$-module,
-\item $\theta: M \rightarrow S$ is a surjective morphism satisfying the property of $(M/N, \pi_{N})$ described in the above proposition,
-\end{itemize}
-then there exists a unique isomorphism $\psi: M/N \rightarrow S$ such that the following diagram commutes.
-\[
-\begin{tikzcd}[row sep=2.8em, column sep=3.8em]
-M \arrow[r, two heads, "\theta"] \arrow[d, two heads, "\pi_{N}"'] & S \\
-M/N \arrow[ur, dashed, "\exists!\,\psi"'] &
-\end{tikzcd}
-\]
+    The pair $(M/N, \pi_{N})$ is unique in the following sense: if $(S, \theta)$ is a pair such that
+    \begin{itemize}
+        \item $S$ is an $R$-module,
+        \item $\theta: M \rightarrow S$ is a surjective morphism satisfying the property of $(M/N, \pi_{N})$ described in the above proposition,
+    \end{itemize}
+    then there exists a unique isomorphism $\psi: M/N \rightarrow S$ such that the following diagram commutes.
+    \[
+        \begin{tikzcd}[row sep=2.8em, column sep=3.8em]
+            M \arrow[r, two heads, "\theta"] \arrow[d, two heads, "\pi_{N}"'] & S \\
+            M/N \arrow[ur, dashed, "\exists!\,\psi"'] &
+        \end{tikzcd}
+    \]
 \end{remark}
 
 \begin{proof}
     Since $(S,\theta)$ satisfies the same universal property as $(M/N,\pi_N)$, we may apply that property to the canonical projection
     \[
-    \pi_N : M \to M/N.
+        \pi_N : M \to M/N.
     \]
     Because $N \subseteq \ker(\pi_N)$, there exists a unique morphism
     \[
-    u:S\to M/N
+        u:S\to M/N
     \]
     such that
     \[
-    u\circ \theta=\pi_N.
+        u\circ \theta=\pi_N.
     \]
-    
+
     On the other hand, since $(M/N,\pi_N)$ has the universal property of the quotient by $N$, and since $N \subseteq \ker(\theta)$, there exists a unique morphism
     \[
-    \psi:M/N\to S
+        \psi:M/N\to S
     \]
     such that
     \[
-    \psi\circ \pi_N=\theta.
+        \psi\circ \pi_N=\theta.
     \]
-    
+
     We now show that $\psi$ and $u$ are inverse to each other.
-    
+
     First, compute
     \[
-    (u\circ \psi)\circ \pi_N
-    = u\circ (\psi\circ \pi_N)
-    = u\circ \theta
-    = \pi_N.
+        (u\circ \psi)\circ \pi_N
+        = u\circ (\psi\circ \pi_N)
+        = u\circ \theta
+        = \pi_N.
     \]
     But the identity morphism $\operatorname{id}_{M/N}:M/N\to M/N$ also satisfies
     \[
-    \operatorname{id}_{M/N}\circ \pi_N=\pi_N.
+        \operatorname{id}_{M/N}\circ \pi_N=\pi_N.
     \]
     By the uniqueness part of the universal property of $(M/N,\pi_N)$, it follows that
     \[
-    u\circ \psi=\operatorname{id}_{M/N}.
+        u\circ \psi=\operatorname{id}_{M/N}.
     \]
-    
+
     Similarly,
     \[
-    (\psi\circ u)\circ \theta
-    = \psi\circ (u\circ \theta)
-    = \psi\circ \pi_N
-    = \theta.
+        (\psi\circ u)\circ \theta
+        = \psi\circ (u\circ \theta)
+        = \psi\circ \pi_N
+        = \theta.
     \]
     But the identity morphism $\operatorname{id}_S:S\to S$ also satisfies
     \[
-    \operatorname{id}_S\circ \theta=\theta.
+        \operatorname{id}_S\circ \theta=\theta.
     \]
     By the uniqueness part of the universal property of $(S,\theta)$, we obtain
     \[
-    \psi\circ u=\operatorname{id}_S.
+        \psi\circ u=\operatorname{id}_S.
     \]
-    
+
     Therefore $\psi$ is an isomorphism, with inverse $u$.
-    
+
     Finally, the uniqueness of $\psi$ follows directly from the universal property of $(M/N,\pi_N)$: indeed, $\psi$ is the unique morphism
     \[
-    \psi:M/N\to S
+        \psi:M/N\to S
     \]
     such that
     \[
-    \psi\circ \pi_N=\theta.
+        \psi\circ \pi_N=\theta.
     \]
     Hence there exists a unique isomorphism
     \[
-    \psi:M/N\to S
+        \psi:M/N\to S
     \]
     for which the diagram commutes.
 \end{proof}
 
 \begin{proposition}
-There is a unique isomorphism $\bar{\varphi}: \operatorname{coim}\varphi \rightarrow \operatorname{im}\varphi$ such that the following diagram commutes:
-\begin{center}
-\begin{tikzcd}
-M \arrow[rr, "\varphi"] \arrow[dd, "\pi_{\operatorname{ker}(\varphi)}"'] &  & M'                                          \\
-                                                                         &  &                                             \\
-\operatorname{coim}(\varphi) \arrow[rr, "\overline{\varphi}"]            &  & \operatorname{im}(\varphi) \arrow[uu, hook]
-\end{tikzcd}
-\end{center}
-Recall:
-\[
-\begin{aligned}
-& \varphi: M \rightarrow M', \quad R\text{-morphism} \\
-& \operatorname{coker}(\varphi)=M'/\operatorname{im}(\varphi) \\
-& \operatorname{coim}(\varphi)=M/\ker \varphi
-\end{aligned}
-\]
+    There is a unique isomorphism $\bar{\varphi}: \operatorname{coim}\varphi \rightarrow \operatorname{im}\varphi$ such that the following diagram commutes:
+    \begin{center}
+        \begin{tikzcd}
+            M \arrow[rr, "\varphi"] \arrow[dd, "\pi_{\operatorname{ker}(\varphi)}"'] &  & M'                                          \\
+            &  &                                             \\
+            \operatorname{coim}(\varphi) \arrow[rr, "\overline{\varphi}"]            &  & \operatorname{im}(\varphi) \arrow[uu, hook]
+        \end{tikzcd}
+    \end{center}
+    Recall:
+    \[
+        \begin{aligned}
+             & \varphi: M \rightarrow M', \quad R\text{-morphism}          \\
+             & \operatorname{coker}(\varphi)=M'/\operatorname{im}(\varphi) \\
+             & \operatorname{coim}(\varphi)=M/\ker \varphi
+        \end{aligned}
+    \]
 \end{proposition}
 
 \begin{definition}
-Let $M$ be an $R$-module and $I$ an ideal of $R$. Denote by $IM$ the submodule of $M$ generated by all elements $am$ where $a \in I$, $m \in M$.
-\[
-IM = \left\{ \sum_{\text{finite}} a_{i} m_{i} \mid a_{i} \in I, \; m_{i} \in M \right\}
-\]
+    Let $M$ be an $R$-module and $I$ an ideal of $R$. Denote by $IM$ the submodule of $M$ generated by all elements $am$ where $a \in I$, $m \in M$.
+    \[
+        IM = \left\{ \sum_{\text{finite}} a_{i} m_{i} \mid a_{i} \in I, \; m_{i} \in M \right\}
+    \]
 \end{definition}
 
 \begin{proposition}
-Let $M$ be an $R$-module. Then $R \rightarrow \operatorname{End}(M)$ is a ring homomorphism.
-\begin{enumerate}
-\item $R \rightarrow \operatorname{End}(M)$ factors through the natural surjection $R \rightarrow R/I$ if and only if $IM = 0$:
-\[
-\begin{tikzcd}[row sep=2.8em, column sep=4.2em]
-R \arrow[rr, "\rho"] \arrow[dr, two heads, "\pi_{I}"'] && \operatorname{End}(M) \\
-& R/I \arrow[ur, dashed, "\exists\,\rho_{I}"'] &
-\end{tikzcd}
-\]
-Where $\rho$ factors through $\pi_I$ means $\exists \rho_{I}: R/I \rightarrow \operatorname{End}(M)$ such that the diagram above commutes.
-\item The module $M/IM$ is naturally endowed with a structure of $R/I$-module.
-\item Let $\varphi: M \rightarrow M'$ be an $R$-homomorphism. Then $\varphi(IM) \subseteq IM'$, so $\varphi$ induces a morphism of $R/I$-modules
-\[
-M/IM \rightarrow M'/IM'.
-\]
-\item If $M=M_1 \oplus \cdots \oplus M_n$, then $M/IM = M_1/IM_1 \oplus \cdots \oplus M_n/IM_n$.
-\item $R^n/IR^n \cong (R/IR)^n$.
-\end{enumerate}
+    Let $M$ be an $R$-module. Then $R \rightarrow \operatorname{End}(M)$ is a ring homomorphism.
+    \begin{enumerate}
+        \item $R \rightarrow \operatorname{End}(M)$ factors through the natural surjection $R \rightarrow R/I$ if and only if $IM = 0$:
+              \[
+                  \begin{tikzcd}[row sep=2.8em, column sep=4.2em]
+                      R \arrow[rr, "\rho"] \arrow[dr, two heads, "\pi_{I}"'] && \operatorname{End}(M) \\
+                      & R/I \arrow[ur, dashed, "\exists\,\rho_{I}"'] &
+                  \end{tikzcd}
+              \]
+              Where $\rho$ factors through $\pi_I$ means $\exists \rho_{I}: R/I \rightarrow \operatorname{End}(M)$ such that the diagram above commutes.
+        \item The module $M/IM$ is naturally endowed with a structure of $R/I$-module.
+        \item Let $\varphi: M \rightarrow M'$ be an $R$-homomorphism. Then $\varphi(IM) \subseteq IM'$, so $\varphi$ induces a morphism of $R/I$-modules
+              \[
+                  M/IM \rightarrow M'/IM'.
+              \]
+        \item If $M=M_1 \oplus \cdots \oplus M_n$, then $M/IM = M_1/IM_1 \oplus \cdots \oplus M_n/IM_n$.
+        \item $R^n/IR^n \cong (R/IR)^n$.
+    \end{enumerate}
 \end{proposition}
 
-    \begin{proof}
+\begin{proof}
     \textbf{(1)} Suppose first that $\rho$ factors through $\pi_I$. Then there exists a ring homomorphism
     \[
-    \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+        \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
     \]
     such that
     \[
-    \rho=\rho_I\circ \pi_I.
+        \rho=\rho_I\circ \pi_I.
     \]
     If $a\in I$, then $\pi_I(a)=0$, so
     \[
-    \rho(a)=\rho_I(0)=0.
+        \rho(a)=\rho_I(0)=0.
     \]
     Therefore $am=0$ for every $m\in M$. Since $IM$ is generated by elements of the form $am$ with $a\in I$ and $m\in M$, it follows that
     \[
-    IM=0.
+        IM=0.
     \]
-    
+
     Conversely, assume that $IM=0$. Then for every $a\in I$ and every $m\in M$ we have
     \[
-    \rho(a)(m)=am=0.
+        \rho(a)(m)=am=0.
     \]
     Thus $\rho(a)=0$, so $I\subseteq \ker \rho$. Hence $\rho$ factors uniquely through the quotient ring $R/I$: there exists a unique ring homomorphism
     \[
-    \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+        \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
     \]
     such that
     \[
-    \rho=\rho_I\circ \pi_I.
+        \rho=\rho_I\circ \pi_I.
     \]
 
     \textbf{(2)} Define an action of $R/I$ on $M/IM$ by
     \[
-    (r+I)\cdot (m+IM):=rm+IM.
+        (r+I)\cdot (m+IM):=rm+IM.
     \]
     We must show that this is well-defined.
-    
+
     If $r+I=r'+I$, then $r-r'\in I$, so
     \[
-    (r-r')m\in IM,
+        (r-r')m\in IM,
     \]
     hence
     \[
-    rm+IM=r'm+IM.
+        rm+IM=r'm+IM.
     \]
     If $m+IM=m'+IM$, then $m-m'\in IM$. Since $IM$ is a submodule of $M$, we have
     \[
-    r(m-m')\in IM,
+        r(m-m')\in IM,
     \]
     so
     \[
-    rm+IM=rm'+IM.
+        rm+IM=rm'+IM.
     \]
     Thus the action is well-defined. The module axioms follow immediately from the module axioms on $M$. Therefore $M/IM$ is naturally an $R/I$-module.
-    
+
     \textbf{(3)} Let $\varphi:M\to M'$ be an $R$-module homomorphism. Take any element of $IM$, say
     \[
-    x=\sum_{j=1}^t a_j m_j
-    \qquad (a_j\in I,\; m_j\in M).
+        x=\sum_{j=1}^t a_j m_j
+        \qquad (a_j\in I,\; m_j\in M).
     \]
     Then
     \[
-    \varphi(x)=\sum_{j=1}^t \varphi(a_jm_j)=\sum_{j=1}^t a_j\varphi(m_j).
+        \varphi(x)=\sum_{j=1}^t \varphi(a_jm_j)=\sum_{j=1}^t a_j\varphi(m_j).
     \]
     Since each $a_j\in I$ and each $\varphi(m_j)\in M'$, it follows that
     \[
-    a_j\varphi(m_j)\in IM'.
+        a_j\varphi(m_j)\in IM'.
     \]
     Hence $\varphi(x)\in IM'$, and therefore
     \[
-    \varphi(IM)\subseteq IM'.
+        \varphi(IM)\subseteq IM'.
     \]
-    
+
     Thus we may define
     \[
-    \overline{\varphi}:M/IM\to M'/IM',
-    \qquad
-    \overline{\varphi}(m+IM)=\varphi(m)+IM'.
+        \overline{\varphi}:M/IM\to M'/IM',
+        \qquad
+        \overline{\varphi}(m+IM)=\varphi(m)+IM'.
     \]
     This is well-defined: if $m+IM=m'+IM$, then $m-m'\in IM$, so
     \[
-    \varphi(m)-\varphi(m')=\varphi(m-m')\in IM',
+        \varphi(m)-\varphi(m')=\varphi(m-m')\in IM',
     \]
     hence
     \[
-    \varphi(m)+IM'=\varphi(m')+IM'.
+        \varphi(m)+IM'=\varphi(m')+IM'.
     \]
-    
+
     Finally, $\overline{\varphi}$ is $R/I$-linear, since
     \[
-    \overline{\varphi}\bigl((r+I)\cdot (m+IM)\bigr)
-    =\overline{\varphi}(rm+IM)
-    =\varphi(rm)+IM'
-    =r\varphi(m)+IM'
-    =(r+I)\cdot \overline{\varphi}(m+IM).
+        \overline{\varphi}\bigl((r+I)\cdot (m+IM)\bigr)
+        =\overline{\varphi}(rm+IM)
+        =\varphi(rm)+IM'
+        =r\varphi(m)+IM'
+        =(r+I)\cdot \overline{\varphi}(m+IM).
     \]
 
     \textbf{(4)} Assume that
     \[
-    M=M_1\oplus\cdots\oplus M_n.
+        M=M_1\oplus\cdots\oplus M_n.
     \]
     We first show that
     \[
-    IM=IM_1\oplus\cdots\oplus IM_n.
+        IM=IM_1\oplus\cdots\oplus IM_n.
     \]
-    
+
     If $x\in IM$, then $x$ is a finite sum of elements of the form $am$ with $a\in I$ and $m\in M$. Writing
     \[
-    m=m_1+\cdots+m_n
-    \qquad (m_i\in M_i),
+        m=m_1+\cdots+m_n
+        \qquad (m_i\in M_i),
     \]
     we get
     \[
-    am=am_1+\cdots+am_n,
+        am=am_1+\cdots+am_n,
     \]
     and each $am_i\in IM_i$. Hence $x\in IM_1+\cdots+IM_n$, so
     \[
-    IM\subseteq IM_1+\cdots+IM_n.
+        IM\subseteq IM_1+\cdots+IM_n.
     \]
     The reverse inclusion is immediate because each $M_i\subseteq M$, hence each $IM_i\subseteq IM$. Therefore
     \[
-    IM=IM_1+\cdots+IM_n.
+        IM=IM_1+\cdots+IM_n.
     \]
-    
+
     To see that the sum is direct, suppose
     \[
-    x_1+\cdots+x_n=0
-    \qquad\text{with } x_i\in IM_i\subseteq M_i.
+        x_1+\cdots+x_n=0
+        \qquad\text{with } x_i\in IM_i\subseteq M_i.
     \]
     Since
     \[
-    M=M_1\oplus\cdots\oplus M_n
+        M=M_1\oplus\cdots\oplus M_n
     \]
     is a direct sum, we must have $x_i=0$ for all $i$. Thus
     \[
-    IM=IM_1\oplus\cdots\oplus IM_n.
+        IM=IM_1\oplus\cdots\oplus IM_n.
     \]
-    
+
     Now define
     \[
-    \Psi:M_1/IM_1\oplus\cdots\oplus M_n/IM_n\to M/IM
+        \Psi:M_1/IM_1\oplus\cdots\oplus M_n/IM_n\to M/IM
     \]
     by
     \[
-    \Psi(m_1+IM_1,\dots,m_n+IM_n)
-    =(m_1+\cdots+m_n)+IM.
+        \Psi(m_1+IM_1,\dots,m_n+IM_n)
+        =(m_1+\cdots+m_n)+IM.
     \]
     This map is well-defined and $R/I$-linear. It is surjective because every element of $M$ can be written as $m_1+\cdots+m_n$. It is injective because
     \[
-    (m_1+\cdots+m_n)+IM=IM
+        (m_1+\cdots+m_n)+IM=IM
     \]
     means that
     \[
-    m_1+\cdots+m_n\in IM=IM_1\oplus\cdots\oplus IM_n,
+        m_1+\cdots+m_n\in IM=IM_1\oplus\cdots\oplus IM_n,
     \]
     so each $m_i\in IM_i$. Hence
     \[
-    m_i+IM_i=IM_i
+        m_i+IM_i=IM_i
     \]
     for all $i$, and the kernel is trivial. Therefore $\Psi$ is an isomorphism:
     \[
-    M/IM \cong M_1/IM_1 \oplus \cdots \oplus M_n/IM_n.
+        M/IM \cong M_1/IM_1 \oplus \cdots \oplus M_n/IM_n.
     \]
- 
+
     \textbf{(5)} Since
     \[
-    R^n=R\oplus\cdots\oplus R
+        R^n=R\oplus\cdots\oplus R
     \]
     ($n$ copies), part (4) yields
     \[
-    R^n/IR^n \cong R/IR \oplus \cdots \oplus R/IR.
+        R^n/IR^n \cong R/IR \oplus \cdots \oplus R/IR.
     \]
     Therefore
     \[
-    R^n/IR^n \cong (R/IR)^n.
+        R^n/IR^n \cong (R/IR)^n.
     \]
-    
+
     This completes the proof.
 \end{proof}
 
 \section{Direct Sums and Free Modules}
 
 \begin{definition}
-Direct sum and direct product $\left(\bigoplus_{i \in I} M_i \; \& \; \prod_{i \in I} M_i\right)$.
+    Direct sum and direct product $\left(\bigoplus_{i \in I} M_i \; \& \; \prod_{i \in I} M_i\right)$.
 
-Let $ (M_i)_{i \in I} $ be a family of $ R $-modules. The direct product of $ (M_i)_{i \in I} $ is the module
-\[
-\prod_{i \in I} M_i = \{ \varphi: I \to \cup_{i \in I}M_i | \forall i \in I, \varphi(i) \in M_i \}
-\]
-with the componentwise addition and scalar multiplication. i.e.
-\[
-R \times \prod_{i \in I} M_i \to \prod_{i \in I} M_i, \quad (r, \varphi) \mapsto (r \varphi(i))_{i \in I}
-\]
-The direct sum of $ (M_i)_{i \in I} $ is the module
-\[
-\bigoplus_{i \in I} M_i = \{ \varphi \in \prod_{i \in I} M_i | \sharp \{ i \in I | \varphi(i) \neq 0 \} < \infty \}
-\]
-Equal when $|I| < \infty$. In a module category, direct product $=$ product, direct sum $=$ coproduct. 
+    Let $ (M_i)_{i \in I} $ be a family of $ R $-modules. The direct product of $ (M_i)_{i \in I} $ is the module
+    \[
+        \prod_{i \in I} M_i = \{ \varphi: I \to \cup_{i \in I}M_i | \forall i \in I, \varphi(i) \in M_i \}
+    \]
+    with the componentwise addition and scalar multiplication. i.e.
+    \[
+        R \times \prod_{i \in I} M_i \to \prod_{i \in I} M_i, \quad (r, \varphi) \mapsto (r \varphi(i))_{i \in I}
+    \]
+    The direct sum of $ (M_i)_{i \in I} $ is the module
+    \[
+        \bigoplus_{i \in I} M_i = \{ \varphi \in \prod_{i \in I} M_i | \sharp \{ i \in I | \varphi(i) \neq 0 \} < \infty \}
+    \]
+    Equal when $|I| < \infty$. In a module category, direct product $=$ product, direct sum $=$ coproduct.
 \end{definition}
 
-\begin{theorem} 
-Suppose that $ M_1, \ldots , M_n $ are $ R $-submodules of $ M $ in which $ M = M_1 + \cdots + M_n $, $ I=[n] $. Then the followings are equivalent:
-\begin{enumerate}
-\item The map $ \varphi:  \sum_{i \in I} M_i \to M $ by $ \varphi( (m_i)_{i \in I} ) = \sum_{i \in I} m_i, m_i \in M_i $ is an isomorphism.
-\item Any element of $ M $ can be uniquely written as a sum of elements of $ M_i $.
-\item $ 0 $ can be uniquely written as a sum of elements of $ M_i $. More precisely, $ 0 = 0 + \ldots + 0 $. 
-\item For $ i \in I $, $ M_i \cap (\sum_{j \neq i} M_j) = 0 $. 
-\end{enumerate}
+\begin{theorem}
+    Suppose that $ M_1, \ldots , M_n $ are $ R $-submodules of $ M $ in which $ M = M_1 + \cdots + M_n $, $ I=[n] $. Then the followings are equivalent:
+    \begin{enumerate}
+        \item The map $ \varphi:  \sum_{i \in I} M_i \to M $ by $ \varphi( (m_i)_{i \in I} ) = \sum_{i \in I} m_i, m_i \in M_i $ is an isomorphism.
+        \item Any element of $ M $ can be uniquely written as a sum of elements of $ M_i $.
+        \item $ 0 $ can be uniquely written as a sum of elements of $ M_i $. More precisely, $ 0 = 0 + \ldots + 0 $.
+        \item For $ i \in I $, $ M_i \cap (\sum_{j \neq i} M_j) = 0 $.
+    \end{enumerate}
 \end{theorem}
 
-\begin{proof} 
+\begin{proof}
     We prove
     \[
-    (1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(4)\Rightarrow(1).
+        (1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(4)\Rightarrow(1).
     \]
-    
-   $(1)\Rightarrow(2)$.
+
+    $(1)\Rightarrow(2)$.
     If $\varphi$ is an isomorphism, then for every $m\in M$ there exists a unique
     \[
-    (m_1,\ldots,m_n)\in \sum_{i=1}^n M_i
+        (m_1,\ldots,m_n)\in \sum_{i=1}^n M_i
     \]
     such that
     \[
-    m=\varphi(m_1,\ldots,m_n)=m_1+\cdots+m_n.
+        m=\varphi(m_1,\ldots,m_n)=m_1+\cdots+m_n.
     \]
     Hence every element of $M$ can be written uniquely as a sum of elements of the $M_i$.
-    
-   $(2)\Rightarrow(3)$.
+
+    $(2)\Rightarrow(3)$.
     Apply $(2)$ to the element $0\in M$.
-    
+
     $(3)\Rightarrow(4)$.
     Fix $i\in I$, and let
     \[
-    x\in M_i\cap \sum_{j\ne i} M_j.
+        x\in M_i\cap \sum_{j\ne i} M_j.
     \]
     Then $x\in M_i$, and there exist $m_j\in M_j$ for $j\ne i$ such that
     \[
-    x=\sum_{j\ne i} m_j.
+        x=\sum_{j\ne i} m_j.
     \]
     Therefore
     \[
-    0=x-\sum_{j\ne i} m_j
+        0=x-\sum_{j\ne i} m_j
     \]
     is a decomposition of $0$ as a sum of elements from the submodules $M_1,\ldots,M_n$.
     By the uniqueness in $(3)$, this decomposition must be the trivial one. In particular,
     \[
-    x=0.
+        x=0.
     \]
     Hence
     \[
-    M_i\cap \sum_{j\ne i} M_j=0.
+        M_i\cap \sum_{j\ne i} M_j=0.
     \]
-    
-  $(4)\Rightarrow(1)$.
+
+    $(4)\Rightarrow(1)$.
     Since
     \[
-    M=M_1+\cdots+M_n,
+        M=M_1+\cdots+M_n,
     \]
     the map $\varphi$ is surjective. It remains to show that $\varphi$ is injective.
-    
+
     Suppose that
     \[
-    \varphi(m_1,\ldots,m_n)=0,
+        \varphi(m_1,\ldots,m_n)=0,
     \]
     that is,
     \[
-    m_1+\cdots+m_n=0
-    \qquad\text{with } m_i\in M_i.
+        m_1+\cdots+m_n=0
+        \qquad\text{with } m_i\in M_i.
     \]
     For each $i\in I$, we have
     \[
-    m_i=-\sum_{j\ne i} m_j\in \sum_{j\ne i} M_j.
+        m_i=-\sum_{j\ne i} m_j\in \sum_{j\ne i} M_j.
     \]
     Since also $m_i\in M_i$, it follows that
     \[
-    m_i\in M_i\cap \sum_{j\ne i} M_j=0.
+        m_i\in M_i\cap \sum_{j\ne i} M_j=0.
     \]
     Thus $m_i=0$ for all $i$, so
     \[
-    \ker\varphi=0.
+        \ker\varphi=0.
     \]
     Therefore $\varphi$ is injective, and hence an isomorphism.
-    
+
     This proves that the four conditions are equivalent.
 \end{proof}
 
 \begin{definition}[free module]
-Let $M$ be an $R$-module.
-\begin{enumerate}
-\item $x_{1}, \dots, x_{n} \in M$ are linearly independent if
-\[
-a_{1} x_{1} + a_{2} x_{2} + \cdots + a_{n} x_{n} = 0 \Rightarrow a_{1} = a_{2} = \cdots = a_{n} = 0.
-\]
-\item $M$ is called free if it is generated by a linearly independent subset. This subset is called a basis of $M$.
-\item If $M$ is an $R$-module with a basis $x_{1}, \ldots, x_{n}$, then $M = \langle x_{1} \rangle \oplus \cdots \oplus \langle x_{n} \rangle$.
-\end{enumerate}
+    Let $M$ be an $R$-module.
+    \begin{enumerate}
+        \item $x_{1}, \dots, x_{n} \in M$ are linearly independent if
+              \[
+                  a_{1} x_{1} + a_{2} x_{2} + \cdots + a_{n} x_{n} = 0 \Rightarrow a_{1} = a_{2} = \cdots = a_{n} = 0.
+              \]
+        \item $M$ is called free if it is generated by a linearly independent subset. This subset is called a basis of $M$.
+        \item If $M$ is an $R$-module with a basis $x_{1}, \ldots, x_{n}$, then $M = \langle x_{1} \rangle \oplus \cdots \oplus \langle x_{n} \rangle$.
+    \end{enumerate}
 \end{definition}
 
 \begin{example}
-$R \oplus \cdots \oplus R = R^{n}$.
+    $R \oplus \cdots \oplus R = R^{n}$.
 \end{example}
 
 \begin{theorem}
-Let $R$ be a commutative ring with $1$. Let $M$ be a finitely generated free $R$-module. Then any basis of $M$ has the same cardinality. The number of elements in a basis is called the rank of the free module.
+    Let $R$ be a commutative ring with $1$. Let $M$ be a finitely generated free $R$-module. Then any basis of $M$ has the same cardinality. The number of elements in a basis is called the rank of the free module.
 \end{theorem}
 
 \begin{proof}
-Let $B=\{x_i\}_{i\in I}$ be a basis of $M$.
-We first show that any basis is finite.
-Since $M$ is finitely generated, choose generators $y_1,\dots,y_n$ of $M$.
-Each $y_k$ is a finite $R$--linear combination of elements of $B$,
-so there exists a finite subset $I_0\subset I$ such that
-\[
-y_1,\dots,y_n \in \sum_{i\in I_0}Rx_i.
-\]
-Hence
-\[
-M = \sum_{k=1}^n Ry_k \subseteq \sum_{i\in I_0}Rx_i \subseteq M,
-\]
-so $M=\sum_{i\in I_0}Rx_i$.
-If $I\setminus I_0\neq\varnothing$, pick $j\in I\setminus I_0$. Then
-\[
-x_j \in M = \sum_{i\in I_0}Rx_i,
-\]
-contradicting that $B$ is linearly independent. Thus $I=I_0$ is finite.
+    Let $B=\{x_i\}_{i\in I}$ be a basis of $M$.
+    We first show that any basis is finite.
+    Since $M$ is finitely generated, choose generators $y_1,\dots,y_n$ of $M$.
+    Each $y_k$ is a finite $R$--linear combination of elements of $B$,
+    so there exists a finite subset $I_0\subset I$ such that
+    \[
+        y_1,\dots,y_n \in \sum_{i\in I_0}Rx_i.
+    \]
+    Hence
+    \[
+        M = \sum_{k=1}^n Ry_k \subseteq \sum_{i\in I_0}Rx_i \subseteq M,
+    \]
+    so $M=\sum_{i\in I_0}Rx_i$.
+    If $I\setminus I_0\neq\varnothing$, pick $j\in I\setminus I_0$. Then
+    \[
+        x_j \in M = \sum_{i\in I_0}Rx_i,
+    \]
+    contradicting that $B$ is linearly independent. Thus $I=I_0$ is finite.
 
-Now let $x_1,\dots,x_r$ and $y_1,\dots,y_s$ be two bases of $M$.
-Let $J\subset R$ be a maximal ideal and set $F:=R/J$, a field.
-Then $M/JM$ is naturally an $F$-vector space.
-Write $\overline{m}$ for the class of $m\in M$ in $M/JM$,
-and $\overline{a}$ for the class of $a\in R$ in $F$.
-We claim that $\overline{x_1},\dots,\overline{x_r}$ form an $F$--basis of $M/JM$.
+    Now let $x_1,\dots,x_r$ and $y_1,\dots,y_s$ be two bases of $M$.
+    Let $J\subset R$ be a maximal ideal and set $F:=R/J$, a field.
+    Then $M/JM$ is naturally an $F$-vector space.
+    Write $\overline{m}$ for the class of $m\in M$ in $M/JM$,
+    and $\overline{a}$ for the class of $a\in R$ in $F$.
+    We claim that $\overline{x_1},\dots,\overline{x_r}$ form an $F$--basis of $M/JM$.
 
-\emph{Spanning.}
-For any $m\in M$, write $m=\sum_{i=1}^r a_i x_i$. Then
-\[
-\overline{m} = \sum_{i=1}^r \overline{a_i}\,\overline{x_i},
-\]
-so $\overline{x_1},\dots,\overline{x_r}$ span $M/JM$.
+    \emph{Spanning.}
+    For any $m\in M$, write $m=\sum_{i=1}^r a_i x_i$. Then
+    \[
+        \overline{m} = \sum_{i=1}^r \overline{a_i}\,\overline{x_i},
+    \]
+    so $\overline{x_1},\dots,\overline{x_r}$ span $M/JM$.
 
-\emph{Linear independence.}
-Suppose
-\[
-\sum_{i=1}^r \overline{a_i}\,\overline{x_i} = 0 \quad \text{in } M/JM.
-\]
-Then $\sum_{i=1}^r a_i x_i \in JM$, so there exist $a'_1,\dots,a'_r\in J$ such that
-\[
-\sum_{i=1}^r a_i x_i = \sum_{i=1}^r a'_i x_i.
-\]
-Hence
-\[
-\sum_{i=1}^r (a_i - a'_i)\,x_i = 0.
-\]
-By linear independence of $x_1,\dots,x_r$, we get $a_i - a'_i = 0$ for all $i$,
-so $a_i\in J$, thus $\overline{a_i}=0$ for all $i$.
-Therefore $\overline{x_1},\dots,\overline{x_r}$ are $F$-linearly independent,
-and form an $F$--basis of $M/JM$.
+    \emph{Linear independence.}
+    Suppose
+    \[
+        \sum_{i=1}^r \overline{a_i}\,\overline{x_i} = 0 \quad \text{in } M/JM.
+    \]
+    Then $\sum_{i=1}^r a_i x_i \in JM$, so there exist $a'_1,\dots,a'_r\in J$ such that
+    \[
+        \sum_{i=1}^r a_i x_i = \sum_{i=1}^r a'_i x_i.
+    \]
+    Hence
+    \[
+        \sum_{i=1}^r (a_i - a'_i)\,x_i = 0.
+    \]
+    By linear independence of $x_1,\dots,x_r$, we get $a_i - a'_i = 0$ for all $i$,
+    so $a_i\in J$, thus $\overline{a_i}=0$ for all $i$.
+    Therefore $\overline{x_1},\dots,\overline{x_r}$ are $F$-linearly independent,
+    and form an $F$--basis of $M/JM$.
 
-By the same argument, $\overline{y_1},\dots,\overline{y_s}$ also form an $F$--basis of $M/JM$. Hence
-\[
-r = \dim_F(M/JM) = s.
-\]
-Therefore any two bases of $M$ have the same cardinality.
+    By the same argument, $\overline{y_1},\dots,\overline{y_s}$ also form an $F$--basis of $M/JM$. Hence
+    \[
+        r = \dim_F(M/JM) = s.
+    \]
+    Therefore any two bases of $M$ have the same cardinality.
 \end{proof}
 
-\chapter{Lecture 2}
+\chapter{Lecture 2: Tensor Product}
 
 \section{Annihilator, Torsion and Projectivity of Free Modules}
 
 \begin{definition}
     Let $M$ be an $R$-module, $m \in M$, $Rm=<m>=\{ rm \mid r \in R \}$. Define the annihilator of $m$ in $R$ as:
-\[
-\operatorname{Ann}_R(m)=\{ r \in R \mid rm=0 \}.
-\]
-It is a left ideal of $R$.
+    \[
+        \operatorname{Ann}_R(m)=\{ r \in R \mid rm=0 \}.
+    \]
+    It is a left ideal of $R$.
 \end{definition}
 
 Then we have $R/\operatorname{Ann}_R(m) \cong Rm$ is an isomorphism. Which shows that all cyclic modules are isomorphic to a quotient of $R$.
@@ -986,7 +986,7 @@ Then we have $R/\operatorname{Ann}_R(m) \cong Rm$ is an isomorphism. Which shows
 \begin{definition}
     The torsion part of $M$ is defined as:
     \[
-    \operatorname{Tor}(M)=\{ m \in M \mid \operatorname{Ann}_R(m)\neq 0 \}.
+        \operatorname{Tor}(M)=\{ m \in M \mid \operatorname{Ann}_R(m)\neq 0 \}.
     \]
 \end{definition}
 
@@ -995,31 +995,31 @@ Then we have $R/\operatorname{Ann}_R(m) \cong Rm$ is an isomorphism. Which shows
 \end{lemma}
 
 \begin{proof}
-We verify the submodule criteria.
+    We verify the submodule criteria.
 
-\emph{Non-empty.}
-Since $r\cdot 0_M=0_M$ for every $r\in R$ and $R\neq 0$,
-we have $\operatorname{Ann}_R(0_M)=R\neq 0$, so $0_M\in\operatorname{Tor}(M)$.
+    \emph{Non-empty.}
+    Since $r\cdot 0_M=0_M$ for every $r\in R$ and $R\neq 0$,
+    we have $\operatorname{Ann}_R(0_M)=R\neq 0$, so $0_M\in\operatorname{Tor}(M)$.
 
-\emph{Closed under addition.}
-Let $m,n\in\operatorname{Tor}(M)$.
-Then there exist $\lambda,\mu\in R\setminus\{0\}$ such that $\lambda m=0$ and $\mu n=0$.
-Hence
-\[
-(\lambda\mu)(m+n)=\mu(\lambda m)+\lambda(\mu n)=0.
-\]
-Since $R$ is an integral domain and $\lambda,\mu\neq 0$, we have $\lambda\mu\neq 0$,
-so $\operatorname{Ann}_R(m+n)\neq 0$ and $m+n\in\operatorname{Tor}(M)$.
+    \emph{Closed under addition.}
+    Let $m,n\in\operatorname{Tor}(M)$.
+    Then there exist $\lambda,\mu\in R\setminus\{0\}$ such that $\lambda m=0$ and $\mu n=0$.
+    Hence
+    \[
+        (\lambda\mu)(m+n)=\mu(\lambda m)+\lambda(\mu n)=0.
+    \]
+    Since $R$ is an integral domain and $\lambda,\mu\neq 0$, we have $\lambda\mu\neq 0$,
+    so $\operatorname{Ann}_R(m+n)\neq 0$ and $m+n\in\operatorname{Tor}(M)$.
 
-\emph{Closed under scalar multiplication.}
-Let $m\in\operatorname{Tor}(M)$ and $r\in R$.
-Choose $\lambda\in R\setminus\{0\}$ with $\lambda m=0$. Then
-\[
-\lambda(rm)=r(\lambda m)=0,
-\]
-so $\operatorname{Ann}_R(rm)\neq 0$ and $rm\in\operatorname{Tor}(M)$.
+    \emph{Closed under scalar multiplication.}
+    Let $m\in\operatorname{Tor}(M)$ and $r\in R$.
+    Choose $\lambda\in R\setminus\{0\}$ with $\lambda m=0$. Then
+    \[
+        \lambda(rm)=r(\lambda m)=0,
+    \]
+    so $\operatorname{Ann}_R(rm)\neq 0$ and $rm\in\operatorname{Tor}(M)$.
 
-Therefore $\operatorname{Tor}(M)$ is a submodule of $M$.
+    Therefore $\operatorname{Tor}(M)$ is a submodule of $M$.
 \end{proof}
 
 \begin{example}
@@ -1029,96 +1029,96 @@ Therefore $\operatorname{Tor}(M)$ is a submodule of $M$.
 
     (3) If $I$ is a nonzero ideal of $R$, then $\operatorname{Tor}(R/I)=R/I$ where $R/I$ is regarded as an $R$-module. If we regard $R/I$ as an $R/I$-module, then it is torsion-free if and only if $I$ is a prime ideal.
 
-    (4) More generally, let $I$ be any non-zero ideal of $R$, and $M$ be an $R$-module. Then $\operatorname{Tor}(M/IM)=M/IM$ where $M/IM$ is regarded as an $R$-module. 
+    (4) More generally, let $I$ be any non-zero ideal of $R$, and $M$ be an $R$-module. Then $\operatorname{Tor}(M/IM)=M/IM$ where $M/IM$ is regarded as an $R$-module.
 \end{example}
 
 \begin{remark}
     Let $R$ be a commutative ring with $1$. Let $M$ be an $R$-module. Then $f: M \to M$ such that $f(m)=rm$ for all $m\in M$ and $r\in R$ is a homomorphism of $R$-modules. If moreover $M$ is torsion-free, then $f$ is a monomorphism.
- \end{remark}
+\end{remark}
 
 \begin{lemma}
-    If $R$ is an integral domain and $M$ is an $R$-module, then 
+    If $R$ is an integral domain and $M$ is an $R$-module, then
     \begin{enumerate}
-\item $\operatorname{Tor}(\operatorname{Tor}(M)) = \operatorname{Tor}(M)$.
-\item $\operatorname{Tor}(M/\operatorname{Tor}(M)) = 0$.
+        \item $\operatorname{Tor}(\operatorname{Tor}(M)) = \operatorname{Tor}(M)$.
+        \item $\operatorname{Tor}(M/\operatorname{Tor}(M)) = 0$.
     \end{enumerate}
 \end{lemma}
 
 \begin{proof}\leavevmode
-\begin{enumerate}
-\item
-Since $\operatorname{Tor}(M)$ is a submodule of $M$, its torsion submodule is
-\[
-\operatorname{Tor}(\operatorname{Tor}(M))
-= \{\, m\in\operatorname{Tor}(M) \mid \operatorname{Ann}_R(m)\neq 0 \,\}.
-\]
-Every $m\in\operatorname{Tor}(M)$ already satisfies $\operatorname{Ann}_R(m)\neq 0$,
-so $\operatorname{Tor}(\operatorname{Tor}(M)) \subseteq \operatorname{Tor}(M)$.
-Conversely, $\operatorname{Tor}(M)\subseteq\operatorname{Tor}(\operatorname{Tor}(M))$
-because the annihilator of $m$ in $R$ does not depend on the ambient module:
-for any $m\in\operatorname{Tor}(M)$, its annihilator computed in the submodule
-$\operatorname{Tor}(M)$ is the same as $\operatorname{Ann}_R(m)\neq 0$,
-so $m\in\operatorname{Tor}(\operatorname{Tor}(M))$.
-Hence $\operatorname{Tor}(\operatorname{Tor}(M))=\operatorname{Tor}(M)$.
+    \begin{enumerate}
+        \item
+              Since $\operatorname{Tor}(M)$ is a submodule of $M$, its torsion submodule is
+              \[
+                  \operatorname{Tor}(\operatorname{Tor}(M))
+                  = \{\, m\in\operatorname{Tor}(M) \mid \operatorname{Ann}_R(m)\neq 0 \,\}.
+              \]
+              Every $m\in\operatorname{Tor}(M)$ already satisfies $\operatorname{Ann}_R(m)\neq 0$,
+              so $\operatorname{Tor}(\operatorname{Tor}(M)) \subseteq \operatorname{Tor}(M)$.
+              Conversely, $\operatorname{Tor}(M)\subseteq\operatorname{Tor}(\operatorname{Tor}(M))$
+              because the annihilator of $m$ in $R$ does not depend on the ambient module:
+              for any $m\in\operatorname{Tor}(M)$, its annihilator computed in the submodule
+              $\operatorname{Tor}(M)$ is the same as $\operatorname{Ann}_R(m)\neq 0$,
+              so $m\in\operatorname{Tor}(\operatorname{Tor}(M))$.
+              Hence $\operatorname{Tor}(\operatorname{Tor}(M))=\operatorname{Tor}(M)$.
 
-\item
-Let $\pi\colon M\to M/\operatorname{Tor}(M)$ be the canonical projection.
-Write $\overline{m}=\pi(m)=m+\operatorname{Tor}(M)$.
-Suppose $\overline{m}\in\operatorname{Tor}(M/\operatorname{Tor}(M))$,
-i.e.\ there exists $\lambda\in R\setminus\{0\}$ such that
-\[
-\lambda\,\overline{m} = \overline{0} \quad\text{in } M/\operatorname{Tor}(M).
-\]
-This means $\lambda m\in\operatorname{Tor}(M)$,
-so there exists $\mu\in R\setminus\{0\}$ with $\mu(\lambda m)=0$, i.e.
-\[
-(\mu\lambda)\,m = 0.
-\]
-Since $R$ is an integral domain and $\mu,\lambda\neq 0$, we have $\mu\lambda\neq 0$,
-hence $m\in\operatorname{Tor}(M)$, so $\overline{m}=\overline{0}$.
-Therefore $\operatorname{Tor}(M/\operatorname{Tor}(M))=0$.
-\end{enumerate}
+        \item
+              Let $\pi\colon M\to M/\operatorname{Tor}(M)$ be the canonical projection.
+              Write $\overline{m}=\pi(m)=m+\operatorname{Tor}(M)$.
+              Suppose $\overline{m}\in\operatorname{Tor}(M/\operatorname{Tor}(M))$,
+              i.e.\ there exists $\lambda\in R\setminus\{0\}$ such that
+              \[
+                  \lambda\,\overline{m} = \overline{0} \quad\text{in } M/\operatorname{Tor}(M).
+              \]
+              This means $\lambda m\in\operatorname{Tor}(M)$,
+              so there exists $\mu\in R\setminus\{0\}$ with $\mu(\lambda m)=0$, i.e.
+              \[
+                  (\mu\lambda)\,m = 0.
+              \]
+              Since $R$ is an integral domain and $\mu,\lambda\neq 0$, we have $\mu\lambda\neq 0$,
+              hence $m\in\operatorname{Tor}(M)$, so $\overline{m}=\overline{0}$.
+              Therefore $\operatorname{Tor}(M/\operatorname{Tor}(M))=0$.
+    \end{enumerate}
 \end{proof}
 
 \begin{definition}
     Let $J$ be a subscript set, denote $R^J=\prod_{j\in J} R$. $R^{(J)}=\bigoplus_{j\in J} R$.
 
-    Let $M$ be an $R$-module. Let $x_j \in M$ where $j \in J$ be a family of elements of $M$. Then the submodule generated by $(x_j)_{j\in J}$ is denoted by $\sum_{j\in J} Rx_j$. 
+    Let $M$ be an $R$-module. Let $x_j \in M$ where $j \in J$ be a family of elements of $M$. Then the submodule generated by $(x_j)_{j\in J}$ is denoted by $\sum_{j\in J} Rx_j$.
 \end{definition}
 
 \begin{corollary}
     We have a morphism of $R$-modules $\phi: R^{(J)} \to M$ such that $\phi(r_j)_{j \in J}=\sum_{j \in J}r_jx_j$ for all $(r_j)_{j \in J} \in R^{(J)}$.
-\begin{itemize}
-\item $\phi$ is injective if and only if $\{x_j\}_{j\in J}$ are linearly independent.
-\item $\phi$ is surjective if and only if $\{x_j\}_{j\in J}$ generate $M$.
-\item $\phi$ is an isomorphism if and only if $M$ is free with basis $\{x_j\}_{j\in J}$. 
-\end{itemize}
+    \begin{itemize}
+        \item $\phi$ is injective if and only if $\{x_j\}_{j\in J}$ are linearly independent.
+        \item $\phi$ is surjective if and only if $\{x_j\}_{j\in J}$ generate $M$.
+        \item $\phi$ is an isomorphism if and only if $M$ is free with basis $\{x_j\}_{j\in J}$.
+    \end{itemize}
 \end{corollary}
 
 \begin{lemma}
     Let $L$ be a free $R$-module with basis $\{x_j\}_{j\in J}$. For any $R$-module $M$ the following map:
     \[
-    \operatorname{Hom}_R(L,M) \to M^J, \quad f \mapsto (f(x_j))_{j \in J}
+        \operatorname{Hom}_R(L,M) \to M^J, \quad f \mapsto (f(x_j))_{j \in J}
     \]
     is a bijection.
 \end{lemma}
 
 \begin{proposition}
-    Let $L$ be a free $R$-module. 
+    Let $L$ be a free $R$-module.
     \begin{enumerate}
         \item Let $\pi: X\to Y$ be an epimorphism of $R$-modules. For any $R$-module homomorphism $\varphi: L \to Y$ there exists a morphism $\tilde{\varphi}: L \to X$ such that the following diagram commutes:
-        \begin{center}
-            \begin{tikzcd}
-                & L \arrow[d, "\varphi"] \arrow[ld, "\tilde{\varphi}"'] &   \\
-X \arrow[r, "\pi"'] & Y \arrow[r]                                           & 0
-\end{tikzcd}
-        \end{center}
+              \begin{center}
+                  \begin{tikzcd}
+                      & L \arrow[d, "\varphi"] \arrow[ld, "\tilde{\varphi}"'] &   \\
+                      X \arrow[r, "\pi"'] & Y \arrow[r]                                           & 0
+                  \end{tikzcd}
+              \end{center}
         \item In particular, for any $R$-module $M$ any epimorphism $\pi: M \to L$ has a section, that is, there exists a morphism $\sigma: L \to M$ such that $\pi \sigma = \operatorname{id}_L$. In that case $\sigma$ is injective, $\operatorname{im}(\sigma) = L$ and $M = \ker \pi \oplus \operatorname{im}(\sigma)$.
-        \begin{center}
-            \begin{tikzcd}
-                0 \arrow[r] & \operatorname{ker} \pi \arrow[r] & M \arrow[r, two heads, shift left] & L \arrow[r] \arrow[l, "\sigma", dashed, shift left] & 0
-                \end{tikzcd}
-        \end{center}
+              \begin{center}
+                  \begin{tikzcd}
+                      0 \arrow[r] & \operatorname{ker} \pi \arrow[r] & M \arrow[r, two heads, shift left] & L \arrow[r] \arrow[l, "\sigma", dashed, shift left] & 0
+                  \end{tikzcd}
+              \end{center}
     \end{enumerate}
 \end{proposition}
 
@@ -1127,72 +1127,72 @@ X \arrow[r, "\pi"'] & Y \arrow[r]                                           & 0
 
     \textbf{(1)} Since $\pi$ is surjective, for each $j\in J$ there exists $\tilde{x}_j \in X$ such that $\pi(\tilde{x}_j) = \varphi(e_j)$. By the lemma above, the map $\operatorname{Hom}_R(L,X) \to X^J$ given by $f \mapsto (f(e_j))_{j\in J}$ is a bijection. Hence there exists a unique $R$-module homomorphism $\tilde{\varphi}: L \to X$ such that $\tilde{\varphi}(e_j) = \tilde{x}_j$ for all $j \in J$. Then for each basis element $e_j$,
     \[
-    \pi \circ \tilde{\varphi}(e_j) = \pi(\tilde{x}_j) = \varphi(e_j),
+        \pi \circ \tilde{\varphi}(e_j) = \pi(\tilde{x}_j) = \varphi(e_j),
     \]
     so $\pi \circ \tilde{\varphi}$ and $\varphi$ agree on the basis $\{e_j\}_{j\in J}$. Since the basis generates $L$, we conclude $\pi \circ \tilde{\varphi} = \varphi$.
 
     \begin{remark}
         The uniqueness appearing in the proof of the lifting property is \emph{not} the uniqueness of the lift among all morphisms \( \tilde{\varphi}:L\to X \) satisfying
         \[
-        \pi\circ \tilde{\varphi}=\varphi.
+            \pi\circ \tilde{\varphi}=\varphi.
         \]
         Rather, it is only the uniqueness \emph{after a choice of lifts of the basis elements has been fixed}.
-        
+
         Indeed, let \(L\) be a free \(R\)-module with basis \(\{e_j\}_{j\in J}\). Since \(\pi:X\to Y\) is surjective, for each \(j\in J\) we may choose an element \(\tilde{x}_j\in X\) such that
         \[
-        \pi(\tilde{x}_j)=\varphi(e_j).
+            \pi(\tilde{x}_j)=\varphi(e_j).
         \]
         By the universal property of a free module, or equivalently by the bijection
         \[
-        \operatorname{Hom}_R(L,X)\xrightarrow{\sim} X^J,\qquad
-        f\mapsto (f(e_j))_{j\in J},
+            \operatorname{Hom}_R(L,X)\xrightarrow{\sim} X^J,\qquad
+            f\mapsto (f(e_j))_{j\in J},
         \]
         there exists a \emph{unique} \(R\)-module homomorphism
         \[
-        \tilde{\varphi}:L\to X
+            \tilde{\varphi}:L\to X
         \]
         such that
         \[
-        \tilde{\varphi}(e_j)=\tilde{x}_j
-        \qquad \text{for all } j\in J.
+            \tilde{\varphi}(e_j)=\tilde{x}_j
+            \qquad \text{for all } j\in J.
         \]
         Thus the word ``unique'' here means: \emph{for the chosen family \((\tilde{x}_j)_{j\in J}\), there is a unique homomorphism realizing those values on the basis.}
-        
+
         However, the elements \(\tilde{x}_j\) themselves are generally \emph{not} unique. If \(\tilde{x}_j\) is one lift of \(\varphi(e_j)\), then for any \(k_j\in \ker\pi\), the element
         \[
-        \tilde{x}_j+k_j
+            \tilde{x}_j+k_j
         \]
         is also a lift, since
         \[
-        \pi(\tilde{x}_j+k_j)=\pi(\tilde{x}_j)+\pi(k_j)=\varphi(e_j).
+            \pi(\tilde{x}_j+k_j)=\pi(\tilde{x}_j)+\pi(k_j)=\varphi(e_j).
         \]
         Different choices of lifts of the basis elements therefore give, in general, different morphisms \( \tilde{\varphi}:L\to X \). Hence the proposition asserts only \emph{existence} of a lift, not uniqueness.
-        
+
         Equivalently, if \(\tilde{\varphi}_1,\tilde{\varphi}_2:L\to X\) are two lifts of \(\varphi\), then
         \[
-        \pi\circ \tilde{\varphi}_1=\varphi=\pi\circ \tilde{\varphi}_2,
+            \pi\circ \tilde{\varphi}_1=\varphi=\pi\circ \tilde{\varphi}_2,
         \]
         so
         \[
-        \pi\circ (\tilde{\varphi}_1-\tilde{\varphi}_2)=0.
+            \pi\circ (\tilde{\varphi}_1-\tilde{\varphi}_2)=0.
         \]
         Therefore
         \[
-        \operatorname{im}(\tilde{\varphi}_1-\tilde{\varphi}_2)\subseteq \ker\pi,
+            \operatorname{im}(\tilde{\varphi}_1-\tilde{\varphi}_2)\subseteq \ker\pi,
         \]
         that is,
         \[
-        \tilde{\varphi}_1-\tilde{\varphi}_2\in \operatorname{Hom}_R(L,\ker\pi).
+            \tilde{\varphi}_1-\tilde{\varphi}_2\in \operatorname{Hom}_R(L,\ker\pi).
         \]
         Conversely, if \(\delta\in \operatorname{Hom}_R(L,\ker\pi)\), then
         \[
-        \pi\circ (\tilde{\varphi}_1+\delta)=\pi\circ \tilde{\varphi}_1=\varphi,
+            \pi\circ (\tilde{\varphi}_1+\delta)=\pi\circ \tilde{\varphi}_1=\varphi,
         \]
         so \(\tilde{\varphi}_1+\delta\) is again a lift of \(\varphi\). Thus the lift is unique if and only if
         \[
-        \operatorname{Hom}_R(L,\ker\pi)=0.
+            \operatorname{Hom}_R(L,\ker\pi)=0.
         \]
-        \end{remark}
+    \end{remark}
 
     \textbf{(2)} Apply (1) with $X = M$, $Y = L$, and $\varphi = \operatorname{id}_L$. Then there exists $\sigma: L \to M$ such that $\pi \circ \sigma = \operatorname{id}_L$.
 
@@ -1200,7 +1200,7 @@ X \arrow[r, "\pi"'] & Y \arrow[r]                                           & 0
 
     \emph{$M = \ker\pi \oplus \operatorname{im}(\sigma)$:} For any $m \in M$, write
     \[
-    m = (m - \sigma(\pi(m))) + \sigma(\pi(m)).
+        m = (m - \sigma(\pi(m))) + \sigma(\pi(m)).
     \]
     The second summand $\sigma(\pi(m)) \in \operatorname{im}(\sigma)$. At first, $\pi\bigl(m - \sigma(\pi(m))\bigr) = \pi(m) - \pi\sigma(\pi(m)) = \pi(m) - \pi(m) = 0$, so it lies in $\ker\pi$. This shows $M = \ker\pi + \operatorname{im}(\sigma)$.
 
@@ -1208,7 +1208,7 @@ X \arrow[r, "\pi"'] & Y \arrow[r]                                           & 0
 \end{proof}
 
 \begin{exercise}
-Let $L$ be a free $R$-module. $P$ a direct summand of $L$. Show that whenever $\pi: X\to Y$ is an epimorphism and $\varphi: P \to Y$ is a morphism, there exists a morphism $\tilde{\varphi}: P \to X$ such that $\varphi = \pi \circ \tilde{\varphi}$.
+    Let $L$ be a free $R$-module. $P$ a direct summand of $L$. Show that whenever $\pi: X\to Y$ is an epimorphism and $\varphi: P \to Y$ is a morphism, there exists a morphism $\tilde{\varphi}: P \to X$ such that $\varphi = \pi \circ \tilde{\varphi}$.
 \end{exercise}
 
 \section{Tensor product}
@@ -1236,8 +1236,8 @@ Let $R$ be a commutative ring. $M,N$ be $R$-modules. The tensor product $M \otim
     \begin{center}
         \begin{tikzcd}
             M \times N \arrow[r, "f"] \arrow[d, "{t_{M,N}}"'] & X \\
-            M \otimes_R N \arrow[ru, "\tilde{f}"', dashed]    &  
-            \end{tikzcd}
+            M \otimes_R N \arrow[ru, "\tilde{f}"', dashed]    &
+        \end{tikzcd}
     \end{center}
 \end{definition}
 
@@ -1250,10 +1250,10 @@ Let $R$ be a commutative ring. $M,N$ be $R$-modules. The tensor product $M \otim
 
     The tensor product is unique up to isomorphism. Suppose $(T_i, t_1)$ and $(T_2, t_2)$ are two tensor products of $M$ and $N$. By the universal property, there exists a unique $R$-module homomorphism $\varphi: T_1 \to T_2$ such that $t_2 = \varphi \circ t_1$ and a unique $R$-module homomorphism $\psi: T_2 \to T_1$ such that $t_1 = \psi \circ t_2$. Then we have:
     \[
-    \varphi \circ \psi \circ t_2 = \varphi \circ t_1 = t_2 
+        \varphi \circ \psi \circ t_2 = \varphi \circ t_1 = t_2
     \]
     \[
-    \psi \circ \varphi \circ t_1 = \psi \circ t_2 = t_1.
+        \psi \circ \varphi \circ t_1 = \psi \circ t_2 = t_1.
     \]
     Since such $\varphi \circ \psi$ and $\psi \circ \varphi$ are unique. It forces $\varphi \circ \psi = \operatorname{id}_{T_2}$ and $\psi \circ \varphi = \operatorname{id}_{T_1}$. Hence $\varphi$ and $\psi$ are isomorphisms. Therefore $T_1 \cong T_2$.
 
@@ -1266,7 +1266,7 @@ Let $R$ be a commutative ring. $M,N$ be $R$-modules. The tensor product $M \otim
         \item $e_{rm,n}-r e_{m,n}$
         \item $e_{m,rn}-r e_{m,n}$
     \end{itemize}
-    Where $m, m_1,m_2\in M$, $n,n_1,n_2\in N$, $r\in R$. Define $M\otimes_R N=F/B$, $t_{M,N}: M\times N \to M\otimes_R N$ by $t_{M,N}(m,n)=e_{m,n}+B$. It is easy to check that $t_{M,N}$ is a well-defined bilinear map. 
+    Where $m, m_1,m_2\in M$, $n,n_1,n_2\in N$, $r\in R$. Define $M\otimes_R N=F/B$, $t_{M,N}: M\times N \to M\otimes_R N$ by $t_{M,N}(m,n)=e_{m,n}+B$. It is easy to check that $t_{M,N}$ is a well-defined bilinear map.
 
     We only need to show that $(M\otimes_R N, t_{M,N})$ satisfies the universal property of tensor product:
 
@@ -1274,10 +1274,10 @@ Let $R$ be a commutative ring. $M,N$ be $R$-modules. The tensor product $M \otim
 
     We claim that $B \subseteq \ker \hat{f}$. Indeed, since $f$ is bilinear:
     \begin{align*}
-        \hat{f}(e_{m_1+m_2,n}-e_{m_1,n}-e_{m_2,n}) &= f(m_1+m_2,n)-f(m_1,n)-f(m_2,n) = 0, \\
-        \hat{f}(e_{m,n_1+n_2}-e_{m,n_1}-e_{m,n_2}) &= f(m,n_1+n_2)-f(m,n_1)-f(m,n_2) = 0, \\
-        \hat{f}(e_{rm,n}-r e_{m,n}) &= f(rm,n)-r f(m,n) = 0, \\
-        \hat{f}(e_{m,rn}-r e_{m,n}) &= f(m,rn)-r f(m,n) = 0.
+        \hat{f}(e_{m_1+m_2,n}-e_{m_1,n}-e_{m_2,n}) & = f(m_1+m_2,n)-f(m_1,n)-f(m_2,n) = 0, \\
+        \hat{f}(e_{m,n_1+n_2}-e_{m,n_1}-e_{m,n_2}) & = f(m,n_1+n_2)-f(m,n_1)-f(m,n_2) = 0, \\
+        \hat{f}(e_{rm,n}-r e_{m,n})                & = f(rm,n)-r f(m,n) = 0,               \\
+        \hat{f}(e_{m,rn}-r e_{m,n})                & = f(m,rn)-r f(m,n) = 0.
     \end{align*}
     Since $B$ is generated by elements of the above forms and $\ker\hat{f}$ is a submodule, we have $B \subseteq \ker\hat{f}$.
 
@@ -1296,16 +1296,16 @@ Let $R$ be a commutative ring. $M,N$ be $R$-modules. The tensor product $M \otim
     Fix $m \in M$. The map $N \to M \otimes_R N, n \mapsto m \otimes n$ is a morphism of $R$-modules. Its image $ m \otimes_R N = \{m \otimes n \mid n \in N\}$ is a submodule of $M \otimes_R N$ which is isomorphic to a quotient $N/\operatorname{Ann}_R(m)N$.
 \end{example}
 
-\begin{proposition} We have the following isomorphisms: 
+\begin{proposition} We have the following isomorphisms:
     \begin{enumerate}
-\item $(M_1 \otimes_R M_2) \otimes_R M_3 \cong M_1 \otimes_R (M_2 \otimes_R M_3)$ where $(m_1 \otimes m_2) \otimes m_3 \mapsto m_1 \otimes (m_2 \otimes m_3)$.
-\item $M_1 \otimes_R M_2 \cong M_2 \otimes_R M_1$ where $m_1 \otimes m_2 \mapsto m_2 \otimes m_1$.
-\item $M_1 \otimes_R (M_2 \oplus M_3) \cong (M_1 \otimes_R M_2) \oplus (M_1 \otimes_R M_3)$ where $m_1 \otimes (m_2 \oplus m_3) \mapsto (m_1 \otimes m_2) + (m_1 \otimes m_3)$. And more generally, 
-\[ 
- M_1 \otimes_R (\bigoplus_{i=1}^n M_i) \cong \bigoplus_{i=1}^n (M_1 \otimes_R M_i)
- \] 
-where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \cdots + (m_1 \otimes m_n)$.
-\item $R \otimes_R M \cong M$ where $r \otimes m \mapsto rm$. And more generally, $R^{(I)} \otimes_R M \cong M^{(I)}$ where $(r_i)_{i\in I} \otimes m \mapsto (r_i m)_{i\in I}$.
+        \item $(M_1 \otimes_R M_2) \otimes_R M_3 \cong M_1 \otimes_R (M_2 \otimes_R M_3)$ where $(m_1 \otimes m_2) \otimes m_3 \mapsto m_1 \otimes (m_2 \otimes m_3)$.
+        \item $M_1 \otimes_R M_2 \cong M_2 \otimes_R M_1$ where $m_1 \otimes m_2 \mapsto m_2 \otimes m_1$.
+        \item $M_1 \otimes_R (M_2 \oplus M_3) \cong (M_1 \otimes_R M_2) \oplus (M_1 \otimes_R M_3)$ where $m_1 \otimes (m_2 \oplus m_3) \mapsto (m_1 \otimes m_2) + (m_1 \otimes m_3)$. And more generally,
+              \[
+                  M_1 \otimes_R (\bigoplus_{i=1}^n M_i) \cong \bigoplus_{i=1}^n (M_1 \otimes_R M_i)
+              \]
+              where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \cdots + (m_1 \otimes m_n)$.
+        \item $R \otimes_R M \cong M$ where $r \otimes m \mapsto rm$. And more generally, $R^{(I)} \otimes_R M \cong M^{(I)}$ where $(r_i)_{i\in I} \otimes m \mapsto (r_i m)_{i\in I}$.
     \end{enumerate}
 \end{proposition}
 
@@ -1324,20 +1324,20 @@ where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \c
 
     Now define $g: (M_1 \otimes_R M_2) \times M_3 \to M_1 \otimes_R (M_2 \otimes_R M_3)$ by $g(\alpha, m_3) = \tilde{f}_{m_3}(\alpha)$. We verify that $g$ is bilinear. Linearity in the first argument follows because each $\tilde{f}_{m_3}$ is an $R$-module homomorphism. For the second argument, on elementary tensors:
     \begin{align*}
-        g(m_1 \otimes m_2, m_3 + m_3') &= m_1 \otimes (m_2 \otimes (m_3+m_3')) \\
-        &= m_1 \otimes (m_2 \otimes m_3 + m_2 \otimes m_3') \\
-        &= m_1 \otimes (m_2 \otimes m_3) + m_1 \otimes (m_2 \otimes m_3') \\
-        &= g(m_1 \otimes m_2, m_3) + g(m_1 \otimes m_2, m_3'),\\
-        g(m_1 \otimes m_2, rm_3) &= m_1 \otimes (m_2 \otimes rm_3) \\
-        &= m_1 \otimes (r(m_2 \otimes m_3)) \\
-        &= r(m_1 \otimes (m_2 \otimes m_3)) \\
-        &= r\, g(m_1 \otimes m_2, m_3).
+        g(m_1 \otimes m_2, m_3 + m_3') & = m_1 \otimes (m_2 \otimes (m_3+m_3'))                           \\
+                                       & = m_1 \otimes (m_2 \otimes m_3 + m_2 \otimes m_3')               \\
+                                       & = m_1 \otimes (m_2 \otimes m_3) + m_1 \otimes (m_2 \otimes m_3') \\
+                                       & = g(m_1 \otimes m_2, m_3) + g(m_1 \otimes m_2, m_3'),            \\
+        g(m_1 \otimes m_2, rm_3)       & = m_1 \otimes (m_2 \otimes rm_3)                                 \\
+                                       & = m_1 \otimes (r(m_2 \otimes m_3))                               \\
+                                       & = r(m_1 \otimes (m_2 \otimes m_3))                               \\
+                                       & = r\, g(m_1 \otimes m_2, m_3).
     \end{align*}
     Since elementary tensors generate $M_1 \otimes_R M_2$, bilinearity holds on all of $(M_1 \otimes_R M_2) \times M_3$.
 
     By the universal property of $(M_1 \otimes_R M_2) \otimes_R M_3$, there exists a unique $R$-module homomorphism
     \[
-    \varphi: (M_1 \otimes_R M_2) \otimes_R M_3 \to M_1 \otimes_R (M_2 \otimes_R M_3)
+        \varphi: (M_1 \otimes_R M_2) \otimes_R M_3 \to M_1 \otimes_R (M_2 \otimes_R M_3)
     \]
     such that $\varphi((m_1 \otimes m_2) \otimes m_3) = m_1 \otimes (m_2 \otimes m_3)$:
     \begin{center}
@@ -1349,16 +1349,16 @@ where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \c
 
     \textbf{Step 2.} By an entirely symmetric argument (fixing $m_1$ first, then extending), we obtain an $R$-module homomorphism
     \[
-    \psi: M_1 \otimes_R (M_2 \otimes_R M_3) \to (M_1 \otimes_R M_2) \otimes_R M_3
+        \psi: M_1 \otimes_R (M_2 \otimes_R M_3) \to (M_1 \otimes_R M_2) \otimes_R M_3
     \]
     such that $\psi(m_1 \otimes (m_2 \otimes m_3)) = (m_1 \otimes m_2) \otimes m_3$.
 
     \textbf{Step 3.} We show $\varphi$ and $\psi$ are inverses. On elementary tensors:
     \[
-    (\psi \circ \varphi)((m_1 \otimes m_2) \otimes m_3) = \psi(m_1 \otimes (m_2 \otimes m_3)) = (m_1 \otimes m_2) \otimes m_3,
+        (\psi \circ \varphi)((m_1 \otimes m_2) \otimes m_3) = \psi(m_1 \otimes (m_2 \otimes m_3)) = (m_1 \otimes m_2) \otimes m_3,
     \]
     \[
-    (\varphi \circ \psi)(m_1 \otimes (m_2 \otimes m_3)) = \varphi((m_1 \otimes m_2) \otimes m_3) = m_1 \otimes (m_2 \otimes m_3).
+        (\varphi \circ \psi)(m_1 \otimes (m_2 \otimes m_3)) = \varphi((m_1 \otimes m_2) \otimes m_3) = m_1 \otimes (m_2 \otimes m_3).
     \]
     Since elementary tensors generate both modules, $\psi \circ \varphi = \operatorname{id}$ and $\varphi \circ \psi = \operatorname{id}$. The overall situation is summarized by the following commutative diagram:
     \begin{center}
@@ -1373,45 +1373,45 @@ where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \c
 \begin{theorem}
     Let $M, N, P$ be $R$-modules. We have a canonical isomorphism:
     \[
-    \phi_{M,N,P}: \operatorname{Hom}_R(M \otimes_R N, P) \to \operatorname{Hom}_R(M, \operatorname{Hom}_R(N, P))
+        \phi_{M,N,P}: \operatorname{Hom}_R(M \otimes_R N, P) \to \operatorname{Hom}_R(M, \operatorname{Hom}_R(N, P))
     \]
     such that $\phi_{M,N,P}(f)(m)(n) = f(m \otimes n)$.
-Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorphism. If $R$ is not commutative, then $\phi_{M,N,P}$ is only a $\mathbb{Z}$-module isomorphism.
+    Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorphism. If $R$ is not commutative, then $\phi_{M,N,P}$ is only a $\mathbb{Z}$-module isomorphism.
 \end{theorem}
 
 \begin{proof}
     Let $f \in \operatorname{Hom}_R(M \otimes_R N, P)$. For each $m \in M$, define $\phi_{M,N,P}(f)(m): N \to P$ by
     \[
-    \phi_{M,N,P}(f)(m)(n) = f(m \otimes n).
+        \phi_{M,N,P}(f)(m)(n) = f(m \otimes n).
     \]
     We verify that $\phi_{M,N,P}(f)(m) \in \operatorname{Hom}_R(N, P)$: for $n_1, n_2 \in N$ and $r \in R$,
     \begin{align*}
-        \phi_{M,N,P}(f)(m)(n_1 + n_2) &= f(m \otimes (n_1+n_2)) = f(m \otimes n_1 + m \otimes n_2) \\
-        &= f(m\otimes n_1) + f(m\otimes n_2),\\
-        \phi_{M,N,P}(f)(m)(rn) &= f(m \otimes rn) = f(r(m\otimes n)) \\
-        &= rf(m\otimes n) = r\,\phi_{M,N,P}(f)(m)(n).
+        \phi_{M,N,P}(f)(m)(n_1 + n_2) & = f(m \otimes (n_1+n_2)) = f(m \otimes n_1 + m \otimes n_2) \\
+                                      & = f(m\otimes n_1) + f(m\otimes n_2),                        \\
+        \phi_{M,N,P}(f)(m)(rn)        & = f(m \otimes rn) = f(r(m\otimes n))                        \\
+                                      & = rf(m\otimes n) = r\,\phi_{M,N,P}(f)(m)(n).
     \end{align*}
     Next, we verify that $\phi_{M,N,P}(f) \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$: for $m_1, m_2 \in M$, $r \in R$, and any $n\in N$,
     \begin{align*}
-        \phi_{M,N,P}(f)(m_1+m_2)(n) &= f((m_1+m_2)\otimes n) \\
-        &= f(m_1\otimes n) + f(m_2\otimes n)\\
-        \phi_{M,N,P}(f)(rm)(n) &= f(rm\otimes n) \\
-        &= f(r(m\otimes n)) \\
-        &= rf(m\otimes n) \\
-        &= (r\,\phi_{M,N,P}(f)(m))(n).
+        \phi_{M,N,P}(f)(m_1+m_2)(n) & = f((m_1+m_2)\otimes n)             \\
+                                    & = f(m_1\otimes n) + f(m_2\otimes n) \\
+        \phi_{M,N,P}(f)(rm)(n)      & = f(rm\otimes n)                    \\
+                                    & = f(r(m\otimes n))                  \\
+                                    & = rf(m\otimes n)                    \\
+                                    & = (r\,\phi_{M,N,P}(f)(m))(n).
     \end{align*}
-    So 
+    So
     \[
         \phi_{M,N,P}(f)(m_1+m_2) = \phi_{M,N,P}(f)(m_1)+\phi_{M,N,P}(f)(m_2)
-   \]
-        and $\phi_{M,N,P}(f)(rm) = r\,\phi_{M,N,P}(f)(m)$, confirming $R$-linearity.
+    \]
+    and $\phi_{M,N,P}(f)(rm) = r\,\phi_{M,N,P}(f)(m)$, confirming $R$-linearity.
 
-     Let $g \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N, P))$. Define $\hat{g}: M \times N \to P$ by $\hat{g}(m,n) = g(m)(n)$. We check that $\hat{g}$ is $R$-bilinear:
+    Let $g \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N, P))$. Define $\hat{g}: M \times N \to P$ by $\hat{g}(m,n) = g(m)(n)$. We check that $\hat{g}$ is $R$-bilinear:
     \begin{align*}
-        \hat{g}(m_1+m_2,n) &= g(m_1+m_2)(n) = g(m_1)(n)+g(m_2)(n) = \hat{g}(m_1,n)+\hat{g}(m_2,n),\\
-        \hat{g}(m,n_1+n_2) &= g(m)(n_1+n_2) = g(m)(n_1)+g(m)(n_2) = \hat{g}(m,n_1)+\hat{g}(m,n_2),\\
-        \hat{g}(rm,n) &= g(rm)(n) = (rg(m))(n) = rg(m)(n) = r\,\hat{g}(m,n),\\
-        \hat{g}(m,rn) &= g(m)(rn) = rg(m)(n) = r\,\hat{g}(m,n).
+        \hat{g}(m_1+m_2,n) & = g(m_1+m_2)(n) = g(m_1)(n)+g(m_2)(n) = \hat{g}(m_1,n)+\hat{g}(m_2,n), \\
+        \hat{g}(m,n_1+n_2) & = g(m)(n_1+n_2) = g(m)(n_1)+g(m)(n_2) = \hat{g}(m,n_1)+\hat{g}(m,n_2), \\
+        \hat{g}(rm,n)      & = g(rm)(n) = (rg(m))(n) = rg(m)(n) = r\,\hat{g}(m,n),                  \\
+        \hat{g}(m,rn)      & = g(m)(rn) = rg(m)(n) = r\,\hat{g}(m,n).
     \end{align*}
     By the universal property of $M \otimes_R N$, there exists a unique $R$-module homomorphism $\psi_{M,N,P}(g): M\otimes_R N \to P$ such that $\psi_{M,N,P}(g)(m\otimes n) = g(m)(n)$:
     \begin{center}
@@ -1423,13 +1423,13 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 
     For any $f \in \operatorname{Hom}_R(M\otimes_R N,P)$:
     \[
-    \psi_{M,N,P}(\phi_{M,N,P}(f))(m\otimes n) = \phi_{M,N,P}(f)(m)(n) = f(m\otimes n).
+        \psi_{M,N,P}(\phi_{M,N,P}(f))(m\otimes n) = \phi_{M,N,P}(f)(m)(n) = f(m\otimes n).
     \]
     Since elementary tensors generate $M\otimes_R N$, we have $\psi_{M,N,P}(\phi_{M,N,P}(f)) = f$.
 
     For any $g \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$, for all $m\in M$ and $n\in N$:
     \[
-    \phi_{M,N,P}(\psi_{M,N,P}(g))(m)(n) = \psi_{M,N,P}(g)(m\otimes n) = g(m)(n).
+        \phi_{M,N,P}(\psi_{M,N,P}(g))(m)(n) = \psi_{M,N,P}(g)(m\otimes n) = g(m)(n).
     \]
     So $\phi_{M,N,P}(\psi_{M,N,P}(g))(m) = g(m)$ for all $m$, hence $\phi_{M,N,P}(\psi_{M,N,P}(g)) = g$.
 
@@ -1439,18 +1439,18 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 
     Both $\operatorname{Hom}_R(M\otimes_R N, P)$ and $\operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$ are abelian groups under pointwise addition. We verify $\phi_{M,N,P}$ is a group homomorphism: for $f_1, f_2 \in \operatorname{Hom}_R(M\otimes_R N, P)$,
     \begin{align*}
-    \phi_{M,N,P}(f_1+f_2)(m)(n) &= (f_1+f_2)(m\otimes n) \\
-    &= f_1(m\otimes n)+f_2(m\otimes n) \\
-    &= \phi_{M,N,P}(f_1)(m)(n)+\phi_{M,N,P}(f_2)(m)(n)
+        \phi_{M,N,P}(f_1+f_2)(m)(n) & = (f_1+f_2)(m\otimes n)                           \\
+                                    & = f_1(m\otimes n)+f_2(m\otimes n)                 \\
+                                    & = \phi_{M,N,P}(f_1)(m)(n)+\phi_{M,N,P}(f_2)(m)(n)
     \end{align*}
     so $\phi_{M,N,P}(f_1+f_2)=\phi_{M,N,P}(f_1)+\phi_{M,N,P}(f_2)$. Hence $\phi_{M,N,P}$ is a $\mathbb{Z}$-module isomorphism.
 
     If $R$ is commutative, $\operatorname{Hom}_R(M\otimes_R N, P)$ carries an $R$-module structure via $(r\cdot f)(x) = rf(x)$, and similarly for $\operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$. Then
     \begin{align*}
-    \phi_{M,N,P}(rf)(m)(n) &= (rf)(m\otimes n) \\
-    &= r f(m\otimes n) \\
-    &= r\,\phi_{M,N,P}(f)(m)(n) \\
-    &= (r\,\phi_{M,N,P}(f))(m)(n)
+        \phi_{M,N,P}(rf)(m)(n) & = (rf)(m\otimes n)           \\
+                               & = r f(m\otimes n)            \\
+                               & = r\,\phi_{M,N,P}(f)(m)(n)   \\
+                               & = (r\,\phi_{M,N,P}(f))(m)(n)
     \end{align*}
     so $\phi_{M,N,P}(rf) = r\,\phi_{M,N,P}(f)$, and $\phi_{M,N,P}$ is an $R$-module isomorphism.
 
@@ -1460,7 +1460,7 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{definition}
     Let $f: M\to M'$ and $g: N\to N'$ be $R$-module homomorphisms. The tensor product of $f$ and $g$ is the $R$-module homomorphism:
     \[
-    f \otimes g: M \otimes_R N \to M' \otimes_R N'
+        f \otimes g: M \otimes_R N \to M' \otimes_R N'
     \]
     defined by $(f \otimes g)(m \otimes n) = f(m) \otimes g(n)$.
 \end{definition}
@@ -1468,76 +1468,76 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{definition}
     Let $M_i, i \in I$ be a family of $R$-modules. Use the following notation:
     \[
-    L^n(M_1, \ldots, M_n; N) = \{ f: M_1 \times \cdots \times M_n \to N \mid f \text{ is $n$-linear } \}
+        L^n(M_1, \ldots, M_n; N) = \{ f: M_1 \times \cdots \times M_n \to N \mid f \text{ is $n$-linear } \}
     \]
     In particular,
     \[
-    L^2(M_1, M_2; N) \cong L(M_1 \otimes M_2, N) \cong \operatorname{Hom}_R(M_1 \otimes M_2, N)
+        L^2(M_1, M_2; N) \cong L(M_1 \otimes M_2, N) \cong \operatorname{Hom}_R(M_1 \otimes M_2, N)
     \]
     or equivalently,
     \[
-    L^2(M_1 \otimes M_2, N) \cong L(M_1, L(M_2, N))
+        L^2(M_1 \otimes M_2, N) \cong L(M_1, L(M_2, N))
     \]
 \end{definition}
 
 \begin{proposition}
-    Let $M,N$ be two finitely generated free $R$-modules. Denote 
+    Let $M,N$ be two finitely generated free $R$-modules. Denote
     \[
-    M^{\vee} = \operatorname{Hom}_R(M, R)
+        M^{\vee} = \operatorname{Hom}_R(M, R)
     \]
     Then we have a canonical isomorphism:
     \[
-    M^{\vee} \otimes N \cong \operatorname{Hom}_R(M, N)
+        M^{\vee} \otimes N \cong \operatorname{Hom}_R(M, N)
     \]
 \end{proposition}
 
 \begin{proof}
     Since $M$ is a finitely generated free $R$-module, we have $M \cong R^m$ for some $m \geq 1$. We construct an explicit isomorphism
     \[
-    \Phi: M^{\vee} \otimes_R N \to \operatorname{Hom}_R(M, N).
+        \Phi: M^{\vee} \otimes_R N \to \operatorname{Hom}_R(M, N).
     \]
     Define a bilinear map $\beta: M^{\vee} \times N \to \operatorname{Hom}_R(M,N)$ by
     \[
-    \beta(f, n)(m) = f(m)\, n, \qquad f \in M^{\vee},\; n \in N,\; m \in M.
+        \beta(f, n)(m) = f(m)\, n, \qquad f \in M^{\vee},\; n \in N,\; m \in M.
     \]
     We check $R$-bilinearity. For $f_1, f_2 \in M^{\vee}$, $n, n_1, n_2 \in N$, $m \in M$, and $r \in R$:
     \begin{align*}
-        \beta(f_1+f_2, n)(m) &= (f_1+f_2)(m)\,n = f_1(m)\,n + f_2(m)\,n \\
-        &= \beta(f_1,n)(m)+\beta(f_2,n)(m),\\
-        \beta(f, n_1+n_2)(m) &= f(m)(n_1+n_2) = f(m)\,n_1+f(m)\,n_2 \\
-        &= \beta(f,n_1)(m)+\beta(f,n_2)(m),\\
-        \beta(rf, n)(m) &= (rf)(m)\,n = r\,f(m)\,n = r\,\beta(f,n)(m),\\
-        \beta(f, rn)(m) &= f(m)\,(rn) = r\,f(m)\,n = r\,\beta(f,n)(m).
+        \beta(f_1+f_2, n)(m) & = (f_1+f_2)(m)\,n = f_1(m)\,n + f_2(m)\,n     \\
+                             & = \beta(f_1,n)(m)+\beta(f_2,n)(m),            \\
+        \beta(f, n_1+n_2)(m) & = f(m)(n_1+n_2) = f(m)\,n_1+f(m)\,n_2         \\
+                             & = \beta(f,n_1)(m)+\beta(f,n_2)(m),            \\
+        \beta(rf, n)(m)      & = (rf)(m)\,n = r\,f(m)\,n = r\,\beta(f,n)(m), \\
+        \beta(f, rn)(m)      & = f(m)\,(rn) = r\,f(m)\,n = r\,\beta(f,n)(m).
     \end{align*}
     By the universal property of the tensor product, there exists a unique $R$-module homomorphism
     \[
-    \Phi: M^{\vee} \otimes_R N \to \operatorname{Hom}_R(M, N), \qquad \Phi(f \otimes n)(m) = f(m)\,n.
+        \Phi: M^{\vee} \otimes_R N \to \operatorname{Hom}_R(M, N), \qquad \Phi(f \otimes n)(m) = f(m)\,n.
     \]
 
     Now let $\{e_1, \ldots, e_m\}$ be a basis of $M \cong R^m$, and let $\{e_1^*, \ldots, e_m^*\}$ be the dual basis, i.e.\ $e_i^* \in M^{\vee}$ with $e_i^*(e_j) = \delta_{ij}$. Define
     \[
-    \Psi: \operatorname{Hom}_R(M, N) \to M^{\vee} \otimes_R N, \qquad \Psi(g) = \sum_{i=1}^{m} e_i^* \otimes g(e_i).
+        \Psi: \operatorname{Hom}_R(M, N) \to M^{\vee} \otimes_R N, \qquad \Psi(g) = \sum_{i=1}^{m} e_i^* \otimes g(e_i).
     \]
     We verify $\Psi$ is an $R$-module homomorphism: for $g_1, g_2 \in \operatorname{Hom}_R(M,N)$ and $r \in R$,
     \begin{align*}
-        \Psi(g_1+g_2) &= \sum_{i=1}^m e_i^* \otimes (g_1+g_2)(e_i) = \sum_{i=1}^m e_i^* \otimes (g_1(e_i)+g_2(e_i)) \\
-        &= \sum_{i=1}^m e_i^* \otimes g_1(e_i) + \sum_{i=1}^m e_i^* \otimes g_2(e_i) = \Psi(g_1)+\Psi(g_2),\\
-        \Psi(rg) &= \sum_{i=1}^m e_i^* \otimes (rg)(e_i) = \sum_{i=1}^m e_i^* \otimes r\,g(e_i) \\
-        &= r \sum_{i=1}^m e_i^* \otimes g(e_i) = r\,\Psi(g).
+        \Psi(g_1+g_2) & = \sum_{i=1}^m e_i^* \otimes (g_1+g_2)(e_i) = \sum_{i=1}^m e_i^* \otimes (g_1(e_i)+g_2(e_i))       \\
+                      & = \sum_{i=1}^m e_i^* \otimes g_1(e_i) + \sum_{i=1}^m e_i^* \otimes g_2(e_i) = \Psi(g_1)+\Psi(g_2), \\
+        \Psi(rg)      & = \sum_{i=1}^m e_i^* \otimes (rg)(e_i) = \sum_{i=1}^m e_i^* \otimes r\,g(e_i)                      \\
+                      & = r \sum_{i=1}^m e_i^* \otimes g(e_i) = r\,\Psi(g).
     \end{align*}
 
     We show $\Phi$ and $\Psi$ are mutual inverses. For any $g \in \operatorname{Hom}_R(M,N)$ and $m = \sum_j r_j e_j \in M$:
     \begin{align*}
-        \Phi(\Psi(g))(m) &= \Phi\!\Bigl(\sum_{i=1}^m e_i^* \otimes g(e_i)\Bigr)\!\Bigl(\sum_j r_j e_j\Bigr) \\
-        &= \sum_{i=1}^m e_i^*\!\Bigl(\sum_j r_j e_j\Bigr) g(e_i) = \sum_{i=1}^m r_i\, g(e_i) \\
-        &= g\!\Bigl(\sum_{i=1}^m r_i e_i\Bigr) = g(m).
+        \Phi(\Psi(g))(m) & = \Phi\!\Bigl(\sum_{i=1}^m e_i^* \otimes g(e_i)\Bigr)\!\Bigl(\sum_j r_j e_j\Bigr)   \\
+                         & = \sum_{i=1}^m e_i^*\!\Bigl(\sum_j r_j e_j\Bigr) g(e_i) = \sum_{i=1}^m r_i\, g(e_i) \\
+                         & = g\!\Bigl(\sum_{i=1}^m r_i e_i\Bigr) = g(m).
     \end{align*}
     So $\Phi \circ \Psi = \operatorname{id}$.
 
     For any elementary tensor $f \otimes n \in M^{\vee} \otimes_R N$:
     \begin{align*}
-        \Psi(\Phi(f \otimes n)) &= \sum_{i=1}^m e_i^* \otimes \Phi(f \otimes n)(e_i) = \sum_{i=1}^m e_i^* \otimes f(e_i)\,n \\
-        &= \sum_{i=1}^m f(e_i)\, (e_i^* \otimes n) = \Bigl(\sum_{i=1}^m f(e_i)\, e_i^*\Bigr) \otimes n = f \otimes n,
+        \Psi(\Phi(f \otimes n)) & = \sum_{i=1}^m e_i^* \otimes \Phi(f \otimes n)(e_i) = \sum_{i=1}^m e_i^* \otimes f(e_i)\,n                   \\
+                                & = \sum_{i=1}^m f(e_i)\, (e_i^* \otimes n) = \Bigl(\sum_{i=1}^m f(e_i)\, e_i^*\Bigr) \otimes n = f \otimes n,
     \end{align*}
     where the last equality uses $f = \sum_{i=1}^m f(e_i)\, e_i^*$ (expansion of $f$ in the dual basis). Since elementary tensors generate $M^{\vee} \otimes_R N$ and $\Psi \circ \Phi$ is $R$-linear, we have $\Psi \circ \Phi = \operatorname{id}$.
 
@@ -1547,39 +1547,39 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{proposition}
     Assume that $R$ is a subring of $S$, and $M$ is an $R$-module. Then the bilinear map:
     \[
-    S \times (S \otimes_R M) \to S \otimes_R M
+        S \times (S \otimes_R M) \to S \otimes_R M
     \]
     defined by
     \[
-    (s, s' \otimes m) \mapsto s s' \otimes m
+        (s, s' \otimes m) \mapsto s s' \otimes m
     \]
     defines a structure of $S$-module on the $R$-module $S \otimes_R M$.
 
     More generally, let $f: R \to T$ be a ring homomorphism. And view $T$ as an $R$-module via $R x T \to T, (\lambda, \mu) \mapsto f(\lambda) \mu$. Then the bilinear map:
     \[
-    T \times (T \otimes_R M) \to T \otimes_R M
+        T \times (T \otimes_R M) \to T \otimes_R M
     \]
     defined by
     \[
-    (t, t' \otimes m) \mapsto t t' \otimes m
+        (t, t' \otimes m) \mapsto t t' \otimes m
     \]
     defines a structure of $T$-module on the $R$-module $T \otimes_R M$.
- \end{proposition}
+\end{proposition}
 
 \begin{proposition}
     Let $I$ be an ideal of $R$. Let $M$ be an $R$-module. Then the morphism of $R$-modules:
     \[
-    M \to (R/I) \otimes_R M
+        M \to (R/I) \otimes_R M
     \]
     defined by
     \[
-    m \mapsto 1_{R/I} \otimes m
+        m \mapsto 1_{R/I} \otimes m
     \]
-  induces an isomorphism of $R$-modules:
-  \[
-  M/(IM) \cong (R/I) \otimes_R M
-  \]
-  as $R/I$-modules.
+    induces an isomorphism of $R$-modules:
+    \[
+        M/(IM) \cong (R/I) \otimes_R M
+    \]
+    as $R/I$-modules.
 \end{proposition}
 
 \section{Balanced product}
@@ -1587,9 +1587,9 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{definition}
     Let $R$ be a ring (not necessarily commutative). Let $M_R$ be a right $R$-module and $_{R}N$ be a left $R$-module. The balanced product of $M$ and $N$ is defined as a pair $(P,f)$ where $P$ is an abelian group and $f: M \times N \to P$ is a bilinear map satisfies:
     \begin{itemize}
-\item $f(rm,n) = f(m,rn)$ for all $r \in R$, $m \in M$, $n \in N$.
-\item $f(m+m',n) = f(m,n) + f(m',n)$ for all $m,m' \in M$, $n \in N$.
-\item $f(m,n+n') = f(m,n) + f(m,n')$ for all $m \in M$, $n,n' \in N$.
+        \item $f(rm,n) = f(m,rn)$ for all $r \in R$, $m \in M$, $n \in N$.
+        \item $f(m+m',n) = f(m,n) + f(m',n)$ for all $m,m' \in M$, $n \in N$.
+        \item $f(m,n+n') = f(m,n) + f(m,n')$ for all $m \in M$, $n,n' \in N$.
     \end{itemize}
 \end{definition}
 
@@ -1599,15 +1599,1266 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
     \begin{center}
         \begin{tikzcd}
             M \times N \arrow[r, "{t_{M,N}}"] \arrow[d, "f"'] & M \otimes_R N \arrow[ld, "\tilde{f}"', dashed] \\
-            P                                                 &                                               
-            \end{tikzcd}
+            P                                                 &
+        \end{tikzcd}
     \end{center}
 \end{definition}
 
+\chapter{Lecture 3: Categories, Bimodules}
 
+\section{Categories}
 
+\begin{definition}
+    A category $\mathcal{C}$ consists of:
+    \begin{itemize}
+        \item A class of objects $\operatorname{ob}(\mathcal{C})$.
+        \item A set of morphisms $\operatorname{Hom}_{\mathcal{C}}(A, B)$ for each pair of objects $A, B \in \mathcal{C}$.
+        \item A composition map $\operatorname{Hom}_{\mathcal{C}}(B, C) \times \operatorname{Hom}_{\mathcal{C}}(A, B) \to \operatorname{Hom}_{\mathcal{C}}(A, C)$ such that $(\phi, \psi) \mapsto \phi \circ \psi$ for each triple of objects $A, B, C \in \mathcal{C}$.
+    \end{itemize}
+\end{definition}
 
+It is assumed that objects and morphisms satisfy the following conditions:
+\begin{itemize}
+    \item If $(A,B)\neq (C,D)$, then
+          \[
+              \operatorname{Hom}(A,B)\cap \operatorname{Hom}(C,D)=\varnothing.
+          \]
 
+    \item If
+          \[
+              f\in \operatorname{Hom}(A,B), \qquad
+              g\in \operatorname{Hom}(B,C), \qquad
+              h\in \operatorname{Hom}(C,D),
+          \]
+          then
+          \[
+              (h\circ g)\circ f = h\circ (g\circ f).
+          \]
+
+    \item (Unit) For every object $A$ we have an element
+          \[
+              1_A \in \operatorname{Hom}(A,A)
+          \]
+          such that
+          \[
+              f\circ 1_A = f \qquad \text{for any } f\in \operatorname{Hom}(A,B),
+          \]
+          and
+          \[
+              1_A\circ g = g \qquad \text{for any } g\in \operatorname{Hom}(B,A).
+          \]
+\end{itemize}
+
+\begin{example}
+    The following are examples of categories.
+    \begin{enumerate}
+        \item The category of sets: the objects are sets, and the morphisms are maps. It is denoted by $\mathbf{Set}$.
+
+        \item The category of groups: the objects are groups, and the morphisms are group homomorphisms. It is denoted by $\mathbf{Grp}$.
+
+        \item The category of abelian groups: the objects are abelian groups, and the morphisms are group homomorphisms. It is denoted by $\mathbf{Ab}$.
+
+        \item The category of $R$-modules: the objects are $R$-modules, and the morphisms are $R$-module homomorphisms. It is denoted by $R\text{-}\mathbf{Mod}$ (left $R$-modules, for right $R$-modules, we use $R\text{-}\mathbf{Mod}$).
+
+        \item The category of finitely generated $R$-modules: the objects are finitely generated $R$-modules, and the morphisms are $R$-module homomorphisms. It is denoted by $R\text{-}\mathbf{mod}$.
+
+        \item The category of topological spaces: the objects are topological spaces, and the morphisms are continuous maps. It is denoted by $\mathbf{Top}$.
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Subcategory]
+    A category $\mathcal{D}$ is called a \emph{subcategory} of a category $\mathcal{C}$ if
+    \begin{enumerate}
+        \item the objects of $\mathcal{D}$ form a subclass of the objects of $\mathcal{C}$;
+        \item for any objects $A,B$ of $\mathcal{D}$, we have
+              \begin{itemize}
+                  \item $\operatorname{Hom}_{\mathcal{D}}(A,B)\subseteq \operatorname{Hom}_{\mathcal{C}}(A,B)$;
+                  \item the identity morphisms and the composition of morphisms in $\mathcal{D}$ are the same as those in $\mathcal{C}$.
+              \end{itemize}
+    \end{enumerate}
+
+    The subcategory $\mathcal{D}$ of $\mathcal{C}$ is called \emph{full} if
+    \[
+        \operatorname{Hom}_{\mathcal{D}}(A,B)=\operatorname{Hom}_{\mathcal{C}}(A,B)
+    \]
+    for any objects $A,B$ of $\mathcal{D}$.
+\end{definition}
+
+\begin{example}
+    The category $\mathbf{Ab}$ is a full subcategory of $\mathbf{Grp}$.
+
+    The category $R\text{-}\mathbf{mod}$ is a full subcategory of $R\text{-}\mathbf{Mod}$.
+
+    The category $\mathbf{Grp}$ is not a full subcategory of $\mathbf{Set}$.
+\end{example}
+
+\begin{definition}
+    Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A \emph{covariant functor}
+    \[
+        F:\mathcal{C}\to\mathcal{D}
+    \]
+    consists of the following data:
+    \begin{itemize}
+        \item for every object $A$ of $\mathcal{C}$, an object $F(A)$ of $\mathcal{D}$;
+        \item for each pair of objects $A,B$ of $\mathcal{C}$, a map
+              \[
+                  F:\operatorname{Hom}_{\mathcal{C}}(A,B)\to \operatorname{Hom}_{\mathcal{D}}(F(A),F(B)),
+                  \qquad
+                  f\mapsto F(f).
+              \]
+    \end{itemize}
+    These data are required to satisfy the following conditions:
+    \begin{enumerate}
+        \item If $g\circ f$ is defined in $\mathcal{C}$, then
+              \[
+                  F(g)\circ F(f)=F(g\circ f).
+              \]
+        \item For every object $A$ of $\mathcal{C}$,
+              \[
+                  F(1_A)=1_{F(A)}.
+              \]
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Functors preserve diagram:
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[r, "f"] \arrow[rd, "g"'] & B \arrow[d, "h"] & {} \arrow[r, "F"] & {} & F(A) \arrow[r, "F(f)"] \arrow[rd, "F(g)"'] & F(B) \arrow[d, "F(h)"] \\
+            & C                &                   &    &                                           & F(AC
+        \end{tikzcd}
+    \end{center}
+\end{proposition}
+
+Let $M$ and $N$ be $R$-modules. Then
+\[
+    \operatorname{Hom}_R(M,N)
+    =
+    \{\, f:M\to N \mid f \text{ is an } R\text{-module homomorphism} \,\}.
+\]
+This is an abelian group.
+
+Moreover,
+\[
+    \operatorname{End}_R(M)=\operatorname{Hom}_R(M,M),
+\]
+and $\operatorname{End}_R(M)$ is a ring.
+
+\begin{example}
+    Let $M$ be an $R$-module. Then
+    \[
+        \operatorname{Hom}_R(M,-): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \]
+    is a functor.
+
+    More precisely, it acts as follows:
+
+    \[
+        N \longmapsto \operatorname{Hom}_R(M,N),
+        \qquad
+        f:N \to N' \longmapsto \operatorname{Hom}_R(M,f).
+    \]
+
+    Given an $R$-module homomorphism
+    \[
+        f:N \to N',
+    \]
+    the induced map
+    \[
+        \operatorname{Hom}_R(M,f): \operatorname{Hom}_R(M,N) \to \operatorname{Hom}_R(M,N')
+    \]
+    is defined by
+    \[
+        \operatorname{Hom}_R(M,f)(h)=f\circ h
+        \qquad
+        (h\in \operatorname{Hom}_R(M,N)).
+    \]
+
+    This corresponds to the commutative diagram
+    \[
+        \begin{tikzcd}
+            & M \arrow[dl, "h"'] \arrow[dr, "f\circ h"] & \\
+            N \arrow[rr, "f"'] & & N'
+        \end{tikzcd}
+    \]
+
+    Hence
+    \[
+        \operatorname{Hom}_R(M,-)
+    \]
+    is a covariant functor.
+\end{example}
+
+\begin{definition}
+    Let $\mathcal C$ be a category. The \emph{opposite category} (or \emph{dual category}) $\mathcal C^{\mathrm{op}}$ is defined as follows:
+    \begin{itemize}
+        \item $\operatorname{Ob}(\mathcal C^{\mathrm{op}})=\operatorname{Ob}(\mathcal C)$;
+        \item for any objects $A,B$,
+              \[
+                  \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(A,B)
+                  =
+                  \operatorname{Hom}_{\mathcal C}(B,A).
+              \]
+    \end{itemize}
+    The composition in $\mathcal C^{\mathrm{op}}$ is defined by reversing the order of composition in $\mathcal C$: if
+    \[
+        f \in \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(A,B),
+        \qquad
+        g \in \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(B,C),
+    \]
+    then
+    \[
+        g\circ f \text{ in } \mathcal C^{\mathrm{op}}
+    \]
+    is defined to be
+    \[
+        f\circ g \text{ in } \mathcal C.
+    \]
+    We call $\mathcal C^{\mathrm{op}}$ the dual category of $\mathcal C$.
+\end{definition}
+
+This is illustrated by the following diagrams:
+\[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        A \arrow[r,"f"] \arrow[dr,"g\circ f"']& B \arrow[d,"g"] \\
+        & C
+    \end{tikzcd}
+    \qquad\text{in } \mathcal C^{\mathrm{op}},
+\]
+while the corresponding picture in $\mathcal C$ is
+\[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        A & B \arrow[l,"f"'] \\
+        & C \arrow[ul,"f\circ g"] \arrow[u,"g"']
+    \end{tikzcd}
+    \qquad\text{in } \mathcal C.
+\]
+
+\begin{definition}
+    A \emph{contravariant functor} from a category $\mathcal C$ to a category $\mathcal D$
+    is a covariant functor
+    \[
+        \mathcal C^{\mathrm{op}} \to \mathcal D.
+    \]
+\end{definition}
+
+\begin{example}
+    Let $M$ be an $R$-module. Then
+    \[
+        \operatorname{Hom}_R(-,M): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \]
+    is a contravariant functor.
+\end{example}
+
+More precisely, it is defined on objects by
+\[
+    N \longmapsto \operatorname{Hom}_R(N,M),
+\]
+and on morphisms by sending an $R$-module homomorphism
+\[
+    f:N \to N'
+\]
+to the induced group homomorphism
+\[
+    \operatorname{Hom}_R(f,M): \operatorname{Hom}_R(N',M) \to \operatorname{Hom}_R(N,M),
+\]
+given by
+\[
+    \operatorname{Hom}_R(f,M)(h)=h\circ f
+    \qquad
+    (h\in \operatorname{Hom}_R(N',M)).
+\]
+
+This corresponds to the commutative diagram
+\[
+    \begin{tikzcd}
+        N \arrow[d,"f"'] \arrow[dr,"h\circ f"] & \\
+        N' \arrow[r,"h"'] & M
+    \end{tikzcd}
+\]
+
+\section{Exact Sequences}
+
+\begin{definition}
+    Let $\{M_i\}_{i\in \mathbb Z}$ be a family of $R$-modules, and let
+    \[
+        \varphi_i:M_i\to M_{i+1}
+    \]
+    be $R$-module homomorphisms for each $i\in\mathbb Z$. Then
+    \[
+        \cdots \longrightarrow M_{i-1}\xrightarrow{\varphi_{i-1}} M_i \xrightarrow{\varphi_i} M_{i+1}\longrightarrow \cdots
+    \]
+    is called a \emph{sequence} of $R$-modules.
+\end{definition}
+
+\begin{definition}
+    The sequence
+    \[
+        \cdots \longrightarrow M_{i-1}\xrightarrow{\varphi_{i-1}} M_i \xrightarrow{\varphi_i} M_{i+1}\longrightarrow \cdots
+    \]
+    is said to be \emph{exact at $M_i$} if
+    \[
+        \operatorname{Im}(\varphi_{i-1})=\ker(\varphi_i).
+    \]
+    It is called an \emph{exact sequence} if it is exact at every term.
+\end{definition}
+
+A short exact sequence is a sequence of the form
+\[
+    0\longrightarrow M' \xrightarrow{\iota} M \xrightarrow{\pi} M'' \longrightarrow 0.
+\]
+
+It is exact if and only if
+\[
+    \ker(\iota)=0,
+    \qquad
+    \operatorname{Im}(\pi)=M'',
+    \qquad
+    \operatorname{Im}(\iota)=\ker(\pi).
+\]
+Equivalently, $\iota$ is injective, $\pi$ is surjective, and
+\[
+    \operatorname{Im}(\iota)=\ker(\pi).
+\]
+
+Hence, for every short exact sequence
+\[
+    0\longrightarrow M' \xrightarrow{\iota} M \xrightarrow{\pi} M'' \longrightarrow 0,
+\]
+we have
+\[
+    M/M' \cong M''.
+\]
+
+\begin{definition}
+    Let $R,S$ be rings, and let
+    \[
+    F: R\text{-}\mathrm{Mod} \to S\text{-}\mathrm{Mod}
+    \]
+    be a covariant functor.
+    
+    We say that $F$ is \emph{left exact} if for any exact sequence
+    \[
+    0 \to N \xrightarrow{\varphi} M \xrightarrow{\psi} P,
+    \]
+    the sequence
+    \[
+    0 \to F(N) \xrightarrow{F(\varphi)} F(M) \xrightarrow{F(\psi)} F(P)
+    \]
+    is exact.
+    
+    We say that $F$ is \emph{right exact} if for any exact sequence
+    \[
+    N \xrightarrow{\varphi} M \xrightarrow{\psi} P \to 0,
+    \]
+    the sequence
+    \[
+    F(N) \xrightarrow{F(\varphi)} F(M) \xrightarrow{F(\psi)} F(P) \to 0
+    \]
+    is exact.
+    \end{definition}
+
+    \begin{definition}
+        Let
+        \[
+        G: R\text{-}\mathrm{Mod} \to S\text{-}\mathrm{Mod}
+        \]
+        be a contravariant functor. We say that $G$ is \emph{left exact} (respectively, \emph{right exact}) if it is left exact (respectively, right exact) when regarded as a covariant functor
+        \[
+        G : (R\text{-}\mathrm{Mod})^{\mathrm{op}} \to S\text{-}\mathrm{Mod}.
+        \]
+        
+        A functor is called \emph{exact} if it is both left exact and right exact.
+        \end{definition}
+        
+        Let $M$ be an $R$-module. Then:
+        \[
+        \operatorname{Hom}_R(M,-): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+        \quad\text{is left exact,}
+        \]
+        \[
+        \operatorname{Hom}_R(-,M): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+        \quad\text{is right exact,}
+        \]
+        and
+        \[
+        M \otimes_R - : R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+        \quad\text{is right exact.}
+        \]
+
+        \begin{definition}
+            A functor $F: \mathcal C \to \mathcal D$ is called \emph{exact} if it is both left exact and right exact.
+        \end{definition}
+
+        \begin{definition}
+            Let $M$ be an $R$-module.
+            
+            \begin{enumerate}
+                \item $M$ is called \emph{projective} if the functor
+                \[
+                \operatorname{Hom}_R(M,-)
+                \]
+                is exact.
+            
+                \item $M$ is called \emph{injective} if the functor
+                \[
+                \operatorname{Hom}_R(-,M)
+                \]
+                is exact.
+            
+                \item $M$ is called \emph{flat} if the functor
+                \[
+                M\otimes_R -
+                \]
+                is exact.
+            \end{enumerate}
+            
+            If $R$ is noncommutative, then in order for
+            \[
+            M\otimes_R -
+            \]
+            to be well-defined, $M$ must be a right $R$-module.
+            \end{definition}
+
+\section{Bimodules}
+
+\begin{definition}
+    Let $R$ and $S$ be rings. An abelian group $M$ is called a \emph{left-$R$-right-$S$-bimodule} if $M$ is both a left $R$-module and a right $S$-module such that the two scalar multiplications satisfy
+    \[
+    r(xs)=(rx)s
+    \qquad
+    \text{for all } r\in R,\ s\in S,\ x\in M.
+    \]
+    \end{definition}
+    
+    \noindent\textbf{Notation.}
+    \[
+    {}_R M \qquad \text{left } R\text{-module},
+    \]
+    \[
+    M_S \qquad \text{right } S\text{-module},
+    \]
+    \[
+    {}_R M_S \qquad \text{left } R\text{-right } S\text{-bimodule}.
+    \]
+
+    Let $R,S$ be rings, and let ${}_R U_S$ be a bimodule.
+
+    For each left $R$-module ${}_R M$, there are two naturally induced $S$-module structures:
+    
+    \[
+    \operatorname{Hom}_R({}_R U_S, {}_R M),
+    \qquad \text{a left } S\text{-module},
+    \]
+    
+    \[
+    \operatorname{Hom}_R({}_R M, {}_R U_S),
+    \qquad \text{a right } S\text{-module}.
+    \]
+    
+    More precisely, for each $s\in S$:
+    
+    if
+    \[
+    f\in \operatorname{Hom}_R({}_R U_S, {}_R M),
+    \]
+    define
+    \[
+    s\cdot f: U\to M,\qquad u\mapsto f(us).
+    \]
+    
+    Similarly, if
+    \[
+    f\in \operatorname{Hom}_R({}_R M, {}_R U_S),
+    \]
+    define
+    \[
+    f\cdot s: M\to U,\qquad m\mapsto f(m)s.
+    \]
+    
+    Thus we obtain functors
+    \[
+    \operatorname{Hom}_R({}_R U_S,-): R\text{-}\mathbf{Mod}\longrightarrow S\text{-}\mathbf{Mod},
+    \]
+    given on objects by
+    \[
+    {}_R M\longmapsto \operatorname{Hom}_R({}_R U_S, {}_R M),
+    \]
+    which is covariant, and
+    \[
+    \operatorname{Hom}_R(-,{}_R U_S): R\text{-}\mathbf{Mod}\longrightarrow \mathbf{Mod}\text{-}S,
+    \]
+    given on objects by
+    \[
+    {}_R M\longmapsto \operatorname{Hom}_R({}_R M, {}_R U_S),
+    \]
+    which is contravariant.
+    
+    On morphisms, for
+    \[
+    f:M\to M',
+    \]
+    the induced map
+    \[
+    \operatorname{Hom}_R({}_R U_S, {}_R M)\longrightarrow \operatorname{Hom}_R({}_R U_S, {}_R M')
+    \]
+    is given by
+    \[
+    h\longmapsto f\circ h.
+    \]
+
+    the induced map
+    \[
+        \operatorname{Hom}_R({}_R M', {}_R U_S)\longrightarrow \operatorname{Hom}_R({}_R M, {}_R U_S)
+    \]
+    is given by
+    \[
+    h\longmapsto  h \circ f.
+    \]
+
+    \begin{theorem}
+        The functor
+        \[
+        \operatorname{Hom}_R({}_R U_S,-): R\text{-}\mathbf{Mod}\longrightarrow S\text{-}\mathbf{Mod}
+        \]
+        is left exact.
+        \end{theorem}
+        
+        \begin{proof}
+        Let
+        \[
+        0\longrightarrow N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N''
+        \]
+        be an exact sequence in $R$-\textbf{Mod}. Consider the induced sequence
+        \[
+        0\longrightarrow \operatorname{Hom}_R({}_R U_S,N')
+        \xrightarrow{\operatorname{Hom}_R(U,f)}
+        \operatorname{Hom}_R({}_R U_S,N)
+        \xrightarrow{\operatorname{Hom}_R(U,g)}
+        \operatorname{Hom}_R({}_R U_S,N'').
+        \]
+        We show that this sequence is exact.
+        
+        First, $\operatorname{Hom}_R(U,f)$ is injective. Let
+        \[
+        \varphi\in \operatorname{Hom}_R(U,N')
+        \]
+        and suppose that
+        \[
+        \operatorname{Hom}_R(U,f)(\varphi)=f\circ \varphi=0.
+        \]
+        Then for every $u\in U$,
+        \[
+        f(\varphi(u))=0.
+        \]
+        Since $f$ is injective, it follows that $\varphi(u)=0$ for all $u\in U$. Hence $\varphi=0$, so $\operatorname{Hom}_R(U,f)$ is injective.
+        
+        Next, we show that
+        \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        \subseteq
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+        \]
+        Indeed, if
+        \[
+        \varphi\in \operatorname{Hom}_R(U,N'),
+        \]
+        then
+        \[
+        \operatorname{Hom}_R(U,g)\bigl(\operatorname{Hom}_R(U,f)(\varphi)\bigr)
+        =
+        g\circ f\circ \varphi
+        =0,
+        \]
+        because $g\circ f=0$. Therefore
+        \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        \subseteq
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+        \]
+        
+        Finally, let
+        \[
+        \psi\in \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+        \]
+        Then $\psi\in \operatorname{Hom}_R(U,N)$ and
+        \[
+        g\circ \psi=0.
+        \]
+        Thus for every $u\in U$,
+        \[
+        g(\psi(u))=0,
+        \]
+        so $\psi(u)\in \ker g=\operatorname{Im} f$ by exactness. Hence for each $u\in U$ there exists some $y\in N'$ such that
+        \[
+        f(y)=\psi(u).
+        \]
+        Since $f$ is injective, such $y$ is unique. Define
+        \[
+        \varphi:U\to N',\qquad u\mapsto y,
+        \]
+        where $y$ is the unique element satisfying $f(y)=\psi(u)$.
+        
+        Then
+        \[
+        f\circ \varphi=\psi.
+        \]
+        It remains to check that $\varphi$ is $R$-linear. For $u,v\in U$,
+        \[
+        f(\varphi(u+v))=\psi(u+v)=\psi(u)+\psi(v)=f(\varphi(u))+f(\varphi(v))
+        =f(\varphi(u)+\varphi(v)).
+        \]
+        Since $f$ is injective,
+        \[
+        \varphi(u+v)=\varphi(u)+\varphi(v).
+        \]
+        Similarly, for $r\in R$ and $u\in U$,
+        \[
+        f(\varphi(ru))=\psi(ru)=r\psi(u)=rf(\varphi(u))=f(r\varphi(u)),
+        \]
+        so again by injectivity of $f$,
+        \[
+        \varphi(ru)=r\varphi(u).
+        \]
+        Thus $\varphi\in \operatorname{Hom}_R(U,N')$, and
+        \[
+        \operatorname{Hom}_R(U,f)(\varphi)=f\circ \varphi=\psi.
+        \]
+        Therefore
+        \[
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr)
+        \subseteq
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr).
+        \]
+        
+        Combining the two inclusions, we get
+        \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        =
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+        \]
+        Hence
+        \[
+        0\longrightarrow \operatorname{Hom}_R({}_R U_S,N')
+        \xrightarrow{\operatorname{Hom}_R(U,f)}
+        \operatorname{Hom}_R({}_R U_S,N)
+        \xrightarrow{\operatorname{Hom}_R(U,g)}
+        \operatorname{Hom}_R({}_R U_S,N'')
+        \]
+        is exact, and so the functor $\operatorname{Hom}_R({}_R U_S,-)$ is left exact.
+        \end{proof}
+
+\begin{theorem}
+Let ${}_R U_S$ be an $R$-$S$-bimodule. Then the contravariant functor
+\[
+\Hom_R(-,U): R\text{-}\mathrm{Mod}\longrightarrow \mathrm{Mod}\text{-}S
+\]
+is left exact.
+\end{theorem}
+
+\begin{proof}
+Since $\Hom_R(-,U)$ is contravariant, to say that it is left exact means the following:
+
+for every short exact sequence of left $R$-modules
+\[
+ A \xrightarrow{\,f\,} B \xrightarrow{\,g\,} C  \longrightarrow 0,
+\]
+the induced sequence of right $S$-modules
+\[
+0 \longrightarrow \Hom_R(C,U)
+\xrightarrow{\ \Hom_R(g,U)\ }
+\Hom_R(B,U)
+\xrightarrow{\ \Hom_R(f,U)\ }
+\Hom_R(A,U)
+\]
+is exact.
+
+We verify this.
+
+First, $\Hom_R(g,U)$ is injective. Indeed, let $\varphi \in \Hom_R(C,U)$ and suppose
+\[
+\Hom_R(g,U)(\varphi)=\varphi\circ g=0.
+\]
+Since $g$ is surjective, it follows that $\varphi=0$. Hence $\Hom_R(g,U)$ is injective.
+
+Next, we show
+\[
+\operatorname{Im}\bigl(\Hom_R(g,U)\bigr)\subseteq \ker\bigl(\Hom_R(f,U)\bigr).
+\]
+Let $\varphi\in \Hom_R(C,U)$. Then
+\[
+\Hom_R(f,U)\bigl(\Hom_R(g,U)(\varphi)\bigr)
+=
+(\varphi\circ g)\circ f
+=
+\varphi\circ (g\circ f)
+=
+0,
+\]
+because $g\circ f=0$. Therefore
+\[
+\operatorname{Im}\bigl(\Hom_R(g,U)\bigr)\subseteq \ker\bigl(\Hom_R(f,U)\bigr).
+\]
+
+Finally, we prove the reverse inclusion. Let $\psi\in \Hom_R(B,U)$ satisfy
+\[
+\Hom_R(f,U)(\psi)=\psi\circ f=0.
+\]
+Then $\psi$ vanishes on $\operatorname{Im}(f)=\ker(g)$. Hence $\psi$ factors through the quotient
+\[
+B/\ker(g).
+\]
+Since $g$ is surjective and $\ker(g)=\operatorname{Im}(f)$, we have
+\[
+B/\ker(g)\cong C.
+\]
+Therefore there exists a unique $R$-module homomorphism $\overline{\psi}:C\to U$ such that
+\[
+\psi=\overline{\psi}\circ g.
+\]
+Thus
+\[
+\psi\in \operatorname{Im}\bigl(\Hom_R(g,U)\bigr),
+\]
+so
+\[
+\ker\bigl(\Hom_R(f,U)\bigr)\subseteq \operatorname{Im}\bigl(\Hom_R(g,U)\bigr).
+\]
+
+Combining the two inclusions, we obtain
+\[
+\operatorname{Im}\bigl(\Hom_R(g,U)\bigr)=\ker\bigl(\Hom_R(f,U)\bigr).
+\]
+Hence the sequence
+\[
+0 \longrightarrow \Hom_R(C,U)
+\xrightarrow{\ \Hom_R(g,U)\ }
+\Hom_R(B,U)
+\xrightarrow{\ \Hom_R(f,U)\ }
+\Hom_R(A,U)
+\]
+is exact. This proves that $\Hom_R(-,U)$ is left exact.
+\end{proof}
+
+Let ${}_SM_R$ be a left-$S$-right-$R$-bimodule, ${}_R N$ be a left $R$-module, consider the tensor product $M \otimes_R N$.
+
+For each \(s \in S\), the mapping
+\[
+M \times N \longrightarrow M \otimes_R N,
+\qquad
+(m,n) \longmapsto (sm)\otimes n
+\]
+is balanced.
+
+So there is a unique abelian group homomorphism
+\[
+u(s): M \otimes_R N \longrightarrow M \otimes_R N
+\]
+such that
+\[
+u(s)(m\otimes n)=(sm)\otimes n.
+\]
+
+Only need to check:
+\[
+u:S\longrightarrow \operatorname{End}_{\mathbb Z}(M\otimes_R N)
+\]
+is a ring homomorphism.
+
+If \(M_R,\ {}_R N_T\), then \(M\otimes_R N\) is a right \(T\)-module:
+\[
+(m\otimes n)t = m\otimes (nt).
+\]
+
+\begin{lemma}
+    Let ${}_S M_R$ and ${}_R N_T$ be bimodules. Then $M \otimes_R N$ carries a natural structure of a left $S$-right $T$-bimodule, defined on elementary tensors by
+    \[
+    s(m\otimes n)=(sm)\otimes n,
+    \qquad
+    (m\otimes n)t=m\otimes (nt),
+    \]
+    for all $s\in S$, $t\in T$, $m\in M$, and $n\in N$.
+    \end{lemma}
+    
+    \begin{proof}
+    Fix $s\in S$. Define
+    \[
+    \beta_s:M\times N\to M\otimes_R N,
+    \qquad
+    \beta_s(m,n)=sm\otimes n.
+    \]
+    We claim that $\beta_s$ is $R$-balanced. Indeed, it is additive in each variable, and for $r\in R$,
+    \[
+    \beta_s(mr,n)=s(mr)\otimes n=(sm)r\otimes n=sm\otimes rn=\beta_s(m,rn).
+    \]
+    Hence, by the universal property of the tensor product, there exists a unique group homomorphism
+    \[
+    \lambda_s:M\otimes_R N\to M\otimes_R N
+    \]
+    such that
+    \[
+    \lambda_s(m\otimes n)=sm\otimes n.
+    \]
+    We write $\lambda_s(x)=sx$.
+    
+    Similarly, for fixed $t\in T$, define
+    \[
+    \gamma_t:M\times N\to M\otimes_R N,
+    \qquad
+    \gamma_t(m,n)=m\otimes nt.
+    \]
+    Again $\gamma_t$ is $R$-balanced, since for $r\in R$,
+    \[
+    \gamma_t(mr,n)=mr\otimes nt=m\otimes r(nt)=m\otimes (rn)t=\gamma_t(m,rn).
+    \]
+    Thus there exists a unique group homomorphism
+    \[
+    \rho_t:M\otimes_R N\to M\otimes_R N
+    \]
+    such that
+    \[
+    \rho_t(m\otimes n)=m\otimes nt.
+    \]
+    We write $\rho_t(x)=xt$.
+    
+    It remains to verify the bimodule axioms. Since elementary tensors generate $M\otimes_R N$, it suffices to check them on $m\otimes n$:
+    \[
+    (s_1+s_2)(m\otimes n)=((s_1+s_2)m)\otimes n
+    =(s_1m)\otimes n+(s_2m)\otimes n
+    =s_1(m\otimes n)+s_2(m\otimes n),
+    \]
+    \[
+    (s_1s_2)(m\otimes n)=((s_1s_2)m)\otimes n
+    =s_1((s_2m)\otimes n)=s_1\bigl(s_2(m\otimes n)\bigr),
+    \]
+    \[
+    1_S(m\otimes n)=(1_Sm)\otimes n=m\otimes n,
+    \]
+    and similarly
+    \[
+    (m\otimes n)(t_1+t_2)=m\otimes n(t_1+t_2)
+    =(m\otimes nt_1)+(m\otimes nt_2),
+    \]
+    \[
+    ((m\otimes n)t_1)t_2
+    =(m\otimes nt_1)t_2
+    =m\otimes (nt_1)t_2
+    =m\otimes n(t_1t_2)
+    =(m\otimes n)(t_1t_2),
+    \]
+    \[
+    (m\otimes n)1_T=m\otimes n.
+    \]
+    Finally,
+    \[
+    \bigl(s(m\otimes n)\bigr)t=((sm)\otimes n)t=(sm)\otimes nt
+    =s(m\otimes nt)=s\bigl((m\otimes n)t\bigr).
+    \]
+    Therefore $M\otimes_R N$ is a left $S$-right $T$-bimodule.
+    \end{proof}
+    
+    \begin{lemma}
+    Let $M_R$, $M'_R$ be right $R$-modules, and let ${}_R N$, ${}_R N'$ be left $R$-modules. Suppose
+    \[
+    f_1,f_2,f\in \Hom_R(M,M'),
+    \qquad
+    g_1,g_2,g\in \Hom_R(N,N').
+    \]
+    Then for each pair $(f,g)$ there exists a unique group homomorphism
+    \[
+    f\otimes g:M\otimes_R N\to M'\otimes_R N'
+    \]
+    such that
+    \[
+    (f\otimes g)(m\otimes n)=f(m)\otimes g(n)
+    \qquad
+    (m\in M,\ n\in N).
+    \]
+    Moreover,
+    \begin{enumerate}
+        \item $(f_1+f_2)\otimes g=(f_1\otimes g)+(f_2\otimes g)$;
+        \item $f\otimes (g_1+g_2)=(f\otimes g_1)+(f\otimes g_2)$;
+        \item $f\otimes 0=0$ and $0\otimes g=0$;
+        \item $1_M\otimes 1_N=1_{M\otimes_R N}$.
+    \end{enumerate}
+    \end{lemma}
+    
+    \begin{proof}
+    Define
+    \[
+    \beta:M\times N\to M'\otimes_R N',
+    \qquad
+    \beta(m,n)=f(m)\otimes g(n).
+    \]
+    We check that $\beta$ is $R$-balanced. It is additive in each variable because $f$ and $g$ are module homomorphisms. Also, for $r\in R$,
+    \[
+    \beta(mr,n)=f(mr)\otimes g(n)=f(m)r\otimes g(n)
+    =f(m)\otimes rg(n)=f(m)\otimes g(rn)=\beta(m,rn).
+    \]
+    Hence, by the universal property of $M\otimes_R N$, there exists a unique group homomorphism
+    \[
+    f\otimes g:M\otimes_R N\to M'\otimes_R N'
+    \]
+    such that
+    \[
+    (f\otimes g)(m\otimes n)=f(m)\otimes g(n).
+    \]
+    
+    Now each asserted identity is verified on elementary tensors, and therefore on all of $M\otimes_R N$.
+    
+    For $(1)$, for all $m\in M$ and $n\in N$,
+    \[
+    \bigl(((f_1+f_2)\otimes g)(m\otimes n)\bigr)
+    =(f_1+f_2)(m)\otimes g(n)
+    =f_1(m)\otimes g(n)+f_2(m)\otimes g(n),
+    \]
+    while
+    \[
+    \bigl((f_1\otimes g)+(f_2\otimes g)\bigr)(m\otimes n)
+    =(f_1\otimes g)(m\otimes n)+(f_2\otimes g)(m\otimes n)
+    =f_1(m)\otimes g(n)+f_2(m)\otimes g(n).
+    \]
+    Hence
+    \[
+    (f_1+f_2)\otimes g=(f_1\otimes g)+(f_2\otimes g).
+    \]
+    
+    The proof of $(2)$ is analogous:
+    \[
+    (f\otimes (g_1+g_2))(m\otimes n)
+    =f(m)\otimes (g_1+g_2)(n)
+    =f(m)\otimes g_1(n)+f(m)\otimes g_2(n),
+    \]
+    which equals
+    \[
+    ((f\otimes g_1)+(f\otimes g_2))(m\otimes n).
+    \]
+    
+    For $(3)$,
+    \[
+    (f\otimes 0)(m\otimes n)=f(m)\otimes 0=0,
+    \qquad
+    (0\otimes g)(m\otimes n)=0\otimes g(n)=0,
+    \]
+    so both maps are the zero homomorphism.
+    
+    For $(4)$,
+    \[
+    (1_M\otimes 1_N)(m\otimes n)=1_M(m)\otimes 1_N(n)=m\otimes n,
+    \]
+    hence $1_M\otimes 1_N$ is the identity on $M\otimes_R N$.
+    \end{proof}
+    
+    \begin{lemma}
+    Let $M_R$, $M'_R$, $M''_R$ be right $R$-modules, and let ${}_R N$, ${}_R N'$, ${}_R N''$ be left $R$-modules. Let
+    \[
+    f:M\to M',\qquad f':M'\to M'',
+    \qquad
+    g:N\to N',\qquad g':N'\to N''
+    \]
+    be $R$-module homomorphisms. Then
+    \[
+    (f'\otimes g')\circ (f\otimes g)=(f'\circ f)\otimes (g'\circ g).
+    \]
+    \end{lemma}
+    
+    \begin{proof}
+    Again it suffices to check the equality on elementary tensors. For $m\in M$ and $n\in N$,
+    \[
+    \bigl((f'\otimes g')\circ (f\otimes g)\bigr)(m\otimes n)
+    =(f'\otimes g')\bigl(f(m)\otimes g(n)\bigr)
+    =f'(f(m))\otimes g'(g(n)),
+    \]
+    while
+    \[
+    \bigl((f'\circ f)\otimes (g'\circ g)\bigr)(m\otimes n)
+    =(f'\circ f)(m)\otimes (g'\circ g)(n)
+    =f'(f(m))\otimes g'(g(n)).
+    \]
+    Thus both homomorphisms agree on the generators $m\otimes n$ of $M\otimes_R N$, hence they are equal.
+    \end{proof}
+
+    \begin{definition}
+    Let ${}_S U_R$ be a bimodule.
+    Define
+    \[
+    U \otimes_R - : R\text{-}\mathrm{Mod} \longrightarrow S\text{-}\mathrm{Mod}
+    \]
+    by
+    \[
+    M \longmapsto U \otimes_R M,
+    \qquad
+    f \longmapsto \operatorname{id}_U \otimes f.
+    \]
+    \end{definition}
+    
+    Similarly, Let ${}_R U_S$ be a bimodule.
+    \[
+    - \otimes_R U : \mathrm{Mod}\text{-}R \longrightarrow \mathrm{Mod}\text{-}S
+    \]
+    by
+    \[
+    N \longmapsto N \otimes_R U,
+    \qquad
+    g \longmapsto g \otimes \operatorname{id}_U.
+    \]
+
+    \begin{proposition}
+        Let ${}_S U_R$ be a bimodule. Then
+        \[
+        U \otimes_R - : R\text{-}\mathrm{Mod} \longrightarrow S\text{-}\mathrm{Mod}
+        \]
+        is a covariant functor.
+        
+        Similarly, if ${}_R U_S$ is a bimodule, then
+        \[
+        - \otimes_R U : \mathrm{Mod}\text{-}R \longrightarrow \mathrm{Mod}\text{-}S
+        \]
+        is a covariant functor.
+        \end{proposition}
+        
+        \begin{proof}
+        We prove the first statement. For each left $R$-module $M$, the tensor product
+        \[
+        U \otimes_R M
+        \]
+        is naturally a left $S$-module via
+        \[
+        s(u \otimes m)=(su)\otimes m
+        \qquad
+        (s\in S,\ u\in U,\ m\in M).
+        \]
+        For each $R$-module homomorphism $f:M\to N$, define
+        \[
+        U\otimes_R f: U\otimes_R M \to U\otimes_R N
+        \]
+        by
+        \[
+        (U\otimes_R f)(u\otimes m)=u\otimes f(m).
+        \]
+        Equivalently,
+        \[
+        U\otimes_R f=\operatorname{id}_U\otimes f.
+        \]
+        This is well-defined and is an $S$-module homomorphism.
+        
+        It remains to verify the functorial properties. For the identity map $\operatorname{id}_M:M\to M$, we have
+        \[
+        U\otimes_R \operatorname{id}_M=\operatorname{id}_U\otimes \operatorname{id}_M
+        =\operatorname{id}_{U\otimes_R M}.
+        \]
+        If
+        \[
+        M \xrightarrow{f} N \xrightarrow{g} P
+        \]
+        are $R$-module homomorphisms, then for every $u\otimes m\in U\otimes_R M$,
+        \[
+        (U\otimes_R (g\circ f))(u\otimes m)
+        = u\otimes (g\circ f)(m)
+        = g(u\otimes f(m))
+        = ((U\otimes_R g)\circ (U\otimes_R f))(u\otimes m).
+        \]
+        Hence
+        \[
+        U\otimes_R (g\circ f)=(U\otimes_R g)\circ (U\otimes_R f).
+        \]
+        Therefore $U\otimes_R -$ is a covariant functor from $R\text{-}\mathrm{Mod}$ to $S\text{-}\mathrm{Mod}$.
+        
+        The proof of the second statement is entirely similar. If ${}_R U_S$ is a bimodule and $N$ is a right $R$-module, then
+        \[
+        N\otimes_R U
+        \]
+        is naturally a right $S$-module via
+        \[
+        (n\otimes u)s=n\otimes (us).
+        \]
+        For a homomorphism $g:N\to N'$ in $\mathrm{Mod}\text{-}R$, define
+        \[
+        g\otimes_R U = g\otimes \operatorname{id}_U : N\otimes_R U \to N'\otimes_R U
+        \]
+        by
+        \[
+        (g\otimes_R U)(n\otimes u)=g(n)\otimes u.
+        \]
+        One checks immediately that identities and compositions are preserved. Thus
+        \[
+        -\otimes_R U:\mathrm{Mod}\text{-}R\to \mathrm{Mod}\text{-}S
+        \]
+        is also a covariant functor.
+        \end{proof}
+
+        \begin{theorem}
+            Let ${}_S U_R$ be a bimodule. Then the functor
+            \[
+            U\otimes_R - \;:\; R\text{-Mod}\longrightarrow S\text{-Mod}
+            \]
+            is right exact. In other words, if
+            \[
+            N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N'' \longrightarrow 0
+            \]
+            is an exact sequence of left $R$-modules, then
+            \[
+            U\otimes_R N' \xrightarrow{\,\mathrm{id}_U\otimes f\,}
+            U\otimes_R N \xrightarrow{\,\mathrm{id}_U\otimes g\,}
+            U\otimes_R N'' \longrightarrow 0
+            \]
+            is exact.
+            \end{theorem}
+            
+            \begin{proof}
+            Since
+            \[
+            N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N'' \longrightarrow 0
+            \]
+            is exact, we have
+            \[
+            \ker g=\operatorname{Im} f
+            \qquad\text{and}\qquad
+            N''\cong N/\operatorname{Im} f.
+            \]
+            Let
+            \[
+            \pi:N\longrightarrow N/\operatorname{Im} f
+            \]
+            be the canonical projection. Then there exists an isomorphism
+            \[
+            \alpha:N/\operatorname{Im} f \longrightarrow N''
+            \]
+            such that
+            \[
+            g=\alpha\circ \pi.
+            \]
+            
+            Now consider the map
+            \[
+            \Phi:U\otimes_R N \longrightarrow U\otimes_R (N/\operatorname{Im} f),
+            \qquad
+            u\otimes n \longmapsto u\otimes \pi(n).
+            \]
+            By the universal property of tensor products, $\Phi$ is a well-defined $S$-module homomorphism.
+            
+            We claim that
+            \[
+            \ker \Phi=\operatorname{Im}(\mathrm{id}_U\otimes f).
+            \]
+            
+            First, since $\pi\circ f=0$, functoriality gives
+            \[
+            \Phi\circ (\mathrm{id}_U\otimes f)
+            =
+            \mathrm{id}_U\otimes (\pi\circ f)
+            =
+            0.
+            \]
+            Hence
+            \[
+            \operatorname{Im}(\mathrm{id}_U\otimes f)\subseteq \ker\Phi.
+            \]
+            
+            To prove the reverse inclusion, define
+            \[
+            \overline{\Phi}:(U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+            \longrightarrow
+            U\otimes_R (N/\operatorname{Im} f)
+            \]
+            by
+            \[
+            \overline{\Phi}\bigl((u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f)\bigr)
+            =
+            u\otimes \pi(n).
+            \]
+            This is well defined because $\Phi$ vanishes on $\operatorname{Im}(\mathrm{id}_U\otimes f)$.
+            
+            Next define
+            \[
+            \Psi:U\times (N/\operatorname{Im} f)\longrightarrow
+            (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+            \]
+            by
+            \[
+            \Psi(u,\overline{n})
+            =
+            (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f),
+            \]
+            where $\overline{n}=n+\operatorname{Im} f$.
+            
+            We check that $\Psi$ is well defined. If $\overline{n}=\overline{n'}$, then
+            \[
+            n-n'\in \operatorname{Im} f,
+            \]
+            so there exists $x\in N'$ such that
+            \[
+            n-n'=f(x).
+            \]
+            Hence
+            \[
+            (u\otimes n)-(u\otimes n')
+            =
+            u\otimes (n-n')
+            =
+            u\otimes f(x)
+            =
+            (\mathrm{id}_U\otimes f)(u\otimes x)
+            \in \operatorname{Im}(\mathrm{id}_U\otimes f).
+            \]
+            Thus
+            \[
+            (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f)
+            =
+            (u\otimes n')+\operatorname{Im}(\mathrm{id}_U\otimes f).
+            \]
+            So $\Psi$ is well defined. It is clearly $R$-balanced, hence induces an $S$-module homomorphism
+            \[
+            \overline{\Psi}:U\otimes_R (N/\operatorname{Im} f)
+            \longrightarrow
+            (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+            \]
+            such that
+            \[
+            \overline{\Psi}(u\otimes \overline{n})
+            =
+            (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f).
+            \]
+            
+            It is immediate that $\overline{\Phi}$ and $\overline{\Psi}$ are inverse to each other. Therefore
+            \[
+            (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+            \cong
+            U\otimes_R (N/\operatorname{Im} f).
+            \]
+            It follows that
+            \[
+            \ker\Phi=\operatorname{Im}(\mathrm{id}_U\otimes f).
+            \]
+            
+            Finally, since $\alpha:N/\operatorname{Im} f\to N''$ is an isomorphism, the induced map
+            \[
+            \mathrm{id}_U\otimes \alpha:
+            U\otimes_R (N/\operatorname{Im} f)
+            \longrightarrow
+            U\otimes_R N''
+            \]
+            is an isomorphism. Moreover,
+            \[
+            \mathrm{id}_U\otimes g
+            =
+            (\mathrm{id}_U\otimes \alpha)\circ \Phi.
+            \]
+            Hence
+            \[
+            \ker(\mathrm{id}_U\otimes g)=\ker\Phi=\operatorname{Im}(\mathrm{id}_U\otimes f),
+            \]
+            and $\mathrm{id}_U\otimes g$ is surjective because $\Phi$ is surjective and
+            $\mathrm{id}_U\otimes \alpha$ is an isomorphism.
+            
+            Therefore
+            \[
+            U\otimes_R N' \xrightarrow{\,\mathrm{id}_U\otimes f\,}
+            U\otimes_R N \xrightarrow{\,\mathrm{id}_U\otimes g\,}
+            U\otimes_R N'' \longrightarrow 0
+            \]
+            is exact.
+            \end{proof}
 
 \chapter{Homework}
 
@@ -1652,8 +2903,8 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 
 \begin{proof}
     This action is well-defined. $\forall r \in R$, $\varphi r \in
-    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ for all $\varphi \in
-    \operatorname{Hom}_{\mathbb{Z}}(M,N)$ as $(\varphi r)(x) = \varphi(xr) \in N$ for all
+        \operatorname{Hom}_{\mathbb{Z}}(M,N)$ for all $\varphi \in
+        \operatorname{Hom}_{\mathbb{Z}}(M,N)$ as $(\varphi r)(x) = \varphi(xr) \in N$ for all
     $x \in M$. We need to verify the module axioms, for all $r_1, r_2 \in R$ and
     $\varphi, \psi \in \operatorname{Hom}_{\mathbb{Z}}(M,N)$, $\forall x \in M$:
     \begin{itemize}
@@ -1721,9 +2972,9 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 
 \begin{proof}
     Let $x \in M$. Then $x = \varphi(x) + (x - \varphi(x))$. Where $\varphi(x) \in
-    \operatorname{im}\varphi$ and $x - \varphi(x) \in \ker\varphi$. Hence $M =
-    \operatorname{im}\varphi + \ker\varphi$. We only need to show that $\ker\varphi \cap
-    \operatorname{im}\varphi = \{0\}$.
+        \operatorname{im}\varphi$ and $x - \varphi(x) \in \ker\varphi$. Hence $M =
+        \operatorname{im}\varphi + \ker\varphi$. We only need to show that $\ker\varphi \cap
+        \operatorname{im}\varphi = \{0\}$.
     Suppose $x \in \ker\varphi \cap \operatorname{im}\varphi$. Then $x = \varphi(y)$ for some
     $y \in M$ and $\varphi(x) = 0$. Then $\varphi(x) = \varphi \varphi(y) = \varphi(y)=x=0$,
     so $x = 0$. Hence $\ker\varphi \cap \operatorname{im}\varphi = \{0\}$.
@@ -1818,11 +3069,11 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
     \begin{enumerate}
         \item ($\Rightarrow$) Suppose $\varphi$ is injective and $\varphi\xi=\varphi\eta$ for $\xi,\eta:T\to M$. Then for every $t\in T$, $\varphi(\xi(t))=\varphi(\eta(t))$, so $\xi(t)-\eta(t)\in\ker\varphi=\{0\}$. Hence $\xi(t)=\eta(t)$ for all $t$, i.e.\ $\xi=\eta$.
 
-        ($\Leftarrow$) We show $\ker\varphi=\{0\}$. Let $T=\ker\varphi$, $\xi:T\hookrightarrow M$ be the inclusion, and $\eta=0:T\to M$ the zero map. Then $\varphi\xi(t)=\varphi(t)=0=\varphi\eta(t)$ for all $t\in T$, so $\varphi\xi=\varphi\eta$. By hypothesis $\xi=\eta$, which means $t=\xi(t)=\eta(t)=0$ for all $t\in T$. Hence $\ker\varphi=\{0\}$, so $\varphi$ is injective.
+              ($\Leftarrow$) We show $\ker\varphi=\{0\}$. Let $T=\ker\varphi$, $\xi:T\hookrightarrow M$ be the inclusion, and $\eta=0:T\to M$ the zero map. Then $\varphi\xi(t)=\varphi(t)=0=\varphi\eta(t)$ for all $t\in T$, so $\varphi\xi=\varphi\eta$. By hypothesis $\xi=\eta$, which means $t=\xi(t)=\eta(t)=0$ for all $t\in T$. Hence $\ker\varphi=\{0\}$, so $\varphi$ is injective.
 
         \item ($\Rightarrow$) Suppose $\varphi$ is surjective and $\rho\varphi=\theta\varphi$. For any $n\in N$, pick $m\in M$ with $\varphi(m)=n$. Then $\rho(n)=\rho(\varphi(m))=\theta(\varphi(m))=\theta(n)$. Hence $\rho=\theta$.
 
-        ($\Leftarrow$) We show $\varphi$ is surjective. Let $S=N/\operatorname{im}\varphi$, $\rho:N\to S$ the canonical projection, and $\theta=0:N\to S$. For any $m\in M$, $\rho(\varphi(m))=\overline{\varphi(m)}=\bar 0=\theta(\varphi(m))$, so $\rho\varphi=\theta\varphi$. By hypothesis $\rho=\theta$, i.e.\ the projection $N\to N/\operatorname{im}\varphi$ is the zero map. This means $N=\operatorname{im}\varphi$, so $\varphi$ is surjective.
+              ($\Leftarrow$) We show $\varphi$ is surjective. Let $S=N/\operatorname{im}\varphi$, $\rho:N\to S$ the canonical projection, and $\theta=0:N\to S$. For any $m\in M$, $\rho(\varphi(m))=\overline{\varphi(m)}=\bar 0=\theta(\varphi(m))$, so $\rho\varphi=\theta\varphi$. By hypothesis $\rho=\theta$, i.e.\ the projection $N\to N/\operatorname{im}\varphi$ is the zero map. This means $N=\operatorname{im}\varphi$, so $\varphi$ is surjective.
     \end{enumerate}
 \end{proof}
 
@@ -1867,35 +3118,35 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{proof}\leavevmode
     \begin{enumerate}
         \item We use the right-exact sequence $\mathbb{Z}\xrightarrow{\cdot\, n}\mathbb{Z}\to\mathbb{Z}/n\mathbb{Z}\to 0$. Tensoring with $\mathbb{Z}/m\mathbb{Z}$ over $\mathbb{Z}$ gives the right-exact sequence
-        \[
-            \mathbb{Z}/m\mathbb{Z} \xrightarrow{\cdot\, n} \mathbb{Z}/m\mathbb{Z} \to \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
-        \]
-        Hence $\mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq (\mathbb{Z}/m\mathbb{Z})/n(\mathbb{Z}/m\mathbb{Z})$. Now $n(\mathbb{Z}/m\mathbb{Z})=(n\mathbb{Z}+m\mathbb{Z})/m\mathbb{Z}$. Since $n\mathbb{Z}+m\mathbb{Z}=(m,n)\mathbb{Z}$, we get
-        \[
-            \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq \frac{\mathbb{Z}/m\mathbb{Z}}{(m,n)\mathbb{Z}/m\mathbb{Z}} \simeq \mathbb{Z}/(m,n)\mathbb{Z}.
-        \]
+              \[
+                  \mathbb{Z}/m\mathbb{Z} \xrightarrow{\cdot\, n} \mathbb{Z}/m\mathbb{Z} \to \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
+              \]
+              Hence $\mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq (\mathbb{Z}/m\mathbb{Z})/n(\mathbb{Z}/m\mathbb{Z})$. Now $n(\mathbb{Z}/m\mathbb{Z})=(n\mathbb{Z}+m\mathbb{Z})/m\mathbb{Z}$. Since $n\mathbb{Z}+m\mathbb{Z}=(m,n)\mathbb{Z}$, we get
+              \[
+                  \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq \frac{\mathbb{Z}/m\mathbb{Z}}{(m,n)\mathbb{Z}/m\mathbb{Z}} \simeq \mathbb{Z}/(m,n)\mathbb{Z}.
+              \]
 
         \item Similarly, tensor the right-exact sequence $\mathbb{Z}\xrightarrow{\cdot\, n}\mathbb{Z}\to\mathbb{Z}/n\mathbb{Z}\to 0$ with $A$:
-        \[
-            A \xrightarrow{\cdot\, n} A \to A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
-        \]
-        By right-exactness, $A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq A/nA$.
+              \[
+                  A \xrightarrow{\cdot\, n} A \to A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
+              \]
+              By right-exactness, $A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq A/nA$.
 
         \item By the fundamental theorem of finitely generated abelian groups,
-        \[
-            A\simeq \mathbb{Z}^r\oplus\bigoplus_{i=1}^s \mathbb{Z}/d_i\mathbb{Z}, \qquad B\simeq \mathbb{Z}^t\oplus\bigoplus_{j=1}^u \mathbb{Z}/e_j\mathbb{Z}.
-        \]
-        Since tensor product distributes over direct sums, using (1), (2), and $\mathbb{Z}\otimes_\mathbb{Z}M\simeq M$, we get
-        \[
-            A\otimes_\mathbb{Z}B \simeq \mathbb{Z}^{rt}\oplus \bigoplus_{j=1}^u(\mathbb{Z}/e_j\mathbb{Z})^r \oplus\bigoplus_{i=1}^s(\mathbb{Z}/d_i\mathbb{Z})^t \oplus \bigoplus_{i=1}^s\bigoplus_{j=1}^u\mathbb{Z}/(d_i,e_j)\mathbb{Z}.
-        \]
+              \[
+                  A\simeq \mathbb{Z}^r\oplus\bigoplus_{i=1}^s \mathbb{Z}/d_i\mathbb{Z}, \qquad B\simeq \mathbb{Z}^t\oplus\bigoplus_{j=1}^u \mathbb{Z}/e_j\mathbb{Z}.
+              \]
+              Since tensor product distributes over direct sums, using (1), (2), and $\mathbb{Z}\otimes_\mathbb{Z}M\simeq M$, we get
+              \[
+                  A\otimes_\mathbb{Z}B \simeq \mathbb{Z}^{rt}\oplus \bigoplus_{j=1}^u(\mathbb{Z}/e_j\mathbb{Z})^r \oplus\bigoplus_{i=1}^s(\mathbb{Z}/d_i\mathbb{Z})^t \oplus \bigoplus_{i=1}^s\bigoplus_{j=1}^u\mathbb{Z}/(d_i,e_j)\mathbb{Z}.
+              \]
     \end{enumerate}
 \end{proof}
 
 \begin{exercise}
     Let $\varphi: \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ be the unique monomorphism. Prove that
     \[
-    \operatorname{id} \otimes \varphi: \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/4\mathbb{Z}
+        \operatorname{id} \otimes \varphi: \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/4\mathbb{Z}
     \]
     is a zero homomorphism.
 \end{exercise}
@@ -1915,7 +3166,7 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
 \begin{exercise}
     Let $V_1$ and $V_2$ be two vector spaces over a field $F$ with dimension $n$ and $m$ respectively. Let $\{\epsilon_1, \ldots, \epsilon_n\}$ and $\{\eta_1, \ldots, \eta_m\}$ be bases of $V_1$ and $V_2$ respectively. Suppose that $\mathscr{A}$ (resp.\ $\mathscr{B}$) is an $F$-linear map of $V_1$ (resp.\ $V_2$), and it is represented by the matrix $A = (a_{ij})_{n \times n}$ (resp.\ $B = (b_{ij})_{m \times m}$) with respect to the above bases. Prove that
     \[
-    \{\epsilon_i \otimes \eta_j \mid 1 \le i \le n,\, 1 \le j \le m\}
+        \{\epsilon_i \otimes \eta_j \mid 1 \le i \le n,\, 1 \le j \le m\}
     \]
     is an $F$-basis of $V_1 \otimes_F V_2$. Determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis.
 \end{exercise}
@@ -1945,5 +3196,617 @@ Furthermore, if $R$ is commutative, then $\phi_{M,N,P}$ is an $R$-module isomorp
         A\otimes B = \begin{pmatrix} a_{11}B & a_{12}B & \cdots & a_{1n}B \\ a_{21}B & a_{22}B & \cdots & a_{2n}B \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1}B & a_{n2}B & \cdots & a_{nn}B \end{pmatrix}.
     \]
 \end{proof}
+
+\section{Homework Week 3}
+
+\begin{exercise}
+    Let $M$, $N$, $M_i$ $(i \in I)$ and $N_j$ $(j \in J)$ be $R$-modules. Prove the following isomorphisms of abelian groups:
+    \begin{enumerate}
+        \item
+        \[
+        \operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\, N\right)
+        \cong
+        \prod_{i\in I}\operatorname{Hom}_R(M_i,N).
+        \]
+        \item
+        \[
+        \operatorname{Hom}_R\!\left(M,\, \prod_{j\in J} N_j\right)
+        \cong
+        \prod_{j\in J}\operatorname{Hom}_R(M,N_j).
+        \]
+    \end{enumerate}
+    \end{exercise}
+    
+    \begin{proof}
+    We prove the two statements separately.
+    
+    \medskip
+    
+    \noindent\textbf{(1)} Define
+    \[
+    \Phi:\operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\,N\right)\longrightarrow
+    \prod_{i\in I}\operatorname{Hom}_R(M_i,N)
+    \]
+    by
+    \[
+    \Phi(f)=(f\circ \iota_i)_{i\in I},
+    \]
+    where
+    \[
+    \iota_i:M_i\to \bigoplus_{i\in I} M_i
+    \]
+    is the canonical inclusion.
+    
+    We show that $\Phi$ is an isomorphism.
+    
+    First, $\Phi$ is a group homomorphism, since composition is compatible with addition:
+    \[
+    \Phi(f+g)=\bigl((f+g)\circ \iota_i\bigr)_{i\in I}
+    =\bigl(f\circ\iota_i+g\circ\iota_i\bigr)_{i\in I}
+    =\Phi(f)+\Phi(g).
+    \]
+    
+    Now let $(f_i)_{i\in I}\in \prod_{i\in I}\operatorname{Hom}_R(M_i,N)$. Define
+    \[
+    f:\bigoplus_{i\in I} M_i\to N
+    \]
+    by
+    \[
+    f\bigl((m_i)_{i\in I}\bigr)=\sum_{i\in I} f_i(m_i).
+    \]
+    This is well-defined, because an element of $\bigoplus_{i\in I} M_i$ has only finitely many nonzero components, so the above sum is finite. It is immediate that $f$ is $R$-linear, and
+    \[
+    f\circ \iota_i=f_i
+    \qquad\text{for all } i\in I.
+    \]
+    Hence $\Phi(f)=(f_i)_{i\in I}$, so $\Phi$ is surjective.
+    
+    To prove injectivity, suppose $\Phi(f)=\Phi(g)$. Then
+    \[
+    f\circ \iota_i=g\circ \iota_i
+    \qquad\text{for all } i\in I.
+    \]
+    Take any $x=(m_i)_{i\in I}\in \bigoplus_{i\in I} M_i$. Since $x$ has finite support, we may write
+    \[
+    x=\sum_{i\in I} \iota_i(m_i),
+    \]
+    with only finitely many nonzero terms. Therefore,
+    \[
+    f(x)=\sum_{i\in I} f(\iota_i(m_i))
+    =\sum_{i\in I} g(\iota_i(m_i))
+    =g(x).
+    \]
+    So $f=g$, and $\Phi$ is injective.
+    
+    Thus $\Phi$ is an isomorphism:
+    \[
+    \operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\,N\right)
+    \cong
+    \prod_{i\in I}\operatorname{Hom}_R(M_i,N).
+    \]
+    
+    \medskip
+    
+    \noindent\textbf{(2)} Let
+    \[
+    \pi_j:\prod_{j\in J} N_j\to N_j
+    \]
+    be the canonical projection. Define
+    \[
+    \Psi:\operatorname{Hom}_R\!\left(M,\prod_{j\in J} N_j\right)\longrightarrow
+    \prod_{j\in J}\operatorname{Hom}_R(M,N_j)
+    \]
+    by
+    \[
+    \Psi(f)=(\pi_j\circ f)_{j\in J}.
+    \]
+    Again, $\Psi$ is a group homomorphism.
+    
+    We show that $\Psi$ is an isomorphism. Given a family
+    \[
+    (g_j)_{j\in J}\in \prod_{j\in J}\operatorname{Hom}_R(M,N_j),
+    \]
+    define
+    \[
+    g:M\to \prod_{j\in J} N_j
+    \]
+    by
+    \[
+    g(m)=(g_j(m))_{j\in J}.
+    \]
+    Since each $g_j$ is $R$-linear, $g$ is also $R$-linear. Moreover,
+    \[
+    \pi_j\circ g=g_j
+    \qquad\text{for all } j\in J,
+    \]
+    so
+    \[
+    \Psi(g)=(g_j)_{j\in J}.
+    \]
+    Hence $\Psi$ is surjective.
+    
+    For injectivity, suppose $\Psi(f)=\Psi(g)$. Then
+    \[
+    \pi_j\circ f=\pi_j\circ g
+    \qquad\text{for all } j\in J.
+    \]
+    Thus for every $m\in M$ and every $j\in J$,
+    \[
+    \pi_j(f(m))=\pi_j(g(m)).
+    \]
+    Since two elements of $\prod_{j\in J} N_j$ are equal if and only if all their components are equal, it follows that
+    \[
+    f(m)=g(m)
+    \qquad\text{for all } m\in M.
+    \]
+    Hence $f=g$, and $\Psi$ is injective.
+    
+    Therefore
+    \[
+    \operatorname{Hom}_R\!\left(M,\prod_{j\in J} N_j\right)
+    \cong
+    \prod_{j\in J}\operatorname{Hom}_R(M,N_j).
+    \]
+    
+    This completes the proof.
+    \end{proof}
+
+    \begin{exercise}[Five Lemma]
+        Suppose that the following diagram of homomorphisms of $R$-modules
+        \[
+        \begin{tikzcd}[column sep=3em, row sep=3em]
+        M_1 \arrow[r] \arrow[d, "\varphi_1"'] &
+        M_2 \arrow[r] \arrow[d, "\varphi_2"'] &
+        M_3 \arrow[r] \arrow[d, "\varphi_3"'] &
+        M_4 \arrow[r] \arrow[d, "\varphi_4"'] &
+        M_5 \arrow[d, "\varphi_5"'] \\
+        N_1 \arrow[r] &
+        N_2 \arrow[r] &
+        N_3 \arrow[r] &
+        N_4 \arrow[r] &
+        N_5
+        \end{tikzcd}
+        \]
+        is commutative and has exact rows. Prove that:
+        \begin{enumerate}
+            \item If $\varphi_1$ is surjective, and $\varphi_2$ and $\varphi_4$ are injective, then $\varphi_3$ is injective.
+            \item If $\varphi_5$ is injective, and $\varphi_2$ and $\varphi_4$ are surjective, then $\varphi_3$ is surjective.
+        \end{enumerate}
+        \end{exercise}
+        
+        \begin{proof}
+        We prove the two assertions separately.
+        
+        \medskip
+        
+        \noindent\textbf{(1)} Assume that $\varphi_1$ is surjective and that $\varphi_2,\varphi_4$ are injective. We show that $\varphi_3$ is injective.
+        
+        Let $x\in M_3$ and suppose that
+        \[
+        \varphi_3(x)=0.
+        \]
+        We must prove that $x=0$.
+        
+        Let $\alpha_3:M_3\to M_4$ and $\beta_3:N_3\to N_4$ denote the third horizontal maps. By commutativity,
+        \[
+        \varphi_4(\alpha_3(x))=\beta_3(\varphi_3(x))=\beta_3(0)=0.
+        \]
+        Since $\varphi_4$ is injective, it follows that $\alpha_3(x)=0$. Exactness of the top row at $M_3$ yields
+        \[
+        x=\alpha_2(y)
+        \]
+        for some $y\in M_2$, where $\alpha_2:M_2\to M_3$ is the second horizontal map.
+        
+        Again by commutativity,
+        \[
+        0=\varphi_3(x)=\varphi_3(\alpha_2(y))=\beta_2(\varphi_2(y)),
+        \]
+        where $\beta_2:N_2\to N_3$ is the second horizontal map. Hence $\varphi_2(y)\in\ker(\beta_2)$. By exactness of the bottom row at $N_2$,
+        \[
+        \ker(\beta_2)=\operatorname{im}(\beta_1),
+        \]
+        so there exists $z\in N_1$ such that
+        \[
+        \beta_1(z)=\varphi_2(y),
+        \]
+        where $\beta_1:N_1\to N_2$ is the first horizontal map.
+        
+        Since $\varphi_1$ is surjective, there exists $w\in M_1$ such that
+        \[
+        \varphi_1(w)=z.
+        \]
+        Using commutativity once more,
+        \[
+        \varphi_2(\alpha_1(w))
+        =
+        \beta_1(\varphi_1(w))
+        =
+        \beta_1(z)
+        =
+        \varphi_2(y),
+        \]
+        where $\alpha_1:M_1\to M_2$ is the first horizontal map. Because $\varphi_2$ is injective, we get
+        \[
+        \alpha_1(w)=y.
+        \]
+        Therefore
+        \[
+        x=\alpha_2(y)=\alpha_2(\alpha_1(w))=0,
+        \]
+        since the composition of two consecutive maps in an exact sequence is zero. Thus $\ker(\varphi_3)=0$, so $\varphi_3$ is injective.
+        
+        \medskip
+        
+        \noindent\textbf{(2)} Assume that $\varphi_5$ is injective and that $\varphi_2,\varphi_4$ are surjective. We show that $\varphi_3$ is surjective.
+        
+        Let $n\in N_3$. We must find $m\in M_3$ such that
+        \[
+        \varphi_3(m)=n.
+        \]
+        
+        Let $\beta_3:N_3\to N_4$ and $\alpha_3:M_3\to M_4$ denote the third horizontal maps. Since $\varphi_4$ is surjective, there exists $u\in M_4$ such that
+        \[
+        \varphi_4(u)=\beta_3(n).
+        \]
+        Let $\alpha_4:M_4\to M_5$ and $\beta_4:N_4\to N_5$ be the next horizontal maps. Then
+        \[
+        \varphi_5(\alpha_4(u))
+        =
+        \beta_4(\varphi_4(u))
+        =
+        \beta_4(\beta_3(n))
+        =
+        0.
+        \]
+        Because $\varphi_5$ is injective, it follows that $\alpha_4(u)=0$. Exactness of the top row at $M_4$ shows that there exists $m\in M_3$ such that
+        \[
+        \alpha_3(m)=u.
+        \]
+        
+        Consider
+        \[
+        n-\varphi_3(m)\in N_3.
+        \]
+        By commutativity,
+        \[
+        \beta_3\bigl(n-\varphi_3(m)\bigr)
+        =
+        \beta_3(n)-\beta_3(\varphi_3(m))
+        =
+        \beta_3(n)-\varphi_4(\alpha_3(m))
+        =
+        \beta_3(n)-\varphi_4(u)
+        =
+        0.
+        \]
+        Hence $n-\varphi_3(m)\in\ker(\beta_3)$. By exactness of the bottom row at $N_3$,
+        \[
+        \ker(\beta_3)=\operatorname{im}(\beta_2),
+        \]
+        so there exists $v\in N_2$ such that
+        \[
+        \beta_2(v)=n-\varphi_3(m),
+        \]
+        where $\beta_2:N_2\to N_3$ is the second horizontal map.
+        
+        Since $\varphi_2$ is surjective, there exists $y\in M_2$ such that
+        \[
+        \varphi_2(y)=v.
+        \]
+        Then
+        \[
+        \varphi_3(\alpha_2(y))
+        =
+        \beta_2(\varphi_2(y))
+        =
+        \beta_2(v)
+        =
+        n-\varphi_3(m),
+        \]
+        where $\alpha_2:M_2\to M_3$ is the second horizontal map. Therefore
+        \[
+        n
+        =
+        \varphi_3(m)+\varphi_3(\alpha_2(y))
+        =
+        \varphi_3\bigl(m+\alpha_2(y)\bigr).
+        \]
+        Thus $n$ lies in the image of $\varphi_3$, proving that $\varphi_3$ is surjective.
+        \end{proof}
+
+        \begin{exercise}[Snake Lemma]
+            Suppose that the following diagram of homomorphisms of $R$-modules
+            \[
+            \begin{tikzcd}[column sep=3.2em, row sep=3em]
+            0 \arrow[r] &
+            M' \arrow[r, "\alpha"] \arrow[d, "\varphi'"'] &
+            M \arrow[r, "\beta"] \arrow[d, "\varphi"'] &
+            M'' \arrow[r] \arrow[d, "\varphi''"'] &
+            0 \\
+            0 \arrow[r] &
+            N' \arrow[r, "\mu"] &
+            N \arrow[r, "\nu"] &
+            N'' \arrow[r] &
+            0
+            \end{tikzcd}
+            \]
+            is commutative and has exact rows. Prove that
+            \[
+            0 \longrightarrow \ker\varphi'
+            \overset{\alpha'}{\longrightarrow} \ker\varphi
+            \overset{\beta'}{\longrightarrow} \ker\varphi''
+            \overset{\delta}{\longrightarrow} \operatorname{coker}\varphi'
+            \overset{\mu'}{\longrightarrow} \operatorname{coker}\varphi
+            \overset{\nu'}{\longrightarrow} \operatorname{coker}\varphi''
+            \longrightarrow 0
+            \]
+            is a long exact sequence, where $\alpha',\beta',\mu',\nu'$ are the homomorphisms induced by
+            $\alpha,\beta,\mu,\nu$, respectively.
+            \end{exercise}
+            
+            \begin{proof}
+            Since the rows are exact, $\alpha$ and $\mu$ are injective, while $\beta$ and $\nu$ are surjective.
+            
+            We first define the connecting homomorphism
+            \[
+            \delta:\ker\varphi''\to \operatorname{coker}\varphi'.
+            \]
+            Let $x\in \ker\varphi''\subseteq M''$. Since $\beta:M\to M''$ is surjective, choose $y\in M$
+            such that
+            \[
+            \beta(y)=x.
+            \]
+            By commutativity,
+            \[
+            \nu(\varphi(y))=\varphi''(\beta(y))=\varphi''(x)=0.
+            \]
+            Hence $\varphi(y)\in \ker\nu=\operatorname{im}\mu$. Therefore there exists $z\in N'$ such that
+            \[
+            \mu(z)=\varphi(y).
+            \]
+            Define
+            \[
+            \delta(x)=\overline{z}=z+\operatorname{im}\varphi' \in \operatorname{coker}\varphi'.
+            \]
+            
+            We must check that this is well-defined. First, suppose $y_1,y_2\in M$ both satisfy
+            \[
+            \beta(y_1)=\beta(y_2)=x.
+            \]
+            Then $y_1-y_2\in \ker\beta=\operatorname{im}\alpha$, so there exists $m'\in M'$ such that
+            \[
+            y_1-y_2=\alpha(m').
+            \]
+            If $\mu(z_i)=\varphi(y_i)$ for $i=1,2$, then
+            \[
+            \mu(z_1-z_2)=\varphi(y_1)-\varphi(y_2)=\varphi(\alpha(m'))
+            =\mu(\varphi'(m')),
+            \]
+            where we used commutativity. Since $\mu$ is injective, it follows that
+            \[
+            z_1-z_2=\varphi'(m')\in \operatorname{im}\varphi'.
+            \]
+            Thus $\overline{z_1}=\overline{z_2}$ in $\operatorname{coker}\varphi'$, so $\delta(x)$ is independent of the choice of $y$.
+            
+            Next, if $z,z'\in N'$ both satisfy
+            \[
+            \mu(z)=\mu(z')=\varphi(y),
+            \]
+            then $\mu(z-z')=0$, and since $\mu$ is injective, $z=z'$. Hence $\delta(x)$ is also independent of the choice of $z$.
+            
+            It is straightforward to verify that $\delta$ is a homomorphism.
+            
+            Now we prove exactness.
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\ker\varphi'$.}
+            Since $\alpha$ induces $\alpha'$, we have
+            \[
+            \alpha'(\ker\varphi')\subseteq \ker\varphi.
+            \]
+            Because $\alpha$ is injective, so is $\alpha'$. Hence
+            \[
+            \ker\alpha'=0.
+            \]
+            Therefore the sequence is exact at $\ker\varphi'$.
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\ker\varphi$.}
+            We show that
+            \[
+            \operatorname{im}\alpha'=\ker\beta'.
+            \]
+            Take $x'\in \ker\varphi'$. Then
+            \[
+            \beta'(\alpha'(x'))=\beta(\alpha(x'))=0,
+            \]
+            so $\operatorname{im}\alpha'\subseteq \ker\beta'$.
+            
+            Conversely, let $y\in \ker\varphi$ satisfy $\beta'(y)=0$. Then $\beta(y)=0$, hence by exactness
+            of the top row there exists $x'\in M'$ such that
+            \[
+            \alpha(x')=y.
+            \]
+            Since $\varphi(y)=0$, we get
+            \[
+            0=\varphi(\alpha(x'))=\mu(\varphi'(x')).
+            \]
+            As $\mu$ is injective, $\varphi'(x')=0$, so $x'\in \ker\varphi'$. Thus
+            \[
+            y=\alpha'(x'),
+            \]
+            proving $\ker\beta'\subseteq \operatorname{im}\alpha'$.
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\ker\varphi''$.}
+            We show that
+            \[
+            \operatorname{im}\beta'=\ker\delta.
+            \]
+            
+            First let $y\in \ker\varphi$. Then $\beta(y)\in \ker\varphi''$, since
+            \[
+            \varphi''(\beta(y))=\nu(\varphi(y))=0.
+            \]
+            Thus $\beta'(y)\in \ker\varphi''$. To compute $\delta(\beta'(y))$, choose the lift $y$ itself.
+            Then $\varphi(y)=0$, so we may take $z=0$, and hence
+            \[
+            \delta(\beta'(y))=\overline{0}=0.
+            \]
+            Therefore $\operatorname{im}\beta'\subseteq \ker\delta$.
+            
+            Conversely, let $x\in \ker\varphi''$ and suppose $\delta(x)=0$. Choose $y\in M$ with
+            \[
+            \beta(y)=x,
+            \]
+            and choose $z\in N'$ such that
+            \[
+            \mu(z)=\varphi(y).
+            \]
+            Since $\delta(x)=\overline{z}=0$ in $\operatorname{coker}\varphi'$, there exists $x'\in M'$ such that
+            \[
+            z=\varphi'(x').
+            \]
+            Hence
+            \[
+            \varphi(y-\alpha(x'))
+            =
+            \varphi(y)-\varphi(\alpha(x'))
+            =
+            \mu(z)-\mu(\varphi'(x'))
+            =
+            0.
+            \]
+            So $y-\alpha(x')\in \ker\varphi$, and
+            \[
+            \beta'(y-\alpha(x'))=\beta(y-\alpha(x'))=\beta(y)=x,
+            \]
+            because $\beta\alpha=0$. Thus $x\in \operatorname{im}\beta'$, proving
+            \[
+            \ker\delta\subseteq \operatorname{im}\beta'.
+            \]
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\operatorname{coker}\varphi'$.}
+            We show that
+            \[
+            \operatorname{im}\delta=\ker\mu'.
+            \]
+            
+            Let $x\in \ker\varphi''$, and write
+            \[
+            \delta(x)=\overline{z}\in \operatorname{coker}\varphi'
+            \]
+            as above, with $\mu(z)=\varphi(y)$. Then
+            \[
+            \mu'(\delta(x))=\overline{\mu(z)}=\overline{\varphi(y)}=0
+            \]
+            in $\operatorname{coker}\varphi$. Hence $\operatorname{im}\delta\subseteq \ker\mu'$.
+            
+            Conversely, let $\overline{z}\in \operatorname{coker}\varphi'$ satisfy
+            \[
+            \mu'(\overline{z})=0.
+            \]
+            This means that $\mu(z)\in \operatorname{im}\varphi$, so there exists $y\in M$ such that
+            \[
+            \varphi(y)=\mu(z).
+            \]
+            Applying $\nu$, we get
+            \[
+            \varphi''(\beta(y))=\nu(\varphi(y))=\nu(\mu(z))=0.
+            \]
+            Thus $\beta(y)\in \ker\varphi''$. By construction of $\delta$,
+            \[
+            \delta(\beta(y))=\overline{z}.
+            \]
+            So $\overline{z}\in \operatorname{im}\delta$, proving
+            \[
+            \ker\mu'\subseteq \operatorname{im}\delta.
+            \]
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\operatorname{coker}\varphi$.}
+            We show that
+            \[
+            \operatorname{im}\mu'=\ker\nu'.
+            \]
+            
+            For $\overline{z}\in \operatorname{coker}\varphi'$, we have
+            \[
+            \nu'(\mu'(\overline{z}))=\overline{\nu(\mu(z))}=\overline{0}=0,
+            \]
+            so $\operatorname{im}\mu'\subseteq \ker\nu'$.
+            
+            Conversely, let $\overline{n}\in \operatorname{coker}\varphi$ satisfy
+            \[
+            \nu'(\overline{n})=0.
+            \]
+            Then $\overline{\nu(n)}=0$ in $\operatorname{coker}\varphi''$, so there exists $m''\in M''$ such that
+            \[
+            \varphi''(m'')=\nu(n).
+            \]
+            Since $\beta$ is surjective, choose $m\in M$ such that
+            \[
+            \beta(m)=m''.
+            \]
+            Then
+            \[
+            \nu(n-\varphi(m))=\nu(n)-\varphi''(\beta(m))=\nu(n)-\varphi''(m'')=0.
+            \]
+            Hence
+            \[
+            n-\varphi(m)\in \ker\nu=\operatorname{im}\mu,
+            \]
+            so there exists $z\in N'$ such that
+            \[
+            \mu(z)=n-\varphi(m).
+            \]
+            Therefore in $\operatorname{coker}\varphi$,
+            \[
+            \overline{n}=\overline{\mu(z)}=\mu'(\overline{z}),
+            \]
+            showing that $\overline{n}\in \operatorname{im}\mu'$. Thus
+            \[
+            \ker\nu'\subseteq \operatorname{im}\mu'.
+            \]
+            
+            \medskip
+            
+            \noindent\textbf{Exactness at $\operatorname{coker}\varphi''$ and termination.}
+            Since $\nu:N\to N''$ is surjective, the induced map
+            \[
+            \nu':\operatorname{coker}\varphi\to \operatorname{coker}\varphi''
+            \]
+            is surjective as well: for any $\overline{n''}\in \operatorname{coker}\varphi''$, choose $n\in N$
+            such that
+            \[
+            \nu(n)=n'',
+            \]
+            then
+            \[
+            \nu'(\overline{n})=\overline{n''}.
+            \]
+            Hence
+            \[
+            \operatorname{im}\nu'=\operatorname{coker}\varphi'',
+            \]
+            which is equivalent to exactness at $\operatorname{coker}\varphi''$ and the final $0$.
+            
+            Collecting all the above, we obtain the exact sequence
+            \[
+            0 \longrightarrow \ker\varphi'
+            \overset{\alpha'}{\longrightarrow} \ker\varphi
+            \overset{\beta'}{\longrightarrow} \ker\varphi''
+            \overset{\delta}{\longrightarrow} \operatorname{coker}\varphi'
+            \overset{\mu'}{\longrightarrow} \operatorname{coker}\varphi
+            \overset{\nu'}{\longrightarrow} \operatorname{coker}\varphi''
+            \longrightarrow 0.
+            \]
+            \end{proof}
 
 \end{document}

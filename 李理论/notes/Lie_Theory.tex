@@ -192,7 +192,7 @@
 %----------------------------------------------------------------------------------------
 %    CONTENT STRUCTURE TEMPLATE
 %----------------------------------------------------------------------------------------
-\chapter{Lecture 1 Where Lie algebras come from}
+\chapter{Lecture 1: Where Lie algebras come from}
 
 \section{Introduction}
 
@@ -1602,7 +1602,7 @@ Let \(L\) be a Lie algebra over a field \(F\).
     So \(L\) is not nilpotent.
 \end{example}
 
-\chapter{Lecture 2 Engel Theorem}
+\chapter{Lecture 2: Engel Theorem}
 
 \section{Engel Theorem the first type}
 
@@ -2224,7 +2224,7 @@ We also have the following truth:
     For this result, we do not need $L$ or the enveloping algebra $A=<L>$ to be finite-dimensional now, we only need such $n$ is a universal bound.
 \end{remark}
 
-\chapter{Lecture 3: Lie's theorem and Jordan-Chevalley decomposition}
+\chapter{Lecture 3: Lie's theorem and Generalized Subspaces}
 
 \section{Lie's theorem}
 
@@ -2677,6 +2677,1470 @@ We also have the following truth:
     \]
     Since $P_i(T)$ is invertible on $V_{\lambda_i}$, it follows that $v_i=0$. As $i$ was arbitrary, all $v_i$ are zero. Therefore the sum is direct.
 \end{proof}
+
+\chapter{Lecture 4: Jordan-Chevalley decomposition}
+
+\section{Review}
+
+Let $L$ be a finite-dimensional solvable Lie algebra over an algebraically closed field $F$ of characteristic 0. Let $V$ be a finite-dimensional $L$-module.
+
+\begin{itemize}
+\item $\forall$ representation $\rho: L \to \mathfrak{gl}(V)$, there exists a basis of $V$ such that 
+\[
+\rho(L) \subseteq \left\{
+\begin{pmatrix}
+* & * & \cdots & * \\
+0 & * & \cdots & * \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & \cdots & 0 & *
+\end{pmatrix}
+\right\} (\operatorname{dim}V < \infty)
+\]
+\item All irreducible finite-dimensional $L$-modules are one-dimensional.
+\end{itemize}
+
+\begin{lemma}
+    Let $I \triangleleft L$ be an ideal of $L$. If both $I$ and $L/I$ are solvable, then $L$ is solvable. (In this lemma we do not need $L$ to be finite-dimensional, also $F$ can be any field.)
+\end{lemma}
+
+\begin{proof}
+    Since $L/I$ is solvable, there exists an integer $m \ge 0$ such that
+    \[
+    (L/I)^{(m)}=0.
+    \]
+    Using the compatibility of the derived series with quotients, we have
+    \[
+    (L/I)^{(m)} = \bigl(L^{(m)}+I\bigr)/I,
+    \]
+    hence
+    \[
+    L^{(m)} \subseteq I.
+    \]
+    
+    Since $I$ is solvable, there exists an integer $n \ge 0$ such that
+    \[
+    I^{(n)}=0.
+    \]
+   We obtain
+    \[
+    L^{(m+n)} \subseteq I^{(n)}=0.
+    \]
+    Therefore $L^{(m+n)}=0$, so $L$ is solvable.
+    \end{proof}
+
+    \begin{example}
+    No similar result for nilpotent Lie algebras. Indeed,
+        Let $L$ be the $2$-dimensional Lie algebra over a field $F$ with basis $\{x,y\}$ and bracket
+        \[
+        [x,y]=y.
+        \]
+        Let
+        \[
+        I:=Fy.
+        \]
+        Then $I\triangleleft L$, since
+        \[
+        [x,y]=y\in I,\qquad [y,y]=0.
+        \]
+        
+        Now $I$ is $1$-dimensional abelian, hence nilpotent. Also
+        \[
+        L/I
+        \]
+        is $1$-dimensional abelian, hence nilpotent.
+        
+        However, $L$ itself is not nilpotent. Indeed, its lower central series is
+        \[
+        \gamma_1(L)=L,\qquad \gamma_2(L)=[L,L]=Fy,
+        \]
+        and for every $n\ge 2$,
+        \[
+        \gamma_{n+1}(L)=[L,\gamma_n(L)]=[L,Fy]=Fy.
+        \]
+        Thus the lower central series never reaches $0$, so $L$ is not nilpotent.
+        
+        Therefore, even if $I$ and $L/I$ are both nilpotent, $L$ need not be nilpotent.
+        \end{example}
+
+\begin{lemma}
+    Let $I,J \triangleleft L$ both $I,J$ are solvable. Then $I+J$ is solvable.
+\end{lemma}
+
+\begin{proof}
+    Since $J \triangleleft I+J$, the quotient
+    \[
+    (I+J)/J
+    \]
+    is naturally isomorphic to
+    \[
+    I/(I\cap J).
+    \]
+    Because $I$ is solvable, every quotient of $I$ is solvable; hence
+    \[
+    (I+J)/J
+    \]
+    is solvable. By assumption, $J$ is solvable. Therefore, applying the previous lemma to the Lie algebra $I+J$ and its ideal $J$, we conclude that $I+J$ is solvable.
+    \end{proof}
+
+Let $\operatorname{Rad}(L)$ be the largest solvable ideal of $L$ ($\operatorname{dim}_FL< \infty$). $\operatorname{Rad}(L)$ is called the \emph{radical} of $L$. $\operatorname{Rad}(L)$ contains all other solvable ideals and $L/\operatorname{Rad}(L)$ does not contain any non-zero solvable ideals.
+
+\begin{definition}
+    A finite-dimensional Lie algebra $L$ is called \emph{semisimple} if $\operatorname{Rad}(L)=0$.
+\end{definition}
+
+\section{Jordan-Chevalley decomposition}
+
+From now on we need over base field $F$ to be algebraically closed. (At least we say the base field $F$ contains all the roots of the characteristic polynomial of the linear transformation we need.)
+
+\begin{definition}
+    A finite-dimensional linear transformation $\varphi: V \to V$ is called \emph{semisimple} if 
+    \begin{itemize}
+\item $\exists$ a basis of $V$ such that $\varphi$ is represented by a diagonal matrix.
+\item Or $(\varphi-\alpha I)^2 v=0$ if and only if $(\varphi-\alpha I)v=0$ for all $\alpha \in F, v \in V$. 
+    \end{itemize}
+    For any $V' \subseteq V$, $V'$ is $\varphi$-invariant.
+\end{definition}
+
+\begin{lemma}[Chinese Remainder Theorem for commutative rings]
+    Let $R$ be a commutative ring with $1$, and let $I_1,\dots,I_n$ be ideals of $R$ such that
+    \[
+    I_i+I_j=R \qquad \text{for all } i\ne j.
+    \]
+    Then the natural map
+    \[
+    \varphi:R\to \prod_{i=1}^n R/I_i,\qquad
+    r\mapsto (r+I_1,\dots,r+I_n)
+    \]
+    is surjective, and
+    \[
+    \ker(\varphi)=\bigcap_{i=1}^n I_i.
+    \]
+    Hence it induces an isomorphism
+    \[
+    R\Big/\bigcap_{i=1}^n I_i \;\cong\; \prod_{i=1}^n R/I_i.
+    \]
+    \end{lemma}
+    
+    \begin{proof}
+    We first determine the kernel of $\varphi$. For $r\in R$,
+    \[
+    \varphi(r)=0
+    \]
+    if and only if
+    \[
+    r+I_i=0+I_i
+    \qquad\text{for all } i=1,\dots,n,
+    \]
+    which is equivalent to $r\in I_i$ for all $i$. Thus
+    \[
+    \ker(\varphi)=\bigcap_{i=1}^n I_i.
+    \]
+    
+    It remains to prove that $\varphi$ is surjective. Let
+    \[
+    (a_1+I_1,\dots,a_n+I_n)\in \prod_{i=1}^n R/I_i
+    \]
+    be arbitrary. We shall construct $r\in R$ such that
+    \[
+    r\equiv a_i \pmod{I_i}\qquad (i=1,\dots,n).
+    \]
+    
+    Fix $i$. Since the ideals are pairwise comaximal, for every $j\ne i$ we have
+    \[
+    I_i+I_j=R.
+    \]
+    We claim that
+    \[
+    I_i+\prod_{j\ne i} I_j = R.
+    \]
+    Indeed, for each $j\ne i$, choose $u_j\in I_i$ and $v_j\in I_j$ such that
+    \[
+    u_j+v_j=1.
+    \]
+    Then
+    \[
+    \prod_{j\ne i}(u_j+v_j)=1.
+    \]
+    After expanding this product, every term except $\prod_{j\ne i} v_j$ contains at least
+    one factor $u_j\in I_i$, hence lies in $I_i$. On the other hand,
+    \[
+    \prod_{j\ne i} v_j \in \prod_{j\ne i} I_j.
+    \]
+    Therefore
+    \[
+    1=x_i+y_i
+    \]
+    for some
+    \[
+    x_i\in I_i,\qquad y_i\in \prod_{j\ne i} I_j.
+    \]
+    In particular,
+    \[
+    y_i\equiv 1 \pmod{I_i},
+    \qquad
+    y_i\equiv 0 \pmod{I_j}\quad (j\ne i).
+    \]
+    
+    Now set
+    \[
+    r:=\sum_{i=1}^n a_i y_i.
+    \]
+    Fix $k\in\{1,\dots,n\}$. Modulo $I_k$, we have
+    \[
+    r \equiv a_k y_k + \sum_{i\ne k} a_i y_i.
+    \]
+    Since $y_k\equiv 1 \pmod{I_k}$ and $y_i\equiv 0 \pmod{I_k}$ for $i\ne k$, it follows that
+    \[
+    r\equiv a_k \pmod{I_k}.
+    \]
+    Thus
+    \[
+    \varphi(r)=(a_1+I_1,\dots,a_n+I_n).
+    \]
+    So $\varphi$ is surjective.
+    
+    By the First Isomorphism Theorem,
+    \[
+    R/\ker(\varphi)\cong \operatorname{im}(\varphi)=\prod_{i=1}^n R/I_i.
+    \]
+    Since $\ker(\varphi)=\bigcap_{i=1}^n I_i$, we obtain
+    \[
+    R\Big/\bigcap_{i=1}^n I_i \cong \prod_{i=1}^n R/I_i.
+    \]
+    This completes the proof.
+    \end{proof}
+    
+    \begin{corollary}
+    Under the assumptions of the theorem,
+    \[
+    I_1\cap\cdots\cap I_n = I_1\cdots I_n.
+    \]
+    Hence
+    \[
+    R/(I_1\cdots I_n)\cong \prod_{i=1}^n R/I_i.
+    \]
+    \end{corollary}
+    
+    \begin{proof}
+    For any ideals $J_1,\dots,J_n$ of a commutative ring, one always has
+    \[
+    J_1\cdots J_n \subseteq J_1\cap\cdots\cap J_n.
+    \]
+    So it remains to prove the reverse inclusion.
+    
+    We first prove the case of two ideals. Suppose $I+J=R$. Let $x\in I\cap J$. Since
+    $I+J=R$, there exist $a\in I$ and $b\in J$ such that
+    \[
+    a+b=1.
+    \]
+    Then
+    \[
+    x=x(a+b)=xa+xb.
+    \]
+    Now $xa\in IJ$ because $x\in J$ and $a\in I$, and similarly $xb\in IJ$ because
+    $x\in I$ and $b\in J$. Hence $x\in IJ$. Therefore
+    \[
+    I\cap J=IJ.
+    \]
+    
+    Now proceed by induction on $n$. Let
+    \[
+    J:=I_1\cdots I_{n-1}.
+    \]
+    Since the ideals $I_1,\dots,I_n$ are pairwise comaximal, one has
+    \[
+    I_n+I_k=R \qquad (k=1,\dots,n-1),
+    \]
+    and this implies
+    \[
+    I_n+J=R.
+    \]
+    Hence, by the two-ideal case,
+    \[
+    J\cap I_n = JI_n.
+    \]
+    By the induction hypothesis,
+    \[
+    I_1\cap\cdots\cap I_{n-1}=I_1\cdots I_{n-1}=J.
+    \]
+    Therefore
+    \[
+    I_1\cap\cdots\cap I_n
+    =
+    (I_1\cap\cdots\cap I_{n-1})\cap I_n
+    =
+    J\cap I_n
+    =
+    JI_n
+    =
+    I_1\cdots I_n.
+    \]
+    The desired isomorphism now follows from the theorem.
+    \end{proof}
+
+\begin{theorem}
+    An arbitrary linear transformation $\varphi$ can be decomposed as $\varphi = \varphi_s + \varphi_n$, where $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent.
+
+    Furthermore, there exists a polynomial $p(t) \in F[t]$ with zero constant term such that $\varphi_s=p(\varphi)$ and $\varphi_n=\varphi-p(\varphi)$. In other words, $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$.
+\end{theorem}
+
+\begin{proof}
+    Decompose $V$ into a direct sum of generalized eigenspaces $V = V_{\lambda_1} \oplus \cdots \oplus V_{\lambda_k}$. For each $\lambda_i$, let $V_{\lambda_i}$ be the generalized eigenspace of $\varphi$ corresponding to $\lambda_i$.
+
+Define $\varphi_s$ as $\varphi_s |_{V_{\lambda_i}} = \lambda_i I$. Then $\varphi_s$ is semisimple and $\varphi_n = \varphi - \varphi_s$ is nilpotent. We only need to show that $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$.
+
+Suppose the characteristic polynomial of $\varphi$ is $P(t) = (t-\lambda_1)^{a_1} \cdots (t-\lambda_k)^{a_k}$. By Chinese Remainder Theorem, there exists a polynomial $p(t) \in F[t]$  such that $p(t) \equiv \lambda_i \pmod{(t-\lambda_i)^{a_i}}$ for all $i$. 
+
+If $0 \in \{\lambda_1, \dots, \lambda_k\}$, then $p(0) = 0$. If $0 \notin \{\lambda_1, \dots, \lambda_k\}$, then there exists $p(t)$ such that $p(t) \equiv \lambda_i \pmod{(t-\lambda_i)^{a_i}}$ and $p(t) \equiv 0 \pmod t$. Hence we can always confirm that $p(t)$ is a polynomial with zero constant term.
+
+Now we have $p(\varphi) = \varphi_s$ and $\varphi - p(\varphi) = \varphi_n$.
+\end{proof}
+
+\begin{theorem}
+    For all linear transformation $\varphi$ there exists a unique decomposition $\varphi=\varphi_s+\varphi_n$ such that $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent. And $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$, in particular, $\varphi_s$ and $\varphi_n$ commute.
+\end{theorem}
+
+\begin{proof}
+    We only need to show the uniqueness of the decomposition. Suppose 
+    \[
+    \varphi=\varphi_s'+\varphi_n'=\varphi_s''+\varphi_n'',
+    \]
+    And $[\varphi_s',\varphi_n']=[\varphi_s'',\varphi_n'']=0$. By former theorem we already have a decomposition $\varphi=\varphi_s+\varphi_n$ such that $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent. And $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$, in particular, $\varphi_s$ and $\varphi_n$ commute.
+
+    First, we prove $\varphi_s'=\varphi_s$ and $\varphi_n'=\varphi_n$.
+
+        Since $[\varphi_s',\varphi_n']=0$, we have $[\varphi_s',\varphi_n'+\varphi_s']=0$ which means that $[\varphi_s', \varphi]=0$. Hence $[\varphi_s', f(\varphi)]=0$ for all polynomial $f(t) \in F[t]$. In particular, $[\varphi_s', \varphi_s]=0$. Similarly, $[\varphi_n', \varphi_n]=0$.
+
+    And $\varphi_s'+ \varphi_n'= \varphi_s+ \varphi_n$ which means that $\varphi_s'- \varphi_s= \varphi_n'- \varphi_n$. Since the difference of two commutative semisimple linear transformations is still semisimple, we have $\varphi_s'- \varphi_s$ is semisimple and for the same reason $\varphi_n'- \varphi_n$ is nilpotent. Hence $\varphi_s'- \varphi_s$ and $\varphi_n'- \varphi_n$ are both zero.
+
+    By the same reason, we have $\varphi_s''=\varphi_s$ and $\varphi_n''=\varphi_n$. Thus 
+    \[
+    \varphi_s'=\varphi_s=\varphi_s'',\varphi_n'=\varphi_n=\varphi_n''.
+    \]
+Therefore the decomposition is unique.
+\end{proof}
+
+\begin{definition}
+    Consider 
+    \[
+\varphi_s=
+\begin{pmatrix}
+\alpha_1 & 0 & \cdots & 0 \\
+0 & \alpha_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \alpha_n
+\end{pmatrix}.
+\]
+We call a linear transformation $\psi$ is a replica of $\varphi$ if 
+\[
+\psi=
+\begin{pmatrix}
+\beta_1 & 0 & \cdots & 0 \\
+0 & \beta_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \beta_n
+\end{pmatrix}.
+\]
+Where $\alpha_i=\alpha_j$ implies $\beta_i=\beta_j$. Then if $\varphi_s=p(\varphi)$, notice that $\psi=f(\varphi_s)=f(p(\varphi))$ for some polynomial $f(t) \in F[t]$.
+\end{definition}
+
+\begin{proposition}
+    Let $\varphi$ be a linear transformation, $\varphi \in \operatorname{End}_F(V)=\mathfrak{gl}(V)$, consider $\mathrm{ad}(\varphi): \mathfrak{gl}(V) \to \mathfrak{gl}(V)$, $x \mapsto [\varphi, x]$. 
+
+If $\varphi$ is semisimple then $\mathrm{ad}(\varphi)$ is a semisimple linear transformation.
+\end{proposition}
+
+\begin{proof}
+    Since $\varphi$ is semisimple, there exists a basis of $V$ in which $\varphi$ is diagonal. Thus we may write
+    \[
+    V=\bigoplus_{i=1}^r V_{\lambda_i},
+    \]
+    where $\lambda_1,\dots,\lambda_r \in F$ are the distinct eigenvalues of $\varphi$, and
+    \[
+    \varphi|_{V_{\lambda_i}}=\lambda_i \operatorname{id}_{V_{\lambda_i}}.
+    \]
+    
+    Now consider $\mathfrak{gl}(V)=\operatorname{End}_F(V)$. For $1\le i,j\le r$, define
+    \[
+    E_{ij}:=\operatorname{Hom}_F(V_{\lambda_j},V_{\lambda_i}) \subseteq \operatorname{End}_F(V).
+    \]
+    Using the decomposition of $V$, we have
+    \[
+    \operatorname{End}_F(V)
+    =
+    \bigoplus_{i,j=1}^r E_{ij}.
+    \]
+    
+    We claim that each $E_{ij}$ is an eigenspace of $\operatorname{ad}(\varphi)$. Indeed, let
+    \[
+    x\in E_{ij}=\operatorname{Hom}_F(V_{\lambda_j},V_{\lambda_i}).
+    \]
+    Then for any $v\in V_{\lambda_j}$,
+    \[
+    (\operatorname{ad}(\varphi)(x))(v)
+    =
+    (\varphi x-x\varphi)(v)
+    =
+    \varphi(x(v))-x(\varphi(v)).
+    \]
+    Since $x(v)\in V_{\lambda_i}$, we have
+    \[
+    \varphi(x(v))=\lambda_i x(v),
+    \]
+    and since $v\in V_{\lambda_j}$,
+    \[
+    x(\varphi(v))=x(\lambda_j v)=\lambda_j x(v).
+    \]
+    Therefore
+    \[
+    (\operatorname{ad}(\varphi)(x))(v)
+    =
+    (\lambda_i-\lambda_j)x(v).
+    \]
+    Hence
+    \[
+    \operatorname{ad}(\varphi)(x)=(\lambda_i-\lambda_j)x,
+    \]
+    so every $x\in E_{ij}$ is an eigenvector of $\operatorname{ad}(\varphi)$ with eigenvalue
+    \[
+    \lambda_i-\lambda_j.
+    \]
+    
+    Thus $\operatorname{End}_F(V)$ is a direct sum of eigenspaces of $\operatorname{ad}(\varphi)$:
+    \[
+    \operatorname{End}_F(V)
+    =
+    \bigoplus_{i,j=1}^r E_{ij}.
+    \]
+    It follows that $\operatorname{ad}(\varphi)$ is diagonalizable, hence semisimple.
+    \end{proof}
+
+    \begin{theorem}
+        Suppose $\varphi=\varphi_s+\varphi_n$ is a Jordan-Chevalley decomposition of $\varphi$. Then $\mathrm{ad}(\varphi)=\mathrm{ad}(\varphi_s)+\mathrm{ad}(\varphi_n)$ is a Jordan-Chevalley decomposition of $\mathrm{ad}(\varphi)$.
+    \end{theorem}
+
+    \begin{proof}
+        We already know $\mathrm{ad}(\varphi_s)$ is semisimple. And by easy discussion, we know $\mathrm{ad}(\varphi_n)$ is nilpotent. According to Jordan-Chevalley decomposition theorem, we only need to show that $[\mathrm{ad}(\varphi_s),\mathrm{ad}(\varphi_n)]=0$. Then $\mathrm{ad}(\varphi)=\mathrm{ad}(\varphi_s)+\mathrm{ad}(\varphi_n)$ is a Jordan-Chevalley decomposition. The commutativity comes from $[\mathrm{ad}(\varphi_s),\mathrm{ad}(\varphi_n)]=\mathrm{ad}([\varphi_s,\varphi_n])=0$ 
+    \end{proof}
+
+\section{Preparation for Cartan's criterion}
+
+Consider the base field $F$. If $\operatorname{char}F=0$ then $\mathbb{Q}\subseteq F$. Let $\pi: \sum\limits_{i=1}^n \mathbb{Q}\alpha_i \to \mathbb{Q}$ be a $\mathbb{Q}$-linear map.
+
+Consider 
+\[
+    \psi=
+    \begin{pmatrix}
+    \pi(\alpha_1) & 0 & \cdots & 0 \\
+    0 & \pi(\alpha_2) & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & \pi(\alpha_n)
+    \end{pmatrix}.
+\]
+This $\psi$ is a replica of $\varphi_s$. Immediately we know that $\mathrm{ad}(\psi)$ is a replica of $\mathrm{ad}(\varphi_s)$.
+
+\begin{lemma}
+    Let $A$ and $B$ be subspaces of $\mathfrak{gl}(V)$ ($\operatorname{dim}_F(V)<\infty$). let
+    \[
+    M=\{ \varphi \in \mathfrak{gl}(V) \mid [\varphi,B] \subseteq A \}
+    \]
+    Then $M$ is a Lie subalgebra of $\mathfrak{gl}(V)$. If $\varphi \in M$, forall $m \in M$, $\operatorname{Tr}(\varphi m)=(0)$, then $\varphi$ is nilpotent.
+\end{lemma}
+
+\begin{proof}
+    We shall prove that $\varphi_s=0$, hence $\varphi=\varphi_n$ is nilpotent.
+
+Choose a basis of $V$ such that
+\[
+\varphi_s=
+\begin{pmatrix}
+\alpha_1 & 0 & \cdots & 0\\
+0 & \alpha_2 & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & \alpha_n
+\end{pmatrix},
+\qquad \alpha_i\in F.
+\]
+Since $\operatorname{char}F=0$, we have $\mathbb{Q}\subseteq F$. Set
+\[
+W:=\sum_{i=1}^n \mathbb{Q}\alpha_i\subseteq F.
+\]
+Let
+\[
+\pi:W\to \mathbb{Q}
+\]
+be any $\mathbb{Q}$-linear map, and define
+\[
+\psi=
+\begin{pmatrix}
+\pi(\alpha_1) & 0 & \cdots & 0\\
+0 & \pi(\alpha_2) & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & \pi(\alpha_n)
+\end{pmatrix}.
+\]
+Then $\psi$ is a replica of $\varphi_s$.
+
+We claim that $\psi\in M$. Indeed, since $\varphi\in M$, we have
+\[
+[\varphi,B]\subseteq A.
+\]
+Passing to the quotient $\mathfrak{gl}(V)/A$, this means that the induced map
+\[
+\operatorname{ad}(\varphi):B+A/A\to \mathfrak{gl}(V)/A
+\]
+is zero. Hence its semisimple part
+\[
+\operatorname{ad}(\varphi_s)
+\]
+also acts as zero on $B+A/A$. Since $\operatorname{ad}(\psi)$ is a replica of $\operatorname{ad}(\varphi_s)$, it follows that $\operatorname{ad}(\psi)$ also vanishes on $B+A/A$. Therefore
+\[
+[\psi,B]\subseteq A,
+\]
+so $\psi\in M$.
+
+By the hypothesis of the lemma, for every $m\in M$ one has
+\[
+\operatorname{Tr}(\varphi m)=0.
+\]
+Applying this to $m=\psi$, we get
+\[
+\operatorname{Tr}(\varphi\psi)=0.
+\]
+Now
+\[
+\operatorname{Tr}(\varphi\psi)
+=
+\operatorname{Tr}(\varphi_s\psi)+\operatorname{Tr}(\varphi_n\psi).
+\]
+Since $\psi$ is a polynomial in $\varphi_s$, it commutes with $\varphi_s$, and hence also with $\varphi_n$. Therefore $\varphi_n\psi$ is nilpotent, so
+\[
+\operatorname{Tr}(\varphi_n\psi)=0.
+\]
+Consequently,
+\[
+0=\operatorname{Tr}(\varphi_s\psi)=\sum_{i=1}^n \alpha_i\,\pi(\alpha_i).
+\]
+This holds for every $\mathbb{Q}$-linear map $\pi:W\to\mathbb{Q}$.
+
+Now choose a $\mathbb{Q}$-basis $\beta_1,\dots,\beta_r$ of $W$, and write
+\[
+\alpha_i=\sum_{j=1}^r a_{ij}\beta_j,
+\qquad a_{ij}\in\mathbb{Q}.
+\]
+Let $\pi_k:W\to\mathbb{Q}$ be the coordinate functional defined by
+\[
+\pi_k(\beta_j)=\delta_{jk}.
+\]
+Then
+\[
+0=\sum_{i=1}^n \alpha_i\,\pi_k(\alpha_i)
+=\sum_{i=1}^n \alpha_i a_{ik}
+=\sum_{i=1}^n \left(\sum_{j=1}^r a_{ij}\beta_j\right)a_{ik}
+=\sum_{j=1}^r \left(\sum_{i=1}^n a_{ij}a_{ik}\right)\beta_j.
+\]
+Since $\beta_1,\dots,\beta_r$ are linearly independent over $\mathbb{Q}$, we obtain
+\[
+\sum_{i=1}^n a_{ij}a_{ik}=0
+\qquad
+\text{for all }1\le j,k\le r.
+\]
+In particular, taking $j=k$, we get
+\[
+\sum_{i=1}^n a_{ik}^2=0
+\qquad
+\text{for each }k.
+\]
+As each $a_{ik}\in\mathbb{Q}$, this implies
+\[
+a_{ik}=0
+\qquad
+\text{for all }i,k.
+\]
+Hence $\alpha_i=0$ for every $i$, so $\varphi_s=0$.
+
+Therefore
+\[
+\varphi=\varphi_n
+\]
+is nilpotent. This proves the lemma.
+\end{proof}
+
+\chapter{Lecture 5: Cartan's criterion and Killing form}
+
+\section{Cartan Criterion for Solvability}
+
+\begin{proposition}
+Let $L \subseteq \mathfrak{gl}(V)$ with $\dim_F V<\infty$. Assume
+\[
+\operatorname{Tr}(xy)=0 \quad \text{for all }x\in L,\ y\in [L,L]
+\]
+(equivalently, $\operatorname{Tr}(L[L,L])=0$). Then every element of $[L,L]$ is nilpotent as an endomorphism of $V$. In particular, $[L,L]$ acts nilpotently on $V$.
+\end{proposition}
+
+\begin{proof}
+Apply the main lemma with
+\[
+A:=[L,L],\qquad B:=L,\qquad 
+M:=\{\varphi\in\mathfrak{gl}(V)\mid [\varphi,B]\subseteq A\}.
+\]
+Then $M$ is a Lie subalgebra, and $L\subseteq M$.
+
+Fix $a,b\in L$, and set $c \in M$.  
+To use the lemma, it suffices to prove
+\[
+\operatorname{Tr}([a,b]c)=0.
+\]
+For any $c\in M$, we compute
+\[
+[a,b]c=[ac,b]-a[c,b].
+\]
+Hence
+\[
+\operatorname{Tr}([a,b]c)=\operatorname{Tr}([ac,b])-\operatorname{Tr}(a[c,b]).
+\]
+The first term is $0$ because the trace of a commutator is $0$.  
+For the second term, $[c,b]\in A=[L,L]$ (since $c\in M$, $b\in B=L$), and $a\in L$; by the assumption $\operatorname{Tr}(L[L,L])=0$, we get $\operatorname{Tr}(a[c,b])=0$.
+
+Therefore $\operatorname{Tr}([a,b]c)=0$ for all $c\in M$. By the main lemma, each $[a,b]$ is nilpotent.
+
+Now let
+\[
+S:=\{[a,b]\mid a,b\in L\}\subseteq [L,L].
+\]
+Since $[L,L]=\langle S\rangle_{\text{Lie}}$, and every element of $S$ is nilpotent on $V$, Engel's theorem implies that $[L,L]$ is a nilpotent Lie algebra. Consequently, $[L,L]$ is solvable, so $L$ is solvable.
+\end{proof}
+
+\section{Killing form}
+
+$\forall a,b \in L$, denote $\kappa(a|b)=\operatorname{Tr}(\operatorname{ad}a \operatorname{ad}b)$. Obviously, $\kappa$ is a symmetric bilinear form on $L$.
+
+\begin{definition}
+    Let $V$ be a vector space over a field $F$, and let
+    \[
+    B: V \times V \to F
+    \]
+    be a bilinear form. We say that $B$ is \emph{nondegenerate} if either of the following equivalent conditions holds:
+    \begin{enumerate}
+        \item If $v \in V$ satisfies
+        \[
+        B(v,w)=0 \qquad \forall\, w\in V,
+        \]
+        then $v=0$.
+        \item If $w \in V$ satisfies
+        \[
+        B(v,w)=0 \qquad \forall\, v\in V,
+        \]
+        then $w=0$.
+    \end{enumerate}
+    Equivalently, the induced linear map
+    \[
+    V \to V^*, \qquad v \mapsto B(v,-)
+    \]
+    is injective; if $\dim V<\infty$, this is equivalent to this map being an isomorphism.
+    \end{definition}
+
+\begin{proposition}
+    Killing form is associative. 
+\end{proposition}
+
+\begin{proof}
+    Let $L$ be a finite-dimensional Lie algebra, and let
+    \[
+    \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y)
+    \qquad (x,y\in L)
+    \]
+    be its Killing form. We claim that for all $x,y,z\in L$,
+    \[
+    \kappa([x,y],z)=\kappa(x,[y,z]).
+    \]
+    
+    Indeed, using
+    \[
+    \operatorname{ad}([x,y])=[\operatorname{ad}x,\operatorname{ad}y]
+    =\operatorname{ad}x\,\operatorname{ad}y-\operatorname{ad}y\,\operatorname{ad}x,
+    \]
+    we compute
+    \begin{align*}
+    \kappa([x,y],z)
+    &=\operatorname{Tr}\bigl(\operatorname{ad}([x,y])\,\operatorname{ad}z\bigr) \\
+    &=\operatorname{Tr}\bigl((\operatorname{ad}x\,\operatorname{ad}y-\operatorname{ad}y\,\operatorname{ad}x)\operatorname{ad}z\bigr) \\
+    &=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y\,\operatorname{ad}z)
+       -\operatorname{Tr}(\operatorname{ad}y\,\operatorname{ad}x\,\operatorname{ad}z).
+    \end{align*}
+    By cyclicity of trace,
+    \[
+    \operatorname{Tr}(\operatorname{ad}y\,\operatorname{ad}x\,\operatorname{ad}z)
+    =\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}z\,\operatorname{ad}y),
+    \]
+    hence
+    \begin{align*}
+    \kappa([x,y],z)
+    &=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y\,\operatorname{ad}z)
+      -\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}z\,\operatorname{ad}y) \\
+    &=\operatorname{Tr}\bigl(\operatorname{ad}x(\operatorname{ad}y\,\operatorname{ad}z-\operatorname{ad}z\,\operatorname{ad}y)\bigr) \\
+    &=\operatorname{Tr}\bigl(\operatorname{ad}x\,[\operatorname{ad}y,\operatorname{ad}z]\bigr) \\
+    &=\operatorname{Tr}\bigl(\operatorname{ad}x\,\operatorname{ad}([y,z])\bigr) \\
+    &=\kappa(x,[y,z]).
+    \end{align*}
+    Therefore the Killing form is associative.
+    \end{proof}
+
+Now we prove the theorem.
+
+($\Rightarrow$): Let $I=\{ a \in L | (a|L)=(0) \}  \triangleleft L $. Since $([a,b]|L)=(a|[b,L])=(0)$. We consider $\mathrm{ad}(L) \subseteq \mathfrak{gl}(L)$. Then we have $\operatorname{Tr}(\mathrm{ad}(I)\mathrm{ad}(I))=0$. Hence $\mathrm{ad}(I) \subseteq \mathfrak{gl}(L)$ is solvable. And $ \mathrm{ad}: I \to \mathrm{ad}(I)$ the image is solvable. $\ker \mathrm{ad}=I \cap Z(L) $ is abelian, hence solvable. If $L$ is semisimple, then we have $I=0$. Which shows that $\kappa$ is nondegenerate.
+
+($\Leftarrow$): Suppose $L$ is not semisimple. Then $\operatorname{Rad}(L) \neq 0$. Let $I \triangleleft L$ be a non-zero solvable ideal, then $L$ mast have a non-zero abelian ideal $J$. Then $\kappa(J|L)=0$. Contradiction.
+
+\begin{proposition}
+    Let $V$ be a vector space over $F$, not necessarily finite-dimensional, and let
+    \[
+    \kappa:V\times V\to F
+    \]
+    be a symmetric bilinear form. Let $W\subseteq V$ be a finite-dimensional subspace.
+    Assume that the restriction
+    \[
+    \kappa|_{W\times W}
+    \]
+    is nondegenerate. Define
+    \[
+    W^\perp:=\{\,v\in V\mid \kappa(v,w)=0\ \text{for all } w\in W\,\}.
+    \]
+    Then
+    \[
+    V=W\oplus W^\perp.
+    \]
+    \end{proposition}
+    
+    \begin{proof}
+    It is enough to prove that
+    \[
+    V=W+W^\perp,
+    \]
+    since $W\cap W^\perp=0$ follows immediately from the nondegeneracy of $\kappa|_{W\times W}$.
+    
+    Let $w_1,\dots,w_n$ be a basis of $W$. Consider the Gram matrix
+    \[
+    G=(\kappa(w_i,w_j))_{1\le i,j\le n}.
+    \]
+    Since $\kappa|_{W\times W}$ is nondegenerate, the matrix $G$ is invertible.
+    
+    Take any $v\in V$. We seek $u=\sum_{i=1}^n c_i w_i\in W$ such that
+    \[
+    v-u\in W^\perp.
+    \]
+    This is equivalent to requiring
+    \[
+    \kappa(v-u,w_j)=0
+    \qquad (j=1,\dots,n),
+    \]
+    that is,
+    \[
+    \kappa(v,w_j)=\sum_{i=1}^n c_i\,\kappa(w_i,w_j)
+    \qquad (j=1,\dots,n).
+    \]
+    This is a linear system for the coefficients $c_i$, whose coefficient matrix is $G$.
+    Since $G$ is invertible, the system has a unique solution. Hence there exists $u\in W$
+    such that $v-u\in W^\perp$.
+    
+    Therefore every $v\in V$ can be written as
+    \[
+    v=u+(v-u)\in W+W^\perp,
+    \]
+    so $V=W+W^\perp$. As noted above, $W\cap W^\perp=0$, hence
+    \[
+    V=W\oplus W^\perp.
+    \]
+    \end{proof}
+    
+    \begin{proposition}
+    Let $L$ be a semisimple Lie algebra, and let
+    \[
+    I\triangleleft L,\qquad I\ne 0.
+    \]
+    Then the restriction of the Killing form $\kappa$ of $L$ to $I\times I$ is nondegenerate.
+    \end{proposition}
+    
+    \begin{proof}
+    Suppose, to the contrary, that $\kappa|_{I\times I}$ is degenerate. Then there exists
+    $0\ne a\in I$ such that
+    \[
+    \kappa(a,I)=0.
+    \]
+    We claim that in fact
+    \[
+    \kappa([a,I],L)=0.
+    \]
+    Indeed, let $x\in I$ and $y\in L$. By associativity of the Killing form,
+    \[
+    \kappa([a,x],y)=\kappa(a,[x,y]).
+    \]
+    Since $I\triangleleft L$, we have $[x,y]\in I$, and since $\kappa(a,I)=0$, it follows that
+    \[
+    \kappa([a,x],y)=0
+    \qquad\text{for all }x\in I,\ y\in L.
+    \]
+    Thus
+    \[
+    [a,I]\subseteq L^\perp,
+    \]
+    where
+    \[
+    L^\perp=\{\,z\in L\mid \kappa(z,L)=0\,\}.
+    \]
+    But $L$ is semisimple, so its Killing form is nondegenerate. Hence $L^\perp=0$, and therefore
+    \[
+    [a,I]=0.
+    \]
+    So $a\in C_L(I)$, the centralizer of $I$ in $L$.
+    
+    Now $I\cap C_L(I)$ is a nonzero ideal of $L$: it is nonzero because $a\in I\cap C_L(I)$,
+    and it is an ideal since both $I$ and $C_L(I)$ are ideals of $L$. Moreover, it is abelian,
+    because for $x,y\in I\cap C_L(I)$ we have $y\in I$ and $x$ centralizes $I$, hence
+    \[
+    [x,y]=0.
+    \]
+    Thus $L$ contains a nonzero abelian ideal, contradicting the semisimplicity of $L$.
+    
+    Therefore $\kappa|_{I\times I}$ must be nondegenerate.
+    \end{proof}
+    
+    \begin{theorem}
+    Every semisimple Lie algebra is a direct sum of simple ideals.
+    \end{theorem}
+    
+    \begin{proof}
+    We argue by induction on $\dim L$. If $L$ is simple, there is nothing to prove.
+    
+    Assume that $L$ is semisimple but not simple. Then there exists a nonzero proper ideal
+    \[
+    0\ne I\triangleleft L,\qquad I\ne L.
+    \]
+    By the previous proposition, the restriction of the Killing form to $I$ is nondegenerate.
+    Since $I$ is finite-dimensional, the preceding orthogonal decomposition proposition gives
+    \[
+    L=I\oplus I^\perp,
+    \]
+    where
+    \[
+    I^\perp=\{\,x\in L\mid \kappa(x,I)=0\,\}.
+    \]
+    
+    We claim that $I^\perp$ is also an ideal of $L$. Let $x\in I^\perp$, $y\in L$, and $z\in I$.
+    Then, by associativity of the Killing form,
+    \[
+    \kappa([y,x],z)=\kappa(y,[x,z]).
+    \]
+    Since $I\triangleleft L$, we have $[x,z]\in I$. Because $x\in I^\perp$, it follows that
+    \[
+    \kappa(x,[z,y])=0,
+    \]
+    and hence
+    \[
+    \kappa([y,x],z)=0
+    \qquad\text{for all } z\in I.
+    \]
+    Therefore $[y,x]\in I^\perp$, proving that $I^\perp\triangleleft L$.
+    
+    Both $I$ and $I^\perp$ are semisimple, being ideals of the semisimple Lie algebra $L$.
+    Moreover,
+    \[
+    \dim I<\dim L,\qquad \dim I^\perp<\dim L.
+    \]
+    By the induction hypothesis, each of $I$ and $I^\perp$ is a direct sum of simple ideals.
+    Hence so is
+    \[
+    L=I\oplus I^\perp.
+    \]
+    This completes the proof.
+    \end{proof}
+
+    \section{Cartan Criterion for Semisimplicity}
+
+    \begin{theorem}[Cartan criterion for semisimplicity]
+        Let $L$ be a finite-dimensional Lie algebra over a field $F$ of characteristic $0$.
+        Then $L$ is semisimple if and only if its Killing form
+        \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y)
+        \qquad (x,y\in L)
+        \]
+        is nondegenerate.
+        \end{theorem}
+        
+        \begin{proof}
+        We prove the two implications separately.
+        
+        \smallskip
+        
+        \noindent
+        ($\Rightarrow$) Assume that $L$ is semisimple. Let
+        \[
+        L^\perp:=\{x\in L\mid \kappa(x,y)=0 \text{ for all } y\in L\}
+        \]
+        be the radical of $\kappa$. We first show that $L^\perp$ is an ideal of $L$.
+        Indeed, if $x\in L^\perp$ and $z\in L$, then for every $y\in L$,
+        \[
+        \kappa([z,x],y)=\kappa(z,[x,y])=-\kappa(x,[z,y])=0,
+        \]
+        where we used the associativity of the Killing form. Hence
+        \[
+        [z,x]\in L^\perp,
+        \]
+        so $L^\perp\triangleleft L$.
+        
+        Now let $a\in [L^\perp,L^\perp]$. Then $a\in L^\perp$, so
+        \[
+        \kappa(a,L)=0.
+        \]
+        Thus
+        \[
+        \kappa([L^\perp,L^\perp],L^\perp)=0.
+        \]
+        By Cartan's criterion for solvability, $L^\perp$ is solvable. Since $L$ is semisimple, it has no nonzero solvable ideals. Therefore
+        \[
+        L^\perp=0.
+        \]
+        Hence $\kappa$ is nondegenerate.
+        
+        \smallskip
+        
+        \noindent
+        ($\Leftarrow$) Assume that $\kappa$ is nondegenerate. Let $R=\operatorname{Rad}(L)$ be the solvable radical of $L$. We shall show that $R=0$.
+        
+        Since $R$ is solvable, its derived algebra $[R,R]$ is nilpotent, hence solvable. For every
+        \[
+        x\in [R,R], \qquad y\in L,
+        \]
+        the operator $\operatorname{ad}x\,\operatorname{ad}y$ has trace $0$. Therefore
+        \[
+        \kappa([R,R],L)=0.
+        \]
+        By the nondegeneracy of $\kappa$, this implies
+        \[
+        [R,R]=0.
+        \]
+        So $R$ is abelian.
+        
+        Now let $x\in R$ and $y\in L$. Since $R$ is an abelian ideal, we have
+        \[
+        [R,R]=0
+        \qquad\text{and}\qquad
+        [L,R]\subseteq R.
+        \]
+        Choose a basis of $L$ adapted to $R$, say
+        \[
+        L=R\oplus U.
+        \]
+        Relative to this decomposition, $\operatorname{ad}x$ has the block form
+        \[
+        \operatorname{ad}x=
+        \begin{pmatrix}
+        0 & *\\
+        0 & 0
+        \end{pmatrix},
+        \]
+        because $\operatorname{ad}x(L)\subseteq R$ and $\operatorname{ad}x(R)=[x,R]=0$.
+        Hence for every $y\in L$, the product $\operatorname{ad}x\,\operatorname{ad}y$ also has trace $0$. Thus
+        \[
+        \kappa(x,y)=0
+        \qquad\text{for all }y\in L.
+        \]
+        So $x\in L^\perp$. Since $\kappa$ is nondegenerate, $L^\perp=0$, hence $x=0$. Therefore
+        \[
+        R=0.
+        \]
+        Thus $L$ is semisimple.
+        \end{proof}
+
+\chapter{Lecture 6: Basics of Representation}
+
+\section{Inner Derivation of Lie algebra}
+
+For any algebra $A$, $\mathrm{d}: A \to A$ is a derivation if $\mathrm{d}(ab)=\mathrm{d}(a)b+a\mathrm{d}(b)$ for all $a,b \in A$. Hence $\mathrm{Der}(A)$ is a Lie subalgebra of $\operatorname{End}_F(A)^{(-)}=\mathfrak{gl}(A)$.
+
+Now let $L$ be a Lie algebra (not necessarily semisimple or finite dimensional). Let $a \in L$, $\mathrm{ad}(a): L \to L : b \mapsto [a,b]$ is a derivation. Such derivation is called inner derivation. 
+
+\begin{theorem}
+    If $L$ is a finite dimensional semisimple Lie algebra, then $\operatorname{Der}(L) = \operatorname{ad}(L)$.
+\end{theorem}
+
+\begin{remark}
+    An example of not inner derivation: Let $A=\begin{pmatrix} f(t) & g(t) \\ h(t) & k(t) \end{pmatrix}$. Then $\mathrm{d}: A \to A : \begin{pmatrix} f(t) & g(t) \\ h(t) & k(t) \end{pmatrix} \mapsto \begin{pmatrix} f'(t) & g'(t) \\ h'(t) & k'(t) \end{pmatrix}$ is a derivation. But it is not inner derivation.
+
+    Another example for Lie algebra: Let $A$ be an abelian Lie algebra. Then any linear transformation is a derivation. But it is not inner derivation.
+\end{remark}
+
+\begin{proof}
+    Let $d \in \operatorname{Der}(L)$. We must show that $d$ is inner.
+
+    Consider the vector space
+    \[
+    \widetilde L := L \oplus Fd,
+    \]
+    and define a Lie bracket on $\widetilde L$ by requiring that:
+    \begin{itemize}
+        \item the bracket on $L$ is the original one;
+        \item for $x \in L$,
+        \[
+        [d,x]:=d(x), \qquad [x,d]:=-d(x);
+        \]
+        \item $[d,d]=0$.
+    \end{itemize}
+    Since $d$ is a derivation of $L$, the Jacobi identity holds, so $\widetilde L$
+    is a Lie algebra and $L \triangleleft \widetilde L$ is an ideal of codimension $1$.
+
+    Let $\operatorname{Rad}(\widetilde L)$ be the solvable radical of $\widetilde L$.
+    Since $L$ is semisimple, it contains no nonzero solvable ideals. Hence
+    \[
+    \operatorname{Rad}(\widetilde L)\cap L=0.
+    \]
+    On the other hand, $\operatorname{Rad}(\widetilde L)+L$ is a subspace of
+    $\widetilde L$ containing $L$, and since $\dim(\widetilde L/L)=1$, either
+    $\operatorname{Rad}(\widetilde L)\subseteq L$ or
+    \[
+    \widetilde L=L+\operatorname{Rad}(\widetilde L).
+    \]
+    The first possibility would imply $\operatorname{Rad}(\widetilde L)=0$, hence in any case
+    we may write
+    \[
+    \widetilde L=L+\operatorname{Rad}(\widetilde L).
+    \]
+    Therefore there exist $a\in L$ and $r\in \operatorname{Rad}(\widetilde L)$ such that
+    \[
+    d=a+r.
+    \]
+    Equivalently,
+    \[
+    r=d-a.
+    \]
+
+    Now let $b\in L$. Since $L\triangleleft \widetilde L$, we have $[r,b]\in L$.
+    Also $r\in \operatorname{Rad}(\widetilde L)$ and $\operatorname{Rad}(\widetilde L)$ is an ideal,
+    so $[r,b]\in \operatorname{Rad}(\widetilde L)$. Thus
+    \[
+    [r,b]\in L\cap \operatorname{Rad}(\widetilde L)=0,
+    \]
+    hence $[r,b]=0$ for all $b\in L$.
+
+    But
+    \[
+    [r,b]=[d-a,b]=[d,b]-[a,b]=d(b)-[a,b].
+    \]
+    Therefore
+    \[
+    d(b)=[a,b]=-\,[b,a]=\operatorname{ad}(-a)(b)
+    \qquad \text{for all } b\in L.
+    \]
+    So
+    \[
+    d=\operatorname{ad}(-a)\in \operatorname{ad}(L).
+    \]
+
+    Since every derivation of $L$ is inner, we conclude that
+    \[
+    \operatorname{Der}(L)=\operatorname{ad}(L).
+    \]
+\end{proof}
+
+\section{Some Basics of Representation of Lie algebra}
+
+\begin{definition}
+    Let \(L\) be a Lie algebra over a field \(F\), and let \(V\) be a vector space over \(F\).
+    An \emph{\(L\)-module structure} on \(V\) is a bilinear map
+    \[
+    L\times V \to V,\qquad (x,v)\mapsto x\cdot v,
+    \]
+    such that
+    \[
+    [x,y]\cdot v = x\cdot (y\cdot v)-y\cdot (x\cdot v)
+    \]
+    for all \(x,y\in L\) and \(v\in V\).
+    \end{definition}
+    
+    \begin{definition}
+    Let \(V\) and \(W\) be \(L\)-modules. The \emph{tensor product module}
+    \(V\otimes W\) is the vector space \(V\otimes_F W\) equipped with the action
+    \[
+    x\cdot (v\otimes w)=(x\cdot v)\otimes w+v\otimes (x\cdot w),
+    \qquad x\in L,\ v\in V,\ w\in W,
+    \]
+    extended linearly to all of \(V\otimes W\).
+    \end{definition}
+    
+    \begin{proof}
+    We verify that this defines an \(L\)-module structure. Since the formula is bilinear in
+    \(x\), \(v\), and \(w\), it extends uniquely to a linear action on \(V\otimes W\).
+    It remains to check the bracket identity.
+    
+    For \(x,y\in L\), \(v\in V\), and \(w\in W\), we have
+    \begin{align*}
+    x\cdot \bigl(y\cdot (v\otimes w)\bigr)
+    &=x\cdot \bigl((y\cdot v)\otimes w+v\otimes (y\cdot w)\bigr) \\
+    &=(x\cdot (y\cdot v))\otimes w+(y\cdot v)\otimes (x\cdot w)
+       +(x\cdot v)\otimes (y\cdot w)+v\otimes (x\cdot (y\cdot w)),
+    \end{align*}
+    and similarly
+    \begin{align*}
+    y\cdot \bigl(x\cdot (v\otimes w)\bigr)
+    &=(y\cdot (x\cdot v))\otimes w+(x\cdot v)\otimes (y\cdot w)
+       +(y\cdot v)\otimes (x\cdot w)+v\otimes (y\cdot (x\cdot w)).
+    \end{align*}
+    Subtracting, we obtain
+    \begin{align*}
+    x\cdot \bigl(y\cdot (v\otimes w)\bigr)-y\cdot \bigl(x\cdot (v\otimes w)\bigr)
+    &=\bigl([x,y]\cdot v\bigr)\otimes w+v\otimes \bigl([x,y]\cdot w\bigr) \\
+    &=[x,y]\cdot (v\otimes w).
+    \end{align*}
+    Thus \(V\otimes W\) is an \(L\)-module.
+    \end{proof}
+    
+    \begin{definition}
+    Let \(V\) and \(W\) be \(L\)-modules. The vector space
+    \[
+    \operatorname{Hom}_F(V,W)
+    \]
+    becomes an \(L\)-module by defining
+    \[
+    (x\cdot f)(v)=x\cdot f(v)-f(x\cdot v),
+    \qquad x\in L,\ f\in \operatorname{Hom}_F(V,W),\ v\in V.
+    \]
+    This is called the \emph{Hom-module}.
+    \end{definition}
+    
+    \begin{proof}
+    We first note that for fixed \(x\in L\) and \(f\in \operatorname{Hom}_F(V,W)\),
+    the map \(x\cdot f\) is again \(F\)-linear in \(v\), so \(x\cdot f\in \operatorname{Hom}_F(V,W)\).
+    
+    Now let \(x,y\in L\), \(f\in \operatorname{Hom}_F(V,W)\), and \(v\in V\). Then
+    \begin{align*}
+    \bigl(x\cdot (y\cdot f)\bigr)(v)
+    &=x\cdot \bigl((y\cdot f)(v)\bigr)-(y\cdot f)(x\cdot v) \\
+    &=x\cdot \bigl(y\cdot f(v)-f(y\cdot v)\bigr)
+       -\bigl(y\cdot f(x\cdot v)-f(y\cdot (x\cdot v))\bigr) \\
+    &=x\cdot (y\cdot f(v))-x\cdot f(y\cdot v)-y\cdot f(x\cdot v)+f(y\cdot (x\cdot v)),
+    \end{align*}
+    and similarly
+    \begin{align*}
+    \bigl(y\cdot (x\cdot f)\bigr)(v)
+    &=y\cdot (x\cdot f(v))-y\cdot f(x\cdot v)-x\cdot f(y\cdot v)+f(x\cdot (y\cdot v)).
+    \end{align*}
+    Subtracting gives
+    \begin{align*}
+    \bigl(x\cdot (y\cdot f)-y\cdot (x\cdot f)\bigr)(v)
+    &=[x,y]\cdot f(v)-f([x,y]\cdot v) \\
+    &=\bigl([x,y]\cdot f\bigr)(v).
+    \end{align*}
+    Hence
+    \[
+    [x,y]\cdot f=x\cdot (y\cdot f)-y\cdot (x\cdot f),
+    \]
+    so \(\operatorname{Hom}_F(V,W)\) is an \(L\)-module.
+    \end{proof}
+    
+    \begin{definition}
+    Let \(V\) be an \(L\)-module. The dual space
+    \[
+    V^*=\operatorname{Hom}_F(V,F)
+    \]
+    is called the \emph{dual module} of \(V\), where \(F\) is regarded as the trivial
+    \(L\)-module. Its action is given by
+    \[
+    (x\cdot \varphi)(v)=-\,\varphi(x\cdot v),
+    \qquad x\in L,\ \varphi\in V^*,\ v\in V.
+    \]
+    \end{definition}
+    
+    \begin{proof}
+    This is the special case \(W=F\) of the Hom-module construction, where the action of
+    \(L\) on \(F\) is trivial. Indeed, if \(\varphi\in \operatorname{Hom}_F(V,F)\), then
+    \[
+    (x\cdot \varphi)(v)=x\cdot \varphi(v)-\varphi(x\cdot v)=0-\varphi(x\cdot v)
+    =-\varphi(x\cdot v).
+    \]
+    Thus \(V^*\) is an \(L\)-module.
+    \end{proof}
+    
+    \begin{remark}
+    The subspace of \(L\)-invariants in \(\operatorname{Hom}_F(V,W)\) is precisely
+    \[
+    \operatorname{Hom}_L(V,W)
+    =
+    \{f\in \operatorname{Hom}_F(V,W)\mid x\cdot f=0 \text{ for all } x\in L\}.
+    \]
+    Indeed, the condition \(x\cdot f=0\) means
+    \[
+    x\cdot f(v)=f(x\cdot v)
+    \qquad \text{for all } x\in L,\ v\in V,
+    \]
+    which is exactly the condition that \(f\) be an \(L\)-module homomorphism.
+    \end{remark}
+    
+    \begin{proposition}
+    Assume that \(V\) is finite-dimensional. Then there is a natural vector space isomorphism
+    \[
+    V^*\otimes W \cong \operatorname{Hom}_F(V,W),
+    \]
+    given by
+    \[
+    \varphi\otimes w \longmapsto \bigl(v\mapsto \varphi(v)w\bigr).
+    \]
+    This is in fact an isomorphism of \(L\)-modules.
+    \end{proposition}
+    
+    \begin{proof}
+    Let
+    \[
+    \Phi:V^*\otimes W \to \operatorname{Hom}_F(V,W)
+    \]
+    be defined by
+    \[
+    \Phi(\varphi\otimes w)(v)=\varphi(v)w.
+    \]
+    It is the usual canonical isomorphism of vector spaces when \(V\) is finite-dimensional.
+    We check that it is \(L\)-equivariant.
+    
+    For \(x\in L\), \(\varphi\in V^*\), \(w\in W\), and \(v\in V\), we have
+    \begin{align*}
+    \Phi\bigl(x\cdot (\varphi\otimes w)\bigr)(v)
+    &=\Phi\bigl((x\cdot \varphi)\otimes w+\varphi\otimes (x\cdot w)\bigr)(v) \\
+    &=(x\cdot \varphi)(v)\,w+\varphi(v)\,(x\cdot w) \\
+    &=-\varphi(x\cdot v)\,w+\varphi(v)\,(x\cdot w).
+    \end{align*}
+    On the other hand,
+    \begin{align*}
+    \bigl(x\cdot \Phi(\varphi\otimes w)\bigr)(v)
+    &=x\cdot \bigl(\Phi(\varphi\otimes w)(v)\bigr)-\Phi(\varphi\otimes w)(x\cdot v) \\
+    &=x\cdot (\varphi(v)w)-\varphi(x\cdot v)w \\
+    &=\varphi(v)(x\cdot w)-\varphi(x\cdot v)w.
+    \end{align*}
+    Thus
+    \[
+    \Phi\bigl(x\cdot (\varphi\otimes w)\bigr)=x\cdot \Phi(\varphi\otimes w),
+    \]
+    so \(\Phi\) is an \(L\)-module isomorphism.
+    \end{proof}
+    
+    \begin{remark}
+    Under the identification
+    \[
+    \operatorname{End}_F(V)=\operatorname{Hom}_F(V,V),
+    \]
+    the \(L\)-action is
+    \[
+    (x\cdot T)(v)=x\cdot T(v)-T(x\cdot v),
+    \qquad x\in L,\ T\in \operatorname{End}_F(V),\ v\in V.
+    \]
+    Thus \(L\) acts on \(\operatorname{End}_F(V)\) by commutator.
+    \end{remark}
+    
+    \begin{remark}
+    The natural pairing
+    \[
+    V^*\times V \to F,\qquad (\varphi,v)\mapsto \varphi(v),
+    \]
+    is \(L\)-invariant in the sense that
+    \[
+    (x\cdot \varphi)(v)+\varphi(x\cdot v)=0
+    \]
+    for all \(x\in L\), \(\varphi\in V^*\), and \(v\in V\).
+    \end{remark}
+
+\section{Schur's Lemma}
+
+\begin{lemma}[Schur's Lemma]
+    Let $L$ be a Lie algebra over a field $F$, and let $V,W$ be irreducible $L$-modules.
+    Suppose
+    \[
+    \varphi:V\to W
+    \]
+    is an $L$-module homomorphism. Then either $\varphi=0$, or $\varphi$ is an isomorphism.
+    \end{lemma}
+    
+    \begin{proof}
+    Since $\varphi$ is an $L$-module homomorphism, its kernel
+    \[
+    \ker\varphi=\{v\in V\mid \varphi(v)=0\}
+    \]
+    is a submodule of $V$, and its image
+    \[
+    \operatorname{Im}\varphi=\varphi(V)
+    \]
+    is a submodule of $W$.
+    
+    Because $V$ is irreducible, $\ker\varphi$ is either $0$ or $V$.
+    If $\ker\varphi=V$, then $\varphi=0$.
+    So if $\varphi\neq 0$, we must have $\ker\varphi=0$, hence $\varphi$ is injective.
+    
+    Likewise, since $W$ is irreducible and $\operatorname{Im}\varphi\neq 0$, we must have
+    \[
+    \operatorname{Im}\varphi=W.
+    \]
+    Thus $\varphi$ is surjective.
+    
+    Therefore, if $\varphi\neq 0$, then $\varphi$ is both injective and surjective, hence an isomorphism.
+    \end{proof}
+    
+    \begin{corollary}[Schur's Lemma, endomorphism form]
+    Let $V$ be an irreducible $L$-module. Then every nonzero element of
+    \[
+    \operatorname{End}_L(V)
+    \]
+    is invertible. In particular, $\operatorname{End}_L(V)$ is a division algebra over $F$.
+    \end{corollary}
+    
+    \begin{proof}
+    Apply Schur's Lemma with $W=V$. Any nonzero $L$-module endomorphism
+    \[
+    \varphi:V\to V
+    \]
+    must be an isomorphism, hence invertible.
+    Therefore $\operatorname{End}_L(V)$ is a division algebra.
+    \end{proof}
+    
+    \begin{corollary}
+    Assume moreover that $F$ is algebraically closed and $\dim_F V<\infty$.
+    If $V$ is an irreducible $L$-module, then every $L$-module endomorphism of $V$ is a scalar multiple of the identity:
+    \[
+    \operatorname{End}_L(V)=F\,\operatorname{id}_V.
+    \]
+    \end{corollary}
+    
+    \begin{proof}
+    Let $\varphi\in \operatorname{End}_L(V)$. Since $F$ is algebraically closed and $V$ is finite-dimensional, $\varphi$ has an eigenvalue $\lambda\in F$.
+    Then
+    \[
+    \psi:=\varphi-\lambda \operatorname{id}_V
+    \]
+    is an $L$-module endomorphism of $V$, and $\psi$ is not injective because $\lambda$ is an eigenvalue of $\varphi$.
+    By Schur's Lemma, a nonzero $L$-module endomorphism of an irreducible module must be an isomorphism, hence injective. Therefore $\psi=0$.
+    So
+    \[
+    \varphi=\lambda \operatorname{id}_V.
+    \]
+    This proves that every $L$-module endomorphism of $V$ is scalar.
+    \end{proof}
+    
+    \begin{remark}
+    The last corollary is the form most often used in representation theory.
+    It says that, over an algebraically closed field, an irreducible finite-dimensional module has only scalar $L$-equivariant endomorphisms.
+    \end{remark}
+
+\section{Casimir element}
+
+\begin{definition}
+    Let $L$ be a finite-dimensional Lie algebra over $F$, and let
+    $B(\cdot,\cdot)$ be a nondegenerate invariant symmetric bilinear form on $L$.
+    Choose a basis $x_1,\dots,x_n$ of $L$, and let $x^1,\dots,x^n$ be the
+    $B$-dual basis, so that
+    \[
+    B(x_i,x^j)=\delta_{ij}.
+    \]
+    The element
+    \[
+    \Omega_B=\sum_{i=1}^n x_i x^i \in U(L)
+    \]
+    is called the Casimir element associated with $B$.
+    \end{definition}
+
+\begin{remark}
+The definition is independent of the choice of basis. Indeed, $\Omega$ is the element corresponding to the identity map of $L$ under the natural identification
+\[
+L \otimes L \cong \operatorname{End}_F(L),\qquad
+x \otimes y \mapsto \bigl(z \mapsto (y,z)x\bigr).
+\]
+\end{remark}
+
+\begin{proposition}
+    Let $L$ be a finite-dimensional Lie algebra equipped with a nondegenerate invariant symmetric bilinear form $B$, and let
+    \[
+    \Omega_B=\sum_{i=1}^n x_i x^i
+    \]
+    be the associated Casimir element. If $\rho:L\to\mathfrak{gl}(V)$ is a representation of $L$, define
+    \[
+    C_V:=\sum_{i=1}^n \rho(x_i)\rho(x^i)\in \operatorname{End}_F(V).
+    \]
+    Then
+    \[
+    \rho(a)C_V=C_V\rho(a)
+    \qquad\text{for all } a\in L.
+    \]
+    \end{proposition}
+
+    \begin{proof}
+        For any $a\in L$, we compute
+        \[
+        [\rho(a),C_V]
+        =
+        \sum_{i=1}^n \bigl([\rho(a),\rho(x_i)]\rho(x^i)+\rho(x_i)[\rho(a),\rho(x^i)]\bigr).
+        \]
+        Since $\rho$ is a representation, this becomes
+        \[
+        [\rho(a),C_V]
+        =
+        \sum_{i=1}^n \bigl(\rho([a,x_i])\rho(x^i)+\rho(x_i)\rho([a,x^i])\bigr).
+        \]
+        
+        Write
+        \[
+        [a,x_i]=\sum_{j=1}^n c_{ji}x_j.
+        \]
+        We claim that
+        \[
+        [a,x^i]=-\sum_{j=1}^n c_{ij}x^j.
+        \]
+        Indeed, for every $k$,
+        \[
+        B([a,x^i],x_k)=-B(x^i,[a,x_k])
+        \]
+        by invariance and symmetry of $B$. Since
+        \[
+        [a,x_k]=\sum_{j=1}^n c_{jk}x_j,
+        \]
+        we get
+        \[
+        B([a,x^i],x_k)
+        =
+        -\sum_{j=1}^n c_{jk}B(x^i,x_j)
+        =
+        -c_{ik}.
+        \]
+        If
+        \[
+        [a,x^i]=\sum_{j=1}^n d_{ji}x^j,
+        \]
+        then
+        \[
+        d_{ki}=B([a,x^i],x_k)=-c_{ik},
+        \]
+        because $B(x^j,x_k)=\delta_{jk}$. This proves the claim.
+        
+        Therefore
+        \[
+        \sum_{i=1}^n \rho([a,x_i])\rho(x^i)
+        =
+        \sum_{i,j=1}^n c_{ji}\rho(x_j)\rho(x^i),
+        \]
+        while
+        \[
+        \sum_{i=1}^n \rho(x_i)\rho([a,x^i])
+        =
+        -\sum_{i,j=1}^n c_{ij}\rho(x_i)\rho(x^j).
+        \]
+        After relabeling indices in the first sum, these two sums cancel. Hence
+        \[
+        [\rho(a),C_V]=0.
+        \]
+        Equivalently,
+        \[
+        \rho(a)C_V=C_V\rho(a)
+        \qquad\text{for all } a\in L.
+        \]
+        \end{proof}
+
+
+
+
+
 
 \chapter{Homework}
 
@@ -3182,11 +4646,496 @@ Therefore $\mathfrak{o}_n$ is simple exactly when $n=3$ or $n\ge5$.
     Consequently, the solvable Lie algebra $\mathfrak{g}$ has no common eigenvector in the representation $V$, demonstrating that Lie's theorem does not hold in characteristic $p$.
     \end{proof}
 
+\section{Homework week 3}
 
+\begin{exercise}
+    Let $x,y \in \operatorname{End} V$ commute. Prove that
+    \[
+    (x+y)_s=x_s+y_s,
+    \qquad
+    (x+y)_n=x_n+y_n.
+    \]
+    Show by example that this can fail if $x,y$ fail to commute.
+    [Show first that $x,y$ semisimple (resp.\ nilpotent) implies $x+y$ semisimple (resp.\ nilpotent).]
+\end{exercise}
 
+\begin{lemma}
+    Let $a,b \in \operatorname{End}(V)$ commute. If both $a$ and $b$ are semisimple, then $a+b$ is semisimple.
+    \end{lemma}
+    
+    \begin{proof}
+    Since $a$ is semisimple,
+    \[
+    V=\bigoplus_{\lambda} V_\lambda(a).
+    \]
+    Because $ab=ba$, each eigenspace $V_\lambda(a)$ is stable under $b$. Since $b$ is semisimple, its restriction to each $V_\lambda(a)$ is again semisimple; hence each $V_\lambda(a)$ decomposes into eigenspaces of $b$. Thus there is a basis of $V$ consisting of common eigenvectors of $a$ and $b$. Relative to this basis, both $a$ and $b$ are diagonal, hence so is $a+b$. Therefore $a+b$ is semisimple.
+    \end{proof}
+    
+    \begin{lemma}
+    Let $a,b \in \operatorname{End}(V)$ commute. If both $a$ and $b$ are nilpotent, then $a+b$ is nilpotent.
+    \end{lemma}
+    
+    \begin{proof}
+    Choose $r,s \ge 1$ such that
+    \[
+    a^r=0,\qquad b^s=0.
+    \]
+    Since $ab=ba$, for any $N$ we have
+    \[
+    (a+b)^N=\sum_{k=0}^N \binom{N}{k} a^k b^{\,N-k}.
+    \]
+    Take $N=r+s-1$. Then for each $k$, either $k \ge r$ or $N-k \ge s$, so every term in the above sum is zero. Hence
+    \[
+    (a+b)^{r+s-1}=0,
+    \]
+    and therefore $a+b$ is nilpotent.
+    \end{proof}
 
+\begin{proof}
+    Write
+\[
+x=x_s+x_n,\qquad y=y_s+y_n
+\]
+for the Jordan decompositions of $x$ and $y$. Since $x$ and $y$ commute, and since each semisimple part and nilpotent part is given by a polynomial in the operator, it follows that
+\[
+x_s,\ x_n,\ y_s,\ y_n
+\]
+all commute with one another.
 
+Now $x_s$ and $y_s$ are commuting semisimple operators, hence $x_s+y_s$ is semisimple. Also $x_n$ and $y_n$ are commuting nilpotent operators, hence $x_n+y_n$ is nilpotent. Therefore
+\[
+x+y=(x_s+y_s)+(x_n+y_n)
+\]
+is a decomposition of $x+y$ into commuting semisimple and nilpotent parts. By uniqueness of Jordan decomposition,
+\[
+(x+y)_s=x_s+y_s,
+\qquad
+(x+y)_n=x_n+y_n.
+\]
 
+To see that this may fail without the hypothesis $xy=yx$, take
+\[
+x=
+\begin{pmatrix}
+1&0\\
+0&0
+\end{pmatrix},
+\qquad
+y=
+\begin{pmatrix}
+0&0\\
+1&1
+\end{pmatrix}.
+\]
+Then $x$ and $y$ are semisimple, but
+\[
+xy\neq yx,
+\]
+and
+\[
+x+y=
+\begin{pmatrix}
+1&0\\
+1&1
+\end{pmatrix}
+\]
+is not semisimple. Thus
+\[
+(x+y)_s\neq x_s+y_s.
+\]
+Since $x_n=y_n=0$ while $(x+y)_n\neq 0$, we also have
+\[
+(x+y)_n\neq x_n+y_n.
+\]
+\end{proof}
+
+\begin{exercise}
+    Let $L=\mathfrak{sl}(2,F)$. Compute the basis of $L$ dual to the standard basis, relative to the Killing form.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+    e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+    f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+    h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+    \]
+    the standard basis of \(L=\mathfrak{sl}(2,F)\). We compute the Killing form
+    \[
+    \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y))
+    \]
+    relative to the ordered basis \((h,e,f)\).
+    
+    Using
+    \[
+    [h,e]=2e,\qquad [h,f]=-2f,\qquad [e,f]=h,
+    \]
+    we get
+    \[
+    \operatorname{ad}(h)=
+    \begin{pmatrix}
+    0&0&0\\
+    0&2&0\\
+    0&0&-2
+    \end{pmatrix},
+    \qquad
+    \operatorname{ad}(e)=
+    \begin{pmatrix}
+    0&0&1\\
+    -2&0&0\\
+    0&0&0
+    \end{pmatrix},
+    \qquad
+    \operatorname{ad}(f)=
+    \begin{pmatrix}
+    0&-1&0\\
+    0&0&0\\
+    2&0&0
+    \end{pmatrix}.
+    \]
+    
+    Hence
+    \[
+    \kappa(h,h)=\operatorname{Tr}(\operatorname{ad}(h)^2)=8,
+    \]
+    \[
+    \kappa(e,f)=\operatorname{Tr}(\operatorname{ad}(e)\operatorname{ad}(f))=4,
+    \qquad
+    \kappa(f,e)=4,
+    \]
+    and
+    \[
+    \kappa(e,e)=\kappa(f,f)=\kappa(h,e)=\kappa(h,f)=0.
+    \]
+    
+    Thus the Gram matrix of \(\kappa\) relative to \((h,e,f)\) is
+    \[
+    \begin{pmatrix}
+    8&0&0\\
+    0&0&4\\
+    0&4&0
+    \end{pmatrix}.
+    \]
+    It follows at once that the dual basis \((h^\vee,e^\vee,f^\vee)\) is given by
+    \[
+    h^\vee=\frac18 h,\qquad e^\vee=\frac14 f,\qquad f^\vee=\frac14 e.
+    \]
+    
+    Therefore the basis of \(L\) dual to the standard basis with respect to the Killing form is
+    \[
+    \boxed{\frac18 h,\ \frac14 f,\ \frac14 e.}
+    \]
+    \end{proof}
+
+\begin{exercise}
+    Relative to the standard basis of $\mathfrak{sl}(3,F)$, compute the determinant of $\kappa$. Which primes divide it?
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+    e_{ij}\qquad (i\neq j)
+    \]
+    be the usual matrix units, and let
+    \[
+    h_1=e_{11}-e_{22},\qquad h_2=e_{22}-e_{33}.
+    \]
+    Take the standard basis of $\mathfrak{sl}(3,F)$ in the order
+    \[
+    e_{12},\,e_{13},\,e_{21},\,e_{23},\,e_{31},\,e_{32},\,h_1,\,h_2.
+    \]
+    We compute the Gram matrix of the Killing form
+    \[
+    \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y))
+    \]
+    relative to this basis.
+    
+    First consider the six root vectors. For $i\neq j$, one has
+    \[
+    [e_{ij},e_{ji}]=e_{ii}-e_{jj},
+    \]
+    and $\operatorname{ad}(e_{ij})\operatorname{ad}(e_{ji})$ preserves each of the root spaces. A direct check shows
+    \[
+    \kappa(e_{12},e_{21})=\kappa(e_{13},e_{31})=\kappa(e_{23},e_{32})=6,
+    \]
+    while all other pairings among the $e_{ij}$ vanish except for the symmetric ones. Hence the root-vector part of the Gram matrix is block diagonal with three blocks
+    \[
+    \begin{pmatrix}
+    0&6\\
+    6&0
+    \end{pmatrix},
+    \]
+    so its determinant is
+    \[
+    (-36)^3.
+    \]
+    
+    Next compute the Cartan part. Since
+    \[
+    [h,e_{ij}]=(\varepsilon_i-\varepsilon_j)(h)e_{ij},
+    \]
+    the operator $\operatorname{ad}(h)$ acts diagonally on the six root spaces and trivially on the Cartan subalgebra. Thus
+    \[
+    \kappa(h,h')=\sum_{\alpha}\alpha(h)\alpha(h'),
+    \]
+    the sum extending over the six roots. For
+    \[
+    h_1=e_{11}-e_{22},\qquad h_2=e_{22}-e_{33},
+    \]
+    this gives
+    \[
+    \kappa(h_1,h_1)=12,\qquad
+    \kappa(h_2,h_2)=12,\qquad
+    \kappa(h_1,h_2)=-6.
+    \]
+    Therefore the Cartan block is
+    \[
+    \begin{pmatrix}
+    12&-6\\
+    -6&12
+    \end{pmatrix},
+    \]
+    whose determinant is
+    \[
+    108.
+    \]
+    
+    Finally, each $h_r$ is orthogonal to each $e_{ij}$, since $\operatorname{ad}(h_r)$ preserves root spaces while $\operatorname{ad}(e_{ij})$ shifts weights, hence
+    \[
+    \operatorname{Tr}(\operatorname{ad}(h_r)\operatorname{ad}(e_{ij}))=0.
+    \]
+    So the full Gram matrix is block diagonal, and
+    \[
+    \det(\kappa)=(-36)^3\cdot 108=-2^8\,3^9.
+    \]
+    
+    Hence the primes dividing $\det(\kappa)$ are exactly
+    \[
+    2\quad\text{and}\quad 3.
+    \]
+    \end{proof}
+
+\begin{exercise}
+    Using the standard basis for $L=\mathfrak{sl}(2,F)$, write down the Casimir element of the adjoint representation of $L$. Do the same thing for the usual (3-dimensional) representation of $\mathfrak{sl}(3,F)$, first computing dual bases relative to the trace form.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+    e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+    f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+    h=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+    \]
+    be the standard basis of $L=\mathfrak{sl}(2,F)$.
+    
+    For the adjoint representation, use the Killing form
+    \[
+    \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y)).
+    \]
+    A routine calculation gives
+    \[
+    \kappa(e,f)=4,\qquad \kappa(h,h)=8,
+    \]
+    and all other pairings among $e,f,h$ are $0$. Hence the basis dual to
+    $(e,h,f)$ relative to $\kappa$ is
+    \[
+    \frac14 f,\qquad \frac18 h,\qquad \frac14 e.
+    \]
+    Therefore the Casimir element is
+    \[
+    \Omega_{\mathrm{ad}}
+    =\frac14\,ef+\frac18\,h^2+\frac14\,fe
+    =\frac18\,h^2+\frac14(ef+fe).
+    \]
+    If one lets this act in the adjoint representation, then it acts as the scalar
+    $1$ on $L$.
+    
+    Now consider the usual $3$-dimensional representation of $\mathfrak{sl}(3,F)$.
+    Take the standard basis
+    \[
+    e_{ij}\quad (i\neq j),\qquad
+    h_1=e_{11}-e_{22},\qquad
+    h_2=e_{22}-e_{33},
+    \]
+    and use the trace form
+    \[
+    (x,y)=\operatorname{Tr}(xy).
+    \]
+    Since
+    \[
+    \operatorname{Tr}(e_{ij}e_{kl})=\delta_{jk}\delta_{il},
+    \]
+    the elements dual to $e_{ij}$ are $e_{ji}$.
+    
+    For $h_1,h_2$ we have
+    \[
+    \operatorname{Tr}(h_1^2)=2,\qquad
+    \operatorname{Tr}(h_2^2)=2,\qquad
+    \operatorname{Tr}(h_1h_2)=-1.
+    \]
+    Thus the Gram matrix is
+    \[
+    \begin{pmatrix}
+    2&-1\\
+    -1&2
+    \end{pmatrix},
+    \]
+    whose inverse is
+    \[
+    \frac13
+    \begin{pmatrix}
+    2&1\\
+    1&2
+    \end{pmatrix}.
+    \]
+    Hence the dual basis elements are
+    \[
+    h_1^*=\frac23h_1+\frac13h_2,\qquad
+    h_2^*=\frac13h_1+\frac23h_2.
+    \]
+    
+    Therefore the Casimir element for the natural representation is
+    \[
+    \Omega_{\mathrm{nat}}
+    =\sum_{i\neq j} e_{ij}e_{ji}
+    +h_1h_1^*+h_2h_2^*,
+    \]
+    that is,
+    \[
+    \Omega_{\mathrm{nat}}
+    =\sum_{i\neq j} e_{ij}e_{ji}
+    +\frac23h_1^2+\frac13h_1h_2+\frac13h_2h_1+\frac23h_2^2.
+    \]
+    Since $h_1$ and $h_2$ commute, this may be written as
+    \[
+    \Omega_{\mathrm{nat}}
+    =\sum_{i\neq j} e_{ij}e_{ji}
+    +\frac23h_1^2+\frac23h_2^2+\frac23h_1h_2.
+    \]
+    
+    In the usual $3$-dimensional representation one computes
+    \[
+    \sum_{i\neq j} e_{ij}e_{ji}=2I_3,
+    \]
+    while
+    \[
+    \frac23h_1^2+\frac13h_1h_2+\frac13h_2h_1+\frac23h_2^2=\frac23 I_3.
+    \]
+    Hence
+    \[
+    \Omega_{\mathrm{nat}}=\frac83 I_3.
+    \]
+    So the Casimir operator for the natural module is the scalar
+    $\frac83$.
+    \end{proof}
+
+    \begin{exercise}\label{ex:w3.5}
+        Let $L$ be a simple Lie algebra. Let $\beta(x,y)$ and $\gamma(x,y)$ be two symmetric associative bilinear forms on $L$. If $\beta$ and $\gamma$ are nondegenerate, prove that $\beta$ and $\gamma$ are proportional. (Use Schur's Lemma.)
+        \end{exercise}
+        
+        \begin{proof}
+            Since $\beta$ is nondegenerate, for each $x\in L$ there exists a unique linear map
+            \[
+            T:L\to L
+            \]
+            such that
+            \[
+            \gamma(x,y)=\beta(Tx,y)
+            \qquad\text{for all }x,y\in L.
+            \]
+            We show that $T$ commutes with all $\operatorname{ad} a$.
+            
+            For $a,x,y\in L$, using associativity of $\gamma$ and then of $\beta$, we get
+            \[
+            \beta\bigl(T([a,x]),y\bigr)
+             =\gamma([a,x],y)
+             =\gamma(a,[x,y])
+             =\gamma(x,[y,a])
+             =\beta\bigl(Tx,[y,a]\bigr)
+             =\beta([a,Tx],y).
+            \]
+            Hence
+            \[
+            \beta\bigl(T([a,x])-[a,Tx],y\bigr)=0
+            \qquad\text{for all }y\in L.
+            \]
+            Since $\beta$ is nondegenerate,
+            \[
+            T([a,x])=[a,Tx]
+            \qquad\text{for all }a,x\in L.
+            \]
+            Thus $T$ is an $L$-module endomorphism of the adjoint module $L$.
+            
+            Now $L$ is simple, so its adjoint module is irreducible: indeed, any submodule is an ideal of $L$. By Schur's Lemma, $T=c\,\mathrm{id}_L$ for some $c\in F$. Therefore
+            \[
+            \gamma(x,y)=\beta(Tx,y)=\beta(cx,y)=c\,\beta(x,y)
+            \qquad\text{for all }x,y\in L.
+            \]
+            So $\beta$ and $\gamma$ are proportional.
+            \end{proof}
+
+        \begin{exercise}
+        It will be seen later on that $\mathfrak{sl}(n,F)$ is actually simple. Assuming this, and using \ref{ex:w3.5}, prove that the Killing form $\kappa$ on $\mathfrak{sl}(n,F)$ is related to the ordinary trace form by
+        \[
+        \kappa(x,y)=2n\,\operatorname{Tr}(xy).
+        \]
+        \end{exercise}
+
+        \begin{proof}
+            Let
+            \[
+            \beta(x,y)=\operatorname{Tr}(xy)
+            \qquad (x,y\in \mathfrak{sl}(n,F)).
+            \]
+            Since
+            \[
+            \operatorname{Tr}([a,x]y)=\operatorname{Tr}(a x y-x a y)
+            =\operatorname{Tr}(a x y-a y x)
+            =\operatorname{Tr}(a[x,y]),
+            \]
+            the form $\beta$ is associative. It is also symmetric. Moreover, $\beta$ is nondegenerate on $\mathfrak{sl}(n,F)$: if $x\in \mathfrak{sl}(n,F)$ satisfies $\operatorname{Tr}(xy)=0$ for all $y\in \mathfrak{sl}(n,F)$, then $x=0$.
+            
+            Assuming $\mathfrak{sl}(n,F)$ is simple, Exercise~\ref{ex:w3.5} shows that $\kappa$ and $\beta$ are proportional. Thus there exists $c\in F$ such that
+            \[
+            \kappa(x,y)=c\,\operatorname{Tr}(xy)
+            \qquad\text{for all }x,y\in \mathfrak{sl}(n,F).
+            \]
+            It remains to determine $c$.
+            
+            Take
+            \[
+            h=e_{11}-e_{22}.
+            \]
+            Then
+            \[
+            \operatorname{Tr}(h^2)=2.
+            \]
+            Also, $\operatorname{ad} h$ acts on the standard matrix units by
+            \[
+            [h,e_{ij}]=(\delta_{1i}-\delta_{2i}-\delta_{1j}+\delta_{2j})e_{ij}.
+            \]
+            Hence the eigenvalues of $\operatorname{ad} h$ are:
+            \[
+            2 \text{ on } e_{12}, \qquad -2 \text{ on } e_{21},
+            \]
+            \[
+            1 \text{ on } e_{1j},e_{j2}\ (j\ge 3), \qquad -1 \text{ on } e_{2j},e_{j1}\ (j\ge 3),
+            \]
+            and \(0\) on all remaining basis elements of \(\mathfrak{sl}(n,F)\). Therefore
+            \[
+            \kappa(h,h)=\operatorname{Tr}\bigl((\operatorname{ad} h)^2\bigr)
+            =2^2+(-2)^2+4(n-2)\cdot 1^2=4n.
+            \]
+            Comparing with
+            \[
+            \kappa(h,h)=c\,\operatorname{Tr}(h^2)=2c,
+            \]
+            we get \(2c=4n\), so \(c=2n\). Thus
+            \[
+            \kappa(x,y)=2n\,\operatorname{Tr}(xy)
+            \qquad\text{for all }x,y\in \mathfrak{sl}(n,F).
+            \]
+            \end{proof}
 
 
 
