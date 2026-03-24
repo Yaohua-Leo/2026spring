@@ -920,13 +920,13 @@ k & k \arrow[l, "1"', shift right] \arrow[l, "0", shift left]
         b:C\to H,
         \]
         because for any arrow $\alpha:i\to j$,
-        \[
+        \begin{align*}
         \chi_\alpha\bigl(b_i(n_i+f_i(M_i))\bigr)
-        =\chi_\alpha(g_i(n_i))
-        =g_j(\psi_\alpha(n_i))
-        =b_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)
-        =b_j\bigl(\overline{\psi}_\alpha(n_i+f_i(M_i))\bigr).
-        \]
+        &=\chi_\alpha(g_i(n_i))\\
+        &=g_j(\psi_\alpha(n_i))\\
+        &=b_j\bigl(\psi_\alpha(n_i)+f_j(M_j)\bigr)\\
+        &=b_j\bigl(\overline{\psi}_\alpha(n_i+f_i(M_i))\bigr).
+        \end{align*}
         So
         \[
         b\circ \pi=g.
@@ -1157,6 +1157,103 @@ and define the projections $\pi_1(a, b) = a$ and $\pi_2(a, b) = b$.
     Therefore $\operatorname{im}(h') = \ker(\pi_2)$, and the top row is exact.
     \end{proof}
 \end{enumerate}
+
+%=============================================================================
+% Problem 9
+%=============================================================================
+\item Let $f \colon L \to M$ be a morphism. Then a \emph{cokernel} of $f$ is a morphism $g \colon M \to N$ such that $g f = 0$, and given any morphism $v \colon M \to X$ such that $v f = 0$, there is a unique morphism $u \colon N \to X$ such that $u g = v$:
+\[
+\begin{tikzcd}
+L \arrow[r, "f"] & M \arrow[r, "g"] \arrow[d, "v"'] & N \arrow[dl, dashed, "\exists\, u"] \\
+& X
+\end{tikzcd}
+\]
+Prove that the two definitions of cokernel agree.
+
+%=============================================================================
+% Problem 10
+%=============================================================================
+\item Let $Q$ be a quiver and let
+\[
+L \xrightarrow{\;f\;} M \xrightarrow{\;g\;} N \longrightarrow 0
+\]
+be a sequence in $\operatorname{Rep} Q$. Show that this sequence is exact if and only if for every representation $X \in \operatorname{Rep} Q$, the sequence
+\[
+0 \longrightarrow \operatorname{Hom}(N, X) \xrightarrow{\;g^\ast\;} \operatorname{Hom}(M, X) \xrightarrow{\;f^\ast\;} \operatorname{Hom}(L, X)
+\]
+is exact, where $g^\ast(h) = h \circ g$ and $f^\ast(k) = k \circ f$.
+
+%=============================================================================
+% Problem 11
+%=============================================================================
+\item Let $g \colon M \to N$ be a surjective morphism between representations of $Q$, and let $P(i)$ be the projective representation at vertex~$i$. Show that the map
+\[
+g_\ast \colon \operatorname{Hom}(P(i), M) \to \operatorname{Hom}(P(i), N),\qquad \varphi \longmapsto g \circ \varphi
+\]
+is surjective.
+
+%=============================================================================
+% Problem 12
+%=============================================================================
+\item Let $g \colon L \to M$ be an injective morphism between representations of $Q$, and let $I(i)$ be the injective representation at vertex~$i$. Show that the map
+\[
+g^\ast \colon \operatorname{Hom}(M, I(i)) \to \operatorname{Hom}(L, I(i)),\qquad \psi \longmapsto \psi \circ g
+\]
+is surjective.
+
+%=============================================================================
+% Problem 13
+%=============================================================================
+\item Let $Q$ be the quiver
+\[
+    \begin{tikzcd}
+        1 \arrow[rr] \arrow[rd] &              & 3 \arrow[r] & 4 \\
+                                & 2 \arrow[ru] &             &  
+        \end{tikzcd}
+\]
+Prove that
+\[
+P(1)\simeq
+\begin{tikzcd}[ampersand replacement=\&, column sep=large, row sep=large]
+k \arrow[rr, "{\begin{bmatrix}x_1\\x_2\end{bmatrix}}"] \arrow[dr, "z"'] \& \& k^2 \arrow[r, "{\begin{bmatrix}a&b\\ c&d\end{bmatrix}}"] \& k^2 \\
+\& k \arrow[ur, "{\begin{bmatrix}y_1\\y_2\end{bmatrix}}"'] \&
+\end{tikzcd}
+\]
+if and only if all four maps have maximal rank, that is,
+\[
+ad-bc\neq 0,\qquad (x_1,x_2)\neq (0,0),\qquad (y_1,y_2)\neq (0,0),\qquad z\neq 0
+\]
+and the vectors
+\[
+\begin{bmatrix}a&b\\ c&d\end{bmatrix}
+\begin{bmatrix}x_1\\x_2\end{bmatrix}
+\qquad\text{and}\qquad
+\begin{bmatrix}a&b\\ c&d\end{bmatrix}
+\begin{bmatrix}y_1\\y_2\end{bmatrix}
+\]
+are linearly independent.
+
+%=============================================================================
+% Problem 14
+%=============================================================================
+\item Compute the indecomposable projective (resp.\ injective) representations $P(i)$ (resp.\ $I(i)$) for the following quivers:
+\[
+Q_1\colon\quad
+\begin{tikzcd}
+    1 & 2 \arrow[l, shift left] \arrow[l, shift right] & 3 \arrow[l, shift right] \arrow[l, shift left]
+    \end{tikzcd}
+\qquad\qquad
+Q_2\colon\quad
+\begin{tikzcd}
+    1 \arrow[r] \arrow[rr, bend left] & 2 \arrow[r] \arrow[d] & 3 \arrow[ld] \\
+                                      & 4                     &             
+    \end{tikzcd}
+\]
+
+%=============================================================================
+% Problem 15
+%=============================================================================
+\item Compute a projective resolution of each simple representation $S(i)$ for the quivers $Q_1$ and $Q_2$ from Problem~14.
 
 \end{enumerate}
 \end{document}

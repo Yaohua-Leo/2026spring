@@ -3407,31 +3407,360 @@ Obviously, $S(i)$ are irreducible.
 \end{proof}
 
 \begin{proposition}
-$ i \in Q_0 $ is a sink if and only if $ P(i)=S(i) $ is simple; $ i \in Q_0 $ is a source if and only if $ I(i)=S(i) $ is simple.
-\end{proposition}
+    A vertex \(i \in Q_0\) is a sink if and only if \(P(i)=S(i)\) is simple; a vertex
+    \(i \in Q_0\) is a source if and only if \(I(i)=S(i)\) is simple.
+    \end{proposition}
+    
+    \begin{proof}
+    We prove the two statements separately.
+    
+    First, recall that for the projective representation \(P(i)\), the vector space
+    \(P(i)_j\) has as a basis the set of all paths from \(i\) to \(j\). In particular,
+    \(P(i)_i\) is one-dimensional, with basis given by the trivial path \(e_i\).
+    
+    We first show that \(i\) is a sink if and only if \(P(i)=S(i)\).
+    
+    Assume that \(i\) is a sink. Then there is no arrow starting at \(i\). Hence the only
+    path starting at \(i\) is the trivial path \(e_i\). Therefore
+    \[
+    P(i)_i \cong k,
+    \qquad
+    P(i)_j=0 \quad \text{for all } j\neq i.
+    \]
+    Thus \(P(i)\) is concentrated at the single vertex \(i\), where it is one-dimensional,
+    and all arrow maps are zero. Hence
+    \[
+    P(i)\cong S(i).
+    \]
+    Since \(S(i)\) is simple, it follows that \(P(i)=S(i)\) is simple.
+    
+    Conversely, assume that \(P(i)=S(i)\) is simple. Then in particular
+    \[
+    P(i)_j=0 \qquad \text{for all } j\neq i.
+    \]
+    If \(i\) were not a sink, there would exist an arrow
+    \[
+    \alpha:i\to j
+    \]
+    for some vertex \(j\neq i\). But then \(\alpha\) is a path from \(i\) to \(j\), so it
+    gives a basis element of \(P(i)_j\). Hence \(P(i)_j\neq 0\), a contradiction.
+    Therefore \(i\) must be a sink.
+    
+    Now consider the injective representation \(I(i)\). By definition, \(I(i)_j\) has as a
+    basis the set of all paths from \(j\) to \(i\). In particular, \(I(i)_i\) is
+    one-dimensional, with basis given by the trivial path \(e_i\).
+    
+    We show that \(i\) is a source if and only if \(I(i)=S(i)\).
+    
+    Assume that \(i\) is a source. Then there is no arrow ending at \(i\). Hence the only
+    path ending at \(i\) is the trivial path \(e_i\). Therefore
+    \[
+    I(i)_i \cong k,
+    \qquad
+    I(i)_j=0 \quad \text{for all } j\neq i.
+    \]
+    Thus \(I(i)\) is concentrated at the single vertex \(i\), where it is one-dimensional,
+    and all arrow maps are zero. Hence
+    \[
+    I(i)\cong S(i).
+    \]
+    So \(I(i)=S(i)\) is simple.
+    
+    Conversely, assume that \(I(i)=S(i)\) is simple. Then
+    \[
+    I(i)_j=0 \qquad \text{for all } j\neq i.
+    \]
+    If \(i\) were not a source, there would exist an arrow
+    \[
+    \alpha:j\to i
+    \]
+    for some vertex \(j\neq i\). But then \(\alpha\) is a path from \(j\) to \(i\), so it
+    gives a basis element of \(I(i)_j\). Hence \(I(i)_j\neq 0\), a contradiction.
+    Therefore \(i\) must be a source.
+    
+    This proves the proposition.
+    \end{proof}
 
 \begin{proposition}\leavevmode
     \begin{enumerate}
-\item Let $ P $ and $ P' $ be representations of $ Q $, $ P,P' $ are both projectives if and only if $ P \oplus P' $ is projective.     
-\item Let $ I $ and $ I' $ be representations of $ Q $, $ I,I' $ are both injective if and only if $ I \oplus I' $ is injective. 
+        \item[(1)] Let $P$ and $P'$ be representations of $Q$. Then
+        \[
+            P \oplus P' \text{ is projective }
+            \Longleftrightarrow
+            P \text{ and } P' \text{ are projective.}
+        \]
+
+        \item[(2)] Let $I$ and $I'$ be representations of $Q$. Then
+        \[
+            I \oplus I' \text{ is injective }
+            \Longleftrightarrow
+            I \text{ and } I' \text{ are injective.}
+        \]
     \end{enumerate}
 \end{proposition}
 
-\begin{proof} 
-sorry
+\begin{proof}
+We prove both statements.
+
+\medskip
+
+\noindent\textbf{(1) Projective case.}
+
+\smallskip
+
+\noindent
+$(\Rightarrow)$ Assume that $P \oplus P'$ is projective. We show that $P$ and $P'$ are projective.
+
+Let $g:M \to N$ be a surjective morphism in $\operatorname{rep} Q$, and let
+$f:P \to N$ be any morphism. Let
+\[
+pr_1:P \oplus P' \to P
+\qquad\text{and}\qquad
+i_1:P \to P \oplus P'
+\]
+be the canonical projection and injection, respectively. Since $P \oplus P'$ is projective,
+there exists a morphism
+\[
+h:P \oplus P' \to M
+\]
+such that
+\[
+g \circ h = f \circ pr_1.
+\]
+Composing with $i_1$, we obtain
+\[
+g \circ h \circ i_1
+=
+f \circ pr_1 \circ i_1
+=
+f \circ 1_P
+=
+f.
+\]
+Thus $h' := h \circ i_1 : P \to M$ satisfies $g \circ h' = f$, so $P$ is projective.
+By symmetry, $P'$ is also projective.
+
+\begin{center}
+    \begin{tikzcd}[row sep=large]
+        & P\oplus P' \arrow[d, "pr_1"', shift right] \arrow[ldd, "h"']     &   \\
+        & P \arrow[d, "f"] \arrow[u, "i_1"', shift right] \arrow[ld, "h'"] &   \\
+M \arrow[r, "g"'] & N \arrow[r]                                                      & 0
+\end{tikzcd}
+\end{center}
+
+\smallskip
+
+\noindent
+$(\Leftarrow)$ Assume that both $P$ and $P'$ are projective. We show that $P \oplus P'$ is projective.
+
+Let $g:M \to N$ be a surjective morphism in $\operatorname{rep} Q$, and let
+\[
+f:P \oplus P' \to N
+\]
+be any morphism. Let
+\[
+i_1:P \to P \oplus P',
+\qquad
+i_2:P' \to P \oplus P'
+\]
+be the canonical injections. Since $P$ is projective, there exists a morphism
+\[
+h_1:P \to M
+\]
+such that
+\[
+g \circ h_1 = f \circ i_1.
+\]
+Similarly, since $P'$ is projective, there exists a morphism
+\[
+h_2:P' \to M
+\]
+such that
+\[
+g \circ h_2 = f \circ i_2.
+\]
+Define
+\[
+h=(h_1,h_2):P \oplus P' \to M
+\]
+by
+\[
+h(p,p')=h_1(p)+h_2(p').
+\]
+Then for every $(p,p') \in P \oplus P'$,
+\[
+g \circ h(p,p')
+=
+g(h_1(p))+g(h_2(p'))
+=
+f(i_1(p))+f(i_2(p'))
+=
+f(p,p').
+\]
+Hence $g \circ h=f$, and therefore $P \oplus P'$ is projective.
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+P \arrow[rd, "h_1", dashed] \arrow[d, "i_1"'] & & P' \arrow[ld, "h_2"', dashed] \arrow[d, "i_2"] \\
+P\oplus P' \arrow[r, "h"', dashed] \arrow[rd, "f"'] & M \arrow[d, "g"] & P\oplus P' \arrow[l, "h", dashed] \arrow[ld, "f"] \\
+ & N \arrow[d] \\
+  & 0
+\end{tikzcd}
+\end{center}
+
+\medskip
+
+\noindent\textbf{(2) Injective case.}
+
+\smallskip
+
+\noindent
+$(\Rightarrow)$ Assume that $I \oplus I'$ is injective. We show that $I$ and $I'$ are injective.
+
+Let $f:M \to N$ be an injective morphism in $\operatorname{rep} Q$, and let
+$g:M \to I$ be any morphism. Let
+\[
+i_1:I \to I \oplus I'
+\qquad\text{and}\qquad
+pr_1:I \oplus I' \to I
+\]
+be the canonical injection and projection, respectively. Since $I \oplus I'$ is injective,
+there exists a morphism
+\[
+h:N \to I \oplus I'
+\]
+such that
+\[
+h \circ f = i_1 \circ g.
+\]
+Composing with $pr_1$, we obtain
+\[
+pr_1 \circ h \circ f
+=
+pr_1 \circ i_1 \circ g
+=
+1_I \circ g
+=
+g.
+\]
+Thus $h' := pr_1 \circ h : N \to I$ satisfies $h' \circ f = g$, so $I$ is injective.
+By symmetry, $I'$ is also injective.
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+0 \arrow[r] & M \arrow[r, "f"] \arrow[d, "g"'] & N \arrow[ld, "h"', dashed] \arrow[ldd, "h'"', dashed] \\
+ & I\oplus I' \arrow[d, "pr_1"', shift right] & \\
+ & I \arrow[u, "i_1"', shift right] &
+\end{tikzcd}
+\end{center}
+
+\smallskip
+
+\noindent
+$(\Leftarrow)$ Assume that both $I$ and $I'$ are injective. We show that $I \oplus I'$ is injective.
+
+Let $f:M \to N$ be an injective morphism in $\operatorname{rep} Q$, and let
+\[
+g:M \to I \oplus I'
+\]
+be any morphism. Let
+\[
+pr_1:I \oplus I' \to I,
+\qquad
+pr_2:I \oplus I' \to I'
+\]
+be the canonical projections, and define
+\[
+g_1=pr_1 \circ g:M \to I,
+\qquad
+g_2=pr_2 \circ g:M \to I'.
+\]
+Since $I$ is injective, there exists a morphism
+\[
+h_1:N \to I
+\]
+such that
+\[
+h_1 \circ f = g_1.
+\]
+Similarly, since $I'$ is injective, there exists a morphism
+\[
+h_2:N \to I'
+\]
+such that
+\[
+h_2 \circ f = g_2.
+\]
+Define
+\[
+h=\binom{h_1}{h_2}:N \to I \oplus I'
+\]
+by
+\[
+h(n)=(h_1(n),h_2(n)).
+\]
+Then for every $m \in M$,
+\[
+h \circ f(m)
+=
+\bigl(h_1(f(m)),h_2(f(m))\bigr)
+=
+\bigl(g_1(m),g_2(m)\bigr)
+=
+g(m).
+\]
+Hence $h \circ f=g$, and therefore $I \oplus I'$ is injective.
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+ & 0 \arrow[d] & \\
+ & M \arrow[ld, "g"'] \arrow[d, "f"'] \arrow[rd, "g"] & \\
+I\oplus I' \arrow[d, "pr_1"'] & N \arrow[l, "h", dashed] \arrow[ld, "h_1"', dashed] \arrow[r, "h"', dashed] \arrow[rd, "h_2", dashed] & I\oplus I' \arrow[d, "pr_2"] \\
+I & & I'
+\end{tikzcd}
+\end{center}
 \end{proof}
 
 \begin{proposition}
-$ S(i) $, $ P(i) $, $ I(i) $ are all indecomposable representations of $ Q $.    
+    The representations $S(i)$, $P(i)$, and $I(i)$ are indecomposable.
 \end{proposition}
 
-\begin{proof} 
-sorry
+\begin{proof}
+    For $S(i)$ this follows directly from the fact that $S(i)$ is simple. Let us prove
+    the result for the projective representation
+    \[
+        P(i)=\bigl(P(i)_j,\varphi_\alpha\bigr)_{j\in Q_0,\ \alpha\in Q_1}.
+    \]
+    Since $Q$ has no oriented cycles, we have $P(i)_i=k$. Suppose that
+    \[
+        P(i)=M\oplus N
+    \]
+    for some $M,N\in \operatorname{rep}Q$. Then we may suppose without loss of
+    generality that $P(i)_i=M_i$ and $N_i=0$. Let $\ell$ be a vertex of $Q$ such that
+    $N_\ell\neq 0$. Now, $P(i)_\ell$ has a basis consisting of the paths from $i$ to
+    $\ell$ in $Q$. Let
+    \[
+        c=(i\mid \beta_1,\ldots,\beta_s\mid \ell)
+    \]
+    be such a path.
+
+    Let
+    \[
+        \varphi_c=\varphi_{\beta_s}\cdots \varphi_{\beta_1}
+    \]
+    denote the composition of the linear maps of the representation $P(i)$ along the
+    path $c$. Then, since $P(i)$ is the direct sum of $M$ and $N$, the map
+    \[
+        \varphi_c:M_i\oplus 0 \longrightarrow M_\ell\oplus N_\ell
+    \]
+    sends the unique basis element $e_i$ of $M_i$ to an element $\varphi_c(e_i)$ of
+    $M_\ell$. But we know that $\varphi_c(e_i)=c$; thus every basis
+    element $c$ of $P(i)_\ell$ lies in $M_\ell$, a contradiction.
+
+    The proof for $I(i)$ is similar.
 \end{proof}
 
-\begin{theorem} 
 
-\end{theorem}
 
 
 
