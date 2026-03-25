@@ -1170,6 +1170,157 @@ L \arrow[r, "f"] & M \arrow[r, "g"] \arrow[d, "v"'] & N \arrow[dl, dashed, "\exi
 \]
 Prove that the two definitions of cokernel agree.
 
+\begin{proof}
+    Let
+    \[
+    f=(f_i)\colon L=(L_i,\varphi_\alpha)\to M=(M_i,\psi_\alpha)
+    \]
+    be a morphism of representations.
+    
+    We first show that the pointwise cokernel satisfies the universal property. For each vertex $i\in Q_0$, set
+    \[
+    H_i:=M_i/f_i(L_i),
+    \]
+    and let
+    \[
+    \pi_i\colon M_i\to H_i
+    \]
+    be the canonical quotient map. For an arrow $\alpha\colon i\to j$, define
+    \[
+    \bar{\psi}_\alpha\colon H_i\to H_j
+    \]
+    by
+    \[
+    \bar{\psi}_\alpha\bigl(m_i+f_i(L_i)\bigr):=\psi_\alpha(m_i)+f_j(L_j).
+    \]
+    This is well defined because $f$ is a morphism, so
+    \[
+    \psi_\alpha\bigl(f_i(L_i)\bigr)=f_j\bigl(\varphi_\alpha(L_i)\bigr)\subseteq f_j(L_j).
+    \]
+    Hence
+    \[
+    H=(H_i,\bar{\psi}_\alpha)
+    \]
+    is a representation, and $\pi=(\pi_i)\colon M\to H$ is a morphism.
+    
+    Moreover,
+    \[
+    (\pi\circ f)_i=\pi_i\circ f_i=0
+    \]
+    for every vertex $i$, since $f_i(L_i)\subseteq \ker \pi_i$. Thus
+    \[
+    \pi\circ f=0.
+    \]
+    
+    Now let $v=(v_i)\colon M\to X=(X_i,\eta_\alpha)$ be a morphism such that
+    \[
+    v\circ f=0.
+    \]
+    Then for every vertex $i$ we have
+    \[
+    v_i\circ f_i=0,
+    \]
+    so $v_i$ vanishes on $f_i(L_i)$. By the universal property of the quotient vector space $H_i=M_i/f_i(L_i)$, there exists a unique linear map
+    \[
+    u_i\colon H_i\to X_i
+    \]
+    such that
+    \[
+    u_i\circ \pi_i=v_i.
+    \]
+    We claim that the family $(u_i)$ defines a morphism of representations
+    \[
+    u\colon H\to X.
+    \]
+    Indeed, let $\alpha\colon i\to j$ be an arrow. Then
+    \[
+    \eta_\alpha\circ u_i\circ \pi_i
+    =
+    \eta_\alpha\circ v_i
+    =
+    v_j\circ \psi_\alpha
+    =
+    u_j\circ \pi_j\circ \psi_\alpha
+    =
+    u_j\circ \bar{\psi}_\alpha\circ \pi_i.
+    \]
+    Since $\pi_i$ is surjective, it follows that
+    \[
+    \eta_\alpha\circ u_i=u_j\circ \bar{\psi}_\alpha.
+    \]
+    Therefore $u\colon H\to X$ is a morphism, and by construction
+    \[
+    u\circ \pi=v.
+    \]
+    
+    To prove uniqueness, suppose $u'\colon H\to X$ is another morphism such that
+    \[
+    u'\circ \pi=v.
+    \]
+    Then for every vertex $i$,
+    \[
+    u'_i\circ \pi_i=v_i=u_i\circ \pi_i.
+    \]
+    Since $\pi_i$ is surjective, we get $u'_i=u_i$. Hence $u'=u$. Thus $\pi\colon M\to H$ satisfies the universal property of the cokernel of $f$.
+    
+    Next, suppose that
+    \[
+    g\colon M\to N
+    \]
+    is any cokernel of $f$ in the sense of the universal property. Since $\pi\circ f=0$, the universal property of $g$ yields a unique morphism
+    \[
+    a\colon N\to H
+    \]
+    such that
+    \[
+    a\circ g=\pi.
+    \]
+    Similarly, since $g\circ f=0$, the universal property of $\pi$ yields a unique morphism
+    \[
+    b\colon H\to N
+    \]
+    such that
+    \[
+    b\circ \pi=g.
+    \]
+    
+    We now show that $a$ and $b$ are inverse isomorphisms. First,
+    \[
+    (a\circ b)\circ \pi
+    =
+    a\circ (b\circ \pi)
+    =
+    a\circ g
+    =
+    \pi
+    =
+    \operatorname{id}_H\circ \pi.
+    \]
+    Both $a\circ b$ and $\operatorname{id}_H$ are morphisms $H\to H$ whose composition with $\pi$ is equal to $\pi$. By the universal property of $\pi$, such a morphism is unique. Therefore
+    \[
+    a\circ b=\operatorname{id}_H.
+    \]
+    
+    Similarly,
+    \[
+    (b\circ a)\circ g
+    =
+    b\circ (a\circ g)
+    =
+    b\circ \pi
+    =
+    g
+    =
+    \operatorname{id}_N\circ g.
+    \]
+    Both $b\circ a$ and $\operatorname{id}_N$ are morphisms $N\to N$ whose composition with $g$ is equal to $g$. By the universal property of $g$, such a morphism is unique. Hence
+    \[
+    b\circ a=\operatorname{id}_N.
+    \]
+    
+    Therefore $a$ and $b$ are inverse isomorphisms, so $N\cong H$. This proves that any cokernel in the universal-property sense is isomorphic to the pointwise cokernel. Hence the two definitions agree.
+    \end{proof}
+
 %=============================================================================
 % Problem 10
 %=============================================================================
@@ -1183,6 +1334,157 @@ be a sequence in $\operatorname{Rep} Q$. Show that this sequence is exact if and
 \]
 is exact, where $g^\ast(h) = h \circ g$ and $f^\ast(k) = k \circ f$.
 
+\begin{proof}
+    $(\Rightarrow)$ Assume that
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    is exact. Let $X \in \operatorname{Rep}Q$ be arbitrary. We show that
+    \[
+    0 \longrightarrow \operatorname{Hom}(N,X)
+    \xrightarrow{\,g^\ast\,}
+    \operatorname{Hom}(M,X)
+    \xrightarrow{\,f^\ast\,}
+    \operatorname{Hom}(L,X)
+    \]
+    is exact.
+    
+    First, $g^\ast$ is injective. Indeed, if $h,h' \in \operatorname{Hom}(N,X)$ satisfy
+    \[
+    g^\ast(h)=g^\ast(h'),
+    \]
+    then
+    \[
+    h\circ g=h'\circ g.
+    \]
+    Since $g$ is surjective, it follows that $h=h'$.
+    
+    Next, for any $h \in \operatorname{Hom}(N,X)$,
+    \[
+    f^\ast(g^\ast(h))=(h\circ g)\circ f=h\circ(g\circ f)=0,
+    \]
+    because $g\circ f=0$. Hence
+    \[
+    \operatorname{im} g^\ast \subseteq \ker f^\ast.
+    \]
+    
+    Conversely, let $k \in \operatorname{Hom}(M,X)$ satisfy
+    \[
+    f^\ast(k)=k\circ f=0.
+    \]
+    Since the sequence
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    is exact, the morphism $g$ is a cokernel of $f$. Therefore, by the universal
+    property of the cokernel, there exists a unique morphism
+    \[
+    u:N\to X
+    \]
+    such that
+    \[
+    u\circ g=k.
+    \]
+    Thus $k=g^\ast(u)$, and so
+    \[
+    \ker f^\ast \subseteq \operatorname{im} g^\ast.
+    \]
+    Therefore
+    \[
+    \ker f^\ast=\operatorname{im} g^\ast,
+    \]
+    and the induced sequence is exact.
+    
+    $(\Leftarrow)$ Assume that for every $X \in \operatorname{Rep}Q$, the sequence
+    \[
+    0 \longrightarrow \operatorname{Hom}(N,X)
+    \xrightarrow{\,g^\ast\,}
+    \operatorname{Hom}(M,X)
+    \xrightarrow{\,f^\ast\,}
+    \operatorname{Hom}(L,X)
+    \]
+    is exact. We show that
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    is exact.
+    
+    First, we prove that $g\circ f=0$. Take $X=N$. Since
+    \[
+    f^\ast\circ g^\ast=0,
+    \]
+    evaluating at $\operatorname{id}_N \in \operatorname{Hom}(N,N)$ gives
+    \[
+    0=f^\ast(g^\ast(\operatorname{id}_N))
+    =\operatorname{id}_N\circ g\circ f
+    =g\circ f.
+    \]
+    
+    Next, we show that $g$ is surjective. Let
+    \[
+    \pi:N\to \operatorname{coker} g
+    \]
+    be the cokernel morphism of $g$. Since $\pi\circ g=0$, we have
+    \[
+    g^\ast(\pi)=\pi\circ g=0.
+    \]
+    By exactness, $g^\ast$ is injective, hence $\pi=0$. Therefore
+    \[
+    \operatorname{coker} g=0,
+    \]
+    so $g$ is surjective.
+    
+    Finally, we show that $\ker g=\operatorname{im} f$. Since $g\circ f=0$, we have
+    \[
+    \operatorname{im} f \subseteq \ker g.
+    \]
+    For the reverse inclusion, let
+    \[
+    \gamma:M\to \operatorname{coker} f
+    \]
+    be the cokernel morphism of $f$. Since $\gamma\circ f=0$, we have
+    \[
+    f^\ast(\gamma)=0.
+    \]
+    By exactness of
+    \[
+    0 \longrightarrow \operatorname{Hom}(N,\operatorname{coker}f)
+    \xrightarrow{\,g^\ast\,}
+    \operatorname{Hom}(M,\operatorname{coker}f)
+    \xrightarrow{\,f^\ast\,}
+    \operatorname{Hom}(L,\operatorname{coker}f),
+    \]
+    it follows that $\gamma \in \operatorname{im} g^\ast$. Hence there exists a morphism
+    \[
+    u:N\to \operatorname{coker} f
+    \]
+    such that
+    \[
+    \gamma=u\circ g.
+    \]
+    Therefore
+    \[
+    \ker g \subseteq \ker \gamma.
+    \]
+    Since $\gamma$ is the cokernel morphism of $f$, we have
+    \[
+    \ker \gamma=\operatorname{im} f.
+    \]
+    Thus
+    \[
+    \ker g \subseteq \operatorname{im} f.
+    \]
+    Combining this with the reverse inclusion, we get
+    \[
+    \ker g=\operatorname{im} f.
+    \]
+    Hence
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    is exact.
+    \end{proof}
+
 %=============================================================================
 % Problem 11
 %=============================================================================
@@ -1192,6 +1494,58 @@ g_\ast \colon \operatorname{Hom}(P(i), M) \to \operatorname{Hom}(P(i), N),\qquad
 \]
 is surjective.
 
+\begin{proof}
+    Let
+    \[
+    g_\ast \colon \operatorname{Hom}(P(i),M)\longrightarrow \operatorname{Hom}(P(i),N),
+    \qquad
+    \varphi \longmapsto g\circ \varphi .
+    \]
+    We must show that \(g_\ast\) is surjective.
+    
+    Recall that for every representation \(X\in \operatorname{Rep}Q\), there is a natural isomorphism
+    \[
+    \Phi_X \colon \operatorname{Hom}(P(i),X)\xrightarrow{\;\sim\;} X_i,
+    \qquad
+    f\longmapsto f_i(e_i),
+    \]
+    where \(e_i\) denotes the trivial path at the vertex \(i\).
+    
+    We claim that the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    \operatorname{Hom}(P(i),M) \arrow[r, "\Phi_M", "\sim"'] \arrow[d, "g_\ast"'] 
+    & M_i \arrow[d, "g_i"] \\
+    \operatorname{Hom}(P(i),N) \arrow[r, "\Phi_N", "\sim"'] 
+    & N_i
+    \end{tikzcd}
+    \]
+    Indeed, for any \(f\in \operatorname{Hom}(P(i),M)\), we have
+    \[
+    \Phi_N\bigl(g_\ast(f)\bigr)
+    =
+    \Phi_N(g\circ f)
+    =
+    (g\circ f)_i(e_i)
+    =
+    g_i\bigl(f_i(e_i)\bigr)
+    =
+    g_i\bigl(\Phi_M(f)\bigr).
+    \]
+    Thus
+    \[
+    \Phi_N\circ g_\ast = g_i\circ \Phi_M.
+    \]
+    
+    Since \(g\colon M\to N\) is surjective, each component map
+    \[
+    g_j\colon M_j\to N_j
+    \]
+    is surjective. In particular, \(g_i\colon M_i\to N_i\) is surjective. Because \(\Phi_M\) and \(\Phi_N\) are isomorphisms, the commutative diagram above shows that \(g_\ast\) corresponds to the surjective map \(g_i\). Hence \(g_\ast\) is surjective.
+    
+    Therefore every morphism \(P(i)\to N\) lifts to a morphism \(P(i)\to M\), as required.
+    \end{proof}
+
 %=============================================================================
 % Problem 12
 %=============================================================================
@@ -1200,6 +1554,80 @@ is surjective.
 g^\ast \colon \operatorname{Hom}(M, I(i)) \to \operatorname{Hom}(L, I(i)),\qquad \psi \longmapsto \psi \circ g
 \]
 is surjective.
+
+\begin{proof}
+    For every representation \(X\), there is a natural isomorphism
+    \[
+    \Psi_X \colon \operatorname{Hom}(X,I(i)) \xrightarrow{\;\sim\;} X_i^{\ast},
+    \]
+    where \(X_i^{\ast}=\operatorname{Hom}_k(X_i,k)\). Concretely, after identifying
+    \[
+    I(i)_i \cong k
+    \]
+    via the trivial path \(e_i\), a morphism \(f\colon X\to I(i)\) is sent to the linear functional
+    \[
+    \Psi_X(f)=f_i \in \operatorname{Hom}_k(X_i,k)=X_i^{\ast}.
+    \]
+    
+    Under these identifications, the map
+    \[
+    g^\ast \colon \operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i)), 
+    \qquad \psi \mapsto \psi\circ g,
+    \]
+    corresponds to the dual map
+    \[
+    g_i^{\ast} \colon M_i^{\ast} \to L_i^{\ast}, 
+    \qquad \lambda \mapsto \lambda\circ g_i.
+    \]
+    Indeed, for every \(\psi \in \operatorname{Hom}(M,I(i))\), we have
+    \[
+    \Psi_L\bigl(g^\ast(\psi)\bigr)
+     = \Psi_L(\psi\circ g)
+     = (\psi\circ g)_i
+     = \psi_i\circ g_i
+     = g_i^{\ast}(\psi_i)
+     = g_i^{\ast}\bigl(\Psi_M(\psi)\bigr).
+    \]
+    Hence the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    \operatorname{Hom}(M,I(i)) \arrow[r, "\Psi_M", "\sim"'] \arrow[d, "g^\ast"'] 
+    & M_i^\ast \arrow[d, "g_i^\ast"] \\
+    \operatorname{Hom}(L,I(i)) \arrow[r, "\Psi_L", "\sim"'] 
+    & L_i^\ast
+    \end{tikzcd}
+    \]
+    
+    Now \(g\colon L\to M\) is injective, so each component
+    \[
+    g_j\colon L_j\to M_j
+    \]
+    is injective; in particular, \(g_i\) is injective. Since we are working with finite-dimensional representations, \(L_i\) and \(M_i\) are finite-dimensional vector spaces. Therefore the dual map
+    \[
+    g_i^\ast \colon M_i^\ast \to L_i^\ast
+    \]
+    is surjective.
+    
+    For completeness, let \(\lambda \in L_i^\ast\). Since \(g_i\) is injective, it induces an isomorphism
+    \[
+    L_i \xrightarrow{\;\sim\;} g_i(L_i)\subseteq M_i.
+    \]
+    Thus \(\lambda\) defines a linear form on the subspace \(g_i(L_i)\) by
+    \[
+    g_i(x)\longmapsto \lambda(x).
+    \]
+    By linear algebra, this linear form extends to some \(\mu \in M_i^\ast\). Then
+    \[
+    g_i^\ast(\mu)=\mu\circ g_i=\lambda.
+    \]
+    Hence \(g_i^\ast\) is surjective.
+    
+    Since \(\Psi_M\) and \(\Psi_L\) are isomorphisms and the diagram above commutes, it follows that
+    \[
+    g^\ast \colon \operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i))
+    \]
+    is surjective.
+    \end{proof}
 
 %=============================================================================
 % Problem 13
@@ -1233,6 +1661,273 @@ and the vectors
 \]
 are linearly independent.
 
+\begin{proof}
+    Let the arrows of \(Q\) be
+    \[
+    \alpha\colon 1\to 3,\qquad
+    \beta\colon 1\to 2,\qquad
+    \gamma\colon 2\to 3,\qquad
+    \delta\colon 3\to 4,
+    \]
+    and let \(M\) denote the representation
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large, row sep=large]
+    k \arrow[rr, "{\begin{bmatrix}x_1\\x_2\end{bmatrix}}"] \arrow[dr, "z"'] \& \& k^2 \arrow[r, "{\begin{bmatrix}a&b\\ c&d\end{bmatrix}}"] \& k^2 \\
+    \& k \arrow[ur, "{\begin{bmatrix}y_1\\y_2\end{bmatrix}}"'] \&
+    \end{tikzcd}
+    \]
+    that is,
+    \[
+    M_\alpha=\begin{bmatrix}x_1\\x_2\end{bmatrix},\qquad
+    M_\beta=z,\qquad
+    M_\gamma=\begin{bmatrix}y_1\\y_2\end{bmatrix},\qquad
+    M_\delta=\begin{bmatrix}a&b\\c&d\end{bmatrix}.
+    \]
+    
+    \medskip
+    \noindent\textbf{Step 1: Description of \(P(1)\).}
+    Since \(Q\) has no oriented cycles, the projective representation \(P(1)\) is given at each vertex \(j\) by the \(k\)-vector space with basis the set of paths from \(1\) to \(j\). Thus
+    \[
+    P(1)_1 \cong k,\qquad
+    P(1)_2 \cong k,\qquad
+    P(1)_3 \cong k^2,\qquad
+    P(1)_4 \cong k^2,
+    \]
+    because:
+    \begin{itemize}
+        \item there is one path \(1\to 1\), namely the trivial path \(e_1\);
+        \item there is one path \(1\to 2\), namely \(\beta\);
+        \item there are two paths \(1\to 3\), namely \(\alpha\) and \(\gamma\beta\);
+        \item there are two paths \(1\to 4\), namely \(\delta\alpha\) and \(\delta\gamma\beta\).
+    \end{itemize}
+    
+    Choose the ordered bases
+    \[
+    P(1)_1=(e_1),\qquad
+    P(1)_2=(\beta),\qquad
+    P(1)_3=(\alpha,\gamma\beta),\qquad
+    P(1)_4=(\delta\alpha,\delta\gamma\beta).
+    \]
+    With respect to these bases, the structure maps of \(P(1)\) are
+    \[
+    P(1)_\beta=1,\qquad
+    P(1)_\alpha=\begin{bmatrix}1\\0\end{bmatrix},\qquad
+    P(1)_\gamma=\begin{bmatrix}0\\1\end{bmatrix},\qquad
+    P(1)_\delta=I_2.
+    \]
+    Hence \(P(1)\) has the form
+    \[
+    P(1)\simeq
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large, row sep=large]
+    k \arrow[rr, "{\begin{bmatrix}1\\0\end{bmatrix}}"] \arrow[dr, "1"'] \& \& k^2 \arrow[r, "I_2"] \& k^2 \\
+    \& k \arrow[ur, "{\begin{bmatrix}0\\1\end{bmatrix}}"'] \&
+    \end{tikzcd}
+    \]
+    In particular, all four maps have maximal rank, and the two vectors
+    \[
+    P(1)_\delta P(1)_\alpha=\begin{bmatrix}1\\0\end{bmatrix},
+    \qquad
+    P(1)_\delta P(1)_\gamma=\begin{bmatrix}0\\1\end{bmatrix}
+    \]
+    are linearly independent.
+    
+    \medskip
+    \noindent\textbf{Step 2: Necessity.}
+    Assume that \(M\simeq P(1)\). Let
+    \[
+    \phi=(\phi_1,\phi_2,\phi_3,\phi_4)\colon P(1)\xrightarrow{\sim} M
+    \]
+    be an isomorphism of representations.
+    
+    Since isomorphisms preserve rank, and since the maps of \(P(1)\) all have maximal rank, it follows immediately that the four maps of \(M\) also have maximal rank. Thus
+    \[
+    ad-bc\neq 0,\qquad
+    (x_1,x_2)\neq (0,0),\qquad
+    (y_1,y_2)\neq (0,0),\qquad
+    z\neq 0.
+    \]
+    
+    It remains to show that
+    \[
+    M_\delta M_\alpha
+    \qquad\text{and}\qquad
+    M_\delta M_\gamma
+    \]
+    are linearly independent in \(k^2\).
+    
+    Since \(\phi_1,\phi_2\colon k\to k\) are automorphisms, there exist nonzero scalars
+    \[
+    \phi_1=\lambda_1,\qquad \phi_2=\lambda_2
+    \]
+    with \(\lambda_1,\lambda_2\in k^\times\). The commutativity of the squares gives
+    \[
+    \phi_3 P(1)_\alpha=M_\alpha\phi_1,
+    \qquad
+    \phi_3 P(1)_\gamma=M_\gamma\phi_2,
+    \qquad
+    \phi_4 P(1)_\delta=M_\delta\phi_3.
+    \]
+    Therefore
+    \[
+    M_\delta M_\alpha\,\lambda_1
+    =
+    M_\delta\phi_3P(1)_\alpha
+    =
+    \phi_4P(1)_\delta P(1)_\alpha,
+    \]
+    and similarly
+    \[
+    M_\delta M_\gamma\,\lambda_2
+    =
+    \phi_4P(1)_\delta P(1)_\gamma.
+    \]
+    Since \(\phi_4\) is invertible and \(P(1)_\delta P(1)_\alpha\), \(P(1)_\delta P(1)_\gamma\) are linearly independent, the vectors
+    \[
+    \phi_4P(1)_\delta P(1)_\alpha
+    \qquad\text{and}\qquad
+    \phi_4P(1)_\delta P(1)_\gamma
+    \]
+    are linearly independent. Multiplication by the nonzero scalars \(\lambda_1^{-1}\) and \(\lambda_2^{-1}\) does not affect linear independence, so
+    \[
+    M_\delta M_\alpha
+    \qquad\text{and}\qquad
+    M_\delta M_\gamma
+    \]
+    are linearly independent as required.
+    
+    \medskip
+    \noindent\textbf{Step 3: Sufficiency.}
+    Conversely, assume that all four maps of \(M\) have maximal rank, namely
+    \[
+    ad-bc\neq 0,\qquad
+    (x_1,x_2)\neq (0,0),\qquad
+    (y_1,y_2)\neq (0,0),\qquad
+    z\neq 0,
+    \]
+    and assume moreover that the two vectors
+    \[
+    M_\delta M_\alpha=
+    \begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix},
+    \qquad
+    M_\delta M_\gamma=
+    \begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}y_1\\y_2\end{bmatrix}
+    \]
+    are linearly independent.
+    
+    Since \(ad-bc\neq 0\), the matrix \(M_\delta\) is invertible. Hence the linear independence of
+    \[
+    M_\delta\begin{bmatrix}x_1\\x_2\end{bmatrix}
+    \qquad\text{and}\qquad
+    M_\delta\begin{bmatrix}y_1\\y_2\end{bmatrix}
+    \]
+    implies that
+    \[
+    \begin{bmatrix}x_1\\x_2\end{bmatrix}
+    \qquad\text{and}\qquad
+    \begin{bmatrix}y_1\\y_2\end{bmatrix}
+    \]
+    are linearly independent. In particular,
+    \[
+    x_1y_2-x_2y_1\neq 0.
+    \]
+    
+    We now define maps
+    \[
+    \phi_1=1\colon k\to k,\qquad
+    \phi_2=z\colon k\to k,
+    \]
+    \[
+    \phi_3=
+    \begin{bmatrix}
+    x_1 & zy_1\\
+    x_2 & zy_2
+    \end{bmatrix}\colon k^2\to k^2,
+    \qquad
+    \phi_4=M_\delta\phi_3\colon k^2\to k^2.
+    \]
+    We claim that
+    \[
+    \phi=(\phi_1,\phi_2,\phi_3,\phi_4)\colon P(1)\to M
+    \]
+    is an isomorphism of representations.
+    
+    Indeed, we check the commutativity of the four arrow maps:
+    \[
+    \phi_2 P(1)_\beta
+    =
+    z\cdot 1
+    =
+    z
+    =
+    M_\beta\cdot 1
+    =
+    M_\beta\phi_1,
+    \]
+    \[
+    \phi_3 P(1)_\alpha
+    =
+    \phi_3\begin{bmatrix}1\\0\end{bmatrix}
+    =
+    \begin{bmatrix}x_1\\x_2\end{bmatrix}
+    =
+    M_\alpha\phi_1,
+    \]
+    \[
+    \phi_3 P(1)_\gamma
+    =
+    \phi_3\begin{bmatrix}0\\1\end{bmatrix}
+    =
+    z\begin{bmatrix}y_1\\y_2\end{bmatrix}
+    =
+    M_\gamma\phi_2,
+    \]
+    and
+    \[
+    \phi_4 P(1)_\delta
+    =
+    \phi_4 I_2
+    =
+    \phi_4
+    =
+    M_\delta\phi_3.
+    \]
+    Thus \(\phi\) is a morphism of representations.
+    
+    Finally, each \(\phi_i\) is invertible:
+    \[
+    \phi_1=1\neq 0,\qquad \phi_2=z\neq 0,
+    \]
+    \[
+    \det(\phi_3)=z(x_1y_2-x_2y_1)\neq 0,
+    \]
+    and
+    \[
+    \det(\phi_4)=\det(M_\delta)\det(\phi_3)\neq 0.
+    \]
+    Hence \(\phi\) is an isomorphism, and therefore
+    \[
+    M\simeq P(1).
+    \]
+    
+    This proves that
+    \[
+    P(1)\simeq
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large, row sep=large]
+    k \arrow[rr, "{\begin{bmatrix}x_1\\x_2\end{bmatrix}}"] \arrow[dr, "z"'] \& \& k^2 \arrow[r, "{\begin{bmatrix}a&b\\ c&d\end{bmatrix}}"] \& k^2 \\
+    \& k \arrow[ur, "{\begin{bmatrix}y_1\\y_2\end{bmatrix}}"'] \&
+    \end{tikzcd}
+    \]
+    if and only if all four maps have maximal rank and the two vectors
+    \[
+    \begin{bmatrix}a&b\\ c&d\end{bmatrix}
+    \begin{bmatrix}x_1\\x_2\end{bmatrix},
+    \qquad
+    \begin{bmatrix}a&b\\ c&d\end{bmatrix}
+    \begin{bmatrix}y_1\\y_2\end{bmatrix}
+    \]
+    are linearly independent.
+    \end{proof}
+
 %=============================================================================
 % Problem 14
 %=============================================================================
@@ -1250,10 +1945,652 @@ Q_2\colon\quad
     \end{tikzcd}
 \]
 
+\begin{proof}
+    We describe the indecomposable projective and injective representations explicitly, up to isomorphism, by choosing natural path bases.
+    
+    Recall that for a quiver $Q$ and a vertex $i\in Q_0$,
+    \[
+    P(i)_j \cong k\{\text{paths } i\to j\},
+    \qquad
+    I(i)_j \cong k\{\text{paths } j\to i\},
+    \]
+    where $k\{S\}$ denotes the $k$-vector space with basis $S$.
+    The linear map attached to an arrow is induced by composition of paths.
+    
+    \medskip
+    
+    \noindent
+    We use the convention that a product of arrows is read from right to left:
+    for instance, $\alpha\gamma$ means ``first $\gamma$, then $\alpha$''.
+    
+    \bigskip
+    \noindent\textbf{(1) The quiver $Q_1$.}
+    \[
+    Q_1 \colon \quad
+    \begin{tikzcd}
+    1 & 2 \arrow[l, shift left] \arrow[l, shift right] & 3 \arrow[l, shift left] \arrow[l, shift right]
+    \end{tikzcd}
+    \]
+    Label the arrows by
+    \[
+    \alpha,\beta \colon 2 \to 1,
+    \qquad
+    \gamma,\delta \colon 3 \to 2.
+    \]
+    
+    \medskip
+    \noindent\textbf{Indecomposable projectives.}
+    
+    \smallskip
+    \noindent\emph{The projective $P(1)$.}
+    Since $1$ is a sink, the only path starting at $1$ is the trivial path $e_1$.
+    Hence
+    \[
+    P(1)=S(1)\colon\quad
+    \begin{tikzcd}
+    k & 0 \arrow[l, shift left] \arrow[l, shift right] & 0 \arrow[l, shift left] \arrow[l, shift right]
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The projective $P(2)$.}
+    The paths starting at $2$ are
+    \[
+    e_2 \text{ (ending at $2$)}, \qquad \alpha,\beta \text{ (ending at $1$)}.
+    \]
+    Thus
+    \[
+    P(2)_1 \cong k\{\alpha,\beta\}\cong k^2,\qquad
+    P(2)_2 \cong k\{e_2\}\cong k,\qquad
+    P(2)_3=0.
+    \]
+    With respect to the ordered basis $\{\alpha,\beta\}$ at vertex $1$, we obtain
+    \[
+    P(2)\colon\quad
+    \begin{tikzcd}
+    k^2 & k \arrow[l, "{\begin{psmallmatrix}1\\0\end{psmallmatrix}}", shift left]
+          \arrow[l, "{\begin{psmallmatrix}0\\1\end{psmallmatrix}}"', shift right]
+        & 0 \arrow[l, shift left] \arrow[l, shift right]
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The projective $P(3)$.}
+    The paths starting at $3$ are
+    \[
+    e_3 \text{ (ending at $3$)},\qquad
+    \gamma,\delta \text{ (ending at $2$)},
+    \]
+    and
+    \[
+    \alpha\gamma,\alpha\delta,\beta\gamma,\beta\delta \text{ (ending at $1$)}.
+    \]
+    Hence
+    \[
+    P(3)_1 \cong k^4,\qquad P(3)_2 \cong k^2,\qquad P(3)_3 \cong k,
+    \]
+    where we choose the ordered bases
+    \[
+    P(3)_1:\ \{\alpha\gamma,\alpha\delta,\beta\gamma,\beta\delta\},
+    \qquad
+    P(3)_2:\ \{\gamma,\delta\}.
+    \]
+    Then
+    \[
+    P(3)\colon\quad
+    \begin{tikzcd}[ampersand replacement=\&]
+    k^4
+    \&
+    k^2 \arrow[l, "{\begin{psmallmatrix}
+    1&0\\
+    0&1\\
+    0&0\\
+    0&0
+    \end{psmallmatrix}}", shift left]
+    \arrow[l, "{\begin{psmallmatrix}
+    0&0\\
+    0&0\\
+    1&0\\
+    0&1
+    \end{psmallmatrix}}"', shift right]
+    \&
+    k \arrow[l, "{\begin{psmallmatrix}1\\0\end{psmallmatrix}}", shift left]
+      \arrow[l, "{\begin{psmallmatrix}0\\1\end{psmallmatrix}}"', shift right]
+    \end{tikzcd}.
+    \]
+    
+    \medskip
+    \noindent\textbf{Indecomposable injectives.}
+    
+    \smallskip
+    \noindent\emph{The injective $I(3)$.}
+    Since $3$ is a source, the only path ending at $3$ is the trivial path $e_3$.
+    Therefore
+    \[
+    I(3)=S(3)\colon\quad
+    \begin{tikzcd}
+    0 & 0 \arrow[l, shift left] \arrow[l, shift right] & k \arrow[l, shift left] \arrow[l, shift right]
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The injective $I(2)$.}
+    The paths ending at $2$ are
+    \[
+    e_2 \text{ (starting at $2$)}, \qquad \gamma,\delta \text{ (starting at $3$)}.
+    \]
+    Thus
+    \[
+    I(2)_1=0,\qquad I(2)_2\cong k,\qquad I(2)_3\cong k^2.
+    \]
+    With respect to the ordered basis $\{\gamma,\delta\}$ at vertex $3$, we get
+    \[
+    I(2)\colon\quad
+    \begin{tikzcd}
+    0 & k \arrow[l, shift left] \arrow[l, shift right]
+      & k^2 \arrow[l, "{(1,0)}", shift left]
+            \arrow[l, "{(0,1)}"', shift right]
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The injective $I(1)$.}
+    The paths ending at $1$ are
+    \[
+    e_1 \text{ (starting at $1$)},\qquad
+    \alpha,\beta \text{ (starting at $2$)},
+    \]
+    and
+    \[
+    \alpha\gamma,\alpha\delta,\beta\gamma,\beta\delta \text{ (starting at $3$)}.
+    \]
+    Hence
+    \[
+    I(1)_1\cong k,\qquad I(1)_2\cong k^2,\qquad I(1)_3\cong k^4.
+    \]
+    Choose the ordered bases
+    \[
+    I(1)_2:\ \{\alpha,\beta\},
+    \qquad
+    I(1)_3:\ \{\alpha\gamma,\alpha\delta,\beta\gamma,\beta\delta\}.
+    \]
+    Then
+    \[
+    I(1)\colon\quad
+    \begin{tikzcd}[ampersand replacement=\&]
+    k
+    \&
+    k^2 \arrow[l, "{(1,0)}", shift left]
+        \arrow[l, "{(0,1)}"', shift right]
+    \&
+    k^4 \arrow[l, "{\begin{psmallmatrix}
+    1&0&0&0\\
+    0&0&1&0
+    \end{psmallmatrix}}", shift left]
+        \arrow[l, "{\begin{psmallmatrix}
+    0&1&0&0\\
+    0&0&0&1
+    \end{psmallmatrix}}"', shift right]
+    \end{tikzcd}.
+    \]
+    
+    \bigskip
+    \noindent\textbf{(2) The quiver $Q_2$.}
+    \[
+    Q_2 \colon \quad
+    \begin{tikzcd}
+    1 \arrow[r] \arrow[rr, bend left] & 2 \arrow[r] \arrow[d] & 3 \arrow[ld] \\
+                                      & 4 &
+    \end{tikzcd}
+    \]
+    Label the arrows by
+    \[
+    \alpha\colon 1\to 2,\qquad
+    \beta\colon 1\to 3,\qquad
+    \gamma\colon 2\to 3,\qquad
+    \delta\colon 2\to 4,\qquad
+    \epsilon\colon 3\to 4.
+    \]
+    
+    \medskip
+    \noindent\textbf{Indecomposable projectives.}
+    
+    \smallskip
+    \noindent\emph{The projective $P(4)$.}
+    Since $4$ is a sink, one has
+    \[
+    P(4)=S(4)\colon\quad
+    \begin{tikzcd}
+    0 \arrow[r] \arrow[rr, bend left] & 0 \arrow[r] \arrow[d] & 0 \arrow[ld] \\
+                                      & k &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The projective $P(3)$.}
+    The paths starting at $3$ are
+    \[
+    e_3 \text{ (ending at $3$)},\qquad \epsilon \text{ (ending at $4$)}.
+    \]
+    Thus
+    \[
+    P(3)_1=0,\qquad P(3)_2=0,\qquad P(3)_3\cong k,\qquad P(3)_4\cong k,
+    \]
+    and the arrow $\epsilon\colon 3\to 4$ induces the identity map. Hence
+    \[
+    P(3)\colon\quad
+    \begin{tikzcd}
+    0 \arrow[r] \arrow[rr, bend left] & 0 \arrow[r] \arrow[d] & k \arrow[ld, "1"] \\
+                                      & k &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The projective $P(2)$.}
+    The paths starting at $2$ are
+    \[
+    e_2 \text{ (ending at $2$)},\qquad
+    \gamma \text{ (ending at $3$)},\qquad
+    \delta,\epsilon\gamma \text{ (ending at $4$)}.
+    \]
+    Therefore
+    \[
+    P(2)_1=0,\qquad P(2)_2\cong k,\qquad P(2)_3\cong k,\qquad P(2)_4\cong k^2.
+    \]
+    Using the ordered basis $\{\delta,\epsilon\gamma\}$ at vertex $4$, we get
+    \[
+    P(2)\colon\quad
+    \begin{tikzcd}
+    0 \arrow[r] \arrow[rr, bend left]
+    & k \arrow[r, "1"] \arrow[d, "{\begin{psmallmatrix}1\\0\end{psmallmatrix}}"]
+    & k \arrow[ld, "{\begin{psmallmatrix}0\\1\end{psmallmatrix}}"] \\
+    & k^2 &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The projective $P(1)$.}
+    The paths starting at $1$ are
+    \[
+    e_1 \text{ (ending at $1$)},\qquad
+    \alpha \text{ (ending at $2$)},
+    \]
+    \[
+    \beta,\gamma\alpha \text{ (ending at $3$)},
+    \qquad
+    \delta\alpha,\epsilon\beta,\epsilon\gamma\alpha \text{ (ending at $4$)}.
+    \]
+    Hence
+    \[
+    P(1)_1\cong k,\qquad
+    P(1)_2\cong k,\qquad
+    P(1)_3\cong k^2,\qquad
+    P(1)_4\cong k^3.
+    \]
+    Choose the ordered bases
+    \[
+    P(1)_3:\ \{\beta,\gamma\alpha\},
+    \qquad
+    P(1)_4:\ \{\delta\alpha,\epsilon\beta,\epsilon\gamma\alpha\}.
+    \]
+    Then
+    \[
+    P(1)\colon\quad
+    \begin{tikzcd}[ampersand replacement=\&]
+    k \arrow[r, "1"]
+      \arrow[rr, bend left, "{\begin{psmallmatrix}1\\0\end{psmallmatrix}}"]
+    \& k \arrow[r, "{\begin{psmallmatrix}0\\1\end{psmallmatrix}}"]
+        \arrow[d, "{\begin{psmallmatrix}1\\0\\0\end{psmallmatrix}}"]
+    \& k^2 \arrow[ld, "{\begin{psmallmatrix}
+    0&0\\
+    1&0\\
+    0&1
+    \end{psmallmatrix}}"] \\
+    \& k^3 \&
+    \end{tikzcd}.
+    \]
+    
+    \medskip
+    \noindent\textbf{Indecomposable injectives.}
+    
+    \smallskip
+    \noindent\emph{The injective $I(1)$.}
+    Since $1$ is a source, we have
+    \[
+    I(1)=S(1)\colon\quad
+    \begin{tikzcd}
+    k \arrow[r] \arrow[rr, bend left] & 0 \arrow[r] \arrow[d] & 0 \arrow[ld] \\
+                                      & 0 &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The injective $I(2)$.}
+    The paths ending at $2$ are
+    \[
+    e_2 \text{ (starting at $2$)},\qquad \alpha \text{ (starting at $1$)}.
+    \]
+    Thus
+    \[
+    I(2)_1\cong k,\qquad I(2)_2\cong k,\qquad I(2)_3=0,\qquad I(2)_4=0,
+    \]
+    and
+    \[
+    I(2)\colon\quad
+    \begin{tikzcd}
+    k \arrow[r, "1"] \arrow[rr, bend left, "0"]
+    & k \arrow[r, "0"] \arrow[d, "0"]
+    & 0 \arrow[ld] \\
+    & 0 &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The injective $I(3)$.}
+    The paths ending at $3$ are
+    \[
+    e_3 \text{ (starting at $3$)},\qquad
+    \gamma \text{ (starting at $2$)},\qquad
+    \beta,\gamma\alpha \text{ (starting at $1$)}.
+    \]
+    Hence
+    \[
+    I(3)_1\cong k^2,\qquad I(3)_2\cong k,\qquad I(3)_3\cong k,\qquad I(3)_4=0.
+    \]
+    With respect to the ordered basis $\{\beta,\gamma\alpha\}$ at vertex $1$, we obtain
+    \[
+    I(3)\colon\quad
+    \begin{tikzcd}
+    k^2 \arrow[r, "{(0,1)}"] \arrow[rr, bend left, "{(1,0)}"]
+    & k \arrow[r, "1"] \arrow[d, "0"]
+    & k \arrow[ld, "0"] \\
+    & 0 &
+    \end{tikzcd}.
+    \]
+    
+    \smallskip
+    \noindent\emph{The injective $I(4)$.}
+    The paths ending at $4$ are
+    \[
+    e_4 \text{ (starting at $4$)},\qquad
+    \epsilon \text{ (starting at $3$)},
+    \]
+    \[
+    \delta,\epsilon\gamma \text{ (starting at $2$)},
+    \qquad
+    \delta\alpha,\epsilon\beta,\epsilon\gamma\alpha \text{ (starting at $1$)}.
+    \]
+    Therefore
+    \[
+    I(4)_1\cong k^3,\qquad I(4)_2\cong k^2,\qquad I(4)_3\cong k,\qquad I(4)_4\cong k.
+    \]
+    Choose the ordered bases
+    \[
+    I(4)_1:\ \{\delta\alpha,\epsilon\beta,\epsilon\gamma\alpha\},
+    \qquad
+    I(4)_2:\ \{\delta,\epsilon\gamma\}.
+    \]
+    Then
+    \[
+    I(4)\colon\quad
+    \begin{tikzcd}[ampersand replacement=\&]
+    k^3
+    \arrow[r, "{\begin{psmallmatrix}
+    1&0&0\\
+    0&0&1
+    \end{psmallmatrix}}"]
+    \arrow[rr, bend left, "{(0,1,0)}"]
+    \&
+    k^2 \arrow[r, "{(0,1)}"] \arrow[d, "{(1,0)}"]
+    \&
+    k \arrow[ld, "1"] \\
+    \& k \&
+    \end{tikzcd}.
+    \]
+    
+    \medskip
+    \noindent
+    This determines all indecomposable projective and injective representations for $Q_1$ and $Q_2$.
+    \end{proof}
+
 %=============================================================================
 % Problem 15
 %=============================================================================
 \item Compute a projective resolution of each simple representation $S(i)$ for the quivers $Q_1$ and $Q_2$ from Problem~14.
+
+\begin{proof}
+    We compute the (minimal) projective resolutions of the simple representations for the two quivers from Problem~14.
+    
+    Recall that for an acyclic quiver $Q$, the category $\operatorname{Rep}Q$ is hereditary. Hence every representation has projective dimension at most $1$. In particular, for each simple representation $S(i)$, its minimal projective resolution is obtained from the projective cover
+    \[
+    P(i)\twoheadrightarrow S(i),
+    \]
+    whose kernel is $\operatorname{rad} P(i)$.
+    
+    Moreover, for a path algebra of an acyclic quiver, one has
+    \[
+    \operatorname{rad} P(i)\cong \bigoplus_{\alpha:i\to j} P(j),
+    \]
+    where the direct sum runs over all arrows starting at $i$.
+    
+    \bigskip
+    \noindent\textbf{(1) The quiver $Q_1$.}
+    \[
+    Q_1\colon\quad
+    \begin{tikzcd}
+    1 & 2 \arrow[l, shift left, "\alpha"] \arrow[l, shift right, "\beta"']
+    & 3 \arrow[l, shift left, "\gamma"] \arrow[l, shift right, "\delta"']
+    \end{tikzcd}
+    \]
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(1)$.}
+    Since $1$ is a sink, $P(1)=S(1)$ is already projective. Hence the minimal projective resolution is
+    \[
+    0 \longrightarrow P(1) \xrightarrow{\;\cong\;} S(1) \longrightarrow 0.
+    \]
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(2)$.}
+    There are exactly two arrows starting at $2$, namely $\alpha,\beta:2\to 1$. Therefore
+    \[
+    \operatorname{rad} P(2)\cong P(1)\oplus P(1).
+    \]
+    Thus we obtain a short exact sequence
+    \[
+    0 \longrightarrow P(1)\oplus P(1)
+    \xrightarrow{\;f\;}
+    P(2)
+    \xrightarrow{\;\pi\;}
+    S(2)
+    \longrightarrow 0,
+    \]
+    where $\pi$ is the canonical projection onto the top of $P(2)$, and $f$ is the morphism whose two components correspond to the two arrows $\alpha$ and $\beta$.
+    
+    More explicitly, if we denote by
+    \[
+    \iota_\alpha,\iota_\beta : P(1)\to P(2)
+    \]
+    the morphisms sending the generator of $P(1)_1\cong k$ to the basis vectors
+    \[
+    \alpha,\beta \in P(2)_1\cong k^2,
+    \]
+    then
+    \[
+    f=(\iota_\alpha,\iota_\beta).
+    \]
+    Its image is precisely the radical of $P(2)$, so this is the minimal projective resolution of $S(2)$.
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(3)$.}
+    There are exactly two arrows starting at $3$, namely $\gamma,\delta:3\to 2$. Hence
+    \[
+    \operatorname{rad} P(3)\cong P(2)\oplus P(2).
+    \]
+    Therefore
+    \[
+    0 \longrightarrow P(2)\oplus P(2)
+    \xrightarrow{\;g\;}
+    P(3)
+    \xrightarrow{\;\rho\;}
+    S(3)
+    \longrightarrow 0
+    \]
+    is exact, where $\rho$ is the canonical projection onto the top of $P(3)$, and $g$ is induced by the arrows $\gamma$ and $\delta$.
+    
+    Explicitly, if
+    \[
+    \iota_\gamma,\iota_\delta : P(2)\to P(3)
+    \]
+    are the morphisms sending the generator of $P(2)_2\cong k$ to
+    \[
+    \gamma,\delta \in P(3)_2\cong k^2,
+    \]
+    then
+    \[
+    g=(\iota_\gamma,\iota_\delta).
+    \]
+    Its image is $\operatorname{rad} P(3)$, so this gives the minimal projective resolution of $S(3)$.
+    
+    \bigskip
+    \noindent\textbf{(2) The quiver $Q_2$.}
+    \[
+    Q_2\colon\quad
+    \begin{tikzcd}
+    1 \arrow[r, "\alpha"] \arrow[rr, bend left, "\beta"]
+    & 2 \arrow[r, "\gamma"] \arrow[d, "\delta"']
+    & 3 \arrow[ld, "\epsilon"] \\
+    & 4 &
+    \end{tikzcd}
+    \]
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(4)$.}
+    Since $4$ is a sink, $P(4)=S(4)$ is projective. Hence
+    \[
+    0 \longrightarrow P(4) \xrightarrow{\;\cong\;} S(4) \longrightarrow 0
+    \]
+    is the minimal projective resolution of $S(4)$.
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(3)$.}
+    There is exactly one arrow starting at $3$, namely $\epsilon:3\to 4$. Thus
+    \[
+    \operatorname{rad} P(3)\cong P(4),
+    \]
+    and we get
+    \[
+    0 \longrightarrow P(4)
+    \xrightarrow{\;\iota_\epsilon\;}
+    P(3)
+    \xrightarrow{\;\pi_3\;}
+    S(3)
+    \longrightarrow 0,
+    \]
+    where $\iota_\epsilon$ is the morphism sending the generator of $P(4)_4\cong k$ to
+    \[
+    \epsilon \in P(3)_4\cong k.
+    \]
+    This is the minimal projective resolution of $S(3)$.
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(2)$.}
+    There are two arrows starting at $2$, namely
+    \[
+    \gamma:2\to 3,
+    \qquad
+    \delta:2\to 4.
+    \]
+    Hence
+    \[
+    \operatorname{rad} P(2)\cong P(3)\oplus P(4).
+    \]
+    Therefore
+    \[
+    0 \longrightarrow P(3)\oplus P(4)
+    \xrightarrow{\;h\;}
+    P(2)
+    \xrightarrow{\;\pi_2\;}
+    S(2)
+    \longrightarrow 0
+    \]
+    is exact, where $h=(\iota_\gamma,\iota_\delta)$ and:
+    \begin{itemize}
+        \item $\iota_\gamma:P(3)\to P(2)$ sends the generator of $P(3)_3\cong k$ to
+        \[
+        \gamma \in P(2)_3\cong k;
+        \]
+        \item $\iota_\delta:P(4)\to P(2)$ sends the generator of $P(4)_4\cong k$ to
+        \[
+        \delta \in P(2)_4\cong k^2.
+        \]
+    \end{itemize}
+    The image of $h$ is exactly the radical of $P(2)$, so this is the minimal projective resolution of $S(2)$.
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(1)$.}
+    There are two arrows starting at $1$, namely
+    \[
+    \alpha:1\to 2,
+    \qquad
+    \beta:1\to 3.
+    \]
+    Thus
+    \[
+    \operatorname{rad} P(1)\cong P(2)\oplus P(3).
+    \]
+    Hence we have the exact sequence
+    \[
+    0 \longrightarrow P(2)\oplus P(3)
+    \xrightarrow{\;u\;}
+    P(1)
+    \xrightarrow{\;\pi_1\;}
+    S(1)
+    \longrightarrow 0,
+    \]
+    where $u=(\iota_\alpha,\iota_\beta)$ and:
+    \begin{itemize}
+        \item $\iota_\alpha:P(2)\to P(1)$ sends the generator of $P(2)_2\cong k$ to
+        \[
+        \alpha \in P(1)_2\cong k;
+        \]
+        \item $\iota_\beta:P(3)\to P(1)$ sends the generator of $P(3)_3\cong k$ to
+        \[
+        \beta \in P(1)_3\cong k^2.
+        \]
+    \end{itemize}
+    Its image is $\operatorname{rad} P(1)$, so this yields the minimal projective resolution of $S(1)$.
+    
+    \bigskip
+    \noindent\textbf{Summary.}
+    
+    For $Q_1$:
+    \[
+    0\to P(1)\xrightarrow{\cong} S(1)\to 0,
+    \]
+    \[
+    0\to P(1)^2\to P(2)\to S(2)\to 0,
+    \]
+    \[
+    0\to P(2)^2\to P(3)\to S(3)\to 0.
+    \]
+    
+    For $Q_2$:
+    \[
+    0\to P(4)\xrightarrow{\cong} S(4)\to 0,
+    \]
+    \[
+    0\to P(4)\to P(3)\to S(3)\to 0,
+    \]
+    \[
+    0\to P(3)\oplus P(4)\to P(2)\to S(2)\to 0,
+    \]
+    \[
+    0\to P(2)\oplus P(3)\to P(1)\to S(1)\to 0.
+    \]
+    
+    These are precisely the minimal projective resolutions of the simple representations.
+    \end{proof}
 
 \end{enumerate}
 \end{document}
