@@ -5969,4 +5969,90 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
     and then increasing $C$ finitely many times if needed to cover finitely many small $n$, we obtain $m<C\,n^{2-1/r}$ for all $n$.
 \end{proof}
 
+\chapter{Quiz}
+
+\section{Quiz 1}
+
+\begin{exercise}
+    Give a graph with degree $3$, girth $5$, and $10$ vertices.
+    \end{exercise}
+
+    \begin{proof}
+    The Petersen graph (below) has $10$ vertices, is $3$-regular, and has girth $5$.
+    \begin{center}
+    \begin{tikzpicture}[scale=1.15]
+        \def\R{2.35} % outer pentagon radius
+        \def\r{1.05} % inner star radius
+        \foreach \j in {0,...,4} {
+            \node[vertex] (Pout\j) at ({90-72*\j}:\R) {};
+            \node[vertex] (Pin\j) at ({90-72*\j}:\r) {};
+        }
+        % outer $5$-cycle
+        \draw (Pout0)--(Pout1)--(Pout2)--(Pout3)--(Pout4)--(Pout0);
+        % inner $\{5/2\}$ star (pentagram)
+        \draw (Pin0)--(Pin2)--(Pin4)--(Pin1)--(Pin3)--(Pin0);
+        % spokes
+        \foreach \j in {0,...,4} \draw (Pout\j)--(Pin\j);
+    \end{tikzpicture}
+    \end{center}
+    \end{proof}
+    
+    \begin{exercise}
+    Suppose that $G$ is a regular graph on $10$ vertices with adjacency matrix $A$,
+    \[
+    \operatorname{tr}(A^2)=30,\qquad \operatorname{tr}(A^3)=0,\qquad \text{and}\qquad \operatorname{tr}(A^4)=150.
+    \]
+    \begin{enumerate}
+        \item[(a)] How many triangles does $G$ have?
+        \item[(b)] How many $4$-cycles does $G$ have?
+    \end{enumerate}
+    \end{exercise}
+
+    \begin{proof}
+    Let $n=10$ and let $G$ be $k$-regular.
+
+    \smallskip\noindent\textbf{(a)}
+    For any graph, $(A^2)_{ii}=\deg(i)$. Hence
+    \[
+        \operatorname{tr}(A^2)=\sum_{i=1}^{10}(A^2)_{ii}=\sum_{i=1}^{10}\deg(i)=10k=30,
+    \]
+    so $k=3$.
+
+    Next, $(A^3)_{ii}$ counts closed walks of length $3$ starting and ending at $i$.
+    If $\{i,j,\ell\}$ spans a triangle, then exactly two such walks at $i$ are
+    $i\!-\!j\!-\!\ell\!-\!i$ and $i\!-\!\ell\!-\!j\!-\!i$, and there are no other
+    closed $3$-walks at $i$ in a simple graph. Each triangle is counted at three
+    vertices, each contributing $2$ walks, so with $T$ triangles,
+    $\operatorname{tr}(A^3)=6T$. Thus $T=\operatorname{tr}(A^3)/6=0$.
+
+    \smallskip\noindent\textbf{(b)}
+    We count closed walks of length $4$ from a fixed vertex $i$ and sum over $i$.
+    Write a walk as $v_0\!-\!v_1\!-\!v_2\!-\!v_3\!-\!v_4$ with $v_0=v_4=i$.
+
+    \emph{Type I:} $v_1=v_3$. Then the walk is $i\!-\!a\!-\!v_2\!-\!a\!-\!i$ with
+    $a\in N(i)$. If $v_2=i$ this is $i\!-\!a\!-\!i\!-\!a\!-\!i$, and there are
+    $\deg(i)=3$ choices for $a$. If $v_2\neq i$ then $v_2\in N(a)\setminus\{i\}$;
+    since $G$ is triangle-free, $a$ has two neighbors other than $i$, so for each
+    of the $3$ choices of $a$ there are $2$ choices of $v_2$. Hence Type~I
+    contributes $3+6=9$ walks from $i$.
+
+    \emph{Type II:} $v_2=i$ and $v_1\neq v_3$. Then the walk is
+    $i\!-\!v_1\!-\!i\!-\!v_3\!-\!i$ with distinct $v_1,v_3\in N(i)$, giving
+    $3\cdot 2=6$ walks.
+
+    Types I and II are disjoint as sequences of vertices. Any closed $4$-walk
+    using four \emph{distinct} vertices $i\!-\!x\!-\!y\!-\!z\!-\!i$ lies on a
+    (simple) $4$-cycle through $i$ and contributes at least $2$ additional walks
+    from $i$ (the two directions around that cycle).
+
+    Therefore $(A^4)_{ii}\ge 9+6=15$, with equality if and only if $i$ lies on
+    no $4$-cycle. Summing,
+    \[
+        \operatorname{tr}(A^4)=\sum_{i=1}^{10}(A^4)_{ii}\ge 10\cdot 15=150,
+    \]
+    and equality holds only if every vertex lies on no $4$-cycle, i.e.\ $G$
+    contains no subgraph isomorphic to $C_4$. Since $\operatorname{tr}(A^4)=150$,
+    the number of (distinct) $4$-cycles is $0$.
+    \end{proof}
+
 \end{document}
