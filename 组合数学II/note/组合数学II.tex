@@ -4506,6 +4506,722 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
     At present, the smallest unresolved admissible order is $668$.
 \end{remark}
 
+\chapter{Lecture: 8}
+
+\begin{theorem}[Hadamard, 1893]\label{thm:hadamard-determinant}
+    Let $M=(m_{ij})\in \mathbb{C}^{n\times n}$ satisfy $|m_{ij}|\leqslant 1$ for all $i,j$.
+    Then
+    \[
+        |\det(M)|\leqslant n^{n/2}.
+    \]
+    Moreover, equality holds if and only if
+    \[
+        MM^{*}=nI_n.
+    \]
+    In particular, in the equality case one has $|m_{ij}|=1$ for all $i,j$.
+\end{theorem}
+
+\begin{proof}
+    Let $r_1,\dots,r_n\in \mathbb{C}^n$ be the row vectors of $M$. We suppose that $\det(M)\neq 0$. If $\det(M)=0$, then the inequality is trivial.
+    For $k=1,\dots,n$, define
+    \[
+        W_{k-1}:=\operatorname{span}(r_1,\dots,r_{k-1}),
+        \qquad
+        d_k:=\operatorname{dist}(r_k,W_{k-1}),
+    \]
+    with the convention $W_0=\{0\}$.
+    By the Gram--Schmidt process, there exist orthogonal vectors
+    $u_1,\dots,u_n$ such that
+    \[
+        u_k=r_k-\operatorname{proj}_{W_{k-1}}(r_k),
+        \qquad
+        \|u_k\|=d_k,
+    \]
+    and the matrix obtained from $M$ by successive row operations of the form
+    \[
+        r_k \longmapsto r_k-\sum_{j<k} c_{kj}r_j
+    \]
+    is upper triangular with diagonal entries corresponding to the vectors $u_k$.
+    Hence
+    \[
+        |\det(M)|=\prod_{k=1}^n \|u_k\|
+        =\prod_{k=1}^n d_k.
+    \]
+    Since orthogonal projection can only decrease norm,
+    \[
+        d_k=\|u_k\|\leqslant \|r_k\|
+        \qquad (1\leqslant k\leqslant n).
+    \]
+    Also,
+    \[
+        \|r_k\|^2=\sum_{j=1}^n |m_{kj}|^2 \leqslant \sum_{j=1}^n 1 = n,
+    \]
+    so $\|r_k\|\leqslant \sqrt{n}$ for every $k$.
+    Therefore
+    \[
+        |\det(M)|
+        =\prod_{k=1}^n d_k
+        \leqslant \prod_{k=1}^n \|r_k\|
+        \leqslant (\sqrt{n})^n
+        = n^{n/2},
+    \]
+    which proves the inequality.
+
+    Now consider the equality case.
+    If $|\det(M)|=n^{n/2}$, then every inequality above must be an equality.
+    Thus for each $k$ we have
+    \[
+        d_k=\|r_k\|=\sqrt{n}.
+    \]
+    The equality $d_k=\|r_k\|$ means that the projection of $r_k$ onto $W_{k-1}$ is zero,
+    so $r_k\perp W_{k-1}$.
+    Hence the rows $r_1,\dots,r_n$ are pairwise orthogonal.
+    The equality $\|r_k\|=\sqrt{n}$ together with
+    \[
+        \|r_k\|^2=\sum_{j=1}^n |m_{kj}|^2 \leqslant n
+    \]
+    forces
+    \[
+        |m_{kj}|=1 \qquad \text{for all } j.
+    \]
+    Therefore each row has squared norm $n$, and distinct rows are orthogonal; equivalently,
+    \[
+        MM^{*}=nI_n.
+    \]
+
+    Conversely, if $MM^{*}=nI_n$, then the rows of $M$ are pairwise orthogonal and each has norm $\sqrt{n}$.
+    Applying the formula above gives
+    \[
+        |\det(M)|^2=\det(MM^{*})=\det(nI_n)=n^n,
+    \]
+    so
+    \[
+        |\det(M)|=n^{n/2}.
+    \]
+    Finally, from $(MM^{*})_{ii}=n$ we obtain
+    \[
+        \sum_{j=1}^n |m_{ij}|^2=n.
+    \]
+    Since each $|m_{ij}|\leqslant 1$, this implies $|m_{ij}|=1$ for all $i,j$.
+\end{proof}
+
+\begin{proposition}[Sylvester's construction]\label{prop:sylvester-construction}
+    Let $H$ be a Hadamard matrix of order $n$. Then
+    \[
+        K:=
+        \begin{pmatrix}
+            H & H  \\
+            H & -H
+        \end{pmatrix}
+    \]
+    is a Hadamard matrix of order $2n$.
+\end{proposition}
+
+\begin{proof}
+    Since $H$ is a Hadamard matrix, all entries of $H$ are equal to $\pm 1$, and
+    \[
+        HH^{\top}=nI_n.
+    \]
+    Hence every entry of
+    \[
+        K=
+        \begin{pmatrix}
+            H & H  \\
+            H & -H
+        \end{pmatrix}
+    \]
+    is also equal to $\pm 1$.
+
+    It remains to verify the orthogonality condition. We compute
+    \[
+        KK^{\top}
+        =
+        \begin{pmatrix}
+            H & H  \\
+            H & -H
+        \end{pmatrix}
+        \begin{pmatrix}
+            H^{\top} & H^{\top}  \\
+            H^{\top} & -H^{\top}
+        \end{pmatrix}.
+    \]
+    By block multiplication,
+    \[
+        KK^{\top}
+        =
+        \begin{pmatrix}
+            HH^{\top}+HH^{\top} & HH^{\top}-HH^{\top} \\
+            HH^{\top}-HH^{\top} & HH^{\top}+HH^{\top}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            2HH^{\top} & 0          \\
+            0          & 2HH^{\top}
+        \end{pmatrix}.
+    \]
+    Using $HH^{\top}=nI_n$, we obtain
+    \[
+        KK^{\top}
+        =
+        \begin{pmatrix}
+            2nI_n & 0     \\
+            0     & 2nI_n
+        \end{pmatrix}
+        =
+        2n\,I_{2n}.
+    \]
+    Therefore $K$ is a $\{\pm1\}$-matrix of order $2n$ satisfying
+    \[
+        KK^{\top}=2n\,I_{2n},
+    \]
+    so $K$ is a Hadamard matrix.
+\end{proof}
+
+\begin{definition}[Tensor product of matrices]
+    Let
+    \[
+        A=(a_{ij})\in M_{m\times n}(F),
+        \qquad
+        B\in M_{p\times q}(F).
+    \]
+    The \emph{tensor product} (or \emph{Kronecker product}) of \(A\) and \(B\) is the block matrix
+    \[
+        A\otimes B
+        :=
+        \begin{pmatrix}
+            a_{11}B & a_{12}B & \cdots & a_{1n}B \\
+            a_{21}B & a_{22}B & \cdots & a_{2n}B \\
+            \vdots  & \vdots  & \ddots & \vdots  \\
+            a_{m1}B & a_{m2}B & \cdots & a_{mn}B
+        \end{pmatrix}
+        \in M_{mp\times nq}(F).
+    \]
+    In other words, the \((i,j)\)-block of \(A\otimes B\) is \(a_{ij}B\).
+\end{definition}
+
+\begin{theorem}\label{thm:kronecker-hadamard}
+    Let \(H_m\) and \(H_n\) be Hadamard matrices of orders \(m\) and \(n\), respectively.
+    Then the Kronecker product
+    \[
+        H_m \otimes H_n
+    \]
+    is a Hadamard matrix of order \(mn\).
+\end{theorem}
+
+\begin{proof}
+    Recall that a Hadamard matrix of order \(r\) is an \(r\times r\) matrix with entries in
+    \(\{\pm1\}\) satisfying
+    \[
+        HH^\top=rI_r.
+    \]
+    Since \(H_m\) and \(H_n\) are Hadamard matrices, every entry of \(H_m\otimes H_n\) is a product
+    of an entry of \(H_m\) and an entry of \(H_n\), hence again lies in \(\{\pm1\}\).
+
+    It remains to verify the orthogonality condition. Using the basic identities for Kronecker products,
+    we have
+    \[
+        (H_m\otimes H_n)^\top=H_m^\top\otimes H_n^\top
+    \]
+    and
+    \[
+        (A\otimes B)(C\otimes D)=(AC)\otimes(BD).
+    \]
+    Therefore
+    \[
+        (H_m\otimes H_n)(H_m\otimes H_n)^\top
+        =(H_m\otimes H_n)(H_m^\top\otimes H_n^\top)
+        =(H_mH_m^\top)\otimes(H_nH_n^\top).
+    \]
+    Since \(H_m\) and \(H_n\) are Hadamard,
+    \[
+        H_mH_m^\top=mI_m,
+        \qquad
+        H_nH_n^\top=nI_n.
+    \]
+    Thus
+    \[
+        (H_m\otimes H_n)(H_m\otimes H_n)^\top
+        =(mI_m)\otimes(nI_n)
+        =mn\,(I_m\otimes I_n)
+        =mn\,I_{mn}.
+    \]
+    Hence \(H_m\otimes H_n\) is a \(\{\pm1\}\)-matrix of order \(mn\) whose rows are mutually orthogonal,
+    so it is a Hadamard matrix.
+\end{proof}
+
+\begin{definition}[Conference matrix]
+    A \textbf{conference matrix} of order \(n\) is an \(n\times n\) matrix
+    \[
+        C=(c_{ij})
+    \]
+    such that
+    \begin{enumerate}
+        \item \(c_{ii}=0\) for all \(1\le i\le n\),
+        \item \(c_{ij}\in\{\pm 1\}\) for all \(i\ne j\),
+        \item
+              \[
+                  CC^{T}=(n-1)I_n.
+              \]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Equivalence of conference matrices]
+    Two conference matrices \(C\) and \(C'\) of order \(n\) are said to be \textbf{equivalent}
+    if one can be obtained from the other by a finite sequence of the following operations:
+    \begin{enumerate}
+        \item multiplying a row and the corresponding column by \(-1\),
+        \item simultaneously permuting rows and the corresponding columns.
+    \end{enumerate}
+    The equivalence classes under these operations are called the \textbf{equivalence classes of conference matrices}.
+\end{definition}
+
+\begin{lemma}\label{lem:conference-symmetric-skew}
+    Let \(C=(c_{ij})\) be a conference matrix of order \(n>1\). Then \(n\) is even.
+
+    Moreover, in the usual sense of conference-matrix equivalence
+    \emph{(sign changes of individual rows and columns, together with simultaneous
+        permutations of rows and columns)}, the matrix \(C\) is equivalent to
+    \begin{itemize}
+        \item a symmetric conference matrix if \(n\equiv 2\pmod 4\),
+        \item an antisymmetric conference matrix if \(n\equiv 0\pmod 4\).
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+    First we show that \(n\) is even.
+    Take two distinct rows \(r_i,r_j\) of \(C\).
+    Since \(C\) is a conference matrix, the \(i\)-th entry of \(r_i\) and the \(j\)-th entry of \(r_j\) are \(0\),
+    while all other entries are \(\pm1\).
+    Because distinct rows are orthogonal, we have
+    \[
+        0=r_i\cdot r_j=\sum_{k\neq i,j} c_{ik}c_{jk}.
+    \]
+    This is a sum of \(n-2\) numbers, each equal to \(\pm1\).
+    For such a sum to be \(0\), the number of summands must be even.
+    Hence \(n-2\) is even, and therefore \(n\) is even.
+
+    \medskip
+    Now assume \(n>2\); the case \(n=2\) is immediate.
+    By multiplying columns \(2,\dots,n\) independently by \(c_{12},\dots,c_{1n}\),
+    we may assume that the first row is normalized:
+    \[
+        c_{1j}=1 \qquad (j>1).
+    \]
+    (We keep the same notation \(C=(c_{ij})\) for the new conference matrix.)
+
+    Fix distinct indices \(i,j>1\).
+    For \(k\notin\{1,i,j\}\), consider the pair \((c_{ik},c_{jk})\in\{\pm1\}^2\), and let
+    \[
+        \begin{aligned}
+            a & =\#\{k\notin\{1,i,j\}: (c_{ik},c_{jk})=(1,1)\},   \\
+            b & =\#\{k\notin\{1,i,j\}: (c_{ik},c_{jk})=(1,-1)\},  \\
+            c & =\#\{k\notin\{1,i,j\}: (c_{ik},c_{jk})=(-1,1)\},  \\
+            d & =\#\{k\notin\{1,i,j\}: (c_{ik},c_{jk})=(-1,-1)\}.
+        \end{aligned}
+    \]
+    Then
+    \[
+        a+b+c+d=n-3.
+    \]
+
+    Since the first row is \((0,1,\dots,1)\), orthogonality of row \(i\) with row \(1\) gives
+    \[
+        c_{ij}+(a+b)-(c+d)=0,
+    \]
+    that is,
+    \[
+        a+b-c-d=-c_{ij}. \tag{1}
+    \]
+    Similarly, orthogonality of row \(j\) with row \(1\) gives
+    \[
+        a-b+c-d=-c_{ji}. \tag{2}
+    \]
+    Finally, orthogonality of rows \(i\) and \(j\) gives
+    \[
+        c_{i1}c_{j1}+a-b-c+d=0,
+    \]
+    so
+    \[
+        a-b-c+d=-c_{i1}c_{j1}. \tag{3}
+    \]
+
+    Solving \((1)\), \((2)\), \((3)\), together with \(a+b+c+d=n-3\), we obtain
+    \[
+        \begin{aligned}
+            a & =\frac{n-3-c_{ij}-c_{ji}-c_{i1}c_{j1}}{4}, \\
+            b & =\frac{n-3-c_{ij}+c_{ji}+c_{i1}c_{j1}}{4}, \\
+            c & =\frac{n-3+c_{ij}-c_{ji}+c_{i1}c_{j1}}{4}, \\
+            d & =\frac{n-3+c_{ij}+c_{ji}-c_{i1}c_{j1}}{4}.
+        \end{aligned}
+    \]
+    Since \(a,b,c,d\) are integers and each of \(c_{ij},c_{ji},c_{i1}c_{j1}\) is \(\pm1\),
+    a check of the eight possible sign triples shows that:
+    \[
+        c_{ij}c_{ji}=c_{i1}c_{j1}\qquad\text{if }n\equiv 2\pmod 4,
+    \]
+    and
+    \[
+        c_{ij}c_{ji}=-\,c_{i1}c_{j1}\qquad\text{if }n\equiv 0\pmod 4.
+    \]
+    Equivalently,
+    \[
+        c_{ji}=c_{i1}c_{j1}c_{ij}\qquad\text{if }n\equiv 2\pmod 4,
+    \]
+    and
+    \[
+        c_{ji}=-\,c_{i1}c_{j1}c_{ij}\qquad\text{if }n\equiv 0\pmod 4.
+    \]
+
+    \medskip
+    If \(n\equiv 2\pmod 4\), multiply each row \(i>1\) by \(c_{i1}\), and call the resulting matrix \(B=(b_{ij})\).
+    Then \(B\) is still a conference matrix, and
+    \[
+        b_{1i}=1,\qquad b_{i1}=c_{i1}^2=1 \qquad (i>1).
+    \]
+    For \(i,j>1\), we have
+    \[
+        b_{ji}=c_{j1}c_{ji}=c_{j1}(c_{i1}c_{j1}c_{ij})=c_{i1}c_{ij}=b_{ij}.
+    \]
+    Hence \(B=B^T\), so \(B\) is symmetric.
+
+    If \(n\equiv 0\pmod 4\), multiply each row \(i>1\) by \(-c_{i1}\), and call the resulting matrix \(B=(b_{ij})\).
+    Again \(B\) is a conference matrix, and now
+    \[
+        b_{1i}=1,\qquad b_{i1}=-c_{i1}^2=-1 \qquad (i>1),
+    \]
+    so \(b_{i1}=-b_{1i}\).
+    For \(i,j>1\), we have
+    \[
+        b_{ji}=-c_{j1}c_{ji}=-c_{j1}(-c_{i1}c_{j1}c_{ij})
+        = c_{i1}c_{ij}
+        = -\,(-c_{i1}c_{ij})
+        = -\,b_{ij}.
+    \]
+    Hence \(B=-B^T\), so \(B\) is antisymmetric.
+
+    Therefore, \(C\) is equivalent to a symmetric conference matrix when \(n\equiv 2\pmod 4\),
+    and to an antisymmetric conference matrix when \(n\equiv 0\pmod 4\).
+\end{proof}
+
+\begin{theorem}
+    Let $C$ be an antisymmetric conference matrix of order $n$. Then
+    \[
+        H:=I_n+C
+    \]
+    is a Hadamard matrix of order $n$.
+\end{theorem}
+
+\begin{proof}
+    Since $C$ is a conference matrix, its diagonal entries are $0$ and its off-diagonal
+    entries are $\pm 1$. Hence the matrix
+    \[
+        H=I_n+C
+    \]
+    has diagonal entries $1$ and off-diagonal entries $\pm 1$, so every entry of $H$
+    is $\pm 1$.
+
+    It remains to verify the Hadamard condition. Because $C$ is antisymmetric, we have
+    \[
+        C^T=-C.
+    \]
+    Therefore
+    \[
+        H^T=(I_n+C)^T=I_n+C^T=I_n-C.
+    \]
+    Thus
+    \[
+        HH^T=(I_n+C)(I_n-C)=I_n-C^2.
+    \]
+    Now, since $C$ is a conference matrix,
+    \[
+        CC^T=(n-1)I_n.
+    \]
+    Using $C^T=-C$, we obtain
+    \[
+        CC^T=C(-C)=-C^2=(n-1)I_n,
+    \]
+    and so
+    \[
+        C^2=-(n-1)I_n.
+    \]
+    Substituting this into the expression for $HH^T$, we get
+    \[
+        HH^T=I_n-C^2=I_n+(n-1)I_n=nI_n.
+    \]
+    Hence $H$ is a $\{\pm1\}$-matrix satisfying
+    \[
+        HH^T=nI_n,
+    \]
+    so $H$ is a Hadamard matrix.
+\end{proof}
+
+\begin{definition}
+    Define
+    \[
+        \chi:\mathrm{GF}(q)\to\{-1,0,1\}\subseteq \mathbb{C}
+    \]
+    by
+    \[
+        \chi(x)=
+        \begin{cases}
+            0,  & \text{if } x=0,                      \\
+            1,  & \text{if } x \text{ is a square},    \\
+            -1, & \text{if } x \text{ is a nonsquare}.
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{proposition}\label{hx2ueq}
+    Let $\chi$ be the quadratic character on $\mathrm{GF}(q)$ for odd $q$. Then the following hold:
+    \begin{enumerate}
+        \item For all $x,y\in \mathrm{GF}(q)$,
+              \[
+                  \chi(x)\chi(y)=\chi(xy).
+              \]
+        \item
+              \[
+                  \sum_{x\in \mathrm{GF}(q)} \chi(x)=0.
+              \]
+        \item For every $c\in \mathrm{GF}(q)^\times$,
+              \[
+                  \sum_{b\in \mathrm{GF}(q)} \chi(b)\chi(b+c)=-1.
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove the three assertions in order.
+
+    \begin{enumerate}
+        \item If $x=0$ or $y=0$, then both sides are equal to $0$.
+              Now assume $x,y\in \mathrm{GF}(q)^\times$. By definition of the quadratic character,
+              \[
+                  \chi(z)=
+                  \begin{cases}
+                      1,  & \text{if } z \text{ is a square},    \\
+                      -1, & \text{if } z \text{ is a nonsquare}.
+                  \end{cases}
+              \]
+              In $\mathrm{GF}(q)^\times$, the product of two squares is a square, the product of a square and a nonsquare is a nonsquare, and the product of two nonsquares is again a square. Hence
+              \[
+                  \chi(xy)=\chi(x)\chi(y).
+              \]
+
+        \item Since $q$ is odd, among the $q-1$ nonzero elements of $\mathrm{GF}(q)$, exactly half are squares and half are nonsquares. Therefore
+              \[
+                  \sum_{x\in \mathrm{GF}(q)} \chi(x)
+                  =
+                  \chi(0)+\sum_{\substack{x\in \mathrm{GF}(q)^\times\\ x\text{ square}}}1
+                  +\sum_{\substack{x\in \mathrm{GF}(q)^\times\\ x\text{ nonsquare}}}(-1)
+                  =
+                  0+\frac{q-1}{2}-\frac{q-1}{2}=0.
+              \]
+
+        \item Let
+              \[
+                  S(c):=\sum_{b\in \mathrm{GF}(q)}\chi(b)\chi(b+c),
+                  \qquad c\in \mathrm{GF}(q)^\times.
+              \]
+              By part~(1),
+              \[
+                  S(c)=\sum_{b\in \mathrm{GF}(q)}\chi\bigl(b(b+c)\bigr).
+              \]
+              Since $c\neq 0$, write $b=ct$. Then
+              \[
+                  S(c)=\sum_{t\in \mathrm{GF}(q)}\chi\bigl(c^2t(t+1)\bigr)
+                  =\sum_{t\in \mathrm{GF}(q)}\chi\bigl(t(t+1)\bigr),
+              \]
+              because $\chi(c^2)=1$.
+
+              Now the terms $t=0$ and $t=-1$ contribute $0$, so
+              \[
+                  S(c)=\sum_{t\in \mathrm{GF}(q)\setminus\{-1\}}\chi\!\left(\frac{t}{t+1}\right).
+              \]
+              Consider the map
+              \[
+                  \phi:\mathrm{GF}(q)\setminus\{-1\}\longrightarrow \mathrm{GF}(q)\setminus\{1\},
+                  \qquad
+                  \phi(t)=\frac{t}{t+1}.
+              \]
+              This is a bijection, with inverse
+              \[
+                  \phi^{-1}(u)=\frac{u}{1-u}.
+              \]
+              Hence
+              \[
+                  S(c)=\sum_{u\in \mathrm{GF}(q)\setminus\{1\}}\chi(u)
+                  =\sum_{u\in \mathrm{GF}(q)}\chi(u)-\chi(1).
+              \]
+              Using part~(2) and $\chi(1)=1$, we obtain
+              \[
+                  S(c)=0-1=-1.
+              \]
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Let
+    \[
+        \mathbb{F}_q=\{a_0,a_1,\dots,a_{q-1}\},
+        \qquad a_0:=0.
+    \]
+    Define the \(q\times q\) matrix \(Q=(q_{ij})\) by
+    \[
+        q_{ij}=\chi(a_i-a_j),
+        \qquad 0\leqslant i,j\leqslant q-1.
+    \]
+    Then, if \(q\equiv 1 \pmod{4}\) (in this case $-1$ is a square hence $\chi(-1)=1$), the matrix \(Q\) is symmetric; if \(q\equiv 3 \pmod{4}\), the matrix \(Q\) is antisymmetric.
+\end{definition}
+
+\begin{definition}
+    Let \(\mathbf{1}\) denote the all-ones column vector of length \(q\), and let
+    \[
+        J:=\mathbf{1}\mathbf{1}^T
+    \]
+    be the \(q\times q\) all-ones matrix. Define the \((q+1)\times(q+1)\) matrix
+    \[
+        C:=
+        \begin{pmatrix}
+            0                      & \mathbf{1}^T \\
+            \varepsilon \mathbf{1} & Q
+        \end{pmatrix},
+    \]
+    where
+    \[
+        \varepsilon=
+        \begin{cases}
+            1,  & \text{if } Q \text{ is symmetric},     \\
+            -1, & \text{if } Q \text{ is antisymmetric}.
+        \end{cases}
+    \]
+    Thus \(C\) is symmetric or antisymmetric accordingly.
+
+    By Proposition \ref{hx2ueq} 2 and 3, we have
+    \[
+        QJ=JQ=0
+        \qquad\text{and}\qquad
+        QQ^T=qI-J.
+    \]
+    Therefore
+    \[
+        CC^T=
+        \begin{pmatrix}
+            0                      & \mathbf{1}^T \\
+            \varepsilon \mathbf{1} & Q
+        \end{pmatrix}
+        \begin{pmatrix}
+            0          & \varepsilon \mathbf{1}^T \\
+            \mathbf{1} & Q^T
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            q & 0      \\
+            0 & J+QQ^T
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            q & 0  \\
+            0 & qI
+        \end{pmatrix}
+        =
+        qI_{q+1}.
+    \]
+    Hence \(C\) is a conference matrix.
+\end{definition}
+
+\begin{theorem}[Williamson, 1944]
+    Let \(A_1,A_2,A_3,A_4\in M_n(\mathbb{R})\) be symmetric matrices such that
+    \[
+        A_iA_j=A_jA_i
+        \qquad\text{for all }1\le i,j\le 4.
+    \]
+    Define the block matrix
+    \[
+        H=
+        \begin{pmatrix}
+            A_1  & A_2  & A_3  & A_4  \\
+            -A_2 & A_1  & -A_4 & A_3  \\
+            -A_3 & A_4  & A_1  & -A_2 \\
+            -A_4 & -A_3 & A_2  & A_1
+        \end{pmatrix}.
+    \]
+    Then
+    \[
+        HH^T=I_4\otimes\bigl(A_1^2+A_2^2+A_3^2+A_4^2\bigr).
+    \]
+    In particular, if
+    \begin{enumerate}
+        \item all entries of each \(A_i\) are in \(\{\pm1\}\),
+        \item
+              \[
+                  A_1^2+A_2^2+A_3^2+A_4^2=4n\,I_n,
+              \]
+    \end{enumerate}
+    then \(H\) is a Hadamard matrix of order \(4n\).
+\end{theorem}
+
+\begin{proof}
+    Since each \(A_i\) is symmetric, we have
+    \[
+        H^T=
+        \begin{pmatrix}
+            A_1 & -A_2 & -A_3 & -A_4 \\
+            A_2 & A_1  & A_4  & -A_3 \\
+            A_3 & -A_4 & A_1  & A_2  \\
+            A_4 & A_3  & -A_2 & A_1
+        \end{pmatrix}.
+    \]
+
+    We now compute the block entries of \(HH^T\).
+
+    First, the \((1,1)\)-block is
+    \[
+        A_1^2+A_2^2+A_3^2+A_4^2.
+    \]
+    By the same calculation, every diagonal block of \(HH^T\) is equal to
+    \[
+        S:=A_1^2+A_2^2+A_3^2+A_4^2.
+    \]
+
+    Next, we check that every off-diagonal block is zero. For example, the
+    \((1,2)\)-block is
+    \[
+        -A_1A_2+A_2A_1-A_3A_4+A_4A_3=0,
+    \]
+    because the matrices commute pairwise. Similarly,
+    \[
+        (1,3)\text{-block}=-A_1A_3+A_2A_4+A_3A_1-A_4A_2=0,
+    \]
+    and
+    \[
+        (1,4)\text{-block}=-A_1A_4-A_2A_3+A_3A_2+A_4A_1=0.
+    \]
+    The other off-diagonal blocks vanish in the same way.
+
+    Hence
+    \[
+        HH^T=
+        \begin{pmatrix}
+            S & 0 & 0 & 0 \\
+            0 & S & 0 & 0 \\
+            0 & 0 & S & 0 \\
+            0 & 0 & 0 & S
+        \end{pmatrix}
+        =I_4\otimes S
+        =I_4\otimes\bigl(A_1^2+A_2^2+A_3^2+A_4^2\bigr).
+    \]
+
+    If moreover each \(A_i\) has only \(\pm1\) entries and
+    \[
+        A_1^2+A_2^2+A_3^2+A_4^2=4n\,I_n,
+    \]
+    then every entry of \(H\) is also in \(\{\pm1\}\), and
+    \[
+        HH^T=I_4\otimes (4n\,I_n)=4n\,I_{4n}.
+    \]
+    Therefore \(H\) is a Hadamard matrix of order \(4n\).
+\end{proof}
+
 \chapter{Homework}
 
 \section{Week 1}
@@ -5975,40 +6691,40 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
 
 \begin{exercise}
     Give a graph with degree $3$, girth $5$, and $10$ vertices.
-    \end{exercise}
+\end{exercise}
 
-    \begin{proof}
+\begin{proof}
     The Petersen graph (below) has $10$ vertices, is $3$-regular, and has girth $5$.
     \begin{center}
-    \begin{tikzpicture}[scale=1.15]
-        \def\R{2.35} % outer pentagon radius
-        \def\r{1.05} % inner star radius
-        \foreach \j in {0,...,4} {
-            \node[vertex] (Pout\j) at ({90-72*\j}:\R) {};
-            \node[vertex] (Pin\j) at ({90-72*\j}:\r) {};
-        }
-        % outer $5$-cycle
-        \draw (Pout0)--(Pout1)--(Pout2)--(Pout3)--(Pout4)--(Pout0);
-        % inner $\{5/2\}$ star (pentagram)
-        \draw (Pin0)--(Pin2)--(Pin4)--(Pin1)--(Pin3)--(Pin0);
-        % spokes
-        \foreach \j in {0,...,4} \draw (Pout\j)--(Pin\j);
-    \end{tikzpicture}
+        \begin{tikzpicture}[scale=1.15]
+            \def\R{2.35} % outer pentagon radius
+            \def\r{1.05} % inner star radius
+            \foreach \j in {0,...,4} {
+                    \node[vertex] (Pout\j) at ({90-72*\j}:\R) {};
+                    \node[vertex] (Pin\j) at ({90-72*\j}:\r) {};
+                }
+            % outer $5$-cycle
+            \draw (Pout0)--(Pout1)--(Pout2)--(Pout3)--(Pout4)--(Pout0);
+            % inner $\{5/2\}$ star (pentagram)
+            \draw (Pin0)--(Pin2)--(Pin4)--(Pin1)--(Pin3)--(Pin0);
+            % spokes
+            \foreach \j in {0,...,4} \draw (Pout\j)--(Pin\j);
+        \end{tikzpicture}
     \end{center}
-    \end{proof}
-    
-    \begin{exercise}
+\end{proof}
+
+\begin{exercise}
     Suppose that $G$ is a regular graph on $10$ vertices with adjacency matrix $A$,
     \[
-    \operatorname{tr}(A^2)=30,\qquad \operatorname{tr}(A^3)=0,\qquad \text{and}\qquad \operatorname{tr}(A^4)=150.
+        \operatorname{tr}(A^2)=30,\qquad \operatorname{tr}(A^3)=0,\qquad \text{and}\qquad \operatorname{tr}(A^4)=150.
     \]
     \begin{enumerate}
         \item[(a)] How many triangles does $G$ have?
         \item[(b)] How many $4$-cycles does $G$ have?
     \end{enumerate}
-    \end{exercise}
+\end{exercise}
 
-    \begin{proof}
+\begin{proof}
     Let $n=10$ and let $G$ be $k$-regular.
 
     \smallskip\noindent\textbf{(a)}
@@ -6053,6 +6769,6 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
     and equality holds only if every vertex lies on no $4$-cycle, i.e.\ $G$
     contains no subgraph isomorphic to $C_4$. Since $\operatorname{tr}(A^4)=150$,
     the number of (distinct) $4$-cycles is $0$.
-    \end{proof}
+\end{proof}
 
 \end{document}
