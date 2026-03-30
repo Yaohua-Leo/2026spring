@@ -4833,7 +4833,13 @@ If \(M_R,\ {}_R N_T\), then \(M\otimes_R N\) is a right \(T\)-module:
     \noindent\textbf{$(1)\Rightarrow(2)$.}
     Assume that $J$ is injective, and let $\varphi\colon J\to M$ be a monomorphism.
     Apply the defining property of injectivity to the monomorphism $\varphi$ and the map
-    $\operatorname{id}_J\colon J\to J$.
+    $\operatorname{id}_J\colon J\to J$:
+    \[
+        \begin{tikzcd}
+            J \arrow[r, hook, "\varphi"] \arrow[d, "\operatorname{id}_J"'] & M \arrow[dl, dashed, "\exists\,\psi"] \\
+            J &
+        \end{tikzcd}
+    \]
     Then there exists an $R$-module homomorphism $\psi\colon M\to J$ such that
     \[
     \psi\circ\varphi=\operatorname{id}_J.
@@ -5240,18 +5246,18 @@ If \(M_R,\ {}_R N_T\), then \(M\otimes_R N\) is a right \(T\)-module:
     
     We claim that $K_m=0$.
     Let $x\in K_m$.
-    Because $f$ is surjective, there exists $y\in V$ such that
+    Because $f$ is surjective, $f^m$ is also surjective, there exists $y\in V$ such that
     \[
-    f(y)=x.
+    f^m(y)=x.
     \]
     Now
     \[
-    f^{m+1}(y)=f^m(f(y))=f^m(x)=0,
+    f^{2m}(y)=f^m(f^m(y))=f^m(x)=0,
     \]
-    so $y\in K_{m+1}=K_m$.
+    so $y\in K_{2m}=K_m$.
     Therefore
     \[
-    x=f(y)=0.
+    x=f^m(y)=0.
     \]
     Thus $K_m=0$.
     
