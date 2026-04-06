@@ -10,3 +10,6 @@
 .vscode/
 %OUTDIR%/
 Jordan algebra/topics in algebra/photo of notes.zip
+__pycache__/
+*.pyc
+tmp/metanote_pipeline/
