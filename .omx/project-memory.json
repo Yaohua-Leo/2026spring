@@ -1,0 +1,10 @@
+{
+  "directives": [
+    {
+      "directive": "When writing generated LaTeX from metanotes, omit editorial notes and workflow text from the lecture body. Do not include source-tracking text, OCR comments, verification reminders, or Chinese editor annotations in the final .tex.",
+      "priority": "high",
+      "context": "metanote-to-latex lecture-note generation",
+      "timestamp": "2026-04-09T12:55:30.104Z"
+    }
+  ]
+}

@@ -2904,6 +2904,117 @@ has a basis consisting of all paths from $j$ to $i$ in $Q$. In particular,
 D(P_Q(i)) = I_{Q^{\operatorname{op}}}(i).
 \]
 
+\begin{proof}
+    For each vertex $j\in Q_0$, let $\mathcal P_Q(i,j)$ denote the set of all paths from
+    $i$ to $j$ in $Q$. By definition,
+    \[
+    P_Q(i)_j = k\langle \mathcal P_Q(i,j)\rangle .
+    \]
+    Therefore
+    \[
+    D\bigl(P_Q(i)\bigr)_j=\operatorname{Hom}_k\bigl(P_Q(i)_j,k\bigr)
+    \]
+    has dual basis
+    \[
+    \{\varepsilon_c \mid c\in \mathcal P_Q(i,j)\},
+    \qquad
+    \varepsilon_c(c')=\delta_{c,c'}.
+    \]
+    
+    On the other hand, reversing arrows gives a bijection
+    \[
+    \mathcal P_Q(i,j)\longrightarrow \mathcal P_{Q^{\operatorname{op}}}(j,i),
+    \qquad
+    c\longmapsto c^{\operatorname{op}}.
+    \]
+    Thus, by the definition of the injective representation over $Q^{\operatorname{op}}$,
+    \[
+    I_{Q^{\operatorname{op}}}(i)_j
+    =
+    k\langle \mathcal P_{Q^{\operatorname{op}}}(j,i)\rangle
+    \]
+    has basis
+    \[
+    \{c^{\operatorname{op}}\mid c\in\mathcal P_Q(i,j)\}.
+    \]
+    So for each $j\in Q_0$ we obtain a vector space isomorphism
+    \[
+    \Phi_j\colon D\bigl(P_Q(i)\bigr)_j \longrightarrow I_{Q^{\operatorname{op}}}(i)_j,
+    \qquad
+    \Phi_j(\varepsilon_c)=c^{\operatorname{op}}.
+    \]
+    
+    It remains to check that these maps are compatible with the arrow maps.
+    Let $\alpha\colon j\to \ell$ be an arrow in $Q$. Then $\alpha^{\operatorname{op}}\colon \ell\to j$
+    is an arrow in $Q^{\operatorname{op}}$.
+    
+    In $P_Q(i)$, the map
+    \[
+    \varphi_\alpha\colon P_Q(i)_j\to P_Q(i)_\ell
+    \]
+    is given on basis paths by
+    \[
+    \varphi_\alpha(c)=c\alpha.
+    \]
+    Hence in $D(P_Q(i))$, the map corresponding to $\alpha^{\operatorname{op}}$ is
+    \[
+    D(\varphi_\alpha)\colon D\bigl(P_Q(i)_\ell\bigr)\to D\bigl(P_Q(i)_j\bigr),
+    \qquad
+    f\longmapsto f\circ \varphi_\alpha.
+    \]
+    
+    Now let $p\in \mathcal P_Q(i,\ell)$. For any basis path $c\in \mathcal P_Q(i,j)$, we have
+    \[
+    D(\varphi_\alpha)(\varepsilon_p)(c)
+    =
+    \varepsilon_p(\varphi_\alpha(c))
+    =
+    \varepsilon_p(c\alpha)
+    =
+    \begin{cases}
+    1,& p=c\alpha,\\
+    0,& \text{otherwise}.
+    \end{cases}
+    \]
+    Therefore
+    \[
+    D(\varphi_\alpha)(\varepsilon_p)
+    =
+    \begin{cases}
+    \varepsilon_c,& p=c\alpha,\\
+    0,& \text{otherwise}.
+    \end{cases}
+    \]
+    
+    Under the bijection of paths, the condition $p=c\alpha$ is equivalent to
+    \[
+    p^{\operatorname{op}}=\alpha^{\operatorname{op}}c^{\operatorname{op}}.
+    \]
+    But this is exactly the defining rule for the arrow map
+    \[
+    \psi_{\alpha^{\operatorname{op}}}\colon
+    I_{Q^{\operatorname{op}}}(i)_\ell\to I_{Q^{\operatorname{op}}}(i)_j,
+    \]
+    namely,
+    \[
+    \psi_{\alpha^{\operatorname{op}}}(p^{\operatorname{op}})
+    =
+    \begin{cases}
+    c^{\operatorname{op}},& p^{\operatorname{op}}=\alpha^{\operatorname{op}}c^{\operatorname{op}},\\
+    0,& \text{otherwise}.
+    \end{cases}
+    \]
+    Thus
+    \[
+    \Phi_j\circ D(\varphi_\alpha)=\psi_{\alpha^{\operatorname{op}}}\circ \Phi_\ell.
+    \]
+    So the family $(\Phi_j)_{j\in Q_0}$ is an isomorphism of representations
+    \[
+    D\bigl(P_Q(i)\bigr)\cong I_{Q^{\operatorname{op}}}(i).
+    \]
+    This proves the claim.
+    \end{proof}
+
 \end{enumerate}
 
 

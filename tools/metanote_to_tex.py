@@ -326,8 +326,21 @@ def sanitize_latex_body(latex_body: str) -> str:
     return body.strip()
 
 
-def build_insertion_block(run_id: str, lecture_title: str, latex_body: str, metanote_path: Path, pdf_path: Path) -> str:
+def build_insertion_block(
+    run_id: str,
+    lecture_title: str,
+    latex_body: str,
+    metanote_path: Path,
+    pdf_path: Path,
+    *,
+    style_profile: StyleProfile | None = None,
+    omit_heading: bool = False,
+) -> str:
     sanitized = sanitize_latex_body(latex_body)
+    if omit_heading and style_profile is not None:
+        rendered_heading = render_heading(style_profile, lecture_title)
+        if sanitized.startswith(rendered_heading):
+            sanitized = sanitized[len(rendered_heading) :].lstrip()
     return (
         f"% >>> METANOTE-AUTO-START\n"
         f"% {dedupe_marker(run_id)}\n"
@@ -345,10 +358,15 @@ def resolved_heading_text(style_profile: StyleProfile, title: str) -> str:
     return title
 
 
-def has_existing_heading(target_tex_path: Path, style_profile: StyleProfile, title: str) -> bool:
+def find_existing_heading_match(target_text: str, style_profile: StyleProfile, title: str) -> re.Match[str] | None:
+    command = style_profile.lecture_heading_command or "chapter"
     heading = resolved_heading_text(style_profile, title)
-    pattern = re.compile(rf"\\{style_profile.lecture_heading_command}\{{{re.escape(heading)}\}}")
-    return bool(pattern.search(read_utf8(target_tex_path)))
+    pattern = re.compile(rf"^[ \t]*\\{command}\{{{re.escape(heading)}\}}[ \t]*\r?\n?", re.MULTILINE)
+    return pattern.search(target_text)
+
+
+def has_existing_heading(target_tex_path: Path, style_profile: StyleProfile, title: str) -> bool:
+    return find_existing_heading_match(read_utf8(target_tex_path), style_profile, title) is not None
 
 
 def insert_before_end_document(target_text: str, block: str) -> str:
@@ -359,6 +377,45 @@ def insert_before_end_document(target_text: str, block: str) -> str:
     prefix = target_text[:index].rstrip()
     suffix = target_text[index:]
     return prefix + "\n\n" + block.rstrip() + "\n\n" + suffix
+
+
+def find_existing_heading_slot(target_text: str, style_profile: StyleProfile, title: str) -> tuple[re.Match[str] | None, int | None]:
+    match = find_existing_heading_match(target_text, style_profile, title)
+    if not match:
+        return None, None
+    command = style_profile.lecture_heading_command or "chapter"
+    if command == "chapter":
+        next_heading_pattern = re.compile(r"^[ \t]*\\chapter\{[^}]+\}[ \t]*\r?\n?", re.MULTILINE)
+    elif style_profile.lecture_heading_prefix:
+        next_heading_pattern = re.compile(
+            rf"^[ \t]*\\{command}\{{{re.escape(style_profile.lecture_heading_prefix)}[^}}]*\}}[ \t]*\r?\n?",
+            re.MULTILINE,
+        )
+    else:
+        return match, None
+    next_match = next_heading_pattern.search(target_text, match.end())
+    end_index = next_match.start() if next_match else target_text.rfind(r"\end{document}")
+    if end_index == -1:
+        raise ValueError("Target TeX does not contain \\end{document}.")
+    between = target_text[match.end() : end_index]
+    if between.strip():
+        return match, None
+    return match, match.end()
+
+
+def insert_at_heading_slot(target_text: str, block: str, insertion_index: int) -> str:
+    prefix = target_text[:insertion_index].rstrip()
+    suffix = target_text[insertion_index:].lstrip("\r\n")
+    if suffix:
+        return prefix + "\n\n" + block.rstrip() + "\n\n" + suffix
+    return prefix + "\n\n" + block.rstrip() + "\n"
+
+
+def insert_lecture_block(target_text: str, block: str, style_profile: StyleProfile, title: str) -> str:
+    _, insertion_index = find_existing_heading_slot(target_text, style_profile, title)
+    if insertion_index is not None:
+        return insert_at_heading_slot(target_text, block, insertion_index)
+    return insert_before_end_document(target_text, block)
 
 
 def write_sources_log(path: Path, title: str, sources: list[GeneratedSource], summary: str) -> None:
@@ -431,7 +488,7 @@ def run_mpx_convert(source: Path, destination: Path) -> tuple[bool, str]:
     if not node:
         return False, "node was not found on PATH."
     command = [node, str(wrapper), "convert", str(source), str(destination)]
-    completed = subprocess.run(command, capture_output=True, text=True, timeout=1800)
+    completed = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=1800)
     output = (completed.stdout or "") + "\n" + (completed.stderr or "")
     return completed.returncode == 0, output.strip()
 
@@ -449,6 +506,60 @@ def normalize_sentence(text: str) -> str:
         return ""
     if cleaned[-1] not in ".!?。！？:$}]":
         cleaned += "."
+    return cleaned
+
+
+EDITORIAL_LINE_PATTERNS = [
+    re.compile(pattern, re.IGNORECASE)
+    for pattern in [
+        r"\bsource pdf\b",
+        r"\bocr\b",
+        r"\bplease verify\b",
+        r"\bplease restore\b",
+        r"\bworkflow\b",
+        r"\bmetanote\b",
+        r"\bthe source then\b",
+        r"\bthe source appears to\b",
+        r"\bthe handwritten note\b",
+        r"\bhandwritten notes\b",
+        r"\btranscript supports\b",
+        r"\bexact statement\b",
+        r"\bleft/right convention\b",
+        r"\bplease restore the exact\b",
+    ]
+]
+
+
+def is_editorial_line(text: str) -> bool:
+    cleaned = normalize_block_text(text)
+    if not cleaned:
+        return False
+    lowered = cleaned.lower()
+    if any(pattern.search(cleaned) for pattern in EDITORIAL_LINE_PATTERNS):
+        return True
+    return any(
+        marker in lowered
+        for marker in [
+            "请复核",
+            "请补充",
+            "源笔记",
+            "草稿",
+            "待核",
+            "恢复 exact",
+            "恢复原笔记",
+        ]
+    )
+
+
+def strip_editorial_lines(text: str) -> str:
+    kept_lines: list[str] = []
+    for raw_line in text.splitlines():
+        stripped = raw_line.strip()
+        if stripped and is_editorial_line(stripped):
+            continue
+        kept_lines.append(raw_line.rstrip())
+    cleaned = "\n".join(kept_lines)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()
     return cleaned
 
 
@@ -638,6 +749,8 @@ class OpenAIBackend:
             f"Stay consistent with the target file style summary: {style_profile.summary} "
             "Only use theorem-like environments that exist in the target style. "
             "Keep mathematical claims conservative and textbook-safe. "
+            "Do not copy editorial metanote notes into latex_body: omit workflow notes, source-tracking text, OCR comments, "
+            "verification reminders, and Chinese annotations that are only for the editor. "
             "If you use web search, cite precise URLs in the sources array. "
             "The final LaTeX should be ready to append before \\end{document}."
         )
@@ -743,6 +856,8 @@ class LocalFallbackBackend:
         for block in blocks:
             if block.tag in {"lecture", "chapter"}:
                 continue
+            if block.tag == "topic":
+                continue
             if block.tag == "sec":
                 has_section = True
                 lines.extend([rf"\section{{{normalize_block_text(block.text)}}}", ""])
@@ -759,7 +874,9 @@ class LocalFallbackBackend:
                 lines.extend(self._render_proof(block.text, previous_statement, bool(ocr_text)))
                 continue
             env = ENV_BY_TAG.get(block.tag)
-            normalized_text = normalize_block_text(block.text)
+            normalized_text = normalize_block_text(strip_editorial_lines(block.text))
+            if not normalized_text:
+                continue
             if env:
                 lines.extend([rf"\begin{{{env}}}", normalized_text, rf"\end{{{env}}}", ""])
                 if block.tag in {"thm", "lemma", "prop", "cor"}:
@@ -818,21 +935,11 @@ class LocalFallbackBackend:
 
     @staticmethod
     def _render_proof(hint: str, previous_statement: str, has_ocr_support: bool) -> list[str]:
-        lines = [r"\begin{proof}"]
-        if previous_statement:
-            lines.append("We follow the standard argument indicated in the handwritten notes for the preceding statement.")
-        else:
-            lines.append("We follow the proof strategy indicated in the handwritten notes.")
-        translated_hint = translate_common_hint_phrases(hint)
-        if translated_hint:
-            lines.append(translated_hint)
-        if has_ocr_support:
-            lines.append("The OCR transcript supports the same outline, and the remaining details are routine.")
-        else:
-            lines.append("The remaining details are routine once this setup is in place.")
-        lines.append(r"\end{proof}")
-        lines.append("")
-        return lines
+        cleaned_hint = strip_editorial_lines(hint)
+        translated_hint = translate_common_hint_phrases(cleaned_hint) if cleaned_hint else ""
+        if not translated_hint:
+            return []
+        return [r"\begin{proof}", translated_hint, r"\end{proof}", ""]
 
 
 class MockBackend:
@@ -953,8 +1060,8 @@ def compile_candidate(candidate_text: str, target_tex_path: Path, run_dir: Path)
     return completed.returncode == 0, compile_log_path
 
 
-def write_target_tex(target_tex_path: Path, insertion_block: str) -> None:
-    updated = insert_before_end_document(read_utf8(target_tex_path), insertion_block)
+def write_target_tex(target_tex_path: Path, insertion_block: str, style_profile: StyleProfile, title: str) -> None:
+    updated = insert_lecture_block(read_utf8(target_tex_path), insertion_block, style_profile, title)
     write_utf8(target_tex_path, updated)
 
 
@@ -1021,8 +1128,13 @@ def run_pipeline(args: argparse.Namespace) -> int:
     if not args.force and has_existing_run(target_tex_path, run_id):
         eprint(f"Duplicate run detected in target TeX for run id {run_id}. Use --force to override.")
         return 2
-    if not args.force and has_existing_heading(target_tex_path, style_profile, title):
-        eprint(f"Target TeX already has a lecture heading for '{resolved_heading_text(style_profile, title)}'. Use --force to append anyway.")
+    target_text = read_utf8(target_tex_path)
+    heading_match, heading_slot = find_existing_heading_slot(target_text, style_profile, title)
+    if not args.force and heading_match and heading_slot is None:
+        eprint(
+            f"Target TeX already has a non-empty lecture block for "
+            f"'{resolved_heading_text(style_profile, title)}'. Use --force to append anyway."
+        )
         return 2
     run_dir = make_run_dir(repo_root, title, run_id)
     course_root = guess_course_root(target_tex_path)
@@ -1129,8 +1241,16 @@ def run_pipeline(args: argparse.Namespace) -> int:
     if not result.latex_body.strip():
         eprint("Generation returned no LaTeX body.")
         return 4
-    insertion_block = build_insertion_block(run_id, result.lecture_title or title, result.latex_body, metanote_path, pdf_path)
-    candidate_text = insert_before_end_document(read_utf8(target_tex_path), insertion_block)
+    insertion_block = build_insertion_block(
+        run_id,
+        result.lecture_title or title,
+        result.latex_body,
+        metanote_path,
+        pdf_path,
+        style_profile=style_profile,
+        omit_heading=heading_slot is not None,
+    )
+    candidate_text = insert_lecture_block(target_text, insertion_block, style_profile, title)
     write_utf8(run_dir / "candidate_fragment.texfrag", sanitize_latex_body(result.latex_body) + "\n")
     compile_ok, compile_log_path = compile_candidate(candidate_text, target_tex_path, run_dir)
     manifest["compile_log"] = str(compile_log_path)
@@ -1141,7 +1261,7 @@ def run_pipeline(args: argparse.Namespace) -> int:
     if args.command == "dry-run":
         eprint(f"Dry-run succeeded. Candidate artifacts are in {run_dir}")
         return 0
-    write_target_tex(target_tex_path, insertion_block)
+    write_target_tex(target_tex_path, insertion_block, style_profile, title)
     eprint(f"Wrote lecture block into {target_tex_path}")
     return 0
 
