@@ -1,0 +1,632 @@
+\documentclass[12pt]{amsart}
+
+
+\setlength{\textheight}{23cm} 
+\setlength{\textwidth}{17.4cm} 
+\setlength{\topmargin}{-1.3cm} 
+\addtolength{\oddsidemargin}{-2cm} 
+\addtolength{\evensidemargin}{-2cm} 
+
+%\input s:/acentos.tex% fazer acentuação como no word
+
+\newcommand{\ai} {\vbox to 7pt{\hbox to 7pt{\vrule height 7pt width 7pt}}}
+
+%\newcommand{\overrightarrow} {\overrightarrow}
+
+
+
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\def\R{\mathbb R}
+\def\C{\mathbb C}
+\def\Z{\mathbb Z}
+\def\N{\mathbb N}
+\def\Q{\mathbb Q}
+
+
+\def\pn{\par\noindent}
+\def\dps{\displaystyle}
+\def\vs{\vskip}
+\def\hs{\hskip}
+\def\st {\stackrel}
+\def\cn{\centerline}
+\usepackage[all
+%,dvips
+]{xy} \xyoption{poly}
+\usepackage{epsfig}
+
+\begin{document}
+
+
+
+\cn{\bf \large  Midterm - Representations of Quivers}
+
+\medskip
+
+\cn{\bf April 13th, 2026}
+
+\bigskip
+
+\medskip
+
+\noindent {\it Choose up to five problems from this list to submit.}
+
+
+\medskip
+
+\begin{enumerate}
+
+\item [1.] Let $Q$ be the quiver $\xymatrix{1&&2\ar[rr]\ar[ll]&&3}$ and let $M$ be a representation 
+\bigskip
+$$
+\begin{array}{c}
+ \xymatrix{k&&&k^3\ar[rrr]^{\left[\begin{array}{ccc} 1&0&0\\0&1&0\end{array}\right]}\ar[lll]_{\left[\begin{array}{ccc} 1&0&0\end{array}\right]}&&&k^2}.\\
+\end{array}
+$$
+
+
+\noindent Write $M$ as a direct sum of simple representations, indecomposable projective and injective representations.
+
+\medskip
+
+\begin{proof}
+Identify \(Q\) with \(\,1\xleftarrow{\alpha}2\xrightarrow{\beta}3\,\). Then \(M\) is given by
+\[
+M_1=k,\qquad M_2=k^3,\qquad M_3=k^2,
+\]
+with (column vectors) \(\phi_\alpha=\begin{bmatrix}1&0&0\end{bmatrix}\colon k^3\to k\) and
+\(\phi_\beta=\begin{bmatrix}1&0&0\\0&1&0\end{bmatrix}\colon k^3\to k^2\).
+
+\medskip\noindent\textbf{Step 1: explicit summands.}
+Let \(e_1,e_2,e_3\) be the standard basis of \(k^3\) and \(f_1,f_2\) the standard basis of \(k^2\).
+Define subrepresentations \(M^{(1)},M^{(2)},M^{(3)}\subseteq M\) by
+\[
+M^{(1)}_1=k,\quad M^{(1)}_2=\langle e_1\rangle,\quad M^{(1)}_3=\langle f_1\rangle,
+\]
+\[
+M^{(2)}_1=0,\quad M^{(2)}_2=\langle e_2\rangle,\quad M^{(2)}_3=\langle f_2\rangle,
+\]
+\[
+M^{(3)}_1=0,\quad M^{(3)}_2=\langle e_3\rangle,\quad M^{(3)}_3=0.
+\]
+The restrictions of \(\phi_\alpha,\phi_\beta\) are well-defined on each summand, and at every vertex the subspaces sum to \(M_1,M_2,M_3\). Hence \(M=M^{(1)}\oplus M^{(2)}\oplus M^{(3)}\).
+
+\medskip\noindent\textbf{Step 2: identify each piece.}
+\begin{itemize}
+\item \(M^{(3)}\) has dimension vector \((0,1,0)\) and both arrow maps are zero; thus \(M^{(3)}\cong S(2)\) (simple).
+
+\item \(M^{(1)}\) has dimension vector \((1,1,1)\); the restrictions of \(\phi_\alpha\) and \(\phi_\beta\) are isomorphisms \(\langle e_1\rangle\to k\) and \(\langle e_1\rangle\to\langle f_1\rangle\). This is the indecomposable projective \(P(2)\): indeed \(P(2)_j\) has a basis of paths \(2\to j\), namely \(e_2,\alpha,\beta\), and both structure maps send the generator of \(P(2)_2\) to the corresponding basis vectors at \(1\) and~\(3\).
+
+\item \(M^{(2)}\) has dimension vector \((0,1,1)\); \(\phi_\alpha=0\) and \(\phi_\beta\) identifies \(\langle e_2\rangle\) with \(\langle f_2\rangle\). This is the indecomposable injective \(I(3)\): paths ending at \(3\) are \(e_3\) and \(\beta\) from~\(2\), so \(I(3)_2\) and \(I(3)_3\) are one-dimensional and the map along \(\beta\) is the identity in the path basis (same picture as \(I(2)\) in the notes for \(1\to 2\leftarrow 3\), but supported on the edge \(2\to 3\)).
+\end{itemize}
+
+\medskip\noindent\textbf{Conclusion.}
+\[
+M\;\cong\;P(2)\oplus I(3)\oplus S(2),
+\]
+a direct sum of an indecomposable projective, an indecomposable injective, and a simple representation.
+\end{proof}
+
+\bigskip
+
+\item [2.] Let $Q$ be the quiver 
+
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^{\beta}\ar@<-0.5ex>[ll]_{\alpha}}
+$$
+
+\noindent For any $\lambda\in k\cup\{\infty\}$, define $M_{\lambda}$ to be the representation:
+
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^{\lambda}\ar@<-0.5ex>[ll]_1}\quad \lambda\in k;
+$$
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^0\ar@<-0.5ex>[ll]_1}\quad \lambda=\infty.
+$$
+
+\
+
+\begin{enumerate}[label=(\alph*)]
+\item Show that each $M_{\lambda}$ is indecomposable.
+\item Show that $M_{\lambda}\simeq M_{\mu}$ if and only if $\lambda=\mu$. In particular,
+ the number of indecomposable representations depends on the choice of the field $k$.
+\item Show that $\operatorname{Hom}(M_{\lambda},M_{\mu})=0$ if $\lambda\neq \mu$.
+\end{enumerate}
+
+\medskip
+
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{proof}
+    Each $M_\lambda$ has dimension vector
+    \[
+    \underline{\dim}\,M_\lambda = (1,1).
+    \]
+    Suppose for contradiction that
+    \[
+    M_\lambda = N_1 \oplus N_2
+    \]
+    is a nontrivial decomposition (both $N_1,N_2\neq 0$). Since $\underline{\dim}\,N_1 + \underline{\dim}\,N_2 = (1,1)$, the only possibility is
+    \[
+    \underline{\dim}\,N_1 = (1,0),\qquad \underline{\dim}\,N_2 = (0,1)
+    \]
+    (or vice versa). The summand $N_2$ with $N_2(1)=0$ and $N_2(2)=k$ must be a subrepresentation. Since both arrows go from vertex~$2$ to vertex~$1$, this requires
+    \[
+    M_\lambda(\alpha)(k) \subseteq N_2(1) = 0 \qquad\text{and}\qquad M_\lambda(\beta)(k) \subseteq N_2(1) = 0.
+    \]
+
+    For $\lambda\in k$: the map $M_\lambda(\beta)=1\colon k\to k$ is nonzero, so
+    \[
+    M_\lambda(\beta)(k) = k \neq 0.
+    \]
+    This is a contradiction.
+
+    For $\lambda=\infty$: the map $M_\infty(\alpha)=1\colon k\to k$ is nonzero, so
+    \[
+    M_\infty(\alpha)(k) = k \neq 0.
+    \]
+    This is again a contradiction.
+
+    In both cases, no such subrepresentation $N_2$ exists, so $M_\lambda$ is indecomposable.
+    \end{proof}
+    \item
+    \begin{proof}
+    ($\Leftarrow$) If $\lambda=\mu$, the identity maps $f_1=f_2=\mathrm{id}_k$ give an isomorphism.
+
+    \medskip
+    ($\Rightarrow$) Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be an isomorphism, with
+    \[
+    f_1 = a\in k^*,\qquad f_2 = b\in k^*.
+    \]
+    The commutativity conditions for the two arrows $\alpha,\beta\colon 2\to 1$ are
+    \[
+    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    \]
+
+    \textbf{Case 1:} $\lambda,\mu\in k$. Then $M_\lambda(\alpha)=\lambda$, $M_\lambda(\beta)=1$, $M_\mu(\alpha)=\mu$, $M_\mu(\beta)=1$. The conditions become
+    \[
+    a\lambda = \mu b,\qquad a\cdot 1 = 1\cdot b.
+    \]
+    From the second equation, $a=b$. Substituting into the first:
+    \[
+    a\lambda = \mu a.
+    \]
+    Since $a\neq 0$, we can divide both sides by $a$ to get $\lambda=\mu$.
+
+    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$ and $M_\infty(\beta)=0$. The commutativity at $\beta$ gives
+    \[
+    a\cdot 1 = 0\cdot b = 0,
+    \]
+    so $a=0$, contradicting $a\in k^*$. Hence no isomorphism exists.
+
+    The case $\lambda=\infty$, $\mu\in k$ is symmetric.
+
+    \textbf{Case 3:} $\lambda=\mu=\infty$. Trivially $\lambda=\mu$.
+
+    \medskip
+    In all cases, $M_\lambda\cong M_\mu$ implies $\lambda=\mu$. Since
+    \[
+    |k\cup\{\infty\}| = |k|+1,
+    \]
+    the number of pairwise non-isomorphic indecomposable representations of this form depends on the cardinality of the field $k$.
+    \end{proof}
+    \item
+    \begin{proof}
+    Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be a morphism, with $f_1=a$ and $f_2=b$ (scalars). The commutativity conditions are
+    \[
+    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    \]
+
+    \textbf{Case 1:} $\lambda,\mu\in k$. The conditions become
+    \[
+    a\lambda = \mu b,\qquad a = b.
+    \]
+    Substituting $b=a$ into the first equation:
+    \[
+    a\lambda = \mu a \quad\Longrightarrow\quad a(\lambda-\mu) = 0.
+    \]
+    Since $\lambda\neq\mu$, we have $\lambda-\mu\neq 0$, so $a=0$. Then $b=a=0$.
+
+    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$, $M_\infty(\beta)=0$. The condition at $\beta$ gives
+    \[
+    a\cdot 1 = 0\cdot b = 0,
+    \]
+    so $a=0$. The condition at $\alpha$ then gives
+    \[
+    0\cdot\lambda = 1\cdot b \quad\Longrightarrow\quad b = 0.
+    \]
+
+    \textbf{Case 3:} $\lambda=\infty$, $\mu\in k$. Then $M_\infty(\beta)=0$, $M_\mu(\beta)=1$. The condition at $\beta$ gives
+    \[
+    a\cdot 0 = 1\cdot b \quad\Longrightarrow\quad b = 0.
+    \]
+    The condition at $\alpha$ gives
+    \[
+    a\cdot 1 = \mu\cdot 0 = 0 \quad\Longrightarrow\quad a = 0.
+    \]
+
+    In every case, $f_1=f_2=0$, so $f=0$. Therefore $\operatorname{Hom}(M_\lambda,M_\mu) = 0$.
+    \end{proof}
+\end{enumerate}
+\bigskip
+
+
+\bigskip
+
+
+\item[3.] Let $Q$ be a quiver, $\xymatrix{L\ar[r]^f & M\ar[r]^g&N}$ be an exact sequence in $rep\, Q$ and $X$ be representation of $Q$. 
+
+\noindent Show that 
+$\operatorname{Ker}g_*\subseteq \operatorname{Im} f_*$, where $f_*$ and $g_*$ are defined in
+$$
+ \xymatrix{\operatorname{Hom}(X,L)\ar[r]^{f_*}&\operatorname{Hom}(X,M)\ar[r]^{g_*} &\operatorname{Hom}(X,N)}.
+$$
+
+\begin{proof}
+    Let
+    \[
+    h \in \operatorname{Ker} g_*.
+    \]
+    By definition of \(g_*\), this means
+    \[
+    g_*(h)=0,
+    \]
+    so
+    \[
+    g \circ h = 0.
+    \]
+    
+    Since
+    \[
+    L \xrightarrow{\,f\,} M \xrightarrow{\,g\,} N
+    \]
+    is exact in \(\operatorname{rep} Q\), we have
+    \[
+    \operatorname{Im} f = \operatorname{Ker} g.
+    \]
+    Equivalently, \(f\colon L \to M\) is a kernel of \(g\).
+    
+    Now \(h\colon X \to M\) satisfies \(g \circ h = 0\). Therefore, by the universal
+    property of the kernel, there exists a morphism
+    \[
+    u \colon X \to L
+    \]
+    such that
+    \[
+    f \circ u = h.
+    \]
+    
+    But then, by definition of \(f_*\),
+    \[
+    f_*(u) = f \circ u = h.
+    \]
+    Hence
+    \[
+    h \in \operatorname{Im} f_*.
+    \]
+    
+    Since \(h \in \operatorname{Ker} g_*\) was arbitrary, it follows that
+    \[
+    \operatorname{Ker} g_* \subseteq \operatorname{Im} f_*.
+    \]
+    \end{proof}
+
+\bigskip
+
+\medskip
+
+\item[4.] Let $g: L\to M$ be an injective morphism between representations of $Q$, and let $I(i)$ be the injective
+representation at vertex $i$. Show that  the map 
+$$
+g^*:\operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i))
+$$
+\noindent is surjective.
+
+\begin{proof}
+    For every representation \(X\), there is a natural isomorphism
+    \[
+    \Psi_X \colon \operatorname{Hom}(X,I(i)) \xrightarrow{\;\sim\;} X_i^{\ast},
+    \]
+    where \(X_i^{\ast}=\operatorname{Hom}_k(X_i,k)\). Concretely, after identifying
+    \[
+    I(i)_i \cong k
+    \]
+    via the trivial path \(e_i\), a morphism \(f\colon X\to I(i)\) is sent to the linear functional
+    \[
+    \Psi_X(f)=f_i \in \operatorname{Hom}_k(X_i,k)=X_i^{\ast}.
+    \]
+    
+    Under these identifications, the map
+    \[
+    g^\ast \colon \operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i)), 
+    \qquad \psi \mapsto \psi\circ g,
+    \]
+    corresponds to the dual map
+    \[
+    g_i^{\ast} \colon M_i^{\ast} \to L_i^{\ast}, 
+    \qquad \lambda \mapsto \lambda\circ g_i.
+    \]
+    Indeed, for every \(\psi \in \operatorname{Hom}(M,I(i))\), we have
+    \[
+    \Psi_L\bigl(g^\ast(\psi)\bigr)
+     = \Psi_L(\psi\circ g)
+     = (\psi\circ g)_i
+     = \psi_i\circ g_i
+     = g_i^{\ast}(\psi_i)
+     = g_i^{\ast}\bigl(\Psi_M(\psi)\bigr).
+    \]
+    Hence the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    \operatorname{Hom}(M,I(i)) \arrow[r, "\Psi_M", "\sim"'] \arrow[d, "g^\ast"'] 
+    & M_i^\ast \arrow[d, "g_i^\ast"] \\
+    \operatorname{Hom}(L,I(i)) \arrow[r, "\Psi_L", "\sim"'] 
+    & L_i^\ast
+    \end{tikzcd}
+    \]
+    
+    Now \(g\colon L\to M\) is injective, so each component
+    \[
+    g_j\colon L_j\to M_j
+    \]
+    is injective; in particular, \(g_i\) is injective. Since we are working with finite-dimensional representations, \(L_i\) and \(M_i\) are finite-dimensional vector spaces. Therefore the dual map
+    \[
+    g_i^\ast \colon M_i^\ast \to L_i^\ast
+    \]
+    is surjective.
+    
+    For completeness, let \(\lambda \in L_i^\ast\). Since \(g_i\) is injective, it induces an isomorphism
+    \[
+    L_i \xrightarrow{\;\sim\;} g_i(L_i)\subseteq M_i.
+    \]
+    Thus \(\lambda\) defines a linear form on the subspace \(g_i(L_i)\) by
+    \[
+    g_i(x)\longmapsto \lambda(x).
+    \]
+    By linear algebra, this linear form extends to some \(\mu \in M_i^\ast\). Then
+    \[
+    g_i^\ast(\mu)=\mu\circ g_i=\lambda.
+    \]
+    Hence \(g_i^\ast\) is surjective.
+    
+    Since \(\Psi_M\) and \(\Psi_L\) are isomorphisms and the diagram above commutes, it follows that
+    \[
+    g^\ast \colon \operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i))
+    \]
+    is surjective.
+\end{proof}
+
+\bigskip
+
+\medskip
+
+\item[5.] Prove that any  projective representation corresponding to vertex $i$, $P(i)$ is indecomposable.
+
+\begin{proof}
+Let \(Q\) be acyclic and \(P(i)=(P(i)_j,\varphi_\alpha)\) the projective representation at~\(i\). Then \(P(i)_i\cong k\) (spanned by the lazy path \(e_i\)).
+
+Suppose \(P(i)=M\oplus N\) for some \(M,N\in\operatorname{Rep}Q\). After reordering, we may assume \(P(i)_i=M_i\) and \(N_i=0\).
+
+If \(N\neq 0\), choose a vertex \(\ell\) with \(N_\ell\neq 0\). The space \(P(i)_\ell\) has a basis consisting of all paths \(c=(i\mid \beta_1,\ldots,\beta_s\mid \ell)\) from \(i\) to~\(\ell\). Let \(\varphi_c=\varphi_{\beta_s}\cdots\varphi_{\beta_1}\) be the composition of the structure maps of \(P(i)\) along~\(c\). Because \(P(i)=M\oplus N\), the map \(\varphi_c\) sends \(M_i\oplus 0\) into \(M_\ell\oplus N_\ell\). But \(\varphi_c(e_i)=c\), so the basis element \(c\in P(i)_\ell\) lies in \(M_\ell\). Hence every basis path \(c\in P(i)_\ell\) lies in \(M_\ell\), contradicting \(N_\ell\neq 0\).
+
+Therefore \(N=0\) and \(P(i)\) is indecomposable.
+\end{proof}
+
+\bigskip
+
+\medskip
+
+\item[6.] Compute a projective resolutions for representations $S(1)$
+and $S(2)$ for quiver
+
+\bigskip
+
+$$
+Q: \qquad \xymatrix{1\ar[rr]\ar@/^0.9pc/[rrrr]&&2\ar[d]\ar[rr]&&3\ar[lld]\\ &&4&&}
+$$
+
+\begin{proof}
+    Recall that for each simple representation $S(i)$, its minimal projective resolution is obtained from the projective cover
+    \[
+    P(i)\twoheadrightarrow S(i),
+    \]
+    whose kernel is $\operatorname{rad} P(i)$.
+    
+    Moreover, for a path algebra of an acyclic quiver, one has
+    \[
+    \operatorname{rad} P(i)\cong \bigoplus_{\alpha:i\to j} P(j),
+    \]
+    where the direct sum runs over all arrows starting at $i$.
+    
+    \noindent\textbf{Resolution of $S(2)$.}
+    There are two arrows starting at $2$, namely
+    \[
+    \gamma:2\to 3,
+    \qquad
+    \delta:2\to 4.
+    \]
+    Hence
+    \[
+    \operatorname{rad} P(2)\cong P(3)\oplus P(4).
+    \]
+    Therefore
+    \[
+    0 \longrightarrow P(3)\oplus P(4)
+    \xrightarrow{\;h\;}
+    P(2)
+    \xrightarrow{\;\pi_2\;}
+    S(2)
+    \longrightarrow 0
+    \]
+    is exact, where $h=(\iota_\gamma,\iota_\delta)$ and:
+    \begin{itemize}
+        \item $\iota_\gamma:P(3)\to P(2)$ sends the generator of $P(3)_3\cong k$ to
+        \[
+        \gamma \in P(2)_3\cong k;
+        \]
+        \item $\iota_\delta:P(4)\to P(2)$ sends the generator of $P(4)_4\cong k$ to
+        \[
+        \delta \in P(2)_4\cong k^2.
+        \]
+    \end{itemize}
+    The image of $h$ is exactly the radical of $P(2)$, so this is the minimal projective resolution of $S(2)$.
+    
+    \medskip
+    \noindent\textbf{Resolution of $S(1)$.}
+    There are two arrows starting at $1$, namely
+    \[
+    \alpha:1\to 2,
+    \qquad
+    \beta:1\to 3.
+    \]
+    Thus
+    \[
+    \operatorname{rad} P(1)\cong P(2)\oplus P(3).
+    \]
+    Hence we have the exact sequence
+    \[
+    0 \longrightarrow P(2)\oplus P(3)
+    \xrightarrow{\;u\;}
+    P(1)
+    \xrightarrow{\;\pi_1\;}
+    S(1)
+    \longrightarrow 0,
+    \]
+    where $u=(\iota_\alpha,\iota_\beta)$ and:
+    \begin{itemize}
+        \item $\iota_\alpha:P(2)\to P(1)$ sends the generator of $P(2)_2\cong k$ to
+        \[
+        \alpha \in P(1)_2\cong k;
+        \]
+        \item $\iota_\beta:P(3)\to P(1)$ sends the generator of $P(3)_3\cong k$ to
+        \[
+        \beta \in P(1)_3\cong k^2.
+        \]
+    \end{itemize}
+    Its image is $\operatorname{rad} P(1)$, so this yields the minimal projective resolution of $S(1)$.
+\end{proof}
+
+
+\item[7.] Let $M=(M_i,\psi_{\alpha})$ be a representation of $Q$. Prove that for any vertex $i$ in $Q$, there is an isomorphism of vector
+spaces: 
+
+$$\operatorname{Hom}(M,I(i))\simeq M_i.$$
+
+\begin{proof}
+    Recall that $I(i)_j$ has as a basis the set of all paths from $j$ to $i$ in $Q$, and that for an arrow $\alpha\colon j\to \ell$, the structure map
+    \[
+    I(i)_\alpha\colon I(i)_j\to I(i)_\ell
+    \]
+    is defined on a basis element (a path $p\colon j\to i$) by
+    \[
+    I(i)_\alpha(p)=
+    \begin{cases}
+    p' & \text{if } p=p'\alpha, \text{ i.e., } p \text{ starts with } \alpha,\\
+    0 & \text{otherwise.}
+    \end{cases}
+    \]
+    In particular, $I(i)_i\cong k$ with basis $\{e_i\}$ (the trivial path at $i$).
+
+    Define
+    \[
+    \Phi\colon\operatorname{Hom}(M,I(i))\longrightarrow M_i^*=\operatorname{Hom}_k(M_i,k)
+    \]
+    by $\Phi(f)=f_i$, where we identify $I(i)_i\cong k$ via $e_i\mapsto 1$.
+    
+    \medskip\noindent\textbf{$\Phi$ is injective.}
+    Suppose $f\colon M\to I(i)$ is a morphism with $f_i=0$. Let $j\in Q_0$ and let $m\in M_j$. We must show $f_j(m)=0$, i.e., that for every path $p\colon j\to i$, the coefficient of $p$ in $f_j(m)$ is zero. Write $p=\alpha_r\cdots\alpha_1$ where $\alpha_k\colon j_{k-1}\to j_k$ with $j_0=j$ and $j_r=i$. Since $f$ is a morphism, commutativity gives
+    \[
+    f_i\circ\psi_{\alpha_r}\circ\cdots\circ\psi_{\alpha_1} = I(i)_{\alpha_r}\circ\cdots\circ I(i)_{\alpha_1}\circ f_j.
+    \]
+    Under the identification $I(i)_i\cong k$, the composition $I(i)_{\alpha_r}\circ\cdots\circ I(i)_{\alpha_1}$ applied to $f_j(m)$ extracts exactly the coefficient of $p$ in $f_j(m)$. Since $f_i=0$, the left-hand side vanishes, so every such coefficient is zero. Hence $f_j=0$ for all $j$, and $\Phi$ is injective.
+    
+    \medskip\noindent\textbf{$\Phi$ is surjective.}
+    Let $\lambda\in M_i^*=\operatorname{Hom}_k(M_i,k)$. We construct a morphism $f^\lambda\colon M\to I(i)$ with $f^\lambda_i=\lambda$. For each vertex $j$ and each $m\in M_j$, define
+    \[
+    f^\lambda_j(m)=\sum_{\substack{p\colon j\to i}} \lambda\bigl(\psi_p(m)\bigr)\cdot p,
+    \]
+    where $\psi_p=\psi_{\alpha_r}\circ\cdots\circ\psi_{\alpha_1}$ denotes the composition of the structure maps of $M$ along the path $p=\alpha_r\cdots\alpha_1$. This is a finite sum since $Q$ is acyclic. In particular, $f^\lambda_i(m)=\lambda(m)\cdot e_i$, which corresponds to $\lambda$ under the identification $I(i)_i\cong k$.
+    
+    We verify that $f^\lambda$ is a morphism. Let $\alpha\colon j\to\ell$ be an arrow. For $m\in M_j$:
+    \[
+    f^\lambda_\ell(\psi_\alpha(m))=\sum_{\substack{q\colon \ell\to i}} \lambda\bigl(\psi_q(\psi_\alpha(m))\bigr)\cdot q
+    =\sum_{\substack{q\colon \ell\to i}} \lambda\bigl(\psi_{q\alpha}(m)\bigr)\cdot q.
+    \]
+    On the other hand,
+    \[
+    I(i)_\alpha(f^\lambda_j(m))=\sum_{\substack{p\colon j\to i}} \lambda\bigl(\psi_p(m)\bigr)\cdot I(i)_\alpha(p).
+    \]
+    A path $p\colon j\to i$ satisfies $I(i)_\alpha(p)\neq 0$ if and only if $p$ starts with $\alpha$, i.e., $p=q\alpha$ for some path $q\colon\ell\to i$. In that case $I(i)_\alpha(q\alpha)=q$. Hence
+    \[
+    I(i)_\alpha(f^\lambda_j(m))=\sum_{\substack{q\colon\ell\to i}} \lambda\bigl(\psi_{q\alpha}(m)\bigr)\cdot q = f^\lambda_\ell(\psi_\alpha(m)).
+    \]
+    Thus $f^\lambda$ is a morphism and $\Phi(f^\lambda)=\lambda$, so $\Phi$ is surjective.
+    
+    \medskip\noindent\textbf{Conclusion.}
+    Since all vector spaces are finite-dimensional, $M_i^*\cong M_i$ as vector spaces (non-canonically). Therefore
+    \[
+    \operatorname{Hom}(M,I(i))\cong M_i^*\cong M_i
+    \]
+    as $k$-vector spaces.
+\end{proof}
+
+\medskip
+
+\bigskip
+
+
+\item[8.] Let $i$ and $j$ be vertices in the quiver $Q$. Prove that the vector space $\operatorname{Hom}(I(i),I(j))$
+has a basis consisting of all paths from $j$ to $i$ in $Q$. In particular, $\operatorname{End}(I(i))\simeq k$.
+
+\begin{proof}
+    By Problem~7 above, for any representation $X$ and any vertex $j$, the isomorphism
+    \[
+    \operatorname{Hom}(X,I(j))\cong X_j^*
+    \]
+    holds (where $X_j^*=\operatorname{Hom}_k(X_j,k)\cong X_j$ as a vector space in finite dimensions). Applying this with $X=I(i)$, we obtain
+    \[
+    \operatorname{Hom}(I(i),I(j))\cong I(i)_j^*.
+    \]
+    
+    By definition, $I(i)_j$ is the $k$-vector space with basis the set of all paths from $j$ to $i$ in $Q$. Hence
+    \[
+    \dim\operatorname{Hom}(I(i),I(j)) = \dim I(i)_j = |\{\text{paths from } j \text{ to } i\}|.
+    \]
+    
+    We now exhibit an explicit basis. For each path $p\colon j\to i$, we construct a morphism $\theta^p\colon I(i)\to I(j)$. By the isomorphism $\operatorname{Hom}(I(i),I(j))\cong I(i)_j^*$, a morphism $f\colon I(i)\to I(j)$ corresponds to a linear functional on $I(i)_j$. The path $p\in I(i)_j$ is a basis element, and we let $p^*\in I(i)_j^*$ be the corresponding dual basis element (the functional satisfying $p^*(p)=1$ and $p^*(q)=0$ for any other basis path $q\neq p$ from $j$ to $i$). Let $\theta^p$ be the morphism corresponding to $p^*$.
+    
+    Explicitly, for a vertex $\ell$ and a basis element $c\in I(i)_\ell$ (a path $c\colon\ell\to i$), the morphism $\theta^p$ is given by
+    \[
+    \theta^p_\ell(c)=
+    \begin{cases}
+    c' & \text{if } c=pc', \text{ i.e., the path } c \text{ factors as } \ell\xrightarrow{c'} j\xrightarrow{p} i,\\
+    0 & \text{otherwise.}
+    \end{cases}
+    \]
+    Here, $c'\colon\ell\to j$ is the remaining path after removing the suffix $p$. We verify this is a morphism. Let $\alpha\colon\ell\to\ell'$ be an arrow. For a basis element $c\colon\ell\to i$ of $I(i)_\ell$:
+    \begin{itemize}
+    \item The map $I(i)_\alpha(c)$ is nonzero only if $c$ starts with $\alpha$, say $c=c''\alpha$. In that case $I(i)_\alpha(c)=c''\in I(i)_{\ell'}$.
+    \item We need $\theta^p_{\ell'}(I(i)_\alpha(c))=I(j)_\alpha(\theta^p_\ell(c))$.
+    \end{itemize}
+    If $c=pc'$ for some path $c'\colon\ell\to j$, and also $c$ starts with $\alpha$ (so $c'$ starts with $\alpha$, say $c'=c''\alpha$), then $I(i)_\alpha(c)=pc''$ and $\theta^p_{\ell'}(pc'')=c''$. On the other hand, $\theta^p_\ell(c)=c'$ and $I(j)_\alpha(c')=c''$ (since $c'=c''\alpha$ starts with $\alpha$). Both sides agree. The other cases are similarly verified.
+    
+    \medskip
+    Since the paths $p$ from $j$ to $i$ form a basis of $I(i)_j$, the dual functionals $\{p^*\}$ form a basis of $I(i)_j^*$, and thus the morphisms $\{\theta^p\}$ form a basis of $\operatorname{Hom}(I(i),I(j))$.
+    
+    \medskip\noindent\textbf{The special case $i=j$.}
+    The only path from $i$ to $i$ is the trivial path $e_i$ (since $Q$ has no oriented cycles). Therefore
+    \[
+    \operatorname{End}(I(i))=\operatorname{Hom}(I(i),I(i))\cong k,
+    \]
+    with basis $\{\theta^{e_i}\}=\{\mathrm{id}_{I(i)}\}$.
+\end{proof}
+
+
+\end{enumerate}
+
+\end{document}

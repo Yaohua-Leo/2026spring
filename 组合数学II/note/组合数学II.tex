@@ -5165,66 +5165,224 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
 \end{theorem}
 
 \begin{proof}
-    Since each \(A_i\) is symmetric, we have
+    Since each $A_i$ is symmetric, we have
     \[
-        H^T=
-        \begin{pmatrix}
-            A_1 & -A_2 & -A_3 & -A_4 \\
-            A_2 & A_1  & A_4  & -A_3 \\
-            A_3 & -A_4 & A_1  & A_2  \\
-            A_4 & A_3  & -A_2 & A_1
-        \end{pmatrix}.
+    H^T=
+    \begin{pmatrix}
+    A_1 & -A_2 & -A_3 & -A_4\\
+    A_2 & A_1 & A_4 & -A_3\\
+    A_3 & -A_4 & A_1 & A_2\\
+    A_4 & A_3 & -A_2 & A_1
+    \end{pmatrix}.
     \]
-
-    We now compute the block entries of \(HH^T\).
-
-    First, the \((1,1)\)-block is
+    We compute the block product $HH^T$.
+    
+    \medskip
+    \noindent\textbf{Diagonal blocks.}
+    For the $(1,1)$-block we get
     \[
-        A_1^2+A_2^2+A_3^2+A_4^2.
+    A_1A_1+A_2A_2+A_3A_3+A_4A_4
+    =
+    A_1^2+A_2^2+A_3^2+A_4^2.
     \]
-    By the same calculation, every diagonal block of \(HH^T\) is equal to
+    By the same calculation, every diagonal block equals
     \[
-        S:=A_1^2+A_2^2+A_3^2+A_4^2.
+    S:=A_1^2+A_2^2+A_3^2+A_4^2.
     \]
-
-    Next, we check that every off-diagonal block is zero. For example, the
-    \((1,2)\)-block is
+    
+    \medskip
+    \noindent\textbf{Off-diagonal blocks.}
+    For the $(1,2)$-block,
     \[
-        -A_1A_2+A_2A_1-A_3A_4+A_4A_3=0,
+    A_1A_2+A_2A_1-A_3A_4+A_4A_3.
     \]
-    because the matrices commute pairwise. Similarly,
+    Using the pairwise commutativity of the $A_i$, this becomes
     \[
-        (1,3)\text{-block}=-A_1A_3+A_2A_4+A_3A_1-A_4A_2=0,
+    A_1A_2-A_2A_1-A_3A_4+A_4A_3=0.
     \]
-    and
+    Likewise, for the $(1,3)$-block,
     \[
-        (1,4)\text{-block}=-A_1A_4-A_2A_3+A_3A_2+A_4A_1=0.
+    A_1A_3-A_2A_4+A_3A_1+A_4A_2
+    =
+    A_1A_3-A_3A_1-A_2A_4+A_4A_2=0,
     \]
-    The other off-diagonal blocks vanish in the same way.
-
+    and for the $(1,4)$-block,
+    \[
+    A_1A_4+A_2A_3-A_3A_2+A_4A_1
+    =
+    A_1A_4-A_4A_1+A_2A_3-A_3A_2=0.
+    \]
+    The remaining off-diagonal blocks vanish in exactly the same way.
+    
     Hence
     \[
-        HH^T=
-        \begin{pmatrix}
-            S & 0 & 0 & 0 \\
-            0 & S & 0 & 0 \\
-            0 & 0 & S & 0 \\
-            0 & 0 & 0 & S
-        \end{pmatrix}
-        =I_4\otimes S
-        =I_4\otimes\bigl(A_1^2+A_2^2+A_3^2+A_4^2\bigr).
+    HH^T=
+    \begin{pmatrix}
+    S & 0 & 0 & 0\\
+    0 & S & 0 & 0\\
+    0 & 0 & S & 0\\
+    0 & 0 & 0 & S
+    \end{pmatrix}
+    =
+    I_4\otimes S
+    =
+    I_4\otimes\bigl(A_1^2+A_2^2+A_3^2+A_4^2\bigr).
     \]
+    
+    If, in addition, each $A_i$ has entries in $\{\pm1\}$ and
+    \[
+    A_1^2+A_2^2+A_3^2+A_4^2=4n\,I_n,
+    \]
+    then
+    \[
+    HH^T
+    =
+    I_4\otimes (4n\,I_n)
+    =
+    4n\,I_{4n}.
+    \]
+    Since every entry of $H$ is also $\pm1$, it follows that $H$ is a Hadamard matrix of order $4n$.
+    \end{proof}
+    
+    \begin{proposition}
+    Let
+    \[
+    U=
+    \begin{pmatrix}
+    0&1&0&\cdots&0\\
+    0&0&1&\cdots&0\\
+    \vdots&\vdots&\ddots&\ddots&\vdots\\
+    0&0&0&\ddots&1\\
+    1&0&0&\cdots&0
+    \end{pmatrix}.
+    \]
+    For $i=1,2,3,4$, let
+    \[
+    A_i=\sum_{j=0}^{n-1} a_{ij}U^j,
+    \qquad a_{i0}=1,
+    \]
+    and assume $a_{ij}=a_{i,n-j}$ for $1\le j\le n-1$.
+    Then the matrices $A_i$ are symmetric and pairwise commuting. If moreover
+    \[
+    A_1^2+A_2^2+A_3^2+A_4^2=4n\,I_n,
+    \]
+    and if $s_i$ denotes the sum of the entries in the first row of $A_i$, then
+    \[
+    s_1^2+s_2^2+s_3^2+s_4^2=4n.
+    \]
+    \end{proposition}
+    
+    \begin{proof}
+    Since each $A_i$ is a polynomial in $U$, the matrices $A_1,A_2,A_3,A_4$ commute pairwise.
+    
+    Next, $U^T=U^{-1}=U^{n-1}$, hence
+    \[
+    (U^j)^T=U^{-j}=U^{n-j}.
+    \]
+    Therefore
+    \[
+    A_i^T
+    =
+    \sum_{j=0}^{n-1} a_{ij}(U^j)^T
+    =
+    \sum_{j=0}^{n-1} a_{ij}U^{n-j}.
+    \]
+    Using the condition $a_{ij}=a_{i,n-j}$, we obtain $A_i^T=A_i$, so each $A_i$ is symmetric.
+    
+    Now let
+    \[
+    \mathbf{j}=(1,1,\dots,1)^T.
+    \]
+    Since every row of $U^j$ has exactly one entry equal to $1$, we have
+    \[
+    U^j\mathbf{j}=\mathbf{j}
+    \qquad\text{for all }j.
+    \]
+    Hence
+    \[
+    A_i\mathbf{j}
+    =
+    \sum_{j=0}^{n-1} a_{ij}U^j\mathbf{j}
+    =
+    \left(\sum_{j=0}^{n-1} a_{ij}\right)\mathbf{j}
+    =
+    s_i\mathbf{j},
+    \]
+    so $\mathbf{j}$ is an eigenvector of each $A_i$ with eigenvalue $s_i$.
+    
+    Applying $A_1^2+\cdots+A_4^2$ to $\mathbf{j}$ gives
+    \[
+    (A_1^2+A_2^2+A_3^2+A_4^2)\mathbf{j}
+    =
+    (s_1^2+s_2^2+s_3^2+s_4^2)\mathbf{j}.
+    \]
+    On the other hand, by assumption,
+    \[
+    (A_1^2+A_2^2+A_3^2+A_4^2)\mathbf{j}
+    =
+    4n\,\mathbf{j}.
+    \]
+    Comparing the two expressions yields
+    \[
+    s_1^2+s_2^2+s_3^2+s_4^2=4n.
+    \]
+    \end{proof}
 
-    If moreover each \(A_i\) has only \(\pm1\) entries and
+
+
+
+\chapter{Lecture 9}
+
+\begin{definition}
+    An incidence geometry is a pair
     \[
-        A_1^2+A_2^2+A_3^2+A_4^2=4n\,I_n,
+    \mathcal{G}=(\Omega,I)
     \]
-    then every entry of \(H\) is also in \(\{\pm1\}\), and
+    where $\Omega$ is a set and $I\subseteq \Omega\times\Omega$ is symmetric and transitive.
+    \end{definition}
+    
+    \begin{definition}
+    Let $\mathcal{G}=(\Omega,I)$ be an incidence geometry. A \emph{(maximal) flag} in $\mathcal{G}$ is a \emph{(maximal) chain} with $\mathcal{G}$ seen as a poset.
+    \end{definition}
+    
+    \begin{definition}
+    A geometry $\mathcal{G}=(\Omega,I)$ has \emph{rank} $r$ if we can partition $\Omega$ into $r$ antichains
     \[
-        HH^T=I_4\otimes (4n\,I_n)=4n\,I_{4n}.
+    \Omega_1,\dots,\Omega_r.
     \]
-    Therefore \(H\) is a Hadamard matrix of order \(4n\).
-\end{proof}
+    \end{definition}
+    
+    \begin{definition}
+    A projective plane is an incidence geometry of points and lines with the following properties:
+    \begin{enumerate}
+        \item Every two points are incident with a unique common line.
+        \item Every two lines are incident with a unique common point.
+        \item There are four points, no three collinear.
+    \end{enumerate}
+    Note that \textup{(i)} and \textup{(ii)} are dual, and \textup{(iii)} implies its dual.
+    \end{definition}
+    
+    \begin{proposition}
+    In a finite projective plane:
+    \begin{itemize}
+        \item Every point is incident with $(n+1)$ lines.
+        \item Dually, every line is incident with $(n+1)$ points.
+    \end{itemize}
+    The integer $n$ is called the \emph{order} of the projective plane
+    \[
+    \mathcal{G}=(\mathcal{P},\mathcal{L},I).
+    \]
+    \end{proposition}
+    
+    \begin{proof}
+    There exist a point $P$ and a line $L$ such that $P \not I L$. Note that the number of points incident with $L$ equals the number of lines incident with $P$. There also exists a point $Q$ such that $Q \not I L$, so the number of lines incident with $P$ equals the number of lines incident with $Q$.
+    
+    Since the choices of $P,Q,L$ are arbitrary, the proof is complete.
+    \end{proof}
+
+\chapter{Lecture 10}
+
+\chapter{Lecture 11}
 
 \chapter{Homework}
 
@@ -6688,6 +6846,696 @@ where the first row and first column consist entirely of $1$s (and $\widetilde{H
     \]
     and then increasing $C$ finitely many times if needed to cover finitely many small $n$, we obtain $m<C\,n^{2-1/r}$ for all $n$.
 \end{proof}
+
+\section{Week 4}
+
+\begin{exercise}
+    Construct a Hadamard matrix of order $28$ using Williamson's method.
+\end{exercise}
+
+\begin{proof}
+    Let \(\operatorname{circ}(a_0,\dots,a_6)\) denote the circulant \(7\times 7\) matrix whose first row is
+    \((a_0,\dots,a_6)\). Consider
+    \[
+        A_1=A_2=\operatorname{circ}(1,1,1,-1,-1,1,1),
+    \]
+    \[
+        A_3=\operatorname{circ}(1,1,-1,1,1,-1,1),
+        \qquad
+        A_4=\operatorname{circ}(1,-1,1,-1,-1,1,-1).
+    \]
+    Each \(A_i\) is symmetric, because its first row is palindromic, and any two circulant matrices commute.
+    Moreover all entries are in \(\{\pm1\}\).
+
+    A direct calculation gives
+    \[
+        A_1^2=A_2^2=\operatorname{circ}(7,3,-1,-1,-1,-1,3),
+    \]
+    \[
+        A_3^2=\operatorname{circ}(7,-1,-1,3,3,-1,-1),
+    \]
+    \[
+        A_4^2=\operatorname{circ}(7,-5,3,-1,-1,3,-5).
+    \]
+    Hence
+    \[
+        A_1^2+A_2^2+A_3^2+A_4^2
+        =
+        \operatorname{circ}(28,0,0,0,0,0,0)
+        =
+        28I_7.
+    \]
+
+    Therefore Williamson's construction applies, and the block matrix
+    \[
+        H=
+        \begin{pmatrix}
+            A_1  & A_2  & A_3  & A_4  \\
+            -A_2 & A_1  & -A_4 & A_3  \\
+            -A_3 & A_4  & A_1  & -A_2 \\
+            -A_4 & -A_3 & A_2  & A_1
+        \end{pmatrix}
+    \]
+    satisfies
+    \[
+        HH^T=28I_{28}.
+    \]
+    Thus \(H\) is a Hadamard matrix of order \(28\).
+\end{proof}
+
+\begin{exercise}
+    Suppose that $M$ is an $m\times n$ matrix with $\{0,1\}$-entries such that the Hamming distance
+    between any two distinct rows is at least $d$, that is, any two rows differ in at least
+    $d$ positions.
+    \begin{enumerate}
+        \item[(a)] Count triples $(i,j,k)\in [m]^2\times [n]$ with $i\ne j$ and $M_{ik}\ne M_{jk}$ in two
+              ways. Conclude that if $2d>n$, then
+              \[
+                  m\le \frac{2d}{2d-n}.
+              \]
+              This is known as Plotkin's bound in coding theory.
+        \item[(b)] Characterize equality in Plotkin's bound.
+        \item[(c)] Suppose that $d=n/2$. Prove that $m\le 2n$ and show that equality holds if and
+              only if there exists a Hadamard matrix of order $n$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    For \(1\le i\le m\), let \(r_i\in\{0,1\}^n\) be the \(i\)-th row of \(M\), and let \(d_H\) denote
+    Hamming distance.
+
+    \noindent\textbf{(a)}
+    Let
+    \[
+        T:=\bigl|\{(i,j,k)\in [m]^2\times [n]:i\ne j,\ M_{ik}\ne M_{jk}\}\bigr|.
+    \]
+    Counting by ordered pairs of rows gives
+    \[
+        T=\sum_{i\ne j} d_H(r_i,r_j)\ge m(m-1)d.
+    \]
+
+    Now count by columns. For a fixed column \(k\), let \(x_k\) be the number of \(1\)'s in that column.
+    Then there are \(x_k(m-x_k)\) ordered pairs \((i,j)\) with \(M_{ik}=1\), \(M_{jk}=0\), and the same
+    number with \(M_{ik}=0\), \(M_{jk}=1\). Hence column \(k\) contributes
+    \[
+        2x_k(m-x_k)\le \frac{m^2}{2},
+    \]
+    because \(x_k(m-x_k)\le m^2/4\). Therefore
+    \[
+        T=\sum_{k=1}^{n}2x_k(m-x_k)\le \frac{nm^2}{2}.
+    \]
+    Combining the two estimates,
+    \[
+        m(m-1)d\le \frac{nm^2}{2}.
+    \]
+    Since \(m>0\), this is equivalent to
+    \[
+        (m-1)d\le \frac{mn}{2},
+        \qquad\text{hence}\qquad
+        m(2d-n)\le 2d.
+    \]
+    If \(2d>n\), we conclude
+    \[
+        m\le \frac{2d}{2d-n}.
+    \]
+
+    \noindent\textbf{(b)}
+    Equality in Plotkin's bound holds if and only if both inequalities above are equalities.
+    Thus equality holds precisely when
+    \begin{enumerate}
+        \item every two distinct rows have Hamming distance exactly \(d\), and
+        \item every column has exactly \(m/2\) zeros and \(m/2\) ones.
+    \end{enumerate}
+    Indeed, equality in \(T\ge m(m-1)d\) means that all pairwise distances are exactly \(d\), and equality in
+    \(2x_k(m-x_k)\le m^2/2\) means \(x_k=m/2\) for every \(k\). Conversely, these two conditions force
+    \(T=m(m-1)d=nm^2/2\), hence \(m=\frac{2d}{2d-n}\).
+
+    \noindent\textbf{(c)}
+    Replace each \(0\) in \(M\) by \(1\) and each \(1\) by \(-1\). This gives vectors
+    \[
+        u_1,\dots,u_m\in \{\pm1\}^n
+    \]
+    such that for \(i\ne j\),
+    \[
+        \langle u_i,u_j\rangle = n-2d_H(r_i,r_j)\le 0,
+    \]
+    because \(d_H(r_i,r_j)\ge n/2\).
+
+    We now prove a general claim.
+
+    \medskip
+    \noindent\emph{Claim.} If \(v_1,\dots,v_t\in \mathbb{R}^n\setminus\{0\}\) satisfy
+    \(\langle v_i,v_j\rangle\le 0\) for all \(i\ne j\), then \(t\le 2n\).
+
+    \smallskip
+    Choose \(x\in\mathbb{R}^n\) such that \(\langle x,v_i\rangle\ne 0\) for all \(i\), and partition
+    \[
+        I:=\{i:\langle x,v_i\rangle>0\},
+        \qquad
+        J:=\{i:\langle x,v_i\rangle<0\}.
+    \]
+    We claim that \(\{v_i:i\in I\}\) is linearly independent. Suppose
+    \[
+        \sum_{i\in I} c_i v_i=0.
+    \]
+    Taking inner product with \(x\) shows that the coefficients are not all of the same sign. Let
+    \[
+        I_+:=\{i\in I:c_i>0\},
+        \qquad
+        I_-:=\{i\in I:c_i<0\}.
+    \]
+    Then
+    \[
+        \sum_{i\in I_+} c_i v_i
+        =
+        \sum_{i\in I_-} (-c_i)v_i
+        =:u.
+    \]
+    Hence
+    \[
+        \|u\|^2
+        =
+        \sum_{i\in I_+}\sum_{j\in I_-} c_i(-c_j)\langle v_i,v_j\rangle
+        \le 0.
+    \]
+    So \(u=0\). But now
+    \[
+        0=\left\langle x,\sum_{i\in I_+} c_i v_i\right\rangle
+        =\sum_{i\in I_+} c_i\langle x,v_i\rangle>0,
+    \]
+    a contradiction. Thus \(\{v_i:i\in I\}\) is linearly independent, and similarly \(\{v_i:i\in J\}\)
+    is linearly independent. Therefore \(|I|\le n\) and \(|J|\le n\), so \(t\le 2n\).
+
+    \medskip
+    Applying the claim to \(u_1,\dots,u_m\) gives \(m\le 2n\).
+
+    Now assume \(m=2n\). Then in the proof of the claim we must have \(|I|=|J|=n\), so both
+    \(\{u_i:i\in I\}\) and \(\{u_j:j\in J\}\) are bases of \(\mathbb{R}^n\).
+
+    Fix \(i\in I\), and write
+    \[
+        u_i=\sum_{j\in J} c_{ji}u_j.
+    \]
+    If some coefficient \(c_{ji}\) were positive, let
+    \[
+        J_+:=\{j\in J:c_{ji}>0\},
+        \qquad
+        J_-:=\{j\in J:c_{ji}<0\}.
+    \]
+    Then
+    \[
+        u_i+\sum_{j\in J_-}(-c_{ji})u_j
+        =
+        \sum_{j\in J_+} c_{ji}u_j.
+    \]
+    The left-hand side and the right-hand side are positive linear combinations of distinct vectors from our
+    family, so taking the norm square of their common value gives
+    \[
+        0\ge \left\| \sum_{j\in J_+} c_{ji}u_j \right\|^2.
+    \]
+    Thus that common value is \(0\). But then
+    \[
+        \sum_{j\in J_+} c_{ji}u_j=0,
+    \]
+    contradicting the linear independence of \(\{u_j:j\in J\}\). Hence every \(c_{ji}\le 0\).
+
+    So the change-of-basis matrix \(C\) from the basis \(\{u_j:j\in J\}\) to the basis \(\{u_i:i\in I\}\)
+    has all entries \(\le 0\). By symmetry, \(C^{-1}\) also has all entries \(\le 0\). Therefore
+    \(-C\) and \(-C^{-1}\) are nonnegative matrices and
+    \[
+        (-C)(-C^{-1})=I.
+    \]
+    A nonnegative matrix whose inverse is also nonnegative must be monomial: indeed, if
+    \(P,Q\ge 0\) and \(PQ=I\), then for \(r\ne s\),
+    \[
+        0=(PQ)_{rs}=\sum_k p_{rk}q_{ks},
+    \]
+    so whenever \(p_{rk}>0\), the \(k\)-th row of \(Q\) has all off-diagonal entries equal to \(0\).
+    Since \(Q\) is invertible, each row of \(P\) can have only one positive entry, and similarly each column.
+    Hence \(P\) is monomial.
+
+    After reordering the basis vectors in \(J\), we may therefore assume
+    \[
+        J=\{-u_1,\dots,-u_n\}
+    \]
+    for suitable \(u_1,\dots,u_n\in\{\pm1\}^n\). Now for \(i\ne j\),
+    \[
+        \langle u_i,u_j\rangle\le 0
+        \qquad\text{and}\qquad
+        \langle u_i,-u_j\rangle\le 0,
+    \]
+    so \(\langle u_i,u_j\rangle=0\). Therefore the matrix \(H\) with rows \(u_1,\dots,u_n\) satisfies
+    \[
+        HH^T=nI_n,
+    \]
+    and \(H\) is a Hadamard matrix of order \(n\).
+
+    Conversely, if \(H\) is a Hadamard matrix of order \(n\) with rows \(h_1,\dots,h_n\), then the
+    \(2n\) vectors
+    \[
+        h_1,\dots,h_n,-h_1,\dots,-h_n
+    \]
+    lie in \(\{\pm1\}^n\) and have pairwise inner products in \(\{0,-n\}\). Converting \(1\mapsto 0\) and
+    \(-1\mapsto 1\), we obtain \(2n\) binary vectors of length \(n\) whose pairwise Hamming distances are
+    \(n/2\) or \(n\). Thus equality \(m=2n\) is attained.
+\end{proof}
+
+\begin{exercise}
+    For an Abelian group $G$ of order $v$, we call a $k$-subset $D\subseteq G$ a $(v,k,\lambda)$-difference
+    set if each nonzero element $g\in G$ occurs exactly $\lambda$ times as a difference $x-y$ for
+    all $x,y\in D$.
+    \begin{enumerate}
+        \item[(a)] Let $q=4n-1$ be a prime power. Show that the set of nonzero squares in $\mathbb{F}_q$
+              is a $(4n-1,2n-1,n-1)$-difference set in the additive group $\mathbb{F}_q$.
+        \item[(b)] A difference set with parameters $(4n-1,2n-1,n-1)$ is called a Hadamard
+              difference set. Show that any Hadamard difference set gives rise to a Hadamard
+              matrix.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \noindent\textbf{(a)}
+    Let \(Q\subseteq \mathbb{F}_q\) be the set of nonzero squares. Since \(q=4n-1\), we have
+    \[
+        |Q|=\frac{q-1}{2}=2n-1.
+    \]
+    We must show that every \(g\in \mathbb{F}_q^\times\) occurs exactly \(n-1\) times as a difference
+    \(x-y\) with \(x,y\in Q\).
+
+    Let \(\chi\) be the quadratic character on \(\mathbb{F}_q\). For \(g\ne 0\), define
+    \[
+        N(g):=\bigl|\{(x,y)\in Q^2:x-y=g\}\bigr|.
+    \]
+    Since \(x-y=g\) is equivalent to \(x=y+g\), we have
+    \[
+        4N(g)
+        =
+        \sum_{y\in \mathbb{F}_q\setminus\{0,-g\}}
+        (1+\chi(y))(1+\chi(y+g)).
+    \]
+    Indeed, for \(y\ne 0,-g\), the factor \((1+\chi(y))(1+\chi(y+g))\) is equal to \(4\) exactly when both
+    \(y\) and \(y+g\) are nonzero squares, and \(0\) otherwise.
+
+    Now add the missing two terms:
+    \[
+        \begin{aligned}
+            4N(g)
+             & =
+            \sum_{y\in \mathbb{F}_q}(1+\chi(y))(1+\chi(y+g))
+            -(1+\chi(-g))-(1+\chi(g)) \\
+             & =
+            q+\sum_{y}\chi(y)+\sum_{y}\chi(y+g)+\sum_{y}\chi(y)\chi(y+g)
+            -(1+\chi(-g))-(1+\chi(g)) \\
+             & =
+            q-1-(1+\chi(-g))-(1+\chi(g)).
+        \end{aligned}
+    \]
+    Since \(q\equiv 3\pmod 4\), we have \(\chi(-1)=-1\), so \(\chi(-g)=-\chi(g)\). Therefore
+    \[
+        4N(g)=q-3=4n-4,
+    \]
+    and hence
+    \[
+        N(g)=n-1.
+    \]
+    Thus \(Q\) is a \((4n-1,2n-1,n-1)\)-difference set in the additive group \(\mathbb{F}_q\).
+
+    \noindent\textbf{(b)}
+    Let \(D\subseteq G\) be a Hadamard difference set. Index rows and columns by elements of \(G\), and define
+    a \((4n-1)\times(4n-1)\) matrix \(N=(N_{x,y})\) by
+    \[
+        N_{x,y}=
+        \begin{cases}
+            1, & \text{if } y-x\in D, \\
+            0, & \text{otherwise.}
+        \end{cases}
+    \]
+    Each row contains exactly \(2n-1\) ones, because \(|D|=2n-1\).
+
+    If \(x\ne x'\), then the number of columns \(y\) for which both \(N_{x,y}=1\) and \(N_{x',y}=1\) is the
+    number of \(y\) such that
+    \[
+        y-x\in D
+        \qquad\text{and}\qquad
+        y-x'\in D.
+    \]
+    Writing \(d=y-x\) and \(d'=y-x'\), this means
+    \[
+        x-x'=d-d'
+        \qquad\text{with } d,d'\in D.
+    \]
+    Since \(D\) is a \((4n-1,2n-1,n-1)\)-difference set, there are exactly \(n-1\) such pairs. Hence
+    \[
+        NN^T = (2n-1)I_{4n-1}+(n-1)(J-I)=nI_{4n-1}+(n-1)J.
+    \]
+
+    Now set
+    \[
+        B:=2N-J.
+    \]
+    Then \(B\) has entries in \(\{\pm1\}\), and every row sum of \(B\) is
+    \[
+        2(2n-1)-(4n-1)=-1.
+    \]
+    Also
+    \[
+        \begin{aligned}
+            BB^T
+             & =
+            (2N-J)(2N^T-J) \\
+             & =
+            4NN^T-2NJ-2JN^T+J^2 \\
+             & =
+            4\bigl(nI+(n-1)J\bigr)-4(2n-1)J+(4n-1)J \\
+             & =
+            4nI-J.
+        \end{aligned}
+    \]
+
+    Finally, define
+    \[
+        H=
+        \begin{pmatrix}
+            1          & \mathbf{1}^T \\
+            \mathbf{1} & B
+        \end{pmatrix},
+    \]
+    where \(\mathbf{1}\) is the all-ones column vector of length \(4n-1\). Since \(B\mathbf{1}=-\mathbf{1}\),
+    we obtain
+    \[
+        HH^T
+        =
+        \begin{pmatrix}
+            1+(4n-1)      & \mathbf{1}^T+\mathbf{1}^TB^T \\
+            \mathbf{1}+B\mathbf{1} & J+BB^T
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            4n & 0 \\
+            0  & 4nI_{4n-1}
+        \end{pmatrix}
+        =
+        4nI_{4n}.
+    \]
+    Therefore \(H\) is a Hadamard matrix of order \(4n\).
+\end{proof}
+
+\begin{exercise}
+    An affine plane is a rank $2$ incidence geometry $\mathcal{A}=(P,L,I)$ that satisfies the
+    following axioms:
+    \begin{enumerate}
+        \item[(AP1)] Through any two distinct points there is exactly one line.
+        \item[(AP2)] If $L$ is a line and $P$ is a point outside of $L$, then there is precisely one line
+              through $P$ that has no point common with $L$ (Playfair's parallel axiom).
+        \item[(AP3)] There exist three noncollinear points.
+    \end{enumerate}
+    \begin{enumerate}
+        \item[(a)] Let $L_\infty$ be a line of a projective plane $\mathcal{G}=(P,L,I)$. Denote the set
+              of points incident with $L_\infty$ by $P_\infty$. Show that
+              \[
+                  \mathcal{A}=(P\setminus P_\infty,\; L\setminus \{L_\infty\},\; I^*)
+              \]
+              is an affine plane. Here $I^*$ denotes the natural restriction of $I$ to $\mathcal{A}$.
+        \item[(b)] In an affine plane, we call two lines $K,L$ parallel if they do not intersect.\footnote{This definition is no good in higher dimension. (Why?) We use it here to keep life simple.}
+              Show that ``being parallel'' is an equivalence relation. We call each equivalence class
+              a parallel class.
+        \item[(c)] Given an affine plane $\mathcal{A}=(P^*,L^*,I^*)$, let $P$ be $P^*$ together with the
+              parallel classes, and let $L$ be $L^*$ together with one further line $L_\infty$.
+              Furthermore, define $I$ as follows:
+              \begin{enumerate}
+                  \item[(i)] $P\,I\,L$ if and only if $P\,I^*\,L$ for $P\in P^*$ and $L\in L^*$.
+                  \item[(ii)] $P\,I\,L_\infty$ for no point $P\in P^*$.
+                  \item[(iii)] $\Pi\,I\,L$ if and only if $L\in \Pi$ for any parallel class $\Pi$ and all $L\in L^*$.
+                  \item[(iv)] $\Pi\,I\,L_\infty$ for any parallel class $\Pi$.
+              \end{enumerate}
+              Show that $\mathcal{G}=(P,L,I)$ is a projective plane.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \noindent\textbf{(a)}
+    Write
+    \[
+        \mathcal{A}=(P\setminus P_\infty,\; L\setminus\{L_\infty\},\; I^*).
+    \]
+    We verify the affine plane axioms.
+
+    \emph{(AP1).} Let \(X,Y\in P\setminus P_\infty\) be distinct. In the projective plane there is a unique
+    line \(M\) incident with both \(X\) and \(Y\). Since neither point lies on \(L_\infty\), we have
+    \(M\ne L_\infty\). Hence \(M\in L\setminus\{L_\infty\}\), and it is still the unique common line of
+    \(X\) and \(Y\) in \(\mathcal{A}\).
+
+    \emph{(AP2).} Let \(M\ne L_\infty\) be a line and let \(X\notin M\) with \(X\notin P_\infty\).
+    In the projective plane, \(M\) meets \(L_\infty\) in a unique point \(Q\). Let \(N\) be the unique
+    line through \(X\) and \(Q\). Since \(X\notin P_\infty\), we have \(N\ne L_\infty\), so \(N\) is a line
+    of \(\mathcal{A}\). In the projective plane, \(M\cap N=\{Q\}\), and \(Q\notin P\setminus P_\infty\), so
+    \(M\) and \(N\) are disjoint in \(\mathcal{A}\).
+
+    Uniqueness is similar: if \(N'\) is any line of \(\mathcal{A}\) through \(X\) disjoint from \(M\), then
+    in the projective plane the unique point \(M\cap N'\) must lie on \(L_\infty\). Hence \(M\cap N'=Q\),
+    so \(N'=N\).
+
+    \emph{(AP3).} In a projective plane every line contains at least three points. Choose a line
+    \(M\ne L_\infty\), and choose distinct points \(A,B\in M\setminus P_\infty\). Choose a second line
+    \(N\) through \(A\) with \(N\ne M,L_\infty\). Since \(N\) also contains at least three points and meets
+    \(L_\infty\) in exactly one point, there exists \(C\in N\setminus P_\infty\) with \(C\ne A\). Because
+    \(M\cap N=\{A\}\), the points \(A,B,C\) are noncollinear in \(\mathcal{A}\).
+
+    Thus \(\mathcal{A}\) is an affine plane.
+
+    \medskip
+    \noindent\textbf{(b)}
+    To obtain an equivalence relation on the set of lines, we use the standard convention
+    \[
+        K\parallel L
+        \iff
+        K=L \text{ or } K\cap L=\varnothing.
+    \]
+    Reflexivity and symmetry are immediate. For transitivity, suppose \(K\parallel L\) and \(L\parallel M\).
+    If \(K=M\), there is nothing to prove. Otherwise assume that \(K\) and \(M\) meet in a point \(X\).
+    Then \(K\) and \(M\) are two distinct lines through \(X\) which have no point in common with \(L\),
+    contradicting (AP2). Hence \(K\parallel M\). So parallelism is an equivalence relation.
+
+    \medskip
+    \noindent\textbf{(c)}
+    Let \(\mathcal{G}=(P,L,I)\) be the incidence structure defined in the statement. We verify the
+    projective plane axioms.
+
+    \emph{Any two distinct points lie on a unique common line.}
+    There are three cases.
+    \begin{enumerate}
+        \item If \(X,Y\in P^*\), then \(X\) and \(Y\) lie on a unique line of \(L^*\) by (AP1) in the affine plane.
+        \item If \(X\in P^*\) and \(\Pi\) is a parallel class, choose \(K\in \Pi\). By (AP2), there is a unique
+              line through \(X\) parallel to \(K\), and this line lies in \(\Pi\). Hence \(X\) and \(\Pi\) are incident
+              with a unique line of \(L^*\).
+        \item If \(\Pi\ne \Sigma\) are parallel classes, then both are incident with \(L_\infty\), and no line of
+              \(L^*\) belongs to two distinct parallel classes. So \(L_\infty\) is their unique common line.
+    \end{enumerate}
+
+    \emph{Any two distinct lines meet in a unique common point.}
+    Again there are three cases.
+    \begin{enumerate}
+        \item If \(K,L\in L^*\) are not parallel, then they meet in a unique point of \(P^*\) by (AP1).
+        \item If \(K,L\in L^*\) are parallel, then they meet in their unique parallel class \(\Pi\), and in no point
+              of \(P^*\).
+        \item If \(K\in L^*\), then \(K\) meets \(L_\infty\) in the unique parallel class containing \(K\).
+    \end{enumerate}
+
+    \emph{There exist four points, no three collinear.}
+    Choose noncollinear points \(A,B,C\in P^*\) from (AP3). Let \(M\) be the line through \(A\) parallel to
+    the line \(BC\), and let \(N\) be the line through \(B\) parallel to the line \(AC\). Since \(BC\) and \(AC\)
+    are not parallel, neither are \(M\) and \(N\); let \(D:=M\cap N\).
+
+    Then \(D\notin BC\), because \(M\parallel BC\). Likewise \(D\notin AC\). If \(D\in AB\), then the two lines
+    \(AB\) and \(M\) would both pass through \(A\) and \(D\), hence \(AB=M\), which would imply \(AB\parallel BC\),
+    impossible since \(AB\) and \(BC\) meet at \(B\). Thus no three of \(A,B,C,D\) are collinear.
+
+    Therefore \(\mathcal{G}\) is a projective plane.
+\end{proof}
+
+\begin{exercise}
+    Let $\mathcal{A}=(P,L,I)$ be a rank $2$ incidence geometry with $P=\mathbb{R}^2$,
+    $L=(\mathbb{R}\cup \{\infty\})\times \mathbb{R}$, and $(x,y)\in P$ incident with $(m,b)\in L$ if
+    \begin{enumerate}
+        \item[(a)] $x=b$ if $m=\infty$,
+        \item[(b)] $y=\frac{1}{2}mx+b$ if $m\le 0$ and $x\le 0$,
+        \item[(c)] $y=mx+b$ if $m\ge 0$ or $x\ge 0$.
+    \end{enumerate}
+    Show that $\mathcal{A}$ is an affine plane. The plane $\mathcal{A}$ is called the Moulton plane.
+\end{exercise}
+
+\begin{proof}
+    For \(b\in \mathbb{R}\), write \(L_{\infty,b}\) for the vertical line \(x=b\). For \(m\in\mathbb{R}\) and
+    \(b\in\mathbb{R}\), write \(L_{m,b}\) for the nonvertical line in the statement.
+
+    If \(m<0\), define
+    \[
+        \sigma(x)=
+        \begin{cases}
+            x/2, & \text{if } x\le 0, \\
+            x,   & \text{if } x\ge 0.
+        \end{cases}
+    \]
+    Then \(L_{m,b}\) is the graph of the continuous function
+    \[
+        f_{m,b}(x)=m\sigma(x)+b.
+    \]
+    If \(m\ge 0\), then \(L_{m,b}\) is the ordinary graph of
+    \[
+        f_{m,b}(x)=mx+b.
+    \]
+
+    We first note two basic facts.
+
+    \smallskip
+    \noindent\emph{Fact 1.} For fixed \(m\in\mathbb{R}\), the lines \(L_{m,b}\) and \(L_{m,b'}\) are equal if
+    and only if \(b=b'\); otherwise they are disjoint.
+
+    \smallskip
+    \noindent\emph{Fact 2.} If \(m_1\ne m_2\), then \(L_{m_1,b_1}\) and \(L_{m_2,b_2}\) meet in exactly one point.
+    Indeed, let
+    \[
+        g(x):=f_{m_1,b_1}(x)-f_{m_2,b_2}(x).
+    \]
+    This is continuous. On \(x\ge 0\), its slope is \(m_1-m_2\). On \(x\le 0\), its slope is
+    \[
+        \alpha_1-\alpha_2,
+        \qquad
+        \alpha_i=
+        \begin{cases}
+            m_i/2, & \text{if } m_i<0, \\
+            m_i,   & \text{if } m_i\ge 0.
+        \end{cases}
+    \]
+    The numbers \(m_1-m_2\) and \(\alpha_1-\alpha_2\) have the same sign, so \(g\) is strictly monotone on
+    all of \(\mathbb{R}\). Also \(g(x)\to\pm\infty\) as \(x\to\pm\infty\). Hence \(g\) has a unique zero, so
+    the two lines meet in exactly one point. Finally, every vertical line \(L_{\infty,b}\) meets every
+    nonvertical line in exactly one point, namely the point with \(x=b\).
+
+    \medskip
+    We now verify the affine plane axioms.
+
+    \emph{(AP1).} Let \(P_1=(x_1,y_1)\) and \(P_2=(x_2,y_2)\) be distinct points.
+
+    If \(x_1=x_2\), then \(P_1\) and \(P_2\) lie on the unique vertical line \(L_{\infty,x_1}\).
+
+    Assume \(x_1\ne x_2\). If
+    \[
+        s:=\frac{y_2-y_1}{x_2-x_1}\ge 0,
+    \]
+    then the ordinary line \(L_{s,b}\), where \(b=y_1-sx_1\), passes through both points.
+
+    If \(s<0\), then \(\sigma\) is strictly increasing, so \(\sigma(x_2)-\sigma(x_1)\ne 0\) and has the same
+    sign as \(x_2-x_1\). Hence
+    \[
+        m:=\frac{y_2-y_1}{\sigma(x_2)-\sigma(x_1)}<0.
+    \]
+    Let \(b:=y_1-m\sigma(x_1)\). Then \(L_{m,b}\) passes through both \(P_1\) and \(P_2\).
+
+    Uniqueness follows from Fact 2: two different nonvertical lines cannot contain the same two points, and a
+    vertical line can only occur when \(x_1=x_2\).
+
+    \emph{(AP2).} Let \(P=(x_0,y_0)\) be a point not on a line \(L\).
+
+    If \(L=L_{\infty,b}\) is vertical, then the unique parallel through \(P\) is \(L_{\infty,x_0}\).
+
+    If \(L=L_{m,b}\) with finite \(m\), define \(b'\) so that \(P\in L_{m,b'}\), namely
+    \[
+        b'=
+        \begin{cases}
+            y_0-mx_0,            & \text{if } m\ge 0, \\
+            y_0-m\sigma(x_0),    & \text{if } m<0.
+        \end{cases}
+    \]
+    Since \(P\notin L\), we have \(b'\ne b\). By Fact 1, the line \(L_{m,b'}\) is disjoint from \(L\).
+    Any other line through \(P\) has different slope parameter, so by Fact 2 it meets \(L\) exactly once.
+    Hence \(L_{m,b'}\) is the unique parallel through \(P\).
+
+    \emph{(AP3).} The three points \((0,0)\), \((0,1)\), and \((1,0)\) are not collinear.
+
+    Therefore \(\mathcal{A}\) is an affine plane.
+\end{proof}
+
+\begin{exercise}
+    Let $\mathcal{O}$ be an oval in the projective plane of order $n$, where $n$ is even.
+    Show that every point not in $\mathcal{O}$ is incident with precisely $1$ or $n+1$ tangents.
+\end{exercise}
+
+\begin{proof}
+    Let \(P\notin \mathcal{O}\), and let \(t(P)\) be the number of tangents through \(P\).
+
+    First note that every point \(Q\in \mathcal{O}\) lies on a unique tangent. Indeed, there are \(n+1\) lines
+    through \(Q\), and the other \(n\) points of \(\mathcal{O}\) can lie on at most one line through \(Q\) each.
+    Since \(|\mathcal{O}|=n+1\), exactly one of the \(n+1\) lines through \(Q\) meets \(\mathcal{O}\) only in \(Q\).
+    Hence there are exactly \(n+1\) tangent lines altogether.
+
+    Now fix \(P\notin \mathcal{O}\). Let \(s(P)\) be the number of secants through \(P\), and let \(e(P)\) be
+    the number of external lines through \(P\). Since \(P\) lies on exactly \(n+1\) lines,
+    \[
+        t(P)+s(P)+e(P)=n+1.
+    \]
+    On the other hand, every point of \(\mathcal{O}\) lies on a unique line through \(P\), every tangent
+    contributes \(1\) point of \(\mathcal{O}\), every secant contributes \(2\), and every external line
+    contributes \(0\). Therefore
+    \[
+        t(P)+2s(P)=n+1.
+    \]
+    Since \(n\) is even, \(n+1\) is odd, so \(t(P)\) is odd.
+
+    Because a projective plane of order \(n\) has \(n^2+n+1\) points, and \(|\mathcal{O}|=n+1\), there are
+    exactly \(n^2\) points outside \(\mathcal{O}\).
+
+    Now count incidences between external points and tangent lines in two ways. Each tangent line contains
+    exactly \(n\) points outside \(\mathcal{O}\), so
+    \[
+        \sum_{P\notin \mathcal{O}} t(P)=n(n+1).
+    \]
+    Next count ordered pairs of distinct tangents through an external point. If two distinct tangents met on
+    \(\mathcal{O}\), then they would both be tangent at the same point, impossible. So every ordered pair of
+    distinct tangents meets in a unique external point. Since there are \(n+1\) tangent lines, this gives
+    \[
+        \sum_{P\notin \mathcal{O}} t(P)\bigl(t(P)-1\bigr)=n(n+1).
+    \]
+
+    Hence
+    \[
+        \sum_{P\notin \mathcal{O}} t(P)^2
+        =
+        \sum_{P\notin \mathcal{O}} t(P)\bigl(t(P)-1\bigr)
+        +
+        \sum_{P\notin \mathcal{O}} t(P)
+        =
+        2n(n+1).
+    \]
+    Therefore
+    \[
+        \begin{aligned}
+            \sum_{P\notin \mathcal{O}} \bigl(t(P)-1\bigr)\bigl(t(P)-(n+1)\bigr)
+             & =
+            \sum_{P\notin \mathcal{O}} t(P)^2
+            -(n+2)\sum_{P\notin \mathcal{O}} t(P)
+            +(n+1)\sum_{P\notin \mathcal{O}} 1 \\
+             & =
+            2n(n+1)-(n+2)n(n+1)+(n+1)n^2 \\
+             & = 0.
+        \end{aligned}
+    \]
+    But every \(t(P)\) is an odd integer with
+    \[
+        1\le t(P)\le n+1.
+    \]
+    Hence each term \(\bigl(t(P)-1\bigr)\bigl(t(P)-(n+1)\bigr)\) is nonpositive, and their sum is \(0\).
+    So every term must vanish. Thus for every point \(P\notin \mathcal{O}\),
+    \[
+        t(P)=1
+        \qquad\text{or}\qquad
+        t(P)=n+1.
+    \]
+    This is exactly the desired conclusion.
+\end{proof}
+
+
+
 
 \chapter{Quiz}
 

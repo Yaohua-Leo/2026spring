@@ -2731,70 +2731,121 @@ is a minimal projective resolution.
 %=============================================================================
 \item Using Problem~17, show that the natural embedding
 \[
-M \longrightarrow \bigoplus_{i\in Q_0} I(i)^{\dim M_i}
+M \longrightarrow \bigoplus_{i\in Q_0} I(i)^{\dim (\operatorname{soc}M)_i}
 \]
-is an injective envelope of $M$.
+is an injective envelope of $M$. (I think here should be $\dim (\operatorname{soc}M)_i$ but not $\dim M_i$ to make sure that the embedding is essential injective.)
 
 \begin{proof}
-    Let $M=(M_i,\psi_\alpha)$ be a representation of $Q$ with $d_i=\dim M_i$. Set
+    Let
     \[
-    E=\bigoplus_{i\in Q_0} I(i)^{d_i}.
+    m_i:=\dim_k(\operatorname{soc}M)_i
+    \qquad\text{and}\qquad
+    E:=\bigoplus_{i\in Q_0} I(i)^{m_i}.
+    \]
+    Since $\operatorname{soc}M$ is semisimple and the simple representations of $Q$ are
+    precisely the $S(i)$, we have
+    \[
+    \operatorname{soc}M \cong \bigoplus_{i\in Q_0} S(i)^{m_i}.
     \]
     
-    \medskip\noindent\textbf{Step 1: Construction of the embedding $\iota\colon M\to E$.}
-    
-    For each vertex $i$, choose a basis $\{m_{i,1},\ldots,m_{i,d_i}\}$ of $M_i$, and let $\{m_{i,1}^*,\ldots,m_{i,d_i}^*\}$ be the dual basis of $M_i^*$. By Problem~17, for each dual basis vector $m_{i,s}^*\in M_i^*$, there is a unique morphism
+    By Problem~17, applied to the simple representation $S(j)$, we get
     \[
-    f^{i,s}\colon M\to I(i)
+    \operatorname{Hom}(S(j),I(i)) \cong S(j)_i=
+    \begin{cases}
+    k & \text{if } i=j,\\
+    0 & \text{if } i\neq j.
+    \end{cases}
     \]
-    corresponding to $m_{i,s}^*$ under the isomorphism $\operatorname{Hom}(M,I(i))\cong M_i^*$. The $d_i$ morphisms $f^{i,1},\ldots,f^{i,d_i}$ assemble into a morphism
+    Thus for each $i$ there is, up to scalar, a unique nonzero morphism
     \[
-    \iota_i=(f^{i,1},\ldots,f^{i,d_i})\colon M\to I(i)^{d_i},
+    S(i)\longrightarrow I(i),
     \]
-    and taking the direct sum over all vertices gives
+    and there is no nonzero morphism $S(j)\to I(i)$ for $j\neq i$. Therefore the above
+    decomposition of $\operatorname{soc}M$ yields an injective morphism
     \[
-    \iota=\bigoplus_{i\in Q_0}\iota_i\colon M\to E.
+    u\colon \operatorname{soc}M \hookrightarrow E
     \]
+    whose image is exactly $\operatorname{soc}E$.
     
-    \medskip\noindent\textbf{Step 2: $\iota$ is injective.}
-    
-    It suffices to show that $\iota$ is injective at each vertex $j$, i.e., that $\iota_j\colon M_j\to E_j$ is injective. Let $m\in M_j$ with $\iota(m)=0$. In particular, the component of $\iota$ in $I(j)^{d_j}$ vanishes: for every $s\in\{1,\ldots,d_j\}$,
+    Now let
     \[
-    f^{j,s}_j(m)=0.
+    s\colon \operatorname{soc}M \hookrightarrow M
     \]
-    Under the identification $I(j)_j\cong k$, the map $f^{j,s}_j$ corresponds to the functional $m_{j,s}^*$. Hence
+    be the inclusion. Since $E$ is injective (being a direct sum of injective representations),
+    the morphism $u$ extends along $s$ to a morphism
     \[
-    m_{j,s}^*(m)=0 \qquad\text{for all } s=1,\ldots,d_j.
+    \iota\colon M \longrightarrow E
     \]
-    Since $\{m_{j,1}^*,\ldots,m_{j,d_j}^*\}$ is a basis of $M_j^*$, it follows that $m=0$. Therefore $\iota$ is injective.
-    
-    \medskip\noindent\textbf{Step 3: $E$ is injective.}
-    
-    Each $I(i)$ is an injective representation, hence $I(i)^{d_i}$ is injective. A direct sum of injective representations is injective, so $E$ is injective.
-    
-    \medskip\noindent\textbf{Step 4: $\iota$ is an injective envelope.}
-    
-    We must show that whenever $f'\colon M\hookrightarrow I'$ is an injective morphism into an injective representation $I'$, there exists an injective morphism $h\colon E\to I'$ such that $h\circ\iota=f'$.
-    
-    Since $\iota\colon M\hookrightarrow E$ is injective and $I'$ is injective, by the injective lifting property there exists a morphism $h\colon E\to I'$ with $h\circ\iota=f'$. We show that $h$ is injective.
-    
-    Suppose $h(e)=0$ for some $e\in E_j$. Since $\iota$ is injective, if $e\in\operatorname{im}\iota_j$, say $e=\iota_j(m)$, then $f'_j(m)=h_j(\iota_j(m))=0$, so $m=0$ (since $f'$ is injective), hence $e=0$.
-
-    For the general case, we use the minimality of $E$. The representation $E$ has dimension vector
+    such that
     \[
-    \dim E_j = \sum_{i\in Q_0} d_i\cdot\dim I(i)_j = \sum_{i\in Q_0} d_i\cdot|\{\text{paths } j\to i\}|.
-    \]
-    In a minimal injective resolution, each simple summand $S(i)$ of the socle of $M$ requires exactly one copy of $I(i)$ in the injective envelope, and the multiplicity of $I(i)$ in the injective envelope of $M$ equals $\dim\operatorname{Hom}(S(i),M)$. 
-    
-    For the representation $M$ of an acyclic quiver, the socle at vertex $i$ consists of elements $m\in M_i$ such that $\psi_\alpha(m)=0$ for all arrows $\alpha$ ending at $i$ (i.e., elements that cannot be reached from other vertices). The multiplicity of $S(i)$ in the socle is the dimension of the intersection
-    \[
-    \operatorname{soc}(M)_i = M_i \cap \bigcap_{\substack{\alpha\in Q_1\\t(\alpha)=i}} \ker(I(i)_\alpha\text{-component}).
+    \iota\circ s=u.
     \]
     
-    However, by direct dimension counting, the embedding $\iota$ has the property that $E$ decomposes as $\iota(M)\oplus C$ only if $C$ is injective (since $E$ is injective and $\operatorname{Rep}Q$ is hereditary). The number of copies $d_i$ of $I(i)$ is $\dim M_i$, which by the isomorphism $\operatorname{Hom}(M,I(i))\cong M_i^*$ is precisely the dimension of $\operatorname{Hom}(M,I(i))$. This ensures that $\iota$ is an essential embedding: any nonzero subrepresentation of $E$ has nonzero intersection with $\iota(M)$.
+    We claim that $\iota$ is injective. Suppose $\ker\iota\neq 0$. Since $\ker\iota$ is a
+    nonzero finite-dimensional representation, it contains a simple subrepresentation. Let $S\subseteq \ker\iota$ be simple. Then $S\subseteq M$ is a
+    simple subrepresentation, hence
+    \[
+    S\subseteq \operatorname{soc}M.
+    \]
+    But $\iota|_{\operatorname{soc}M}=u$ is injective, so $\iota$ cannot vanish on the
+    nonzero subrepresentation $S$, a contradiction. Hence
+    \[
+    \ker\iota=0,
+    \]
+    so $\iota$ is a monomorphism.
     
-    Therefore $\iota\colon M\hookrightarrow E$ is an injective envelope.
-\end{proof}
+    Next we show that $\iota(M)$ is an essential subrepresentation of $E$. Let
+    $0\neq X\subseteq E$ be any nonzero subrepresentation. Again,
+    $X$ contains a simple subrepresentation $S$. Since $S$ is simple and $S\subseteq E$,
+    we have
+    \[
+    S\subseteq \operatorname{soc}E=\operatorname{im}(u)\subseteq \iota(M).
+    \]
+    Therefore
+    \[
+    0\neq S\subseteq X\cap \iota(M),
+    \]
+    so $X\cap \iota(M)\neq 0$. Thus $\iota(M)$ is essential in $E$.
+    
+    Finally, let
+    \[
+    j\colon M \hookrightarrow J
+    \]
+    be any injective morphism into an injective representation $J$. Since $J$ is injective
+    and $\iota\colon M\hookrightarrow E$ is a monomorphism, there exists a morphism
+    \[
+    h\colon E\longrightarrow J
+    \]
+    such that
+    \[
+    h\circ \iota=j.
+    \]
+    We show that $h$ is injective. If $\ker h\neq 0$, then since $\iota(M)$ is essential in
+    $E$, we must have
+    \[
+    \ker h\cap \iota(M)\neq 0.
+    \]
+    But on $\iota(M)$ we have $h\circ \iota=j$, and $j$ is injective, so
+    $h|_{\iota(M)}$ is injective. Hence
+    \[
+    \ker h\cap \iota(M)=0,
+    \]
+    a contradiction. Therefore $\ker h=0$, so $h$ is injective.
+    
+    Thus for every injective morphism $j\colon M\hookrightarrow J$ into an injective
+    representation $J$, there exists an injective morphism $h\colon E\hookrightarrow J$
+    such that
+    \[
+    h\circ \iota=j.
+    \]
+    Therefore $\iota\colon M\hookrightarrow E$ is an injective envelope of $M$.
+    
+    Hence the natural embedding
+    \[
+    M \longrightarrow \bigoplus_{i\in Q_0} I(i)^{\dim(\operatorname{soc}M)_i}
+    \]
+    is an injective envelope of $M$.
+    \end{proof}
 
 %=============================================================================
 % Problem 19

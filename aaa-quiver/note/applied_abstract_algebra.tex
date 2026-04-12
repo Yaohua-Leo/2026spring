@@ -3551,7 +3551,7 @@ Clearly, the representations $S(i)$ are irreducible.
 
 \section{Direct Sums of Projectives and Injectives; Indecomposability}
 
-\begin{proposition}\leavevmode
+\begin{proposition}\label{prop:7.2.1}\leavevmode
     \begin{enumerate}
         \item[(1)] Let $P$ and $P'$ be representations of $Q$. Then
         \[
@@ -4635,7 +4635,7 @@ This is exact by the general standard-resolution construction.
             Therefore there exists a free representation $F$ such that $M$ is isomorphic to a direct summand of $F$.
         \end{proof}
         
-        \begin{corollary}
+        \begin{corollary}\label{cor:8.2.13}
             Any projective representation $P\in \operatorname{Rep}Q$ is a direct sum of $P(i)$'s, that is,
         \[
         P\simeq P(i_1)\oplus \cdots \oplus P(i_t),
@@ -4688,6 +4688,755 @@ This is exact by the general standard-resolution construction.
         \]
         Then $f_j$ sends the basis of $\bigl(\operatorname{rad}P(i)\bigr)_j$ to a basis of $P_j$, for each $j\in Q_0$, and thus $f$ is an isomorphism.
         \end{proof}
+
+        \begin{theorem}\label{thm:8.2.17}
+            Subrepresentations of projective representations in $\operatorname{rep} Q$ are projective.
+            \end{theorem}
+            
+            \begin{remark}
+            The subrepresentation inherits the projectivity. Categories with this property are called hereditary.
+            \end{remark}
+            
+            \begin{proof}
+            Suppose that $P$ is a projective representation with dimension vector
+            \[
+            (d_i)_{i\in Q_0}.
+            \]
+            We will prove the theorem by induction on
+            \[
+            d=\sum_{i\in Q_0} d_i,
+            \]
+            the dimension of $P$.
+            
+            If $d=1$, then $P$ is simple and there is nothing to prove. So suppose that $d>1$.
+            Let $M$ be a subrepresentation of $P$ and let
+            \[
+            u\colon M \to P
+            \]
+            be the inclusion morphism.
+            
+            By Corollary~\ref{cor:8.2.13}, we have
+            \[
+            P \cong P(i_1)\oplus \cdots \oplus P(i_t)
+            \]
+            for some vertices $i_1,\dots,i_t$, and thus the inclusion $u$ is of the form
+            \[
+            u=
+            \begin{bmatrix}
+            u_1\\
+            \vdots\\
+            u_t
+            \end{bmatrix},
+            \]
+            with
+            \[
+            \operatorname{im} u_j \subseteq P(i_j).
+            \]
+            
+            It follows that
+            \[
+            M \cong \operatorname{im} u_1 \oplus \cdots \oplus \operatorname{im} u_t,
+            \]
+            and, by Proposition~\ref{prop:7.2.1}, it suffices to show that $\operatorname{im} u_j$ is projective
+            for each $j$.
+            
+            This is obvious in the case where
+            \[
+            \operatorname{im} u_j = P(i_j),
+            \]
+            so let us suppose that $\operatorname{im} u_j$ is a proper subrepresentation of
+            \[
+            P(i_j).
+            \]
+            Then $\operatorname{im} u_j$ is a subrepresentation of $\operatorname{rad} P(i_j)$,
+            and $\operatorname{rad} P(i_j)$ is projective. Moreover, the
+            dimension of $\operatorname{rad} P(i_j)$ is strictly smaller than $d$, and, by
+            induction, we conclude that $\operatorname{im} u_j$ is projective, which completes
+            the proof.
+            \end{proof}
+
+\chapter{Lecture 9}
+
+\begin{definition}
+    We say that two functors
+    \[
+    F_1, F_2 : \mathcal{C} \to \mathcal{D}
+    \]
+    are \emph{isomorphic} if for every object
+    \[
+    M \in \operatorname{Ob}(\mathcal{C}),
+    \]
+    there exists an isomorphism
+    \[
+    \eta_M : F_1(M) \to F_2(M)
+    \]
+    such that for every morphism
+    \[
+    f : M \to N
+    \]
+    in \(\mathcal{C}\), the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    F_1(M) \arrow[r, "F_1(f)"] \arrow[d, "\eta_M"']
+    & F_1(N) \arrow[d, "\eta_N"] \\
+    F_2(M) \arrow[r, "F_2(f)"']
+    & F_2(N)
+    \end{tikzcd}
+    \]
+    In this case, we denote
+    \[
+    F_1 \cong F_2.
+    \]
+    \end{definition}
+
+    \begin{definition}
+        We say that a functor
+        \[
+        F:\mathcal{C}\to\mathcal{D}
+        \]
+        is an \emph{equivalence of categories} if there exists a functor
+        \[
+        G:\mathcal{D}\to\mathcal{C}
+        \]
+        such that
+        \[
+        F\circ G \cong \operatorname{id}_{\mathcal{D}}
+        \qquad\text{and}\qquad
+        G\circ F \cong \operatorname{id}_{\mathcal{C}}.
+        \]
+        In this case, \(G\) is called a \emph{quasi-inverse} of \(F\).
+        \end{definition}
+
+        \begin{definition}
+            A contravariant functor
+            \[
+            F:\mathcal{C}\to\mathcal{D}
+            \]
+            which has a quasi-inverse is called a \emph{duality functor}.
+    \end{definition}
+
+    Apply this to quivers. First define \(Q^{\operatorname{op}}\).
+    \[
+    Q_0^{\operatorname{op}} := Q_0,
+    \qquad
+    \alpha : i \to j \text{ in } Q
+    \ \mapsto\
+    \alpha^{\operatorname{op}} : j \to i \text{ in } Q^{\operatorname{op}}.
+    \]
+    For every \(\alpha \in Q_1\), define \(\alpha^{\operatorname{op}}\) by
+    \[
+    s(\alpha^{\operatorname{op}})=t(\alpha),
+    \qquad
+    t(\alpha^{\operatorname{op}})=s(\alpha).
+    \]
+    We will use the notation
+    \[
+    P_Q(i), \qquad P_{Q^{\operatorname{op}}}(i).
+    \]
+
+    Define a functor
+    \[
+    D := \operatorname{Hom}(-,k)
+    :\operatorname{Rep}(Q)\to \operatorname{Rep}(Q^{\operatorname{op}})
+    \]
+    this is a contravariant functor.
+    
+    If
+    \[
+    M=(M_i,\varphi_\alpha),
+    \]
+    then
+    \[
+    DM=(DM_i, D\varphi_{\alpha}),
+    \qquad
+    DM_i=\operatorname{Hom}_k(M_i,k),
+    \qquad
+    D\varphi_{\alpha}=\operatorname{Hom}_k(\varphi_\alpha,k).
+    \]
+    
+    If
+    \[
+    \alpha:i\to j \text{ in } Q,
+    \qquad
+    \varphi_\alpha:M_i\to M_j,
+    \]
+    then
+    \[
+    \alpha^{\operatorname{op}}:j\to i \text{ in } Q^{\operatorname{op}},
+    \]
+    and
+    \[
+    \operatorname{Hom}_k(M_j,k)
+    \xrightarrow{\;D\varphi_{\alpha}\;}
+    \operatorname{Hom}_k(M_i,k),
+    \]
+    where for
+    \[
+    f:M_j\to k,
+    \]
+    we have
+    \[
+    D\varphi_{\alpha}(f)=f\circ \varphi_\alpha.
+    \]
+    
+    For a morphism
+    \[
+    h:M\to N,
+    \]
+    define
+    \[
+    Dh:DN\to DM.
+    \]
+    On the \(i\)-th vertex, this is
+    \[
+    \operatorname{Hom}_k(N_i,k)
+    \xrightarrow{\;\operatorname{Hom}_k(h_i,k)=h_i^*\;}
+    \operatorname{Hom}_k(M_i,k),
+    \]
+    and for
+    \[
+    \psi:N_i\to k,
+    \]
+    we have
+    \[
+    h_i^*(\psi)=\psi\circ h_i.
+    \]
+
+    In the same way, we may define
+\[
+D^{\operatorname{op}}:=\operatorname{Hom}_k(-,k):
+\operatorname{Rep}(Q^{\operatorname{op}})\to \operatorname{Rep}(Q)
+\qquad
+(\text{actually } D^{\operatorname{op}}=D).
+\]
+
+Hence
+\[
+D^{\operatorname{op}}\circ D:
+\operatorname{Rep}(Q)\to \operatorname{Rep}(Q)
+\qquad
+(\text{actually } D^2).
+\]
+
+Moreover,
+\[
+D^2 M_i
+=
+\operatorname{Hom}_k\bigl(\operatorname{Hom}_k(M_i,k),k\bigr)
+\cong M_i.
+\]
+
+Therefore,
+\[
+D^2 \cong \operatorname{id}_{\operatorname{Rep}(Q)}.
+\]
+
+So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
+
+\begin{example}
+    Let
+    \[
+    Q:\qquad
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+    1 \arrow[r] \& 2 \& 3 \arrow[l]
+    \end{tikzcd}
+    \]
+    Then the indecomposable projective representations are
+    \[
+    P_Q(1)=
+    \begin{matrix}
+    1\\[-2mm]
+    2
+    \end{matrix},
+    \qquad
+    P_Q(2)=2,
+    \qquad
+    P_Q(3)=
+    \begin{matrix}
+    3\\[-2mm]
+    2
+    \end{matrix}.
+    \]
+    
+    The opposite quiver is
+    \[
+    Q^{\operatorname{op}}:\qquad
+    \begin{tikzcd}[ampersand replacement=\&, column sep=large]
+    1 \& 2 \arrow[l] \arrow[r] \& 3
+    \end{tikzcd}
+    \]
+    
+    Moreover,
+    \[
+    D\bigl(k \xrightarrow{\,1\,} k \xleftarrow{\,0\,} 0\bigr)
+    =
+    \bigl(k \xleftarrow{\,1\,} k \xrightarrow{\,0\,} 0\bigr),
+    \qquad
+    D\bigl(P_Q(1)\bigr)=I_{Q^{\operatorname{op}}}(1),
+    \]
+    \[
+    D\bigl(0 \xrightarrow{\,0\,} k \xleftarrow{\,0\,} 0\bigr)
+    =
+    \bigl(0 \xleftarrow{\,0\,} k \xrightarrow{\,0\,} 0\bigr),
+    \qquad
+    D\bigl(P_Q(2)\bigr)=I_{Q^{\operatorname{op}}}(2),
+    \]
+    \[
+    D\bigl(0 \xrightarrow{\,0\,} k \xleftarrow{\,1\,} k\bigr)
+    =
+    \bigl(0 \xleftarrow{\,0\,} k \xrightarrow{\,1\,} k\bigr),
+    \qquad
+    D\bigl(P_Q(3)\bigr)=I_{Q^{\operatorname{op}}}(3).
+    \]
+    \end{example}
+
+    \begin{proposition}
+        Let \(Q\) be a quiver without oriented cycles, and let \(i\in Q_0\). Then
+        \[
+        D\bigl(P_Q(i)\bigr)\cong I_{Q^{\operatorname{op}}}(i).
+        \]
+        In particular, the duality
+        \[
+        D=\operatorname{Hom}_k(-,k):\operatorname{Rep}Q\longrightarrow \operatorname{Rep}Q^{\operatorname{op}}
+        \]
+        restricts to a duality
+        \[
+        D:\operatorname{proj}Q\longrightarrow \operatorname{inj}Q^{\operatorname{op}}.
+        \]
+        \end{proposition}
+        
+        \begin{proof}
+        For each vertex \(j\in Q_0\), the vector space \(P_Q(i)_j\) has a basis given by the set
+        of all paths from \(i\) to \(j\) in \(Q\). Hence
+        \[
+        D\bigl(P_Q(i)\bigr)_j=\operatorname{Hom}_k\bigl(P_Q(i)_j,k\bigr)
+        \]
+        has the corresponding dual basis
+        \[
+        \{\delta_c \mid c:i\rightsquigarrow j \text{ a path in }Q\},
+        \]
+        where \(\delta_c(c')=\delta_{c,c'}\).
+        
+        On the other hand, \(I_{Q^{\operatorname{op}}}(i)_j\) has a basis given by the set of all
+        paths from \(j\) to \(i\) in \(Q^{\operatorname{op}}\). These are naturally in bijection with
+        the paths from \(i\) to \(j\) in \(Q\): if \(c:i\rightsquigarrow j\) is a path in \(Q\), then
+        \(c^{\operatorname{op}}:j\rightsquigarrow i\) is the corresponding path in \(Q^{\operatorname{op}}\).
+        
+        Thus for each \(j\in Q_0\), we define a \(k\)-linear isomorphism
+        \[
+        \Phi_j:D\bigl(P_Q(i)\bigr)_j\longrightarrow I_{Q^{\operatorname{op}}}(i)_j
+        \]
+        by
+        \[
+        \Phi_j(\delta_c)=c^{\operatorname{op}}.
+        \]
+        
+        It remains to show that these maps are compatible with the arrow maps.
+        
+        Let \(\alpha:j\to \ell\) be an arrow in \(Q\). Then \(\alpha^{\operatorname{op}}:\ell\to j\)
+        is an arrow in \(Q^{\operatorname{op}}\). In the projective representation \(P_Q(i)\), the map
+        \[
+        \varphi_\alpha:P_Q(i)_j\longrightarrow P_Q(i)_\ell
+        \]
+        is given by concatenation with \(\alpha\), that is,
+        \[
+        \varphi_\alpha(c)=c\alpha.
+        \]
+        Hence in the dual representation, the map
+        \[
+        D\varphi_\alpha:
+        D\bigl(P_Q(i)\bigr)_\ell\longrightarrow D\bigl(P_Q(i)\bigr)_j
+        \]
+        is given by precomposition.
+        
+        Take a basis element \(\delta_d\in D\bigl(P_Q(i)\bigr)_\ell\), where \(d:i\rightsquigarrow \ell\)
+        is a path in \(Q\). Then for any path \(c:i\rightsquigarrow j\), we have
+        \[
+        (D\varphi_\alpha)(\delta_d)(c)
+        =
+        \delta_d\bigl(\varphi_\alpha(c)\bigr)
+        =
+        \delta_d(c\alpha).
+        \]
+        Therefore,
+        \[
+        D\varphi_\alpha(\delta_d)
+        =
+        \begin{cases}
+        \delta_c, & \text{if } d=c\alpha \text{ for some path } c:i\rightsquigarrow j,\\[1mm]
+        0, & \text{otherwise.}
+        \end{cases}
+        \]
+        
+        Now consider the injective representation \(I_{Q^{\operatorname{op}}}(i)\). The arrow map
+        corresponding to \(\alpha^{\operatorname{op}}:\ell\to j\) is defined by deleting the initial arrow
+        \(\alpha^{\operatorname{op}}\) from a path in \(Q^{\operatorname{op}}\) when possible, and sending the
+        path to \(0\) otherwise. Thus
+        \[
+        \varphi_{\alpha^{\operatorname{op}}}\bigl(d^{\operatorname{op}}\bigr)
+        =
+        \begin{cases}
+        c^{\operatorname{op}}, & \text{if } d=c\alpha,\\[1mm]
+        0, & \text{otherwise.}
+        \end{cases}
+        \]
+        This shows that
+        \[
+        \Phi_j\circ D\varphi_\alpha
+        =
+        \varphi_{\alpha^{\operatorname{op}}}\circ \Phi_\ell.
+        \]
+        Hence \((\Phi_j)_{j\in Q_0}\) defines an isomorphism of representations
+        \[
+        D\bigl(P_Q(i)\bigr)\cong I_{Q^{\operatorname{op}}}(i).
+        \]
+        
+        Finally, every projective representation in \(\operatorname{Rep}Q\) is a finite direct sum of
+        indecomposable projectives \(P_Q(i)\), and \(D\) commutes with finite direct sums. Therefore
+        \(D\) sends projective representations to injective representations in
+        \(\operatorname{Rep}Q^{\operatorname{op}}\). Since \(D\) is already a duality on the whole
+        categories, it restricts to a duality
+        \[
+        \operatorname{proj}Q\longrightarrow \operatorname{inj}Q^{\operatorname{op}}.
+        \]
+        \end{proof}
+
+        \begin{definition}
+            Let \(Q\) be a quiver without oriented cycles, and let
+            \[
+            A:=\bigoplus_{j\in Q_0} P(j)
+            \]
+            be the free representation given by the direct sum of the indecomposable projective
+            representations of \(Q\).
+            
+            For each representation \(X\in \operatorname{rep}Q\), we define a representation
+            \[
+            \operatorname{Hom}(X,A)\in \operatorname{rep}Q^{\operatorname{op}}
+            \]
+            as follows.
+            
+            For every vertex \(i\in Q_0\), set
+            \[
+            \operatorname{Hom}(X,A)_i:=\operatorname{Hom}(X,P(i)).
+            \]
+            If \(\alpha:i\to j\) is an arrow in \(Q\), then \(\alpha^{\operatorname{op}}:j\to i\) is an arrow
+            in \(Q^{\operatorname{op}}\), and we define the corresponding arrow map
+            \[
+            \varphi_{\alpha^{\operatorname{op}}}:
+            \operatorname{Hom}(X,P(j))\longrightarrow \operatorname{Hom}(X,P(i))
+            \]
+            by
+            \[
+            \varphi_{\alpha^{\operatorname{op}}}(f):=\alpha\circ f,
+            \]
+            where \(\alpha\) is viewed as the morphism
+            \[
+            \alpha:P(j)\longrightarrow P(i)
+            \]
+            corresponding to the path \(\alpha\).
+            
+            Moreover, if \(g:X\to X'\) is a morphism in \(\operatorname{rep}Q\), define
+            \[
+            \operatorname{Hom}(g,A):\operatorname{Hom}(X',A)\longrightarrow \operatorname{Hom}(X,A)
+            \]
+            vertexwise by
+            \[
+            \operatorname{Hom}(g,P(i)):
+            \operatorname{Hom}(X',P(i))\longrightarrow \operatorname{Hom}(X,P(i)),
+            \qquad
+            f\longmapsto f\circ g.
+            \]
+            \end{definition}
+            
+            \begin{proposition}
+            The assignment above defines a contravariant functor
+            \[
+            \operatorname{Hom}(-,A):\operatorname{rep}Q\longrightarrow \operatorname{rep}Q^{\operatorname{op}}.
+            \]
+            \end{proposition}
+            
+            \begin{proof}
+            Fix \(X\in \operatorname{rep}Q\). For each vertex \(i\in Q_0\), the space
+            \[
+            \operatorname{Hom}(X,P(i))
+            \]
+            is a \(k\)-vector space. For each arrow \(\alpha:i\to j\) in \(Q\), the map
+            \[
+            \varphi_{\alpha^{\operatorname{op}}}(f)=\alpha\circ f
+            \]
+            is clearly \(k\)-linear. Hence the collection
+            \[
+            \operatorname{Hom}(X,A)
+            =
+            \bigl(\operatorname{Hom}(X,P(i)),\varphi_{\alpha^{\operatorname{op}}}\bigr)_{i\in Q_0,\alpha\in Q_1}
+            \]
+            is a representation of \(Q^{\operatorname{op}}\).
+            
+            Now let \(g:X\to X'\) be a morphism in \(\operatorname{rep}Q\). We must show that
+            \[
+            \operatorname{Hom}(g,A):\operatorname{Hom}(X',A)\to \operatorname{Hom}(X,A)
+            \]
+            is a morphism of representations of \(Q^{\operatorname{op}}\). Let \(\alpha:i\to j\) be an arrow in \(Q\).
+            Then we need to show that the following diagram commutes:
+            \[
+            \begin{tikzcd}[column sep=large, row sep=large]
+            \operatorname{Hom}(X',P(j))
+            \arrow[r, "\varphi^{X'}_{\alpha^{\operatorname{op}}}"]
+            \arrow[d, "{\operatorname{Hom}(g,P(j))}"']
+            &
+            \operatorname{Hom}(X',P(i))
+            \arrow[d, "{\operatorname{Hom}(g,P(i))}"]
+            \\
+            \operatorname{Hom}(X,P(j))
+            \arrow[r, "\varphi^{X}_{\alpha^{\operatorname{op}}}"']
+            &
+            \operatorname{Hom}(X,P(i)).
+            \end{tikzcd}
+            \]
+            Take \(f\in \operatorname{Hom}(X',P(j))\). Then
+            \[
+            \operatorname{Hom}(g,P(i))\bigl(\varphi^{X'}_{\alpha^{\operatorname{op}}}(f)\bigr)
+            =
+            \operatorname{Hom}(g,P(i))(\alpha\circ f)
+            =
+            (\alpha\circ f)\circ g.
+            \]
+            On the other hand,
+            \[
+            \varphi^{X}_{\alpha^{\operatorname{op}}}\bigl(\operatorname{Hom}(g,P(j))(f)\bigr)
+            =
+            \varphi^{X}_{\alpha^{\operatorname{op}}}(f\circ g)
+            =
+            \alpha\circ (f\circ g)
+            =
+            (\alpha\circ f)\circ g.
+            \]
+            Thus the diagram commutes, so \(\operatorname{Hom}(g,A)\) is indeed a morphism in
+            \(\operatorname{rep}Q^{\operatorname{op}}\).
+            
+            Finally, the functorial identities are immediate:
+            \[
+            \operatorname{Hom}(\operatorname{id}_X,A)=\operatorname{id}_{\operatorname{Hom}(X,A)},
+            \]
+            and if \(X\xrightarrow{g} X'\xrightarrow{h} X''\), then for each vertex \(i\in Q_0\),
+            \[
+            \operatorname{Hom}(h\circ g,P(i))(f)
+            =
+            f\circ h\circ g
+            =
+            \operatorname{Hom}(g,P(i))\bigl(\operatorname{Hom}(h,P(i))(f)\bigr),
+            \]
+            so
+            \[
+            \operatorname{Hom}(h\circ g,A)
+            =
+            \operatorname{Hom}(g,A)\circ \operatorname{Hom}(h,A).
+            \]
+            Therefore \(\operatorname{Hom}(-,A)\) is a contravariant functor from
+            \(\operatorname{rep}Q\) to \(\operatorname{rep}Q^{\operatorname{op}}\).
+            \end{proof}
+
+            \begin{definition}
+                The functor
+                \[
+                \nu = D\operatorname{Hom}(-,A): \operatorname{rep}Q \to \operatorname{rep}Q
+                \]
+                is called the \emph{Nakayama functor}:
+                \[
+                \begin{tikzcd}[column sep=large]
+                \operatorname{rep}Q
+                \arrow[r, "{\operatorname{Hom}(-,A)}"]
+                \arrow[rr, bend right=20, "\nu"']
+                & \operatorname{rep}Q^{\operatorname{op}}
+                \arrow[r, "D"]
+                & \operatorname{rep}Q
+                \end{tikzcd}
+                \]
+                \end{definition}
+
+                \begin{lemma}\label{lem:9.0.9}
+                    Let
+                    \[
+                    f\colon M \to P
+                    \]
+                    be a nonzero morphism from an indecomposable representation \(M\) to a projective representation \(P\). Then \(M\) is projective, and \(f\) is injective.
+                    \end{lemma}
+                    
+                    \begin{proof}
+                    Since the image of \(f\) is a subrepresentation of \(P\), it is projective by Theorem~\ref{thm:8.2.17}. Therefore, the short exact sequence
+                    \[
+                    0 \longrightarrow \ker f \longrightarrow M \longrightarrow \operatorname{im} f \longrightarrow 0
+                    \]
+                    splits. Hence \(\operatorname{im} f\) is isomorphic to a direct summand of \(M\). But \(M\) is indecomposable, so
+                    \[
+                    M \cong \operatorname{im} f.
+                    \]
+                    Therefore \(M\) is projective, and necessarily
+                    \[
+                    \ker f = 0.
+                    \]
+                    Thus \(f\) is injective.
+                    \end{proof}
+
+                Lemma~\ref{lem:9.0.9} implies that the functor
+                \[
+                \operatorname{Hom}(-,A)
+                \]
+                is zero on all representations which have no projective direct summands.
+                Therefore we must study the behavior of the Nakayama functor when applied to an
+                indecomposable projective representation, say, $P_Q(i)$.
+                
+                Let us first consider the functor $\operatorname{Hom}(-,A)$ only. Let
+                \[
+                M=\operatorname{Hom}(P_Q(i),A),
+                \]
+                and use the habitual notation
+                \[
+                M=\bigl(M_j,\varphi_{\alpha^{\operatorname{op}}}\bigr)_{j\in Q_0,\ \alpha\in Q_1}
+                \]
+                to denote the representation. Then the vector space
+                \[
+                M_j=\operatorname{Hom}(P_Q(i),P_Q(j)).
+                \]
+                Thus, the space $M_j$ has a basis consisting of all
+                paths from $j$ to $i$ in $Q$. In terms of $Q^{\operatorname{op}}$, this can be
+                rephrased as: $M_j$ has a basis consisting of all paths from $i$ to $j$ in
+                $Q^{\operatorname{op}}$.
+                
+                Moreover, for any arrow
+                \[
+                h \xrightarrow{\alpha} j
+                \]
+                in $Q$, the linear map
+                \[
+                \varphi_{\alpha^{\operatorname{op}}} : M_j \to M_h
+                \]
+                maps the basis element $c$, which is a path from $i$ to $j$ in
+                $Q^{\operatorname{op}}$, to the basis element
+                \[
+                c\alpha^{\operatorname{op}},
+                \]
+                which is a path from $i$ to $h$ in $Q^{\operatorname{op}}$. This shows that
+                \[
+                M=\operatorname{Hom}(P_Q(i),A)
+                \]
+                is the indecomposable projective $Q^{\operatorname{op}}$-representation
+                \[
+                P_{Q^{\operatorname{op}}}(i)
+                \]
+                at vertex $i$.
+                
+                Thus the restriction of $\operatorname{Hom}(-,A)$ to the subcategory
+                $\operatorname{proj} Q$ gives a duality of categories
+                \[
+                \operatorname{proj} Q \longrightarrow \operatorname{proj} Q^{\operatorname{op}},
+                \]
+                whose quasi-inverse is given by
+                \[
+                \operatorname{Hom}_{Q^{\operatorname{op}}}(-,A^{\operatorname{op}}),
+                \]
+                where $A^{\operatorname{op}}$ is the sum of all indecomposable projective
+                $Q^{\operatorname{op}}$-representations.
+                
+                To obtain the Nakayama functor $\nu$, we must now form the composition with the
+                duality $D$. Note that
+                \[
+                DA^{\operatorname{op}}=\bigoplus_{i\in Q_0} I_Q(i).
+                \]
+
+                \begin{proposition}
+                    The restriction of $\nu$ to $\operatorname{proj} Q$ is an equivalence of categories
+                    \[
+                    \nu \colon \operatorname{proj} Q \longrightarrow \operatorname{inj} Q
+                    \]
+                    whose quasi-inverse is given by
+                    \[
+                    \nu^{-1}=\operatorname{Hom}(DA^{\operatorname{op}},-)\colon \operatorname{inj} Q \longrightarrow \operatorname{proj} Q.
+                    \]
+                    
+                    Moreover, for any vertex $i$,
+                    \[
+                    \nu P(i)=I(i),
+                    \]
+                    and if $c$ is a path from $i$ to $j$, and
+                    \[
+                    f_c\in \operatorname{Hom}(P(j),P(i))
+                    \]
+                    is the corresponding morphism, then
+                    \[
+                    \nu f_c\colon I(j)\to I(i)
+                    \]
+                    is the morphism given by the cancellation of the path $c$.
+                    \end{proposition}
+                    
+                    \begin{proof}
+                    The functor $\nu$ is an equivalence because it is the composition of the two dualities
+                    $D$ and $\operatorname{Hom}(-,A)$. Its quasi-inverse $\nu^{-1}$ is the composition of the
+                    quasi-inverses of $D$ and $\operatorname{Hom}(-,A)$, thus
+                    \[
+                    \nu^{-1}=\operatorname{Hom}_{Q^{\operatorname{op}}}(-,A^{\operatorname{op}})\circ D.
+                    \]
+                    Note that since
+                    \[
+                    \operatorname{Hom}_{Q^{\operatorname{op}}}(DX,DY)\cong \operatorname{Hom}_Q(Y,X)
+                    \]
+                    for all $X,Y\in \operatorname{rep} Q$, we have in particular that
+                    \[
+                    \operatorname{Hom}_{Q^{\operatorname{op}}}(DX,A^{\operatorname{op}})
+                    \cong
+                    \operatorname{Hom}_Q(DA^{\operatorname{op}},X),
+                    \]
+                    whence
+                    \[
+                    \nu^{-1}=\operatorname{Hom}(DA^{\operatorname{op}},-).
+                    \]
+                    
+                    Finally,
+                    \[
+                    \nu P_Q(i)=D\operatorname{Hom}(P_Q(i),A)
+                    = D\bigl(P_{Q^{\operatorname{op}}}(i)\bigr)
+                    = I_Q(i).
+                    \]
+                    
+                    To show the last statement, let $c$ be a path from $i$ to $j$, and let
+                    \[
+                    f_c\colon P_Q(j)\to P_Q(i)
+                    \]
+                    be defined by
+                    \[
+                    f(x)=cx
+                    \]
+                    as in the proposition. Let $f_c^*$ be the image of $f_c$ under the functor
+                    $\operatorname{Hom}(-,A)$. Thus
+                    \[
+                    f_c^*\colon \operatorname{Hom}(P_Q(i),A)\to \operatorname{Hom}(P_Q(j),A)
+                    \]
+                    maps a morphism $g$ to the pullback $g\circ f_c$. Now using
+                    \[
+                    \operatorname{Hom}(P_Q(x),A)\cong P_{Q^{\operatorname{op}}}(x),
+                    \]
+                    we see that
+                    \[
+                    f_c^*\colon P_{Q^{\operatorname{op}}}(i)\to P_{Q^{\operatorname{op}}}(j)
+                    \]
+                    is given by
+                    \[
+                    f(y)=c^{\operatorname{op}}y,
+                    \]
+                    where $c^{\operatorname{op}}$ denotes the opposite of the path $c$ in $Q^{\operatorname{op}}$.
+                    Finally,
+                    \[
+                    \nu f_c = Df_c^*
+                    \]
+                    is the map sending
+                    \[
+                    D(c^{\operatorname{op}}y)\mapsto D(y),
+                    \]
+                    thus the result follows from
+                    \[
+                    D(c^{\operatorname{op}}y)=D(y)c.
+                    \]
+                    \end{proof}
 
 
 

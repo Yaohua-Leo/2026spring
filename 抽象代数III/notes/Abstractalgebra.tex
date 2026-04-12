@@ -5859,33 +5859,159 @@ If $R=k$ is a field and $A$ is finite-dimensional over $k$, then $A$ is called a
 Such an algebra is Noetherian and Artinian as a ring/module object.
 \end{remark}
 
-\begin{lemma}
-Let $A$ be a $k$-algebra, where $k$ is a field, and let $S$ be a simple $A$-module.
-Then $\operatorname{End}_A(S)$ is a division ring, and it is naturally a $k$-algebra.
-\end{lemma}
+\begin{example}
+    Let $R$ be a commutative ring with $1$. The following are $R$-algebras:
+    \begin{enumerate}
+        \item $R[x_1,\dots,x_n]$.
+        \item $M_n(R)$.
+        \item Let $G$ be a finite group. The group algebra
+        \[
+        RG=\left\{\sum_{g\in G} a_g g \;\middle|\; a_g\in R\right\}
+        \]
+        is an $R$-algebra, with multiplication defined by
+        \[
+        \left(\sum_{g\in G} a_g g\right)\left(\sum_{h\in G} b_h h\right)
+        =
+        \sum_{r\in G}\left(\sum_{\substack{g,h\in G\\ gh=r}} a_g b_h\right) r.
+        \]
+    \end{enumerate}
+\end{example}
 
 \begin{lemma}
-If $A$ is finite-dimensional over $k$, then $\operatorname{End}_A(S)$ is finite-dimensional over $k$.
-\end{lemma}
-
-\begin{lemma}
-If $A$ is finite-dimensional over $k$ and $k$ is algebraically closed, then
-\[
-\operatorname{End}_A(S) = k.
-\]
-\end{lemma}
-
-\begin{proof}
-Regard $S$ as a finite-dimensional $k$-vector space.
-Then $\operatorname{End}_A(S)$ is a $k$-subspace of $\operatorname{End}_k(S)$.
-For any
-\[
-f \in \operatorname{End}_A(S),
-\]
-choose an eigenvalue $\lambda \in k$.
-Then $f-\lambda \operatorname{id}_S$ is not invertible, so it has nonzero kernel.
-Because the kernel is an $A$-submodule of the simple module $S$, it must be all of $S$.
-Hence $f=\lambda \operatorname{id}_S$.
+    Let $A$ be a $k$-algebra, where $k$ is a field, and let $S$ be a simple $A$-module.
+    Then $\operatorname{End}_A(S)$ is a division ring, and it is naturally a $k$-algebra.
+    \end{lemma}
+    
+    \begin{proof}
+    We first show that $\operatorname{End}_A(S)$ is a division ring.
+    
+    Let
+    \[
+    0\neq f\in \operatorname{End}_A(S).
+    \]
+    Since $f$ is $A$-linear, both $\ker(f)$ and $\operatorname{im}(f)$ are $A$-submodules of $S$.
+    Because $S$ is simple and $f\neq 0$, we have $\operatorname{im}(f)\neq 0$, hence
+    \[
+    \operatorname{im}(f)=S.
+    \]
+    Also $\ker(f)\neq S$ since $f\neq 0$, so by simplicity,
+    \[
+    \ker(f)=0.
+    \]
+    Thus $f$ is bijective. Since the inverse of a bijective $A$-linear map is again $A$-linear,
+    $f^{-1}\in \operatorname{End}_A(S)$. Therefore every nonzero element of
+    $\operatorname{End}_A(S)$ is invertible, so $\operatorname{End}_A(S)$ is a division ring.
+    
+    Next we show that $\operatorname{End}_A(S)$ is naturally a $k$-algebra.
+    
+    Because $A$ is a $k$-algebra, $S$ becomes a $k$-vector space via
+    \[
+    \lambda\cdot s := (\lambda 1_A)s
+    \qquad (\lambda\in k,\ s\in S).
+    \]
+    Now let $f\in \operatorname{End}_A(S)$. Then for $\lambda\in k$ and $s\in S$,
+    \[
+    f(\lambda s)
+    =
+    f\bigl((\lambda 1_A)s\bigr)
+    =
+    (\lambda 1_A)f(s)
+    =
+    \lambda f(s).
+    \]
+    Hence every $A$-linear endomorphism of $S$ is automatically $k$-linear. So
+    \[
+    \operatorname{End}_A(S)\subseteq \operatorname{End}_k(S)
+    \]
+    as a $k$-subspace. Equivalently, there is a $k$-algebra homomorphism
+    \[
+    k\longrightarrow \operatorname{End}_A(S),
+    \qquad
+    \lambda\longmapsto \lambda\,\operatorname{id}_S,
+    \]
+    whose image lies in the center of $\operatorname{End}_A(S)$. Therefore
+    $\operatorname{End}_A(S)$ is naturally a $k$-algebra.
+    \end{proof}
+    
+    \begin{lemma}
+    If $A$ is finite-dimensional over $k$, then $\operatorname{End}_A(S)$ is finite-dimensional over $k$.
+    \end{lemma}
+    
+    \begin{proof}
+    Choose $0\neq s\in S$. Since $S$ is simple, the cyclic submodule $As$ is nonzero, hence
+    \[
+    As=S.
+    \]
+    Consider the map
+    \[
+    \varphi:A\longrightarrow S,
+    \qquad
+    a\longmapsto as.
+    \]
+    This is a surjective $k$-linear map. Therefore
+    \[
+    \dim_k S\leq \dim_k A<\infty.
+    \]
+    So $S$ is finite-dimensional over $k$.
+    
+    Since every $A$-endomorphism of $S$ is $k$-linear, we have
+    \[
+    \operatorname{End}_A(S)\subseteq \operatorname{End}_k(S)
+    \]
+    as $k$-vector spaces. Hence
+    \[
+    \dim_k \operatorname{End}_A(S)
+    \leq
+    \dim_k \operatorname{End}_k(S)
+    =
+    (\dim_k S)^2
+    <\infty.
+    \]
+    Thus $\operatorname{End}_A(S)$ is finite-dimensional over $k$.
+    \end{proof}
+    
+    \begin{lemma}
+    If $A$ is finite-dimensional over $k$ and $k$ is algebraically closed, then
+    \[
+    \operatorname{End}_A(S)=k.
+    \]
+    \end{lemma}
+    
+    \begin{proof}
+    By the previous lemma, $S$ is finite-dimensional over $k$, and
+    $\operatorname{End}_A(S)$ is a finite-dimensional $k$-algebra.
+    
+    Let
+    \[
+    f\in \operatorname{End}_A(S).
+    \]
+    Since $S$ is a finite-dimensional $k$-vector space and $k$ is algebraically closed,
+    the $k$-linear operator $f:S\to S$ has an eigenvalue $\lambda\in k$. Hence
+    \[
+    f-\lambda \operatorname{id}_S
+    \]
+    has a nonzero kernel, so it is not injective.
+    
+    But $f-\lambda \operatorname{id}_S$ is still an element of $\operatorname{End}_A(S)$.
+    Since $\operatorname{End}_A(S)$ is a division ring by the first lemma, every nonzero
+    element is invertible, hence injective. Therefore
+    \[
+    f-\lambda \operatorname{id}_S=0.
+    \]
+    So
+    \[
+    f=\lambda \operatorname{id}_S.
+    \]
+    This shows that every $A$-endomorphism of $S$ is scalar. Under the natural embedding
+    \[
+    k\hookrightarrow \operatorname{End}_A(S),
+    \qquad
+    \lambda\mapsto \lambda\operatorname{id}_S,
+    \]
+    we therefore obtain
+    \[
+    \operatorname{End}_A(S)=k.
+    \]
 \end{proof}
 
 \begin{theorem}
@@ -5896,16 +6022,62 @@ A \cong M_{n_1}(k) \oplus \cdots \oplus M_{n_r}(k).
 \end{theorem}
 
 \begin{corollary}
-If
-\[
-{}_A A \cong \bigoplus_{i=1}^r S_i^{\oplus n_i}
-\]
-with the $S_i$ pairwise nonisomorphic simple $A$-modules, then
-\[
-S_1,\dots,S_r
-\]
-form a complete set of representatives for the isomorphism classes of simple $A$-modules.
-\end{corollary}
+    Let $A$ be a finite-dimensional semisimple $k$-algebra, where $k$ is a field.
+    
+    In any decomposition
+    \[
+    {}_A A \cong S_1^{n_1} \oplus \cdots \oplus S_r^{n_r},
+    \]
+    where the $S_i$'s are pairwise non-isomorphic simple $A$-modules, we have that
+    $S_1,\dots,S_r$ form a complete set of representatives of the isomorphism classes
+    of simple $A$-modules.
+    
+    If moreover $k=\overline{k}$, then $n_i=\dim_k S_i$ and
+    \[
+    \dim_k A = n_1^2+\cdots+n_r^2.
+    \]
+    \end{corollary}
+    
+    \begin{proof}
+    Let $S$ be a simple module. Then
+    \[
+    S \cong A/M
+    \]
+    where $M$ is a maximal submodule.
+    
+    By semisimplicity,
+    \[
+    {}_A A = M \oplus S.
+    \]
+    Hence all simple submodules appear in $\{S_1,\dots,S_r\}$.
+    
+    Since $k=\overline{k}$, we have
+    \[
+    A \cong M_{n_1}(k)\oplus \cdots \oplus M_{n_r}(k).
+    \]
+    
+    Moreover,
+    \[
+    M_{n_i}(k)=
+    \underbrace{
+    \left\{
+    \begin{pmatrix}
+    * & \cdots & 0 \\
+    \vdots & \ddots & \vdots \\
+    * & \cdots & 0
+    \end{pmatrix}
+    \right\}
+    \oplus \cdots \oplus
+    \left\{
+    \begin{pmatrix}
+    0 & \cdots & * \\
+    \vdots & \ddots & \vdots \\
+    0 & \cdots & *
+    \end{pmatrix}
+    \right\}
+    }_{\text{each of them is a simple } M_{n_i}(k)\text{-module}.}
+    \]
+\end{proof}
 
 \section{\texorpdfstring{$k$-algebras, indecomposables, and idempotents}{k-algebras, indecomposables, and idempotents}}
 
@@ -5917,8 +6089,7 @@ M = M_1 \oplus M_2
 forces $M_1=0$ or $M_2=0$.
 \end{definition}
 
-\begin{theorem}
-(Krull--Schmidt) Let $M$ be an $R$-module with a composition series.
+\begin{theorem}[Krull-Schmidt] Let $M$ be an $R$-module with a composition series.
 Suppose
 \[
 M \cong V_1 \oplus \cdots \oplus V_m
@@ -5936,6 +6107,160 @@ V_i \cong U_i
 \quad\text{for all } i.
 \]
 \end{theorem}
+
+\begin{proof}
+    Replacing the given isomorphisms by identifications, we may assume
+    \[
+    M=V_1\oplus\cdots\oplus V_m
+       =U_1\oplus\cdots\oplus U_n .
+    \]
+    If $M=0$, the statement is trivial. So assume $M\neq 0$.
+    
+    Since $M$ has a composition series, it has finite length. Hence each direct summand
+    $V_i$ and $U_j$ also has finite length. Moreover, for every indecomposable module
+    $X$ of finite length, Fitting's lemma implies that every endomorphism of $X$ is either
+    invertible or nilpotent; therefore $\operatorname{End}_R(X)$ is a local ring.
+    
+    We prove the theorem by induction on the length $\ell(M)$ of $M$.
+    If $\ell(M)=1$, then $M$ is simple, hence indecomposable, so necessarily $m=n=1$
+    and $V_1\cong U_1$.
+    
+    Now assume $\ell(M)>1$ and that the statement is known for all modules of smaller
+    length. Set
+    \[
+    A:=V_1,
+    \qquad
+    B:=V_2\oplus\cdots\oplus V_m,
+    \]
+    so that
+    \[
+    M=A\oplus B.
+    \]
+    Let
+    \[
+    \iota:A\to M,\qquad \pi:M\to A
+    \]
+    be the canonical inclusion and projection. For the decomposition
+    \[
+    M=U_1\oplus\cdots\oplus U_n,
+    \]
+    let
+    \[
+    \kappa_j:U_j\to M,\qquad p_j:M\to U_j
+    \]
+    be the canonical inclusion and projection for $1\le j\le n$.
+    
+    Since
+    \[
+    1_M=\sum_{j=1}^n \kappa_j p_j,
+    \]
+    we get
+    \[
+    1_A=\pi\iota
+       =\pi\Bigl(\sum_{j=1}^n \kappa_j p_j\Bigr)\iota
+       =\sum_{j=1}^n (\pi\kappa_j)(p_j\iota).
+    \]
+    For each $j$, put
+    \[
+    u_j:=(\pi\kappa_j)(p_j\iota)\in \operatorname{End}_R(A).
+    \]
+    If all $u_j$ were noninvertible, then, since $\operatorname{End}_R(A)$ is local, their sum would
+    also be noninvertible. But their sum is $1_A$, a contradiction. Hence $u_j$ is a unit
+    for some $j$. After reordering the $U_j$, we may assume that $u_1$ is a unit.
+    
+    Set
+    \[
+    a:=\pi\kappa_1:U_1\to A,
+    \qquad
+    b:=p_1\iota:A\to U_1.
+    \]
+    Then
+    \[
+    ab=u_1
+    \]
+    is an automorphism of $A$. Consider
+    \[
+    e:=b(ab)^{-1}a\in \operatorname{End}_R(U_1).
+    \]
+    Then
+    \[
+    e^2=b(ab)^{-1}a\,b(ab)^{-1}a
+       =b(ab)^{-1}(ab)(ab)^{-1}a
+       =b(ab)^{-1}a
+       =e,
+    \]
+    so $e$ is an idempotent. Also,
+    \[
+    eb=b(ab)^{-1}ab=b\neq 0,
+    \]
+    hence $e\neq 0$. Since $\operatorname{End}_R(U_1)$ is local, its only idempotents are $0$ and $1$,
+    therefore $e=1_{U_1}$.
+    
+    Thus
+    \[
+    b(ab)^{-1}a=1_{U_1},
+    \]
+    so $a$ is injective. On the other hand, $ab$ is surjective, hence $a$ is surjective as well.
+    Therefore $a$ is an isomorphism, and we obtain
+    \[
+    A\cong U_1.
+    \]
+    
+    Now define
+    \[
+    f:=\kappa_1 a^{-1}:A\to M.
+    \]
+    Then
+    \[
+    \pi f=\pi\kappa_1 a^{-1}=aa^{-1}=1_A.
+    \]
+    Hence
+    \[
+    M=f(A)\oplus B.
+    \]
+    Indeed, for any $x\in M$,
+    \[
+    x=f(\pi(x))+\bigl(x-f(\pi(x))\bigr),
+    \]
+    and
+    \[
+    \pi\bigl(x-f(\pi(x))\bigr)=\pi(x)-\pi f(\pi(x))=0,
+    \]
+    so $x-f(\pi(x))\in \ker\pi=B$. Also, if $f(a)\in B=\ker\pi$, then
+    \[
+    a=\pi f(a)=0,
+    \]
+    so the sum is direct. Since $f(A)=\kappa_1(U_1)=U_1$, we have
+    \[
+    M=U_1\oplus B.
+    \]
+    
+    Therefore
+    \[
+    B\cong M/U_1\cong U_2\oplus\cdots\oplus U_n.
+    \]
+    But also
+    \[
+    B=V_2\oplus\cdots\oplus V_m.
+    \]
+    Now $\ell(B)<\ell(M)$, so by the induction hypothesis,
+    \[
+    m-1=n-1,
+    \]
+    and after reordering $U_2,\dots,U_n$, we have
+    \[
+    V_i\cong U_i \qquad (i=2,\dots,m).
+    \]
+    Together with $V_1\cong U_1$, this gives
+    \[
+    m=n,
+    \qquad
+    V_i\cong U_i \quad\text{for all } i
+    \]
+    after a suitable reordering.
+    
+    This completes the proof.
+\end{proof}
 
 \begin{definition}
 An idempotent of a ring $R$ is a nonzero element
@@ -5972,6 +6297,27 @@ e_1+\cdots+e_n
 is again an idempotent.
 \end{lemma}
 
+\begin{proof}
+    Let
+    \[
+    e:=e_1+\cdots+e_n.
+    \]
+    Since each $e_i$ is an idempotent, we have $e_i^2=e_i$ for all $i$. Since the
+    $idempotents$ are orthogonal, for $i\neq j$ we have
+    \[
+    e_ie_j=0.
+    \]
+    Therefore
+    \[
+    e^2=(e_1+\cdots+e_n)^2
+    =\sum_{i=1}^n e_i^2+\sum_{i\neq j} e_ie_j
+    =\sum_{i=1}^n e_i+\sum_{i\neq j}0
+    =e_1+\cdots+e_n
+    =e.
+    \]
+    Hence $e$ is an idempotent.
+    \end{proof}
+
 \begin{definition}
 An idempotent decomposition of an idempotent $e$ is an expression
 \[
@@ -5979,6 +6325,10 @@ e=e_1+\cdots+e_n
 \]
 where the $e_i$ are orthogonal idempotents.
 \end{definition}
+
+\begin{remark}
+    If $e=e_1+e_2$ is an idempotent decomposition, then $e_1$ and $e_2$ are in $eRe$.
+\end{remark}
 
 \begin{definition}
 An idempotent is called primitive if it cannot be written as a sum of two nonzero orthogonal idempotents.
@@ -5996,61 +6346,207 @@ If $e$ is an idempotent in a unital ring, then
 is an idempotent decomposition of $1$.
 \end{example}
 
-\begin{theorem}
-Let $e$ be an idempotent of $R$.
-If
-\[
-e=e_1+\cdots+e_n
-\]
-is an idempotent decomposition, then
-\[
-Re = Re_1 \oplus \cdots \oplus Re_n
-\]
-as a direct sum of left ideals / left $R$-modules.
-\end{theorem}
-
-\begin{proof}
-Every element of $Re$ can be written as
-\[
-ae = ae_1+\cdots+ae_n.
-\]
-Orthogonality of the $e_i$ gives directness of the sum.
-\end{proof}
+\begin{example}
+    Let $e$ be an idempotent, $Re = \{ ae | a\in R\}$ is a left module of $R$.
+\end{example}
 
 \begin{theorem}
-Conversely, if
-\[
-Re = I_1 \oplus \cdots \oplus I_n
-\]
-is a direct sum decomposition by left ideals, then there exist idempotents $e_1,\dots,e_n$ such that
-\[
-I_i = Re_i
-\quad\text{and}\quad
-e=e_1+\cdots+e_n.
-\]
-\end{theorem}
+    Let $e$ be an idempotent of $R$.
+    
+    If
+    \[
+    e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition, then
+    \[
+    Re=Re_1\oplus\cdots\oplus Re_n.
+    \]
+    
+    Conversely, if $Re$ is a direct sum of left ideals
+    \[
+    Re=I_1\oplus\cdots\oplus I_n,
+    \]
+    then there exists an idempotent decomposition
+    \[
+    e=e_1+\cdots+e_n
+    \]
+    with $e_i\in I_i$ and $I_i=Re_i$.
+    
+    In this way, the idempotent decompositions of $e$ are in one-to-one correspondence
+    with the direct sum decompositions of the left $R$-module $Re$.
+    \end{theorem}
+    
+    \begin{proof}
+    Assume first that
+    \[
+    e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition. Since
+    \[
+    e_ie=ee_i=e_i,
+    \]
+    we have
+    \[
+    Re_i\subseteq Re.
+    \]
+    Indeed, if $x\in Re_i$, then $xe=x$.
+    
+    Now let $a\in R$. Then
+    \[
+    ae=ae_1+\cdots+ae_n\in Re_1+\cdots+Re_n,
+    \]
+    so
+    \[
+    Re\subseteq Re_1+\cdots+Re_n.
+    \]
+    The reverse inclusion is clear, hence
+    \[
+    Re=Re_1+\cdots+Re_n.
+    \]
+    
+    To show that the sum is direct, suppose
+    \[
+    a_1e_1+\cdots+a_ne_n=0.
+    \]
+    Multiplying on the right by $e_i$, we get
+    \[
+    a_ie_i=0
+    \]
+    for each $i$, since $e_je_i=0$ for $j\ne i$. Therefore the expression is unique, and
+    \[
+    Re=Re_1\oplus\cdots\oplus Re_n.
+    \]
+    
+    Conversely, suppose
+    \[
+    Re=I_1\oplus\cdots\oplus I_n.
+    \]
+    Since $e\in Re$, we may write
+    \[
+    e=e_1+\cdots+e_n,
+    \qquad e_i\in I_i.
+    \]
+    
+    For any $a_i\in I_i\subseteq Re$, we have
+    \[
+    a_i=a_ie=a_ie_1+\cdots+a_ie_n.
+    \]
+    Since $e_j\in I_j$, we have
+    \[
+    Re_j\subseteq I_j,
+    \]
+    hence
+    \[
+    a_ie_j\in I_j.
+    \]
+    But $a_i\in I_i$, and the decomposition
+    \[
+    Re=I_1\oplus\cdots\oplus I_n
+    \]
+    is direct. Therefore
+    \[
+    a_i=a_ie_i,
+    \qquad
+    a_ie_j=0 \quad (j\ne i).
+    \]
+    It follows that
+    \[
+    I_i\subseteq Re_i.
+    \]
+    On the other hand, since $e_i\in I_i$ and $I_i$ is a left ideal, we have
+    \[
+    Re_i\subseteq I_i.
+    \]
+    Thus
+    \[
+    I_i=Re_i.
+    \]
+    
+    Now take $a_i=e_i$. Then
+    \[
+    e_i=e_i^2,
+    \qquad
+    e_ie_j=0 \quad (j\ne i).
+    \]
+    Hence
+    \[
+    e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition.
+    \end{proof}
 
-\begin{proof}
-Write
-\[
-e=a_1+\cdots+a_n
-\]
-with $a_i \in I_i$.
-Then one checks that the $a_i$ are pairwise orthogonal idempotents and that
-\[
-I_i = Ra_i.
-\]
-Use these $a_i$ as the required $e_i$.
-\end{proof}
-
-\begin{corollary}
-For an idempotent $e \in R$, the following are equivalent:
-(1) $e$ is primitive.
-(2) $Re$ is indecomposable as a left $R$-module.
-(3) The corner ring $eRe$ has no nontrivial idempotents, i.e. its only idempotents are $0$ and $e$.
-\end{corollary}
-
-% <<< METANOTE-AUTO-END
+    \begin{corollary}
+        Let $e$ be an idempotent of $R$. Then the following are equivalent:
+        \begin{enumerate}
+            \renewcommand{\labelenumi}{(\theenumi)}
+            \item $e$ is primitive.
+            \item $Re$ is indecomposable as a left $R$-module.
+            \item The only idempotents in $eRe$ are $0$ and $e$.
+        \end{enumerate}
+        \end{corollary}
+        
+        \begin{proof}
+        \textbf{(1) \(\Longleftrightarrow\) (2).}
+        This follows immediately from the previous theorem, which gives a bijection between
+        idempotent decompositions of $e$ and direct sum decompositions of the left ideal $Re$.
+        
+        \medskip
+        
+        \textbf{(1) \(\Longrightarrow\) (3).}
+        Suppose that $e' \in eRe$ is an idempotent with
+        \[
+        e' \neq 0, \qquad e' \neq e.
+        \]
+        Since $e' \in eRe$, we have
+        \[
+        ee' = e' = e'e.
+        \]
+        Hence
+        \[
+        e = e' + (e-e').
+        \]
+        We claim that this is an idempotent decomposition of $e$.
+        
+        First,
+        \[
+        (e-e')^2 = e^2 - ee' - e'e + (e')^2
+        = e - e' - e' + e'
+        = e - e'.
+        \]
+        So $e-e'$ is an idempotent.
+        
+        Next,
+        \[
+        e'(e-e') = e'e - (e')^2 = e' - e' = 0,
+        \]
+        and similarly
+        \[
+        (e-e')e' = ee' - (e')^2 = e' - e' = 0.
+        \]
+        Thus $e'$ and $e-e'$ are orthogonal idempotents. Since both are nonzero, this contradicts
+        the primitiveness of $e$.
+        
+        Therefore no such $e'$ exists, and the only idempotents in $eRe$ are $0$ and $e$.
+        
+        \medskip
+        
+        \textbf{(3) \(\Longrightarrow\) (1).}
+        Suppose that $e$ is not primitive. Then there exist nonzero orthogonal idempotents
+        $e_1,e_2$ such that
+        \[
+        e = e_1 + e_2.
+        \]
+        Since
+        \[
+        ee_1e = e_1, \qquad ee_2e = e_2,
+        \]
+        we have
+        \[
+        e_1,e_2 \in eRe.
+        \]
+        But $e_1$ is a nonzero idempotent different from $e$, contradicting (3). Hence $e$ must be
+        primitive.
+        \end{proof}
 
 \chapter{Homework}
 
@@ -7762,6 +8258,363 @@ For an idempotent $e \in R$, the following are equivalent:
     \]
     which is a direct sum of simple modules, hence semisimple.
 \end{proof}
+
+\section{Homework Week 6}
+
+\begin{exercise}
+    Let $D$ be a division ring and $n$ a positive integer.
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+        \item Show that the natural left $M_n(D)$-module, consisting of column vectors of length $n$ with entries in $D$, is a simple module.
+        \item Show that $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+        \item Show that every ring of the form
+        \[
+        M_{n_1}(D_1)\oplus \cdots \oplus M_{n_r}(D_r)
+        \]
+        is semisimple, where $D_i$ are division rings.
+        \item Show that $M_n(D)$ is a simple ring, namely, one in which the only $2$-sided ideals are the zero ideal and the whole ring.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    Let $R=M_n(D)$ and let $V=D^n$ be the natural left $R$-module of column vectors.
+    
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+    
+        \item We show that $V$ is simple. Let $0\neq W\leq V$, and choose
+        \[
+        v=(v_1,\dots,v_n)^t\in W,\qquad v\neq 0.
+        \]
+        Then $v_j\neq 0$ for some $j$. For each $i\in \{1,\dots,n\}$, let $A_i\in R$ be the matrix whose $(i,j)$-entry is $v_j^{-1}$ and whose other entries are $0$. Then
+        \[
+        A_i v=e_i,
+        \]
+        where $e_i$ is the $i$-th standard basis vector in $D^n$. Since $W$ is an $R$-submodule and $v\in W$, we get $e_i\in W$ for all $i$. Hence
+        \[
+        W=D^n=V.
+        \]
+        Therefore $V$ is a simple left $R$-module.
+    
+        \item Let $E_{11},\dots,E_{nn}$ be the standard diagonal matrix units. Then
+        \[
+        1=E_{11}+\cdots+E_{nn},
+        \]
+        and hence
+        \[
+        R=RE_{11}\oplus\cdots\oplus RE_{nn}.
+        \]
+        Indeed, $RE_{ii}$ is precisely the set of matrices whose only possibly nonzero column is the $i$-th column, so every matrix is uniquely the sum of its columns.
+    
+        For each $i$, define
+        \[
+        \phi_i:RE_{ii}\longrightarrow V
+        \]
+        by sending a matrix in $RE_{ii}$ to its $i$-th column. This is an isomorphism of left $R$-modules. By part (a), $V$ is simple, so each $RE_{ii}$ is simple. Thus $_RR$ is a direct sum of simple submodules, and therefore $R$ is semisimple.
+    
+        Now let $S$ be a simple left $R$-module. Pick $0\neq s\in S$. Then the map
+        \[
+        \psi:R\longrightarrow S,\qquad A\mapsto As
+        \]
+        is a nonzero $R$-homomorphism, hence surjective since $S$ is simple. Because $R$ is semisimple, every quotient of $R$ is semisimple. Since $S$ is simple, it must be isomorphic to one of the simple direct summands $RE_{ii}$. Therefore
+        \[
+        S\cong RE_{ii}\cong V
+        \]
+        for some $i$. Hence, up to isomorphism, $R$ has only one simple left module.
+    
+        \item Let
+        \[
+        A=M_{n_1}(D_1)\oplus\cdots\oplus M_{n_r}(D_r).
+        \]
+        As a left $A$-module over itself,
+        \[
+        {}_AA
+        =
+        {}_A M_{n_1}(D_1)\oplus\cdots\oplus {}_A M_{n_r}(D_r).
+        \]
+        Each summand is semisimple by part (b), and a finite direct sum of semisimple modules is semisimple. Hence $A$ is a semisimple ring.
+    
+        \item Let $I$ be a nonzero two-sided ideal of $R$. Choose $0\neq A=(a_{pq})\in I$, and pick indices $i,j$ such that $a_{ij}\neq 0$. For arbitrary $r,s$, let $E_{uv}$ denote the standard matrix units. Then
+        \[
+        E_{ri}AE_{js}=a_{ij}E_{rs}\in I.
+        \]
+        Since $a_{ij}\in D^\times$, we also have
+        \[
+        (a_{ij}^{-1}E_{rr})(a_{ij}E_{rs})=E_{rs}\in I.
+        \]
+        Thus every matrix unit $E_{rs}$ belongs to $I$. Therefore
+        \[
+        1=E_{11}+\cdots+E_{nn}\in I,
+        \]
+        so $I=R$. Hence the only two-sided ideals of $R$ are $0$ and $R$, i.e. $R$ is a simple ring.
+    \end{enumerate}
+    \end{proof}
+    
+    \begin{exercise}
+    Let $U$ be an $A$-module for a semisimple finite-dimensional algebra $A$ (over a field). Show that if $\operatorname{End}_A(U)$ is a division ring then $U$ is simple.
+    \end{exercise}
+
+    \begin{proof}
+        Since $A$ is a semisimple finite-dimensional algebra over a field, it is a semisimple
+        Artinian ring. Hence every left $A$-module is semisimple. In particular, $U$ is a semisimple
+        $A$-module.
+        
+        We claim that $U$ must be simple. Suppose not. Then $U$ is not simple, so because $U$
+        is semisimple, there exist nonzero submodules $U_1,U_2\leq U$ such that
+        \[
+        U=U_1\oplus U_2.
+        \]
+        Let
+        \[
+        \pi_1:U\to U_1
+        \]
+        be the projection onto the first summand. Since $U_1$ is an $A$-submodule, $\pi_1$ is an
+        $A$-module endomorphism of $U$, so
+        \[
+        \pi_1\in \operatorname{End}_A(U).
+        \]
+        Moreover,
+        \[
+        \pi_1^2=\pi_1,
+        \]
+        so $\pi_1$ is an idempotent.
+        
+        Now $\pi_1\neq 0$ because $U_1\neq 0$, and $\pi_1\neq 1_U$ because $U_2\neq 0$.
+        Thus $\pi_1$ is a nontrivial idempotent in $\operatorname{End}_A(U)$.
+        
+        But a division ring has no idempotents other than $0$ and $1$: indeed, if $e^2=e$ and
+        $e\neq 0$, then multiplying by $e^{-1}$ gives $e=1$. This contradicts the assumption that
+        $\operatorname{End}_A(U)$ is a division ring.
+        
+        Therefore $U$ must be simple.
+        \end{proof}
+    
+    \begin{exercise}
+    Let $A$ be a ring. Then $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+    \end{exercise}
+
+    \begin{proof}
+        Here all modules are left $A$-modules.
+        
+        \[
+        (\Rightarrow)
+        \]
+        Assume that $A$ is a semisimple Artinian ring. Then every $A$-module is semisimple.
+        
+        Let $M$ be any $A$-module. To show that $M$ is projective, consider an arbitrary short exact sequence
+        \[
+        0\longrightarrow K \longrightarrow N \xrightarrow{\pi} M \longrightarrow 0.
+        \]
+        Since $N$ is semisimple, the submodule $K$ is a direct summand of $N$. Thus there exists a submodule $N'\leq N$ such that
+        \[
+        N=K\oplus N'.
+        \]
+        Now $\pi|_{N'}:N'\to M$ is surjective, and
+        \[
+        \ker(\pi|_{N'})=N'\cap K=0.
+        \]
+        Hence $\pi|_{N'}$ is an isomorphism. Therefore the above short exact sequence splits. Since every short exact sequence ending in $M$ splits, $M$ is projective.
+        
+        Since $M$ was arbitrary, every $A$-module is projective.
+        
+        \[
+        (\Leftarrow)
+        \]
+        Assume that every $A$-module is projective. Let $M$ be any $A$-module and let $N\leq M$ be a submodule. Then the quotient $M/N$ is projective, so the short exact sequence
+        \[
+        0\longrightarrow N \longrightarrow M \longrightarrow M/N \longrightarrow 0
+        \]
+        splits. Hence $N$ is a direct summand of $M$.
+        
+        Therefore every submodule of every $A$-module is a direct summand. It follows that every $A$-module is semisimple. In particular, the left regular module ${}_AA$ is semisimple.
+        
+        Now $A$ is cyclic as a left $A$-module, generated by $1$. Since ${}_AA$ is semisimple, it is a sum of simple submodules:
+        \[
+        A=\sum_{\lambda\in \Lambda} S_\lambda.
+        \]
+        Because $1\in A$, we may write
+        \[
+        1=s_1+\cdots+s_n
+        \qquad (s_i\in S_{\lambda_i}).
+        \]
+        Then for any $a\in A$,
+        \[
+        a=a\cdot 1=a s_1+\cdots+a s_n \in S_{\lambda_1}+\cdots+S_{\lambda_n}.
+        \]
+        Thus
+        \[
+        A=S_{\lambda_1}+\cdots+S_{\lambda_n}.
+        \]
+        Since $A$ is semisimple, this finite sum is in fact a direct sum (after deleting repetitions if necessary):
+        \[
+        A\cong S_1\oplus\cdots\oplus S_m
+        \]
+        with each $S_i$ simple.
+        
+        Hence ${}_AA$ is a finite direct sum of simple modules, so it is Artinian. Therefore $A$ is a semisimple Artinian ring.
+        
+        This proves that $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+        \end{proof}
+    
+    \begin{exercise}
+    Let $k$ be a field. Suppose the group algebra $kG$ is semisimple, and the simple $kG$-modules are $S_1,\dots,S_r$ with degrees $d_i=\dim_k S_i$. Show that
+    \[
+    \sum_{i=1}^r d_i^2 \ge |G|
+    \]
+    with equality if and only if $\operatorname{End}_{kG}(S_i)=k$ for all $i$.
+    \end{exercise}
+
+    \begin{proof}
+        Let
+        \[
+        A=kG,
+        \qquad
+        E_i=\operatorname{End}_A(S_i)
+        \quad (1\le i\le r).
+        \]
+        Since $A$ is a semisimple finite-dimensional $k$-algebra, by the Wedderburn--Artin theorem
+        there exist positive integers $n_1,\dots,n_r$ such that
+        \[
+        A \cong \bigoplus_{i=1}^r M_{n_i}(E_i^{\operatorname{op}}),
+        \]
+        where $S_1,\dots,S_r$ form a complete set of representatives of the isomorphism classes
+        of simple $A$-modules.
+        
+        For each $i$, the simple module $S_i$ is naturally a right $E_i$-vector space of
+        dimension $n_i$. Hence
+        \[
+        d_i=\dim_k S_i = n_i\,\dim_k E_i.
+        \]
+        Taking $k$-dimensions in the Wedderburn decomposition gives
+        \[
+        |G|=\dim_k(kG)=\dim_k A
+         =\sum_{i=1}^r \dim_k M_{n_i}(E_i^{\operatorname{op}})
+         =\sum_{i=1}^r n_i^2 \dim_k E_i.
+        \]
+        Using $d_i=n_i\dim_k E_i$, we obtain
+        \[
+        |G|
+        =\sum_{i=1}^r n_i^2\dim_k E_i
+        =\sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}.
+        \]
+        Now each $E_i$ is a division $k$-algebra, so $\dim_k E_i\ge 1$. Therefore
+        \[
+        |G|
+        =\sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}
+        \le \sum_{i=1}^r d_i^2.
+        \]
+        Thus
+        \[
+        \sum_{i=1}^r d_i^2 \ge |G|.
+        \]
+        
+        It remains to determine when equality holds. Since each $d_i>0$ and each
+        $\dim_k E_i\ge 1$, we have
+        \[
+        \sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}
+        =
+        \sum_{i=1}^r d_i^2
+        \]
+        if and only if
+        \[
+        \dim_k E_i=1
+        \qquad\text{for all }i.
+        \]
+        But $E_i=\operatorname{End}_A(S_i)$ is a $k$-algebra, so $\dim_k E_i=1$ is equivalent to
+        \[
+        E_i=k.
+        \]
+        Hence equality holds if and only if
+        \[
+        \operatorname{End}_{kG}(S_i)=k
+        \qquad\text{for all }i.
+        \]
+        
+        This proves the claim.
+        \end{proof}
+    
+    \begin{exercise}
+    Suppose that we have $R$-module homomorphisms
+    \[
+    U \xrightarrow{f} V \xrightarrow{g} W.
+    \]
+    Show that: if $gf$ is an essential epimorphism and $f$ is an epimorphism, then both $f$ and $g$ are essential epimorphisms.
+\end{exercise}
+
+\begin{proof}
+    Assume that
+    \[
+    U \xrightarrow{f} V \xrightarrow{g} W
+    \]
+    are $R$-module homomorphisms such that $gf$ is an essential epimorphism and $f$ is an epimorphism.
+    
+    We must show that both $f$ and $g$ are essential epimorphisms.
+    
+    \medskip
+    
+    \noindent\textbf{Step 1: $f$ is an essential epimorphism.}
+    
+    Since $f$ is already assumed to be an epimorphism, it remains to show that it is essential.
+    
+    Let $U'\leq U$ be a submodule such that
+    \[
+    f(U')=V.
+    \]
+    Then applying $g$, we get
+    \[
+    (gf)(U')=g(f(U'))=g(V)=W,
+    \]
+    because $gf$ is an epimorphism. Thus $U'$ maps onto $W$ under $gf$.
+    
+    But $gf$ is an \emph{essential} epimorphism, so no proper submodule of $U$ can map
+    surjectively onto $W$. Hence we must have
+    \[
+    U'=U.
+    \]
+    Therefore $f$ is an essential epimorphism.
+    
+    \medskip
+    
+    \noindent\textbf{Step 2: $g$ is an essential epimorphism.}
+    
+    First, $g$ is an epimorphism: indeed, since $gf$ is surjective and $f$ is surjective, for any
+    $w\in W$ there exists $u\in U$ such that
+    \[
+    g(f(u))=w.
+    \]
+    Thus $w\in g(V)$, so $g(V)=W$.
+    
+    Now let $V'\leq V$ be a submodule such that
+    \[
+    g(V')=W.
+    \]
+    We claim that $V'=V$.
+    
+    Consider the inverse image
+    \[
+    f^{-1}(V')=\{u\in U\mid f(u)\in V'\}.
+    \]
+    This is a submodule of $U$, and
+    \[
+    (gf)\bigl(f^{-1}(V')\bigr)=g(V')=W.
+    \]
+    Since $gf$ is an essential epimorphism, it follows that
+    \[
+    f^{-1}(V')=U.
+    \]
+    Applying $f$ to both sides gives
+    \[
+    V=f(U)=f\bigl(f^{-1}(V')\bigr)\subseteq V'.
+    \]
+    Hence $V'=V$.
+    
+    Therefore no proper submodule of $V$ maps surjectively onto $W$ under $g$, so $g$ is an
+    essential epimorphism.
+    
+    \medskip
+    
+    We conclude that both $f$ and $g$ are essential epimorphisms.
+    \end{proof}
 
 
 \end{document}

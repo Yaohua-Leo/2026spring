@@ -1,0 +1,167 @@
+\documentclass[12pt]{amsart}
+
+
+\setlength{\textheight}{23cm} 
+\setlength{\textwidth}{17.4cm} 
+\setlength{\topmargin}{-1.3cm} 
+\addtolength{\oddsidemargin}{-2cm} 
+\addtolength{\evensidemargin}{-2cm} 
+
+%\input s:/acentos.tex% fazer acentuação como no word
+
+\newcommand{\ai} {\vbox to 7pt{\hbox to 7pt{\vrule height 7pt width 7pt}}}
+
+%\newcommand{\overrightarrow} {\overrightarrow}
+
+
+
+\usepackage{amssymb}
+
+\def\R{\mathbb R}
+\def\C{\mathbb C}
+\def\Z{\mathbb Z}
+\def\N{\mathbb N}
+\def\Q{\mathbb Q}
+
+
+\def\pn{\par\noindent}
+\def\dps{\displaystyle}
+\def\vs{\vskip}
+\def\hs{\hskip}
+\def\st {\stackrel}
+\def\cn{\centerline}
+\usepackage[all
+%,dvips
+]{xy} \xyoption{poly}
+\usepackage{epsfig}
+
+\begin{document}
+
+
+
+\cn{\bf \large  Midterm - Representations of Quivers}
+
+\medskip
+
+\cn{\bf April 13th, 2026}
+
+\bigskip
+
+\medskip
+
+\noindent {\it Choose up to five problems from this list to submit.}
+
+
+\medskip
+
+\begin{enumerate}
+
+\item [1.] Let $Q$ be the quiver $\xymatrix{1&&2\ar[rr]\ar[ll]&&3}$ and let $M$ be a representation 
+\bigskip
+$$
+\begin{array}{c}
+ \xymatrix{k&&&k^3\ar[rrr]^{\left[\begin{array}{ccc} 1&0&0\\0&1&0\end{array}\right]}\ar[lll]_{\left[\begin{array}{ccc} 1&0&0\end{array}\right]}&&&k^2}.\\
+\end{array}
+$$
+
+
+\noindent Write $M$ as a direct sum of simple representations, indecomposable projective and injective representations.
+
+
+
+
+\bigskip
+
+\item [2.] Let $Q$ be the quiver 
+
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^{\beta}\ar@<-0.5ex>[ll]_{\alpha}}
+$$
+
+\noindent For any $\lambda\in k\cup\{\infty\}$, define $M_{\lambda}$ to be the representation:
+
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^{\lambda}\ar@<-0.5ex>[ll]_1}\quad \lambda\in k;
+$$
+\
+$$
+\xymatrix{1&&2\ar@<0.5ex>[ll]^0\ar@<-0.5ex>[ll]_1}\quad \lambda=\infty.
+$$
+
+\
+
+\begin{enumerate}
+\item Show that each $M_{\lambda}$ is indecomposable.
+\item Show that $M_{\lambda}\simeq M_{\mu}$ if and only if $\lambda=\mu$. In particular,
+ the number of indecomposable representations depends on the choice of the field $k$.
+\item Show that $\operatorname{Hom}(M_{\lambda},M_{\mu})=0$ if $\lambda\neq \mu$.
+\end{enumerate}
+\bigskip
+
+
+\bigskip
+
+
+\item[3.] Let $Q$ be a quiver, $\xymatrix{L\ar[r]^f & M\ar[r]^g&N}$ be an exact sequence in $rep\, Q$ and $X$ be representation of $Q$. 
+
+\noindent Show that 
+$\operatorname{Ker}g_*\subseteq \operatorname{Im} f_*$, where $f_*$ and $g_*$ are defined in
+$$
+ \xymatrix{\operatorname{Hom}(X,L)\ar[r]^{f_*}&\operatorname{Hom}(X,M)\ar[r]^{g_*} &\operatorname{Hom}(X,N)}.
+$$
+
+\bigskip
+
+\medskip
+
+\item[4.] Let $g: L\to M$ be an injective morphism between representations of $Q$, and let $I(i)$ be the injective
+representation at vertex $i$. Show that  the map 
+$$
+g^*:\operatorname{Hom}(M,I(i)) \to \operatorname{Hom}(L,I(i))
+$$
+\noindent is surjective.
+
+\bigskip
+
+\medskip
+
+\item[5.] Prove that any  projective representation corresponding to vertex $i$, $P(i)$ is indecomposable.
+
+\bigskip
+
+\medskip
+
+\item[6.] Compute a projective resolutions for representations $S(1)$
+and $S(2)$ for quiver
+
+\bigskip
+
+$$
+Q: \qquad \xymatrix{1\ar[rr]\ar@/^0.9pc/[rrrr]&&2\ar[d]\ar[rr]&&3\ar[lld]\\ &&4&&}
+$$
+
+
+\bigskip
+
+\medskip
+
+
+\item[7.] Let $M=(M_i,\psi_{\alpha})$ be a representation of $Q$. Prove that for any vertex $i$ in $Q$, there is an isomorphism of vector
+spaces: 
+
+$$\operatorname{Hom}(M,I(i))\simeq M_i.$$
+
+\medskip
+
+\bigskip
+
+
+\item[8.] Let $i$ and $j$ be vertices in the quiver $Q$. Prove that the vector space $\operatorname{Hom}(I(i),I(j))$
+has a basis consisting of all paths from $j$ to $i$ in $Q$. In particular, $\operatorname{End}(I(i))\simeq k$.
+
+
+\end{enumerate}
+
+\end{document}
