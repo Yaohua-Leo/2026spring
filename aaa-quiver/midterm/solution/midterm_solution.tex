@@ -126,7 +126,7 @@ $$
 $$
 \
 $$
-\xymatrix{1&&2\ar@<0.5ex>[ll]^0\ar@<-0.5ex>[ll]_1}\quad \lambda=\infty.
+\xymatrix{1&&2\ar@<0.5ex>[ll]^1\ar@<-0.5ex>[ll]_0}\quad \lambda=\infty.
 $$
 
 \
@@ -145,117 +145,200 @@ $$
     \begin{proof}
     Each $M_\lambda$ has dimension vector
     \[
-    \underline{\dim}\,M_\lambda = (1,1).
+    \underline{\dim}\,M_\lambda=(1,1).
     \]
-    Suppose for contradiction that
+    Suppose, for contradiction, that
     \[
-    M_\lambda = N_1 \oplus N_2
+    M_\lambda \cong N_1 \oplus N_2
     \]
-    is a nontrivial decomposition (both $N_1,N_2\neq 0$). Since $\underline{\dim}\,N_1 + \underline{\dim}\,N_2 = (1,1)$, the only possibility is
+    is a nontrivial decomposition with $N_1,N_2\neq 0$. Since
     \[
-    \underline{\dim}\,N_1 = (1,0),\qquad \underline{\dim}\,N_2 = (0,1)
+    \underline{\dim}\,N_1+\underline{\dim}\,N_2=(1,1),
     \]
-    (or vice versa). The summand $N_2$ with $N_2(1)=0$ and $N_2(2)=k$ must be a subrepresentation. Since both arrows go from vertex~$2$ to vertex~$1$, this requires
+    one of the two summands must have dimension vector $(0,1)$. Without loss of
+    generality, assume
     \[
-    M_\lambda(\alpha)(k) \subseteq N_2(1) = 0 \qquad\text{and}\qquad M_\lambda(\beta)(k) \subseteq N_2(1) = 0.
+    \underline{\dim}\,N_2=(0,1).
+    \]
+    Then $N_2(1)=0$ and $N_2(2)=k$, so $N_2$ would have to be a subrepresentation of
+    $M_\lambda$. Since both arrows $\alpha,\beta$ go from vertex~$2$ to vertex~$1$,
+    this would force
+    \[
+    M_\lambda(\alpha)(k)\subseteq N_2(1)=0,
+    \qquad
+    M_\lambda(\beta)(k)\subseteq N_2(1)=0.
     \]
 
-    For $\lambda\in k$: the map $M_\lambda(\beta)=1\colon k\to k$ is nonzero, so
+    If $\lambda\in k$, then
     \[
-    M_\lambda(\beta)(k) = k \neq 0.
+    M_\lambda(\alpha)=1\colon k\to k,
     \]
-    This is a contradiction.
-
-    For $\lambda=\infty$: the map $M_\infty(\alpha)=1\colon k\to k$ is nonzero, so
+    so
     \[
-    M_\infty(\alpha)(k) = k \neq 0.
+    M_\lambda(\alpha)(k)=k\neq 0,
     \]
-    This is again a contradiction.
+    a contradiction.
 
-    In both cases, no such subrepresentation $N_2$ exists, so $M_\lambda$ is indecomposable.
+    If $\lambda=\infty$, then
+    \[
+    M_\infty(\beta)=1\colon k\to k,
+    \]
+    so
+    \[
+    M_\infty(\beta)(k)=k\neq 0,
+    \]
+    again a contradiction.
+
+    Therefore no such nontrivial decomposition exists, and $M_\lambda$ is
+    indecomposable.
     \end{proof}
+
     \item
     \begin{proof}
-    ($\Leftarrow$) If $\lambda=\mu$, the identity maps $f_1=f_2=\mathrm{id}_k$ give an isomorphism.
+    ($\Leftarrow$) If $\lambda=\mu$, then the identity maps on the two vertex spaces
+    give an isomorphism $M_\lambda\cong M_\mu$.
 
     \medskip
-    ($\Rightarrow$) Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be an isomorphism, with
+    ($\Rightarrow$) Suppose that
     \[
-    f_1 = a\in k^*,\qquad f_2 = b\in k^*.
+    f=(f_1,f_2)\colon M_\lambda\to M_\mu
     \]
-    The commutativity conditions for the two arrows $\alpha,\beta\colon 2\to 1$ are
+    is an isomorphism. Since both vertex spaces are $k$, we may write
     \[
-    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    f_1=a\in k^\times,\qquad f_2=b\in k^\times.
+    \]
+    The commutativity conditions for the arrows $\alpha,\beta\colon 2\to 1$ are
+    \[
+    f_1\circ M_\lambda(\alpha)=M_\mu(\alpha)\circ f_2,
+    \qquad
+    f_1\circ M_\lambda(\beta)=M_\mu(\beta)\circ f_2.
     \]
 
-    \textbf{Case 1:} $\lambda,\mu\in k$. Then $M_\lambda(\alpha)=\lambda$, $M_\lambda(\beta)=1$, $M_\mu(\alpha)=\mu$, $M_\mu(\beta)=1$. The conditions become
-    \[
-    a\lambda = \mu b,\qquad a\cdot 1 = 1\cdot b.
-    \]
-    From the second equation, $a=b$. Substituting into the first:
-    \[
-    a\lambda = \mu a.
-    \]
-    Since $a\neq 0$, we can divide both sides by $a$ to get $\lambda=\mu$.
+    \textbf{Case 1:} $\lambda,\mu\in k$.
 
-    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$ and $M_\infty(\beta)=0$. The commutativity at $\beta$ gives
+    Then
+    \[
+    M_\lambda(\alpha)=1,\qquad M_\lambda(\beta)=\lambda,
+    \qquad
+    M_\mu(\alpha)=1,\qquad M_\mu(\beta)=\mu.
+    \]
+    Hence
+    \[
+    a\cdot 1 = 1\cdot b,\qquad a\lambda=\mu b.
+    \]
+    From the first equation we get $a=b$, and substituting into the second gives
+    \[
+    a\lambda=\mu a.
+    \]
+    Since $a\neq 0$, we conclude that $\lambda=\mu$.
+
+    \textbf{Case 2:} $\lambda\in k$ and $\mu=\infty$.
+
+    Then
+    \[
+    M_\lambda(\alpha)=1,\qquad M_\infty(\alpha)=0.
+    \]
+    So commutativity at $\alpha$ gives
     \[
     a\cdot 1 = 0\cdot b = 0,
     \]
-    so $a=0$, contradicting $a\in k^*$. Hence no isomorphism exists.
+    hence $a=0$, contradicting the fact that $f_1$ is invertible.
 
-    The case $\lambda=\infty$, $\mu\in k$ is symmetric.
+    \textbf{Case 3:} $\lambda=\infty$ and $\mu\in k$.
 
-    \textbf{Case 3:} $\lambda=\mu=\infty$. Trivially $\lambda=\mu$.
-
-    \medskip
-    In all cases, $M_\lambda\cong M_\mu$ implies $\lambda=\mu$. Since
+    Then
     \[
-    |k\cup\{\infty\}| = |k|+1,
+    M_\infty(\alpha)=0,\qquad M_\mu(\alpha)=1.
     \]
-    the number of pairwise non-isomorphic indecomposable representations of this form depends on the cardinality of the field $k$.
+    So commutativity at $\alpha$ gives
+    \[
+    a\cdot 0 = 1\cdot b,
+    \]
+    hence $b=0$, contradicting the fact that $f_2$ is invertible.
+
+    Thus the only possible case is $\lambda=\mu$. Therefore
+    \[
+    M_\lambda\cong M_\mu \iff \lambda=\mu.
+    \]
+
+    In particular, the family $\{M_\lambda\}_{\lambda\in k\cup\{\infty\}}$ contains
+    $|k|+1$ pairwise non-isomorphic indecomposable representations, so the number of
+    indecomposable representations depends on the field $k$.
     \end{proof}
+
     \item
     \begin{proof}
-    Let $f=(f_1,f_2)\colon M_\lambda\to M_\mu$ be a morphism, with $f_1=a$ and $f_2=b$ (scalars). The commutativity conditions are
+    Let
     \[
-    f_1\circ M_\lambda(\alpha) = M_\mu(\alpha)\circ f_2,\qquad f_1\circ M_\lambda(\beta) = M_\mu(\beta)\circ f_2.
+    f=(f_1,f_2)\colon M_\lambda\to M_\mu
+    \]
+    be a morphism. Since both vertex spaces are $k$, write
+    \[
+    f_1=a\in k,\qquad f_2=b\in k.
+    \]
+    Again, the commutativity conditions are
+    \[
+    f_1\circ M_\lambda(\alpha)=M_\mu(\alpha)\circ f_2,
+    \qquad
+    f_1\circ M_\lambda(\beta)=M_\mu(\beta)\circ f_2.
     \]
 
-    \textbf{Case 1:} $\lambda,\mu\in k$. The conditions become
-    \[
-    a\lambda = \mu b,\qquad a = b.
-    \]
-    Substituting $b=a$ into the first equation:
-    \[
-    a\lambda = \mu a \quad\Longrightarrow\quad a(\lambda-\mu) = 0.
-    \]
-    Since $\lambda\neq\mu$, we have $\lambda-\mu\neq 0$, so $a=0$. Then $b=a=0$.
+    \textbf{Case 1:} $\lambda,\mu\in k$ and $\lambda\neq\mu$.
 
-    \textbf{Case 2:} $\lambda\in k$, $\mu=\infty$. Then $M_\lambda(\beta)=1$, $M_\infty(\beta)=0$. The condition at $\beta$ gives
+    Then
+    \[
+    M_\lambda(\alpha)=1,\qquad M_\lambda(\beta)=\lambda,
+    \qquad
+    M_\mu(\alpha)=1,\qquad M_\mu(\beta)=\mu.
+    \]
+    Hence
+    \[
+    a=b,\qquad a\lambda=\mu b.
+    \]
+    Substituting $b=a$ into the second equation gives
+    \[
+    a(\lambda-\mu)=0.
+    \]
+    Since $\lambda\neq\mu$, we get $a=0$, and hence $b=0$.
+
+    \textbf{Case 2:} $\lambda\in k$ and $\mu=\infty$.
+
+    Then
+    \[
+    M_\lambda(\alpha)=1,\qquad M_\infty(\alpha)=0,
+    \]
+    so the condition at $\alpha$ gives
     \[
     a\cdot 1 = 0\cdot b = 0,
     \]
-    so $a=0$. The condition at $\alpha$ then gives
+    hence $a=0$. Now the condition at $\beta$ becomes
     \[
-    0\cdot\lambda = 1\cdot b \quad\Longrightarrow\quad b = 0.
+    0\cdot \lambda = 1\cdot b,
     \]
+    so $b=0$.
 
-    \textbf{Case 3:} $\lambda=\infty$, $\mu\in k$. Then $M_\infty(\beta)=0$, $M_\mu(\beta)=1$. The condition at $\beta$ gives
-    \[
-    a\cdot 0 = 1\cdot b \quad\Longrightarrow\quad b = 0.
-    \]
-    The condition at $\alpha$ gives
-    \[
-    a\cdot 1 = \mu\cdot 0 = 0 \quad\Longrightarrow\quad a = 0.
-    \]
+    \textbf{Case 3:} $\lambda=\infty$ and $\mu\in k$.
 
-    In every case, $f_1=f_2=0$, so $f=0$. Therefore $\operatorname{Hom}(M_\lambda,M_\mu) = 0$.
+    Then
+    \[
+    M_\infty(\alpha)=0,\qquad M_\mu(\alpha)=1,
+    \]
+    so the condition at $\alpha$ gives
+    \[
+    a\cdot 0 = 1\cdot b,
+    \]
+    hence $b=0$. Then the condition at $\beta$ becomes
+    \[
+    a\cdot 1 = \mu\cdot 0 = 0,
+    \]
+    so $a=0$.
+
+    In every case with $\lambda\neq\mu$, we obtain $a=b=0$. Therefore
+    \[
+    \operatorname{Hom}(M_\lambda,M_\mu)=0.
+    \]
     \end{proof}
 \end{enumerate}
-\bigskip
-
-
 \bigskip
 
 
