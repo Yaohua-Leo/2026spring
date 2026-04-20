@@ -1,5 +1,5 @@
 \documentclass[11pt, a4paper]{report}
-% !TeX root = Lie Theory.tex
+% !TeX program = xelatex
 %----------------------------------------------------------------------------------------
 %	PACKAGES (宏包管理)
 %----------------------------------------------------------------------------------------
@@ -38,11 +38,16 @@
 % 5. 漂亮的文本框
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable, skins, theorems}
+% Avoid breakable-box warnings about zero-height first parts (thmtools + tcolorbox v6+).
+% Match after upper strut so inner top/bottom padding looks symmetric (before-only strut skews upward).
+\tcbset{before upper={\strut}, after upper={\strut}}
 % 6. 参考文献
 %\usepackage[backend=biber,style=gb7714-2015,sorting=gb7714-2015]{biblatex}
 %\addbibresource{references.bib}
 % 7. 交互 (最后加载)
 \usepackage[hidelinks]{hyperref}
+% bookmark: 与 hyperref 配套，稳定 PDF 书签/目录并减少 “Rerun … outlines/PageLabels” 的额外编译轮次
+\usepackage{bookmark}
 \usepackage{array}
 %----------------------------------------------------------------------------------------
 %	CUSTOM COLORS (自定义配色方案)
@@ -4508,6 +4513,864 @@ I use my proof in a former note use short exact sequence.
         $\frac{1}{a}f \circ i = \mathrm{id}_W$ shows this short exact sequence splits.
         
         \end{proof}
+
+
+
+\chapter{Lecture 8: \texorpdfstring{$\mathfrak{sl}_2$-modules}{sl2-modules}}
+
+\begin{remark}[Maschke's theorem]
+    Let \(G\) be a finite group, and let \(K\) be a field such that
+    \[
+    \operatorname{char}(K)\nmid |G|.
+    \]
+    Then every \(K[G]\)-module is completely reducible.
+    \end{remark}
+    
+    \begin{proof}[Idea of the proof]
+    It suffices to show that every submodule \(W\) of a \(K[G]\)-module \(V\)
+    is a direct summand.
+    
+    Choose a \(K\)-linear projection
+    \[
+    P\colon V\to W
+    \]
+    (which need not commute with the action of \(G\)). Averaging over the group,
+    define
+    \[
+    P'=\frac{1}{|G|}\sum_{g\in G} gPg^{-1}.
+    \]
+    Then \(P'\) commutes with the action of \(G\). Moreover, \(P'\) still maps
+    \(V\) into \(W\), and for every \(w\in W\) one has \(P'(w)=w\). Hence
+    \[
+    \operatorname{Im}(P')=W.
+    \]
+    Therefore \(\ker P'\) is a \(G\)-submodule and
+    \[
+    V=W\oplus \ker P'.
+    \]
+    So \(W\) is a direct summand. It follows that \(V\) is completely reducible.
+    \end{proof}
+    
+    \begin{remark}[Relation with Weyl's theorem]
+    Weyl's original proof of complete reducibility uses the same averaging idea
+    for representations of compact Lie groups, replacing the finite sum by an
+    integral over the group (with respect to Haar measure). 
+    \end{remark}
+
+    \section{\texorpdfstring{\(\mathfrak{sl}_2\)-modules}{sl2-modules}}
+
+    Recall the standard \(\mathfrak{sl}_2\)-triple
+    \[
+    e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+    f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+    h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+    \]
+    satisfying
+    \[
+    [e,f]=h,\qquad [h,e]=2e,\qquad [h,f]=-2f.
+    \]
+    
+    \begin{theorem}\label{thm:sl2-irreducible}
+    Let \(F\) be an algebraically closed field of characteristic \(0\), and let \(V\) be a finite-dimensional irreducible \(\mathfrak{sl}_2(F)\)-module. Then there exist
+    \[
+    m\in \mathbb Z_{\ge 0},\qquad 0\neq v\in V
+    \]
+    such that
+    \[
+    hv=mv,\qquad ev=0,
+    \]
+    and
+    \[
+    \{v,fv,f^2v,\dots,f^mv\}
+    \]
+    is a basis of \(V\). In particular,
+    \[
+    \dim V=m+1,
+    \]
+    and the weights of \(h\) on \(V\) are
+    \[
+    m,m-2,m-4,\dots,-m.
+    \]
+    Moreover, for \(0\le i\le m\),
+    \[
+    h(f^iv)=(m-2i)f^iv,
+    \]
+    and for \(1\le i\le m\),
+    \[
+    e(f^iv)=i(m-i+1)f^{i-1}v.
+    \]
+    \end{theorem}
+    
+    \begin{proof}
+    Choose an eigenvector \(0\neq u\in V\) of \(h\), say
+    \[
+    hu=\alpha u.
+    \]
+    Then
+    \[
+    h(eu)=[h,e]u+e(hu)=2eu+\alpha eu=(\alpha+2)eu,
+    \]
+    and similarly
+    \[
+    h(fu)=[h,f]u+f(hu)=-2fu+\alpha fu=(\alpha-2)fu.
+    \]
+    Thus \(e\) raises weights by \(2\), and \(f\) lowers weights by \(2\).
+    
+    Since \(V\) is finite-dimensional, the vectors
+    \[
+    u,eu,e^2u,\dots
+    \]
+    cannot all be nonzero. Let \(r\ge 0\) be minimal such that
+    \[
+    e^{r+1}u=0,
+    \]
+    and set
+    \[
+    v=e^ru.
+    \]
+    Then \(v\neq 0\), \(ev=0\), and \(v\) is again an eigenvector of \(h\); write
+    \[
+    hv=\lambda v.
+    \]
+    
+    Now consider the subspace
+    \[
+    W=\operatorname{span}\{v,fv,f^2v,\dots\}.
+    \]
+    It is stable under \(f\) by definition, and it is stable under \(h\) because
+    \[
+    h(f^iv)=(\lambda-2i)f^iv.
+    \]
+    We claim that \(W\) is also stable under \(e\).
+    
+    For \(i\ge 1\),
+    \[
+    ef^iv=[e,f]f^{i-1}v+fef^{i-1}v
+    =hf^{i-1}v+fef^{i-1}v.
+    \]
+    Iterating this identity, we obtain
+    \[
+    ef^iv=\sum_{j=0}^{i-1}f^jhf^{i-1-j}v.
+    \]
+    Since
+    \[
+    hf^{i-1-j}v=(\lambda-2(i-1-j))f^{i-1-j}v,
+    \]
+    it follows that
+    \[
+    ef^iv=\sum_{j=0}^{i-1}(\lambda-2(i-1-j))f^{i-1}v
+    =i(\lambda-i+1)f^{i-1}v.
+    \]
+    Hence \(eW\subseteq W\), so \(W\) is a nonzero submodule of \(V\). By irreducibility of \(V\), we have
+    \[
+    W=V.
+    \]
+    
+    Now let \(m\ge 0\) satisfy
+    \[
+    f^mv\neq 0,\qquad f^{m+1}v=0.
+    \]
+    Then
+    \[
+    V=\operatorname{span}\{v,fv,\dots,f^mv\}.
+    \]
+    These vectors are linearly independent, since they are eigenvectors of \(h\) with distinct eigenvalues
+    \[
+    \lambda,\lambda-2,\dots,\lambda-2m.
+    \]
+    Thus \(\{v,fv,\dots,f^mv\}\) is a basis of \(V\).
+    
+    Finally, applying the formula for \(ef^iv\) with \(i=m+1\), we get
+    \[
+    0=ef^{m+1}v=(m+1)(\lambda-m)f^mv.
+    \]
+    Since \(f^mv\neq 0\), we must have
+    \[
+    \lambda=m.
+    \]
+    Therefore
+    \[
+    hv=mv,\qquad ev=0,
+    \]
+    and the weights are exactly
+    \[
+    m,m-2,\dots,-m.
+    \]
+    \end{proof}
+    
+    \begin{corollary}\label{cor:sl2-unique}
+    For each \(m\in\mathbb Z_{\ge 0}\), there exists, up to isomorphism, a unique irreducible \(\mathfrak{sl}_2(F)\)-module of dimension \(m+1\).
+    \end{corollary}
+    
+    \begin{proof}
+    By Theorem~\ref{thm:sl2-irreducible}, any such module admits a basis
+    \[
+    v,fv,\dots,f^mv
+    \]
+    with
+    \[
+    hv=mv,\qquad ev=0,
+    \]
+    and
+    \[
+    h(f^iv)=(m-2i)f^iv,\qquad
+    e(f^iv)=i(m-i+1)f^{i-1}v,\qquad
+    f(f^iv)=f^{i+1}v.
+    \]
+    Thus the action is completely determined by \(m\).
+    \end{proof}
+    
+    \begin{remark}
+    Once complete reducibility of finite-dimensional \(\mathfrak{sl}_2(F)\)-modules is known, one obtains the following consequences.
+    \end{remark}
+    
+    \begin{corollary}\label{cor:h-integral}
+    Let \(V\) be a finite-dimensional \(\mathfrak{sl}_2(F)\)-module. Then every eigenvalue of \(h\) on \(V\) is an integer.
+    \end{corollary}
+    
+    \begin{proof}
+    Decompose \(V\) as a direct sum of irreducible submodules. By Theorem~\ref{thm:sl2-irreducible}, each irreducible summand has highest weight \(m\in\mathbb Z_{\ge0}\), hence all of its weights are
+    \[
+    m,m-2,\dots,-m,
+    \]
+    which are integers.
+    \end{proof}
+    
+    \begin{proposition}\label{prop:weight-q-minus-p}
+    Let \(V\) be a finite-dimensional \(\mathfrak{sl}_2(F)\)-module, and let \(0\neq w\in V\) be an eigenvector of \(h\) with eigenvalue \(\alpha\). Suppose
+    \[
+    f^{q+1}w=0,\qquad f^qw\neq 0,
+    \]
+    and
+    \[
+    e^{p+1}w=0,\qquad e^pw\neq 0.
+    \]
+    Then
+    \[
+    \alpha=q-p.
+    \]
+    \end{proposition}
+    
+    \begin{proof}
+    Write \(V\) as a direct sum of irreducible submodules:
+    \[
+    V=\bigoplus_j V_j.
+    \]
+    Then
+    \[
+    w=\sum_j w_j,\qquad w_j\in V_j,
+    \]
+    where each nonzero \(w_j\) is again an eigenvector of \(h\) of eigenvalue \(\alpha\).
+    
+    Fix a nonzero \(w_j\). By Theorem~\ref{thm:sl2-irreducible}, there exists a highest weight vector \(v_j\in V_j\) and an integer \(i_j\ge 0\) such that
+    \[
+    w_j=f^{i_j}v_j.
+    \]
+    If the highest weight of \(V_j\) is \(m_j\), then
+    \[
+    \alpha=m_j-2i_j.
+    \]
+    Set
+    \[
+    p_j=i_j,\qquad q_j=m_j-i_j.
+    \]
+    Then
+    \[
+    \alpha=q_j-p_j.
+    \]
+    
+    Because the decomposition is direct, the integers \(p\) and \(q\) attached to \(w\) satisfy
+    \[
+    p=\max_j p_j,\qquad q=\max_j q_j.
+    \]
+    Since \(q_j-p_j=\alpha\) for every nonzero \(w_j\), we get
+    \[
+    q=\max_j(\alpha+p_j)=\alpha+\max_j p_j=\alpha+p,
+    \]
+    hence
+    \[
+    \alpha=q-p.
+    \]
+    \end{proof}
+    
+    \begin{proposition}\label{prop:existence-all-dimensions}
+    For every \(m\in\mathbb Z_{\ge 0}\), there exists an irreducible \(\mathfrak{sl}_2(F)\)-module of dimension \(m+1\).
+    \end{proposition}
+    
+    \begin{proof}
+    Consider the polynomial algebra \(F[x,y]\). Define operators on \(F[x,y]\) by
+    \[
+    e=y\frac{\partial}{\partial x},\qquad
+    f=x\frac{\partial}{\partial y},\qquad
+    h=[e,f]=y\frac{\partial}{\partial y}-x\frac{\partial}{\partial x}.
+    \]
+    A direct computation shows that
+    \[
+    [e,f]=h,\qquad [h,e]=2e,\qquad [h,f]=-2f,
+    \]
+    so this defines an \(\mathfrak{sl}_2(F)\)-action on \(F[x,y]\).
+    
+    Fix \(m\ge 0\), and let
+    \[
+    V_m=\operatorname{span}_F\{x^iy^j\mid i+j=m\}.
+    \]
+    Then \(V_m\) is stable under \(e,f,h\), so \(V_m\) is an \(\mathfrak{sl}_2(F)\)-submodule. Clearly,
+    \[
+    \dim V_m=m+1.
+    \]
+    
+    Take
+    \[
+    v=y^m.
+    \]
+    Then
+    \[
+    ev=0,\qquad hv=my^m=mv,
+    \]
+    so \(v\) is a highest weight vector of weight \(m\). Moreover,
+    \[
+    f^i(v)=m(m-1)\cdots(m-i+1)x^iy^{m-i}\qquad (0\le i\le m),
+    \]
+    so the vectors
+    \[
+    v,fv,\dots,f^mv
+    \]
+    span \(V_m\). Hence, by Corollary~\ref{cor:sl2-unique}, \(V_m\) is the irreducible module of highest weight \(m\).
+    \end{proof}
+
+\chapter{Lecture 9: Root space decomposition}
+
+Throughout, let $F$ be an algebraically closed field of characteristic $0$.
+
+\section{Jordan decomposition in a semisimple linear Lie algebra}
+
+\begin{theorem}
+Let $L \subseteq \mathfrak{gl}(V)$ be a semisimple Lie algebra, where $V$ is finite-dimensional.
+Then for every $a \in L$, the semisimple and nilpotent parts of $a$ in $\mathfrak{gl}(V)$ both lie in $L$.
+Hence the abstract Jordan decomposition in $L$ coincides with the usual Jordan decomposition in $\mathfrak{gl}(V)$.
+\end{theorem}
+
+\begin{proof}
+Take $a \in L$, and write its usual Jordan decomposition in $\mathfrak{gl}(V)$ as
+\[
+a=a_s+a_n,
+\qquad [a_s,a_n]=0,
+\]
+where $a_s$ is semisimple and $a_n$ is nilpotent.
+
+Then
+\[
+\operatorname{ad}_{\mathfrak{gl}(V)}(a)
+=
+\operatorname{ad}_{\mathfrak{gl}(V)}(a_s)
++
+\operatorname{ad}_{\mathfrak{gl}(V)}(a_n)
+\]
+is the Jordan decomposition of $\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ in
+$\mathfrak{gl}(\mathfrak{gl}(V))$. In particular,
+$\operatorname{ad}_{\mathfrak{gl}(V)}(a_s)$ is a polynomial in
+$\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ with no constant term. Since
+$\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ preserves $L$, it follows that
+\[
+[a_s,L]\subseteq L.
+\]
+Thus $\operatorname{ad}(a_s)\vert_L$ is a derivation of $L$.
+
+Because $L$ is semisimple, every derivation of $L$ is inner. Hence there exists
+$a_s' \in L$ such that
+\[
+[a_s,x]=[a_s',x]
+\qquad \text{for all } x\in L.
+\]
+Therefore
+\[
+[a_s-a_s',L]=0.
+\]
+
+Now decompose the $L$-module $V$ as
+\[
+V=\bigoplus_i V_i,
+\]
+where each $V_i$ is irreducible. Since $a_s-a_s'$ commutes with the action of $L$,
+Schur's lemma shows that $a_s-a_s'$ acts by a scalar on each $V_i$.
+
+On the other hand, $L=[L,L]$, so for every $x\in L$ and every $i$,
+\[
+\operatorname{tr}_{V_i}(x)=0.
+\]
+Applying this to $x=a-a_s' \in L$, we get
+\[
+\operatorname{tr}_{V_i}(a-a_s')=0.
+\]
+Since $a_n$ is nilpotent, $\operatorname{tr}_{V_i}(a_n)=0$, hence
+\[
+\operatorname{tr}_{V_i}(a_s-a_s')=0.
+\]
+But $a_s-a_s'$ is scalar on $V_i$, so that scalar must be $0$. Thus
+$a_s-a_s'$ acts trivially on every $V_i$, whence
+\[
+a_s=a_s' \in L.
+\]
+Finally,
+\[
+a_n=a-a_s\in L.
+\]
+So both parts lie in $L$, as required.
+\end{proof}
+
+\begin{corollary}
+Let $L$ be a semisimple Lie algebra and $\varphi\colon L\to \mathfrak{gl}(V)$
+a finite-dimensional representation.
+If
+\[
+x=s+n
+\]
+is the abstract Jordan decomposition of $x\in L$, then
+\[
+\varphi(x)=\varphi(s)+\varphi(n)
+\]
+is the usual Jordan decomposition of $\varphi(x)$ in $\mathfrak{gl}(V)$.
+\end{corollary}
+
+\begin{proof}
+It is enough to show that
+\[
+\operatorname{ad}_{\varphi(L)}(\varphi(x))
+=
+\operatorname{ad}_{\varphi(L)}(\varphi(s))
++
+\operatorname{ad}_{\varphi(L)}(\varphi(n))
+\]
+is the abstract Jordan decomposition of
+$\operatorname{ad}_{\varphi(L)}(\varphi(x))$.
+
+Since $\operatorname{ad}_L(s)$ is semisimple, $L$ is spanned by its eigenvectors.
+Applying $\varphi$, we see that $\varphi(L)$ is spanned by eigenvectors of
+$\operatorname{ad}_{\varphi(L)}(\varphi(s))$. Hence
+$\operatorname{ad}_{\varphi(L)}(\varphi(s))$ is semisimple.
+
+Since $\operatorname{ad}_L(n)$ is nilpotent, its induced action on the quotient
+$\varphi(L) \cong L / \ker(\varphi)$ is nilpotent. Hence
+$\operatorname{ad}_{\varphi(L)}(\varphi(n))$ is nilpotent.
+
+Also, because $[s,n]=0$,
+\[
+\bigl[\operatorname{ad}_{\varphi(L)}(\varphi(s)),
+      \operatorname{ad}_{\varphi(L)}(\varphi(n))\bigr]=0.
+\]
+Thus the displayed decomposition is the abstract Jordan decomposition in the
+semisimple linear Lie algebra $\varphi(L)$. By the theorem above, it is also the
+usual Jordan decomposition in $\mathfrak{gl}(V)$.
+\end{proof}
+
+\section{Root space decomposition}
+
+\begin{definition}
+A Lie algebra $L$ is called \emph{toral} if $\operatorname{ad}(a)$ is semisimple
+for every $a\in L$.
+\end{definition}
+
+\begin{lemma}
+    Any toral Lie algebra is abelian.
+    \end{lemma}
+    
+    \begin{proof}
+    Fix $a \in L$. Since $\operatorname{ad} a$ is semisimple,
+    \[
+    L=\bigoplus_{\lambda} L_\lambda(a),
+    \qquad
+    L_\lambda(a)=\{x\in L\mid [a,x]=\lambda x\}.
+    \]
+    We claim that $L_\alpha(a)=0$ for all $\alpha\neq 0$.
+    
+    Suppose instead that $L_\alpha(a)\neq 0$ for some $\alpha\neq 0$, and choose
+    $0\neq b\in L_\alpha(a)$. If $x\in L_\beta(a)$, then the Jacobi identity gives
+    \[
+    [a,[b,x]]
+    =
+    [[a,b],x]+[b,[a,x]]
+    =
+    \alpha[b,x]+\beta[b,x]
+    =
+    (\alpha+\beta)[b,x].
+    \]
+    Hence
+    \[
+    [b,L_\beta(a)]\subseteq L_{\alpha+\beta}(a).
+    \]
+    Thus $\operatorname{ad} b$ carries each eigenspace of $\operatorname{ad} a$ into the
+    next one shifted by $\alpha$. Since $\operatorname{ad} a$ has only finitely many
+    eigenvalues, it follows that $\operatorname{ad} b$ is nilpotent.
+    
+    On the other hand, $L$ is toral, so $\operatorname{ad} b$ is semisimple. Hence
+    $\operatorname{ad} b=0$. But
+    \[
+    (\operatorname{ad} b)(a)=[b,a]=-\alpha b\neq 0,
+    \]
+    a contradiction. Therefore $L_\alpha(a)=0$ whenever $\alpha\neq 0$.
+    
+    So $L=L_0(a)$, i.e.
+    \[
+    [a,x]=0
+    \qquad\text{for all }x\in L.
+    \]
+    Since $a$ was arbitrary, $L$ is abelian.
+    \end{proof}
+
+Now let $L$ be semisimple, and let $H$ be a maximal toral subalgebra of $L$.
+Since $H$ is toral, it is abelian by the lemma above. Hence the commuting
+semisimple endomorphisms $\operatorname{ad}(h)$ $(h\in H)$ are simultaneously
+diagonalizable, and we obtain a decomposition
+\[
+L=L_0\oplus \bigoplus_{\alpha\in \Delta} L_\alpha,
+\]
+where
+\[
+L_\alpha=\{x\in L\mid [h,x]=\alpha(h)x \text{ for all } h\in H\},
+\qquad \alpha\in H^*,
+\]
+and $\Delta\subseteq H^*\setminus\{0\}$ is the set of nonzero weights.
+
+
+\begin{lemma}
+For $\alpha,\beta\in \Delta\cup\{0\}$ one has
+\[
+[L_\alpha,L_\beta]\subseteq L_{\alpha+\beta},
+\]
+where by convention $L_{\alpha+\beta}=0$ if $\alpha+\beta\notin \Delta\cup\{0\}$.
+\end{lemma}
+
+\begin{proof}
+Take $x_\alpha\in L_\alpha$, $y_\beta\in L_\beta$, and $h\in H$. Then
+\[
+[h,[x_\alpha,y_\beta]]
+=
+[[h,x_\alpha],y_\beta]+[x_\alpha,[h,y_\beta]]
+=
+\alpha(h)[x_\alpha,y_\beta]+\beta(h)[x_\alpha,y_\beta].
+\]
+So
+\[
+[h,[x_\alpha,y_\beta]]
+=
+(\alpha+\beta)(h)[x_\alpha,y_\beta].
+\]
+Hence $[x_\alpha,y_\beta]\in L_{\alpha+\beta}$.
+\end{proof}
+
+Let $(\cdot\mid\cdot)$ denote the Killing form of $L$.
+
+\begin{lemma}
+For any $\alpha,\beta\in \Delta\cup\{0\}$, if $\alpha+\beta\neq 0$, then
+\[
+(L_\alpha\mid L_\beta)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose $h\in H$ such that $(\alpha+\beta)(h)\neq 0$.
+Let $x_\alpha\in L_\alpha$ and $y_\beta\in L_\beta$. Then
+\[
+\alpha(h)(x_\alpha\mid y_\beta)
+=
+([h,x_\alpha]\mid y_\beta)
+=
+(h\mid [x_\alpha,y_\beta]),
+\]
+while
+\[
+\beta(h)(x_\alpha\mid y_\beta)
+=
+(x_\alpha\mid [h,y_\beta])
+=
+-([h,x_\alpha]\mid y_\beta).
+\]
+Hence
+\[
+(\alpha(h)+\beta(h))(x_\alpha\mid y_\beta)=0.
+\]
+Since $(\alpha+\beta)(h)\neq 0$, we obtain
+\[
+(x_\alpha\mid y_\beta)=0.
+\]
+\end{proof}
+
+\begin{lemma}
+\[
+L_0=H.
+\]
+\end{lemma}
+
+\begin{proof}
+First note that the restriction of the Killing form to $L_0$ is nondegenerate.
+Indeed, if $x\in L_0$ and $(x\mid L_0)=0$, then by the previous lemma
+\[
+(x\mid L_\alpha)=0
+\qquad (\alpha\neq 0),
+\]
+so $x$ is orthogonal to all of $L$. Since the Killing form on $L$ is nondegenerate,
+$x=0$.
+
+Now let $a\in L_0$, and write its abstract Jordan decomposition in $L$ as
+\[
+a=a_s+a_n.
+\]
+Because $\operatorname{ad}(a)$ commutes with every $\operatorname{ad}(h)$ $(h\in H)$,
+the same is true of its semisimple and nilpotent parts. Hence
+\[
+a_s,a_n\in L_0.
+\]
+Since $a_s$ is semisimple and centralizes $H$, the subalgebra
+\[
+H+Fa_s
+\]
+is toral. By maximality of $H$, we must have $a_s\in H$.
+
+We claim that $a_n=0$. To prove this, it is enough --- by the nondegeneracy
+of $(\cdot\mid\cdot)$ on $L_0$ --- to show that
+\[
+(a_n\mid L_0)=0.
+\]
+
+First observe that $L_0$ is solvable. Indeed, if $u\in [L_0,L_0]$, then
+$u\in L_0$, so its semisimple part $u_s$ lies in $H$. On the other hand, since
+$u=[x,y]$ with $x,y\in L_0$ and $H$ centralizes $L_0$, one sees from the
+Killing-form computation that $u_s$ acts trivially on $L$; hence $u_s=0$.
+Therefore every element of $[L_0,L_0]$ is nilpotent, so Engel's theorem
+implies that $[L_0,L_0]$ is nilpotent. Thus $L_0$ is solvable.
+
+By Lie's theorem, there exists a basis of $L$ with respect to which all operators
+$\operatorname{ad}(x)$ $(x\in L_0)$ are upper triangular. Since $a_n$ is nilpotent,
+$\operatorname{ad}(a_n)$ is strictly upper triangular. Therefore, for every
+$x\in L_0$,
+\[
+(a_n\mid x)
+=
+\operatorname{tr}\bigl(\operatorname{ad}(a_n)\operatorname{ad}(x)\bigr)=0.
+\]
+Hence $(a_n\mid L_0)=0$, and so $a_n=0$.
+
+Thus $a=a_s\in H$. Since $a\in L_0$ was arbitrary, we have $L_0\subseteq H$.
+The reverse inclusion is clear, so $L_0=H$.
+\end{proof}
+
+\begin{corollary}
+The restriction of the Killing form to $H$ is nondegenerate.
+\end{corollary}
+
+\begin{proof}
+This follows immediately from the lemma $L_0=H$ and the nondegeneracy
+of the Killing form on $L_0$.
+\end{proof}
+
+\begin{corollary}
+For every $\alpha\in\Delta$, the pairing
+\[
+L_\alpha\times L_{-\alpha}\to F,
+\qquad (x,y)\mapsto (x\mid y),
+\]
+is nondegenerate. In particular, $L_{-\alpha}\neq 0$.
+\end{corollary}
+
+\begin{proof}
+Let $0\neq x\in L_\alpha$ and assume $(x\mid L_{-\alpha})=0$. By the orthogonality
+lemma, $x$ is also orthogonal to $H=L_0$ and to every $L_\beta$ with
+$\beta\neq -\alpha$. Hence $x$ is orthogonal to all of $L$, contradicting the
+nondegeneracy of the Killing form.
+\end{proof}
+
+We may therefore identify $H$ with $H^*$ via the Killing form:
+\[
+\nu\colon H\longrightarrow H^*,
+\qquad
+h\longmapsto (h\mid \cdot)\vert_H .
+\]
+Thus
+\[
+\nu(h)(y)=(h\mid y)
+\qquad \text{for all } y\in H.
+\]
+Let
+\[
+\nu^{-1}\colon H^*\longrightarrow H
+\]
+be its inverse. For $\alpha,\beta\in H^*$ define
+\[
+(\alpha\mid\beta):=\bigl(\nu^{-1}(\alpha)\mid \nu^{-1}(\beta)\bigr).
+\]
+
+\begin{lemma}
+For $x_\alpha\in L_\alpha$ and $y_{-\alpha}\in L_{-\alpha}$,
+\[
+[x_\alpha,y_{-\alpha}]
+=
+(x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha).
+\]
+\end{lemma}
+
+\begin{proof}
+Since $[L_\alpha,L_{-\alpha}]\subseteq L_0=H$, both sides lie in $H$.
+Let $h\in H$. Then
+\[
+([h,x_\alpha]\mid y_{-\alpha})
+=
+(h\mid [x_\alpha,y_{-\alpha}]).
+\]
+But
+\[
+[h,x_\alpha]=\alpha(h)x_\alpha,
+\]
+so
+\[
+\alpha(h)(x_\alpha\mid y_{-\alpha})
+=
+(h\mid [x_\alpha,y_{-\alpha}]).
+\]
+By definition of $\nu^{-1}(\alpha)$,
+\[
+\alpha(h)
+=
+(\nu^{-1}(\alpha)\mid h).
+\]
+Hence
+\[
+(h\mid [x_\alpha,y_{-\alpha}])
+=
+\bigl(h\mid (x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha)\bigr).
+\]
+Since the Killing form on $H$ is nondegenerate, we conclude that
+\[
+[x_\alpha,y_{-\alpha}]
+=
+(x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha).
+\]
+\end{proof}
+
+\begin{lemma}
+For every $\alpha\in\Delta$,
+\[
+(\alpha\mid\alpha)\neq 0.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose $0\neq x_\alpha\in L_\alpha$. By the preceding corollary, there exists
+$y_{-\alpha}\in L_{-\alpha}$ such that
+\[
+(x_\alpha\mid y_{-\alpha})\neq 0.
+\]
+Hence, by the previous lemma,
+\[
+[x_\alpha,y_{-\alpha}]
+=
+(x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha)\neq 0.
+\]
+
+Suppose $(\alpha\mid\alpha)=0$. Then
+\[
+\alpha\bigl(\nu^{-1}(\alpha)\bigr)
+=
+\bigl(\nu^{-1}(\alpha)\mid \nu^{-1}(\alpha)\bigr)
+=
+(\alpha\mid\alpha)
+=
+0.
+\]
+Set
+\[
+L' := Fx_\alpha \oplus Fy_{-\alpha}\oplus F\nu^{-1}(\alpha).
+\]
+Then
+\[
+[\nu^{-1}(\alpha),x_\alpha]
+=
+\alpha(\nu^{-1}(\alpha))x_\alpha
+=
+0,
+\]
+and similarly
+\[
+[\nu^{-1}(\alpha),y_{-\alpha}]=0.
+\]
+Also
+\[
+[x_\alpha,y_{-\alpha}]
+\in F\nu^{-1}(\alpha).
+\]
+Thus $L'$ is a solvable subalgebra.
+
+Consider the adjoint representation of $L'$ on $L$. By Lie's theorem,
+the operators $\operatorname{ad}(L')$ are simultaneously upper triangularizable.
+Since
+\[
+\nu^{-1}(\alpha)\in [L',L'],
+\]
+its adjoint action is strictly upper triangular, hence nilpotent.
+But $\nu^{-1}(\alpha)\in H$, so $\operatorname{ad}(\nu^{-1}(\alpha))$ is semisimple.
+Therefore it must be $0$. This implies $\nu^{-1}(\alpha)=0$, hence $\alpha=0$,
+a contradiction.
+
+Therefore $(\alpha\mid\alpha)\neq 0$.
+\end{proof}
+
+\begin{proposition}
+For every root $\alpha\in\Delta$, one may choose root vectors
+\[
+x_\alpha\in L_\alpha,
+\qquad
+y_{-\alpha}\in L_{-\alpha},
+\]
+such that if
+\[
+h_\alpha := \frac{2}{(\alpha\mid\alpha)}\,\nu^{-1}(\alpha),
+\]
+then
+\[
+[x_\alpha,y_{-\alpha}]=h_\alpha,
+\qquad
+[h_\alpha,x_\alpha]=2x_\alpha,
+\qquad
+[h_\alpha,y_{-\alpha}]=-2y_{-\alpha}.
+\]
+\end{proposition}
+
+\begin{proof}
+Choose $0\neq x_\alpha\in L_\alpha$. By the nondegeneracy of the pairing
+$L_\alpha\times L_{-\alpha}$, choose $y_{-\alpha}\in L_{-\alpha}$ so that
+\[
+(x_\alpha\mid y_{-\alpha})=\frac{2}{(\alpha\mid\alpha)}.
+\]
+Then the preceding lemma gives
+\[
+[x_\alpha,y_{-\alpha}]
+=
+\frac{2}{(\alpha\mid\alpha)}\,\nu^{-1}(\alpha)
+=
+h_\alpha.
+\]
+
+Now
+\[
+[h_\alpha,x_\alpha]
+=
+\alpha(h_\alpha)x_\alpha
+=
+\frac{2}{(\alpha\mid\alpha)}
+\alpha(\nu^{-1}(\alpha))x_\alpha
+=
+\frac{2}{(\alpha\mid\alpha)}(\alpha\mid\alpha)x_\alpha
+=
+2x_\alpha.
+\]
+Similarly,
+\[
+[h_\alpha,y_{-\alpha}]
+=
+-\alpha(h_\alpha)y_{-\alpha}
+=
+-2y_{-\alpha}.
+\]
+\end{proof}
 
 \chapter{Homework}
 
