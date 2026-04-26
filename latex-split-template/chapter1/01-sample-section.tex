@@ -1,0 +1,31 @@
+\section{Sample Section}
+
+This section is a small smoke test for the split-file template. Replace it with
+your own course notes, and add more section files beside this one.
+
+\begin{definition}
+    A template is reusable when its structure is stable and its content can be
+    replaced without editing the preamble.
+\end{definition}
+
+\begin{theorem}
+    If each chapter is included from the main file and each section is input
+    from its chapter file, then the document can grow without making the main
+    file hard to navigate.
+\end{theorem}
+
+\begin{proof}
+    The main file stores global configuration. Chapter files store chapter
+    order. Section files store local content. These responsibilities are
+    separate, so each file stays small.
+\end{proof}
+
+\begin{example}
+    Add a second section file beside this one, then add a matching input line
+    to the chapter file.
+\end{example}
+
+\begin{remark}
+    Keep package imports, theorem declarations, and custom commands in
+    the main file; child files should contain document content only.
+\end{remark}

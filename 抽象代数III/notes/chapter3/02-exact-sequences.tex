@@ -1,0 +1,143 @@
+\section{Exact Sequences}
+
+\begin{definition}
+    Let $\{M_i\}_{i\in \mathbb Z}$ be a family of $R$-modules, and let
+    \[
+        \varphi_i:M_i\to M_{i+1}
+    \]
+    be $R$-module homomorphisms for each $i\in\mathbb Z$. Then
+    \[
+        \cdots \longrightarrow M_{i-1}\xrightarrow{\varphi_{i-1}} M_i \xrightarrow{\varphi_i} M_{i+1}\longrightarrow \cdots
+    \]
+    is called a \emph{sequence} of $R$-modules.
+\end{definition}
+
+\begin{definition}
+    The sequence
+    \[
+        \cdots \longrightarrow M_{i-1}\xrightarrow{\varphi_{i-1}} M_i \xrightarrow{\varphi_i} M_{i+1}\longrightarrow \cdots
+    \]
+    is said to be \emph{exact at $M_i$} if
+    \[
+        \operatorname{Im}(\varphi_{i-1})=\ker(\varphi_i).
+    \]
+    It is called an \emph{exact sequence} if it is exact at every term.
+\end{definition}
+
+A short exact sequence is a sequence of the form
+\[
+    0\longrightarrow M' \xrightarrow{\iota} M \xrightarrow{\pi} M'' \longrightarrow 0.
+\]
+
+It is exact if and only if
+\[
+    \ker(\iota)=0,
+    \qquad
+    \operatorname{Im}(\pi)=M'',
+    \qquad
+    \operatorname{Im}(\iota)=\ker(\pi).
+\]
+Equivalently,$\iota$ is injective,$\pi$ is surjective, and
+\[
+    \operatorname{Im}(\iota)=\ker(\pi).
+\]
+
+Hence, for every short exact sequence
+\[
+    0\longrightarrow M' \xrightarrow{\iota} M \xrightarrow{\pi} M'' \longrightarrow 0,
+\]
+we have
+\[
+    M/M' \cong M''.
+\]
+
+\begin{definition}
+    Let $R,S$ be rings, and let
+    \[
+        F: R\text{-}\mathrm{Mod} \to S\text{-}\mathrm{Mod}
+    \]
+    be a covariant functor.
+
+    We say that $F$ is \emph{left exact} if for any exact sequence
+    \[
+        0 \to N \xrightarrow{\varphi} M \xrightarrow{\psi} P,
+    \]
+    the sequence
+    \[
+        0 \to F(N) \xrightarrow{F(\varphi)} F(M) \xrightarrow{F(\psi)} F(P)
+    \]
+    is exact.
+
+    We say that $F$ is \emph{right exact} if for any exact sequence
+    \[
+        N \xrightarrow{\varphi} M \xrightarrow{\psi} P \to 0,
+    \]
+    the sequence
+    \[
+        F(N) \xrightarrow{F(\varphi)} F(M) \xrightarrow{F(\psi)} F(P) \to 0
+    \]
+    is exact.
+\end{definition}
+
+\begin{definition}
+    Let
+    \[
+        G: R\text{-}\mathrm{Mod} \to S\text{-}\mathrm{Mod}
+    \]
+    be a contravariant functor. We say that $G$ is \emph{left exact} (respectively, \emph{right exact}) if it is left exact (respectively, right exact) when regarded as a covariant functor
+    \[
+        G : (R\text{-}\mathrm{Mod})^{\mathrm{op}} \to S\text{-}\mathrm{Mod}.
+    \]
+
+    A functor is called \emph{exact} if it is both left exact and right exact.
+\end{definition}
+
+Let $M$ be an $R$-module. Then:
+\[
+    \operatorname{Hom}_R(M,-): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \quad\text{is left exact,}
+\]
+\[
+    \operatorname{Hom}_R(-,M): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \quad\text{is left exact,}
+\]
+and
+\[
+    M \otimes_R - : R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \quad\text{is right exact.}
+\]
+
+\begin{definition}
+    A functor $F: \mathcal C \to \mathcal D$ is called \emph{exact} if it is both left exact and right exact.
+\end{definition}
+
+\begin{definition}
+    Let $M$ be an $R$-module.
+
+    \begin{enumerate}
+        \item $M$ is called \emph{projective} if the functor
+              \[
+                  \operatorname{Hom}_R(M,-)
+              \]
+              is exact.
+
+        \item $M$ is called \emph{injective} if the functor
+              \[
+                  \operatorname{Hom}_R(-,M)
+              \]
+              is exact.
+
+        \item $M$ is called \emph{flat} if the functor
+              \[
+                  -\otimes_R M
+              \]
+              is exact.
+    \end{enumerate}
+
+    If $R$ is noncommutative, then in order for
+    \[
+        M\otimes_R -
+    \]
+    to be well-defined,$M$ must be a right $R$-module.
+\end{definition}
+

@@ -1,0 +1,634 @@
+\section{Radical and Socle Series}
+
+\begin{proposition}
+    Let $A$ be an Artinian ring, and let $U$ be a finitely generated left $A$-module.
+
+    \begin{enumerate}
+        \item For a submodule $V\leq U$, the following are equivalent:
+              \begin{enumerate}
+                  \item $V=\operatorname{Rad}(U)$;
+                  \item $V$ is the smallest submodule of $U$ such that $U/V$ is semisimple;
+                  \item $V=J(A)U$.
+              \end{enumerate}
+
+        \item For a submodule $V\leq U$, the following are equivalent:
+              \begin{enumerate}
+                  \item $V=\operatorname{Soc}(U)$;
+                  \item $V$ is the largest semisimple submodule of $U$;
+                  \item
+                        \[
+                            V=\{\,u\in U\mid J(A)u=0\,\}.
+                        \]
+              \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We first record two standard facts.
+
+    \medskip
+
+    \noindent
+    \textbf{Fact 1.}
+    Since $A$ is Artinian, the quotient ring $A/J(A)$ is semisimple. Hence every
+    $A/J(A)$-module is semisimple.
+
+    \medskip
+
+    \noindent
+    \textbf{Fact 2.}
+    If $S$ is a simple left $A$-module, then
+    \[
+        J(A)S=0.
+    \]
+    Indeed, by the characterization
+    \[
+        J(A)=\bigcap \{\,\operatorname{Ann}_A(T)\mid T \text{ simple left }A\text{-module}\,\},
+    \]
+    we have $J(A)\subseteq \operatorname{Ann}_A(S)$.
+
+    \bigskip
+
+    \noindent
+    \textbf{(1)} We prove the equivalence of \textup{(a)}, \textup{(b)}, \textup{(c)}.
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(c)} $\Rightarrow$ \textup{(b)}.}
+    Set
+    \[
+        W:=J(A)U.
+    \]
+    Then
+    \[
+        J(A)(U/W)=0,
+    \]
+    so $U/W$ is naturally an $A/J(A)$-module. By Fact~1, $U/W$ is semisimple.
+
+    Now let $V'\leq U$ be any submodule such that $U/V'$ is semisimple. Since every
+    simple module is annihilated by $J(A)$, every semisimple module is annihilated by
+    $J(A)$ as well. Hence
+    \[
+        J(A)(U/V')=0.
+    \]
+    Equivalently,
+    \[
+        J(A)U\subseteq V'.
+    \]
+    Thus $W=J(A)U$ is the smallest submodule of $U$ with semisimple quotient.
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(b)} $\Rightarrow$ \textup{(c)}.}
+    Assume that $V$ is the smallest submodule of $U$ such that $U/V$ is semisimple.
+
+    Since $U/J(A)U$ is semisimple by the previous paragraph, the minimality of $V$ gives
+    \[
+        V\subseteq J(A)U.
+    \]
+    On the other hand, $U/V$ is semisimple, so it is annihilated by $J(A)$. Hence
+    \[
+        J(A)(U/V)=0,
+    \]
+    which means
+    \[
+        J(A)U\subseteq V.
+    \]
+    Therefore
+    \[
+        V=J(A)U.
+    \]
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(c)} $\Leftrightarrow$ \textup{(a)}.}
+    Let $W=J(A)U$. We show that $W=\operatorname{Rad}(U)$.
+
+    First, let $M$ be a maximal submodule of $U$. Then $U/M$ is simple, hence semisimple.
+    By the minimality proved above for $J(A)U$, we must have
+    \[
+        J(A)U\subseteq M.
+    \]
+    Since this is true for every maximal submodule $M$ of $U$, it follows that
+    \[
+        J(A)U\subseteq \operatorname{Rad}(U).
+    \]
+
+    For the reverse inclusion, suppose there exists
+    \[
+        u\in \operatorname{Rad}(U)\setminus J(A)U.
+    \]
+    Let
+    \[
+        \overline{U}:=U/J(A)U,\qquad \overline{u}:=u+J(A)U\neq 0.
+    \]
+    We already know that $\overline{U}$ is semisimple, so we may write
+    \[
+        \overline{U}=\bigoplus_{i\in I} S_i
+    \]
+    with each $S_i$ simple. Since $\overline{u}\neq 0$, some component of $\overline{u}$ in
+    this direct sum is nonzero; choose $i_0\in I$ such that the $S_{i_0}$-component of
+    $\overline{u}$ is nonzero.
+
+    Set
+    \[
+        \overline{M}:=\bigoplus_{i\neq i_0} S_i.
+    \]
+    Then $\overline{M}$ is a maximal submodule of $\overline{U}$ and
+    \[
+        \overline{u}\notin \overline{M}.
+    \]
+    Let $M$ be the inverse image of $\overline{M}$ under the quotient map
+    \[
+        \pi:U\twoheadrightarrow \overline{U}.
+    \]
+    Then $M$ is a maximal submodule of $U$, because
+    \[
+        U/M\cong \overline{U}/\overline{M}\cong S_{i_0}
+    \]
+    is simple. But $u\notin M$, contradicting $u\in \operatorname{Rad}(U)$, since
+    $\operatorname{Rad}(U)$ is contained in every maximal submodule of $U$.
+
+    Hence
+    \[
+        \operatorname{Rad}(U)\subseteq J(A)U.
+    \]
+    Together with the opposite inclusion, we get
+    \[
+        \operatorname{Rad}(U)=J(A)U.
+    \]
+
+    Combining the implications above, we conclude that \textup{(a)}, \textup{(b)}, and
+    \textup{(c)} are equivalent.
+
+    \bigskip
+
+    \noindent
+    \textbf{(2)} Recall that
+    \[
+        \operatorname{Soc}(U)=\sum \{\,S\leq U\mid S \text{ is a simple submodule}\,\}.
+    \]
+
+    Let
+    \[
+        T:=\{\,u\in U\mid J(A)u=0\,\}.
+    \]
+    We first show that $T$ is a submodule of $U$. If $u,v\in T$ and $a\in A$, then
+    \[
+        J(A)(u+v)=J(A)u+J(A)v=0,
+    \]
+    and for every $j\in J(A)$,
+    \[
+        j(au)=(ja)u=0,
+    \]
+    because $J(A)$ is a two-sided ideal and $ja\in J(A)$. Thus $au\in T$, so $T\leq U$.
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(c)} $\Rightarrow$ \textup{(b)}.}
+    Assume $V=T$.
+
+    Since $J(A)T=0$, the module $T$ is naturally an $A/J(A)$-module. By Fact~1, $T$ is
+    semisimple.
+
+    Now let $W\leq U$ be any semisimple submodule. Then $W$ is a sum of simple
+    submodules, and by Fact~2 each simple submodule is annihilated by $J(A)$. Hence
+    \[
+        J(A)W=0,
+    \]
+    so
+    \[
+        W\subseteq T.
+    \]
+    Therefore $T$ is the largest semisimple submodule of $U$.
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(b)} $\Rightarrow$ \textup{(c)}.}
+    Assume that $V$ is the largest semisimple submodule of $U$.
+
+    The submodule
+    \[
+        T=\{\,u\in U\mid J(A)u=0\,\}
+    \]
+    is semisimple by the previous paragraph, so by maximality of $V$ we get
+    \[
+        T\subseteq V.
+    \]
+    On the other hand, $V$ is semisimple, hence $J(A)V=0$, so
+    \[
+        V\subseteq T.
+    \]
+    Thus
+    \[
+        V=T.
+    \]
+
+    \medskip
+
+    \noindent
+    \textit{\textup{(a)} $\Leftrightarrow$ \textup{(c)}.}
+    Let $T=\{u\in U\mid J(A)u=0\}$ as above.
+
+    Every simple submodule $S\leq U$ satisfies $J(A)S=0$ by Fact~2, so
+    \[
+        S\subseteq T.
+    \]
+    Taking the sum over all simple submodules of $U$, we obtain
+    \[
+        \operatorname{Soc}(U)\subseteq T.
+    \]
+
+    Conversely, $T$ is semisimple, so it is a sum of simple submodules of $U$. Hence
+    \[
+        T\subseteq \operatorname{Soc}(U).
+    \]
+    Therefore
+    \[
+        \operatorname{Soc}(U)=T.
+    \]
+
+    So \textup{(a)}, \textup{(b)}, and \textup{(c)} are equivalent.
+\end{proof}
+
+Let $A$ be an Artinian ring, and let $U$ be a finitely generated left $A$-module.
+Recall the basic identities
+\[
+    \operatorname{Rad}(U)=J(A)U,
+    \qquad
+    \operatorname{Soc}(U)=\{u\in U\mid J(A)u=0\}.
+\]
+
+\begin{definition}
+    Define inductively
+    \[
+        \operatorname{Rad}^0(U):=U,\qquad \operatorname{Rad}^n(U):=\operatorname{Rad}(\operatorname{Rad}^{n-1}(U))\quad (n\ge 1),
+    \]
+    and
+    \[
+        \operatorname{Soc}^0(U):=0,\qquad
+        \operatorname{Soc}^n(U)/\operatorname{Soc}^{n-1}(U):=\operatorname{Soc}\bigl(U/\operatorname{Soc}^{n-1}(U)\bigr)\quad (n\ge 1).
+    \]
+    The descending chain
+    \[
+        U=\operatorname{Rad}^0(U)\supseteq \operatorname{Rad}(U)\supseteq \operatorname{Rad}^2(U)\supseteq \cdots
+    \]
+    is called the \emph{radical series} of $U$, and the ascending chain
+    \[
+        0=\operatorname{Soc}^0(U)\subseteq \operatorname{Soc}(U)\subseteq \operatorname{Soc}^2(U)\subseteq \cdots
+    \]
+    is called the \emph{socle series} of $U$.
+\end{definition}
+
+\begin{proposition}\label{prop:rad-soc-formulas}
+    For every integer $n\ge 1$,
+    \[
+        \operatorname{Rad}^n(U)=J(A)^nU,
+    \]
+    and
+    \[
+        \operatorname{Soc}^n(U)=\{u\in U\mid J(A)^n u=0\}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    We prove both formulas by induction on $n$.
+
+    \medskip
+
+    \noindent
+    \textbf{Radical formula.}
+    For $n=1$, this is exactly the identity
+    \[
+        \operatorname{Rad}(U)=J(A)U.
+    \]
+    Assume now that $\operatorname{Rad}^{n-1}(U)=J(A)^{n-1}U$. Since $\operatorname{Rad}^{n-1}(U)$ is a finitely generated
+    $A$-module, we may apply the same identity to it:
+    \[
+        \operatorname{Rad}^n(U)
+        =\operatorname{Rad}(\operatorname{Rad}^{n-1}(U))
+        =J(A)\operatorname{Rad}^{n-1}(U)
+        =J(A)\bigl(J(A)^{n-1}U\bigr)
+        =J(A)^nU.
+    \]
+
+    \medskip
+
+    \noindent
+    \textbf{Socle formula.}
+    For $n=1$, this is exactly the identity
+    \[
+        \operatorname{Soc}(U)=\{u\in U\mid J(A)u=0\}.
+    \]
+    Assume now that
+    \[
+        \operatorname{Soc}^{n-1}(U)=\{u\in U\mid J(A)^{n-1}u=0\}.
+    \]
+    By definition,
+    \[
+        \operatorname{Soc}^n(U)/\operatorname{Soc}^{n-1}(U)
+        =
+        \operatorname{Soc}\bigl(U/\operatorname{Soc}^{n-1}(U)\bigr).
+    \]
+    Applying the case $n=1$ to the module $U/\operatorname{Soc}^{n-1}(U)$, we get
+    \[
+        \operatorname{Soc}\bigl(U/\operatorname{Soc}^{n-1}(U)\bigr)
+        =
+        \left\{
+        u+\operatorname{Soc}^{n-1}(U)\in U/\operatorname{Soc}^{n-1}(U)
+        \;\middle|\;
+        J(A)u\subseteq \operatorname{Soc}^{n-1}(U)
+        \right\}.
+    \]
+    By the induction hypothesis, the condition
+    \[
+        J(A)u\subseteq \operatorname{Soc}^{n-1}(U)
+    \]
+    is equivalent to
+    \[
+        J(A)^{n-1}(J(A)u)=0,
+    \]
+    that is,
+    \[
+        J(A)^n u=0.
+    \]
+    Hence the preimage of $\operatorname{Soc}(U/\operatorname{Soc}^{n-1}(U))$ in $U$ is precisely
+    \[
+        \{u\in U\mid J(A)^n u=0\}.
+    \]
+    Therefore
+    \[
+        \operatorname{Soc}^n(U)=\{u\in U\mid J(A)^n u=0\}.
+    \]
+    This completes the induction.
+\end{proof}
+
+\begin{remark}
+    For $n\ge 1$, the quotient
+    \[
+        \operatorname{Rad}^{n-1}(U)/\operatorname{Rad}^n(U)
+    \]
+    is called the $n$-th \emph{radical layer} of $U$, and
+    \[
+        \operatorname{Soc}^n(U)/\operatorname{Soc}^{n-1}(U)
+    \]
+    is called the $n$-th \emph{socle layer} of $U$.
+\end{remark}
+
+\begin{lemma}\label{lem:rad-soc-direct-sum}
+    For every $n\ge 1$ and any finitely generated $A$-modules $U,V$,
+    \[
+        \operatorname{Rad}^n(U\oplus V)=\operatorname{Rad}^n(U)\oplus \operatorname{Rad}^n(V),
+    \]
+    and
+    \[
+        \operatorname{Soc}^n(U\oplus V)=\operatorname{Soc}^n(U)\oplus \operatorname{Soc}^n(V).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Using Proposition~\ref{prop:rad-soc-formulas},
+    \[
+        \operatorname{Rad}^n(U\oplus V)
+        =
+        J(A)^n(U\oplus V)
+        =
+        J(A)^nU\oplus J(A)^nV
+        =
+        \operatorname{Rad}^n(U)\oplus \operatorname{Rad}^n(V).
+    \]
+    Similarly,
+    \[
+        \operatorname{Soc}^n(U\oplus V)
+        =
+        \{(u,v)\in U\oplus V\mid J(A)^n(u,v)=0\}.
+    \]
+    But
+    \[
+        J(A)^n(u,v)=0
+        \iff
+        J(A)^n u=0 \text{ and } J(A)^n v=0.
+    \]
+    Hence
+    \[
+        \operatorname{Soc}^n(U\oplus V)
+        =
+        \{u\in U\mid J(A)^n u=0\}
+        \oplus
+        \{v\in V\mid J(A)^n v=0\}
+        =
+        \operatorname{Soc}^n(U)\oplus \operatorname{Soc}^n(V).
+    \]
+\end{proof}
+
+\begin{theorem}\label{thm:rad-soc-fastest}
+    Let $A$ be an Artinian ring, and let $U$ be a finitely generated left $A$-module.
+
+    \begin{enumerate}
+        \item The radical series of $U$ is the fastest descending chain
+              \[
+                  U=U_0\supseteq U_1\supseteq U_2\supseteq \cdots
+              \]
+              such that every factor $U_{r-1}/U_r$ is semisimple. More precisely, if
+              \[
+                  U=U_0\supseteq U_1\supseteq U_2\supseteq \cdots
+              \]
+              is any descending chain with each $U_{r-1}/U_r$ semisimple, then for every $r\ge 0$,
+              \[
+                  \operatorname{Rad}^r(U)\subseteq U_r.
+              \]
+
+        \item The socle series of $U$ is the fastest ascending chain
+              \[
+                  0=V_0\subseteq V_1\subseteq V_2\subseteq \cdots
+              \]
+              such that every factor $V_r/V_{r-1}$ is semisimple. More precisely, if
+              \[
+                  0=V_0\subseteq V_1\subseteq V_2\subseteq \cdots
+              \]
+              is any ascending chain with each $V_r/V_{r-1}$ semisimple, then for every $r\ge 0$,
+              \[
+                  V_r\subseteq \operatorname{Soc}^r(U).
+              \]
+
+        \item Both series terminate. If $m$ and $n$ are the minimal integers such that
+              \[
+                  \operatorname{Rad}^m(U)=0
+                  \qquad\text{and}\qquad
+                  \operatorname{Soc}^n(U)=U,
+              \]
+              then
+              \[
+                  m=n.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1)} Let
+    \[
+        U=U_0\supseteq U_1\supseteq U_2\supseteq \cdots
+    \]
+    be a descending chain such that each quotient $U_{r-1}/U_r$ is semisimple.
+    We prove by induction on $r$ that
+    \[
+        \operatorname{Rad}^r(U)\subseteq U_r.
+    \]
+
+    For $r=0$, this is clear, since $\operatorname{Rad}^0(U)=U=U_0$.
+
+    Assume $r\ge 1$ and that
+    \[
+        \operatorname{Rad}^{r-1}(U)\subseteq U_{r-1}.
+    \]
+    Consider the quotient
+    \[
+        \operatorname{Rad}^{r-1}(U)\big/\bigl(\operatorname{Rad}^{r-1}(U)\cap U_r\bigr).
+    \]
+    By the second isomorphism theorem,
+    \[
+        \operatorname{Rad}^{r-1}(U)\big/\bigl(\operatorname{Rad}^{r-1}(U)\cap U_r\bigr)
+        \cong
+        \bigl(\operatorname{Rad}^{r-1}(U)+U_r\bigr)/U_r.
+    \]
+    Since $\operatorname{Rad}^{r-1}(U)\subseteq U_{r-1}$, we have
+    \[
+        \bigl(\operatorname{Rad}^{r-1}(U)+U_r\bigr)/U_r
+        \subseteq
+        U_{r-1}/U_r.
+    \]
+    But $U_{r-1}/U_r$ is semisimple, and any submodule of a semisimple module is semisimple.
+    Hence
+    \[
+        \operatorname{Rad}^{r-1}(U)\big/\bigl(\operatorname{Rad}^{r-1}(U)\cap U_r\bigr)
+    \]
+    is semisimple.
+
+    By definition of the radical as the smallest submodule with semisimple quotient, it follows that
+    \[
+        \operatorname{Rad}\bigl(\operatorname{Rad}^{r-1}(U)\bigr)
+        \subseteq
+        \operatorname{Rad}^{r-1}(U)\cap U_r.
+    \]
+    That is,
+    \[
+        \operatorname{Rad}^r(U)\subseteq U_r.
+    \]
+    This proves \textup{(1)}.
+
+    \bigskip
+
+    \textbf{(2)} Let
+    \[
+        0=V_0\subseteq V_1\subseteq V_2\subseteq \cdots
+    \]
+    be an ascending chain such that each quotient $V_r/V_{r-1}$ is semisimple.
+    We prove by induction on $r$ that
+    \[
+        V_r\subseteq \operatorname{Soc}^r(U).
+    \]
+
+    For $r=0$, this is clear.
+
+    Assume $r\ge 1$ and that
+    \[
+        V_{r-1}\subseteq \operatorname{Soc}^{r-1}(U).
+    \]
+    Consider the image of $V_r$ in the quotient $U/\operatorname{Soc}^{r-1}(U)$:
+    \[
+        \bigl(V_r+\operatorname{Soc}^{r-1}(U)\bigr)\big/\operatorname{Soc}^{r-1}(U).
+    \]
+    By the second isomorphism theorem,
+    \[
+        \bigl(V_r+\operatorname{Soc}^{r-1}(U)\bigr)\big/\operatorname{Soc}^{r-1}(U)
+        \cong
+        V_r/\bigl(V_r\cap \operatorname{Soc}^{r-1}(U)\bigr).
+    \]
+    Since $V_{r-1}\subseteq \operatorname{Soc}^{r-1}(U)$, we have
+    \[
+        V_{r-1}\subseteq V_r\cap \operatorname{Soc}^{r-1}(U),
+    \]
+    so
+    \[
+        V_r/\bigl(V_r\cap \operatorname{Soc}^{r-1}(U)\bigr)
+    \]
+    is a quotient of $V_r/V_{r-1}$. Because $V_r/V_{r-1}$ is semisimple, so is every quotient of it.
+    Hence
+    \[
+        \bigl(V_r+\operatorname{Soc}^{r-1}(U)\bigr)\big/\operatorname{Soc}^{r-1}(U)
+    \]
+    is a semisimple submodule of
+    \[
+        U/\operatorname{Soc}^{r-1}(U).
+    \]
+    By the maximality of the socle,
+    \[
+        \bigl(V_r+\operatorname{Soc}^{r-1}(U)\bigr)\big/\operatorname{Soc}^{r-1}(U)
+        \subseteq
+        \operatorname{Soc}\bigl(U/\operatorname{Soc}^{r-1}(U)\bigr)
+        =
+        \operatorname{Soc}^r(U)/\operatorname{Soc}^{r-1}(U).
+    \]
+    Therefore
+    \[
+        V_r\subseteq \operatorname{Soc}^r(U).
+    \]
+    This proves \textup{(2)}.
+
+    \bigskip
+
+    \textbf{(3)} Since $A$ is Artinian, $J(A)$ is nilpotent. Choose $N\ge 1$ such that
+    \[
+        J(A)^N=0.
+    \]
+    Then by Proposition~\ref{prop:rad-soc-formulas},
+    \[
+        \operatorname{Rad}^N(U)=J(A)^N U=0,
+    \]
+    and
+    \[
+        \operatorname{Soc}^N(U)=\{u\in U\mid J(A)^N u=0\}=U.
+    \]
+    So both series terminate.
+
+    Now let $m$ be minimal such that $\operatorname{Rad}^m(U)=0$. By Proposition~\ref{prop:rad-soc-formulas},
+    \[
+        J(A)^mU=0.
+    \]
+    Hence every $u\in U$ satisfies $J(A)^m u=0$, so again by
+    Proposition~\ref{prop:rad-soc-formulas},
+    \[
+        \operatorname{Soc}^m(U)=U.
+    \]
+    Thus $n\le m$.
+
+    Conversely, let $n$ be minimal such that $\operatorname{Soc}^n(U)=U$. Then for every $u\in U$,
+    \[
+        J(A)^n u=0.
+    \]
+    So
+    \[
+        J(A)^nU=0,
+    \]
+    hence
+    \[
+        \operatorname{Rad}^n(U)=J(A)^nU=0.
+    \]
+    Therefore $m\le n$.
+
+    Combining the two inequalities, we obtain
+    \[
+        m=n.
+    \]
+\end{proof}
+
+\begin{definition}
+    The common integer in Theorem~\ref{thm:rad-soc-fastest}(3) is called the
+    \emph{Loewy length} of $U$.
+\end{definition}
+

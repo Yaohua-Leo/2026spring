@@ -1,0 +1,22 @@
+\section{Balanced product}
+
+\begin{definition}
+    Let $R$ be a ring (not necessarily commutative). Let $M_R$ be a right $R$-module and $_{R}N$ be a left $R$-module. The balanced product of $M$ and $N$ is defined as a pair $(P,f)$ where $P$ is an abelian group and $f: M \times N \to P$ is a bilinear map satisfies:
+    \begin{itemize}
+        \item $f(rm,n) = f(m,rn)$ for all $r \in R$,$m \in M$,$n \in N$.
+        \item $f(m+m',n) = f(m,n) + f(m',n)$ for all $m,m' \in M$,$n \in N$.
+        \item $f(m,n+n') = f(m,n) + f(m,n')$ for all $m \in M$,$n,n' \in N$.
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}
+    A tensor product of $M_R$ and $_{R}N$ is a balanced product $(M \otimes_R N,t_{M,N})$ such that if $(P,f)$ is any balanced product of $M_R$ and $_{R}N$, then there exists a unique abelian group homomorphism $\tilde{f}: M \otimes_R N \to P$ such that the following diagram commutes:
+    \begin{center}
+        \begin{tikzcd}
+            M \times N \arrow[r, "{t_{M,N}}"] \arrow[d, "f"'] & M \otimes_R N \arrow[ld, "\tilde{f}"', dashed] \\
+            P                                                 &
+        \end{tikzcd}
+    \end{center}
+\end{definition}
+

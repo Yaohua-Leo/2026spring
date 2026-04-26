@@ -1,0 +1,185 @@
+\section{Schanuel Lemma}
+
+\begin{theorem}[Schanuel Lemma]
+    Let
+    \[
+        0\longrightarrow K \longrightarrow P \xrightarrow{\,\lambda\,} M \longrightarrow 0
+    \]
+    and
+    \[
+        0\longrightarrow K' \longrightarrow P' \xrightarrow{\,\lambda'\,} M \longrightarrow 0
+    \]
+    be short exact sequences of left $R$-modules, with $P$ and $P'$ projective. Then
+    \[
+        K'\oplus P \cong K\oplus P'.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Define
+    \[
+        Y:=P\times_M P'
+        =\{(p,p')\in P\oplus P' \mid \lambda(p)=\lambda'(p')\}.
+    \]
+    Let
+    \[
+        \mu:Y\to P,\qquad \mu(p,p')=p,
+    \]
+    and
+    \[
+        \mu':Y\to P',\qquad \mu'(p,p')=p'.
+    \]
+    Then $Y$ fits into the pullback diagram
+    \[
+        \begin{tikzcd}
+            Y \arrow[r, "\mu'"] \arrow[d, "\mu"']
+            & P' \arrow[d, "\lambda'"] \\
+            P \arrow[r, "\lambda"']
+            & M
+        \end{tikzcd}
+    \]
+    that is, the square commutes and $Y$ is the fiber product of $\lambda$ and $\lambda'$.
+
+    We claim that there are short exact sequences
+    \[
+        0\longrightarrow K' \xrightarrow{\,i'\,} Y \xrightarrow{\,\mu\,} P \longrightarrow 0,
+        \qquad i'(k')=(0,k'),
+    \]
+    and
+    \[
+        0\longrightarrow K \xrightarrow{\,i\,} Y \xrightarrow{\,\mu'\,} P' \longrightarrow 0,
+        \qquad i(k)=(k,0).
+    \]
+
+    First,$\mu$ is surjective. Indeed, let $p\in P$. Since $\lambda'$ is surjective,
+    there exists $p'\in P'$ such that
+    \[
+        \lambda'(p')=\lambda(p).
+    \]
+    Then $(p,p')\in Y$, so $\mu(p,p')=p$.
+
+    Next,
+    \[
+        \ker(\mu)
+        =\{(0,p')\in Y \mid \lambda'(p')=0\}
+        =\{(0,k') \mid k'\in K'\}
+        =\operatorname{Im}(i').
+    \]
+    Hence
+    \[
+        0\longrightarrow K' \xrightarrow{\,i'\,} Y \xrightarrow{\,\mu\,} P \longrightarrow 0
+    \]
+    is exact.
+
+    Similarly,$\mu'$ is surjective, and
+    \[
+        \ker(\mu')
+        =\{(p,0)\in Y \mid \lambda(p)=0\}
+        =\{(k,0) \mid k\in K\}
+        =\operatorname{Im}(i).
+    \]
+    Thus
+    \[
+        0\longrightarrow K \xrightarrow{\,i\,} Y \xrightarrow{\,\mu'\,} P' \longrightarrow 0
+    \]
+    is exact.
+
+    Since $P$ is projective and $\mu:Y\to P$ is an epimorphism, there exists
+    an $R$-homomorphism $s:P\to Y$ such that
+    \[
+        \mu\circ s=\mathrm{id}_P.
+    \]
+    This is expressed by the commutative diagram
+    \[
+        \begin{tikzcd}
+            & Y \arrow[d, two heads, "\mu"] \\
+            P \arrow[ur, dashed, "s"] \arrow[r, "\mathrm{id}_P"']
+            & P
+        \end{tikzcd}
+    \]
+    so the sequence
+    \[
+        0\longrightarrow K' \longrightarrow Y \xrightarrow{\,\mu\,} P \longrightarrow 0
+    \]
+    splits. Therefore,
+    \[
+        Y\cong K'\oplus P.
+    \]
+
+    Likewise, since $P'$ is projective and $\mu':Y\to P'$ is an epimorphism, there exists $s':P'\to Y$ such that
+    \[
+        \mu'\circ s'=\mathrm{id}_{P'},
+    \]
+    and hence
+    \[
+        0\longrightarrow K \longrightarrow Y \xrightarrow{\,\mu'\,} P' \longrightarrow 0
+    \]
+    splits. Therefore,
+    \[
+        Y\cong K\oplus P'.
+    \]
+
+    Combining the two decompositions of $Y$, we obtain
+    \[
+        K'\oplus P \cong Y \cong K\oplus P',
+    \]
+    and hence
+    \[
+        K'\oplus P \cong K\oplus P'.
+    \]
+\end{proof}
+
+
+
+\begin{lemma}
+    Let $M$ be a left $R$-module. Then
+    \[
+        \Hom_R({}_R R,M)\cong M
+    \]
+    as left $R$-modules.
+\end{lemma}
+
+\begin{proof}
+    Define
+    \[
+        \Phi:\Hom_R({}_R R,M)\to M,\qquad f\mapsto f(1).
+    \]
+    This map is $R$-linear. Define also
+    \[
+        \Psi:M\to \Hom_R({}_R R,M),\qquad m\mapsto (r\mapsto rm).
+    \]
+    For $f\in \Hom_R({}_R R,M)$ and $r\in R$,
+    \[
+        \Psi(\Phi(f))(r)=r f(1)=f(r\cdot 1)=f(r),
+    \]
+    so $\Psi\Phi=\operatorname{id}$. Also
+    \[
+        \Phi(\Psi(m))=\Psi(m)(1)=1m=m,
+    \]
+    hence $\Phi$ and $\Psi$ are inverse isomorphisms.
+\end{proof}
+
+\begin{corollary}
+    For any ring $R$ with $1$,
+    \[
+        \operatorname{End}_R({}_R R)\cong R^{\operatorname{op}}
+    \]
+    as rings.
+\end{corollary}
+
+\begin{proof}
+    By the lemma, every $f\in \operatorname{End}_R({}_R R)$ is determined by $f(1)$, and
+    \[
+        f(r)=rf(1)
+    \]
+    for all $r\in R$. Thus
+    \[
+        \Theta:\operatorname{End}_R({}_R R)\to R^{\operatorname{op}},\qquad f\mapsto f(1)
+    \]
+    is bijective. Moreover, for $f,g\in \operatorname{End}_R({}_R R)$,
+    \[
+        (f\circ g)(1)=f(g(1))=g(1)f(1),
+    \]
+    which is multiplication in the opposite ring. Therefore $\Theta$ is a ring isomorphism.
+\end{proof}
+

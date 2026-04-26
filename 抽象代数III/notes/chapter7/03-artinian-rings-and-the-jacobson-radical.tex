@@ -1,0 +1,297 @@
+\section{Artinian Rings and the Jacobson Radical}
+
+\begin{theorem}
+    Let $A$ be an Artinian ring. Then $J(A)$ is nilpotent.
+\end{theorem}
+
+\begin{proof}
+    Consider the descending chain of left ideals
+    \[
+        J(A)\supseteq J(A)^2\supseteq J(A)^3\supseteq \cdots.
+    \]
+    Since $A$ is Artinian, this chain stabilizes. Hence there exists $n\ge 1$ such that
+    \[
+        J(A)^n=J(A)^{n+1}=J(A)^{n+2}=\cdots.
+    \]
+    Set
+    \[
+        N:=J(A)^n.
+    \]
+    Then
+    \[
+        N^2=J(A)^{2n}=J(A)^n=N,
+    \]
+    because all powers from the $n$th onward are equal.
+
+    We claim that $N=0$. Suppose not. Consider the set
+    \[
+        \Sigma:=\{\,L\leq {}_AA \mid NL\neq 0\,\}
+    \]
+    of left ideals $L$ of $A$ such that $NL\neq 0$. Since
+    \[
+        NN=N\neq 0,
+    \]
+    the set $\Sigma$ is nonempty. As $A$ is Artinian, $\Sigma$ has a minimal element; call it $L_0$.
+
+    Since $NL_0\neq 0$, there exists $a\in L_0$ such that
+    \[
+        Na\neq 0.
+    \]
+    Now $Na$ is a left ideal of $A$ contained in $L_0$, and
+    \[
+        N(Na)=N^2a=Na\neq 0.
+    \]
+    Thus $Na\in \Sigma$. By minimality of $L_0$, we must have
+    \[
+        L_0=Na.
+    \]
+    In particular, $a\in Na$, so there exists $b\in N$ such that
+    \[
+        a=ba.
+    \]
+    Hence
+    \[
+        (1-b)a=0.
+    \]
+    But $b\in N\subseteq J(A)$, so $1-b$ is a unit. Multiplying by its inverse gives $a=0$, a contradiction
+    to $Na\neq 0$.
+
+    Therefore $N=0$, that is,
+    \[
+        J(A)^n=0.
+    \]
+    So $J(A)$ is nilpotent.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be an Artinian ring. Then $J(A)$ is the largest nilpotent left ideal of $A$.
+\end{corollary}
+
+\begin{proof}
+    By the theorem above, $J(A)$ is itself nilpotent.
+
+    Now let $I$ be any nilpotent left ideal of $A$. By the earlier lemma, $I$ is a nil left ideal.
+    Hence by the theorem on nil left ideals,
+    \[
+        I\subseteq J(A).
+    \]
+    Thus $J(A)$ contains every nilpotent left ideal, so it is the largest one.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a ring and let $I$ be a two-sided ideal of $R$ such that
+    \[
+        I\subseteq J(R).
+    \]
+    Then
+    \[
+        J(R/I)=J(R)/I.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We prove the two inclusions separately.
+
+    \medskip
+
+    \noindent\emph{First inclusion: $J(R)/I\subseteq J(R/I)$.}
+
+    Let $a\in J(R)$. For any $x\in R$, the element $1-xa$ has a left inverse in $R$.
+    So there exists $b\in R$ such that
+    \[
+        b(1-xa)=1.
+    \]
+    Passing to the quotient modulo $I$, we get
+    \[
+        (b+I)\bigl((1-xa)+I\bigr)=1+I.
+    \]
+    Hence $(1-xa)+I$ has a left inverse in $R/I$. Since this holds for every $x\in R$,
+    the characterization of the Jacobson radical gives
+    \[
+        a+I\in J(R/I).
+    \]
+    Thus
+    \[
+        J(R)/I\subseteq J(R/I).
+    \]
+
+    \medskip
+
+    \noindent\emph{Second inclusion: $J(R/I)\subseteq J(R)/I$.}
+
+    Let $a+I\in J(R/I)$. We show that $a\in J(R)$. Let $x\in R$ be arbitrary.
+    Since $a+I\in J(R/I)$, the element
+    \[
+        (1-xa)+I
+    \]
+    has a left inverse in $R/I$. Therefore there exists $b\in R$ such that
+    \[
+        (b+I)\bigl((1-xa)+I\bigr)=1+I,
+    \]
+    that is,
+    \[
+        b(1-xa)=1-c
+    \]
+    for some $c\in I$.
+
+    Since $I\subseteq J(R)$, we have $c\in J(R)$, so $1-c$ has a left inverse in $R$.
+    Thus there exists $d\in R$ such that
+    \[
+        d(1-c)=1.
+    \]
+    Multiplying the equation $b(1-xa)=1-c$ on the left by $d$, we obtain
+    \[
+        (db)(1-xa)=1.
+    \]
+    Hence $1-xa$ has a left inverse in $R$. Since $x\in R$ was arbitrary, the characterization
+    of $J(R)$ implies
+    \[
+        a\in J(R).
+    \]
+    Therefore
+    \[
+        a+I\in J(R)/I.
+    \]
+
+    Combining the two inclusions, we conclude that
+    \[
+        J(R/I)=J(R)/I.
+    \]
+\end{proof}
+
+\begin{definition}
+    A ring $A$ is called \emph{semisimple} if the left regular module ${}_AA$ is semisimple.
+\end{definition}
+
+\begin{theorem}
+    Let $A$ be an Artinian ring. Then $A$ is semisimple if and only if
+    \[
+        J(A)=0.
+    \]
+\end{theorem}
+
+\begin{proof}
+    \noindent\emph{($\Rightarrow$)} Suppose $A$ is semisimple. Then ${}_AA$ is a direct sum of simple
+    left $A$-modules:
+    \[
+        {}_AA \cong S_1\oplus \cdots \oplus S_r.
+    \]
+    By the standard description of $J(A)$ as the intersection of the annihilators of all simple
+    left $A$-modules, every element of $J(A)$ annihilates each $S_i$. Hence
+    \[
+        J(A)A=0.
+    \]
+    But $1\in A$, so for any $x\in J(A)$ we have
+    \[
+        x=x\cdot 1=0.
+    \]
+    Therefore
+    \[
+        J(A)=0.
+    \]
+
+    \medskip
+
+    \noindent\emph{($\Leftarrow$)} Suppose now that $J(A)=0$. Let
+    \[
+        \mathcal{S}:=\left\{\,M_1\cap \cdots \cap M_r \;\middle|\; r\ge 1,\; M_1,\dots,M_r
+        \text{ maximal left ideals of }A \right\}.
+    \]
+    Since $A$ is Artinian, the set $\mathcal{S}$ has a minimal element with respect to inclusion.
+    Choose such a minimal element and write it as
+    \[
+        L=M_1\cap \cdots \cap M_r.
+    \]
+
+    We claim that $L=0$. Suppose $L\neq 0$. Since
+    \[
+        J(A)=\bigcap\{\,M\mid M \text{ maximal left ideal of }A\,\}=0,
+    \]
+    there exists a maximal left ideal $M$ such that
+    \[
+        L\not\subseteq M.
+    \]
+    Hence
+    \[
+        L\cap M \subsetneq L.
+    \]
+    But $L\cap M$ is again a finite intersection of maximal left ideals, contradicting the minimality
+    of $L$. Therefore $L=0$.
+
+    Now consider the natural $A$-module homomorphism
+    \[
+        \varphi:A\longrightarrow A/M_1\oplus \cdots \oplus A/M_r,
+        \qquad
+        a\longmapsto (a+M_1,\dots,a+M_r).
+    \]
+    Its kernel is
+    \[
+        \ker\varphi=M_1\cap \cdots \cap M_r=L=0,
+    \]
+    so $\varphi$ is injective.
+
+    Each $A/M_i$ is a simple left $A$-module, hence the direct sum
+    \[
+        A/M_1\oplus \cdots \oplus A/M_r
+    \]
+    is semisimple. Since every submodule of a semisimple module is semisimple, it follows that
+    ${}_AA$ is semisimple. Therefore $A$ is semisimple.
+\end{proof}
+
+\begin{corollary}
+    If $A$ is an Artinian ring, then
+    \[
+        A/J(A)
+    \]
+    is semisimple.
+\end{corollary}
+
+\begin{proof}
+    Since $A$ is Artinian, so is the quotient ring $A/J(A)$. By the previous theorem, it suffices to
+    show that
+    \[
+        J\bigl(A/J(A)\bigr)=0.
+    \]
+    But by the quotient formula,
+    \[
+        J\bigl(A/J(A)\bigr)=J(A)/J(A)=0.
+    \]
+    Hence $A/J(A)$ is semisimple.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be an Artinian ring. Then $J(A)$ is the unique two-sided ideal $U$ of $A$ such that
+    \begin{enumerate}
+        \item $U$ is nilpotent;
+        \item $A/U$ is semisimple.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    First, $J(A)$ has these two properties: it is nilpotent by the nilpotency theorem above, and
+    $A/J(A)$ is semisimple by the previous corollary.
+
+    Now let $U$ be a two-sided ideal satisfying \textup{(1)} and \textup{(2)}.
+    Since $U$ is nilpotent, it is a nilpotent left ideal, hence
+    \[
+        U\subseteq J(A).
+    \]
+    Because $A/U$ is semisimple, we have
+    \[
+        J(A/U)=0.
+    \]
+    On the other hand, since $U\subseteq J(A)$, the quotient formula gives
+    \[
+        J(A/U)=J(A)/U.
+    \]
+    Therefore
+    \[
+        J(A)/U=0,
+    \]
+    so
+    \[
+        J(A)=U.
+    \]
+    Thus $J(A)$ is unique.
+\end{proof}
+

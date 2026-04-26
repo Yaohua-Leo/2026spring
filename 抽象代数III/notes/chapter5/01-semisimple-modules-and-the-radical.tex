@@ -1,0 +1,271 @@
+\section{Semisimple Modules and the Radical}
+
+\begin{definition}
+    An $R$-module $M$ is called \emph{semisimple} if it is a direct sum of simple
+    submodules.
+\end{definition}
+
+\begin{theorem}[Schur's lemma]
+    Let $S_1$ and $S_2$ be simple $R$-modules, and let
+    \[
+        \varphi:S_1\to S_2
+    \]
+    be an $R$-homomorphism. Then either $\varphi=0$ or $\varphi$ is an isomorphism.
+    In particular,$\operatorname{End}_R(S)$ is a division ring for every simple $R$-module $S$.
+\end{theorem}
+
+\begin{proof}
+    Assume $\varphi\neq 0$. Since $\ker(\varphi)$ is a submodule of the simple module $S_1$, we have $\ker(\varphi)=0$ or $\ker(\varphi)=S_1$. The latter is impossible
+    because $\varphi\neq 0$, hence $\ker(\varphi)=0$ and $\varphi$ is injective.
+
+    Likewise,$\operatorname{Im}(\varphi)$ is a nonzero submodule of the simple module $S_2$, so $\operatorname{Im}(\varphi)=S_2$. Thus $\varphi$ is surjective and
+    therefore an isomorphism.
+
+    Taking $S_1=S_2=S$, every nonzero endomorphism of $S$ is invertible, which means
+    that $\operatorname{End}_R(S)$ is a division ring.
+\end{proof}
+
+\begin{lemma}
+    Let $S$ be a simple left $R$-module. Then $S$ is a quotient of the regular left
+    module ${}_R R$. More precisely, for every nonzero $x\in S$ there is an
+    isomorphism
+    \[
+        S\cong R/\operatorname{Ann}_R(x).
+    \]
+    In particular,$\operatorname{Ann}_R(x)$ is a maximal left ideal of $R$.
+\end{lemma}
+
+\begin{proof}
+    Fix $0\neq x\in S$ and define
+    \[
+        \pi_x:R\to S,\qquad r\mapsto rx.
+    \]
+    Since $S$ is simple and $Rx$ is a nonzero submodule of $S$, we have $Rx=S$.
+    Hence $\pi_x$ is surjective. Its kernel is exactly
+    \[
+        \ker(\pi_x)=\operatorname{Ann}_R(x):=\{r\in R\mid rx=0\}.
+    \]
+    By the first isomorphism theorem,
+    \[
+        S\cong R/\operatorname{Ann}_R(x).
+    \]
+    Because $S$ is simple, the quotient $R/\operatorname{Ann}_R(x)$ is simple as a
+    left $R$-module, so $\operatorname{Ann}_R(x)$ is a maximal left ideal.
+\end{proof}
+
+\begin{definition}
+    Let $U$ be an $R$-module. A proper submodule $M\subsetneq U$ is called a
+    \emph{maximal submodule} if whenever
+    \[
+        M\subseteq N\subseteq U,
+    \]
+    then either $N=M$ or $N=U$.
+\end{definition}
+
+\begin{lemma}
+    Let $W$ be a proper submodule of an $R$-module $U$. Assume that $U/W$ is finitely
+    generated. Then there exists a maximal submodule $M$ of $U$ such that
+    \[
+        W\subseteq M\subsetneq U.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Consider the set
+    \[
+        \mathcal{S}:=\{N\leq U\mid W\subseteq N\subsetneq U\},
+    \]
+    ordered by inclusion. Since $W\in \mathcal{S}$, the set is non-empty. Let $\{N_\lambda\}_{\lambda\in \Lambda}$ be a totally ordered subset of $\mathcal{S}$,
+    and set
+    \[
+        N:=\bigcup_{\lambda\in\Lambda} N_\lambda.
+    \]
+    Then $N$ is a submodule containing $W$. We claim that $N\neq U$. Indeed, write
+    \[
+        U/W=R\overline{u}_1+\cdots+R\overline{u}_n.
+    \]
+    If $N=U$, then each $u_i$ lies in some $N_{\lambda_i}$. Because the family is totally
+    ordered, there exists $\mu$ such that
+    \[
+        N_{\lambda_1},\dots,N_{\lambda_n}\subseteq N_\mu.
+    \]
+    Hence $u_1,\dots,u_n\in N_\mu$, so $U/W\subseteq N_\mu/W$, which implies $N_\mu=U$,
+    contradicting $N_\mu\in\mathcal{S}$. Therefore $N$ is an upper bound for the chain
+    in $\mathcal{S}$.
+
+    By Zorn's lemma,$\mathcal{S}$ has a maximal element $M$, and this is precisely a
+    maximal submodule of $U$ containing $W$.
+\end{proof}
+
+\begin{corollary}
+    Every proper left ideal of $R$ is contained in a maximal left ideal.
+\end{corollary}
+
+\begin{proof}
+    Apply the lemma to the left regular module ${}_R R$ and to the proper submodule $W=I$.
+\end{proof}
+
+\begin{definition}
+    Let $U$ be an $R$-module. The \emph{radical} of $U$ is the intersection of all
+    maximal submodules of $U$, and is denoted by $\operatorname{Rad}(U)$. If $U$ has no
+    maximal submodules, we set $\operatorname{Rad}(U)=U$.
+\end{definition}
+
+\begin{theorem}[Nakayama's lemma]
+    Let $U$ be an $R$-module and let $V\subseteq U$ be a submodule such that $U/V$ is
+    finitely generated. Then
+    \[
+        V+\operatorname{Rad}(U)=U
+        \qquad \Longleftrightarrow \qquad
+        V=U.
+    \]
+\end{theorem}
+
+\begin{proof}
+    If $V=U$, then the equality is obvious.
+
+    Conversely, assume $V\neq U$. Since $U/V$ is finitely generated, the previous lemma
+    yields a maximal submodule $M$ of $U$ with
+    \[
+        V\subseteq M\subsetneq U.
+    \]
+    By definition,
+    \[
+        \operatorname{Rad}(U)\subseteq M.
+    \]
+    Therefore
+    \[
+        V+\operatorname{Rad}(U)\subseteq M\subsetneq U,
+    \]
+    so $V+\operatorname{Rad}(U)\neq U$. This proves the contrapositive.
+\end{proof}
+
+\begin{corollary}
+    If $U$ is a finitely generated $R$-module, then the quotient map
+    \[
+        \pi:U\to U/\operatorname{Rad}(U)
+    \]
+    is an essential epimorphism.
+\end{corollary}
+
+\begin{proof}
+    Let $W\leq U$ be a submodule such that $\pi(W)=U/\operatorname{Rad}(U)$. Then
+    \[
+        W+\operatorname{Rad}(U)=U.
+    \]
+    Since $U/W$ is a quotient of the finitely generated module $U$, it is finitely
+    generated. Nakayama's lemma therefore gives $W=U$, so $\pi$ is essential.
+\end{proof}
+
+\begin{lemma}
+    Let $M$ and $N$ be finitely generated $R$-modules, and let
+    \[
+        f:M\to N
+    \]
+    be an $R$-homomorphism.
+    \begin{enumerate}
+        \item We have
+              \[
+                  f(\operatorname{Rad}(M))\subseteq \operatorname{Rad}(N).
+              \]
+        \item If $f$ is surjective and $\ker(f)\subseteq \operatorname{Rad}(M)$, then
+              \[
+                  \operatorname{Rad}(N)=f(\operatorname{Rad}(M)).
+              \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textbf{(1).}
+    Let $x\in \operatorname{Rad}(M)$. Suppose that $f(x)\notin \operatorname{Rad}(N)$.
+    Then there exists a maximal submodule $L$ of $N$ such that
+    \[
+        f(x)\notin L.
+    \]
+    Let
+    \[
+        \rho:N\to N/L
+    \]
+    be the quotient map. Since $N/L$ is simple and $\rho(f(x))\neq 0$, the morphism $\rho\circ f:M\to N/L$ is nonzero, hence surjective. Therefore
+    \[
+        M/\ker(\rho\circ f)\cong N/L
+    \]
+    is simple, so $\ker(\rho\circ f)$ is a maximal submodule of $M$. But
+    \[
+        x\notin \ker(\rho\circ f),
+    \]
+    contradicting $x\in \operatorname{Rad}(M)$. Hence $f(x)\in \operatorname{Rad}(N)$.
+
+    \textbf{(2).}
+    By (1),
+    \[
+        f(\operatorname{Rad}(M))\subseteq \operatorname{Rad}(N).
+    \]
+    For the reverse inclusion, let $x\in M$ with $f(x)\in \operatorname{Rad}(N)$. If $x\notin \operatorname{Rad}(M)$, choose a maximal submodule $K$ of $M$ with
+    \[
+        x\notin K.
+    \]
+    Since $\ker(f)\subseteq \operatorname{Rad}(M)\subseteq K$, the map $f$ induces a
+    surjection
+    \[
+        \overline{f}:M/K\to N/f(K).
+    \]
+    Because $M/K$ is simple and $x\notin K$, the quotient $N/f(K)$ is nonzero and hence
+    simple. Thus $f(K)$ is a maximal submodule of $N$. But $f(x)\notin f(K)$, so $f(x)\notin \operatorname{Rad}(N)$, contradiction. Therefore
+    \[
+        f^{-1}(\operatorname{Rad}(N))=\operatorname{Rad}(M),
+    \]
+    and applying $f$ gives the desired equality
+    \[
+        \operatorname{Rad}(N)=f(\operatorname{Rad}(M)).
+    \]
+\end{proof}
+
+\begin{lemma}
+    Let $M$ and $N$ be finitely generated $R$-modules, and let
+    \[
+        f:M\to N
+    \]
+    be an $R$-homomorphism. Then $f$ is an essential epimorphism if and only if the
+    induced morphism
+    \[
+        \overline{f}:M/\operatorname{Rad}(M)\to N/\operatorname{Rad}(N)
+    \]
+    is an essential epimorphism.
+\end{lemma}
+
+\begin{proof}
+    First assume that $f$ is an essential epimorphism. In particular,$f$ is surjective.
+    By the previous lemma,
+    \[
+        f(\operatorname{Rad}(M))\subseteq \operatorname{Rad}(N),
+    \]
+    so $\overline{f}$ is well defined and surjective. Let
+    \[
+        X/\operatorname{Rad}(M)\subseteq M/\operatorname{Rad}(M)
+    \]
+    be a submodule such that $\overline{f}(X/\operatorname{Rad}(M))=N/\operatorname{Rad}(N)$.
+    Then
+    \[
+        f(X)+\operatorname{Rad}(N)=N.
+    \]
+    Since $N/f(X)$ is a quotient of the finitely generated module $N$, Nakayama's lemma
+    gives $f(X)=N$. As $f$ is essential, we conclude that $X=M$. Hence $\overline{f}$ is
+    essential.
+
+    Conversely, assume that $\overline{f}$ is an essential epimorphism. Since $\overline{f}$ is surjective, we have
+    \[
+        f(M)+\operatorname{Rad}(N)=N.
+    \]
+    By Nakayama's lemma applied to the submodule $f(M)\subseteq N$, it follows that $f(M)=N$, so $f$ is surjective. Now let $X\leq M$ satisfy $f(X)=N$. Then
+    \[
+        \overline{f}\bigl((X+\operatorname{Rad}(M))/\operatorname{Rad}(M)\bigr)
+        =N/\operatorname{Rad}(N).
+    \]
+    Since $\overline{f}$ is essential, we obtain
+    \[
+        X+\operatorname{Rad}(M)=M.
+    \]
+    Again Nakayama's lemma yields $X=M$. Hence $f$ is an essential epimorphism.
+\end{proof}
+

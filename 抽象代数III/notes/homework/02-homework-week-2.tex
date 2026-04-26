@@ -1,0 +1,169 @@
+\section{Homework Week 2}
+
+\begin{exercise}
+    Let $R$ be a commutative ring, and suppose that $\varphi$ is an endomorphism of the free $R$-module $R^m$. Prove that if $\varphi$ is surjective, then $\varphi$ is injective. Consider that: if $\varphi$ is injective, is $\varphi$ surjective?
+\end{exercise}
+
+\begin{proof}
+    Let $\{e_1,\ldots,e_m\}$ be the standard basis of $R^m$, and let $A\in M_m(R)$ be the matrix of $\varphi$ with respect to this basis. Since $\varphi$ is surjective, for each $j$ there exists $v_j\in R^m$ with $\varphi(v_j)=e_j$. Write $v_j=\sum_{i=1}^m b_{ij}e_i$ and let $B=(b_{ij})\in M_m(R)$. Then $AB=I_m$, so
+    \[
+        \det(A)\det(B)=\det(AB)=1.
+    \]
+    Hence $\det(A)$ is a unit in $R$. It follows that $A$ is invertible (with $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$), so $\varphi$ is an isomorphism. In particular $\varphi$ is injective.
+
+    \medskip
+    \noindent\textbf{Counterexample for the converse.} The converse is false in general. Let $R = \mathbb{Z}$ and $m = 1$, so $R^m = \mathbb{Z}$. Define $\varphi\colon \mathbb{Z} \to \mathbb{Z}$ by $\varphi(n) = 2n$. Then $\varphi$ is injective but not surjective; for example, $1 \notin \operatorname{Im}\varphi$.
+\end{proof}
+
+\begin{exercise}
+    Let $\varphi: M \to N$ be a homomorphism of $R$-modules. Prove that:
+    \begin{enumerate}
+        \item $\varphi$ is a monomorphism if and only if for any $R$-module $T$ and any two $R$-module homomorphisms $\xi, \eta: T \to M$,$\varphi\xi = \varphi\eta$ implies $\xi = \eta$;
+        \item $\varphi$ is an epimorphism if and only if for any $R$-module $S$ and any two $R$-module homomorphisms $\rho, \theta: N \to S$,$\rho\varphi = \theta\varphi$ implies $\rho = \theta$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item ($\Rightarrow$) Suppose $\varphi$ is injective and $\varphi\xi=\varphi\eta$ for $\xi,\eta:T\to M$. Then for every $t\in T$,
+              \[
+                  \varphi(\xi(t))=\varphi(\eta(t)),
+              \]
+              so $\xi(t)-\eta(t)\in\ker\varphi=\{0\}$. Hence $\xi(t)=\eta(t)$ for all $t\in T$, and therefore $\xi=\eta$.
+
+              ($\Leftarrow$) We show $\ker\varphi=\{0\}$. Let $T=\ker\varphi$, let $\xi:T\hookrightarrow M$ be the inclusion, and let $\eta=0:T\to M$ be the zero map. Then $\varphi\xi(t)=\varphi(t)=0=\varphi\eta(t)$ for all $t\in T$, so $\varphi\xi=\varphi\eta$. By hypothesis $\xi=\eta$, which means $t=\xi(t)=\eta(t)=0$ for all $t\in T$. Hence $\ker\varphi=\{0\}$, so $\varphi$ is injective.
+
+        \item ($\Rightarrow$) Suppose $\varphi$ is surjective and $\rho\varphi=\theta\varphi$. For any $n\in N$, pick $m\in M$ with $\varphi(m)=n$. Then
+              \[
+                  \rho(n)=\rho(\varphi(m))=\theta(\varphi(m))=\theta(n),
+              \]
+              so $\rho=\theta$.
+
+              ($\Leftarrow$) We show $\varphi$ is surjective. Let $S=N/\operatorname{Im}\varphi$, let $\rho:N\to S$ be the canonical projection, and let $\theta=0:N\to S$ be the zero map. For any $m\in M$, we have
+              \[
+                  \rho(\varphi(m))=\overline{\varphi(m)}=\bar 0=\theta(\varphi(m)),
+              \]
+              so $\rho\varphi=\theta\varphi$. By hypothesis $\rho=\theta$, i.e.\ the projection $N\to N/\operatorname{Im}\varphi$ is the zero map. This means $N=\operatorname{Im}\varphi$, so $\varphi$ is surjective.
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    Let $M$ and $M_i\ (1 \le i \le n)$ be $R$-modules. Show that $M \simeq \bigoplus_{i=1}^{n} M_i$ if and only if for every $i \in \{1, \ldots, n\}$, there exists an $\varphi_i \in \operatorname{End}_R(M)$ such that $\operatorname{Im}\varphi_i \simeq M_i$,$\varphi_i\varphi_j = 0$ for $i \neq j$,$\varphi_i^2 = \varphi_i$, and $\varphi_1 + \varphi_2 + \cdots + \varphi_n = \operatorname{id}_M$.
+\end{exercise}
+
+\begin{proof}
+    ($\to$) Suppose $f:M\xrightarrow{\sim}\bigoplus_{i=1}^n M_i$. Let $\iota_i:M_i\hookrightarrow \bigoplus_{j=1}^n M_j$ be the canonical inclusion and $\pi_i:\bigoplus_{j=1}^n M_j\twoheadrightarrow M_i$ the canonical projection. Define
+    \[
+        \varphi_i = f^{-1}\circ\iota_i\circ\pi_i\circ f \in \operatorname{End}_R(M).
+    \]
+    Then:
+    \begin{itemize}
+        \item $\varphi_i^2 = f^{-1}\iota_i\pi_i f f^{-1}\iota_i\pi_i f = f^{-1}\iota_i(\pi_i\iota_i)\pi_i f = f^{-1}\iota_i\pi_i f = \varphi_i$, since $\pi_i\iota_i=\operatorname{id}_{M_i}$.
+        \item For $i\neq j$:$\varphi_i\varphi_j = f^{-1}\iota_i(\pi_i\iota_j)\pi_j f = 0$, since $\pi_i\iota_j=0$ when $i\neq j$.
+        \item $\sum_{i=1}^n \varphi_i = f^{-1}\left(\sum_{i=1}^n \iota_i\pi_i\right) f = f^{-1}\circ\operatorname{id}\circ f = \operatorname{id}_M$, since $\sum_i \iota_i\pi_i = \operatorname{id}_{\bigoplus M_j}$.
+        \item $\operatorname{Im}\varphi_i = f^{-1}\circ\iota_i\circ\pi_i\circ f(M) \simeq M_i$.
+    \end{itemize}
+
+    ($\Leftarrow$) Suppose such $\varphi_i$ exist. Define $g:M\to \bigoplus_{i=1}^n \operatorname{Im}\varphi_i$ by $g(x)=(\varphi_1(x),\ldots,\varphi_n(x))$.
+
+    \textit{Surjective}: for any $(y_1,\ldots,y_n)\in\bigoplus \operatorname{Im}\varphi_i$, let $x = y_1+\cdots+y_n \in M$. Then
+    \[
+        \varphi_j(x) = \sum_{i=1}^n \varphi_j(y_i) = \sum_{i=1}^n \varphi_j(\varphi_i(x_i)) = \varphi_j(\varphi_j(x_j)) = \varphi_j^2(x_j) = \varphi_j(x_j) = y_j,
+    \]
+    where we used $\varphi_j\varphi_i=0$ for $j\neq i$ and $\varphi_j^2=\varphi_j$. Hence $g(x)=(y_1,\ldots,y_n)$.
+
+    \textit{Injective}: if $g(x)=0$, then $\varphi_i(x)=0$ for all $i$, so $x=\operatorname{id}_M(x)=\sum_i\varphi_i(x)=0$.
+
+    Since $\operatorname{Im}\varphi_i\simeq M_i$, we conclude $M\simeq\bigoplus_{i=1}^n M_i$.
+\end{proof}
+
+\begin{exercise}\leavevmode
+    \begin{enumerate}
+        \item Prove $\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq \mathbb{Z}/(m,n)\mathbb{Z}$, where $m, n \in \mathbb{Z}$.
+        \item Let $A$ be an abelian group, prove $A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq A/nA$.
+        \item Let $A, B$ be two finitely generated abelian groups. What is $A \otimes_{\mathbb{Z}} B$?
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item We use the right-exact sequence $\mathbb{Z}\xrightarrow{\cdot\, n}\mathbb{Z}\to\mathbb{Z}/n\mathbb{Z}\to 0$. Tensoring with $\mathbb{Z}/m\mathbb{Z}$ over $\mathbb{Z}$ gives the right-exact sequence
+              \[
+                  \mathbb{Z}/m\mathbb{Z} \xrightarrow{\cdot\, n} \mathbb{Z}/m\mathbb{Z} \to \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
+              \]
+              Hence $\mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq (\mathbb{Z}/m\mathbb{Z})/n(\mathbb{Z}/m\mathbb{Z})$. Now $n(\mathbb{Z}/m\mathbb{Z})=(n\mathbb{Z}+m\mathbb{Z})/m\mathbb{Z}$. Since $n\mathbb{Z}+m\mathbb{Z}=(m,n)\mathbb{Z}$, we get
+              \[
+                  \mathbb{Z}/m\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq \frac{\mathbb{Z}/m\mathbb{Z}}{(m,n)\mathbb{Z}/m\mathbb{Z}} \simeq \mathbb{Z}/(m,n)\mathbb{Z}.
+              \]
+
+        \item Similarly, tensor the right-exact sequence $\mathbb{Z}\xrightarrow{\cdot\, n}\mathbb{Z}\to\mathbb{Z}/n\mathbb{Z}\to 0$ with $A$:
+              \[
+                  A \xrightarrow{\cdot\, n} A \to A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\to 0.
+              \]
+              By right-exactness,$A\otimes_\mathbb{Z}\mathbb{Z}/n\mathbb{Z}\simeq A/nA$.
+
+        \item By the fundamental theorem of finitely generated abelian groups,
+              \[
+                  A\simeq \mathbb{Z}^r\oplus\bigoplus_{i=1}^s \mathbb{Z}/d_i\mathbb{Z}, \qquad B\simeq \mathbb{Z}^t\oplus\bigoplus_{j=1}^u \mathbb{Z}/e_j\mathbb{Z}.
+              \]
+              Since tensor product distributes over direct sums, using (1), (2), and $\mathbb{Z}\otimes_\mathbb{Z}M\simeq M$, we get
+              \[
+                  A\otimes_\mathbb{Z}B \simeq \mathbb{Z}^{rt}\oplus \bigoplus_{j=1}^u(\mathbb{Z}/e_j\mathbb{Z})^r \oplus\bigoplus_{i=1}^s(\mathbb{Z}/d_i\mathbb{Z})^t \oplus \bigoplus_{i=1}^s\bigoplus_{j=1}^u\mathbb{Z}/(d_i,e_j)\mathbb{Z}.
+              \]
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    Let $\varphi: \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ be the unique monomorphism. Prove that
+    \[
+        \operatorname{id} \otimes \varphi: \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/4\mathbb{Z}
+    \]
+    is a zero homomorphism.
+\end{exercise}
+
+\begin{proof}
+    The unique monomorphism $\varphi:\mathbb{Z}/2\mathbb{Z}\to\mathbb{Z}/4\mathbb{Z}$ is given by $\varphi(\bar 1)=\bar 2$. By the previous exercise,$\mathbb{Z}/2\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/2\mathbb{Z}\simeq\mathbb{Z}/2\mathbb{Z}$ and $\mathbb{Z}/2\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/4\mathbb{Z}\simeq\mathbb{Z}/2\mathbb{Z}$.
+
+    It suffices to check on the generator $\bar 1\otimes\bar 1$ of $\mathbb{Z}/2\mathbb{Z}\otimes_\mathbb{Z}\mathbb{Z}/2\mathbb{Z}$:
+    \[
+        (\operatorname{id}\otimes\varphi)(\bar 1\otimes\bar 1) = \bar 1\otimes\varphi(\bar 1) = \bar 1\otimes\bar 2 = \bar 1\otimes 2\cdot\bar 1 = 2\cdot(\bar 1\otimes\bar 1) = (2\cdot\bar 1)\otimes\bar 1 = \bar 0\otimes\bar 1 = 0,
+    \]
+    where we used $2\cdot\bar 1 = \bar 0$ in $\mathbb{Z}/2\mathbb{Z}$. Since the generator maps to $0$, the map $\operatorname{id}\otimes\varphi$ is the zero homomorphism.
+
+    This also shows that tensoring a monomorphism need not yield a monomorphism, i.e.\ the functor $\mathbb{Z}/2\mathbb{Z}\otimes_\mathbb{Z}-$ is not left-exact.
+\end{proof}
+
+\begin{exercise}
+    Let $V_1$ and $V_2$ be vector spaces over a field $F$, with $\dim_F V_1=n$ and $\dim_F V_2=m$. Let $\{\epsilon_1, \ldots, \epsilon_n\}$ and $\{\eta_1, \ldots, \eta_m\}$ be bases of $V_1$ and $V_2$, respectively. Suppose that $\mathscr{A}\colon V_1 \to V_1$ and $\mathscr{B}\colon V_2 \to V_2$ are $F$-linear maps, represented by the matrices $A=(a_{ij})_{n\times n}$ and $B=(b_{ij})_{m\times m}$ with respect to these bases. Prove that
+    \[
+        \{\epsilon_i \otimes \eta_j \mid 1 \le i \le n,\, 1 \le j \le m\}
+    \]
+    is an $F$-basis of $V_1 \otimes_F V_2$. Determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis.
+\end{exercise}
+
+\begin{proof}
+    \textbf{Step 1.} The set $\{\epsilon_i\otimes\eta_j\}$ is a basis.
+
+    \textit{Spanning.} Every element of $V_1\otimes_F V_2$ is a finite sum of simple tensors $v\otimes w$. Writing $v=\sum_i a_i\epsilon_i$ and $w=\sum_j b_j\eta_j$, by bilinearity of the tensor product we get
+    \[
+        v\otimes w = \sum_{i,j} a_i b_j\,(\epsilon_i\otimes\eta_j).
+    \]
+    Hence $\{\epsilon_i\otimes\eta_j\}$ spans $V_1\otimes_F V_2$.
+
+    \textit{Linear independence.} Suppose $\sum_{i,j}c_{ij}(\epsilon_i\otimes\eta_j)=0$. For each pair $(p,q)$, let $f_p\in V_1^*$ and $g_q\in V_2^*$ be the dual basis functionals:$f_p(\epsilon_i)=\delta_{pi}$ and $g_q(\eta_j)=\delta_{qj}$. The bilinear map $(v,w)\mapsto f_p(v)g_q(w)$ from $V_1\times V_2$ to $F$ induces (by the universal property of the tensor product) an $F$-linear map $\Phi_{pq}:V_1\otimes_F V_2\to F$ with $\Phi_{pq}(\epsilon_i\otimes\eta_j)=\delta_{pi}\delta_{qj}$. Applying $\Phi_{pq}$ to the relation $\sum_{i,j}c_{ij}(\epsilon_i\otimes\eta_j)=0$ yields $c_{pq}=0$. Since $(p,q)$ was arbitrary, all $c_{ij}=0$.
+
+    Therefore $\{\epsilon_i\otimes\eta_j:1\le i\le n,\,1\le j\le m\}$ is an $F$-basis of $V_1\otimes_F V_2$, and $\dim_F(V_1\otimes_F V_2)=nm$.
+
+    \medskip
+    \textbf{Step 2: matrix of $\mathscr{A}\otimes\mathscr{B}$.}
+
+    Order the basis lexicographically:$\epsilon_1\otimes\eta_1,\,\epsilon_1\otimes\eta_2,\,\ldots,\,\epsilon_1\otimes\eta_m,\,\epsilon_2\otimes\eta_1,\,\ldots,\,\epsilon_n\otimes\eta_m$. Since $\mathscr{A}(\epsilon_i)=\sum_{k=1}^n a_{ki}\epsilon_k$ and $\mathscr{B}(\eta_j)=\sum_{l=1}^m b_{lj}\eta_l$, we have
+    \[
+        (\mathscr{A}\otimes\mathscr{B})(\epsilon_i\otimes\eta_j) = \mathscr{A}(\epsilon_i)\otimes\mathscr{B}(\eta_j) = \sum_{k=1}^n\sum_{l=1}^m a_{ki}b_{lj}\,(\epsilon_k\otimes\eta_l).
+    \]
+    The entry in row $(k,l)$ and column $(i,j)$ of the representing matrix is $a_{ki}b_{lj}$. Written as an $nm\times nm$ block matrix, this is the \textbf{Kronecker product}
+    \[
+        A\otimes B = \begin{pmatrix} a_{11}B & a_{12}B & \cdots & a_{1n}B \\ a_{21}B & a_{22}B & \cdots & a_{2n}B \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1}B & a_{n2}B & \cdots & a_{nn}B \end{pmatrix}.
+    \]
+\end{proof}
+

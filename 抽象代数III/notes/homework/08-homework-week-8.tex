@@ -1,0 +1,381 @@
+\section{Homework Week 8}
+
+\begin{exercise}
+    Let \(A\) be a finite-dimensional algebra over a field \(k\).
+    Suppose that \(V\) is a finitely generated \(A\)-module, and that a certain simple
+    \(A\)-module \(S\) occurs as a composition factor of \(V\) with multiplicity \(1\).
+    Suppose that there exist nonzero homomorphisms
+    \[
+    S \longrightarrow V
+    \qquad\text{and}\qquad
+    V \longrightarrow S.
+    \]
+    Prove that \(S\) is a direct summand of \(V\).
+    \end{exercise}
+    
+    \begin{proof}
+    Since \(A\) is finite-dimensional over \(k\) and \(V\) is finitely generated over \(A\),
+    the module \(V\) is finite-dimensional over \(k\). Hence \(V\) has finite length.
+    
+    Let
+    \[
+    \iota:S\longrightarrow V,
+    \qquad
+    \rho:V\longrightarrow S
+    \]
+    be nonzero \(A\)-homomorphisms. Since \(S\) is simple, \(\iota\) is injective and
+    \(\rho\) is surjective.
+    
+    We claim that
+    \[
+    \rho\circ \iota\neq 0.
+    \]
+    Suppose otherwise that \(\rho\circ\iota=0\). Then
+    \[
+    \iota(S)\subseteq \ker\rho.
+    \]
+    Thus \(S\) occurs as a composition factor of \(\ker\rho\). Since \(\rho\) is surjective,
+    we have a short exact sequence
+    \[
+    0\longrightarrow \ker\rho \longrightarrow V \longrightarrow S \longrightarrow 0.
+    \]
+    By additivity of composition multiplicities in short exact sequences,
+    \[
+    [V:S]=[\ker\rho:S]+[S:S]\geq 1+1=2,
+    \]
+    contradicting the assumption that \(S\) occurs in \(V\) with multiplicity \(1\).
+    Therefore
+    \[
+    \rho\circ\iota\neq 0.
+    \]
+    
+    By Schur's lemma, the nonzero endomorphism
+    \[
+    \rho\circ\iota:S\longrightarrow S
+    \]
+    is an isomorphism. Define
+    \[
+    \sigma=\iota\circ(\rho\circ\iota)^{-1}:S\longrightarrow V.
+    \]
+    Then
+    \[
+    \rho\circ\sigma
+    =
+    \rho\circ\iota\circ(\rho\circ\iota)^{-1}
+    =
+    \operatorname{id}_S.
+    \]
+    Hence \(\rho:V\to S\) splits. Therefore
+    \[
+    V=\ker\rho\oplus \sigma(S),
+    \]
+    and since \(\sigma(S)\cong S\), the simple module \(S\) is a direct summand of \(V\).
+    \end{proof}
+    
+    
+    \begin{exercise}
+    Suppose that \(U,V,W\) are modules over a finite-dimensional algebra \(A\) over a field,
+    and let
+    \[
+    p_W:P_W\longrightarrow W
+    \]
+    be a projective cover of \(W\). Assume that all modules involved are finite-dimensional.
+    
+    \begin{enumerate}
+        \item[(a)] Show that a homomorphism
+        \[
+        \alpha:U\longrightarrow W
+        \]
+        is an essential epimorphism if and only if there is a surjective homomorphism
+        \[
+        h:P_W\longrightarrow U
+        \]
+        such that the composite
+        \[
+        P_W \xrightarrow{\,h\,} U \xrightarrow{\,\alpha\,} W
+        \]
+        is a projective cover of \(W\). In this situation, show that
+        \[
+        h:P_W\longrightarrow U
+        \]
+        must be a projective cover of \(U\).
+    
+        \item[(b)] Prove the following ``extension and converse'' to Nakayama's lemma:
+        let \(V\) be any submodule of \(U\). Then the canonical epimorphism
+        \[
+        q:U\longrightarrow U/V
+        \]
+        is an essential epimorphism if and only if
+        \[
+        V\subseteq \operatorname{Rad}U.
+        \]
+    \end{enumerate}
+    \end{exercise}
+    
+    \begin{proof}
+    \textbf{(a)}
+    Recall that an epimorphism \(f:X\to Y\) is essential if whenever \(X_0\leq X\) satisfies
+    \(f(X_0)=Y\), one must have \(X_0=X\).
+    
+    First suppose that
+    \[
+    \alpha:U\longrightarrow W
+    \]
+    is an essential epimorphism. Since \(P_W\) is projective and \(\alpha\) is surjective,
+    the map \(p_W:P_W\to W\) lifts through \(\alpha\). Thus there exists an \(A\)-homomorphism
+    \[
+    h:P_W\longrightarrow U
+    \]
+    such that
+    \[
+    \alpha\circ h=p_W.
+    \]
+    Because \(p_W\) is surjective, we have
+    \[
+    \alpha(h(P_W))=W.
+    \]
+    Since \(\alpha\) is essential, this forces
+    \[
+    h(P_W)=U.
+    \]
+    Hence \(h\) is surjective. Moreover, the composite
+    \[
+    P_W \xrightarrow{\,h\,} U \xrightarrow{\,\alpha\,} W
+    \]
+    is precisely \(p_W\), hence is a projective cover of \(W\).
+    
+    Conversely, suppose that there exists a surjective homomorphism
+    \[
+    h:P_W\longrightarrow U
+    \]
+    such that
+    \[
+    \alpha\circ h:P_W\longrightarrow W
+    \]
+    is a projective cover of \(W\). In particular, \(\alpha\circ h\) is an essential epimorphism.
+    Since \(h\) is surjective, \(\alpha\) is also surjective.
+    
+    Let \(U_0\leq U\) be a submodule such that
+    \[
+    \alpha(U_0)=W.
+    \]
+    Then
+    \[
+    (\alpha\circ h)\bigl(h^{-1}(U_0)\bigr)=W.
+    \]
+    Since \(\alpha\circ h\) is essential, we must have
+    \[
+    h^{-1}(U_0)=P_W.
+    \]
+    Applying \(h\), and using the surjectivity of \(h\), we get
+    \[
+    U=h(P_W)\subseteq U_0.
+    \]
+    Hence \(U_0=U\). Therefore \(\alpha:U\to W\) is an essential epimorphism.
+    
+    Finally, we show that in this situation
+    \[
+    h:P_W\longrightarrow U
+    \]
+    is a projective cover of \(U\). We already know that \(P_W\) is projective and that \(h\)
+    is surjective. It remains to show that \(h\) is essential.
+    
+    Let \(X\leq P_W\) be a submodule such that
+    \[
+    h(X)=U.
+    \]
+    Then
+    \[
+    (\alpha\circ h)(X)=\alpha(U)=W.
+    \]
+    Since \(\alpha\circ h\) is essential, we obtain
+    \[
+    X=P_W.
+    \]
+    Thus \(h\) is an essential epimorphism. Therefore \(h:P_W\to U\) is a projective cover
+    of \(U\).
+    
+    \medskip
+    
+    \textbf{(b)}
+    Let
+    \[
+    q:U\longrightarrow U/V
+    \]
+    be the canonical epimorphism.
+    
+    First suppose that \(q\) is essential. We prove that
+    \[
+    V\subseteq \operatorname{Rad}U.
+    \]
+    If not, then there exists a maximal submodule \(M\) of \(U\) such that
+    \[
+    V\nsubseteq M.
+    \]
+    Since \(M\) is maximal and \(V\nsubseteq M\), we have
+    \[
+    M+V=U.
+    \]
+    Therefore
+    \[
+    q(M)=U/V.
+    \]
+    But \(M\neq U\), contradicting the essentiality of \(q\). Hence
+    \[
+    V\subseteq \operatorname{Rad}U.
+    \]
+    
+    Conversely, suppose that
+    \[
+    V\subseteq \operatorname{Rad}U.
+    \]
+    Let \(X\leq U\) be a submodule such that
+    \[
+    q(X)=U/V.
+    \]
+    This is equivalent to
+    \[
+    X+V=U.
+    \]
+    We show that \(X=U\). Suppose, for contradiction, that \(X\neq U\). Since \(U\) is
+    finite-dimensional, \(X\) is contained in some maximal submodule \(M\) of \(U\). Since
+    \[
+    V\subseteq \operatorname{Rad}U\subseteq M,
+    \]
+    we get
+    \[
+    U=X+V\subseteq M,
+    \]
+    which is impossible because \(M\neq U\). Therefore \(X=U\), and hence \(q\) is an
+    essential epimorphism.
+    
+    Thus
+    \[
+    U\longrightarrow U/V
+    \]
+    is an essential epimorphism if and only if
+    \[
+    V\subseteq \operatorname{Rad}U.
+    \]
+    \end{proof}
+    
+    
+    \begin{exercise}
+    Let \(v\) be a valuation of a field \(K\). Prove the following properties:
+    \begin{enumerate}
+        \item[(i)] \(v(\pm 1)=0\).
+        \item[(ii)] \(v(a)=v(-a)\).
+        \item[(iii)] \(v(a^{-1})=-v(a)\).
+        \item[(iv)] If \(v(b)<v(a)\), then
+        \[
+        v(a+b)=v(b).
+        \]
+    \end{enumerate}
+    \end{exercise}
+    
+    \begin{proof}
+    We use the defining properties of a valuation:
+    \[
+    v(xy)=v(x)+v(y),
+    \qquad
+    v(x+y)\geq \min\{v(x),v(y)\}.
+    \]
+    
+    \textbf{(i)}
+    Since \(1\cdot 1=1\), we have
+    \[
+    v(1)=v(1\cdot 1)=v(1)+v(1).
+    \]
+    Hence
+    \[
+    v(1)=0.
+    \]
+    Also,
+    \[
+    (-1)^2=1,
+    \]
+    so
+    \[
+    2v(-1)=v((-1)^2)=v(1)=0.
+    \]
+    Therefore
+    \[
+    v(-1)=0.
+    \]
+    Thus
+    \[
+    v(\pm 1)=0.
+    \]
+    
+    \textbf{(ii)}
+    For \(a\in K^\times\),
+    \[
+    -a=(-1)a.
+    \]
+    Therefore
+    \[
+    v(-a)=v((-1)a)=v(-1)+v(a)=v(a).
+    \]
+    
+    \textbf{(iii)}
+    For \(a\in K^\times\), we have
+    \[
+    aa^{-1}=1.
+    \]
+    Thus
+    \[
+    v(a)+v(a^{-1})=v(aa^{-1})=v(1)=0.
+    \]
+    Hence
+    \[
+    v(a^{-1})=-v(a).
+    \]
+    
+    \textbf{(iv)}
+    Assume that \(a,b\in K^\times\) and
+    \[
+    v(b)<v(a).
+    \]
+    First, \(a+b\neq 0\); otherwise \(a=-b\), and by part \textbf{(ii)} we would have
+    \[
+    v(a)=v(-b)=v(b),
+    \]
+    contradicting \(v(b)<v(a)\).
+    
+    By the valuation inequality,
+    \[
+    v(a+b)\geq \min\{v(a),v(b)\}=v(b).
+    \]
+    We now prove the reverse inequality. Since
+    \[
+    b=(a+b)-a,
+    \]
+    we have
+    \[
+    v(b)
+    =
+    v((a+b)-a)
+    \geq
+    \min\{v(a+b),v(-a)\}
+    =
+    \min\{v(a+b),v(a)\}.
+    \]
+    If \(v(a+b)>v(b)\), then both \(v(a+b)\) and \(v(a)\) are strictly larger than \(v(b)\),
+    so
+    \[
+    \min\{v(a+b),v(a)\}>v(b),
+    \]
+    contradicting the previous inequality. Therefore
+    \[
+    v(a+b)\leq v(b).
+    \]
+    Combining this with
+    \[
+    v(a+b)\geq v(b),
+    \]
+    we obtain
+    \[
+    v(a+b)=v(b).
+    \]
+    \end{proof}
+

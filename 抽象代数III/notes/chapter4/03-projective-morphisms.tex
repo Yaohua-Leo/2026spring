@@ -1,0 +1,347 @@
+\section{Projective Morphisms}
+
+\begin{lemma}
+    Let $R$ be a commutative ring with $1$, and let $X$,$Y$,$M$ be $R$-modules. Then
+    there is an $R$-module homomorphism
+    \[
+        \Theta_M^{X,Y}:\Hom_R(X,M)\otimes_R \Hom_R(M,Y)\longrightarrow \Hom_R(X,Y),
+        \qquad
+        \varphi\otimes \psi \longmapsto \psi\circ \varphi.
+    \]
+    Its image is precisely the set of all morphisms $f:X\to Y$ which factor through some
+    finite direct power $M^n$ of $M$.
+\end{lemma}
+
+\begin{proof}
+    First define
+    \[
+        b:\Hom_R(X,M)\times \Hom_R(M,Y)\longrightarrow \Hom_R(X,Y),
+        \qquad
+        b(\varphi,\psi)=\psi\circ\varphi.
+    \]
+    Since $R$ is commutative, composition is $R$-balanced in the sense that
+    \[
+        b(r\varphi,\psi)=\psi\circ(r\varphi)=r(\psi\circ\varphi)=b(\varphi,r\psi)
+    \]
+    for all $r\in R$,$\varphi\in\Hom_R(X,M)$, and $\psi\in\Hom_R(M,Y)$; moreover $b$ is additive in each variable. Hence $b$ induces a unique $R$-linear map
+    \[
+        \Theta_M^{X,Y}:\Hom_R(X,M)\otimes_R \Hom_R(M,Y)\to \Hom_R(X,Y)
+    \]
+    such that
+    \[
+        \Theta_M^{X,Y}(\varphi\otimes\psi)=\psi\circ\varphi.
+    \]
+
+    Now let
+    \[
+        f=\Theta_M^{X,Y}\Bigl(\sum_{i=1}^n \varphi_i\otimes\psi_i\Bigr)
+        =\sum_{i=1}^n \psi_i\circ\varphi_i.
+    \]
+    Define morphisms
+    \[
+        \alpha:X\to M^n,\qquad x\longmapsto (\varphi_1(x),\dots,\varphi_n(x)),
+    \]
+    and
+    \[
+        \beta:M^n\to Y,\qquad (m_1,\dots,m_n)\longmapsto \sum_{i=1}^n \psi_i(m_i).
+    \]
+    Then for every $x\in X$,
+    \[
+        (\beta\circ\alpha)(x)
+        =\beta\bigl(\varphi_1(x),\dots,\varphi_n(x)\bigr)
+        =\sum_{i=1}^n \psi_i(\varphi_i(x))
+        =f(x).
+    \]
+    Thus $f=\beta\circ\alpha$, so every element in the image of $\Theta_M^{X,Y}$ factors
+    through some finite direct power $M^n$.
+
+    Conversely, suppose that a morphism $f:X\to Y$ factors through $M^n$, say
+    \[
+        f:X\xrightarrow{\,u\,} M^n \xrightarrow{\,v\,} Y.
+    \]
+    Let $\pi_i:M^n\to M$ be the $i$ th projection and $\iota_i:M\to M^n$ the $i$ th inclusion.
+    Since
+    \[
+        \operatorname{id}_{M^n}=\sum_{i=1}^n \iota_i\circ\pi_i,
+    \]
+    we obtain
+    \[
+        f=v\circ u
+        =v\circ\operatorname{id}_{M^n}\circ u
+        =\sum_{i=1}^n v\circ\iota_i\circ\pi_i\circ u
+        =\sum_{i=1}^n (v\circ\iota_i)\circ(\pi_i\circ u).
+    \]
+    Therefore
+    \[
+        f
+        =\Theta_M^{X,Y}\Bigl(\sum_{i=1}^n (\pi_i\circ u)\otimes (v\circ\iota_i)\Bigr),
+    \]
+    so $f$ lies in the image of $\Theta_M^{X,Y}$.
+
+    Hence the image of $\Theta_M^{X,Y}$ is exactly the set of morphisms $X\to Y$ that
+    factor through some finite direct power $M^n$.
+\end{proof}
+
+\begin{definition}
+    Let $R$ be a commutative ring with $1$. For an $R$-module $X$, write
+    \[
+        X^*:=\Hom_R(X,R).
+    \]
+    For $R$-modules $X$ and $Y$, define
+    \[
+        \tau_{X,Y}:X^*\otimes_R Y\longrightarrow \Hom_R(X,Y),
+        \qquad
+        \varphi\otimes y \longmapsto \bigl(x\mapsto \varphi(x)y\bigr).
+    \]
+
+\end{definition}
+
+\begin{definition}
+    A morphism $f:X\to Y$ is called a \emph{projective morphism} if it factors through a
+    finitely generated projective module.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a commutative ring with $1$. A morphism $f:X\to Y$ is projective if and only if
+    \[
+        f\in\operatorname{Im}(\tau_{X,Y}).
+    \]
+\end{proposition}
+
+\begin{proof}
+    By the previous lemma with $M=R$, the image of $\tau_{X,Y}$ consists exactly of those
+    morphisms that factor through some finite free module $R^n$.
+
+    Since finite free modules are finitely generated projective, every morphism in $\operatorname{Im}(\tau_{X,Y})$ is projective.
+
+    Conversely, suppose $f:X\to Y$ factors through a finitely generated projective module $P$:
+    \[
+        X\xrightarrow{\,u\,} P \xrightarrow{\,v\,} Y.
+    \]
+    Choose $Q$ and $n$ such that
+    \[
+        P\oplus Q\cong R^n.
+    \]
+    Let $i:P\to R^n$ and $p:R^n\to P$ be the inclusion and projection corresponding to this
+    decomposition, so that $p\circ i=\operatorname{id}_P$. Then
+    \[
+        f=v\circ p\circ i\circ u,
+    \]
+    hence $f$ factors through $R^n$. Therefore $f\in\operatorname{Im}(\tau_{X,Y})$.
+\end{proof}
+
+\begin{definition}
+    For $R$-modules $X$ and $Y$, we write
+    \[
+        \Hom_R^{\operatorname{pr}}(X,Y)
+    \]
+    for the set of projective morphisms from $X$ to $Y$.
+\end{definition}
+
+\begin{lemma}
+    For any $R$-module $M$, the set
+    \[
+        \Hom_R^{\operatorname{pr}}(M,M)
+    \]
+    is a two-sided ideal of the ring $\operatorname{End}_R(M)$.
+\end{lemma}
+
+\begin{proof}
+    We first show that $\Hom_R^{\operatorname{pr}}(M,M)$ is an additive subgroup of $\operatorname{End}_R(M)$.
+
+    Let $f,g\in \Hom_R^{\operatorname{pr}}(M,M)$. Then there exist finitely generated
+    projective $R$-modules $P,Q$ and morphisms
+    \[
+        M \xrightarrow{\,u\,} P \xrightarrow{\,v\,} M,
+        \qquad
+        M \xrightarrow{\,u'\,} Q \xrightarrow{\,v'\,} M
+    \]
+    such that
+    \[
+        f=v\circ u,\qquad g=v'\circ u'.
+    \]
+    Consider the morphisms
+    \[
+        \alpha:M\to P\oplus Q,\qquad \alpha(x)=(u(x),u'(x)),
+    \]
+    and
+    \[
+        \beta:P\oplus Q\to M,\qquad \beta(p,q)=v(p)+v'(q).
+    \]
+    Then
+    \[
+        (f+g)(x)=v(u(x))+v'(u'(x))=\beta(\alpha(x))
+    \]
+    for all $x\in M$, so
+    \[
+        f+g=\beta\circ\alpha.
+    \]
+    Since $P\oplus Q$ is again a finitely generated projective $R$-module, it follows that $f+g\in \Hom_R^{\operatorname{pr}}(M,M)$.
+
+    Also, the zero endomorphism factors through the zero module, and if $f=v\circ u$, then
+    \[
+        -f=(-v)\circ u,
+    \]
+    so $\Hom_R^{\operatorname{pr}}(M,M)$ is an additive subgroup of $\operatorname{End}_R(M)$.
+
+    Now let $f\in \Hom_R^{\operatorname{pr}}(M,M)$ and let $a,b\in \operatorname{End}_R(M)$. Choose a
+    factorization
+    \[
+        M\xrightarrow{\,u\,} P \xrightarrow{\,v\,} M
+    \]
+    with $P$ finitely generated projective and $f=v\circ u$. Then
+    \[
+        a\circ f\circ b
+        =a\circ v\circ u\circ b
+        =(a\circ v)\circ (u\circ b),
+    \]
+    so $a\circ f\circ b$ still factors through the same finitely generated projective
+    module $P$. Hence
+    \[
+        a\circ f\circ b\in \Hom_R^{\operatorname{pr}}(M,M).
+    \]
+
+    Therefore $\Hom_R^{\operatorname{pr}}(M,M)$ is a two-sided ideal of $\operatorname{End}_R(M)$.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a commutative ring with $1$, and let $P$ be an $R$-module. The following
+    statements are equivalent.
+    \begin{enumerate}
+        \item $P$ is a finitely generated projective module.
+        \item
+              \[
+                  \Hom_R^{\operatorname{pr}}(P,P)=\operatorname{End}_R(P).
+              \]
+        \item For every $R$-module $X$, the morphism
+              \[
+                  \tau_{X,P}:X^*\otimes_R P\longrightarrow \Hom_R(X,P)
+              \]
+              is an isomorphism.
+        \item For every $R$-module $X$, the morphism
+              \[
+                  \tau_{P,X}:P^*\otimes_R X\longrightarrow \Hom_R(P,X)
+              \]
+              is an isomorphism.
+        \item The morphism
+              \[
+                  \tau_{P,P}:P^*\otimes_R P\longrightarrow \operatorname{End}_R(P)
+              \]
+              is an isomorphism.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1) $\Longrightarrow$(2).}
+    Since $P$ itself is finitely generated projective, the identity morphism
+    \[
+        \operatorname{id}_P:P\to P
+    \]
+    is projective. By the previous lemma,$\Hom_R^{\operatorname{pr}}(P,P)$ is a two-sided ideal
+    of $\operatorname{End}_R(P)$ containing $\operatorname{id}_P$, and therefore equals the whole
+    endomorphism ring.
+
+    \textbf{(3) $\Longrightarrow$(5)} and \textbf{(4) $\Longrightarrow$(5)} are immediate by
+    taking $X=P$.
+
+    \textbf{(2) $\Longrightarrow$(3).}
+    By (2),$\operatorname{id}_P$ is projective, so there exist $\varphi_1,\dots,\varphi_n\in P^*$ and $p_1,\dots,p_n\in P$ such that
+    \[
+        \operatorname{id}_P=\tau_{P,P}\Bigl(\sum_{i=1}^n \varphi_i\otimes p_i\Bigr).
+    \]
+    Equivalently,
+    \[
+        p=\sum_{i=1}^n \varphi_i(p)p_i
+        \qquad \text{for all } p\in P.
+    \]
+    For any $R$-module $X$, define
+    \[
+        \sigma_X:\Hom_R(X,P)\to X^*\otimes_R P,\qquad
+        \alpha\mapsto \sum_{i=1}^n (\varphi_i\circ \alpha)\otimes p_i.
+    \]
+    Then for $\alpha\in \Hom_R(X,P)$ and $x\in X$,
+    \[
+        \tau_{X,P}(\sigma_X(\alpha))(x)
+        =
+        \sum_{i=1}^n (\varphi_i\circ \alpha)(x)p_i
+        =
+        \sum_{i=1}^n \varphi_i(\alpha(x))p_i
+        =
+        \alpha(x),
+    \]
+    so $\tau_{X,P}\circ \sigma_X=\operatorname{id}$.
+
+    Conversely, let
+    \[
+        \xi=\sum_{j=1}^m \psi_j\otimes q_j\in X^*\otimes_R P.
+    \]
+    Then
+    \begin{align*}
+        \sigma_X(\tau_{X,P}(\xi))
+         & =\sum_{i=1}^n \Bigl(\varphi_i\circ \tau_{X,P}(\xi)\Bigr)\otimes p_i                           \\
+         & =\sum_{i=1}^n \left(x\mapsto \varphi_i\Bigl(\sum_{j=1}^m \psi_j(x)q_j\Bigr)\right)\otimes p_i \\
+         & =\sum_{i=1}^n \sum_{j=1}^m \bigl(\psi_j \varphi_i(q_j)\bigr)\otimes p_i                       \\
+         & =\sum_{j=1}^m \psi_j\otimes \Bigl(\sum_{i=1}^n \varphi_i(q_j)p_i\Bigr)                        \\
+         & =\sum_{j=1}^m \psi_j\otimes q_j                                                               \\
+         & =\xi.
+    \end{align*}
+    Therefore $\sigma_X$ is the inverse of $\tau_{X,P}$, and $\tau_{X,P}$ is an isomorphism.
+
+    \textbf{(2) $\Longrightarrow$(4).}
+    Using the same decomposition of $\operatorname{id}_P$, define for any $R$-module $X$\[
+        \rho_X:\Hom_R(P,X)\to P^*\otimes_R X,\qquad
+        \beta\mapsto \sum_{i=1}^n \varphi_i\otimes \beta(p_i).
+    \]
+    For $\beta\in \Hom_R(P,X)$ and $p\in P$,
+    \[
+        \tau_{P,X}(\rho_X(\beta))(p)
+        =
+        \sum_{i=1}^n \varphi_i(p)\beta(p_i)
+        =
+        \beta\Bigl(\sum_{i=1}^n \varphi_i(p)p_i\Bigr)
+        =
+        \beta(p),
+    \]
+    so $\tau_{P,X}\rho_X=\operatorname{id}$.
+    Conversely, for
+    \[
+        \eta=\sum_{j=1}^m \varphi'_j\otimes x_j\in P^*\otimes_R X,
+    \]
+    we have
+    \begin{align*}
+        \rho_X(\tau_{P,X}(\eta))
+         & =\sum_{i=1}^n \varphi_i\otimes \tau_{P,X}(\eta)(p_i)                       \\
+         & =\sum_{i=1}^n \varphi_i\otimes \Bigl(\sum_{j=1}^m \varphi'_j(p_i)x_j\Bigr) \\
+         & =\sum_{j=1}^m \Bigl(\sum_{i=1}^n \varphi'_j(p_i)\varphi_i\Bigr)\otimes x_j \\
+         & =\sum_{j=1}^m \varphi'_j\otimes x_j                                        \\
+         & =\eta,
+    \end{align*}
+    because
+    \[
+        \varphi'_j(p)=\varphi'_j\Bigl(\sum_{i=1}^n \varphi_i(p)p_i\Bigr)
+        =
+        \sum_{i=1}^n \varphi_i(p)\varphi'_j(p_i)
+    \]
+    for all $p\in P$. Hence $\tau_{P,X}$ is an isomorphism.
+
+    \textbf{(5) $\Longrightarrow$(1).}
+    Since $\tau_{P,P}$ is surjective, we can write
+    \[
+        \operatorname{id}_P=\tau_{P,P}\Bigl(\sum_{i=1}^n \varphi_i\otimes p_i\Bigr)
+    \]
+    for some $\varphi_i\in P^*$ and $p_i\in P$. Define
+    \[
+        \iota:P\to R^n,\qquad \iota(p)=(\varphi_1(p),\dots,\varphi_n(p)),
+    \]
+    and
+    \[
+        \pi:R^n\to P,\qquad \pi(a_1,\dots,a_n)=\sum_{i=1}^n a_i p_i.
+    \]
+    Then
+    \[
+        (\pi\circ \iota)(p)=\sum_{i=1}^n \varphi_i(p)p_i=p
+    \]
+    for all $p\in P$. Thus $\pi\circ \iota=\operatorname{id}_P$, so $P$ is a direct summand of
+    the finite free module $R^n$. Therefore $P$ is finitely generated and projective.
+\end{proof}
+

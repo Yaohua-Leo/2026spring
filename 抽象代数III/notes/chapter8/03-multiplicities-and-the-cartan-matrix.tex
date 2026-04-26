@@ -1,0 +1,490 @@
+\section{Multiplicities and the Cartan Matrix}
+
+\begin{definition}[Multiplicity of a simple module]
+    Let \(A\) be an Artinian ring, and let \(V\) be a finitely generated left \(A\)-module.
+    Then \(V\) has a composition series
+    \[
+        0=V_n \subset V_{n-1} \subset \cdots \subset V_1 \subset V_0=V,
+    \]
+    where each quotient
+    \[
+        V_{i-1}/V_i
+    \]
+    is a simple \(A\)-module.
+
+    For a simple \(A\)-module \(S\), the number of composition factors
+    \[
+        V_{i-1}/V_i
+    \]
+    which are isomorphic to \(S\) is called the \emph{multiplicity of \(S\) in \(V\)}.
+    We denote it by
+    \[
+        [V:S].
+    \]
+\end{definition}
+
+\begin{theorem}
+    Let \(A\) be an Artinian ring, and let \(f\in A\) be a primitive idempotent. Put
+    \[
+        J=J(A),\qquad \overline{A}=A/J,
+        \qquad e=f+J\in \overline{A}.
+    \]
+    Assume that \(e\) is a primitive idempotent in \(\overline{A}\). Then, for every finitely
+    generated left \(A\)-module \(V\), the multiplicity of the simple \(A\)-module
+    \(\overline{A}e\) in \(V\) is equal to the composition length of \(fV\) as a left
+    \(fAf\)-module. In other words,
+    \[
+        [V:\overline{A}e]=\ell_{fAf}(fV).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        V=V_0\supset V_1\supset \cdots \supset V_n=0
+    \]
+    be a composition series of \(V\). Applying \(f\) gives a descending chain of
+    left \(fAf\)-modules
+    \[
+        fV=fV_0\supseteq fV_1\supseteq \cdots \supseteq fV_n=0.
+    \]
+
+    For each \(i\), the quotient \(V_i/V_{i+1}\) is a simple \(A\)-module, hence it is also
+    a simple \(\overline{A}\)-module because \(J(A)\) annihilates every simple
+    \(A\)-module. We claim that
+    \[
+        V_i/V_{i+1}\cong \overline{A}e
+        \quad\Longleftrightarrow\quad
+        f(V_i/V_{i+1})\neq 0.
+    \]
+    Indeed, the action of \(f\) on a simple \(A\)-module is the same as the action of
+    \(e=f+J\). Hence, for a simple \(A\)-module \(S\),
+    \[
+        fS\neq 0
+        \quad\Longleftrightarrow\quad
+        eS\neq 0.
+    \]
+    Moreover,
+    \[
+        eS\cong \operatorname{Hom}_{\overline{A}}(\overline{A}e,S),
+    \]
+    and since \(\overline{A}e\) and \(S\) are simple \(\overline{A}\)-modules, this space is
+    nonzero if and only if
+    \[
+        S\cong \overline{A}e.
+    \]
+    Thus the claim follows.
+
+    Now for each \(i\), we have
+    \[
+        f(V_i/V_{i+1})
+        \cong
+        \frac{fV_i+V_{i+1}}{V_{i+1}}
+        \cong
+        \frac{fV_i}{fV_i\cap V_{i+1}}.
+    \]
+    Since \(f\) is idempotent, one has
+    \[
+        fV_i\cap V_{i+1}=fV_{i+1}.
+    \]
+    Indeed, if \(x\in fV_i\cap V_{i+1}\), then \(x=fv\) for some \(v\in V_i\), and since
+    \(x\in V_{i+1}\), we get
+    \[
+        x=fx\in fV_{i+1}.
+    \]
+    The reverse inclusion is clear. Therefore
+    \[
+        f(V_i/V_{i+1})
+        \cong
+        \frac{fV_i}{fV_{i+1}}.
+    \]
+
+    Hence every quotient
+    \[
+        fV_i/fV_{i+1}
+    \]
+    is either \(0\) or a simple \(fAf\)-module. Moreover, it is nonzero precisely when
+    \[
+        V_i/V_{i+1}\cong \overline{A}e.
+    \]
+    Therefore, after deleting the zero quotients from the chain
+    \[
+        fV=fV_0\supseteq fV_1\supseteq \cdots \supseteq fV_n=0,
+    \]
+    we obtain a composition series of \(fV\) as an \(fAf\)-module.
+
+    Consequently, the composition length of \(fV\) as an \(fAf\)-module is exactly the
+    number of composition factors of \(V\) isomorphic to \(\overline{A}e\). Hence
+    \[
+        \ell_{fAf}(fV)=[V:\overline{A}e].
+    \]
+\end{proof}
+
+\begin{definition}[Cartan invariant and Cartan matrix]
+    Let \(A\) be an Artinian ring, and let
+    \[
+        J=J(A), \qquad \overline{A}=A/J.
+    \]
+    Let
+    \[
+        1=e_1+\cdots+e_n
+    \]
+    be a primitive idempotent decomposition of \(1\) in \(\overline{A}\). Choose a lifting
+    \[
+        1=f_1+\cdots+f_n
+    \]
+    to a primitive idempotent decomposition of \(1\) in \(A\), so that
+    \[
+        e_i=f_i+J(A)
+        \qquad
+        \text{for all } 1\le i\le n.
+    \]
+
+    For \(1\le i,j\le n\), define
+    \[
+        c_{ij}:=\bigl[Af_j:\overline{A}e_i\bigr],
+    \]
+    that is, \(c_{ij}\) is the multiplicity of the simple \(A\)-module
+    \(\overline{A}e_i\) as a composition factor of the \(A\)-module \(Af_j\).
+
+    The integer \(c_{ij}\) is called the \emph{Cartan invariant} of \(A\). The matrix
+    \[
+        C_A=(c_{ij})_{1\le i,j\le n}
+    \]
+    is called the \emph{Cartan matrix} of \(A\).
+\end{definition}
+
+\begin{theorem}
+    Let \(A\) be an Artinian ring, and let
+    \[
+        J=J(A), \qquad \overline{A}=A/J.
+    \]
+    Let
+    \[
+        1=e_1+\cdots+e_n
+    \]
+    be a primitive idempotent decomposition in \(\overline{A}\), and let
+    \[
+        1=f_1+\cdots+f_n
+    \]
+    be a primitive idempotent decomposition in \(A\) such that
+    \[
+        e_i=f_i+J(A)
+        \qquad
+        \text{for all } 1\le i\le n.
+    \]
+    Let
+    \[
+        c_{ij}=\bigl[Af_j:\overline{A}e_i\bigr]
+    \]
+    be the Cartan invariant of \(A\). Then
+    \[
+        c_{ij}\neq 0
+        \quad\Longleftrightarrow\quad
+        f_iAf_j\neq 0.
+    \]
+\end{theorem}
+
+\begin{proof}
+    By the multiplicity theorem for primitive idempotents, for any finitely generated
+    \(A\)-module \(V\), the multiplicity of \(\overline{A}e_i\) in \(V\) is equal to the
+    composition length of \(f_iV\) as an \(f_iAf_i\)-module. That is,
+    \[
+        [V:\overline{A}e_i]
+        =
+        \ell_{f_iAf_i}(f_iV).
+    \]
+
+    Now take
+    \[
+        V=Af_j.
+    \]
+    Then
+    \[
+        f_iV=f_i(Af_j)=f_iAf_j.
+    \]
+    Therefore
+    \[
+        c_{ij}
+            =
+            [Af_j:\overline{A}e_i]
+        =
+        \ell_{f_iAf_i}(f_iAf_j).
+    \]
+
+    Since \(f_iAf_j\) is a finite length \(f_iAf_i\)-module, its composition length is nonzero
+    if and only if the module itself is nonzero. Hence
+    \[
+        c_{ij}\neq 0
+        \quad\Longleftrightarrow\quad
+        \ell_{f_iAf_i}(f_iAf_j)\neq 0
+        \quad\Longleftrightarrow\quad
+        f_iAf_j\neq 0.
+    \]
+    This proves the theorem.
+\end{proof}
+
+\begin{proposition}
+    Let \(A\) be a finite-dimensional \(k\)-algebra over a field \(k\). Let \(S\) be a
+    simple left \(A\)-module with projective cover
+    \[
+        P_S \twoheadrightarrow S,
+    \]
+    and let \(U\) be a finite-dimensional left \(A\)-module.
+
+    \begin{enumerate}
+        \item If \(T\) is a simple left \(A\)-module, then
+              \[
+                  \dim_k \operatorname{Hom}_A(P_S,T)
+                  =
+                  \begin{cases}
+                      \dim_k \operatorname{End}_A(S), & S\cong T,     \\
+                      0,                              & S\not\cong T.
+                  \end{cases}
+              \]
+
+        \item The multiplicity of \(S\) in \(U\) is given by
+              \[
+                  [U:S]
+                  =
+                  \frac{\dim_k \operatorname{Hom}_A(P_S,U)}
+                  {\dim_k \operatorname{End}_A(S)}.
+              \]
+
+        \item If \(e\in A\) is an idempotent, then
+              \[
+                  \dim_k \operatorname{Hom}_A(Ae,U)=\dim_k eU.
+              \]
+
+        \item Let \(e_S,e_T\in A\) be idempotents such that
+              \[
+                  P_S=Ae_S,
+                  \qquad
+                  P_T=Ae_T
+              \]
+              are projective covers of \(S\) and \(T\), respectively. If
+              \[
+                  c_{ST}:=[P_T:S]
+              \]
+              denotes the Cartan invariant, then
+              \[
+                  c_{ST}
+                  =
+                  \frac{\dim_k \operatorname{Hom}_A(P_S,P_T)}
+                  {\dim_k \operatorname{End}_A(S)}
+                  =
+                  \frac{\dim_k e_SAe_T}
+                  {\dim_k \operatorname{End}_A(S)}.
+              \]
+              In particular, if \(k\) is algebraically closed, then
+              \[
+                  c_{ST}
+                  =
+                  \dim_k \operatorname{Hom}_A(P_S,P_T)
+                  =
+                  \dim_k e_SAe_T.
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Since \(P_S\twoheadrightarrow S\) is a projective cover, we have
+    \[
+        P_S/\operatorname{Rad}(P_S)\cong S.
+    \]
+
+    \medskip
+
+    \noindent
+    \textbf{(1)}
+    Let \(T\) be a simple left \(A\)-module. Every homomorphism
+    \[
+        \varphi:P_S\to T
+    \]
+    vanishes on \(\operatorname{Rad}(P_S)\). Indeed, if \(\varphi=0\), this is clear. If
+    \(\varphi\neq 0\), then \(\varphi\) is surjective because \(T\) is simple, hence
+    \(\ker\varphi\) is a maximal submodule of \(P_S\). Therefore
+    \[
+        \operatorname{Rad}(P_S)\subseteq \ker\varphi.
+    \]
+    Thus every map \(P_S\to T\) factors uniquely through
+    \(P_S/\operatorname{Rad}(P_S)\). Hence
+    \[
+        \operatorname{Hom}_A(P_S,T)
+        \cong
+        \operatorname{Hom}_A(P_S/\operatorname{Rad}(P_S),T)
+        \cong
+        \operatorname{Hom}_A(S,T).
+    \]
+    By Schur's lemma,
+    \[
+        \operatorname{Hom}_A(S,T)=0
+    \]
+    if \(S\not\cong T\), while
+    \[
+        \operatorname{Hom}_A(S,S)=\operatorname{End}_A(S)
+    \]
+    if \(S\cong T\). Therefore
+    \[
+        \dim_k \operatorname{Hom}_A(P_S,T)
+        =
+        \begin{cases}
+            \dim_k \operatorname{End}_A(S), & S\cong T,     \\
+            0,                              & S\not\cong T.
+        \end{cases}
+    \]
+
+    \medskip
+
+    \noindent
+    \textbf{(2)}
+    Let
+    \[
+        U=U_0\supset U_1\supset \cdots \supset U_m=0
+    \]
+    be a composition series of \(U\). Since \(P_S\) is projective, the functor
+    \[
+        \operatorname{Hom}_A(P_S,-)
+    \]
+    is exact. Therefore, for each \(i\), applying \(\operatorname{Hom}_A(P_S,-)\) to
+    \[
+        0\longrightarrow U_{i+1}\longrightarrow U_i
+        \longrightarrow U_i/U_{i+1}\longrightarrow 0
+    \]
+    gives an exact sequence
+    \[
+        0\longrightarrow
+        \operatorname{Hom}_A(P_S,U_{i+1})
+        \longrightarrow
+        \operatorname{Hom}_A(P_S,U_i)
+        \longrightarrow
+        \operatorname{Hom}_A(P_S,U_i/U_{i+1})
+        \longrightarrow 0.
+    \]
+    Hence
+    \[
+        \dim_k\operatorname{Hom}_A(P_S,U)
+        =
+        \sum_{i=0}^{m-1}
+        \dim_k\operatorname{Hom}_A(P_S,U_i/U_{i+1}).
+    \]
+    By part \((1)\), each composition factor \(U_i/U_{i+1}\) contributes
+    \(\dim_k\operatorname{End}_A(S)\) precisely when
+    \[
+        U_i/U_{i+1}\cong S,
+    \]
+    and contributes \(0\) otherwise. Therefore
+    \[
+        \dim_k\operatorname{Hom}_A(P_S,U)
+        =
+        [U:S]\cdot \dim_k\operatorname{End}_A(S).
+    \]
+    Thus
+    \[
+        [U:S]
+        =
+        \frac{\dim_k \operatorname{Hom}_A(P_S,U)}
+        {\dim_k \operatorname{End}_A(S)}.
+    \]
+
+    \medskip
+
+    \noindent
+    \textbf{(3)}
+    Define a map
+    \[
+        \Phi:\operatorname{Hom}_A(Ae,U)\longrightarrow eU
+    \]
+    by
+    \[
+        \Phi(\varphi)=\varphi(e).
+    \]
+    Since
+    \[
+        \varphi(e)=\varphi(e^2)=e\varphi(e),
+    \]
+    we indeed have \(\varphi(e)\in eU\).
+
+    Conversely, for \(u\in eU\), define
+    \[
+        \psi_u:Ae\longrightarrow U
+    \]
+    by
+    \[
+        \psi_u(ae)=au.
+    \]
+    This is well-defined and \(A\)-linear. Moreover,
+    \[
+        \Phi(\psi_u)=\psi_u(e)=u.
+    \]
+    Also, for \(\varphi\in\operatorname{Hom}_A(Ae,U)\),
+    \[
+        \psi_{\varphi(e)}(ae)=a\varphi(e)=\varphi(ae).
+    \]
+    Hence \(\Phi\) is an isomorphism of \(k\)-vector spaces:
+    \[
+        \operatorname{Hom}_A(Ae,U)\cong eU.
+    \]
+    Therefore
+    \[
+        \dim_k \operatorname{Hom}_A(Ae,U)=\dim_k eU.
+    \]
+
+    \medskip
+
+    \noindent
+    \textbf{(4)}
+    By definition,
+    \[
+        c_{ST}=[P_T:S].
+    \]
+    Applying part \((2)\) to \(U=P_T\), we obtain
+    \[
+        c_{ST}
+        =
+        \frac{\dim_k\operatorname{Hom}_A(P_S,P_T)}
+        {\dim_k\operatorname{End}_A(S)}.
+    \]
+    Since \(P_S=Ae_S\) and \(P_T=Ae_T\), part \((3)\) gives
+    \[
+        \operatorname{Hom}_A(P_S,P_T)
+        =
+        \operatorname{Hom}_A(Ae_S,Ae_T)
+        \cong
+        e_SAe_T.
+    \]
+    Thus
+    \[
+        \dim_k\operatorname{Hom}_A(P_S,P_T)
+        =
+        \dim_k e_SAe_T.
+    \]
+    Therefore
+    \[
+        c_{ST}
+        =
+        \frac{\dim_k \operatorname{Hom}_A(P_S,P_T)}
+        {\dim_k \operatorname{End}_A(S)}
+        =
+        \frac{\dim_k e_SAe_T}
+        {\dim_k \operatorname{End}_A(S)}.
+    \]
+
+    If \(k\) is algebraically closed, then by Schur's lemma
+    \[
+        \operatorname{End}_A(S)\cong k,
+    \]
+    so
+    \[
+        \dim_k\operatorname{End}_A(S)=1.
+    \]
+    Hence
+    \[
+        c_{ST}
+        =
+        \dim_k \operatorname{Hom}_A(P_S,P_T)
+        =
+        \dim_k e_SAe_T.
+    \]
+\end{proof}
+

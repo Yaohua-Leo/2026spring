@@ -1,0 +1,238 @@
+\section{Socles and Projective Covers}
+
+\begin{definition}
+    The unique largest semisimple submodule of an $R$-module $U$ is called the
+    \emph{socle} of $U$ and is denoted by
+    \[
+        \operatorname{Soc}(U).
+    \]
+\end{definition}
+
+\begin{lemma}
+    Let
+    \[
+        U=S_1^{\oplus a_1}\oplus \cdots \oplus S_r^{\oplus a_r}
+    \]
+    be a semisimple $R$-module, where the $S_i$ are pairwise nonisomorphic simple
+    modules. Then, for each $i$, the summand $S_i^{\oplus a_i}$ is uniquely determined:
+    it is the unique largest submodule of $U$ that is isomorphic to a direct sum of
+    copies of $S_i$.
+\end{lemma}
+
+\begin{proof}
+    Let $T\leq U$ be a submodule which is a direct sum of copies of $S_i$. Write
+    \[
+        U_i:=S_i^{\oplus a_i}
+        \qquad\text{and}\qquad
+        U':=\bigoplus_{j\neq i} S_j^{\oplus a_j}.
+    \]
+    Consider the projection
+    \[
+        p:U=U_i\oplus U'\to U'.
+    \]
+    If $p(T)\neq 0$, then $p(T)$ contains a simple submodule isomorphic to a simple
+    submodule of $U'$, hence to some $S_j$ with $j\neq i$. This contradicts the fact that
+    every simple submodule of $T$ is isomorphic to $S_i$. Therefore $p(T)=0$, so $T\subseteq U_i$. Thus $U_i$ contains every submodule of $U$ which is a direct sum of
+    copies of $S_i$, and therefore $U_i$ is the unique largest such submodule.
+\end{proof}
+
+\begin{lemma}
+    Let $U$ be an $R$-module.
+    \begin{enumerate}
+        \item Suppose $M_1,\dots,M_n$ are maximal submodules of $U$. Then there exists a
+              subset $I\subseteq \{1,\dots,n\}$ such that
+              \[
+                  U/(M_1\cap \cdots \cap M_n)\cong \bigoplus_{i\in I} U/M_i.
+              \]
+              In particular,$U/(M_1\cap \cdots \cap M_n)$ is semisimple.
+        \item If $U$ is finitely generated and Artinian, then $U/\operatorname{Rad}(U)$ is
+              semisimple, and $\operatorname{Rad}(U)$ is the unique smallest submodule of $U$ with semisimple quotient.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textbf{(1).}
+    Choose a subset $I\subseteq \{1,\dots,n\}$ maximal with the property that the
+    diagonal map
+    \[
+        \delta_I:U\to \bigoplus_{i\in I} U/M_i,\qquad
+        u\mapsto (u+M_i)_{i\in I}
+    \]
+    is surjective. Then
+    \[
+        \ker(\delta_I)=\bigcap_{i\in I} M_i.
+    \]
+    If some $j\notin I$ satisfied
+    \[
+        \bigcap_{i\in I} M_i\nsubseteq M_j,
+    \]
+    then the induced map
+    \[
+        U\to \left(\bigoplus_{i\in I} U/M_i\right)\oplus U/M_j
+    \]
+    would still be surjective, contradicting the maximality of $I$. Hence
+    \[
+        \bigcap_{i\in I} M_i\subseteq M_j
+        \qquad\text{for all } j\notin I,
+    \]
+    and therefore
+    \[
+        \bigcap_{i\in I} M_i=M_1\cap \cdots \cap M_n.
+    \]
+    Applying the first isomorphism theorem gives the required decomposition.
+
+    \textbf{(2).}
+    Because $U$ is finitely generated and Artinian, every proper submodule is contained
+    in a maximal submodule, and the intersection of all maximal submodules stabilizes to a
+    finite intersection. Thus
+    \[
+        \operatorname{Rad}(U)=M_1\cap \cdots \cap M_n
+    \]
+    for suitable maximal submodules $M_i$. By part (1),
+    \[
+        U/\operatorname{Rad}(U)
+    \]
+    is semisimple.
+
+    Now let $V\leq U$ be such that $U/V$ is semisimple. Then every maximal submodule
+    containing $V$ is the kernel of a simple quotient of $U/V$, so $V$ is contained in
+    every maximal submodule of $U$. Hence
+    \[
+        V\subseteq \operatorname{Rad}(U).
+    \]
+    Therefore $\operatorname{Rad}(U)$ is the unique smallest submodule with semisimple
+    quotient.
+\end{proof}
+
+\begin{lemma}
+    For all $R$-modules $U$ and $V$,
+    \[
+        \operatorname{Rad}(U\oplus V)=\operatorname{Rad}(U)\oplus \operatorname{Rad}(V)
+        \qquad\text{and}\qquad
+        \operatorname{Soc}(U\oplus V)=\operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+\end{lemma}
+
+\begin{proof}
+    The projection maps show that every maximal submodule of $U\oplus V$ is of the form
+    \[
+        M\oplus V
+        \qquad\text{or}\qquad
+        U\oplus N,
+    \]
+    where $M$ and $N$ are maximal submodules of $U$ and $V$, respectively. Intersecting
+    all such maximal submodules yields
+    \[
+        \operatorname{Rad}(U\oplus V)=\operatorname{Rad}(U)\oplus \operatorname{Rad}(V).
+    \]
+
+    For the socle, every simple submodule of $U\oplus V$ projects nontrivially onto at
+    least one of the two factors; by simplicity it must embed into one factor. Therefore
+    every simple submodule of $U\oplus V$ lies in
+    \[
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V),
+    \]
+    and the reverse inclusion is clear.
+\end{proof}
+
+\begin{proposition}
+    Suppose that
+    \[
+        f:P\to U
+    \]
+    is a projective cover of an $R$-module $U$, and that
+    \[
+        g:Q\to U
+    \]
+    is an epimorphism with $Q$ projective.
+    \begin{enumerate}
+        \item There exists a decomposition
+              \[
+                  Q=Q_1\oplus Q_2
+              \]
+              such that, with respect to this decomposition,
+              \[
+                  g=(g_1,0),
+              \]
+              and there is an isomorphism $\gamma:Q_1\to P$ satisfying
+              \[
+                  f\circ \gamma=g_1.
+              \]
+        \item If a projective cover of $U$ exists, then it is unique up to
+              isomorphism.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Since $Q$ is projective and $f:P\to U$ is surjective, there exists
+    \[
+        \alpha:Q\to P
+    \]
+    such that
+    \[
+        f\circ \alpha=g.
+    \]
+    Since $P$ is projective and $g:Q\to U$ is surjective, there exists
+    \[
+        \beta:P\to Q
+    \]
+    such that
+    \[
+        g\circ \beta=f.
+    \]
+    Consequently,
+    \[
+        f=f\circ (\alpha\beta).
+    \]
+    Because $f$ is an essential epimorphism, the endomorphism $\alpha\beta$ of $P$ must
+    be surjective. Since $P$ is projective,$\alpha\beta$ splits. Let
+    \[
+        P=\ker(\alpha\beta)\oplus P'.
+    \]
+    If $\ker(\alpha\beta)\neq 0$, then $P'$ is a proper submodule of $P$ and
+    \[
+        f(P')=f(\alpha\beta(P'))=f(P)=U,
+    \]
+    contradicting the essentiality of $f$. Hence $\ker(\alpha\beta)=0$, so $\alpha\beta$ is an automorphism.
+
+    Replacing $\beta$ by $\beta\circ (\alpha\beta)^{-1}$, we may assume that
+    \[
+        \alpha\beta=\operatorname{id}_P.
+    \]
+    Thus $\beta$ is a split monomorphism and
+    \[
+        Q=\beta(P)\oplus \ker(\alpha).
+    \]
+    Set
+    \[
+        Q_1:=\beta(P),
+        \qquad
+        Q_2:=\ker(\alpha),
+    \]
+    and let $\gamma:Q_1\to P$ be the inverse of the isomorphism $\beta:P\to Q_1$.
+    Then
+    \[
+        g|_{Q_1}=f\circ \gamma.
+    \]
+    Moreover,
+    \[
+        g(Q_2)=f(\alpha(Q_2))=0,
+    \]
+    so $g=(g_1,0)$ with $g_1=f\circ \gamma$. This proves (1).
+
+    For (2), if
+    \[
+        f:P\to U
+        \qquad\text{and}\qquad
+        f':P'\to U
+    \]
+    are projective covers, apply (1) twice: once with $Q=P'$ and once with $Q=P$. We
+    deduce that $P$ is isomorphic to a direct summand of $P'$ and $P'$ is isomorphic to a
+    direct summand of $P$. The decompositions obtained in (1) force the complementary
+    summands to map trivially to $U$, hence to vanish by essentiality. Therefore
+    \[
+        P\cong P',
+    \]
+    so the projective cover is unique up to isomorphism.
+\end{proof}
+

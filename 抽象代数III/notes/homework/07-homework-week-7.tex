@@ -1,0 +1,752 @@
+\section{Homework Week 7}
+
+\begin{exercise}
+    Let \(V\) be an \(A\)-module.
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+        \item Show that an endomorphism
+              \[
+                  e \colon V \to V
+              \]
+              is a projection onto an \(A\)-submodule \(W\) if and only if \(e\) is idempotent as an element of \(\operatorname{End}_A(V)\).
+
+        \item Show that direct sum decompositions
+              \[
+                  V = W_1 \oplus W_2
+              \]
+              as \(A\)-modules are in bijection with idempotent decompositions
+              \[
+                  1 = e + f
+              \]
+              in \(\operatorname{End}_A(V)\).
+
+        \item Show that \(e \in \operatorname{End}_A(V)\) is primitive if and only if \(e(V)\) is indecomposable.
+
+        \item Suppose that \(V\) is semisimple with finitely many simple summands and let
+              \[
+                  e_1, e_2 \in \operatorname{End}_A(V)
+              \]
+              be idempotents. Show that
+              \[
+                  e_1(V) \cong e_2(V)
+              \]
+              as \(A\)-modules if and only if \(e_1\) and \(e_2\) are conjugate by an invertible element of \(\operatorname{End}_A(V)\).
+
+        \item Let \(k\) be a field. Show that all primitive idempotent elements in \(M_n(k)\) are conjugate under the action of the unit group \(GL_n(k)\), which consists of all the invertible matrices in \(M_n(k)\).
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+
+        \item Suppose first that \(e\colon V\to V\) is a projection onto an \(A\)-submodule \(W\).
+              Then \(e(V)=W\) and \(e(w)=w\) for every \(w\in W\). Hence for any \(v\in V\),
+              \[
+                  e^2(v)=e(e(v))=e(v),
+              \]
+              because \(e(v)\in W\). Thus \(e^2=e\), so \(e\) is idempotent.
+
+              Conversely, suppose that \(e^2=e\). Set
+              \[
+                  W:=e(V).
+              \]
+              Since \(e\) is \(A\)-linear, \(W\) is an \(A\)-submodule of \(V\). Moreover, if \(w=e(v)\in W\), then
+              \[
+                  e(w)=e^2(v)=e(v)=w.
+              \]
+              Thus \(e\) fixes \(W\) pointwise and maps \(V\) onto \(W\), so \(e\) is a projection onto \(W\).
+
+              In fact, one also has
+              \[
+                  V=e(V)\oplus \ker(e),
+              \]
+              since for any \(v\in V\),
+              \[
+                  v=e(v)+(v-e(v)),
+                  \qquad e(v-e(v))=e(v)-e^2(v)=0,
+              \]
+              and if \(x\in e(V)\cap \ker(e)\), then \(x=e(v)\) for some \(v\), hence
+              \[
+                  x=e(x)=0.
+              \]
+
+        \item Suppose first that
+              \[
+                  V=W_1\oplus W_2.
+              \]
+              Define
+              \[
+                  e(w_1+w_2)=w_1,
+                  \qquad
+                  f(w_1+w_2)=w_2
+                  \qquad (w_i\in W_i).
+              \]
+              Then \(e,f\in \operatorname{End}_A(V)\), and \(e\) and \(f\) are the projections onto
+              \(W_1\) and \(W_2\), respectively. By part (a), both are idempotent, and clearly
+              \[
+                  e+f=1.
+              \]
+              Also,
+              \[
+                  ef=fe=0.
+              \]
+
+              Conversely, suppose
+              \[
+                  1=e+f
+              \]
+              with \(e^2=e\) and \(f^2=f\). Then
+              \[
+                  e=e(e+f)=e+ef,
+              \]
+              so \(ef=0\). Similarly,
+              \[
+                  f=(e+f)f=ef+f,
+              \]
+              so again \(ef=0\), and likewise
+              \[
+                  fe=0.
+              \]
+              By part (a), \(e\) and \(f\) are projections onto \(e(V)\) and \(f(V)\), respectively.
+              For every \(v\in V\),
+              \[
+                  v=(e+f)(v)=e(v)+f(v),
+              \]
+              so
+              \[
+                  V=e(V)+f(V).
+              \]
+              If \(x\in e(V)\cap f(V)\), say \(x=e(v)=f(w)\), then
+              \[
+                  x=e(x)=ef(w)=0.
+              \]
+              Hence
+              \[
+                  V=e(V)\oplus f(V).
+              \]
+
+              These two constructions are inverse to each other, so direct sum decompositions
+              \[
+                  V=W_1\oplus W_2
+              \]
+              are in bijection with idempotent decompositions
+              \[
+                  1=e+f
+              \]
+              in \(\operatorname{End}_A(V)\).
+
+        \item We show that \(e\) is primitive if and only if \(e(V)\) is indecomposable.
+
+              First suppose that \(e\) is not primitive. Then there exist nonzero idempotents
+              \(e_1,e_2\in \operatorname{End}_A(V)\) such that
+              \[
+                  e=e_1+e_2,
+                  \qquad
+                  e_1e_2=e_2e_1=0.
+              \]
+              Since
+              \[
+                  ee_i=(e_1+e_2)e_i=e_i,
+              \]
+              we have \(e_i(V)\subseteq e(V)\) for \(i=1,2\). Moreover, for any \(v\in V\),
+              \[
+                  e(v)=e_1(v)+e_2(v),
+              \]
+              so
+              \[
+                  e(V)=e_1(V)+e_2(V).
+              \]
+              If \(x\in e_1(V)\cap e_2(V)\), say \(x=e_1(v)=e_2(w)\), then
+              \[
+                  x=e_1(x)=e_1e_2(w)=0.
+              \]
+              Hence
+              \[
+                  e(V)=e_1(V)\oplus e_2(V).
+              \]
+              Since \(e_1\) and \(e_2\) are nonzero, both \(e_1(V)\) and \(e_2(V)\) are nonzero.
+              Thus \(e(V)\) is decomposable.
+
+              Conversely, suppose that \(e(V)\) is decomposable:
+              \[
+                  e(V)=U_1\oplus U_2
+              \]
+              with \(U_1,U_2\neq 0\). Let
+              \[
+                  p_i\colon e(V)\to e(V)
+              \]
+              be the projection onto \(U_i\) (\(i=1,2\)). Define
+              \[
+                  \widetilde e_i:=p_i\circ e \in \operatorname{End}_A(V).
+              \]
+              Since \(e\) acts as the identity on \(e(V)\), we have \(e\circ p_i=p_i\), and therefore
+              \[
+                  \widetilde e_i^2=p_i e p_i e=p_i p_i e=\widetilde e_i.
+              \]
+              Also,
+              \[
+                  \widetilde e_1\widetilde e_2=p_1 e p_2 e=p_1p_2 e=0,
+                  \qquad
+                  \widetilde e_2\widetilde e_1=0,
+              \]
+              and
+              \[
+                  \widetilde e_1+\widetilde e_2=(p_1+p_2)e=e.
+              \]
+              Since \(U_i\neq 0\), each \(\widetilde e_i\neq 0\). Thus \(e\) is not primitive.
+
+              Hence \(e\) is primitive if and only if \(e(V)\) is indecomposable.
+
+        \item Assume first that \(e_2=u e_1 u^{-1}\) for some invertible
+              \(u\in \operatorname{End}_A(V)\). Then for any \(x=e_1(v)\in e_1(V)\),
+              \[
+                  u(x)=u e_1(v)=e_2u(v)\in e_2(V),
+              \]
+              so \(u(e_1(V))\subseteq e_2(V)\). Conversely, if \(y=e_2(w)\in e_2(V)\), then
+              \[
+                  y=u e_1 u^{-1}(w)\in u(e_1(V)).
+              \]
+              Hence
+              \[
+                  u(e_1(V))=e_2(V),
+              \]
+              and therefore the restriction
+              \[
+                  u|_{e_1(V)}\colon e_1(V)\to e_2(V)
+              \]
+              is an isomorphism of \(A\)-modules. So
+              \[
+                  e_1(V)\cong e_2(V).
+              \]
+
+              Conversely, suppose
+              \[
+                  e_1(V)\cong e_2(V).
+              \]
+              Since \(V\) is semisimple with finitely many simple summands, we may write
+              \[
+                  V\cong \bigoplus_{j=1}^r S_j^{\,n_j},
+              \]
+              where \(S_1,\dots,S_r\) are pairwise nonisomorphic simple \(A\)-modules.
+              Because \(e_i(V)\) is a submodule of a semisimple module, it is semisimple, so
+              \[
+                  e_i(V)\cong \bigoplus_{j=1}^r S_j^{\,m_j}
+              \]
+              for some integers \(m_j\), and the \(m_j\) are the same for \(i=1,2\) since
+              \(e_1(V)\cong e_2(V)\).
+
+              By part (a),
+              \[
+                  V=e_i(V)\oplus \ker(e_i).
+              \]
+              Therefore
+              \[
+                  \ker(e_i)\cong \bigoplus_{j=1}^r S_j^{\,n_j-m_j},
+              \]
+              and hence
+              \[
+                  \ker(e_1)\cong \ker(e_2).
+              \]
+
+              Choose isomorphisms
+              \[
+                  \alpha\colon e_1(V)\xrightarrow{\sim} e_2(V),
+                  \qquad
+                  \beta\colon \ker(e_1)\xrightarrow{\sim} \ker(e_2).
+              \]
+              Using the decompositions
+              \[
+                  V=e_1(V)\oplus \ker(e_1)
+                  \qquad\text{and}\qquad
+                  V=e_2(V)\oplus \ker(e_2),
+              \]
+              define
+              \[
+                  u\colon V\to V,
+                  \qquad
+                  u(x+y)=\alpha(x)+\beta(y)
+                  \quad
+                  \bigl(x\in e_1(V),\ y\in \ker(e_1)\bigr).
+              \]
+              Then \(u\) is an invertible \(A\)-endomorphism of \(V\). For \(x\in e_1(V)\) and
+              \(y\in \ker(e_1)\),
+              \[
+                  ue_1(x+y)=u(x)=\alpha(x),
+              \]
+              while
+              \[
+                  e_2u(x+y)=e_2\bigl(\alpha(x)+\beta(y)\bigr)=\alpha(x),
+              \]
+              because \(e_2\) is the identity on \(e_2(V)\) and zero on \(\ker(e_2)\).
+              Hence
+              \[
+                  ue_1=e_2u,
+              \]
+              so
+              \[
+                  e_2=ue_1u^{-1}.
+              \]
+              Thus \(e_1\) and \(e_2\) are conjugate by an invertible element of
+              \(\operatorname{End}_A(V)\).
+
+        \item Let \(V=k^n\). Then
+              \[
+                  M_n(k)\cong \operatorname{End}_k(V).
+              \]
+              Let \(e\in M_n(k)\) be a primitive idempotent. By part (c), \(e(V)\) is indecomposable
+              as a \(k\)-vector space. But a nonzero \(k\)-vector space is indecomposable if and only if
+              it has dimension \(1\): indeed, if \(\dim_k W\ge 2\), then any nonzero proper subspace has
+              a complement, so \(W\) is decomposable.
+
+              Therefore
+              \[
+                  \dim_k e(V)=1.
+              \]
+              Since \(e\) is idempotent, part (a) gives
+              \[
+                  V=e(V)\oplus \ker(e).
+              \]
+              Choose a basis \(v_1,\dots,v_n\) of \(V\) such that \(v_1\) spans \(e(V)\) and
+              \(v_2,\dots,v_n\) is a basis of \(\ker(e)\). Then
+              \[
+                  e(v_1)=v_1,
+                  \qquad
+                  e(v_i)=0 \quad (i\ge 2).
+              \]
+              Hence the matrix of \(e\) with respect to this basis is
+              \[
+                  E_{11}=
+                  \begin{pmatrix}
+                      1      & 0      & \cdots & 0      \\
+                      0      & 0      & \cdots & 0      \\
+                      \vdots & \vdots & \ddots & \vdots \\
+                      0      & 0      & \cdots & 0
+                  \end{pmatrix}.
+              \]
+              Therefore \(e\) is conjugate to \(E_{11}\) by some element of \(GL_n(k)\). It follows that
+              any two primitive idempotents in \(M_n(k)\) are conjugate to each other.
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    Prove: No idempotent \(e\) of \(A\) is contained in \(J(A)\). [Hint: \(e(1-e)=0\).]
+\end{exercise}
+
+\begin{proof}
+    Assume that \(e\in J(A)\) and that \(e\) is idempotent, so
+    \[
+        e^2=e.
+    \]
+    Since \(e\in J(A)\), a standard characterization of the Jacobson radical implies that
+    \[
+        1-e
+    \]
+    is a unit in \(A\).
+
+    On the other hand,
+    \[
+        e(1-e)=e-e^2=0.
+    \]
+    Multiplying this equality on the right by \((1-e)^{-1}\), we obtain
+    \[
+        e=0.
+    \]
+
+    Therefore any idempotent contained in \(J(A)\) must be zero. In particular, no nonzero idempotent of \(A\) lies in \(J(A)\).
+\end{proof}
+
+\begin{exercise}
+    Prove: Let \(A\) be an Artinian ring with Artinian center \(Z(A)\). Then
+    \[
+        J(Z(A)) = J(A) \cap Z(A).
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        B:=Z(A).
+    \]
+    We prove the two inclusions separately.
+
+    First, we show that
+    \[
+        J(B)\subseteq J(A)\cap B.
+    \]
+    Take \(z\in J(B)\). Since \(B\) is Artinian, its Jacobson radical is nilpotent, so there exists
+    \(m\ge 1\) such that
+    \[
+        J(B)^m=0.
+    \]
+    In particular,
+    \[
+        z^m=0.
+    \]
+    Now let \(x\in A\). Because \(z\in Z(A)\), we have \(xz=zx\), hence
+    \[
+        (xz)^m=x^m z^m=0.
+    \]
+    So \(xz\) is nilpotent, and therefore
+    \[
+        1-xz
+    \]
+    is invertible in \(A\), with inverse
+    \[
+        1+xz+\cdots +(xz)^{m-1}.
+    \]
+    By the standard characterization of the Jacobson radical, this implies
+    \[
+        z\in J(A).
+    \]
+    Since also \(z\in B\), we get
+    \[
+        z\in J(A)\cap B.
+    \]
+    Thus
+    \[
+        J(B)\subseteq J(A)\cap B.
+    \]
+
+    Next, we show that
+    \[
+        J(A)\cap B\subseteq J(B).
+    \]
+    Take \(z\in J(A)\cap B\). Since \(A\) is Artinian, \(J(A)\) is nilpotent, so there exists
+    \(n\ge 1\) such that
+    \[
+        J(A)^n=0.
+    \]
+    Hence
+    \[
+        z^n=0.
+    \]
+    Now let \(c\in B\). Since \(B\) is commutative, we have
+    \[
+        (cz)^n=c^n z^n=0.
+    \]
+    Therefore \(cz\) is nilpotent in \(B\), and so
+    \[
+        1-cz
+    \]
+    is invertible in \(B\), with inverse
+    \[
+        1+cz+\cdots +(cz)^{n-1}.
+    \]
+    Again by the standard characterization of the Jacobson radical, this shows that
+    \[
+        z\in J(B).
+    \]
+    Hence
+    \[
+        J(A)\cap B\subseteq J(B).
+    \]
+
+    Combining the two inclusions, we conclude that
+    \[
+        J(Z(A))=J(B)=J(A)\cap B.
+    \]
+\end{proof}
+
+\begin{exercise}
+    Prove: Let
+    \[
+        A = A_1 \oplus \cdots \oplus A_n
+    \]
+    be a direct sum of \(2\)-sided ideals. Then
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\roman{enumi})}
+        \item
+              \[
+                  Z(A) = Z(A_1) \oplus Z(A_2) \oplus \cdots \oplus Z(A_n).
+              \]
+        \item
+              \[
+                  J(A) = J(A_1) \oplus J(A_2) \oplus \cdots \oplus J(A_n).
+              \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    For \(i\neq j\), since \(A_i\) and \(A_j\) are two-sided ideals and the sum is direct,
+    \[
+        A_iA_j\subseteq A_i\cap A_j=0.
+    \]
+    Write
+    \[
+        1_A=e_1+\cdots+e_n,\qquad e_i\in A_i.
+    \]
+    Then \(e_i\) is the identity element of \(A_i\). Indeed, if \(a_i\in A_i\), then
+    all mixed products vanish, so
+    \[
+        a_i=1_Aa_i=e_i a_i,\qquad
+        a_i=a_i1_A=a_i e_i.
+    \]
+    Thus each \(A_i\) is a unital ring, with identity \(e_i\). Moreover multiplication in
+    \(A\) is coordinatewise with respect to the decomposition
+    \[
+        A=A_1\oplus\cdots\oplus A_n.
+    \]
+    Hence
+    \[
+        \Phi\colon A\longrightarrow A_1\times\cdots\times A_n,
+        \qquad
+        a_1+\cdots+a_n\longmapsto (a_1,\dots,a_n)
+    \]
+    is an isomorphism of rings. Since \(n\) is finite, we identify
+    \[
+        A \cong A_1\times\cdots\times A_n.
+    \]
+
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\roman{enumi})}
+
+        \item First we prove
+              \[
+                  Z(A)\subseteq Z(A_1)\oplus\cdots\oplus Z(A_n).
+              \]
+              Let \(z\in Z(A)\), and write
+              \[
+                  z=z_1+\cdots+z_n,\qquad z_i\in A_i.
+              \]
+              Fix \(i\), and let \(x_i\in A_i\). Since \(z\) is central in \(A\),
+              \[
+                  zx_i=x_i z.
+              \]
+              But all mixed products vanish, so
+              \[
+                  zx_i=z_i x_i,\qquad x_i z=x_i z_i.
+              \]
+              Hence \(z_i x_i=x_i z_i\) for every \(x_i\in A_i\), and therefore
+              \[
+                  z_i\in Z(A_i).
+              \]
+              Since this holds for every \(i\), we get
+              \[
+                  z\in Z(A_1)\oplus\cdots\oplus Z(A_n).
+              \]
+
+              Conversely, suppose
+              \[
+                  z=z_1+\cdots+z_n,\qquad z_i\in Z(A_i).
+              \]
+              Let
+              \[
+                  a=a_1+\cdots+a_n,\qquad a_i\in A_i.
+              \]
+              Again using \(A_iA_j=0\) for \(i\neq j\), we have
+              \[
+                  za=\sum_{i=1}^n z_i a_i,
+                  \qquad
+                  az=\sum_{i=1}^n a_i z_i.
+              \]
+              Since \(z_i\in Z(A_i)\), each \(z_i a_i=a_i z_i\). Hence \(za=az\), so
+              \(z\in Z(A)\). Therefore
+              \[
+                  Z(A)=Z(A_1)\oplus\cdots\oplus Z(A_n).
+              \]
+
+        \item First we prove
+              \[
+                  J(A_1)\oplus\cdots\oplus J(A_n)\subseteq J(A).
+              \]
+              Let
+              \[
+                  x=x_1+\cdots+x_n,\qquad x_i\in J(A_i).
+              \]
+              Take any
+              \[
+                  a=a_1+\cdots+a_n\in A,\qquad a_i\in A_i.
+              \]
+              Since \(J(A_i)\) is an ideal of \(A_i\), we have \(a_i x_i\in J(A_i)\). Hence
+              \(e_i-a_i x_i\) is invertible in \(A_i\). Choose \(u_i\in A_i\) such that
+              \[
+                  u_i(e_i-a_i x_i)=e_i.
+              \]
+              Put \(u=u_1+\cdots+u_n\). Since multiplication is coordinatewise,
+              \[
+                  u(1_A-ax)
+                  =
+                  \sum_{i=1}^n u_i(e_i-a_i x_i)
+                  =
+                  \sum_{i=1}^n e_i
+                  =
+                  1_A.
+              \]
+              Therefore \(1_A-ax\) has a left inverse for every \(a\in A\). By the Jacobson
+              radical criterion,
+              \[
+                  x\in J(A).
+              \]
+              Thus
+              \[
+                  J(A_1)\oplus\cdots\oplus J(A_n)\subseteq J(A).
+              \]
+
+              Conversely, we prove
+              \[
+                  J(A)\subseteq J(A_1)\oplus\cdots\oplus J(A_n).
+              \]
+              Let
+              \[
+                  x=x_1+\cdots+x_n\in J(A),\qquad x_i\in A_i.
+              \]
+              Fix \(i\), and let \(a_i\in A_i\). Since \(x\in J(A)\), the element
+              \[
+                  1_A-a_i x=1_A-a_i x_i
+              \]
+              has a left inverse in \(A\). Thus there exists \(v=v_1+\cdots+v_n\in A\), with
+              \(v_j\in A_j\), such that
+              \[
+                  v(1_A-a_i x_i)=1_A.
+              \]
+              Taking the \(A_i\)-component of this equality gives
+              \[
+                  v_i(e_i-a_i x_i)=e_i.
+              \]
+              Hence \(e_i-a_i x_i\) has a left inverse in \(A_i\) for every \(a_i\in A_i\). By the
+              Jacobson radical criterion applied inside \(A_i\),
+              \[
+                  x_i\in J(A_i).
+              \]
+              Since \(i\) was arbitrary,
+              \[
+                  x\in J(A_1)\oplus\cdots\oplus J(A_n).
+              \]
+              Combining the two inclusions, we conclude that
+              \[
+                  J(A)=J(A_1)\oplus\cdots\oplus J(A_n).
+              \]
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    Let
+    \[
+        \phi \colon U \to V
+    \]
+    be a homomorphism of \(A\)-modules. Show that
+    \[
+        \phi(\operatorname{Soc} U) \subseteq \operatorname{Soc} V,
+    \]
+    and that if \(\phi\) is an isomorphism then \(\phi\) restricts to an isomorphism
+    \[
+        \operatorname{Soc} U \to \operatorname{Soc} V.
+    \]
+\end{exercise}
+
+\begin{proof}
+    Recall that
+    \[
+        \operatorname{Soc}(U)=\sum \{\,S\leq U \mid S \text{ is a simple } A\text{-submodule}\,\}.
+    \]
+
+    We first show that
+    \[
+        \phi(\operatorname{Soc} U)\subseteq \operatorname{Soc} V.
+    \]
+    Let \(S\leq U\) be a simple submodule. Then \(\phi(S)\) is a submodule of \(V\), and since
+    \(S\) is simple, the restriction
+    \[
+        \phi|_S \colon S\to \phi(S)
+    \]
+    is either the zero map or an isomorphism. Hence \(\phi(S)\) is either \(0\) or a simple
+    submodule of \(V\). In either case,
+    \[
+        \phi(S)\subseteq \operatorname{Soc} V.
+    \]
+    Since \(\operatorname{Soc}(U)\) is the sum of all simple submodules \(S\le U\), we get
+    \[
+        \phi(\operatorname{Soc} U)
+        =
+        \sum_{S\text{ simple }\le U}\phi(S)
+        \subseteq \operatorname{Soc} V.
+    \]
+
+    Now assume that \(\phi\) is an isomorphism. Then \(\phi^{-1}\colon V\to U\) is also an
+    \(A\)-module homomorphism. Applying the first part to \(\phi^{-1}\), we obtain
+    \[
+        \phi^{-1}(\operatorname{Soc} V)\subseteq \operatorname{Soc} U.
+    \]
+    Applying \(\phi\) to both sides gives
+    \[
+        \operatorname{Soc} V \subseteq \phi(\operatorname{Soc} U).
+    \]
+    Together with the already proved inclusion
+    \[
+        \phi(\operatorname{Soc} U)\subseteq \operatorname{Soc} V,
+    \]
+    we conclude that
+    \[
+        \phi(\operatorname{Soc} U)=\operatorname{Soc} V.
+    \]
+
+    Therefore the restriction
+    \[
+        \phi|_{\operatorname{Soc} U}\colon \operatorname{Soc} U\to \operatorname{Soc} V
+    \]
+    is surjective. It is also injective because \(\phi\) itself is injective. Hence
+    \[
+        \phi|_{\operatorname{Soc} U}\colon \operatorname{Soc} U \xrightarrow{\sim} \operatorname{Soc} V
+    \]
+    is an isomorphism of \(A\)-modules.
+\end{proof}
+
+\begin{exercise}
+    If
+    \[
+        \varphi \colon A \to A'
+    \]
+    is an epimorphism of rings, then
+    \[
+        \varphi(J(A)) \subseteq J(A').
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let \(a\in J(A)\). We show that \(\varphi(a)\in J(A')\).
+
+    We use the standard characterization of the Jacobson radical:
+    \[
+        x\in J(R)
+        \quad\Longleftrightarrow\quad
+        \text{for every } r\in R,\ \ 1-rx \text{ has a left inverse in } R.
+    \]
+
+    So let \(y'\in A'\). Since \(\varphi\colon A\to A'\) is surjective, there exists \(y\in A\)
+    such that
+    \[
+        \varphi(y)=y'.
+    \]
+    Because \(a\in J(A)\), the element
+    \[
+        1-ya
+    \]
+    has a left inverse in \(A\). Thus there exists \(b\in A\) such that
+    \[
+        b(1-ya)=1.
+    \]
+    Apply \(\varphi\) to this equality. Since \(\varphi\) is a ring homomorphism, we get
+    \[
+        \varphi(b)\,\varphi(1-ya)=\varphi(1)=1,
+    \]
+    that is,
+    \[
+        \varphi(b)\bigl(1-\varphi(y)\varphi(a)\bigr)=1.
+    \]
+    Using \(\varphi(y)=y'\), this becomes
+    \[
+        \varphi(b)(1-y'\varphi(a))=1.
+    \]
+    Hence \(1-y'\varphi(a)\) has a left inverse in \(A'\).
+
+    Since \(y'\in A'\) was arbitrary, the above characterization implies that
+    \[
+        \varphi(a)\in J(A').
+    \]
+    Therefore
+    \[
+        \varphi(J(A))\subseteq J(A').
+    \]
+\end{proof}
+

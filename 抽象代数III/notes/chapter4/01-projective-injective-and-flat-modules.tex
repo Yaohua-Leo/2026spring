@@ -1,0 +1,307 @@
+\section{Projective, Injective and Flat Modules}
+
+\begin{definition}
+    Let $R$ be a ring.
+    \begin{itemize}
+        \item A left $R$-module $P$ is called \emph{projective} if the functor
+              \[
+                  \Hom_R(P,-): R-\mathrm{Mod}\longrightarrow \mathbf{Ab}
+              \]
+              is exact.
+        \item A left $R$-module $I$ is called \emph{injective} if the contravariant functor
+              \[
+                  \Hom_R(-,I): R-\mathrm{Mod}\longrightarrow \mathbf{Ab}
+              \]
+              is exact.
+        \item A left $R$-module $F$ is called \emph{flat} if the functor
+              \[
+                  -\otimes_R F:\mathrm{Mod}\text{-}R\longrightarrow \mathbf{Ab}
+              \]
+              is exact.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    Let ${}_R P$ be a left $R$-module. The following statements are equivalent.
+    \begin{enumerate}
+        \item Whenever we are given a commutative diagram
+              \begin{center}
+                  \begin{tikzcd}
+                      & P \arrow[d, "\gamma"] \arrow[ld, dashed, "\widetilde{\gamma}"'] &   \\
+                      M \arrow[r, two heads, "g"'] & N \arrow[r]                         & 0
+                  \end{tikzcd}
+              \end{center}
+              with $g$ an epimorphism, there exists an $R$-homomorphism
+              \[
+                  \widetilde{\gamma}:P\to M
+              \]
+              such that $g\circ \widetilde{\gamma}=\gamma$.
+        \item For every epimorphism $f:M\to N$ of left $R$-modules, the induced map
+              \[
+                  \Hom_R(P,f):\Hom_R(P,M)\longrightarrow \Hom_R(P,N)
+              \]
+              is surjective.
+        \item For every ring $S$ and every right $S$-module structure on $P$ making ${}_R P_S$ an $R$-$S$-bimodule, the functor
+              \[
+                  \Hom_R(P,-): R - \mathrm{Mod}\longrightarrow S-\mathrm{Mod}\
+              \]
+              is exact.
+        \item For every short exact sequence
+              \[
+                  0\longrightarrow M' \xrightarrow{\,u\,} M \xrightarrow{\,v\,} M'' \longrightarrow 0
+              \]
+              of left $R$-modules, the sequence
+              \[
+                  0\longrightarrow \Hom_R(P,M')
+                  \xrightarrow{\,\Hom_R(P,u)\,}
+                  \Hom_R(P,M)
+                  \xrightarrow{\,\Hom_R(P,v)\,}
+                  \Hom_R(P,M'')
+                  \longrightarrow 0
+              \]
+              is exact.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We first recall two standard facts.
+
+    \begin{enumerate}
+        \item For every left $R$-module $P$, the functor
+              \[
+                  \Hom_R(P,-): R\text{-}\mathrm{Mod}\to \mathbf{Ab}
+              \]
+              is left exact.
+
+        \item If ${}_R P_S$ is an $R$-$S$-bimodule and $M$ is a left $R$-module, then $\Hom_R(P,M)$ is naturally a left $S$-module via
+              \[
+                  (s\cdot \varphi)(p):=\varphi(ps)
+                  \qquad
+                  (s\in S,\ \varphi\in \Hom_R(P,M),\ p\in P).
+              \]
+              Moreover, for every $R$-homomorphism $h:M\to N$, the induced map
+              \[
+                  \Hom_R(P,h):\Hom_R(P,M)\to \Hom_R(P,N)
+              \]
+              is $S$-linear.
+    \end{enumerate}
+
+    \medskip
+    \noindent\textbf{(1) $\Longleftrightarrow$(2).}
+    Let $f:M\to N$ be an epimorphism. For $\gamma\in \Hom_R(P,N)$, saying that there
+    exists $\widetilde{\gamma}:P\to M$ such that
+    \[
+        f\circ \widetilde{\gamma}=\gamma
+    \]
+    is exactly saying that $\gamma$ lies in the image of
+    \[
+        \Hom_R(P,f):\Hom_R(P,M)\to \Hom_R(P,N).
+    \]
+    Hence (1) and (2) are equivalent.
+
+    \medskip
+    \noindent\textbf{(2) $\Longrightarrow$(4).}
+    Let
+    \[
+        0\longrightarrow M' \xrightarrow{\,u\,} M \xrightarrow{\,v\,} M'' \longrightarrow 0
+    \]
+    be a short exact sequence of left $R$-modules. Since $\Hom_R(P,-)$ is left exact, the
+    sequence
+    \[
+        0\longrightarrow \Hom_R(P,M')
+        \xrightarrow{\,\Hom_R(P,u)\,}
+        \Hom_R(P,M)
+        \xrightarrow{\,\Hom_R(P,v)\,}
+        \Hom_R(P,M'')
+    \]
+    is exact. Since $v$ is an epimorphism, (2) implies that $\Hom_R(P,v)$ is surjective.
+    Therefore
+    \[
+        0\longrightarrow \Hom_R(P,M')
+        \xrightarrow{\,\Hom_R(P,u)\,}
+        \Hom_R(P,M)
+        \xrightarrow{\,\Hom_R(P,v)\,}
+        \Hom_R(P,M'')
+        \longrightarrow 0
+    \]
+    is exact, proving (4).
+
+    \medskip
+    \noindent\textbf{(4) $\Longrightarrow$(2).}
+    Let $f:M\to N$ be an epimorphism. Apply (4) to the short exact sequence
+    \[
+        0\longrightarrow \ker(f)\longrightarrow M\xrightarrow{\,f\,}N\longrightarrow 0.
+    \]
+    Then
+    \[
+        \Hom_R(P,f):\Hom_R(P,M)\to \Hom_R(P,N)
+    \]
+    is surjective. Thus (2) holds.
+
+    \medskip
+    \noindent\textbf{(3) $\Longrightarrow$(4).}
+    Take $S=\mathbb{Z}$, with the canonical right $\mathbb{Z}$-module structure on $P$.
+    Then ${}_R P_{\mathbb{Z}}$ is an $R$-$\mathbb{Z}$-bimodule, and $\mathbb{Z}\text{-}\mathrm{Mod}=\mathbf{Ab}$. Hence (3) gives that
+    \[
+        \Hom_R(P,-):R\text{-}\mathrm{Mod}\to \mathbf{Ab}
+    \]
+    is exact, which is exactly statement (4).
+
+    \medskip
+    \noindent\textbf{(4) $\Longrightarrow$(3).}
+    Fix a ring $S$ and a right $S$-module structure on $P$ making ${}_R P_S$ an $R$-$S$-bimodule. Let
+    \[
+        0\longrightarrow M' \xrightarrow{\,u\,} M \xrightarrow{\,v\,} M'' \longrightarrow 0
+    \]
+    be a short exact sequence of left $R$-modules. By (4), the induced sequence
+    \[
+        0\longrightarrow \Hom_R(P,M')
+        \xrightarrow{\,\Hom_R(P,u)\,}
+        \Hom_R(P,M)
+        \xrightarrow{\,\Hom_R(P,v)\,}
+        \Hom_R(P,M'')
+        \longrightarrow 0
+    \]
+    is exact as a sequence of abelian groups. By the remark above, each term carries a
+    natural left $S$-module structure and each map is $S$-linear. Since exactness in $S\text{-}\mathrm{Mod}$ is equivalent to exactness of the underlying abelian groups,
+    the above sequence is exact in $S\text{-}\mathrm{Mod}$. Therefore
+    \[
+        \Hom_R(P,-):R\text{-}\mathrm{Mod}\to S\text{-}\mathrm{Mod}
+    \]
+    is exact. Hence (3) holds.
+
+    \medskip
+    Therefore \textup{(1)}, \textup{(2)}, \textup{(3)}, and \textup{(4)} are equivalent.
+\end{proof}
+
+\begin{proposition}
+    Free modules are projective.
+\end{proposition}
+
+\begin{proof}
+    Let $F=\bigoplus_{i\in I} Re_i$ be a free left $R$-module with basis $\{e_i\}_{i\in I}$.
+    Let $g:M\to N$ be an epimorphism and let $\gamma:F\to N$ be an $R$-homomorphism.
+    For each $i\in I$, choose $m_i\in M$ such that
+    \[
+        g(m_i)=\gamma(e_i).
+    \]
+    Since $F$ is free, there exists a unique $R$-homomorphism
+    \[
+        \widetilde{\gamma}:F\to M
+    \]
+    such that $\widetilde{\gamma}(e_i)=m_i$ for all $i\in I$. Then
+    \[
+        g\widetilde{\gamma}(e_i)=g(m_i)=\gamma(e_i)
+    \]
+    for every basis element, so $g\widetilde{\gamma}=\gamma$. Hence $F$ is projective.
+\end{proof}
+
+\begin{theorem}
+    Let ${}_R P$ be a left $R$-module. The following statements are equivalent.
+    \begin{enumerate}
+        \item $P$ is projective.
+        \item Every epimorphism
+              \[
+                  f:M\longrightarrow P\longrightarrow 0
+              \]
+              splits, that is, there exists an $R$-homomorphism $g:P\to M$ such that
+              \[
+                  f\circ g=\operatorname{id}_P.
+              \]
+        \item $P$ is isomorphic to a direct summand of a free module.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1) $\Longrightarrow$(2).}
+    Apply the lifting property to the diagram
+    \begin{center}
+        \begin{tikzcd}
+            & P \arrow[d, "\operatorname{id}_P"] \arrow[ld, dashed, "g"'] &   \\
+            M \arrow[r, two heads, "f"'] & P \arrow[r]                     & 0
+        \end{tikzcd}
+    \end{center}
+    to obtain $f\circ g=\operatorname{id}_P$.
+
+    \textbf{(2) $\Longrightarrow$(3).}
+    Every module is a homomorphic image of a free module, so choose an epimorphism
+    \[
+        \pi:F\to P
+    \]
+    with $F$ free. By (2),$\pi$ splits, so there exists $s:P\to F$ such that
+    \[
+        \pi\circ s=\operatorname{id}_P.
+    \]
+    Therefore
+    \[
+        F\cong \ker\pi \oplus s(P)\cong \ker\pi \oplus P,
+    \]
+    and hence $P$ is a direct summand of the free module $F$.
+
+    \textbf{(3) $\Longrightarrow$(1).}
+    Write
+    \[
+        F\cong P\oplus Q
+    \]
+    with $F$ free. Since free modules are projective, it suffices to show that a direct summand
+    of a projective module is projective. Let $f:M\to N$ be an epimorphism and
+    \[
+        \alpha:P\to N
+    \]
+    an $R$-homomorphism. Define
+    \[
+        \widehat{\alpha}:P\oplus Q\to N,\qquad \widehat{\alpha}(p,q)=\alpha(p).
+    \]
+    Because $F$ is projective, there exists
+    \[
+        \widehat{\beta}:P\oplus Q\to M
+    \]
+    such that $f\circ \widehat{\beta}=\widehat{\alpha}$. Let
+    \[
+        \iota:P\to P\oplus Q,\qquad p\mapsto (p,0).
+    \]
+    Then
+    \[
+        f\circ (\widehat{\beta}\circ \iota)=\widehat{\alpha}\circ \iota=\alpha.
+    \]
+    Hence $P$ is projective.
+\end{proof}
+
+\begin{corollary}
+    A left $R$-module $P$ is finitely generated and projective if and only if for some $R$-module $P'$ and some integer $n\ge 0$ there is an $R$-isomorphism
+    \[
+        P\oplus P'\cong R^n.
+    \]
+\end{corollary}
+
+\begin{proof}
+    If $P\oplus P'\cong R^n$, then $P$ is a direct summand of a finite free module, hence
+    finitely generated and projective.
+
+    Conversely, assume that $P$ is finitely generated and projective. By the theorem above,
+    there exists a free module
+    \[
+        F=\bigoplus_{i\in I} Re_i
+    \]
+    and an $R$-module $Q$ such that
+    \[
+        F\cong P\oplus Q.
+    \]
+    Let $p:F\to P$ and $s:P\to F$ be the projection and inclusion corresponding to this direct
+    sum decomposition. Choose generators $x_1,\dots,x_m$ of $P$. Each $s(x_j)$ is a finite
+    linear combination of the basis elements $\{e_i\}_{i\in I}$, so there exists a finite
+    subset $J\subseteq I$ such that
+    \[
+        s(x_1),\dots,s(x_m)\in F_J:=\bigoplus_{j\in J} Re_j.
+    \]
+    Since the $x_j$ generate $P$, we have $s(P)\subseteq F_J$. Hence the restriction
+    \[
+        p|_{F_J}:F_J\to P
+    \]
+    is surjective, and the map $s:P\to F_J$ is a section of $p|_{F_J}$. Therefore
+    \[
+        F_J\cong P\oplus \ker(p|_{F_J}).
+    \]
+    Since $F_J\cong R^{|J|}$, the result follows.
+\end{proof}
+

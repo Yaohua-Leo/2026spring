@@ -1,0 +1,415 @@
+\section{Quotient Modules and Homomorphism Theorems}
+
+\begin{definition}
+    Let $R$ be a ring, let $M$ be a left $R$-module, and let $N$ be a submodule of $M$. The \emph{quotient module} (or \emph{factor module}) of $M$ by $N$ is the quotient abelian group
+    \[
+        M/N = \{\, x+N \mid x \in M \,\},
+    \]
+    with scalar multiplication defined by
+    \[
+        r(x+N) = rx + N
+        \qquad
+        (r \in R,\ x \in M).
+    \]
+    This is well defined, and with this operation $M/N$ becomes a left $R$-module.
+\end{definition}
+
+\begin{example}
+    (1) If $I$ is a left ideal of a ring $R$, then $R/I$ is a quotient $R$-module of the left regular module ${}_R R$.
+
+    (2) For $n \in \mathbb{Z}$, the subgroup $n\mathbb{Z}$ is a submodule of the $\mathbb{Z}$-module $\mathbb{Z}$, and $\mathbb{Z}/n\mathbb{Z}$ is a cyclic quotient module.
+\end{example}
+
+\begin{definition}
+    Let $R$ be a ring, and let $M$ and $N$ be left $R$-modules. A group homomorphism
+    \[
+        f\colon M \to N
+    \]
+    is called an \emph{$R$-module homomorphism} (or \emph{$R$-linear map}) if
+    \[
+        f(rx) = rf(x)
+    \]
+    for all $r \in R$ and $x \in M$.
+\end{definition}
+
+\begin{definition}
+    Let $f\colon M \to N$ be an $R$-module homomorphism. The \emph{kernel} of $f$ is the set
+    \[
+        \ker f = \{\, x \in M \mid f(x) = 0 \,\}.
+    \]
+    The kernel is a submodule of $M$. The \emph{image} of $f$ is the set
+    \[
+        \operatorname{Im} f = \{\, f(x) \mid x \in M \,\}.
+    \]
+    The image is a submodule of $N$.
+
+    If $\ker f = 0$, then $f$ is injective. If $\operatorname{Im} f = N$, then $f$ is surjective. A bijective $R$-module homomorphism is called an \emph{isomorphism}.
+\end{definition}
+
+\begin{example}
+    Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Then $\operatorname{Hom}_R(M,N)$ is naturally an $R$-module.
+\end{example}
+
+\begin{theorem}
+    If $f\colon M \to N$ is an $R$-module homomorphism, then there is a canonical $R$-module isomorphism
+    \[
+        M / \ker f \to \operatorname{Im} f.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Let $N$ be an $R$-submodule of $M$, and let $\pi_N\colon M \to M/N$ be the quotient map. Then $\pi_N$ induces a natural bijection
+    \[
+        \{\, \text{$R$-submodules of $M$ containing $N$} \,\}
+        \to
+        \{\, \text{$R$-submodules of $M/N$} \,\}.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    If $N \subseteq H$ are two $R$-submodules of $M$, then
+    \[
+        M/H \cong (M/N)/(H/N).
+    \]
+\end{theorem}
+
+\begin{theorem}
+    If $N$ and $H$ are $R$-submodules of $M$, then
+    \[
+        \frac{H+N}{N} \cong \frac{H}{H \cap N}.
+    \]
+\end{theorem}
+
+\begin{proposition}
+    Let $M$ be an $R$-module, let $N$ be a submodule of $M$, let $M'$ be an $R$-module, and let $\varphi\colon M \to M'$ be a morphism such that $N \subseteq \ker \varphi$. Then there exists a unique morphism
+    \[
+        \varphi_N\colon M/N \to M'
+    \]
+    such that the following diagram commutes. Moreover,
+    \[
+        \ker \varphi_N = (\ker \varphi)/N.
+    \]
+    \[
+        \begin{tikzcd}
+            M \arrow[r, "\varphi"] \arrow[d, "\pi_{N}"'] & M' \\
+            M/N \arrow[ru, "\varphi_N"', dashed]
+        \end{tikzcd}
+    \]
+\end{proposition}
+
+\begin{remark}
+    The pair $(M/N, \pi_{N})$ is unique in the following sense: if $(S, \theta)$ is a pair such that
+    \begin{itemize}
+        \item $S$ is an $R$-module,
+        \item $\theta: M \to S$ is a surjective morphism satisfying the property of $(M/N, \pi_{N})$ described in the above proposition,
+    \end{itemize}
+    then there exists a unique isomorphism $\psi: M/N \to S$ such that the following diagram commutes.
+    \[
+        \begin{tikzcd}[row sep=2.8em, column sep=3.8em]
+            M \arrow[r, two heads, "\theta"] \arrow[d, two heads, "\pi_{N}"'] & S \\
+            M/N \arrow[ur, dashed, "\exists!\,\psi"'] &
+        \end{tikzcd}
+    \]
+\end{remark}
+
+\begin{proof}
+    Since $(S,\theta)$ satisfies the same universal property as $(M/N,\pi_N)$, we may apply that property to the canonical projection
+    \[
+        \pi_N : M \to M/N.
+    \]
+    Because $N \subseteq \ker(\pi_N)$, there exists a unique morphism
+    \[
+        u:S\to M/N
+    \]
+    such that
+    \[
+        u\circ \theta=\pi_N.
+    \]
+
+    On the other hand, since $(M/N,\pi_N)$ has the universal property of the quotient by $N$, and since $N \subseteq \ker(\theta)$, there exists a unique morphism
+    \[
+        \psi:M/N\to S
+    \]
+    such that
+    \[
+        \psi\circ \pi_N=\theta.
+    \]
+
+    We now show that $\psi$ and $u$ are inverse to each other.
+
+    First, compute
+    \[
+        (u\circ \psi)\circ \pi_N
+        = u\circ (\psi\circ \pi_N)
+        = u\circ \theta
+        = \pi_N.
+    \]
+    But the identity morphism $\operatorname{id}_{M/N}:M/N\to M/N$ also satisfies
+    \[
+        \operatorname{id}_{M/N}\circ \pi_N=\pi_N.
+    \]
+    By the uniqueness part of the universal property of $(M/N,\pi_N)$, it follows that
+    \[
+        u\circ \psi=\operatorname{id}_{M/N}.
+    \]
+
+    Similarly,
+    \[
+        (\psi\circ u)\circ \theta
+        = \psi\circ (u\circ \theta)
+        = \psi\circ \pi_N
+        = \theta.
+    \]
+    But the identity morphism $\operatorname{id}_S:S\to S$ also satisfies
+    \[
+        \operatorname{id}_S\circ \theta=\theta.
+    \]
+    By the uniqueness part of the universal property of $(S,\theta)$, we obtain
+    \[
+        \psi\circ u=\operatorname{id}_S.
+    \]
+
+    Therefore $\psi$ is an isomorphism, with inverse $u$.
+
+    Finally, the uniqueness of $\psi$ follows directly from the universal property of $(M/N,\pi_N)$: indeed,$\psi$ is the unique morphism
+    \[
+        \psi:M/N\to S
+    \]
+    such that
+    \[
+        \psi\circ \pi_N=\theta.
+    \]
+    Hence there exists a unique isomorphism
+    \[
+        \psi:M/N\to S
+    \]
+    for which the diagram commutes.
+\end{proof}
+
+\begin{proposition}
+    There is a unique isomorphism $\bar{\varphi}: \operatorname{coim}\varphi \to \operatorname{Im}\varphi$ such that the following diagram commutes:
+    \begin{center}
+        \begin{tikzcd}
+            M \arrow[rr, "\varphi"] \arrow[dd, "\pi_{\operatorname{ker}(\varphi)}"'] &  & M'                                          \\
+            &  &                                             \\
+            \operatorname{coim}(\varphi) \arrow[rr, "\overline{\varphi}"]            &  & \operatorname{Im}(\varphi) \arrow[uu, hook]
+        \end{tikzcd}
+    \end{center}
+    Recall:
+    \[
+        \begin{aligned}
+             & \varphi: M \to M', \quad R\text{-morphism}                  \\
+             & \operatorname{coker}(\varphi)=M'/\operatorname{Im}(\varphi) \\
+             & \operatorname{coim}(\varphi)=M/\ker \varphi
+        \end{aligned}
+    \]
+\end{proposition}
+
+\begin{definition}
+    Let $M$ be an $R$-module and $I$ an ideal of $R$. Denote by $IM$ the submodule of $M$ generated by all elements $am$ where $a \in I$,$m \in M$.
+    \[
+        IM = \left\{ \sum_{\text{finite}} a_{i} m_{i} \mid a_{i} \in I, \; m_{i} \in M \right\}
+    \]
+\end{definition}
+
+\begin{proposition}
+    Let $M$ be an $R$-module. Then $R \to \operatorname{End}(M)$ is a ring homomorphism.
+    \begin{enumerate}
+        \item $R \to \operatorname{End}(M)$ factors through the natural surjection $R \to R/I$ if and only if $IM = 0$:
+              \[
+                  \begin{tikzcd}[row sep=2.8em, column sep=4.2em]
+                      R \arrow[rr, "\rho"] \arrow[dr, two heads, "\pi_{I}"'] && \operatorname{End}(M) \\
+                      & R/I \arrow[ur, dashed, "\exists\,\rho_{I}"'] &
+                  \end{tikzcd}
+              \]
+              Where $\rho$ factors through $\pi_I$ means $\exists \rho_{I}: R/I \to \operatorname{End}(M)$ such that the diagram above commutes.
+        \item The module $M/IM$ is naturally endowed with a structure of $R/I$-module.
+        \item Let $\varphi: M \to M'$ be an $R$-homomorphism. Then $\varphi(IM) \subseteq IM'$, so $\varphi$ induces a morphism of $R/I$-modules
+              \[
+                  M/IM \to M'/IM'.
+              \]
+        \item If $M=M_1 \oplus \cdots \oplus M_n$, then $M/IM = M_1/IM_1 \oplus \cdots \oplus M_n/IM_n$.
+        \item $R^n/IR^n \cong (R/IR)^n$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textbf{(1)} Suppose first that $\rho$ factors through $\pi_I$. Then there exists a ring homomorphism
+    \[
+        \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+    \]
+    such that
+    \[
+        \rho=\rho_I\circ \pi_I.
+    \]
+    If $a\in I$, then $\pi_I(a)=0$, so
+    \[
+        \rho(a)=\rho_I(0)=0.
+    \]
+    Therefore $am=0$ for every $m\in M$. Since $IM$ is generated by elements of the form $am$ with $a\in I$ and $m\in M$, it follows that
+    \[
+        IM=0.
+    \]
+
+    Conversely, assume that $IM=0$. Then for every $a\in I$ and every $m\in M$ we have
+    \[
+        \rho(a)(m)=am=0.
+    \]
+    Thus $\rho(a)=0$, so $I\subseteq \ker \rho$. Hence $\rho$ factors uniquely through the quotient ring $R/I$: there exists a unique ring homomorphism
+    \[
+        \rho_I:R/I\to \operatorname{End}_{\mathbb{Z}}(M)
+    \]
+    such that
+    \[
+        \rho=\rho_I\circ \pi_I.
+    \]
+
+    \textbf{(2)} Define an action of $R/I$ on $M/IM$ by
+    \[
+        (r+I)\cdot (m+IM):=rm+IM.
+    \]
+    We must show that this is well-defined.
+
+    If $r+I=r'+I$, then $r-r'\in I$, so
+    \[
+        (r-r')m\in IM,
+    \]
+    hence
+    \[
+        rm+IM=r'm+IM.
+    \]
+    If $m+IM=m'+IM$, then $m-m'\in IM$. Since $IM$ is a submodule of $M$, we have
+    \[
+        r(m-m')\in IM,
+    \]
+    so
+    \[
+        rm+IM=rm'+IM.
+    \]
+    Thus the action is well-defined. The module axioms follow immediately from the module axioms on $M$. Therefore $M/IM$ is naturally an $R/I$-module.
+
+    \textbf{(3)} Let $\varphi:M\to M'$ be an $R$-module homomorphism. Take any element of $IM$, say
+    \[
+        x=\sum_{j=1}^t a_j m_j
+        \qquad (a_j\in I,\; m_j\in M).
+    \]
+    Then
+    \[
+        \varphi(x)=\sum_{j=1}^t \varphi(a_jm_j)=\sum_{j=1}^t a_j\varphi(m_j).
+    \]
+    Since each $a_j\in I$ and each $\varphi(m_j)\in M'$, it follows that
+    \[
+        a_j\varphi(m_j)\in IM'.
+    \]
+    Hence $\varphi(x)\in IM'$, and therefore
+    \[
+        \varphi(IM)\subseteq IM'.
+    \]
+
+    Thus we may define
+    \[
+        \overline{\varphi}:M/IM\to M'/IM',
+        \qquad
+        \overline{\varphi}(m+IM)=\varphi(m)+IM'.
+    \]
+    This is well-defined: if $m+IM=m'+IM$, then $m-m'\in IM$, so
+    \[
+        \varphi(m)-\varphi(m')=\varphi(m-m')\in IM',
+    \]
+    hence
+    \[
+        \varphi(m)+IM'=\varphi(m')+IM'.
+    \]
+
+    Finally,$\overline{\varphi}$ is $R/I$-linear, since
+    \[
+        \overline{\varphi}\bigl((r+I)\cdot (m+IM)\bigr)
+        =\overline{\varphi}(rm+IM)
+        =\varphi(rm)+IM'
+        =r\varphi(m)+IM'
+        =(r+I)\cdot \overline{\varphi}(m+IM).
+    \]
+
+    \textbf{(4)} Assume that
+    \[
+        M=M_1\oplus\cdots\oplus M_n.
+    \]
+    We first show that
+    \[
+        IM=IM_1\oplus\cdots\oplus IM_n.
+    \]
+
+    If $x\in IM$, then $x$ is a finite sum of elements of the form $am$ with $a\in I$ and $m\in M$. Writing
+    \[
+        m=m_1+\cdots+m_n
+        \qquad (m_i\in M_i),
+    \]
+    we get
+    \[
+        am=am_1+\cdots+am_n,
+    \]
+    and each $am_i\in IM_i$. Hence $x\in IM_1+\cdots+IM_n$, so
+    \[
+        IM\subseteq IM_1+\cdots+IM_n.
+    \]
+    The reverse inclusion is immediate because each $M_i\subseteq M$, hence each $IM_i\subseteq IM$. Therefore
+    \[
+        IM=IM_1+\cdots+IM_n.
+    \]
+
+    To see that the sum is direct, suppose
+    \[
+        x_1+\cdots+x_n=0
+        \qquad\text{with } x_i\in IM_i\subseteq M_i.
+    \]
+    Since
+    \[
+        M=M_1\oplus\cdots\oplus M_n
+    \]
+    is a direct sum, we must have $x_i=0$ for all $i$. Thus
+    \[
+        IM=IM_1\oplus\cdots\oplus IM_n.
+    \]
+
+    Now define
+    \[
+        \Psi:M_1/IM_1\oplus\cdots\oplus M_n/IM_n\to M/IM
+    \]
+    by
+    \[
+        \Psi(m_1+IM_1,\dots,m_n+IM_n)
+        =(m_1+\cdots+m_n)+IM.
+    \]
+    This map is well-defined and $R/I$-linear. It is surjective because every element of $M$ can be written as $m_1+\cdots+m_n$. It is injective because
+    \[
+        (m_1+\cdots+m_n)+IM=IM
+    \]
+    means that
+    \[
+        m_1+\cdots+m_n\in IM=IM_1\oplus\cdots\oplus IM_n,
+    \]
+    so each $m_i\in IM_i$. Hence
+    \[
+        m_i+IM_i=IM_i
+    \]
+    for all $i$, and the kernel is trivial. Therefore $\Psi$ is an isomorphism:
+    \[
+        M/IM \cong M_1/IM_1 \oplus \cdots \oplus M_n/IM_n.
+    \]
+
+    \textbf{(5)} Since
+    \[
+        R^n=R\oplus\cdots\oplus R
+    \]
+    ($n$ copies), part (4) yields
+    \[
+        R^n/IR^n \cong R/IR \oplus \cdots \oplus R/IR.
+    \]
+    Therefore
+    \[
+        R^n/IR^n \cong (R/IR)^n.
+    \]
+
+    This completes the proof.
+\end{proof}
+

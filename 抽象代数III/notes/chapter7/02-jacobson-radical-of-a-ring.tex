@@ -1,0 +1,317 @@
+\section{Jacobson Radical of a Ring}
+
+\begin{definition}[Jacobson radical]
+    Let $R$ be a ring with identity. The \emph{Jacobson radical} of $R$ is defined by
+    \[
+        J(R):=\bigcap \{\, M \mid M \text{ is a maximal left ideal of } R \,\}.
+    \]
+\end{definition}
+
+\begin{remark}[Annihilators]
+    Let ${}_RM$ be a left $R$-module.
+
+    \begin{enumerate}
+        \item For $x\in M$, define
+              \[
+                  \operatorname{Ann}_R(x):=\{\,r\in R \mid rx=0\,\}.
+              \]
+              This is a left ideal of $R$.
+
+        \item For a subset $X\subseteq M$, define
+              \[
+                  \operatorname{Ann}_R(X):=\bigcap_{x\in X}\operatorname{Ann}_R(x).
+              \]
+
+        \item If $N\leq M$ is a submodule, then
+              \[
+                  \operatorname{Ann}_R(N):=\bigcap_{x\in N}\operatorname{Ann}_R(x)
+              \]
+              is a two-sided ideal of $R$.
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}[Properties of the Jacobson radical]
+    Let $R$ be a ring with identity. Then the following hold.
+
+    \begin{enumerate}
+        \item
+              \[
+                  J(R)=\bigcap \{\,\operatorname{Ann}_R(S)\mid S \text{ is a simple left }R\text{-module}\,\}.
+              \]
+              In particular, $J(R)$ is a two-sided ideal of $R$.
+
+        \item For $a\in R$,
+              \[
+                  a\in J(R)
+                  \quad\Longleftrightarrow\quad
+                  1-xa \text{ has a left inverse for every } x\in R.
+              \]
+              Equivalently, for every $x\in R$ there exists $b\in R$ such that
+              \[
+                  b(1-xa)=1.
+              \]
+
+        \item $J(R)$ is the largest two-sided ideal $I$ of $R$ satisfying the condition
+              \[
+                  a\in I \;\Longrightarrow\; 1-a \text{ is a unit in } R.
+              \]
+
+        \item $J(R)$ coincides with the intersection of all maximal right ideals of $R$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1)} Let $S$ be a simple left $R$-module, and choose $0\neq v\in S$. Since $S$ is simple,
+    \[
+        S=Rv.
+    \]
+    Consider the surjective $R$-homomorphism
+    \[
+        R\longrightarrow S,\qquad r\longmapsto rv.
+    \]
+    Its kernel is $\operatorname{Ann}_R(v)$, so
+    \[
+        S\cong R/\operatorname{Ann}_R(v).
+    \]
+    Because $S$ is simple, $\operatorname{Ann}_R(v)$ is a maximal left ideal of $R$. Hence
+    \[
+        J(R)\subseteq \operatorname{Ann}_R(v)
+    \]
+    for every nonzero $v\in S$, and therefore
+    \[
+        J(R)\subseteq \operatorname{Ann}_R(S)
+    \]
+    for every simple left $R$-module $S$.
+
+    Conversely, suppose that
+    \[
+        x\in \bigcap \{\,\operatorname{Ann}_R(S)\mid S \text{ simple left }R\text{-module}\,\}.
+    \]
+    Let $M$ be any maximal left ideal of $R$. Then $R/M$ is a simple left $R$-module, so
+    \[
+        x\in \operatorname{Ann}_R(R/M).
+    \]
+    In particular,
+    \[
+        x(1+M)=0,
+    \]
+    hence
+    \[
+        x+M=0,
+    \]
+    so $x\in M$. Since this holds for every maximal left ideal $M$, we obtain
+    \[
+        x\in J(R).
+    \]
+    Thus
+    \[
+        J(R)=\bigcap \{\,\operatorname{Ann}_R(S)\mid S \text{ simple left }R\text{-module}\,\}.
+    \]
+
+    Finally, each $\operatorname{Ann}_R(S)$ is a two-sided ideal, so their intersection $J(R)$ is also a two-sided ideal.
+
+    \medskip
+
+    \textbf{(2)} Assume first that $a\in J(R)$. Suppose, for contradiction, that there exists $x\in R$ such that $1-xa$ has no left inverse. Then the principal left ideal
+    \[
+        R(1-xa)
+    \]
+    is a proper left ideal of $R$, so it is contained in some maximal left ideal $M$.
+
+    Since $a\in J(R)$, we have $a\in M$, and because $M$ is a left ideal,
+    \[
+        xa\in M.
+    \]
+    Also,
+    \[
+        1-xa\in M.
+    \]
+    Therefore
+    \[
+        1=(1-xa)+xa\in M,
+    \]
+    a contradiction. Hence $1-xa$ has a left inverse for every $x\in R$.
+
+    Conversely, assume that for every $x\in R$, the element $1-xa$ has a left inverse. Suppose that $a\notin J(R)$. Then there exists a maximal left ideal $M$ such that
+    \[
+        a\notin M.
+    \]
+    Hence
+    \[
+        M+Ra=R,
+    \]
+    so there exist $b\in M$ and $x\in R$ such that
+    \[
+        b+xa=1.
+    \]
+    Thus
+    \[
+        1-xa=b\in M.
+    \]
+    But an element of a proper left ideal cannot have a left inverse, for if $c(1-xa)=1$, then
+    \[
+        1\in M,
+    \]
+    contradicting the propriety of $M$. This contradiction shows that $a\in J(R)$.
+
+    \medskip
+
+    \textbf{(3)} First let $a\in J(R)$. By part \textbf{(2)} with $x=1$, there exists $b\in R$ such that
+    \[
+        b(1-a)=1.
+    \]
+    Then
+    \[
+        b=1+ba=1-(-b)a.
+    \]
+    Since $a\in J(R)$, part \textbf{(2)} again implies that $b$ has a left inverse. So there exists $c\in R$ such that
+    \[
+        cb=1.
+    \]
+    Now
+    \[
+        c=cb(1-a)=1-a.
+    \]
+    Hence
+    \[
+        (1-a)b=1,
+    \]
+    and together with $b(1-a)=1$, this shows that $1-a$ is a unit in $R$.
+
+    Thus $J(R)$ satisfies the stated property.
+
+    Now let $I$ be a two-sided ideal of $R$ such that
+    \[
+        a\in I \;\Longrightarrow\; 1-a \text{ is a unit in }R.
+    \]
+    Suppose $I\not\subseteq J(R)$. Then there exists a maximal left ideal $M$ such that
+    \[
+        I\not\subseteq M.
+    \]
+    Choose $a\in I\setminus M$. Then
+    \[
+        M+Ra=R,
+    \]
+    so there exist $m\in M$ and $r\in R$ such that
+    \[
+        m+ra=1.
+    \]
+    Since $I$ is a two-sided ideal and $a\in I$, we have
+    \[
+        ra\in I.
+    \]
+    Therefore
+    \[
+        1-ra
+    \]
+    is a unit in $R$. But
+    \[
+        1-ra=m\in M,
+    \]
+    and a proper left ideal cannot contain a unit. This is a contradiction. Hence
+    \[
+        I\subseteq J(R).
+    \]
+    So $J(R)$ is the largest such two-sided ideal.
+
+    \medskip
+
+    \textbf{(4)} Let
+    \[
+        J_r(R):=\bigcap \{\,N\mid N \text{ is a maximal right ideal of }R\,\}.
+    \]
+    Applying the preceding arguments to the opposite ring $R^{\operatorname{op}}$, we see that $J_r(R)$ is also the largest two-sided ideal $I$ of $R$ such that
+    \[
+        a\in I \;\Longrightarrow\; 1-a \text{ is a unit in }R.
+    \]
+    By part \textbf{(3)}, this property characterizes $J(R)$ uniquely. Therefore
+    \[
+        J_r(R)=J(R).
+    \]
+    Hence $J(R)$ coincides with the intersection of all maximal right ideals of $R$.
+\end{proof}
+
+\begin{definition}
+    Let $R$ be a ring with $1$.
+
+    \begin{enumerate}
+        \item An element $a\in R$ is called \emph{nilpotent} if
+              \[
+                  a^n=0
+              \]
+              for some integer $n\ge 1$.
+
+        \item A left ideal $I\subseteq R$ is called \emph{nilpotent} if
+              \[
+                  I^n=0
+              \]
+              for some integer $n\ge 1$.
+
+        \item A left ideal $I\subseteq R$ is called a \emph{nil left ideal} if every element of $I$
+              is nilpotent.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    If $a\in R$ is nilpotent, say $a^n=0$, then $1-a$ is a unit in $R$, with inverse
+    \[
+        (1-a)^{-1}=1+a+a^2+\cdots+a^{n-1}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since $a^n=0$, we have
+    \[
+        (1-a)(1+a+a^2+\cdots+a^{n-1})=1-a^n=1,
+    \]
+    and similarly
+    \[
+        (1+a+a^2+\cdots+a^{n-1})(1-a)=1-a^n=1.
+    \]
+    Hence $1-a$ is a unit.
+\end{proof}
+
+\begin{lemma}
+    Every nilpotent left ideal is a nil left ideal.
+\end{lemma}
+
+\begin{proof}
+    Suppose $I^n=0$ and let $a\in I$. Then
+    \[
+        a^n\in I^n=0,
+    \]
+    so $a$ is nilpotent. Hence every element of $I$ is nilpotent.
+\end{proof}
+
+\begin{remark}
+    We shall use the following standard characterization of the Jacobson radical:
+    \[
+        a\in J(R)
+        \quad\Longleftrightarrow\quad
+        \text{for every }x\in R,\; 1-xa \text{ has a left inverse in }R.
+    \]
+    In particular, if $a\in J(R)$, then $1-a$ is a unit.
+\end{remark}
+
+\begin{theorem}
+    Let $I$ be a nil left ideal of a ring $R$. Then
+    \[
+        I\subseteq J(R).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let $a\in I$. For every $x\in R$, since $I$ is a left ideal we have $xa\in I$. Because $I$
+    is nil, the element $xa$ is nilpotent. By the previous lemma, $1-xa$ is a unit in $R$, hence
+    in particular it has a left inverse.
+
+    Therefore, by the characterization of $J(R)$,
+    \[
+        a\in J(R).
+    \]
+    Since $a\in I$ was arbitrary, it follows that
+    \[
+        I\subseteq J(R).
+    \]
+\end{proof}
+

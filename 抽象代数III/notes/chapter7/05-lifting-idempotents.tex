@@ -1,0 +1,137 @@
+\section{Lifting Idempotents}
+
+\begin{definition}
+    Let $R$ be a ring and let $I$ be a two-sided ideal of $R$.
+
+    If $f\in R$ is an idempotent and $ f \notin I $, then $e=f+I$ is an idempotent of $R/I$. We say that an idempotent $f\in R$ \emph{lifts}
+    $e$.
+\end{definition}
+
+\begin{remark}
+    For a general ideal $I$, an idempotent of $R/I$ need not lift to an idempotent of $R$.
+    The next theorem shows that lifting is always possible when $I$ is nilpotent.
+\end{remark}
+
+\begin{theorem}\label{thm:lift-idempotent}
+    Let $R$ be a ring, let $I$ be a nilpotent two-sided ideal of $R$, and let
+    \[
+        e\in R/I
+    \]
+    be an idempotent. Then there exists an idempotent $f\in R$ such that
+    \[
+        f+I=e.
+    \]
+    Moreover, if $e$ is primitive, then every lift $f$ of $e$ is primitive.
+\end{theorem}
+
+\begin{proof}
+    Since $I$ is nilpotent, there exists $r\ge 1$ such that
+    \[
+        I^r=0.
+    \]
+    We shall construct idempotents
+    \[
+        e_i\in R/I^i \qquad (1\le i\le r)
+    \]
+    such that
+    \[
+        e_1=e
+    \]
+    and for each $i\ge 2$, the image of $e_i$ in $R/I^{i-1}$ is $e_{i-1}$.
+
+    Assume inductively that $e_{i-1}\in R/I^{i-1}$ is an idempotent, with $2\le i\le r$.
+    Choose any element
+    \[
+        a\in R/I^i
+    \]
+    whose image in $R/I^{i-1}$ is $e_{i-1}$.
+    Since $e_{i-1}$ is idempotent, we have
+    \[
+        a^2-a\in I^{i-1}/I^i.
+    \]
+    Now
+    \[
+        \bigl(I^{i-1}/I^i\bigr)^2=0,
+    \]
+    because
+    \[
+        I^{2i-2}\subseteq I^i
+        \qquad (i\ge 2).
+    \]
+    Hence
+    \[
+        (a^2-a)^2=0
+        \qquad\text{in } R/I^i.
+    \]
+
+    Define
+    \[
+        e_i:=3a^2-2a^3\in R/I^i.
+    \]
+    First, $e_i$ maps to $e_{i-1}$ in $R/I^{i-1}$, because
+    \[
+        e_i-a
+        =
+        3a^2-2a^3-a
+        =
+        -(2a-1)(a^2-a)\in I^{i-1}/I^i.
+    \]
+    Next, $e_i$ is idempotent. Indeed, the polynomial identity
+    \[
+        (3t^2-2t^3)^2-(3t^2-2t^3)
+        =
+        -(3-2t)(1+2t)(t^2-t)^2
+    \]
+    gives
+    \[
+        e_i^2-e_i
+        =
+        -(3-2a)(1+2a)(a^2-a)^2=0
+    \]
+    in $R/I^i$.
+
+    Thus, by induction, we obtain an idempotent
+    \[
+        e_r\in R/I^r=R.
+    \]
+    Let
+    \[
+        f:=e_r.
+    \]
+    Then $f$ is an idempotent of $R$ whose image in $R/I$ is $e$.
+
+    \medskip
+
+    Now suppose that $e$ is primitive and that $f$ is a lift of $e$.
+    Assume that
+    \[
+        f=f_1+f_2
+    \]
+    is a decomposition of $f$ into orthogonal idempotents:
+    \[
+        f_1^2=f_1,\qquad f_2^2=f_2,\qquad f_1f_2=f_2f_1=0.
+    \]
+    Reducing modulo $I$, we get
+    \[
+        e=(f_1+I)+(f_2+I),
+    \]
+    and this is again a decomposition into orthogonal idempotents in $R/I$.
+    Since $e$ is primitive, one of $f_1+I$ or $f_2+I$ must be zero.
+    Without loss of generality, assume
+    \[
+        f_1+I=0.
+    \]
+    Then $f_1\in I$.
+
+    But $f_1$ is idempotent, so for every $m\ge 1$,
+    \[
+        f_1=f_1^m\in I^m.
+    \]
+    Taking $m=r$, we get
+    \[
+        f_1\in I^r=0,
+    \]
+    hence $f_1=0$.
+    Therefore $f$ cannot be written as a sum of two nonzero orthogonal idempotents, so $f$ is primitive.
+\end{proof}
+

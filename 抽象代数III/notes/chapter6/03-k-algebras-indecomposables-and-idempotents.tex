@@ -1,0 +1,469 @@
+\section{\texorpdfstring{$k$-algebras, indecomposables, and idempotents}{k-algebras, indecomposables, and idempotents}}
+
+\begin{definition}
+    A nonzero $R$-module $M$ is called indecomposable if every decomposition
+    \[
+        M = M_1 \oplus M_2
+    \]
+    forces $M_1=0$ or $M_2=0$.
+\end{definition}
+
+\begin{theorem}[Krull-Schmidt] Let $M$ be an $R$-module with a composition series.
+    Suppose
+    \[
+        M \cong V_1 \oplus \cdots \oplus V_m
+        \cong
+        U_1 \oplus \cdots \oplus U_n
+    \]
+    where all $V_i$ and $U_j$ are indecomposable.
+    Then
+    \[
+        m=n,
+    \]
+    and after reordering the summands one has
+    \[
+        V_i \cong U_i
+        \quad\text{for all } i.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Replacing the given isomorphisms by identifications, we may assume
+    \[
+        M=V_1\oplus\cdots\oplus V_m
+        =U_1\oplus\cdots\oplus U_n .
+    \]
+    If $M=0$, the statement is trivial. So assume $M\neq 0$.
+
+    Since $M$ has a composition series, it has finite length. Hence each direct summand
+    $V_i$ and $U_j$ also has finite length. Moreover, for every indecomposable module
+    $X$ of finite length, Fitting's lemma implies that every endomorphism of $X$ is either
+    invertible or nilpotent; therefore $\operatorname{End}_R(X)$ is a local ring.
+
+    We prove the theorem by induction on the length $\ell(M)$ of $M$.
+    If $\ell(M)=1$, then $M$ is simple, hence indecomposable, so necessarily $m=n=1$
+    and $V_1\cong U_1$.
+
+    Now assume $\ell(M)>1$ and that the statement is known for all modules of smaller
+    length. Set
+    \[
+        A:=V_1,
+        \qquad
+        B:=V_2\oplus\cdots\oplus V_m,
+    \]
+    so that
+    \[
+        M=A\oplus B.
+    \]
+    Let
+    \[
+        \iota:A\to M,\qquad \pi:M\to A
+    \]
+    be the canonical inclusion and projection. For the decomposition
+    \[
+        M=U_1\oplus\cdots\oplus U_n,
+    \]
+    let
+    \[
+        \kappa_j:U_j\to M,\qquad p_j:M\to U_j
+    \]
+    be the canonical inclusion and projection for $1\le j\le n$.
+
+    Since
+    \[
+        1_M=\sum_{j=1}^n \kappa_j p_j,
+    \]
+    we get
+    \[
+        1_A=\pi\iota
+        =\pi\Bigl(\sum_{j=1}^n \kappa_j p_j\Bigr)\iota
+        =\sum_{j=1}^n (\pi\kappa_j)(p_j\iota).
+    \]
+    For each $j$, put
+    \[
+        u_j:=(\pi\kappa_j)(p_j\iota)\in \operatorname{End}_R(A).
+    \]
+    If all $u_j$ were noninvertible, then, since $\operatorname{End}_R(A)$ is local, their sum would
+    also be noninvertible. But their sum is $1_A$, a contradiction. Hence $u_j$ is a unit
+    for some $j$. After reordering the $U_j$, we may assume that $u_1$ is a unit.
+
+    Set
+    \[
+        a:=\pi\kappa_1:U_1\to A,
+        \qquad
+        b:=p_1\iota:A\to U_1.
+    \]
+    Then
+    \[
+        ab=u_1
+    \]
+    is an automorphism of $A$. Consider
+    \[
+        e:=b(ab)^{-1}a\in \operatorname{End}_R(U_1).
+    \]
+    Then
+    \[
+        e^2=b(ab)^{-1}a\,b(ab)^{-1}a
+        =b(ab)^{-1}(ab)(ab)^{-1}a
+        =b(ab)^{-1}a
+        =e,
+    \]
+    so $e$ is an idempotent. Also,
+    \[
+        eb=b(ab)^{-1}ab=b\neq 0,
+    \]
+    hence $e\neq 0$. Since $\operatorname{End}_R(U_1)$ is local, its only idempotents are $0$ and $1$,
+    therefore $e=1_{U_1}$.
+
+    Thus
+    \[
+        b(ab)^{-1}a=1_{U_1},
+    \]
+    so $a$ is injective. On the other hand, $ab$ is surjective, hence $a$ is surjective as well.
+    Therefore $a$ is an isomorphism, and we obtain
+    \[
+        A\cong U_1.
+    \]
+
+    Now define
+    \[
+        f:=\kappa_1 a^{-1}:A\to M.
+    \]
+    Then
+    \[
+        \pi f=\pi\kappa_1 a^{-1}=aa^{-1}=1_A.
+    \]
+    Hence
+    \[
+        M=f(A)\oplus B.
+    \]
+    Indeed, for any $x\in M$,
+    \[
+        x=f(\pi(x))+\bigl(x-f(\pi(x))\bigr),
+    \]
+    and
+    \[
+        \pi\bigl(x-f(\pi(x))\bigr)=\pi(x)-\pi f(\pi(x))=0,
+    \]
+    so $x-f(\pi(x))\in \ker\pi=B$. Also, if $f(a)\in B=\ker\pi$, then
+    \[
+        a=\pi f(a)=0,
+    \]
+    so the sum is direct. Since $f(A)=\kappa_1(U_1)=U_1$, we have
+    \[
+        M=U_1\oplus B.
+    \]
+
+    Therefore
+    \[
+        B\cong M/U_1\cong U_2\oplus\cdots\oplus U_n.
+    \]
+    But also
+    \[
+        B=V_2\oplus\cdots\oplus V_m.
+    \]
+    Now $\ell(B)<\ell(M)$, so by the induction hypothesis,
+    \[
+        m-1=n-1,
+    \]
+    and after reordering $U_2,\dots,U_n$, we have
+    \[
+        V_i\cong U_i \qquad (i=2,\dots,m).
+    \]
+    Together with $V_1\cong U_1$, this gives
+    \[
+        m=n,
+        \qquad
+        V_i\cong U_i \quad\text{for all } i
+    \]
+    after a suitable reordering.
+
+    This completes the proof.
+\end{proof}
+
+\begin{definition}
+    An idempotent of a ring $R$ is a nonzero element
+    \[
+        e \in R
+    \]
+    such that
+    \[
+        e^2=e.
+    \]
+\end{definition}
+
+\begin{remark}
+    If $e$ is an idempotent, then the corner ring
+    \[
+        eRe
+    \]
+    is a ring with identity element $e$.
+\end{remark}
+
+\begin{definition}
+    Two idempotents $e_1,e_2 \in R$ are called orthogonal if
+    \[
+        e_1 e_2 = e_2 e_1 = 0.
+    \]
+    More generally, finitely many idempotents are orthogonal if they are pairwise orthogonal.
+\end{definition}
+
+\begin{lemma}
+    If $e_1,\dots,e_n$ are orthogonal idempotents, then
+    \[
+        e_1+\cdots+e_n
+    \]
+    is again an idempotent.
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        e:=e_1+\cdots+e_n.
+    \]
+    Since each $e_i$ is an idempotent, we have $e_i^2=e_i$ for all $i$. Since the
+    $idempotents$ are orthogonal, for $i\neq j$ we have
+    \[
+        e_ie_j=0.
+    \]
+    Therefore
+    \[
+        e^2=(e_1+\cdots+e_n)^2
+        =\sum_{i=1}^n e_i^2+\sum_{i\neq j} e_ie_j
+        =\sum_{i=1}^n e_i+\sum_{i\neq j}0
+        =e_1+\cdots+e_n
+        =e.
+    \]
+    Hence $e$ is an idempotent.
+\end{proof}
+
+\begin{definition}
+    An idempotent decomposition of an idempotent $e$ is an expression
+    \[
+        e=e_1+\cdots+e_n
+    \]
+    where the $e_i$ are orthogonal idempotents.
+\end{definition}
+
+\begin{remark}
+    If $e=e_1+e_2$ is an idempotent decomposition, then $e_1$ and $e_2$ are in $eRe$.
+\end{remark}
+
+\begin{definition}
+    An idempotent is called primitive if it cannot be written as a sum of two nonzero orthogonal idempotents.
+\end{definition}
+
+\begin{definition}
+    A primitive orthogonal decomposition is an idempotent decomposition in which all summands are primitive.
+\end{definition}
+
+\begin{example}
+    If $e$ is an idempotent in a unital ring, then
+    \[
+        1=e+(1-e)
+    \]
+    is an idempotent decomposition of $1$.
+\end{example}
+
+\begin{example}
+    Let $e$ be an idempotent, $Re = \{ ae | a\in R\}$ is a left module of $R$.
+\end{example}
+
+\begin{theorem}
+    Let $e$ be an idempotent of $R$.
+
+    If
+    \[
+        e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition, then
+    \[
+        Re=Re_1\oplus\cdots\oplus Re_n.
+    \]
+
+    Conversely, if $Re$ is a direct sum of left ideals
+    \[
+        Re=I_1\oplus\cdots\oplus I_n,
+    \]
+    then there exists an idempotent decomposition
+    \[
+        e=e_1+\cdots+e_n
+    \]
+    with $e_i\in I_i$ and $I_i=Re_i$.
+
+    In this way, the idempotent decompositions of $e$ are in one-to-one correspondence
+    with the direct sum decompositions of the left $R$-module $Re$.
+\end{theorem}
+
+\begin{proof}
+    Assume first that
+    \[
+        e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition. Since
+    \[
+        e_ie=ee_i=e_i,
+    \]
+    we have
+    \[
+        Re_i\subseteq Re.
+    \]
+    Indeed, if $x\in Re_i$, then $xe=x$.
+
+    Now let $a\in R$. Then
+    \[
+        ae=ae_1+\cdots+ae_n\in Re_1+\cdots+Re_n,
+    \]
+    so
+    \[
+        Re\subseteq Re_1+\cdots+Re_n.
+    \]
+    The reverse inclusion is clear, hence
+    \[
+        Re=Re_1+\cdots+Re_n.
+    \]
+
+    To show that the sum is direct, suppose
+    \[
+        a_1e_1+\cdots+a_ne_n=0.
+    \]
+    Multiplying on the right by $e_i$, we get
+    \[
+        a_ie_i=0
+    \]
+    for each $i$, since $e_je_i=0$ for $j\ne i$. Therefore the expression is unique, and
+    \[
+        Re=Re_1\oplus\cdots\oplus Re_n.
+    \]
+
+    Conversely, suppose
+    \[
+        Re=I_1\oplus\cdots\oplus I_n.
+    \]
+    Since $e\in Re$, we may write
+    \[
+        e=e_1+\cdots+e_n,
+        \qquad e_i\in I_i.
+    \]
+
+    For any $a_i\in I_i\subseteq Re$, we have
+    \[
+        a_i=a_ie=a_ie_1+\cdots+a_ie_n.
+    \]
+    Since $e_j\in I_j$, we have
+    \[
+        Re_j\subseteq I_j,
+    \]
+    hence
+    \[
+        a_ie_j\in I_j.
+    \]
+    But $a_i\in I_i$, and the decomposition
+    \[
+        Re=I_1\oplus\cdots\oplus I_n
+    \]
+    is direct. Therefore
+    \[
+        a_i=a_ie_i,
+        \qquad
+        a_ie_j=0 \quad (j\ne i).
+    \]
+    It follows that
+    \[
+        I_i\subseteq Re_i.
+    \]
+    On the other hand, since $e_i\in I_i$ and $I_i$ is a left ideal, we have
+    \[
+        Re_i\subseteq I_i.
+    \]
+    Thus
+    \[
+        I_i=Re_i.
+    \]
+
+    Now take $a_i=e_i$. Then
+    \[
+        e_i=e_i^2,
+        \qquad
+        e_ie_j=0 \quad (j\ne i).
+    \]
+    Hence
+    \[
+        e=e_1+\cdots+e_n
+    \]
+    is an idempotent decomposition.
+\end{proof}
+
+\begin{corollary}
+    Let $e$ be an idempotent of $R$. Then the following are equivalent:
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\theenumi)}
+        \item $e$ is primitive.
+        \item $Re$ is indecomposable as a left $R$-module.
+        \item The only idempotents in $eRe$ are $0$ and $e$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \textbf{(1) \(\Longleftrightarrow\) (2).}
+    This follows immediately from the previous theorem, which gives a bijection between
+    idempotent decompositions of $e$ and direct sum decompositions of the left ideal $Re$.
+
+    \medskip
+
+    \textbf{(1) \(\Longrightarrow\) (3).}
+    Suppose that $e' \in eRe$ is an idempotent with
+    \[
+        e' \neq 0, \qquad e' \neq e.
+    \]
+    Since $e' \in eRe$, we have
+    \[
+        ee' = e' = e'e.
+    \]
+    Hence
+    \[
+        e = e' + (e-e').
+    \]
+    We claim that this is an idempotent decomposition of $e$.
+
+    First,
+    \[
+        (e-e')^2 = e^2 - ee' - e'e + (e')^2
+        = e - e' - e' + e'
+        = e - e'.
+    \]
+    So $e-e'$ is an idempotent.
+
+    Next,
+    \[
+        e'(e-e') = e'e - (e')^2 = e' - e' = 0,
+    \]
+    and similarly
+    \[
+        (e-e')e' = ee' - (e')^2 = e' - e' = 0.
+    \]
+    Thus $e'$ and $e-e'$ are orthogonal idempotents. Since both are nonzero, this contradicts
+    the primitiveness of $e$.
+
+    Therefore no such $e'$ exists, and the only idempotents in $eRe$ are $0$ and $e$.
+
+    \medskip
+
+    \textbf{(3) \(\Longrightarrow\) (1).}
+    Suppose that $e$ is not primitive. Then there exist nonzero orthogonal idempotents
+    $e_1,e_2$ such that
+    \[
+        e = e_1 + e_2.
+    \]
+    Since
+    \[
+        ee_1e = e_1, \qquad ee_2e = e_2,
+    \]
+    we have
+    \[
+        e_1,e_2 \in eRe.
+    \]
+    But $e_1$ is a nonzero idempotent different from $e$, contradicting (3). Hence $e$ must be
+    primitive.
+\end{proof}
+

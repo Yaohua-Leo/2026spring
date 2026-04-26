@@ -1,0 +1,630 @@
+\section{Projective Covers over Artinian Rings}
+
+\begin{lemma}\label{lem:primitive-decomposition-semisimple-artinian}
+    Let $A$ be a semisimple Artinian ring. Then the following statements hold.
+
+    \begin{enumerate}
+        \item There exists a primitive idempotent decomposition
+              \[
+                  1=e_1+\cdots+e_n .
+              \]
+              This decomposition corresponds to a decomposition of the left regular module
+              \[
+                  {}_A A = Ae_1\oplus \cdots \oplus Ae_n,
+              \]
+              where each $Ae_i$ is a simple left $A$-module.
+
+        \item For every simple left $A$-module $S$, there exists a primitive idempotent
+              $e\in A$ such that
+              \[
+                  S\cong Ae .
+              \]
+
+        \item For every simple left $A$-module $S$, there exists some $1\le i\le n$
+              such that
+              \[
+                  e_iS\neq 0.
+              \]
+              Moreover, if $T$ is a simple left $A$-module with $T\not\cong S$, then
+              \[
+                  e_iT=0.
+              \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textbf{(1)}
+    Since $A$ is semisimple Artinian, the left regular module ${}_A A$ is semisimple and
+    Artinian. Hence it is a finite direct sum of simple left ideals:
+    \[
+        {}_A A = I_1\oplus \cdots \oplus I_n .
+    \]
+    By the correspondence between direct sum decompositions of ${}_A A$ and idempotent
+    decompositions of $1$, there exist pairwise orthogonal idempotents
+    \[
+        e_1,\dots,e_n\in A
+    \]
+    such that
+    \[
+        1=e_1+\cdots+e_n
+    \]
+    and
+    \[
+        I_i=Ae_i
+        \qquad (1\le i\le n).
+    \]
+    Since each $I_i$ is simple, each $Ae_i$ is simple and hence indecomposable. Therefore
+    each $e_i$ is primitive.
+
+    \medskip
+
+    \textbf{(2)}
+    Let $S$ be a simple left $A$-module. Choose $0\neq s\in S$. Then
+    \[
+        S=As,
+    \]
+    so the map
+    \[
+        A\longrightarrow S,
+        \qquad
+        a\longmapsto as
+    \]
+    is a surjective $A$-module homomorphism.
+
+    Using the decomposition from part \textup{(1)}, we have
+    \[
+        A=Ae_1\oplus\cdots\oplus Ae_n.
+    \]
+    Since the map $A\to S$ is nonzero and surjective, its restriction to at least one
+    summand $Ae_i$ is nonzero. Thus there exists $i$ such that we have a nonzero
+    homomorphism
+    \[
+        Ae_i\longrightarrow S.
+    \]
+    Because both $Ae_i$ and $S$ are simple, this nonzero homomorphism is an isomorphism.
+    Therefore
+    \[
+        S\cong Ae_i.
+    \]
+    Taking $e=e_i$, we obtain the desired primitive idempotent.
+
+    \medskip
+
+    \textbf{(3)}
+    Let $S$ be a simple left $A$-module. Since
+    \[
+        1=e_1+\cdots+e_n,
+    \]
+    we have
+    \[
+        S=1S=(e_1+\cdots+e_n)S=e_1S+\cdots+e_nS.
+    \]
+    Since $S\neq 0$, there exists some $i$ such that
+    \[
+        e_iS\neq 0.
+    \]
+
+    For this $i$, we claim that if $T$ is a simple left $A$-module with $T\not\cong S$,
+    then
+    \[
+        e_iT=0.
+    \]
+    Indeed, by the standard isomorphism
+    \[
+        \operatorname{Hom}_A(Ae_i,T)\cong e_iT,
+        \qquad
+        \varphi\longmapsto \varphi(e_i),
+    \]
+    it is enough to show that
+    \[
+        \operatorname{Hom}_A(Ae_i,T)=0.
+    \]
+    Since $e_iS\neq 0$, the same isomorphism gives
+    \[
+        \operatorname{Hom}_A(Ae_i,S)\cong e_iS\neq 0.
+    \]
+    Thus there is a nonzero homomorphism
+    \[
+        Ae_i\longrightarrow S.
+    \]
+    Because $Ae_i$ and $S$ are simple, this homomorphism is an isomorphism. Hence
+    \[
+        Ae_i\cong S.
+    \]
+    If $T\not\cong S$, then $T\not\cong Ae_i$. Therefore, by Schur's lemma,
+    \[
+        \operatorname{Hom}_A(Ae_i,T)=0.
+    \]
+    Consequently,
+    \[
+        e_iT=0.
+    \]
+\end{proof}
+
+\begin{theorem}\label{thm:projective-cover-simple}
+    Let $A$ be an Artinian ring, and let $S$ be a simple left $A$-module. Then the following hold.
+
+    \begin{enumerate}
+        \item There exists an indecomposable projective left $A$-module $P_S$ such that
+              \[
+                  P_S/\operatorname{Rad}(P_S)\cong S.
+              \]
+              Moreover, $P_S$ is of the form
+              \[
+                  P_S=Af,
+              \]
+              where $f$ is a primitive idempotent of $A$.
+
+        \item The idempotent $f$ has the following property:
+              \[
+                  fS\neq 0,
+              \]
+              and if $T$ is any simple left $A$-module with $T\not\cong S$, then
+              \[
+                  fT=0.
+              \]
+
+        \item The module $P_S$ is the projective cover of $S$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        \overline{A}:=A/J(A).
+    \]
+    Since $A$ is Artinian, the ideal $J(A)$ is nilpotent, and $\overline{A}$ is a semisimple
+    Artinian ring.
+
+    By the structure theory of semisimple Artinian rings, there exists a primitive idempotent
+    \[
+        e\in \overline{A}
+    \]
+    such that
+    \[
+        eS\neq 0.
+    \]
+    Equivalently, the simple $\overline{A}$-module $\overline{A}e$ is isomorphic to $S$.
+
+    Since $J(A)$ is nilpotent, idempotents lift modulo $J(A)$. Hence there exists an
+    idempotent $f\in A$ such that
+    \[
+        f+J(A)=e.
+    \]
+    Moreover, because $e$ is primitive, the lift $f$ is also primitive.
+
+    Now define
+    \[
+        P_S:=Af.
+    \]
+    Since $f$ is an idempotent, $Af$ is a direct summand of the left regular module
+    ${}_A A$. Indeed,
+    \[
+        A=Af\oplus A(1-f).
+    \]
+    Hence $Af$ is projective. Since $f$ is primitive, $Af$ is indecomposable. Therefore
+    $P_S=Af$ is an indecomposable projective left $A$-module.
+
+    Consider the natural map
+    \[
+        Af \longrightarrow \overline{A}e
+    \]
+    defined by
+    \[
+        af \longmapsto (a+J(A))(f+J(A)).
+    \]
+    Since $f+J(A)=e$, this map is explicitly
+    \[
+        af \longmapsto (a+J(A))e.
+    \]
+    It is a surjective $A$-module homomorphism. Its kernel is
+    \[
+        J(A)f.
+    \]
+    Indeed, $af$ maps to zero if and only if
+    \[
+        (a+J(A))(f+J(A))=0,
+    \]
+    which is equivalent to
+    \[
+        af\in J(A).
+    \]
+    Since $af\in Af$, the kernel is
+    \[
+        Af\cap J(A)=J(A)f.
+    \]
+    Thus
+    \[
+        Af/J(A)f\cong \overline{A}e.
+    \]
+    Because $\overline{A}e\cong S$, we get
+    \[
+        P_S/J(A)P_S\cong S.
+    \]
+    Since $A$ is Artinian and $P_S$ is finitely generated, we have
+    \[
+        \operatorname{Rad}(P_S)=J(A)P_S.
+    \]
+    Therefore
+    \[
+        P_S/\operatorname{Rad}(P_S)\cong S.
+    \]
+
+    Next we verify the stated property of $f$. Since every simple $A$-module is annihilated
+    by $J(A)$, the action of $f$ on any simple $A$-module is the same as the action of
+    \[
+        e=f+J(A)
+    \]
+    through the quotient algebra $\overline{A}=A/J(A)$. Hence
+    \[
+        fS=eS\neq 0.
+    \]
+    If $T$ is a simple $A$-module with $T\not\cong S$, then, by the choice of $e$ in the
+    semisimple algebra $\overline{A}$, we have
+    \[
+        eT=0.
+    \]
+    Therefore
+    \[
+        fT=0.
+    \]
+
+    Finally, the natural epimorphism
+    \[
+        P_S=Af \longrightarrow P_S/\operatorname{Rad}(P_S)\cong S
+    \]
+    is essential by Nakayama's lemma. Since $P_S$ is projective, this epimorphism is a
+    projective cover of $S$.
+
+    Thus $P_S$ is the projective cover of $S$.
+\end{proof}
+
+\begin{theorem}\label{thm:indecomposable-projectives-artinian}
+    Let $A$ be an Artinian ring. Up to isomorphism, the indecomposable projective
+    left $A$-modules are exactly the modules
+    \[
+        P_S,
+    \]
+    where $S$ runs through the isomorphism classes of simple left $A$-modules and
+    $P_S$ denotes the projective cover of $S$.
+
+    Moreover,
+    \[
+        P_S\cong P_T
+        \qquad\Longleftrightarrow\qquad
+        S\cong T.
+    \]
+
+    Each $P_S$ occurs as a direct summand of the left regular module ${}_A A$, with
+    multiplicity equal to the multiplicity of $S$ as a direct summand of
+    \[
+        A/J(A).
+    \]
+    Equivalently, one has a decomposition
+    \[
+        {}_A A\cong \bigoplus_{S} P_S^{\,n_S},
+    \]
+    where $S$ runs through the isomorphism classes of simple left $A$-modules and
+    \[
+        A/J(A)\cong \bigoplus_S S^{\,n_S}.
+    \]
+    Furthermore,
+    \[
+        n_S=\dim_{D_S} S,
+        \qquad
+        D_S:=\operatorname{End}_A(S),
+    \]
+    where $S$ is regarded as a right $D_S$-vector space by
+    \[
+        s\cdot \varphi:=\varphi(s).
+    \]
+    In particular, if $A$ is a finite-dimensional $k$-algebra over an algebraically closed
+    field $k$, then
+    \[
+        n_S=\dim_k S.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We first classify the indecomposable projective modules.
+
+    Let $P$ be a finitely generated indecomposable projective left $A$-module. Since $A$
+    is Artinian, $P$ has finite length, and therefore
+    \[
+        P/\operatorname{Rad}(P)
+    \]
+    is semisimple. Hence we may write
+    \[
+        P/\operatorname{Rad}(P)\cong S_1\oplus \cdots \oplus S_t,
+    \]
+    where each $S_i$ is simple.
+
+    The canonical epimorphism
+    \[
+        P\longrightarrow P/\operatorname{Rad}(P)
+    \]
+    is essential by Nakayama's lemma. Since $P$ is projective, this epimorphism is a
+    projective cover of
+    \[
+        S_1\oplus \cdots \oplus S_t.
+    \]
+    For each simple left $A$-module $T$, let
+    \[
+        \pi_T:P_T\longrightarrow T
+    \]
+    denote the projective cover of $T$, whose existence was proved in
+    Theorem~\ref{thm:projective-cover-simple}. Thus $P_T$ is an indecomposable
+    projective left $A$-module and
+    \[
+        P_T/\operatorname{Rad}(P_T)\cong T.
+    \]
+
+    In particular, for each $i=1,\dots,t$, we have a projective cover
+    \[
+        \pi_{S_i}:P_{S_i}\longrightarrow S_i.
+    \]
+    Therefore the direct sum map
+    \[
+        \pi_{S_1}\oplus\cdots\oplus \pi_{S_t}:
+        P_{S_1}\oplus \cdots \oplus P_{S_t}
+        \longrightarrow
+        S_1\oplus \cdots \oplus S_t
+    \]
+    is also a projective cover. By uniqueness of projective covers, we obtain
+    \[
+        P\cong P_{S_1}\oplus \cdots \oplus P_{S_t}.
+    \]
+    Since $P$ is indecomposable, we must have $t=1$. Hence
+    \[
+        P\cong P_{S_1}.
+    \]
+    Thus every indecomposable projective module is isomorphic to $P_S$ for some simple
+    module $S$.
+
+    Conversely, for every simple module $S$, the projective cover $P_S$ is indecomposable.
+    Indeed, by the previous theorem, $P_S$ has the form
+    \[
+        P_S\cong Af
+    \]
+    for some primitive idempotent $f\in A$. Since $f$ is primitive, the module $Af$ is
+    indecomposable.
+
+    Next we show that
+    \[
+        P_S\cong P_T
+        \qquad\Longleftrightarrow\qquad
+        S\cong T.
+    \]
+    If $P_S\cong P_T$, then passing to radical quotients gives
+    \[
+        P_S/\operatorname{Rad}(P_S)
+        \cong
+        P_T/\operatorname{Rad}(P_T).
+    \]
+    But
+    \[
+        P_S/\operatorname{Rad}(P_S)\cong S,
+        \qquad
+        P_T/\operatorname{Rad}(P_T)\cong T,
+    \]
+    so $S\cong T$. The converse is immediate from the uniqueness of projective covers.
+
+    Now consider the left regular module ${}_A A$. Since $A$ is Artinian, the natural
+    epimorphism
+    \[
+        A\longrightarrow A/J(A)
+    \]
+    is essential by Nakayama's lemma. Since ${}_A A$ is projective, this epimorphism is
+    a projective cover of $A/J(A)$.
+
+    Write the semisimple $A$-module $A/J(A)$ as
+    \[
+        A/J(A)\cong \bigoplus_S S^{\,n_S},
+    \]
+    where $S$ runs through the isomorphism classes of simple left $A$-modules. Then
+    \[
+        \bigoplus_S P_S^{\,n_S}
+        \longrightarrow
+        \bigoplus_S S^{\,n_S}
+    \]
+    is a projective cover. By uniqueness of projective covers, we get
+    \[
+        {}_A A\cong \bigoplus_S P_S^{\,n_S}.
+    \]
+    Thus the multiplicity of $P_S$ in ${}_A A$ is exactly the multiplicity of $S$ in
+    $A/J(A)$.
+
+    It remains to identify $n_S$. Since $A/J(A)$ is semisimple Artinian, the Wedderburn--Artin
+    decomposition shows that the multiplicity of a simple module $S$ in the left regular
+    module of $A/J(A)$ is
+    \[
+        n_S=\dim_{D_S}S,
+        \qquad
+        D_S=\operatorname{End}_A(S).
+    \]
+    Here $S$ is regarded as a right $D_S$-vector space via
+    \[
+        s\cdot \varphi=\varphi(s).
+    \]
+
+    Finally, if $A$ is a finite-dimensional $k$-algebra over an algebraically closed field
+    $k$, then by Schur's lemma,
+    \[
+        \operatorname{End}_A(S)\cong k.
+    \]
+    Therefore
+    \[
+        n_S=\dim_{D_S}S=\dim_k S.
+    \]
+\end{proof}
+
+\begin{corollary}\label{cor:fg-module-has-projective-cover}
+    Let $A$ be an Artinian ring, and let $U$ be a finitely generated left $A$-module.
+    Then $U$ has a projective cover.
+\end{corollary}
+
+\begin{proof}
+    Since $A$ is Artinian and $U$ is finitely generated, the quotient
+    \[
+        U/\operatorname{Rad}(U)
+    \]
+    is semisimple. Hence we may write
+    \[
+        U/\operatorname{Rad}(U)\cong S_1\oplus\cdots\oplus S_n,
+    \]
+    where each $S_i$ is a simple left $A$-module.
+
+    For each $i$, let
+    \[
+        \pi_i:P_{S_i}\longrightarrow S_i
+    \]
+    be the projective cover of $S_i$. Then the direct sum
+    \[
+        \pi:=\pi_1\oplus\cdots\oplus\pi_n:
+        P_{S_1}\oplus\cdots\oplus P_{S_n}
+        \longrightarrow
+        S_1\oplus\cdots\oplus S_n
+    \]
+    is a projective cover.
+
+    Let
+    \[
+        q:U\longrightarrow U/\operatorname{Rad}(U)
+    \]
+    be the canonical epimorphism. After identifying
+    \[
+        U/\operatorname{Rad}(U)\cong S_1\oplus\cdots\oplus S_n,
+    \]
+    we may regard $\pi$ as an epimorphism
+    \[
+        \pi:P_{S_1}\oplus\cdots\oplus P_{S_n}
+        \longrightarrow
+        U/\operatorname{Rad}(U).
+    \]
+
+    Since
+    \[
+        P:=P_{S_1}\oplus\cdots\oplus P_{S_n}
+    \]
+    is projective and $q$ is surjective, there exists an $A$-module homomorphism
+    \[
+        \widetilde{\pi}:P\longrightarrow U
+    \]
+    such that the following diagram commutes:
+    \[
+        \begin{tikzcd}
+            & P \arrow[d, "\pi"] \arrow[dl, dashed, "\widetilde{\pi}"'] \\
+            U \arrow[r, "q"'] & U/\operatorname{Rad}(U) \arrow[r] & 0 .
+        \end{tikzcd}
+    \]
+    That is,
+    \[
+        q\circ \widetilde{\pi}=\pi.
+    \]
+
+    We claim that $\widetilde{\pi}$ is an essential epimorphism. Since $\pi$ is surjective,
+    $q\circ\widetilde{\pi}$ is surjective. Moreover, $q$ is essential by Nakayama's lemma.
+    Therefore $\widetilde{\pi}$ is surjective.
+
+    Now let $W\subseteq P$ be a submodule such that
+    \[
+        \widetilde{\pi}(W)=U.
+    \]
+    Then
+    \[
+        \pi(W)=q\bigl(\widetilde{\pi}(W)\bigr)=q(U)=U/\operatorname{Rad}(U).
+    \]
+    Since $\pi:P\to U/\operatorname{Rad}(U)$ is essential, it follows that
+    \[
+        W=P.
+    \]
+    Thus $\widetilde{\pi}$ is essential.
+
+    Therefore
+    \[
+        \widetilde{\pi}:P_{S_1}\oplus\cdots\oplus P_{S_n}\longrightarrow U
+    \]
+    is an essential epimorphism from a projective module onto $U$. Hence it is a projective
+    cover of $U$.
+\end{proof}
+
+\begin{lemma}\label{lem:artinian-noetherian}
+    Let $A$ be a ring with identity.
+
+    \begin{enumerate}
+        \item If $A$ is semisimple, then $A$ is left Artinian if and only if $A$ is left
+              Noetherian.
+
+        \item If $A$ is left Artinian, then $A$ is left Noetherian.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textbf{(1)}
+    Assume that $A$ is semisimple. Then the left regular module ${}_A A$ is semisimple,
+    so it is a direct sum of simple left $A$-modules:
+    \[
+        {}_A A=\bigoplus_{\lambda\in \Lambda} S_\lambda .
+    \]
+
+    For a semisimple module, being Noetherian is equivalent to being a finite direct sum
+    of simple modules, and the same is true for being Artinian. Indeed, if the index set
+    $\Lambda$ is infinite, then we can form an infinite strictly increasing chain
+    \[
+        S_{\lambda_1}
+        \subset
+        S_{\lambda_1}\oplus S_{\lambda_2}
+        \subset
+        S_{\lambda_1}\oplus S_{\lambda_2}\oplus S_{\lambda_3}
+        \subset \cdots ,
+    \]
+    so the module is not Noetherian. Similarly, we can form an infinite strictly decreasing
+    chain by removing summands one by one, so the module is not Artinian.
+
+    Thus a semisimple module is Noetherian if and only if it is Artinian, namely if and
+    only if it is a finite direct sum of simple modules. Applying this to the left regular
+    module ${}_A A$, we obtain that $A$ is left Artinian if and only if $A$ is left
+    Noetherian.
+
+    \medskip
+
+    \textbf{(2)}
+    Assume that $A$ is left Artinian. Let
+    \[
+        J=J(A)
+    \]
+    be the Jacobson radical of $A$. Since $A$ is left Artinian, the radical $J$ is nilpotent.
+    Hence there exists $n\geq 1$ such that
+    \[
+        J^n=0.
+    \]
+    Therefore we have a finite filtration of left $A$-modules
+    \[
+        A\supseteq J\supseteq J^2\supseteq \cdots \supseteq J^n=0.
+    \]
+
+    It is enough to show that each quotient
+    \[
+        J^i/J^{i+1}
+    \]
+    is Noetherian as a left $A$-module. Since $J$ annihilates $J^i/J^{i+1}$, each quotient
+    is naturally a module over
+    \[
+        A/J.
+    \]
+    Moreover, $A/J$ is semisimple Artinian. Hence every $A/J$-module is semisimple.
+
+    Because $J^i/J^{i+1}$ is a quotient of the left Artinian module $J^i$, it is Artinian.
+    Thus $J^i/J^{i+1}$ is an Artinian semisimple module. By part \textup{(1)}, it is
+    Noetherian.
+
+    Now using the finite filtration
+    \[
+        A\supseteq J\supseteq J^2\supseteq \cdots \supseteq J^n=0
+    \]
+    and the fact that a module is Noetherian whenever it has a finite filtration whose
+    successive quotients are Noetherian, we conclude that ${}_A A$ is Noetherian.
+
+    Therefore $A$ is left Noetherian.
+\end{proof}
+

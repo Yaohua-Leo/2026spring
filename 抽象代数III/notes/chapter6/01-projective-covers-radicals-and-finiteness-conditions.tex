@@ -1,0 +1,387 @@
+\section{Projective covers, radicals, and finiteness conditions}
+
+\begin{corollary}
+    For finitely generated projective modules $P$ and $Q$,
+    \[
+        P \cong Q
+        \quad\Longleftrightarrow\quad
+        P/\operatorname{Rad}(P) \cong Q/\operatorname{Rad}(Q).
+    \]
+\end{corollary}
+
+\begin{proof}
+    Let
+    \[
+        T := P/\operatorname{Rad}(P).
+    \]
+    By Nakayama lemma, the quotient map $P \to T$ is an essential epimorphism, so $P$ is the projective cover of $T$.
+    Similarly $Q \to Q/\operatorname{Rad}(Q)$ is a projective cover.
+    Then apply uniqueness of projective covers from the previous lecture.
+\end{proof}
+
+\begin{definition}
+    A unital ring $R$ is called left Noetherian if ${}_R R$ is Noetherian as a left $R$-module.
+\end{definition}
+
+\begin{remark}
+    Similar definitions are given for right Noetherian and for left/right Artinian rings.
+\end{remark}
+
+\begin{remark}
+    one-sided Noetherian / Artinian conditions generally do not imply the opposite-sided versions
+\end{remark}
+
+\begin{example}
+    There exists a ring which is left Noetherian but not right Noetherian.
+
+    Let
+    \[
+        R=
+        \left\{
+        \begin{pmatrix}
+            a & b \\
+            0 & n
+        \end{pmatrix}
+        \;\middle|\;
+        a,b\in \mathbb{Q},\ n\in \mathbb{Z}
+        \right\}.
+    \]
+    Then $R$ is left Noetherian, but not right Noetherian.
+\end{example}
+
+\begin{proof}
+    Let
+    \[
+        e_{11}=
+        \begin{pmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{pmatrix},
+        \qquad
+        e_{22}=
+        \begin{pmatrix}
+            0 & 0 \\
+            0 & 1
+        \end{pmatrix}.
+    \]
+    Then, as left $R$-modules,
+    \[
+        {}_R R = Re_{11}\oplus Re_{22}.
+    \]
+
+    We first show that both $Re_{11}$ and $Re_{22}$ are Noetherian as left
+    $R$-modules.
+
+    For $Re_{11}$, we have
+    \[
+        Re_{11}
+        =
+        \left\{
+        \begin{pmatrix}
+            q & 0 \\
+            0 & 0
+        \end{pmatrix}
+        \;\middle|\;
+        q\in\mathbb{Q}
+        \right\}.
+    \]
+    This is a simple left $R$-module. Indeed, if
+    \[
+        0\neq
+        \begin{pmatrix}
+            q & 0 \\
+            0 & 0
+        \end{pmatrix}
+        \in Re_{11},
+    \]
+    then for any $x\in \mathbb{Q}$,
+    \[
+        \begin{pmatrix}
+            xq^{-1} & 0 \\
+            0       & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            q & 0 \\
+            0 & 0
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            x & 0 \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Hence every nonzero submodule of $Re_{11}$ is all of $Re_{11}$, so
+    $Re_{11}$ is simple, in particular Noetherian.
+
+    Now consider
+    \[
+        Re_{22}
+        =
+        \left\{
+        \begin{pmatrix}
+            0 & q \\
+            0 & n
+        \end{pmatrix}
+        \;\middle|\;
+        q\in\mathbb{Q},\ n\in\mathbb{Z}
+        \right\}.
+    \]
+    Define
+    \[
+        \pi:Re_{22}\longrightarrow \mathbb{Z},
+        \qquad
+        \pi\!\left(
+        \begin{pmatrix}
+                0 & q \\
+                0 & n
+            \end{pmatrix}
+        \right)=n.
+    \]
+    We regard $\mathbb{Z}$ as a left $R$-module via
+    \[
+        \begin{pmatrix}
+            a & b \\
+            0 & n
+        \end{pmatrix}\cdot m = nm.
+    \]
+    Then $\pi$ is a surjective $R$-homomorphism. Its kernel is
+    \[
+        \ker\pi=
+        \left\{
+        \begin{pmatrix}
+            0 & q \\
+            0 & 0
+        \end{pmatrix}
+        \;\middle|\;
+        q\in\mathbb{Q}
+        \right\}.
+    \]
+    This is again a simple left $R$-module, because
+    \[
+        \begin{pmatrix}
+            a & b \\
+            0 & n
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & q \\
+            0 & 0
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0 & aq \\
+            0 & 0
+        \end{pmatrix},
+    \]
+    so the action is through multiplication by elements of $\mathbb{Q}$.
+    Moreover, ${}_R\mathbb{Z}$ is Noetherian, since its submodules are exactly
+    the ideals of $\mathbb{Z}$, and $\mathbb{Z}$ is Noetherian.
+
+    Therefore $Re_{22}$ is an extension of two Noetherian left $R$-modules,
+    hence is Noetherian. It follows that
+    \[
+        {}_R R = Re_{11}\oplus Re_{22}
+    \]
+    is a Noetherian left $R$-module. Thus $R$ is left Noetherian.
+
+    Next we show that $R$ is not right Noetherian.
+
+    For each integer $k\ge 0$, define
+    \[
+        I_k=
+        \left\{
+        \begin{pmatrix}
+            0 & q \\
+            0 & 0
+        \end{pmatrix}
+        \;\middle|\;
+        q\in 2^{-k}\mathbb{Z}
+        \right\}.
+    \]
+    We claim that each $I_k$ is a right ideal of $R$. Indeed, if
+    \[
+        \begin{pmatrix}
+            0 & q \\
+            0 & 0
+        \end{pmatrix}\in I_k,
+        \qquad
+        \begin{pmatrix}
+            a & b \\
+            0 & n
+        \end{pmatrix}\in R,
+    \]
+    then
+    \[
+        \begin{pmatrix}
+            0 & q \\
+            0 & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            a & b \\
+            0 & n
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0 & qn \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Since $q\in 2^{-k}\mathbb{Z}$ and $n\in\mathbb{Z}$, we have
+    $qn\in 2^{-k}\mathbb{Z}$, so the product again lies in $I_k$.
+
+    Moreover,
+    \[
+        I_0\subsetneq I_1\subsetneq I_2\subsetneq \cdots
+    \]
+    is a strictly ascending chain of right ideals, because
+    \[
+        2^{-(k+1)}\in 2^{-(k+1)}\mathbb{Z}
+        \quad\text{but}\quad
+        2^{-(k+1)}\notin 2^{-k}\mathbb{Z}.
+    \]
+    Hence $R$ does not satisfy the ascending chain condition on right ideals.
+
+    Therefore $R$ is not right Noetherian.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a left Artinian ring. Then its Jacobson radical $J(R)$ is nilpotent.
+\end{lemma}
+
+\begin{proof}
+    Set
+    \[
+        J:=J(R).
+    \]
+    Since $R$ is left Artinian, the descending chain of left ideals
+    \[
+        J \supseteq J^2 \supseteq J^3 \supseteq \cdots
+    \]
+    stabilizes. Hence there exists some $n \ge 1$ such that
+    \[
+        J^n = J^{n+1}.
+    \]
+    Let
+    \[
+        N:=J^n.
+    \]
+    We claim that $N=0$.
+
+    Suppose, for contradiction, that $N \neq 0$. Then
+    \[
+        N^2 = J^{2n} = J^n = N,
+    \]
+    since the chain has stabilized.
+
+    Now consider the set
+    \[
+        \Sigma=\{\, I \leq {}_R R \mid NI \neq 0 \,\}
+    \]
+    of left ideals of $R$. This set is nonempty because
+    \[
+        N^2 = N \neq 0,
+    \]
+    so $N \in \Sigma$.
+
+    Since $R$ is left Artinian, the set of left ideals satisfies the descending chain
+    condition, so $\Sigma$ contains a minimal element. Let $I_0 \in \Sigma$ be such a
+    minimal left ideal.
+
+    Because $NI_0 \neq 0$, there exists some $a \in I_0$ such that
+    \[
+        Na \neq 0.
+    \]
+    Then $Na$ is a left ideal of $R$ contained in $I_0$, and moreover
+    \[
+        N(Na)=N^2a=Na\neq 0.
+    \]
+    Thus $Na \in \Sigma$. By the minimality of $I_0$, we must have
+    \[
+        Na=I_0.
+    \]
+
+    Since $a \in I_0 = Na$, there exists $b \in N$ such that
+    \[
+        a=ba.
+    \]
+    Therefore
+    \[
+        (1-b)a=0.
+    \]
+    But $b \in N \subseteq J(R)$, and for every element of the Jacobson radical,
+    $1-b$ has a left inverse. Hence there exists $c \in R$ such that
+    \[
+        c(1-b)=1.
+    \]
+    Multiplying the equation $(1-b)a=0$ on the left by $c$, we get
+    \[
+        a=c(1-b)a=0,
+    \]
+    contradicting the choice of $a$ with $Na \neq 0$.
+
+    This contradiction shows that $N=0$. Hence
+    \[
+        J^n=0,
+    \]
+    so $J(R)$ is nilpotent.
+\end{proof}
+
+\begin{theorem}[Levitzki]
+    Every left Artinian ring is left Noetherian.
+\end{theorem}
+
+\begin{proof}
+    Let $R$ be a left Artinian ring, and let $J=J(R)$ be its Jacobson radical.
+
+    Since $R$ is left Artinian, the quotient ring $R/J$ is also left Artinian. Moreover,
+    $J(R/J)=0$, hence $R/J$ is semisimple. Therefore every left $R/J$-module is
+    semisimple.
+
+    Also, since $R$ is left Artinian, $J$ is nilpotent. Thus there exists $n\ge 1$ such
+    that
+    \[
+        J^n=0.
+    \]
+    Consider the finite chain of left ideals
+    \[
+        0=J^n \subseteq J^{n-1} \subseteq \cdots \subseteq J \subseteq R.
+    \]
+
+    For each $i=0,1,\dots,n-1$, the factor module $J^i/J^{i+1}$ is naturally a left
+    $R/J$-module, because
+    \[
+        J\cdot J^i \subseteq J^{i+1}.
+    \]
+    Hence $J^i/J^{i+1}$ is semisimple.
+
+    On the other hand, $J^i/J^{i+1}$ is Artinian, being a quotient of the Artinian
+    left $R$-module ${}_R R$. A semisimple Artinian module must be a finite direct sum
+    of simple modules, so it is Noetherian. Therefore each factor
+    \[
+        J^i/J^{i+1}
+    \]
+    is Noetherian.
+
+    Now we argue by descending induction on $i$. Since $J^n=0$ is Noetherian, and for
+    each $i=0,1,\dots,n-1$ we have a short exact sequence
+    \[
+        0 \longrightarrow J^{i+1} \longrightarrow J^i \longrightarrow J^i/J^{i+1}
+        \longrightarrow 0,
+    \]
+    it follows that if $J^{i+1}$ is Noetherian, then so is $J^i$. Hence
+    \[
+        J^{n-1},\,J^{n-2},\,\dots,\,J,\,R
+    \]
+    are all Noetherian as left $R$-modules.
+
+    In particular, ${}_R R$ is Noetherian. Therefore $R$ is a left Noetherian ring.
+\end{proof}
+
+\begin{theorem}
+    If $R$ is left Noetherian/Artinian, then every finitely generated left $R$-module is Noetherian/Artinian.
+\end{theorem}
+
+\begin{proof}
+    Prove for Noetherian case: If $M$ is generated by $m$ elements, then $M=Rm_1+ \ldots + Rm_n$, each $Rm_i$ is a homomorphic image of ${}_RR$. Hence $Rm_i$ is Noetherian.
+    Finite sums of Noetherian modules are Noetherian, so $M$ is Noetherian.
+\end{proof}
+

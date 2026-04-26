@@ -1,0 +1,454 @@
+\section{Homework Week 4}
+
+\begin{exercise}
+    Let $J$ be an $R$-module. Show that the following are equivalent.
+    \begin{enumerate}
+        \item $J$ is an injective module.
+        \item For any $R$-module monomorphism $\varphi \colon J \to M$, there exists an $R$-module homomorphism $\psi \colon M \to J$ such that $\psi\varphi=\operatorname{id}_J$.
+        \item If $J$ is a submodule of some $R$-module $M$, then $J$ is a direct summand of $M$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    We prove $(1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(1)$.
+
+    \medskip
+    \noindent\textbf{$(1)\Rightarrow(2)$.}
+    Assume that $J$ is injective, and let $\varphi\colon J\to M$ be a monomorphism.
+    Apply the defining property of injectivity to the monomorphism $\varphi$ and the map $\operatorname{id}_J\colon J\to J$:
+    \[
+        \begin{tikzcd}
+            J \arrow[r, hook, "\varphi"] \arrow[d, "\operatorname{id}_J"'] & M \arrow[dl, dashed, "\exists\,\psi"] \\
+            J &
+        \end{tikzcd}
+    \]
+    Then there exists an $R$-module homomorphism $\psi\colon M\to J$ such that
+    \[
+        \psi\circ\varphi=\operatorname{id}_J.
+    \]
+
+    \medskip
+    \noindent\textbf{$(2)\Rightarrow(3)$.}
+    Assume \textup{(2)}.
+    If $J\subseteq M$, let $\iota\colon J\hookrightarrow M$ be the inclusion map.
+    By \textup{(2)}, there exists $\psi\colon M\to J$ such that
+    \[
+        \psi\circ\iota=\operatorname{id}_J.
+    \]
+    We claim that
+    \[
+        M=J\oplus\ker\psi.
+    \]
+    Indeed, for any $m\in M$,
+    \[
+        m=\iota(\psi(m))+\bigl(m-\iota(\psi(m))\bigr),
+    \]
+    and
+    \[
+        \psi\bigl(m-\iota(\psi(m))\bigr)=\psi(m)-\psi(\iota(\psi(m)))=\psi(m)-\psi(m)=0,
+    \]
+    so $m-\iota(\psi(m))\in\ker\psi$.
+    Hence $M=J+\ker\psi$.
+    If $x\in J\cap\ker\psi$, then
+    \[
+        x=(\psi\circ\iota)(x)=\psi(x)=0,
+    \]
+    so $J\cap\ker\psi=0$.
+    Therefore $M=J\oplus\ker\psi$, and $J$ is a direct summand of $M$.
+
+    \medskip
+    \noindent\textbf{$(3)\Rightarrow(1)$.}
+    Assume \textup{(3)}.
+    To prove that $J$ is injective, let
+    \[
+        i\colon A\hookrightarrow B
+    \]
+    be a monomorphism of $R$-modules, and let
+    \[
+        f\colon A\to J
+    \]
+    be an $R$-module homomorphism.
+    We must show that $f$ extends to a map $g\colon B\to J$.
+
+    Consider the quotient module
+    \[
+        P=(B\oplus J)/N,
+        \qquad
+        N=\{(i(a),-f(a))\mid a\in A\}.
+    \]
+    Define maps
+    \[
+        \eta\colon J\to P,\qquad \eta(j)=[(0,j)],
+    \]
+    and
+    \[
+        \beta\colon B\to P,\qquad \beta(b)=[(b,0)].
+    \]
+    We first show that $\eta$ is injective.
+    If $\eta(j)=0$, then $(0,j)\in N$, so for some $a\in A$,
+    \[
+        (0,j)=(i(a),-f(a)).
+    \]
+    Hence $i(a)=0$. Since $i$ is injective,$a=0$, and therefore $j=-f(0)=0$.
+    Thus $\eta$ is a monomorphism, so we may identify $J$ with the submodule $\eta(J)\subseteq P$.
+
+    By \textup{(3)}, this submodule is a direct summand of $P$.
+    Therefore there exists an $R$-module homomorphism
+    \[
+        s\colon P\to J
+    \]
+    such that
+    \[
+        s\circ\eta=\operatorname{id}_J.
+    \]
+    Now define
+    \[
+        g=s\circ\beta\colon B\to J.
+    \]
+    For any $a\in A$, we have in $P$:
+    \[
+        [(i(a),0)]=[(0,f(a))],
+    \]
+    because
+    \[
+        (i(a),0)-(0,f(a))=(i(a),-f(a))\in N.
+    \]
+    Hence
+    \[
+        g(i(a))
+        =s([(i(a),0)])
+        =s([(0,f(a))])
+        =(s\circ\eta)(f(a))
+        =f(a).
+    \]
+    So $g\circ i=f$, and $f$ extends to $B$.
+    Therefore $J$ is injective.
+\end{proof}
+
+\begin{exercise}
+    Suppose that $(M_i)_{i\in I}$ are $R$-modules. Prove that
+    \[
+        \bigoplus_{i\in I} M_i
+    \]
+    is a flat $R$-module if and only if each $M_i$ is a flat $R$-module.
+\end{exercise}
+
+\begin{proof}
+    Set
+    \[
+        M=\bigoplus_{i\in I} M_i.
+    \]
+
+    \medskip
+    \noindent\textbf{First assume that each $M_i$ is flat.}
+    Let
+    \[
+        0\longrightarrow A \longrightarrow B \longrightarrow C \longrightarrow 0
+    \]
+    be a short exact sequence of $R$-modules.
+    Since each $M_i$ is flat, for every $i\in I$ the sequence
+    \[
+        0\longrightarrow M_i\otimes_R A
+        \longrightarrow M_i\otimes_R B
+        \longrightarrow M_i\otimes_R C
+        \longrightarrow 0
+    \]
+    is exact.
+    Taking direct sums over $i\in I$, we obtain an exact sequence
+    \[
+        0\longrightarrow \bigoplus_{i\in I}(M_i\otimes_R A)
+        \longrightarrow \bigoplus_{i\in I}(M_i\otimes_R B)
+        \longrightarrow \bigoplus_{i\in I}(M_i\otimes_R C)
+        \longrightarrow 0.
+    \]
+    Using the canonical isomorphisms
+    \[
+        \left(\bigoplus_{i\in I} M_i\right)\otimes_R X
+        \cong
+        \bigoplus_{i\in I}(M_i\otimes_R X)
+        \qquad (X=A,B,C),
+    \]
+    we get
+    \[
+        0\longrightarrow M\otimes_R A
+        \longrightarrow M\otimes_R B
+        \longrightarrow M\otimes_R C
+        \longrightarrow 0.
+    \]
+    Hence $M$ is flat.
+
+    \medskip
+    \noindent\textbf{Conversely, assume that $M$ is flat.}
+    Fix $i\in I$, and write
+    \[
+        M=M_i\oplus N_i,
+        \qquad
+        N_i=\bigoplus_{j\neq i} M_j.
+    \]
+    Let
+    \[
+        0\longrightarrow A \longrightarrow B \longrightarrow C \longrightarrow 0
+    \]
+    be a short exact sequence of $R$-modules.
+    Since $M$ is flat, the sequence
+    \[
+        0\longrightarrow M\otimes_R A
+        \longrightarrow M\otimes_R B
+        \longrightarrow M\otimes_R C
+        \longrightarrow 0
+    \]
+    is exact.
+    Using
+    \[
+        M\otimes_R X
+        \cong
+        (M_i\otimes_R X)\oplus(N_i\otimes_R X)
+        \qquad (X=A,B,C),
+    \]
+    this becomes
+    \[
+        0\longrightarrow
+        (M_i\otimes_R A)\oplus(N_i\otimes_R A)
+        \longrightarrow
+        (M_i\otimes_R B)\oplus(N_i\otimes_R B)
+        \longrightarrow
+        (M_i\otimes_R C)\oplus(N_i\otimes_R C)
+        \longrightarrow 0.
+    \]
+    Since kernels and images of direct sum maps decompose componentwise, it follows that
+    \[
+        0\longrightarrow M_i\otimes_R A
+        \longrightarrow M_i\otimes_R B
+        \longrightarrow M_i\otimes_R C
+        \longrightarrow 0
+    \]
+    is exact.
+    Therefore $M_i$ is flat.
+    As $i$ was arbitrary, each $M_i$ is flat.
+\end{proof}
+
+\begin{exercise}
+    Prove that the following three conditions on an $R$-module $V$ are equivalent.
+    \begin{enumerate}
+        \item \textup{(Ascending chain condition.)} For every infinite chain of $R$-submodules of $V$,
+              \[
+                  V_1\subseteq V_2\subseteq \cdots \subseteq V_n\subseteq\cdots,
+              \]
+              there is a number $m$ such that
+              \[
+                  V_m=V_{m+1}=\cdots.
+              \]
+        \item Any non-empty set of submodules of $V$ contains a maximal element with respect to inclusion.
+        \item Every $R$-submodule of $V$ is finitely generated.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    We prove $(1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(1)$.
+
+    \medskip
+    \noindent\textbf{$(1)\Rightarrow(2)$.}
+    Assume that \textup{(2)} fails.
+    Then there exists a non-empty set $\mathcal{S}$ of submodules of $V$ having no maximal element.
+    Choose $V_1\in\mathcal{S}$.
+    Since $V_1$ is not maximal in $\mathcal{S}$, there exists $V_2\in\mathcal{S}$ such that
+    \[
+        V_1\subsetneq V_2.
+    \]
+    Inductively, having chosen $V_n\in\mathcal{S}$, since $V_n$ is not maximal there exists $V_{n+1}\in\mathcal{S}$ with
+    \[
+        V_n\subsetneq V_{n+1}.
+    \]
+    Thus we obtain a strictly ascending chain
+    \[
+        V_1\subsetneq V_2\subsetneq \cdots,
+    \]
+    which contradicts \textup{(1)}.
+    Hence every non-empty set of submodules contains a maximal element.
+
+    \medskip
+    \noindent\textbf{$(2)\Rightarrow(3)$.}
+    Let $U$ be a submodule of $V$.
+    Consider the set
+    \[
+        \mathcal{T}=\{N\le U \mid N \text{ is finitely generated}\}.
+    \]
+    This set is non-empty, since $0\in\mathcal{T}$.
+    By \textup{(2)},$\mathcal{T}$ has a maximal element, say $N$.
+
+    We claim that $N=U$.
+    If not, choose $u\in U\setminus N$.
+    Then
+    \[
+        N+Ru
+    \]
+    is a finitely generated submodule of $U$ properly containing $N$, contradicting the maximality of $N$ in $\mathcal{T}$.
+    Therefore $U=N$, so $U$ is finitely generated.
+    Hence every submodule of $V$ is finitely generated.
+
+    \medskip
+    \noindent\textbf{$(3)\Rightarrow(1)$.}
+    Let
+    \[
+        V_1\subseteq V_2\subseteq \cdots
+    \]
+    be an ascending chain of submodules of $V$.
+    Set
+    \[
+        U=\bigcup_{n\ge 1} V_n.
+    \]
+    Since the chain is ascending,$U$ is a submodule of $V$.
+    By \textup{(3)},$U$ is finitely generated, say
+    \[
+        U=Ru_1+\cdots+Ru_r.
+    \]
+    For each $j$, choose $n_j$ such that $u_j\in V_{n_j}$, and let
+    \[
+        m=\max\{n_1,\dots,n_r\}.
+    \]
+    Then $u_1,\dots,u_r\in V_m$, so $U\subseteq V_m$.
+    Since always $V_m\subseteq U$, we get $U=V_m$.
+    Therefore for all $n\ge m$,
+    \[
+        V_n=U=V_m,
+    \]
+    so the chain stabilizes.
+    Hence \textup{(1)} holds.
+\end{proof}
+
+\begin{exercise}
+    Let $W$ be an $R$-submodule of $V$. Prove that $V$ is Noetherian if and only if both $W$ and $V/W$ are Noetherian.
+\end{exercise}
+
+\begin{proof}
+    We use the characterization that an $R$-module is Noetherian if and only if every submodule is finitely generated.
+
+    \medskip
+    \noindent\textbf{Assume first that $V$ is Noetherian.}
+    Then every submodule of $V$ is finitely generated.
+
+    Since every submodule of $W$ is also a submodule of $V$, it follows that every submodule of $W$ is finitely generated.
+    Hence $W$ is Noetherian.
+
+    Now let $\overline{U}$ be a submodule of $V/W$, and let
+    \[
+        \pi\colon V\to V/W
+    \]
+    be the quotient map.
+    Then $U:=\pi^{-1}(\overline{U})$ is a submodule of $V$, so $U$ is finitely generated, say
+    \[
+        U=Rv_1+\cdots+Rv_n.
+    \]
+    Applying $\pi$, we get
+    \[
+        \overline{U}=R(v_1+W)+\cdots+R(v_n+W).
+    \]
+    Thus every submodule of $V/W$ is finitely generated, and therefore $V/W$ is Noetherian.
+
+    \medskip
+    \noindent\textbf{Conversely, assume that both $W$ and $V/W$ are Noetherian.}
+    Let $U$ be any submodule of $V$.
+    We show that $U$ is finitely generated.
+
+    First,
+    \[
+        U\cap W
+    \]
+    is a submodule of $W$, so it is finitely generated.
+    Choose generators
+    \[
+        U\cap W=Rw_1+\cdots+Rw_m.
+    \]
+
+    Next, since
+    \[
+        (U+W)/W
+    \]
+    is a submodule of $V/W$, it is finitely generated as well.
+    Choose elements $u_1,\dots,u_n\in U$ such that
+    \[
+        (U+W)/W
+        =
+        R(u_1+W)+\cdots+R(u_n+W).
+    \]
+
+    Now let $u\in U$.
+    Since $u+W\in (U+W)/W$, there exist $a_1,\dots,a_n\in R$ such that
+    \[
+        u+W=\sum_{i=1}^n a_i(u_i+W).
+    \]
+    Therefore
+    \[
+        u-\sum_{i=1}^n a_i u_i\in W.
+    \]
+    Because also $u,u_i\in U$, we have
+    \[
+        u-\sum_{i=1}^n a_i u_i\in U\cap W.
+    \]
+    So there exist $b_1,\dots,b_m\in R$ such that
+    \[
+        u-\sum_{i=1}^n a_i u_i=\sum_{j=1}^m b_j w_j.
+    \]
+    Hence
+    \[
+        u=\sum_{i=1}^n a_i u_i+\sum_{j=1}^m b_j w_j.
+    \]
+    This shows that $U$ is generated by
+    \[
+        u_1,\dots,u_n,w_1,\dots,w_m.
+    \]
+    Thus every submodule of $V$ is finitely generated, so $V$ is Noetherian.
+\end{proof}
+
+\begin{exercise}
+    Let $V$ be a Noetherian $R$-module and let $f\colon V\to V$ be an epimorphism. Show that $f$ is an $R$-isomorphism.
+\end{exercise}
+
+\begin{proof}
+    Since $f$ is an epimorphism, it is surjective.
+    It therefore suffices to prove that $f$ is injective.
+
+    For each $n\ge 1$, set
+    \[
+        K_n=\ker(f^n).
+    \]
+    Then
+    \[
+        K_1\subseteq K_2\subseteq K_3\subseteq \cdots,
+    \]
+    because if $f^n(x)=0$, then
+    \[
+        f^{n+1}(x)=f(f^n(x))=0.
+    \]
+    Since $V$ is Noetherian, this ascending chain stabilizes.
+    Hence there exists $m\ge 1$ such that
+    \[
+        K_m=K_{m+1}.
+    \]
+
+    We claim that $K_m=0$.
+    Let $x\in K_m$.
+    Because $f$ is surjective,$f^m$ is also surjective, there exists $y\in V$ such that
+    \[
+        f^m(y)=x.
+    \]
+    Now
+    \[
+        f^{2m}(y)=f^m(f^m(y))=f^m(x)=0,
+    \]
+    so $y\in K_{2m}=K_m$.
+    Therefore
+    \[
+        x=f^m(y)=0.
+    \]
+    Thus $K_m=0$.
+
+    Since
+    \[
+        \ker(f)=K_1\subseteq K_m=0,
+    \]
+    we obtain $\ker(f)=0$.
+    So $f$ is injective.
+    Being both surjective and injective,$f$ is an isomorphism.
+\end{proof}
+

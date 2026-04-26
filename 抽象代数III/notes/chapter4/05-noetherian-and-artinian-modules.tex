@@ -1,0 +1,170 @@
+\section{Noetherian and Artinian Modules}
+
+\begin{definition}
+    An $R$-module $M$ is called \emph{Noetherian} if for every ascending chain of submodules
+    \[
+        L_1\subseteq L_2\subseteq \cdots
+    \]
+    there exists $n_0$ such that
+    \[
+        L_n=L_{n_0}\qquad \text{for all } n\ge n_0.
+    \]
+\end{definition}
+
+\begin{lemma}
+    For an $R$-module $M$, the following are equivalent.
+    \begin{enumerate}
+        \item $M$ is Noetherian.
+        \item Every submodule of $M$ is finitely generated.
+        \item Every non-empty set of submodules of $M$ has a maximal element.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textbf{(1) $\Longrightarrow$(3).}
+    Suppose $\mathcal{S}$ is a non-empty set of submodules of $M$ having no maximal element.
+    Choose $L_1\in \mathcal{S}$. Since $L_1$ is not maximal, there exists $L_2\in \mathcal{S}$ with
+    \[
+        L_1\subsetneq L_2.
+    \]
+    Continuing inductively, we obtain a strictly ascending chain
+    \[
+        L_1\subsetneq L_2\subsetneq L_3\subsetneq \cdots,
+    \]
+    contradicting that $M$ is Noetherian.
+
+    \textbf{(3) $\Longrightarrow$(2).}
+    Let $N\le M$. Consider the set
+    \[
+        \mathcal{T}:=\{L\le N \mid L \text{ is finitely generated}\}.
+    \]
+    This set is non-empty because $0\in \mathcal{T}$. By (3),$\mathcal{T}$ has a maximal
+    element, say $L$. If $L\neq N$, choose $x\in N\setminus L$. Then
+    \[
+        L+Rx
+    \]
+    is a finitely generated submodule of $N$ strictly containing $L$, contradicting the
+    maximality of $L$. Hence $L=N$, so $N$ is finitely generated.
+
+    \textbf{(2) $\Longrightarrow$(1).}
+    Let
+    \[
+        L_1\subseteq L_2\subseteq \cdots
+    \]
+    be an ascending chain of submodules, and set
+    \[
+        L:=\bigcup_{n\ge 1} L_n.
+    \]
+    Then $L$ is a submodule of $M$, so by (2) it is finitely generated, say
+    \[
+        L=Rx_1+\cdots+Rx_m.
+    \]
+    Each generator $x_j$ lies in some $L_{n_j}$. If $N=\max\{n_1,\dots,n_m\}$, then
+    \[
+        x_1,\dots,x_m\in L_N,
+    \]
+    so $L=L_N$. Hence
+    \[
+        L_n=L_N \qquad \text{for all } n\ge N,
+    \]
+    and the chain stabilizes.
+\end{proof}
+
+\begin{proposition}
+    Let
+    \[
+        0\longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0
+    \]
+    be a short exact sequence of $R$-modules. Then $M$ is Noetherian if and only if both $M'$ and $M''$ are Noetherian.
+\end{proposition}
+
+\begin{proof}
+    Let $\pi:M\to M''$ be the quotient map, and identify $M'$ with its image in $M$.
+
+    First assume that $M$ is Noetherian. Since $M'$ is a submodule of $M$, it is
+    Noetherian. Now let $N''\leq M''$ be any submodule. Then $\pi^{-1}(N'')$ is a
+    submodule of $M$, hence is finitely generated. Since $\pi(\pi^{-1}(N''))=N''$,
+    it follows that $N''$ is finitely generated. Therefore $M''$ is Noetherian.
+
+    Conversely, assume that both $M'$ and $M''$ are Noetherian. Let $N\leq M$ be
+    any submodule. Then $N\cap M'$ is a submodule of $M'$, so it is finitely
+    generated. Also $\pi(N)$ is a submodule of $M''$, so it is finitely generated.
+    Choose elements $x_1,\dots,x_r\in N$ such that
+    \[
+        \pi(x_1),\dots,\pi(x_r)
+    \]
+    generate $\pi(N)$, and choose elements $y_1,\dots,y_s\in N\cap M'$ which
+    generate $N\cap M'$.
+
+    We claim that
+    \[
+        N=Rx_1+\cdots+Rx_r+Ry_1+\cdots+Ry_s.
+    \]
+    Indeed, let $x\in N$. Since $\pi(x)\in \pi(N)$, there exist $a_1,\dots,a_r\in R$ such that
+    \[
+        \pi(x)=\sum_{i=1}^r a_i\pi(x_i)
+        =\pi\!\left(\sum_{i=1}^r a_i x_i\right).
+    \]
+    Hence
+    \[
+        x-\sum_{i=1}^r a_i x_i \in \ker(\pi)\cap N = M'\cap N = N\cap M'.
+    \]
+    Since $y_1,\dots,y_s$ generate $N\cap M'$, there exist $b_1,\dots,b_s\in R$ such
+    that
+    \[
+        x-\sum_{i=1}^r a_i x_i=\sum_{j=1}^s b_j y_j.
+    \]
+    Therefore
+    \[
+        x=\sum_{i=1}^r a_i x_i+\sum_{j=1}^s b_j y_j,
+    \]
+    proving the claim. Thus $N$ is finitely generated.
+
+    Since every submodule $N\leq M$ is finitely generated,$M$ is Noetherian.
+\end{proof}
+
+\begin{definition}
+    An $R$-module $M$ is called \emph{Artinian} if for every descending chain of submodules
+    \[
+        L_1\supseteq L_2\supseteq \cdots
+    \]
+    there exists $n_0$ such that
+    \[
+        L_n=L_{n_0}\qquad \text{for all } n\ge n_0.
+    \]
+\end{definition}
+
+\begin{lemma}
+    An $R$-module $M$ is Artinian if and only if every non-empty set of submodules of $M$ contains a minimal element.
+\end{lemma}
+
+\begin{proof}
+    The proof is the descending-chain analogue of the Noetherian case.
+\end{proof}
+
+\begin{remark}
+    If an $R$-module $M$ is Noetherian (respectively Artinian), then we also say that $M$ satisfies the ascending chain condition (respectively descending chain condition) on
+    submodules, abbreviated as ACC (respectively DCC).
+\end{remark}
+
+\begin{proposition}
+    Let
+    \[
+        0\longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0
+    \]
+    be a short exact sequence of $R$-modules. Then $M$ is Artinian if and only if both $M'$ and $M''$ are Artinian.
+\end{proposition}
+
+\begin{proof}
+    The proof is completely analogous to the Noetherian case, using minimal elements instead of
+    maximal elements.
+\end{proof}
+
+\begin{definition}
+    An $R$-module $M$ is called \emph{simple} (or \emph{irreducible}) if it has exactly two
+    submodules:
+    \[
+        0 \qquad \text{and} \qquad M.
+    \]
+\end{definition}
+

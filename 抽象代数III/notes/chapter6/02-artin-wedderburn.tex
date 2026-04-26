@@ -1,0 +1,604 @@
+\section{Artin-Wedderburn}
+
+\begin{theorem}
+    Let
+    \[
+        {}_RV = V_1 \oplus \cdots \oplus V_n
+    \]
+    be a direct sum of $R$-modules, and suppose all $V_i$ are isomorphic to each other.
+    Then
+    \[
+        \operatorname{End}_R({}_RV) \cong M_n\bigl(\operatorname{End}_R(V_i)\bigr).
+    \]
+\end{theorem}
+
+\begin{proof}
+    For each $i$, let
+    \[
+        \iota_i:V_i\hookrightarrow V
+        \qquad\text{and}\qquad
+        \pi_i:V\to V_i
+    \]
+    be the canonical inclusion and projection. Fix isomorphisms
+    \[
+        \theta_i:V_1\xrightarrow{\sim} V_i
+        \qquad (i=1,\dots,n).
+    \]
+
+    For $\sigma\in \operatorname{End}_R(V)$, define
+    \[
+        \varphi_{ij}(\sigma):=\theta_i^{-1}\pi_i\,\sigma\,\iota_j\theta_j
+        \in \operatorname{End}_R(V_1).
+    \]
+    Thus we obtain a map
+    \[
+        \Phi:\operatorname{End}_R(V)\longrightarrow M_n(E_1),
+        \qquad
+        \sigma\longmapsto \bigl(\varphi_{ij}(\sigma)\bigr),
+    \]
+    where
+    \[
+        E_1:=\operatorname{End}_R(V_1).
+    \]
+
+    We first check that $\Phi$ is a ring homomorphism.
+
+    Additivity is immediate. For multiplicativity, let $\sigma,\beta\in \operatorname{End}_R(V)$. Since
+    \[
+        1_V=\sum_{j=1}^n \iota_j\pi_j,
+    \]
+    we have
+    \begin{align*}
+        \varphi_{ik}(\beta\sigma)
+         & =\theta_i^{-1}\pi_i\,\beta\sigma\,\iota_k\theta_k             \\
+         & =\theta_i^{-1}\pi_i\,\beta
+        \left(\sum_{j=1}^n \iota_j\pi_j\right)
+        \sigma\,\iota_k\theta_k                                          \\
+         & =\sum_{j=1}^n
+        \theta_i^{-1}\pi_i\,\beta\,\iota_j\pi_j\,\sigma\,\iota_k\theta_k \\
+         & =\sum_{j=1}^n
+        \bigl(\theta_i^{-1}\pi_i\,\beta\,\iota_j\theta_j\bigr)
+        \bigl(\theta_j^{-1}\pi_j\,\sigma\,\iota_k\theta_k\bigr)          \\
+         & =\sum_{j=1}^n \varphi_{ij}(\beta)\varphi_{jk}(\sigma).
+    \end{align*}
+    Hence
+    \[
+        \Phi(\beta\sigma)=\Phi(\beta)\Phi(\sigma).
+    \]
+    So $\Phi$ is a ring homomorphism.
+
+    Next we show that $\Phi$ is injective. Suppose $\Phi(\sigma)=0$. Then
+    \[
+        \varphi_{ij}(\sigma)=0
+        \qquad\text{for all } i,j,
+    \]
+    so
+    \[
+        \theta_i^{-1}\pi_i\,\sigma\,\iota_j\theta_j=0
+        \qquad\text{for all } i,j.
+    \]
+    Since each $\theta_i$ and $\theta_j$ is an isomorphism, this implies
+    \[
+        \pi_i\,\sigma\,\iota_j=0
+        \qquad\text{for all } i,j.
+    \]
+    Therefore $\pi_i(\sigma(v))=0$ for every $v\in V_j$ and every $i,j$. Hence
+    \[
+        \sigma(V_j)=0
+        \qquad\text{for all } j.
+    \]
+    Because
+    \[
+        V=V_1\oplus\cdots\oplus V_n,
+    \]
+    it follows that $\sigma=0$. Thus $\Phi$ is injective.
+
+    Finally we prove surjectivity. Let
+    \[
+        (a_{ij})\in M_n(E_1).
+    \]
+    Define
+    \[
+        \sigma:=\sum_{i,j=1}^n \iota_i\theta_i\,a_{ij}\,\theta_j^{-1}\pi_j
+        \in \operatorname{End}_R(V).
+    \]
+    Then for each $i,j$,
+    \begin{align*}
+        \varphi_{ij}(\sigma)
+         & =\theta_i^{-1}\pi_i
+        \left(\sum_{r,s=1}^n \iota_r\theta_r\,a_{rs}\,\theta_s^{-1}\pi_s\right)
+        \iota_j\theta_j        \\
+         & =\sum_{r,s=1}^n
+        \theta_i^{-1}(\pi_i\iota_r)\theta_r\,a_{rs}\,\theta_s^{-1}(\pi_s\iota_j)\theta_j.
+    \end{align*}
+    Now
+    \[
+        \pi_i\iota_r=
+        \begin{cases}
+            1_{V_i}, & i=r,     \\
+            0,       & i\neq r,
+        \end{cases}
+        \qquad
+        \pi_s\iota_j=
+        \begin{cases}
+            1_{V_j}, & s=j,     \\
+            0,       & s\neq j,
+        \end{cases}
+    \]
+    so all terms vanish except the one with $r=i$ and $s=j$. Hence
+    \[
+        \varphi_{ij}(\sigma)
+        =\theta_i^{-1}\theta_i\,a_{ij}\,\theta_j^{-1}\theta_j
+        =a_{ij}.
+    \]
+    Therefore
+    \[
+        \Phi(\sigma)=(a_{ij}),
+    \]
+    and $\Phi$ is surjective.
+
+    Thus $\Phi$ is a ring isomorphism, and we conclude that
+    \[
+        \operatorname{End}_R(V)\cong M_n\bigl(\operatorname{End}_R(V_1)\bigr).
+    \]
+\end{proof}
+
+\begin{definition}
+    A ring $R$ is called semisimple if ${}_R R$ is semisimple as a left $R$-module.
+\end{definition}
+
+\begin{lemma}
+    For a unital ring $R$, the following are equivalent:
+    (1) $R$ is semisimple.
+    (2) Every left $R$-module is semisimple.
+\end{lemma}
+
+\begin{proof}
+    If ${}_R R$ is semisimple, then every free module is semisimple, and every module is a quotient of a free module.
+    Use closure properties of semisimple modules to deduce that every left $R$-module is semisimple.
+    The converse is immediate by applying the statement to ${}_R R$ itself.
+\end{proof}
+
+\begin{lemma}
+    For an $R$-module ${}_RM$, there is a standard identification
+    \[
+        \operatorname{Hom}_R({}_RR_R, {}_RM) \cong {}_RM,
+        \qquad
+        f \longmapsto f(1).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Define
+    \[
+        \Phi:\operatorname{Hom}_R({}_RR_R,{}_RM)\longrightarrow {}_RM,
+        \qquad
+        \Phi(f)=f(1).
+    \]
+
+    We first show that $\Phi$ is bijective.
+
+    For any $f\in \operatorname{Hom}_R({}_RR_R,{}_RM)$ and any $r\in R$, since $f$ is
+    left $R$-linear, we have
+    \[
+        f(r)=f(r\cdot 1)=r\,f(1).
+    \]
+    Thus $f$ is completely determined by the element $f(1)\in M$.
+
+    Conversely, for each $m\in M$, define
+    \[
+        \Psi(m):{}_RR_R\longrightarrow {}_RM,
+        \qquad
+        \Psi(m)(r)=rm
+        \quad (r\in R).
+    \]
+    Then $\Psi(m)$ is left $R$-linear, because for all $a,r\in R$,
+    \[
+        \Psi(m)(ar)=(ar)m=a(rm)=a\,\Psi(m)(r).
+    \]
+    Hence $\Psi(m)\in \operatorname{Hom}_R({}_RR_R,{}_RM)$.
+
+    Now for $m\in M$,
+    \[
+        (\Phi\circ \Psi)(m)=\Phi(\Psi(m))=\Psi(m)(1)=1m=m.
+    \]
+    And for $f\in \operatorname{Hom}_R({}_RR_R,{}_RM)$ and $r\in R$,
+    \[
+        (\Psi\circ\Phi)(f)(r)=\Psi(f(1))(r)=r\,f(1)=f(r).
+    \]
+    So $\Psi\circ\Phi=\mathrm{id}$ and $\Phi\circ\Psi=\mathrm{id}$, hence $\Phi$ is a bijection.
+
+    Finally, we check that this identification is $R$-linear. Recall that
+    $\operatorname{Hom}_R({}_RR_R,{}_RM)$ carries the left $R$-module structure
+    \[
+        (a\cdot f)(r)=f(ra)
+        \qquad (a,r\in R).
+    \]
+    Then for $a\in R$ and $f\in \operatorname{Hom}_R({}_RR_R,{}_RM)$,
+    \[
+        \Phi(a\cdot f)=(a\cdot f)(1)=f(1a)=f(a)=a\,f(1)=a\,\Phi(f).
+    \]
+    Therefore $\Phi$ is an isomorphism of left $R$-modules:
+    \[
+        \operatorname{Hom}_R({}_RR_R,{}_RM)\cong {}_RM.
+    \]
+\end{proof}
+
+\begin{corollary}
+    For any ring $R$, there is a ring isomorphism
+    \[
+        \operatorname{End}_R({}_R R)\cong R^{\operatorname{op}},
+        \qquad
+        f\longmapsto f(1).
+    \]
+\end{corollary}
+
+\begin{proof}
+    Consider the map
+    \[
+        \Phi:\operatorname{End}_R({}_R R)\longrightarrow R,
+        \qquad
+        \Phi(f)=f(1).
+    \]
+    By the preceding lemma with $M=R$, this map is a bijection of sets.
+
+    We now check the ring structure. Let $f_1,f_2\in \operatorname{End}_R({}_R R)$. Then
+    \[
+        \Phi(f_1\circ f_2)
+        =(f_1\circ f_2)(1)
+        =f_1\bigl(f_2(1)\bigr).
+    \]
+    Since $f_1$ is left $R$-linear, for any $r\in R$ we have
+    \[
+        f_1(r)=f_1(r\cdot 1)=r\,f_1(1).
+    \]
+    Hence
+    \[
+        f_1\bigl(f_2(1)\bigr)=f_2(1)\,f_1(1).
+    \]
+    Therefore
+    \[
+        \Phi(f_1\circ f_2)=\Phi(f_2)\Phi(f_1),
+    \]
+    where the product on the right is the multiplication in $R$. This means exactly that
+    \[
+        \Phi(f_1\circ f_2)=\Phi(f_1)\cdot_{\operatorname{op}}\Phi(f_2)
+    \]
+    when the codomain is viewed as $R^{\operatorname{op}}$.
+
+    Thus $\Phi$ is a ring isomorphism
+    \[
+        \operatorname{End}_R({}_R R)\cong R^{\operatorname{op}}.
+    \]
+\end{proof}
+
+\begin{lemma}
+    For any ring $R$ and any $n\ge 1$, there is a ring isomorphism
+    \[
+        M_n(R)^{\operatorname{op}}\cong M_n\bigl(R^{\operatorname{op}}\bigr),
+        \qquad
+        A\longmapsto A^{\top}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Define
+    \[
+        \Psi:M_n(R)^{\operatorname{op}}\longrightarrow M_n\bigl(R^{\operatorname{op}}\bigr),
+        \qquad
+        \Psi(A)=A^{\top}.
+    \]
+    This map is clearly additive and bijective, since transpose is its own inverse.
+
+    It remains to check multiplicativity. Let
+    \[
+        A=(a_{ij}),\qquad B=(b_{ij})\in M_n(R).
+    \]
+    Recall that multiplication in $M_n(R)^{\operatorname{op}}$ is reversed, so
+    \[
+        A\cdot_{\operatorname{op}} B = BA
+    \]
+    with the usual matrix product on the right-hand side.
+
+    Now fix $i,j$. Then
+    \[
+        \bigl(\Psi(A\cdot_{\operatorname{op}} B)\bigr)_{ij}
+        =\bigl((BA)^{\top}\bigr)_{ij}
+        =(BA)_{ji}
+        =\sum_{k=1}^n b_{jk}a_{ki}.
+    \]
+    On the other hand, in the ring $R^{\operatorname{op}}$ the product is reversed, so
+    \[
+        \bigl(\Psi(A)\Psi(B)\bigr)_{ij}
+        =\sum_{k=1}^n (A^{\top})_{ik}\cdot_{R^{\operatorname{op}}}(B^{\top})_{kj}
+        =\sum_{k=1}^n a_{ki}\cdot_{R^{\operatorname{op}}} b_{jk}
+        =\sum_{k=1}^n b_{jk}a_{ki}.
+    \]
+    Thus
+    \[
+        \Psi(A\cdot_{\operatorname{op}} B)=\Psi(A)\Psi(B).
+    \]
+    So $\Psi$ is a ring homomorphism, hence a ring isomorphism.
+
+    Therefore
+    \[
+        M_n(R)^{\operatorname{op}}\cong M_n\bigl(R^{\operatorname{op}}\bigr).
+    \]
+\end{proof}
+
+\begin{theorem}
+    (Artin-Wedderburn) Let $A$ be a semisimple Artinian ring.
+    Then
+    \[
+        A \cong M_{n_1}(D_1) \oplus \cdots \oplus M_{n_r}(D_r),
+    \]
+    where each $D_i$ is a division ring.
+    More concretely, if
+    \[
+        {}_A A \cong S_1^{\oplus n_1} \oplus \cdots \oplus S_r^{\oplus n_r}
+    \]
+    with pairwise nonisomorphic simple $A$-modules $S_i$, then
+    \[
+        D_i = \operatorname{End}_A(S_i)^{op}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Decompose $\operatorname{End}_A(A)$ using the decomposition of the regular module.
+    Use
+    \[
+        \operatorname{Hom}_A(S_i,S_j)=0
+        \quad (i \neq j)
+    \]
+    and Schur's lemma to identify the diagonal blocks with division rings.
+    Then use the previous matrix-ring result to rewrite
+    \[
+        \operatorname{End}_A\bigl(S_i^{\oplus n_i}\bigr)
+    \]
+    as
+    \[
+        M_{n_i}\bigl(\operatorname{End}_A(S_i)\bigr)=M_{n_i}(D_i^{op}).
+    \]
+    Therefore
+    \[
+        A \cong \operatorname{End}_A(A)^{op} \cong M_{n_1}(D_1) \oplus \cdots \oplus M_{n_r}(D_r).
+    \]
+\end{proof}
+
+
+
+\begin{definition}
+    Let $R$ be a commutative ring with $1$, and let $A$ be an associative ring with $1$.
+    An $R$-algebra is an $R$-module $A$ whose multiplication is compatible with the $R$-action.
+    Equivalently, there is a ring homomorphism
+    \[
+        R \to A
+    \]
+    whose image lies in the center $Z(A)$.
+\end{definition}
+
+\begin{remark}
+    If $R=k$ is a field and $A$ is finite-dimensional over $k$, then $A$ is called a finite-dimensional $k$-algebra.
+    Such an algebra is Noetherian and Artinian as a ring/module object.
+\end{remark}
+
+\begin{example}
+    Let $R$ be a commutative ring with $1$. The following are $R$-algebras:
+    \begin{enumerate}
+        \item $R[x_1,\dots,x_n]$.
+        \item $M_n(R)$.
+        \item Let $G$ be a finite group. The group algebra
+              \[
+                  RG=\left\{\sum_{g\in G} a_g g \;\middle|\; a_g\in R\right\}
+              \]
+              is an $R$-algebra, with multiplication defined by
+              \[
+                  \left(\sum_{g\in G} a_g g\right)\left(\sum_{h\in G} b_h h\right)
+                  =
+                  \sum_{r\in G}\left(\sum_{\substack{g,h\in G\\ gh=r}} a_g b_h\right) r.
+              \]
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    Let $A$ be a $k$-algebra, where $k$ is a field, and let $S$ be a simple $A$-module.
+    Then $\operatorname{End}_A(S)$ is a division ring, and it is naturally a $k$-algebra.
+\end{lemma}
+
+\begin{proof}
+    We first show that $\operatorname{End}_A(S)$ is a division ring.
+
+    Let
+    \[
+        0\neq f\in \operatorname{End}_A(S).
+    \]
+    Since $f$ is $A$-linear, both $\ker(f)$ and $\operatorname{im}(f)$ are $A$-submodules of $S$.
+    Because $S$ is simple and $f\neq 0$, we have $\operatorname{im}(f)\neq 0$, hence
+    \[
+        \operatorname{im}(f)=S.
+    \]
+    Also $\ker(f)\neq S$ since $f\neq 0$, so by simplicity,
+    \[
+        \ker(f)=0.
+    \]
+    Thus $f$ is bijective. Since the inverse of a bijective $A$-linear map is again $A$-linear,
+    $f^{-1}\in \operatorname{End}_A(S)$. Therefore every nonzero element of
+    $\operatorname{End}_A(S)$ is invertible, so $\operatorname{End}_A(S)$ is a division ring.
+
+    Next we show that $\operatorname{End}_A(S)$ is naturally a $k$-algebra.
+
+    Because $A$ is a $k$-algebra, $S$ becomes a $k$-vector space via
+    \[
+        \lambda\cdot s := (\lambda 1_A)s
+        \qquad (\lambda\in k,\ s\in S).
+    \]
+    Now let $f\in \operatorname{End}_A(S)$. Then for $\lambda\in k$ and $s\in S$,
+    \[
+        f(\lambda s)
+        =
+        f\bigl((\lambda 1_A)s\bigr)
+        =
+        (\lambda 1_A)f(s)
+        =
+        \lambda f(s).
+    \]
+    Hence every $A$-linear endomorphism of $S$ is automatically $k$-linear. So
+    \[
+        \operatorname{End}_A(S)\subseteq \operatorname{End}_k(S)
+    \]
+    as a $k$-subspace. Equivalently, there is a $k$-algebra homomorphism
+    \[
+        k\longrightarrow \operatorname{End}_A(S),
+        \qquad
+        \lambda\longmapsto \lambda\,\operatorname{id}_S,
+    \]
+    whose image lies in the center of $\operatorname{End}_A(S)$. Therefore
+    $\operatorname{End}_A(S)$ is naturally a $k$-algebra.
+\end{proof}
+
+\begin{lemma}
+    If $A$ is finite-dimensional over $k$, then $\operatorname{End}_A(S)$ is finite-dimensional over $k$.
+\end{lemma}
+
+\begin{proof}
+    Choose $0\neq s\in S$. Since $S$ is simple, the cyclic submodule $As$ is nonzero, hence
+    \[
+        As=S.
+    \]
+    Consider the map
+    \[
+        \varphi:A\longrightarrow S,
+        \qquad
+        a\longmapsto as.
+    \]
+    This is a surjective $k$-linear map. Therefore
+    \[
+        \dim_k S\leq \dim_k A<\infty.
+    \]
+    So $S$ is finite-dimensional over $k$.
+
+    Since every $A$-endomorphism of $S$ is $k$-linear, we have
+    \[
+        \operatorname{End}_A(S)\subseteq \operatorname{End}_k(S)
+    \]
+    as $k$-vector spaces. Hence
+    \[
+        \dim_k \operatorname{End}_A(S)
+        \leq
+        \dim_k \operatorname{End}_k(S)
+        =
+        (\dim_k S)^2
+        <\infty.
+    \]
+    Thus $\operatorname{End}_A(S)$ is finite-dimensional over $k$.
+\end{proof}
+
+\begin{lemma}
+    If $A$ is finite-dimensional over $k$ and $k$ is algebraically closed, then
+    \[
+        \operatorname{End}_A(S)=k.
+    \]
+\end{lemma}
+
+\begin{proof}
+    By the previous lemma, $S$ is finite-dimensional over $k$, and
+    $\operatorname{End}_A(S)$ is a finite-dimensional $k$-algebra.
+
+    Let
+    \[
+        f\in \operatorname{End}_A(S).
+    \]
+    Since $S$ is a finite-dimensional $k$-vector space and $k$ is algebraically closed,
+    the $k$-linear operator $f:S\to S$ has an eigenvalue $\lambda\in k$. Hence
+    \[
+        f-\lambda \operatorname{id}_S
+    \]
+    has a nonzero kernel, so it is not injective.
+
+    But $f-\lambda \operatorname{id}_S$ is still an element of $\operatorname{End}_A(S)$.
+    Since $\operatorname{End}_A(S)$ is a division ring by the first lemma, every nonzero
+    element is invertible, hence injective. Therefore
+    \[
+        f-\lambda \operatorname{id}_S=0.
+    \]
+    So
+    \[
+        f=\lambda \operatorname{id}_S.
+    \]
+    This shows that every $A$-endomorphism of $S$ is scalar. Under the natural embedding
+    \[
+        k\hookrightarrow \operatorname{End}_A(S),
+        \qquad
+        \lambda\mapsto \lambda\operatorname{id}_S,
+    \]
+    we therefore obtain
+    \[
+        \operatorname{End}_A(S)=k.
+    \]
+\end{proof}
+
+\begin{theorem}
+    If $k$ is algebraically closed and $A$ is a finite-dimensional semisimple $k$-algebra, then
+    \[
+        A \cong M_{n_1}(k) \oplus \cdots \oplus M_{n_r}(k).
+    \]
+\end{theorem}
+
+\begin{corollary}
+    Let $A$ be a finite-dimensional semisimple $k$-algebra, where $k$ is a field.
+
+    In any decomposition
+    \[
+        {}_A A \cong S_1^{n_1} \oplus \cdots \oplus S_r^{n_r},
+    \]
+    where the $S_i$'s are pairwise non-isomorphic simple $A$-modules, we have that
+    $S_1,\dots,S_r$ form a complete set of representatives of the isomorphism classes
+    of simple $A$-modules.
+
+    If moreover $k=\overline{k}$, then $n_i=\dim_k S_i$ and
+    \[
+        \dim_k A = n_1^2+\cdots+n_r^2.
+    \]
+\end{corollary}
+
+\begin{proof}
+    Let $S$ be a simple module. Then
+    \[
+        S \cong A/M
+    \]
+    where $M$ is a maximal submodule.
+
+    By semisimplicity,
+    \[
+        {}_A A = M \oplus S.
+    \]
+    Hence all simple submodules appear in $\{S_1,\dots,S_r\}$.
+
+    Since $k=\overline{k}$, we have
+    \[
+        A \cong M_{n_1}(k)\oplus \cdots \oplus M_{n_r}(k).
+    \]
+
+    Moreover,
+    \[
+        M_{n_i}(k)=
+        \underbrace{
+            \left\{
+            \begin{pmatrix}
+                *      & \cdots & 0      \\
+                \vdots & \ddots & \vdots \\
+                *      & \cdots & 0
+            \end{pmatrix}
+            \right\}
+            \oplus \cdots \oplus
+            \left\{
+            \begin{pmatrix}
+                0      & \cdots & *      \\
+                \vdots & \ddots & \vdots \\
+                0      & \cdots & *
+            \end{pmatrix}
+            \right\}
+        }_{\text{each of them is a simple } M_{n_i}(k)\text{-module}.}
+    \]
+\end{proof}
+

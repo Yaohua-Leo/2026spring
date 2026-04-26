@@ -1,0 +1,270 @@
+\section{Categories}
+
+\begin{definition}
+    A category $\mathcal{C}$ consists of:
+    \begin{itemize}
+        \item A class of objects $\operatorname{ob}(\mathcal{C})$.
+        \item A set of morphisms $\operatorname{Hom}_{\mathcal{C}}(A, B)$ for each pair of objects $A, B \in \mathcal{C}$.
+        \item A composition map $\operatorname{Hom}_{\mathcal{C}}(B, C) \times \operatorname{Hom}_{\mathcal{C}}(A, B) \to \operatorname{Hom}_{\mathcal{C}}(A, C)$, $(\phi, \psi) \mapsto \phi \circ \psi$ for each triple of objects $A, B, C \in \mathcal{C}$.
+    \end{itemize}
+\end{definition}
+
+It is assumed that objects and morphisms satisfy the following conditions:
+\begin{itemize}
+    \item If $(A,B)\neq (C,D)$, then
+          \[
+              \operatorname{Hom}(A,B)\cap \operatorname{Hom}(C,D)=\varnothing.
+          \]
+
+    \item If
+          \[
+              f\in \operatorname{Hom}(A,B), \qquad
+              g\in \operatorname{Hom}(B,C), \qquad
+              h\in \operatorname{Hom}(C,D),
+          \]
+          then
+          \[
+              (h\circ g)\circ f = h\circ (g\circ f).
+          \]
+
+    \item (Unit) For every object $A$ we have an element
+          \[
+              1_A \in \operatorname{Hom}(A,A)
+          \]
+          such that
+          \[
+              f\circ 1_A = f \qquad \text{for any } f\in \operatorname{Hom}(A,B),
+          \]
+          and
+          \[
+              1_A\circ g = g \qquad \text{for any } g\in \operatorname{Hom}(B,A).
+          \]
+\end{itemize}
+
+\begin{example}
+    The following are examples of categories.
+    \begin{enumerate}
+        \item The category of sets: the objects are sets, and the morphisms are maps. It is denoted by $\mathbf{Set}$.
+
+        \item The category of groups: the objects are groups, and the morphisms are group homomorphisms. It is denoted by $\mathbf{Grp}$.
+
+        \item The category of abelian groups: the objects are abelian groups, and the morphisms are group homomorphisms. It is denoted by $\mathbf{Ab}$.
+
+        \item The category of $R$-modules: the objects are $R$-modules, and the morphisms are $R$-module homomorphisms. It is denoted by $R\text{-}\mathbf{Mod}$(left $R$-modules, for right $R$-modules, we use $R\text{-}\mathbf{Mod}$).
+
+        \item The category of finitely generated $R$-modules: the objects are finitely generated $R$-modules, and the morphisms are $R$-module homomorphisms. It is denoted by $R\text{-}\mathbf{mod}$.
+
+        \item The category of topological spaces: the objects are topological spaces, and the morphisms are continuous maps. It is denoted by $\mathbf{Top}$.
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Subcategory]
+    A category $\mathcal{D}$ is called a \emph{subcategory} of a category $\mathcal{C}$ if
+    \begin{enumerate}
+        \item the objects of $\mathcal{D}$ form a subclass of the objects of $\mathcal{C}$;
+        \item for any objects $A,B$ of $\mathcal{D}$, we have
+              \begin{itemize}
+                  \item $\operatorname{Hom}_{\mathcal{D}}(A,B)\subseteq \operatorname{Hom}_{\mathcal{C}}(A,B)$;
+                  \item the identity morphisms and the composition of morphisms in $\mathcal{D}$ are the same as those in $\mathcal{C}$.
+              \end{itemize}
+    \end{enumerate}
+
+    The subcategory $\mathcal{D}$ of $\mathcal{C}$ is called \emph{full} if
+    \[
+        \operatorname{Hom}_{\mathcal{D}}(A,B)=\operatorname{Hom}_{\mathcal{C}}(A,B)
+    \]
+    for any objects $A,B$ of $\mathcal{D}$.
+\end{definition}
+
+\begin{example}
+    The category $\mathbf{Ab}$ is a full subcategory of $\mathbf{Grp}$.
+
+    The category $R\text{-}\mathbf{mod}$ is a full subcategory of $R\text{-}\mathbf{Mod}$.
+
+    The category $\mathbf{Grp}$ is not a full subcategory of $\mathbf{Set}$.
+\end{example}
+
+\begin{definition}
+    Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A \emph{covariant functor}
+    \[
+        F:\mathcal{C}\to\mathcal{D}
+    \]
+    consists of the following data:
+    \begin{itemize}
+        \item for every object $A$ of $\mathcal{C}$, an object $F(A)$ of $\mathcal{D}$;
+        \item for each pair of objects $A,B$ of $\mathcal{C}$, a map
+              \[
+                  F:\operatorname{Hom}_{\mathcal{C}}(A,B)\to \operatorname{Hom}_{\mathcal{D}}(F(A),F(B)),
+                  \qquad
+                  f\mapsto F(f).
+              \]
+    \end{itemize}
+    These data are required to satisfy the following conditions:
+    \begin{enumerate}
+        \item If $g\circ f$ is defined in $\mathcal{C}$, then
+              \[
+                  F(g)\circ F(f)=F(g\circ f).
+              \]
+        \item For every object $A$ of $\mathcal{C}$,
+              \[
+                  F(1_A)=1_{F(A)}.
+              \]
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Functors preserve diagram:
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[r, "f"] \arrow[rd, "g"'] & B \arrow[d, "h"] & {} \arrow[r, "F"] & {} & F(A) \arrow[r, "F(f)"] \arrow[rd, "F(g)"'] & F(B) \arrow[d, "F(h)"] \\
+            & C                &                   &    &                                           & F(AC
+        \end{tikzcd}
+    \end{center}
+\end{proposition}
+
+Let $M$ and $N$ be $R$-modules. Then
+\[
+    \operatorname{Hom}_R(M,N)
+    =
+    \{\, f:M\to N \mid f \text{ is an } R\text{-module homomorphism} \,\}.
+\]
+This is an abelian group.
+
+Moreover,
+\[
+    \operatorname{End}_R(M)=\operatorname{Hom}_R(M,M),
+\]
+and $\operatorname{End}_R(M)$ is a ring.
+
+\begin{example}
+    Let $M$ be an $R$-module. Then
+    \[
+        \operatorname{Hom}_R(M,-): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \]
+    is a functor.
+
+    More precisely, it acts as follows:
+
+    \[
+        N \longmapsto \operatorname{Hom}_R(M,N),
+        \qquad
+        f:N \to N' \longmapsto \operatorname{Hom}_R(M,f).
+    \]
+
+    Given an $R$-module homomorphism
+    \[
+        f:N \to N',
+    \]
+    the induced map
+    \[
+        \operatorname{Hom}_R(M,f): \operatorname{Hom}_R(M,N) \to \operatorname{Hom}_R(M,N')
+    \]
+    is defined by
+    \[
+        \operatorname{Hom}_R(M,f)(h)=f\circ h
+        \qquad
+        (h\in \operatorname{Hom}_R(M,N)).
+    \]
+
+    This corresponds to the commutative diagram
+    \[
+        \begin{tikzcd}
+            & M \arrow[dl, "h"'] \arrow[dr, "f\circ h"] & \\
+            N \arrow[rr, "f"'] & & N'
+        \end{tikzcd}
+    \]
+
+    Hence
+    \[
+        \operatorname{Hom}_R(M,-)
+    \]
+    is a covariant functor.
+\end{example}
+
+\begin{definition}
+    Let $\mathcal C$ be a category. The \emph{opposite category} (or \emph{dual category}) $\mathcal C^{\mathrm{op}}$ is defined as follows:
+    \begin{itemize}
+        \item $\operatorname{Ob}(\mathcal C^{\mathrm{op}})=\operatorname{Ob}(\mathcal C)$;
+        \item for any objects $A,B$,
+              \[
+                  \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(A,B)
+                  =
+                  \operatorname{Hom}_{\mathcal C}(B,A).
+              \]
+    \end{itemize}
+    The composition in $\mathcal C^{\mathrm{op}}$ is defined by reversing the order of composition in $\mathcal C$: if
+    \[
+        f \in \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(A,B),
+        \qquad
+        g \in \operatorname{Hom}_{\mathcal C^{\mathrm{op}}}(B,C),
+    \]
+    then
+    \[
+        g\circ f \text{ in } \mathcal C^{\mathrm{op}}
+    \]
+    is defined to be
+    \[
+        f\circ g \text{ in } \mathcal C.
+    \]
+    We call $\mathcal C^{\mathrm{op}}$ the dual category of $\mathcal C$.
+\end{definition}
+
+This is illustrated by the following diagrams:
+\[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        A \arrow[r,"f"] \arrow[dr,"g\circ f"']& B \arrow[d,"g"] \\
+        & C
+    \end{tikzcd}
+    \qquad\text{in } \mathcal C^{\mathrm{op}},
+\]
+while the corresponding picture in $\mathcal C$ is
+\[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        A & B \arrow[l,"f"'] \\
+        & C \arrow[ul,"f\circ g"] \arrow[u,"g"']
+    \end{tikzcd}
+    \qquad\text{in } \mathcal C.
+\]
+
+\begin{definition}
+    A \emph{contravariant functor} from a category $\mathcal C$ to a category $\mathcal D$ is a covariant functor
+    \[
+        \mathcal C^{\mathrm{op}} \to \mathcal D.
+    \]
+\end{definition}
+
+\begin{example}
+    Let $M$ be an $R$-module. Then
+    \[
+        \operatorname{Hom}_R(-,M): R\text{-}\mathrm{Mod} \to \mathrm{Ab}
+    \]
+    is a contravariant functor.
+\end{example}
+
+More precisely, it is defined on objects by
+\[
+    N \longmapsto \operatorname{Hom}_R(N,M),
+\]
+and on morphisms by sending an $R$-module homomorphism
+\[
+    f:N \to N'
+\]
+to the induced group homomorphism
+\[
+    \operatorname{Hom}_R(f,M): \operatorname{Hom}_R(N',M) \to \operatorname{Hom}_R(N,M),
+\]
+given by
+\[
+    \operatorname{Hom}_R(f,M)(h)=h\circ f
+    \qquad
+    (h\in \operatorname{Hom}_R(N',M)).
+\]
+
+This corresponds to the commutative diagram
+\[
+    \begin{tikzcd}
+        N \arrow[d,"f"'] \arrow[dr,"h\circ f"] & \\
+        N' \arrow[r,"h"'] & M
+    \end{tikzcd}
+\]
+

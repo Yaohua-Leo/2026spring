@@ -1,0 +1,179 @@
+\section{Lifting Idempotent Decompositions}
+
+\begin{corollary}
+    Let $I$ be a nilpotent two-sided ideal of $R$, and let
+    \[
+        1=e_1+\cdots+e_n
+    \]
+    be an idempotent decomposition in $R/I$. Then there exists an idempotent decomposition
+    \[
+        1=f_1+\cdots+f_n
+    \]
+    in $R$ such that
+    \[
+        f_i+I=e_i
+        \qquad (1\le i\le n).
+    \]
+    If moreover the $e_i$ are primitive, then so are the $f_i$.
+\end{corollary}
+
+\begin{proof}
+    We argue by induction on $n$.
+
+    If $n=1$, this is exactly Theorem~\ref{thm:lift-idempotent}.
+
+    Assume the result holds for decompositions with fewer than $n$ summands. Write
+    \[
+        1=e_1+E,
+        \qquad\text{where}\qquad
+        E=e_2+\cdots+e_n
+    \]
+    in $R/I$. Then $E$ is an idempotent orthogonal to $e_1$.
+
+    By Theorem~\ref{thm:lift-idempotent}, $e_1$ lifts to an idempotent $f\in R$ such that
+    \[
+        e_1=f+I.
+    \]
+    Set
+    \[
+        F:=1-f.
+    \]
+    Then $F$ is an idempotent and
+    \[
+        F+I=1-(f+I)=1-e_1=E,
+    \]
+    so $F$ lifts $E$.
+
+    Now $F$ is the identity element of the corner ring $FRF$, and $FIF$ is a nilpotent
+    two-sided ideal of $FRF$. Consider the composite homomorphism
+    \[
+        FRF \hookrightarrow R \twoheadrightarrow R/I.
+    \]
+    Its kernel is $FRF\cap I$. We claim that
+    \[
+        FRF\cap I=FIF.
+    \]
+
+    Indeed, if $x\in FIF$, then clearly $x\in FRF\cap I$. Conversely, if $x\in FRF\cap I$,
+    then since $x\in FRF$ we have
+    \[
+        x=FxF,
+    \]
+    and because $x\in I$ and $I$ is a two-sided ideal, it follows that
+    \[
+        x=FxF\in FIF.
+    \]
+    Thus the claim holds.
+
+    Hence we obtain an injective homomorphism
+    \[
+        FRF/FIF \hookrightarrow R/I.
+    \]
+    Its image is
+    \[
+        E(R/I)E.
+    \]
+    Indeed, the image of $FrF\in FRF$ is
+    \[
+        (F+I)(r+I)(F+I)=E(r+I)E,
+    \]
+    and every element of $E(R/I)E$ has this form. Therefore
+    \[
+        FRF/FIF \cong E(R/I)E.
+    \]
+
+    In the ring $E(R/I)E$, whose identity element is $E$, we have the idempotent decomposition
+    \[
+        E=e_2+\cdots+e_n.
+    \]
+    So, by the induction hypothesis applied to the ring $FRF$ and its nilpotent ideal $FIF$,
+    there exists an idempotent decomposition
+    \[
+        F=f_2+\cdots+f_n
+    \]
+    in $FRF$ such that
+    \[
+        f_i+I=e_i
+        \qquad (2\le i\le n).
+    \]
+
+    Finally, letting
+    \[
+        f_1:=f,
+    \]
+    we get
+    \[
+        1=f_1+F=f_1+f_2+\cdots+f_n,
+    \]
+    which is an idempotent decomposition in $R$, and each $f_i$ lifts $e_i$.
+
+    Moreover, since each $f_i\in FRF$ for $i\ge2$, we have
+    \[
+        Ff_i=f_i=f_iF,
+        \qquad
+        f_1f_i=f_i f_1=0
+        \qquad (i\ge2),
+    \]
+    so the sum is orthogonal.
+
+    If the $e_i$ are primitive, then $f_1$ is primitive by
+    Theorem~\ref{thm:lift-idempotent}, and $f_2,\dots,f_n$ are primitive by the induction
+    hypothesis. Hence all $f_i$ are primitive.
+\end{proof}
+
+\begin{corollary}\label{cor:primitive-idempotent-quotient}
+    Let $I$ be a nilpotent two-sided ideal of $R$, and let $f\in R$ be an idempotent.
+    Then $f$ is primitive in $R$ if and only if $f+I$ is primitive in $R/I$.
+\end{corollary}
+
+\begin{proof}
+    First suppose that $f+I$ is primitive in $R/I$. Since $f$ is an idempotent lift of
+    $f+I$, Theorem~\ref{thm:lift-idempotent} implies that $f$ is primitive in $R$.
+
+    Conversely, suppose that $f$ is primitive in $R$. We show that $f+I$ is primitive in
+    $R/I$. Assume that
+    \[
+        f+I=\overline{e}_1+\overline{e}_2
+    \]
+    is an idempotent decomposition in $R/I$, where
+    \[
+        \overline{e}_1^2=\overline{e}_1,\qquad
+        \overline{e}_2^2=\overline{e}_2,\qquad
+        \overline{e}_1\overline{e}_2=\overline{e}_2\overline{e}_1=0.
+    \]
+    Since $\overline{e}_1+\overline{e}_2=f+I$, we have
+    \[
+        \overline{e}_j(f+I)=\overline{e}_j=(f+I)\overline{e}_j
+        \qquad (j=1,2).
+    \]
+    Hence $\overline{e}_1,\overline{e}_2$ lie in the corner ring
+    \[
+        (f+I)(R/I)(f+I).
+    \]
+
+    There is a natural isomorphism
+    \[
+        fRf/fIf \cong (f+I)(R/I)(f+I).
+    \]
+    Moreover, $fIf$ is a nilpotent two-sided ideal of the ring $fRf$.
+
+    Thus, by the lifting theorem for idempotent decompositions, the decomposition
+    \[
+        f+I=\overline{e}_1+\overline{e}_2
+    \]
+    lifts to an idempotent decomposition
+    \[
+        f=f_1+f_2
+    \]
+    in $fRf\subseteq R$, with
+    \[
+        f_j+I=\overline{e}_j
+        \qquad (j=1,2).
+    \]
+    Since $f$ is primitive in $R$, one of $f_1,f_2$ must be zero. Therefore one of
+    $\overline{e}_1,\overline{e}_2$ is zero.
+
+    Hence $f+I$ admits no nontrivial idempotent decomposition in $R/I$, so $f+I$ is
+    primitive.
+\end{proof}
+

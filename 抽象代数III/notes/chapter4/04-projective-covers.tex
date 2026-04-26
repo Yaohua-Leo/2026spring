@@ -1,0 +1,82 @@
+\section{Projective Covers}
+
+\begin{definition}
+    Let $R$ be a ring with $1$. An epimorphism
+    \[
+        f:U\to V
+    \]
+    is called an \emph{essential epimorphism} if no proper submodule of $U$ is mapped
+    surjectively onto $V$ by $f$. Equivalently, whenever
+    \[
+        g:W\to U
+    \]
+    is a morphism such that $f\circ g$ is an epimorphism, then $g$ is an epimorphism.
+\end{definition}
+
+\begin{proof}
+    Suppose first that no proper submodule of $U$ maps onto $V$. Let $g:W\to U$ satisfy $f\circ g$ epimorphic. Then
+    \[
+        f(g(W))=V.
+    \]
+    By assumption,$g(W)$ cannot be a proper submodule of $U$, so $g(W)=U$ and $g$ is
+    surjective.
+
+    Conversely, assume that whenever $f\circ g$ is epi, then $g$ is epi. Let $U_0\subsetneq U$ be a proper submodule and let
+    \[
+        \iota:U_0\hookrightarrow U
+    \]
+    be the inclusion. If $f(U_0)=V$, then $f\circ \iota$ is epi, hence $\iota$ is epi, which is
+    impossible. Thus $f(U_0)\neq V$.
+\end{proof}
+
+\begin{definition}
+    A \emph{projective cover} of an $R$-module $U$ is an essential epimorphism
+    \[
+        P\to U
+    \]
+    with $P$ projective.
+\end{definition}
+
+\begin{proposition}
+    Let
+    \[
+        U\xrightarrow{\,f\,} V\xrightarrow{\,g\,} W
+    \]
+    be $R$-homomorphisms. If any two of $f$,$g$, and $g\circ f$ are essential epimorphisms,
+    then so is the third.
+\end{proposition}
+
+\begin{proof}
+    \textbf{If $f$ and $g$ are essential, then $g\circ f$ is essential.}
+    Let $U_0\subsetneq U$ be a proper submodule. Since $f$ is essential,
+    \[
+        f(U_0)\neq V.
+    \]
+    As $g$ is essential,$g(f(U_0))\neq W$. Hence $(g\circ f)(U_0)\neq W$, so $g\circ f$ is
+    essential.
+
+    \textbf{If $g$ and $g\circ f$ are essential, then $f$ is essential.}
+    Since $g\circ f$ is epic,$f$ is epic. Let $U_0\subsetneq U$ be proper. If $f(U_0)=V$, then
+    \[
+        (g\circ f)(U_0)=W,
+    \]
+    contradicting that $g\circ f$ is essential. Thus $f(U_0)\neq V$, so $f$ is essential.
+
+    \textbf{If $f$ and $g\circ f$ are essential, then $g$ is essential.}
+    Since $g\circ f$ is epic and $f$ is epic,$g$ is epic. Let $V_0\subsetneq V$ be a proper
+    submodule, and set
+    \[
+        U_0:=f^{-1}(V_0).
+    \]
+    Because $f$ is surjective,$U_0$ is a proper submodule of $U$. Since $g\circ f$ is
+    essential,
+    \[
+        (g\circ f)(U_0)\neq W.
+    \]
+    But
+    \[
+        (g\circ f)(U_0)=g(V_0),
+    \]
+    so $g(V_0)\neq W$. Hence $g$ is essential.
+\end{proof}
+

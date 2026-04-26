@@ -1,0 +1,357 @@
+\section{Homework Week 6}
+
+\begin{exercise}
+    Let $D$ be a division ring and $n$ a positive integer.
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+        \item Show that the natural left $M_n(D)$-module, consisting of column vectors of length $n$ with entries in $D$, is a simple module.
+        \item Show that $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+        \item Show that every ring of the form
+              \[
+                  M_{n_1}(D_1)\oplus \cdots \oplus M_{n_r}(D_r)
+              \]
+              is semisimple, where $D_i$ are division rings.
+        \item Show that $M_n(D)$ is a simple ring, namely, one in which the only $2$-sided ideals are the zero ideal and the whole ring.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    Let $R=M_n(D)$ and let $V=D^n$ be the natural left $R$-module of column vectors.
+
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+
+        \item We show that $V$ is simple. Let $0\neq W\leq V$, and choose
+              \[
+                  v=(v_1,\dots,v_n)^t\in W,\qquad v\neq 0.
+              \]
+              Then $v_j\neq 0$ for some $j$. For each $i\in \{1,\dots,n\}$, let $A_i\in R$ be the matrix whose $(i,j)$-entry is $v_j^{-1}$ and whose other entries are $0$. Then
+              \[
+                  A_i v=e_i,
+              \]
+              where $e_i$ is the $i$-th standard basis vector in $D^n$. Since $W$ is an $R$-submodule and $v\in W$, we get $e_i\in W$ for all $i$. Hence
+              \[
+                  W=D^n=V.
+              \]
+              Therefore $V$ is a simple left $R$-module.
+
+        \item Let $E_{11},\dots,E_{nn}$ be the standard diagonal matrix units. Then
+              \[
+                  1=E_{11}+\cdots+E_{nn},
+              \]
+              and hence
+              \[
+                  R=RE_{11}\oplus\cdots\oplus RE_{nn}.
+              \]
+              Indeed, $RE_{ii}$ is precisely the set of matrices whose only possibly nonzero column is the $i$-th column, so every matrix is uniquely the sum of its columns.
+
+              For each $i$, define
+              \[
+                  \phi_i:RE_{ii}\longrightarrow V
+              \]
+              by sending a matrix in $RE_{ii}$ to its $i$-th column. This is an isomorphism of left $R$-modules. By part (a), $V$ is simple, so each $RE_{ii}$ is simple. Thus $_RR$ is a direct sum of simple submodules, and therefore $R$ is semisimple.
+
+              Now let $S$ be a simple left $R$-module. Pick $0\neq s\in S$. Then the map
+              \[
+                  \psi:R\longrightarrow S,\qquad A\mapsto As
+              \]
+              is a nonzero $R$-homomorphism, hence surjective since $S$ is simple. Because $R$ is semisimple, every quotient of $R$ is semisimple. Since $S$ is simple, it must be isomorphic to one of the simple direct summands $RE_{ii}$. Therefore
+              \[
+                  S\cong RE_{ii}\cong V
+              \]
+              for some $i$. Hence, up to isomorphism, $R$ has only one simple left module.
+
+        \item Let
+              \[
+                  A=M_{n_1}(D_1)\oplus\cdots\oplus M_{n_r}(D_r).
+              \]
+              As a left $A$-module over itself,
+              \[
+                  {}_AA
+                  =
+                  {}_A M_{n_1}(D_1)\oplus\cdots\oplus {}_A M_{n_r}(D_r).
+              \]
+              Each summand is semisimple by part (b), and a finite direct sum of semisimple modules is semisimple. Hence $A$ is a semisimple ring.
+
+        \item Let $I$ be a nonzero two-sided ideal of $R$. Choose $0\neq A=(a_{pq})\in I$, and pick indices $i,j$ such that $a_{ij}\neq 0$. For arbitrary $r,s$, let $E_{uv}$ denote the standard matrix units. Then
+              \[
+                  E_{ri}AE_{js}=a_{ij}E_{rs}\in I.
+              \]
+              Since $a_{ij}\in D^\times$, we also have
+              \[
+                  (a_{ij}^{-1}E_{rr})(a_{ij}E_{rs})=E_{rs}\in I.
+              \]
+              Thus every matrix unit $E_{rs}$ belongs to $I$. Therefore
+              \[
+                  1=E_{11}+\cdots+E_{nn}\in I,
+              \]
+              so $I=R$. Hence the only two-sided ideals of $R$ are $0$ and $R$, i.e. $R$ is a simple ring.
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    Let $U$ be an $A$-module for a semisimple finite-dimensional algebra $A$ (over a field). Show that if $\operatorname{End}_A(U)$ is a division ring then $U$ is simple.
+\end{exercise}
+
+\begin{proof}
+    Since $A$ is a semisimple finite-dimensional algebra over a field, it is a semisimple
+    Artinian ring. Hence every left $A$-module is semisimple. In particular, $U$ is a semisimple
+    $A$-module.
+
+    We claim that $U$ must be simple. Suppose not. Then $U$ is not simple, so because $U$
+    is semisimple, there exist nonzero submodules $U_1,U_2\leq U$ such that
+    \[
+        U=U_1\oplus U_2.
+    \]
+    Let
+    \[
+        \pi_1:U\to U_1
+    \]
+    be the projection onto the first summand. Since $U_1$ is an $A$-submodule, $\pi_1$ is an
+    $A$-module endomorphism of $U$, so
+    \[
+        \pi_1\in \operatorname{End}_A(U).
+    \]
+    Moreover,
+    \[
+        \pi_1^2=\pi_1,
+    \]
+    so $\pi_1$ is an idempotent.
+
+    Now $\pi_1\neq 0$ because $U_1\neq 0$, and $\pi_1\neq 1_U$ because $U_2\neq 0$.
+    Thus $\pi_1$ is a nontrivial idempotent in $\operatorname{End}_A(U)$.
+
+    But a division ring has no idempotents other than $0$ and $1$: indeed, if $e^2=e$ and
+    $e\neq 0$, then multiplying by $e^{-1}$ gives $e=1$. This contradicts the assumption that
+    $\operatorname{End}_A(U)$ is a division ring.
+
+    Therefore $U$ must be simple.
+\end{proof}
+
+\begin{exercise}
+    Let $A$ be a ring. Then $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+\end{exercise}
+
+\begin{proof}
+    Here all modules are left $A$-modules.
+
+    \[
+        (\Rightarrow)
+    \]
+    Assume that $A$ is a semisimple Artinian ring. Then every $A$-module is semisimple.
+
+    Let $M$ be any $A$-module. To show that $M$ is projective, consider an arbitrary short exact sequence
+    \[
+        0\longrightarrow K \longrightarrow N \xrightarrow{\pi} M \longrightarrow 0.
+    \]
+    Since $N$ is semisimple, the submodule $K$ is a direct summand of $N$. Thus there exists a submodule $N'\leq N$ such that
+    \[
+        N=K\oplus N'.
+    \]
+    Now $\pi|_{N'}:N'\to M$ is surjective, and
+    \[
+        \ker(\pi|_{N'})=N'\cap K=0.
+    \]
+    Hence $\pi|_{N'}$ is an isomorphism. Therefore the above short exact sequence splits. Since every short exact sequence ending in $M$ splits, $M$ is projective.
+
+    Since $M$ was arbitrary, every $A$-module is projective.
+
+    \[
+        (\Leftarrow)
+    \]
+    Assume that every $A$-module is projective. Let $M$ be any $A$-module and let $N\leq M$ be a submodule. Then the quotient $M/N$ is projective, so the short exact sequence
+    \[
+        0\longrightarrow N \longrightarrow M \longrightarrow M/N \longrightarrow 0
+    \]
+    splits. Hence $N$ is a direct summand of $M$.
+
+    Therefore every submodule of every $A$-module is a direct summand. It follows that every $A$-module is semisimple. In particular, the left regular module ${}_AA$ is semisimple.
+
+    Now $A$ is cyclic as a left $A$-module, generated by $1$. Since ${}_AA$ is semisimple, it is a sum of simple submodules:
+    \[
+        A=\sum_{\lambda\in \Lambda} S_\lambda.
+    \]
+    Because $1\in A$, we may write
+    \[
+        1=s_1+\cdots+s_n
+        \qquad (s_i\in S_{\lambda_i}).
+    \]
+    Then for any $a\in A$,
+    \[
+        a=a\cdot 1=a s_1+\cdots+a s_n \in S_{\lambda_1}+\cdots+S_{\lambda_n}.
+    \]
+    Thus
+    \[
+        A=S_{\lambda_1}+\cdots+S_{\lambda_n}.
+    \]
+    Since $A$ is semisimple, this finite sum is in fact a direct sum (after deleting repetitions if necessary):
+    \[
+        A\cong S_1\oplus\cdots\oplus S_m
+    \]
+    with each $S_i$ simple.
+
+    Hence ${}_AA$ is a finite direct sum of simple modules, so it is Artinian. Therefore $A$ is a semisimple Artinian ring.
+
+    This proves that $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+\end{proof}
+
+\begin{exercise}
+    Let $k$ be a field. Suppose the group algebra $kG$ is semisimple, and the simple $kG$-modules are $S_1,\dots,S_r$ with degrees $d_i=\dim_k S_i$. Show that
+    \[
+        \sum_{i=1}^r d_i^2 \ge |G|
+    \]
+    with equality if and only if $\operatorname{End}_{kG}(S_i)=k$ for all $i$.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        A=kG,
+        \qquad
+        E_i=\operatorname{End}_A(S_i)
+        \quad (1\le i\le r).
+    \]
+    Since $A$ is a semisimple finite-dimensional $k$-algebra, by the Wedderburn--Artin theorem
+    there exist positive integers $n_1,\dots,n_r$ such that
+    \[
+        A \cong \bigoplus_{i=1}^r M_{n_i}(E_i^{\operatorname{op}}),
+    \]
+    where $S_1,\dots,S_r$ form a complete set of representatives of the isomorphism classes
+    of simple $A$-modules.
+
+    For each $i$, the simple module $S_i$ is naturally a right $E_i$-vector space of
+    dimension $n_i$. Hence
+    \[
+        d_i=\dim_k S_i = n_i\,\dim_k E_i.
+    \]
+    Taking $k$-dimensions in the Wedderburn decomposition gives
+    \[
+        |G|=\dim_k(kG)=\dim_k A
+        =\sum_{i=1}^r \dim_k M_{n_i}(E_i^{\operatorname{op}})
+        =\sum_{i=1}^r n_i^2 \dim_k E_i.
+    \]
+    Using $d_i=n_i\dim_k E_i$, we obtain
+    \[
+        |G|
+        =\sum_{i=1}^r n_i^2\dim_k E_i
+        =\sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}.
+    \]
+    Now each $E_i$ is a division $k$-algebra, so $\dim_k E_i\ge 1$. Therefore
+    \[
+        |G|
+        =\sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}
+        \le \sum_{i=1}^r d_i^2.
+    \]
+    Thus
+    \[
+        \sum_{i=1}^r d_i^2 \ge |G|.
+    \]
+
+    It remains to determine when equality holds. Since each $d_i>0$ and each
+    $\dim_k E_i\ge 1$, we have
+    \[
+        \sum_{i=1}^r \frac{d_i^2}{\dim_k E_i}
+        =
+        \sum_{i=1}^r d_i^2
+    \]
+    if and only if
+    \[
+        \dim_k E_i=1
+        \qquad\text{for all }i.
+    \]
+    But $E_i=\operatorname{End}_A(S_i)$ is a $k$-algebra, so $\dim_k E_i=1$ is equivalent to
+    \[
+        E_i=k.
+    \]
+    Hence equality holds if and only if
+    \[
+        \operatorname{End}_{kG}(S_i)=k
+        \qquad\text{for all }i.
+    \]
+
+    This proves the claim.
+\end{proof}
+
+\begin{exercise}
+    Suppose that we have $R$-module homomorphisms
+    \[
+        U \xrightarrow{f} V \xrightarrow{g} W.
+    \]
+    Show that: if $gf$ is an essential epimorphism and $f$ is an epimorphism, then both $f$ and $g$ are essential epimorphisms.
+\end{exercise}
+
+\begin{proof}
+    Assume that
+    \[
+        U \xrightarrow{f} V \xrightarrow{g} W
+    \]
+    are $R$-module homomorphisms such that $gf$ is an essential epimorphism and $f$ is an epimorphism.
+
+    We must show that both $f$ and $g$ are essential epimorphisms.
+
+    \medskip
+
+    \noindent\textbf{Step 1: $f$ is an essential epimorphism.}
+
+    Since $f$ is already assumed to be an epimorphism, it remains to show that it is essential.
+
+    Let $U'\leq U$ be a submodule such that
+    \[
+        f(U')=V.
+    \]
+    Then applying $g$, we get
+    \[
+        (gf)(U')=g(f(U'))=g(V)=W,
+    \]
+    because $gf$ is an epimorphism. Thus $U'$ maps onto $W$ under $gf$.
+
+    But $gf$ is an \emph{essential} epimorphism, so no proper submodule of $U$ can map
+    surjectively onto $W$. Hence we must have
+    \[
+        U'=U.
+    \]
+    Therefore $f$ is an essential epimorphism.
+
+    \medskip
+
+    \noindent\textbf{Step 2: $g$ is an essential epimorphism.}
+
+    First, $g$ is an epimorphism: indeed, since $gf$ is surjective and $f$ is surjective, for any
+    $w\in W$ there exists $u\in U$ such that
+    \[
+        g(f(u))=w.
+    \]
+    Thus $w\in g(V)$, so $g(V)=W$.
+
+    Now let $V'\leq V$ be a submodule such that
+    \[
+        g(V')=W.
+    \]
+    We claim that $V'=V$.
+
+    Consider the inverse image
+    \[
+        f^{-1}(V')=\{u\in U\mid f(u)\in V'\}.
+    \]
+    This is a submodule of $U$, and
+    \[
+        (gf)\bigl(f^{-1}(V')\bigr)=g(V')=W.
+    \]
+    Since $gf$ is an essential epimorphism, it follows that
+    \[
+        f^{-1}(V')=U.
+    \]
+    Applying $f$ to both sides gives
+    \[
+        V=f(U)=f\bigl(f^{-1}(V')\bigr)\subseteq V'.
+    \]
+    Hence $V'=V$.
+
+    Therefore no proper submodule of $V$ maps surjectively onto $W$ under $g$, so $g$ is an
+    essential epimorphism.
+
+    \medskip
+
+    We conclude that both $f$ and $g$ are essential epimorphisms.
+\end{proof}
+

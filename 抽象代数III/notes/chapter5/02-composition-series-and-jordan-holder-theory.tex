@@ -1,0 +1,198 @@
+\section{Composition Series and Jordan--H\"older Theory}
+
+\begin{definition}
+    A finite chain of submodules
+    \[
+        U=U_0\supsetneq U_1\supsetneq \cdots \supsetneq U_n=0
+    \]
+    is called a \emph{composition series} of $U$ if each factor
+    \[
+        U_i/U_{i+1}
+    \]
+    is simple. The integer $n$ is called the \emph{composition length} of $U$.
+\end{definition}
+
+\begin{lemma}
+    A nonzero $R$-module $U$ has a composition series if and only if $U$ is both
+    Noetherian and Artinian.
+\end{lemma}
+
+\begin{proof}
+    Suppose first that
+    \[
+        U=U_0\supsetneq U_1\supsetneq \cdots \supsetneq U_n=0
+    \]
+    is a composition series. We argue by induction on $n$. If $n=1$, then $U$ is simple,
+    hence both Noetherian and Artinian. If $n>1$, then $U_1$ has a composition series of
+    length $n-1$, so by induction $U_1$ is Noetherian and Artinian. The quotient $U/U_1$ is simple, hence also Noetherian and Artinian. By the permanence of both
+    properties in short exact sequences,$U$ is Noetherian and Artinian.
+
+    Conversely, assume that $U$ is Noetherian and Artinian. Since $U\neq 0$, choose a
+    maximal proper submodule $U_1$ of $U$. Then $U/U_1$ is simple. Because $U_1$ is a
+    submodule of both a Noetherian and an Artinian module, it is again Noetherian and
+    Artinian. Repeating the argument inductively and using the Artinian condition to rule
+    out an infinite descending chain, we obtain a composition series.
+\end{proof}
+
+\begin{lemma}
+    Suppose that
+    \[
+        U=S_1+\cdots+S_n
+    \]
+    where each $S_i$ is a simple submodule of $U$. If $V\leq U$, then there exists a
+    subset $I\subseteq \{1,\dots,n\}$ such that
+    \[
+        U=V\oplus \bigoplus_{i\in I} S_i.
+    \]
+    In particular, every submodule of a finite direct sum of simple modules is a direct
+    summand.
+\end{lemma}
+
+\begin{proof}
+    Choose a subset $I\subseteq \{1,\dots,n\}$ maximal with the property that
+    \[
+        V\oplus \bigoplus_{i\in I} S_i
+    \]
+    is a direct sum, and set
+    \[
+        W:=V\oplus \bigoplus_{i\in I} S_i.
+    \]
+    We claim that $W=U$. If not, then there exists $j\notin I$ such that
+    \[
+        S_j\nsubseteq W.
+    \]
+    Now $W\cap S_j$ is a submodule of the simple module $S_j$, so either
+    \[
+        W\cap S_j=0
+        \qquad \text{or} \qquad
+        W\cap S_j=S_j.
+    \]
+    The second case is impossible because it would imply $S_j\subseteq W$. Hence $W\cap S_j=0$, and therefore
+    \[
+        W\oplus S_j
+    \]
+    is a direct sum, contradicting the maximality of $I$. Thus $W=U$.
+\end{proof}
+
+\begin{theorem}
+    Let $U$ be an $R$-module with a composition series. The following are equivalent.
+    \begin{enumerate}
+        \item $U$ is semisimple.
+        \item $U$ is a sum of simple submodules.
+        \item Every submodule of $U$ is a direct summand of $U$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1) $\Longrightarrow$(2).}
+    This is immediate from the definition of a semisimple module.
+
+    \textbf{(2) $\Longrightarrow$(3).}
+    Since $U$ has finite composition length, a finite number of simple summands already
+    generate $U$. Thus
+    \[
+        U=S_1+\cdots+S_n
+    \]
+    for simple submodules $S_i$. The previous lemma shows that every submodule of $U$ is
+    a direct summand.
+
+    \textbf{(3) $\Longrightarrow$(1).}
+    Let
+    \[
+        U=U_0\supsetneq U_1\supsetneq \cdots \supsetneq U_n=0
+    \]
+    be a composition series. Since $U_1$ is a direct summand of $U$, there exists a
+    submodule $S_1$ such that
+    \[
+        U=U_1\oplus S_1.
+    \]
+    Because $U/U_1$ is simple, the submodule $S_1$ is simple. Repeating the argument
+    inside $U_1$, we obtain simple submodules $S_2,\dots,S_n$ with
+    \[
+        U_i=U_{i+1}\oplus S_{i+1}
+    \]
+    for all $i$. Hence
+    \[
+        U=S_1\oplus \cdots \oplus S_n,
+    \]
+    so $U$ is semisimple.
+\end{proof}
+
+\begin{corollary}
+    Let $U$ be an $R$-module of finite composition length.
+    \begin{enumerate}
+        \item The sum of all simple submodules of $U$ is semisimple, hence is the unique
+              largest semisimple submodule of $U$.
+        \item If $S$ is a simple submodule of $U$, then the sum of all submodules of $U$ isomorphic to $S$ is a submodule of $U$ isomorphic to a direct sum of
+              copies of $S$. It is the unique largest submodule of $U$ with this
+              property.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    For (1), let $\Sigma$ be the sum of all simple submodules of $U$. Since $U$ has
+    finite composition length, only finitely many simple submodules are needed to
+    generate $\Sigma$. By the theorem,$\Sigma$ is semisimple. Any semisimple submodule is
+    a sum of simple submodules and is therefore contained in $\Sigma$.
+
+    For (2), let $\Sigma_S$ be the sum of all submodules of $U$ isomorphic to $S$. Again
+    finite composition length implies that $\Sigma_S$ is generated by finitely many such
+    submodules, so $\Sigma_S$ is semisimple. Every simple submodule of $\Sigma_S$ is
+    isomorphic to $S$, hence
+    \[
+        \Sigma_S\cong S^{\oplus m}
+    \]
+    for some $m\geq 0$. The maximality statement is immediate from the construction.
+\end{proof}
+
+\begin{theorem}[Zassenhaus lemma]
+    Let $A'\subseteq A$ and $B'\subseteq B$ be submodules of an $R$-module $M$. Then
+    \[
+        \frac{A'+(A\cap B)}{A'+(A\cap B')}
+        \cong
+        \frac{B'+(A\cap B)}{B'+(A'\cap B)}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    By the second isomorphism theorem,
+    \[
+        \frac{A'+(A\cap B)}{A'+(A\cap B')}
+        \cong
+        \frac{A\cap B}{(A\cap B')+(A'\cap B)}.
+    \]
+    Interchanging the roles of $A$ and $B$ gives
+    \[
+        \frac{B'+(A\cap B)}{B'+(A'\cap B)}
+        \cong
+        \frac{A\cap B}{(A\cap B')+(A'\cap B)}.
+    \]
+    Hence the two quotients are naturally isomorphic.
+\end{proof}
+
+\begin{theorem}[Schreier refinement theorem]
+    Any two finite submodule series of a module admit equivalent refinements.
+\end{theorem}
+
+\begin{proof}
+    Starting from two finite submodule series, form the usual Schreier refinements by
+    intersecting the terms of one series with the terms of the other. The Zassenhaus
+    lemma shows that the successive factors in these two refinements are pairwise
+    isomorphic up to reordering. Hence the refinements are equivalent.
+\end{proof}
+
+\begin{theorem}[Jordan--H\"older theorem]
+    Let $U$ be an $R$-module with a composition series. Then any two composition series
+    of $U$ have the same length, and their composition factors are the same up to
+    permutation and isomorphism.
+\end{theorem}
+
+\begin{proof}
+    A composition series is, by definition, a submodule series whose successive factors
+    are simple. Therefore it admits no proper refinement. Applying the Schreier
+    refinement theorem to two composition series of $U$, we obtain equivalent refinements
+    of both. Since no further refinement is possible, the two original series were
+    already equivalent. This means precisely that they have the same length and the same
+    multiset of composition factors up to isomorphism.
+\end{proof}
+

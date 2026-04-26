@@ -1,0 +1,288 @@
+\section{Homework Week 5}
+
+\begin{exercise}
+    Are the following statements correct?
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\theenumi)}
+        \item Any submodule of a semisimple module is also semisimple.
+        \item Any semisimple Noetherian module is Artinian.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \textbf{(1)} True. Let $V$ be a semisimple module, so
+    \[
+        V=\bigoplus_{i\in I} S_i
+    \]
+    where each $S_i$ is simple. Let $W\leq V$ be a submodule. We show that $W$ is a sum of simple submodules, hence semisimple.
+
+    Consider the set $\mathcal{S}$ of all subsets $J\subseteq I$ such that the sum
+    \[
+        W+\bigoplus_{j\in J}S_j
+    \]
+    is direct, i.e.
+    \[
+        W\cap \bigoplus_{j\in J}S_j=0.
+    \]
+    By Zorn's lemma, there exists a maximal such subset $J_0$. Set
+    \[
+        U:=W\oplus \bigoplus_{j\in J_0}S_j.
+    \]
+    For any $i\in I\setminus J_0$, the maximality of $J_0$ forces $U\cap S_i\neq 0$. Since $S_i$ is simple, we have $S_i\subseteq U$. Therefore $S_i\subseteq U$ for every $i\in I$, so $V=U$. Hence
+    \[
+        V=W\oplus \bigoplus_{j\in J_0}S_j,
+    \]
+    and
+    \[
+        W\cong V\Big/\bigoplus_{j\in J_0}S_j \cong \bigoplus_{i\in I\setminus J_0} S_i,
+    \]
+    which is semisimple.
+
+    \medskip
+    \textbf{(2)} True. Let $V$ be a semisimple Noetherian module. Since $V$ is semisimple,
+    \[
+        V=\bigoplus_{i\in I}S_i
+    \]
+    Since $V$ is Noetherian, it is finitely generated. Let $v_1,\dots,v_n$ generate $V$.
+    For each $k$, because $V=\bigoplus_{i\in I} S_i$ is a direct sum, the element $v_k$ has only finitely many nonzero components, so there exists a finite subset $I_k\subseteq I$ such that
+    \[
+        v_k\in \bigoplus_{i\in I_k} S_i.
+    \]
+    Hence
+    \[
+        V=\langle v_1,\dots,v_n\rangle \subseteq \bigoplus_{i\in I_1\cup\cdots\cup I_n} S_i.
+    \]
+    Since the reverse inclusion is obvious, we get
+    \[
+        V=\bigoplus_{i\in I_1\cup\cdots\cup I_n} S_i,
+    \]
+    and therefore $V$ is a finite direct sum of simple modules. Each $S_i$ is simple, hence both Noetherian and Artinian. A finite direct sum of Artinian modules is Artinian, so $V$ is Artinian.
+\end{proof}
+
+\begin{exercise}
+    Let \(V\) be an \(R\)-module with a composition series. Prove that the following conditions are equivalent.
+    \begin{enumerate}
+        \renewcommand{\labelenumi}{(\theenumi)}
+        \item \(V\) is semisimple.
+        \item Every irreducible submodule of \(V\) is a direct summand of \(V\).
+        \item Every maximal submodule of \(V\) is a direct summand of \(V\).
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    We prove
+    \[
+        (1)\Longrightarrow(2)\Longrightarrow(3)\Longrightarrow(1).
+    \]
+
+    \medskip
+    \noindent\textbf{(1) \(\Longrightarrow\) (2).}
+    If \(V\) is semisimple, then every submodule of \(V\) is a direct summand.
+    In particular, every irreducible submodule of \(V\) is a direct summand.
+
+    \medskip
+    \noindent\textbf{(2) \(\Longrightarrow\) (3).}
+    Let \(M\) be a maximal submodule of \(V\).
+    Then \(V/M\) is simple.
+
+    Since \(M\) is a maximal submodule of \(V\), the quotient \(V/M\) is simple.
+    Now let \(S\) be a submodule of \(V\) such that \(S \nsubseteq M\).
+    Then \(S+M \neq M\), so
+    \[
+        (S+M)/M \neq 0.
+    \]
+    By the second isomorphism theorem,
+    \[
+        S/(S\cap M)\cong (S+M)/M.
+    \]
+    Since \((S+M)/M\) is a nonzero submodule of the simple module \(V/M\), it follows that
+    \((S+M)/M\) is simple. Hence \(S/(S\cap M)\) is simple.
+
+    Choose \(S\subseteq V\) minimal subject to \(S\nsubseteq M\).
+    Then \(S\cap M\) is a maximal submodule of \(S\), and by minimality of \(S\),
+    the quotient \(S/(S\cap M)\) is simple.
+    But \(S\cap M\) is a proper submodule of \(S\), so by minimality of \(S\), it must be \(0\).
+    Thus \(S\) is simple.
+
+    Therefore \(S\) is an irreducible submodule of \(V\) with \(S\nsubseteq M\).
+    By (2), \(S\) is a direct summand of \(V\), say
+    \[
+        V=S\oplus T.
+    \]
+    Since \(S\nsubseteq M\) and \(S\) is simple, we have \(S\cap M=0\).
+    Also \(M\) is maximal and \(S\not\subseteq M\), so
+    \[
+        M+S=V.
+    \]
+    Hence
+    \[
+        V=M\oplus S,
+    \]
+    and therefore \(M\) is a direct summand of \(V\).
+
+    \medskip
+    \noindent\textbf{(3) \(\Longrightarrow\) (1).}
+    Let
+    \[
+        V=V_0\supsetneq V_1\supsetneq \cdots \supsetneq V_n=0
+    \]
+    be a composition series of \(V\).
+    We argue by induction on \(n\), the composition length of \(V\).
+
+    If \(n=1\), then \(V\) is simple, hence semisimple.
+
+    Assume \(n>1\), and suppose the statement holds for modules of composition length \(<n\).
+    Since \(V/V_1\) is simple, \(V_1\) is a maximal submodule of \(V\).
+    By (3), \(V_1\) is a direct summand of \(V\); thus
+    \[
+        V=V_1\oplus S
+    \]
+    for some simple submodule \(S\cong V/V_1\).
+
+    Now \(V_1\) has composition length \(n-1\).
+    We claim that every maximal submodule of \(V_1\) is a direct summand of \(V_1\).
+    Indeed, let \(N\) be a maximal submodule of \(V_1\).
+    Then
+    \[
+        V/N \cong (V_1/N)\oplus S,
+    \]
+    and since \(V_1/N\) is simple, \(N\oplus S\) is a maximal submodule of \(V\).
+    By (3), \(N\oplus S\) is a direct summand of \(V\), say
+    \[
+        V=(N\oplus S)\oplus T.
+    \]
+    Because
+    \[
+        V=V_1\oplus S,
+    \]
+    intersecting with \(V_1\) gives
+    \[
+        V_1=N\oplus T.
+    \]
+    So \(N\) is a direct summand of \(V_1\).
+
+    Hence \(V_1\) satisfies condition (3), and by the induction hypothesis \(V_1\) is semisimple.
+    Therefore
+    \[
+        V=V_1\oplus S
+    \]
+    is semisimple as well.
+
+    This proves \((3)\Longrightarrow(1)\), and therefore the three conditions are equivalent.
+\end{proof}
+
+\begin{exercise}
+    Prove that
+    \[
+        \operatorname{Soc}(U \oplus V)=\operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+\end{exercise}
+
+\begin{proof}
+    We first show
+    \[
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V)\subseteq \operatorname{Soc}(U\oplus V).
+    \]
+    Indeed, \(\operatorname{Soc}(U)\) and \(\operatorname{Soc}(V)\) are semisimple, so
+    \(\operatorname{Soc}(U)\oplus \operatorname{Soc}(V)\) is a semisimple submodule of
+    \(U\oplus V\). Hence it is contained in \(\operatorname{Soc}(U\oplus V)\).
+
+    For the reverse inclusion, let \(S\) be a simple submodule of \(U\oplus V\), and let
+    \[
+        \pi_U:U\oplus V\to U, \qquad \pi_V:U\oplus V\to V
+    \]
+    be the canonical projections. Consider the restrictions
+    \[
+        \pi_U|_S:S\to U, \qquad \pi_V|_S:S\to V.
+    \]
+    Since \(S\) is simple, the image of any homomorphism defined on \(S\) is either \(0\) or
+    simple. Therefore \(\pi_U(S)\) is either \(0\) or a simple submodule of \(U\), and similarly
+    \(\pi_V(S)\) is either \(0\) or a simple submodule of \(V\). Hence
+    \[
+        \pi_U(S)\subseteq \operatorname{Soc}(U),
+        \qquad
+        \pi_V(S)\subseteq \operatorname{Soc}(V).
+    \]
+
+    Now for any \(s\in S\), we can write
+    \[
+        s=(\pi_U(s),\pi_V(s)).
+    \]
+    Since \(\pi_U(s)\in \operatorname{Soc}(U)\) and
+    \(\pi_V(s)\in \operatorname{Soc}(V)\), it follows that
+    \[
+        s\in \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+    Thus
+    \[
+        S\subseteq \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+
+    Since \(\operatorname{Soc}(U\oplus V)\) is the sum of all simple submodules of \(U\oplus V\),
+    we obtain
+    \[
+        \operatorname{Soc}(U\oplus V)\subseteq \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+
+    Combining the two inclusions, we conclude that
+    \[
+        \operatorname{Soc}(U\oplus V)=\operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+\end{proof}
+
+\begin{exercise}
+    Let \(R\) be an arbitrary ring. Then every two-sided ideal of the matrix ring \(M_n(R)\) can be expressed in the form \(M_n(I)\), where \(I\) is a two-sided ideal of \(R\). In particular, \(R\) is simple if and only if \(M_n(R)\) is simple.
+
+    \textit{Hint.} For an ideal \(L\) of \(M_n(R)\), let \(I\) be the set of \((1,1)\)-entries of \(L\). Show that \(I\) is an ideal of \(R\) and \(L=M_n(I)\).
+\end{exercise}
+
+\begin{proof}
+    Let $E_{ij}$ denote the matrix with $1$ in position $(i,j)$ and $0$ elsewhere. For a two-sided ideal $L$ of $M_n(R)$, define
+    \[
+        I:=\{a\in R\mid aE_{11}\in L\}.
+    \]
+    We first note that for any $A=(a_{kl})\in L$, we have
+    \[
+        E_{1k}\cdot A\cdot E_{l1}=a_{kl}\,E_{11}\in L,
+    \]
+    so every entry of every matrix in $L$ belongs to $I$. In particular,
+    \[
+        I=\{a_{kl}\mid A=(a_{kl})\in L,\; 1\leq k,l\leq n\}.
+    \]
+
+    \textbf{$I$ is a two-sided ideal of $R$.}
+    If $a,b\in I$, then $aE_{11},bE_{11}\in L$, so $(a-b)E_{11}=aE_{11}-bE_{11}\in L$, hence $a-b\in I$. For $r\in R$, we have $(rE_{11})\cdot(aE_{11})=raE_{11}\in L$ and $(aE_{11})\cdot(rE_{11})=arE_{11}\in L$, so $ra,ar\in I$. Thus $I$ is a two-sided ideal of $R$.
+
+    \textbf{$L=M_n(I)$.}
+    Since every entry of every matrix in $L$ lies in $I$, we have $L\subseteq M_n(I)$. Conversely, let $aE_{ij}\in M_n(I)$ with $a\in I$. Then $aE_{11}\in L$, and
+    \[
+        aE_{ij}=E_{i1}\cdot(aE_{11})\cdot E_{1j}\in L.
+    \]
+    Since every matrix in $M_n(I)$ is a sum of such elements $aE_{ij}$, we get $M_n(I)\subseteq L$. Therefore $L=M_n(I)$.
+
+    \textbf{$R$ is simple $\Longleftrightarrow M_n(R)$ is simple.}
+    The map $I\mapsto M_n(I)$ is a bijection from the set of two-sided ideals of $R$ to the set of two-sided ideals of $M_n(R)$. Hence $R$ has no nontrivial two-sided ideals if and only if $M_n(R)$ has no nontrivial two-sided ideals.
+\end{proof}
+
+\begin{exercise}
+    Let \(W\) be a submodule of a semisimple module \(V\). Show that \(W\) and \(V/W\) are also semisimple.
+\end{exercise}
+
+\begin{proof}
+    Since $V$ is semisimple, write $V=\bigoplus_{i\in I}S_i$ with each $S_i$ simple.
+
+    \textbf{$W$ is semisimple.}
+    By Zorn's lemma, choose a maximal subset $J\subseteq I$ such that $W\cap\bigoplus_{j\in J}S_j=0$. Set $U=W\oplus\bigoplus_{j\in J}S_j$. For any $i\in I\setminus J$, the maximality of $J$ gives $U\cap S_i\neq 0$, and since $S_i$ is simple,$S_i\subseteq U$. Therefore $V\subseteq U$, so $V=U=W\oplus\bigoplus_{j\in J}S_j$. Thus
+    \[
+        W\cong V\Big/\bigoplus_{j\in J}S_j\cong \bigoplus_{i\in I\setminus J}S_i,
+    \]
+    which is a direct sum of simple modules, hence semisimple.
+
+    \textbf{$V/W$ is semisimple.}
+    From the decomposition $V=W\oplus\bigoplus_{j\in J}S_j$, we obtain
+    \[
+        V/W\cong \bigoplus_{j\in J}S_j,
+    \]
+    which is a direct sum of simple modules, hence semisimple.
+\end{proof}
+

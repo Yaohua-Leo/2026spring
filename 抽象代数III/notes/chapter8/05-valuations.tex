@@ -1,0 +1,153 @@
+\section{Valuations}
+
+\begin{definition}[Valuation]
+    Let \(K\) be a field. A \emph{valuation} on \(K\) is a function
+    \[
+        v:K^\times\longrightarrow \mathbb R,
+    \]
+    where \(K^\times=K\setminus\{0\}\), satisfying the following conditions:
+    \begin{enumerate}
+        \item For all \(a,b\in K^\times\),
+              \[
+                  v(ab)=v(a)+v(b).
+              \]
+        \item For all \(a,b\in K^\times\) with \(a+b\neq 0\),
+              \[
+                  v(a+b)\geq \min\{v(a),v(b)\}.
+              \]
+    \end{enumerate}
+    We extend \(v\) to \(K\) by setting
+    \[
+        v(0)=+\infty.
+    \]
+    With this convention, the second condition can be written as
+    \[
+        v(a+b)\geq \min\{v(a),v(b)\}
+    \]
+    for all \(a,b\in K\).
+\end{definition}
+
+\begin{proposition}
+    Let \(v\) be a valuation on a field \(K\). Then
+    \[
+        v:(K^\times,\cdot)\longrightarrow (\mathbb R,+)
+    \]
+    is a group homomorphism.
+\end{proposition}
+
+\begin{proof}
+    By definition, for all \(a,b\in K^\times\),
+    \[
+        v(ab)=v(a)+v(b).
+    \]
+    Also,
+    \[
+        0=v(1)=v(aa^{-1})=v(a)+v(a^{-1}),
+    \]
+    so
+    \[
+        v(a^{-1})=-v(a).
+    \]
+    Therefore \(v\) is a group homomorphism from \(K^\times\) to the additive group
+    \((\mathbb R,+)\).
+\end{proof}
+
+\begin{definition}[Value group]
+    Let \((K,v)\) be a valued field. The subgroup
+    \[
+        v(K^\times)\subseteq (\mathbb R,+)
+    \]
+    is called the \emph{value group} of \(v\).
+
+    A field \(K\) together with a valuation \(v\) is called a \emph{valued field},
+    and is denoted by
+    \[
+        (K,v).
+    \]
+\end{definition}
+
+\begin{proposition}[Basic properties of valuations]
+    Let \(v\) be a valuation on a field \(K\). Then for all \(a,b\in K^\times\), the
+    following hold:
+    \begin{enumerate}
+        \item
+              \[
+                  v(1)=0,\qquad v(-1)=0.
+              \]
+        \item
+              \[
+                  v(-a)=v(a).
+              \]
+        \item
+              \[
+                  v(a^{-1})=-v(a).
+              \]
+        \item If
+              \[
+                  v(b)<v(a),
+              \]
+              then
+              \[
+                  v(a+b)=v(b).
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    First,
+    \[
+        v(1)=v(1\cdot 1)=v(1)+v(1),
+    \]
+    so
+    \[
+        v(1)=0.
+    \]
+    Since \((-1)^2=1\), we have
+    \[
+        2v(-1)=v((-1)^2)=v(1)=0,
+    \]
+    and hence
+    \[
+        v(-1)=0.
+    \]
+
+    For \(a\in K^\times\),
+    \[
+        v(-a)=v((-1)a)=v(-1)+v(a)=v(a).
+    \]
+
+    Also,
+    \[
+        0=v(1)=v(aa^{-1})=v(a)+v(a^{-1}),
+    \]
+    so
+    \[
+        v(a^{-1})=-v(a).
+    \]
+
+    Finally, suppose that \(v(b)<v(a)\). By the valuation inequality,
+    \[
+        v(a+b)\geq \min\{v(a),v(b)\}=v(b).
+    \]
+    We claim that equality holds. If instead
+    \[
+        v(a+b)>v(b),
+    \]
+    then using
+    \[
+        b=(a+b)-a,
+    \]
+    we get
+    \[
+        v(b)\geq \min\{v(a+b),v(a)\}.
+    \]
+    But both \(v(a+b)\) and \(v(a)\) are strictly larger than \(v(b)\), so the right-hand
+    side is strictly larger than \(v(b)\), a contradiction. Therefore
+    \[
+        v(a+b)=v(b).
+    \]
+\end{proof}
+
+
+
+

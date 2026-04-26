@@ -1,0 +1,198 @@
+\section{Idempotents and Module Homomorphisms}
+
+\begin{theorem}
+    Let $R$ be a ring, let $e,f\in R$ be idempotents, and let ${}_RV$ be a left $R$-module.
+    \begin{enumerate}
+        \item There is a natural isomorphism of abelian groups
+              \[
+                  \Hom_R(Re,V)\cong eV.
+              \]
+              In particular,
+              \[
+                  \Hom_R(Re,Rf)\cong eRf.
+              \]
+
+        \item There is an isomorphism of rings
+              \[
+                  \operatorname{End}_R(Re)\cong (eRe)^{op}.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \textbf{(1)} Define
+    \[
+        g:\Hom_R(Re,V)\longrightarrow eV,\qquad \varphi\longmapsto \varphi(e).
+    \]
+    First we check that $g$ is well-defined. If $\varphi\in \Hom_R(Re,V)$, then
+    \[
+        \varphi(e)=\varphi(e^2)=e\varphi(e),
+    \]
+    so indeed $\varphi(e)\in eV$.
+
+    Next, for any $a\in R$ and any $\varphi\in \Hom_R(Re,V)$, we have
+    \[
+        \varphi(ae)=a\varphi(e).
+    \]
+    Thus $\varphi$ is uniquely determined by the single value $\varphi(e)$. Hence $g$ is injective.
+
+    To show surjectivity, let $v\in eV$. Define
+    \[
+        \psi_v:Re\longrightarrow V,\qquad ae\longmapsto av.
+    \]
+    This is well-defined, since if $ae=be$, then
+    \[
+        av=(ae)v=(be)v=bv.
+    \]
+    It is also $R$-linear. Moreover,
+    \[
+        g(\psi_v)=\psi_v(e)=ev=v,
+    \]
+    because $v\in eV$. Hence $g$ is surjective.
+
+    Finally, $g$ is a homomorphism of abelian groups, since for $\varphi,\psi\in \Hom_R(Re,V)$,
+    \[
+        g(\varphi+\psi)=(\varphi+\psi)(e)=\varphi(e)+\psi(e)=g(\varphi)+g(\psi).
+    \]
+    Therefore $g$ is an isomorphism of abelian groups:
+    \[
+        \Hom_R(Re,V)\cong eV.
+    \]
+
+    Taking $V=Rf$, we obtain
+    \[
+        \Hom_R(Re,Rf)\cong e(Rf)=eRf.
+    \]
+
+    \medskip
+
+    \textbf{(2)} Apply part~\textbf{(1)} with $V=Re$. Then we get an isomorphism of abelian groups
+    \[
+        \Phi:\operatorname{End}_R(Re)\longrightarrow eRe,\qquad \sigma\longmapsto \sigma(e).
+    \]
+    Now let $\sigma,\tau\in \operatorname{End}_R(Re)$. Then
+    \[
+        \Phi(\sigma\circ\tau)
+        =(\sigma\circ\tau)(e)
+        =\sigma(\tau(e)).
+    \]
+    Since $\tau(e)\in Re$, we have $\tau(e)=\tau(e)e$, and hence
+    \[
+        \sigma(\tau(e))
+        =\sigma(\tau(e)e)
+        =\tau(e)\sigma(e).
+    \]
+    Therefore
+    \[
+        \Phi(\sigma\circ\tau)=\Phi(\tau)\Phi(\sigma).
+    \]
+    So composition in $\operatorname{End}_R(Re)$ corresponds to multiplication in $eRe$ with the order reversed. Hence
+    \[
+        \operatorname{End}_R(Re)\cong (eRe)^{op}
+    \]
+    as rings.
+\end{proof}
+
+\begin{theorem}
+    Let $e,f$ be idempotents of a ring $R$. Then the followings are equivalent:
+    \begin{enumerate}
+        \item $Re \cong Rf$ as left $R$-modules.
+        \item $eR \cong fR$ as right $R$-modules.
+        \item There exist elements
+              \[
+                  a \in eRf, \qquad b \in fRe
+              \]
+              such that
+              \[
+                  ab=e, \qquad ba=f.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    By passing to the opposite ring $R^{\operatorname{op}}$, statement \textup{(2)} is the right-handed analogue of \textup{(1)}. Thus it suffices to prove that \textup{(1)} and \textup{(3)} are equivalent.
+
+    \medskip
+
+    \noindent
+    \textup{(1) $\Rightarrow$ (3).}
+    Assume that there is an isomorphism of left $R$-modules
+    \[
+        \varphi: Re \xrightarrow{\;\sim\;} Rf.
+    \]
+    Set
+    \[
+        a:=\varphi(e), \qquad b:=\varphi^{-1}(f).
+    \]
+    Then
+    \[
+        a=\varphi(e)=\varphi(ee)=e\varphi(e)=ea,
+    \]
+    and since $a\in Rf$, we also have $af=a$. Hence
+    \[
+        a\in eRf.
+    \]
+    Similarly,
+    \[
+        b=\varphi^{-1}(f)=\varphi^{-1}(ff)=f\varphi^{-1}(f)=fb,
+    \]
+    and since $b\in Re$, we have $be=b$. Therefore
+    \[
+        b\in fRe.
+    \]
+
+    Now compute:
+    \[
+        f=\varphi\bigl(\varphi^{-1}(f)\bigr)=\varphi(b)=\varphi(be)=b\varphi(e)=ba,
+    \]
+    and
+    \[
+        e=\varphi^{-1}(\varphi(e))=\varphi^{-1}(a)=\varphi^{-1}(af)=a\varphi^{-1}(f)=ab.
+    \]
+    Thus
+    \[
+        ab=e, \qquad ba=f.
+    \]
+
+    \medskip
+
+    \noindent
+    \textup{(3) $\Rightarrow$ (1).}
+    Assume there exist $a\in eRf$ and $b\in fRe$ such that
+    \[
+        ab=e, \qquad ba=f.
+    \]
+    Since $a\in eRf$ and $b\in fRe$, we have
+    \[
+        ea=a, \qquad af=a, \qquad fb=b, \qquad be=b.
+    \]
+
+    Define maps
+    \[
+        \varphi_a: Re \longrightarrow Rf, \qquad xe \longmapsto xa,
+    \]
+    and
+    \[
+        \varphi_b: Rf \longrightarrow Re, \qquad xf \longmapsto xb.
+    \]
+    These are well-defined left $R$-module homomorphisms.
+
+    Now for any $xe\in Re$,
+    \[
+        (\varphi_b\circ \varphi_a)(xe)=\varphi_b(xa)=xab=xe,
+    \]
+    since $ab=e$. Likewise, for any $xf\in Rf$,
+    \[
+        (\varphi_a\circ \varphi_b)(xf)=\varphi_a(xb)=xba=xf,
+    \]
+    since $ba=f$.
+
+    Hence $\varphi_a$ and $\varphi_b$ are inverse isomorphisms, so
+    \[
+        Re \cong Rf
+    \]
+    as left $R$-modules.
+
+    Therefore \textup{(1)} and \textup{(3)} are equivalent, and by symmetry so are all three statements.
+\end{proof}
+

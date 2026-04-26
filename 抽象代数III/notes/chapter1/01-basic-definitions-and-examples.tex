@@ -1,0 +1,175 @@
+\section{Basic Definitions and Examples}
+
+\begin{definition}
+    Let $R$ be a ring with $1$, and let $M$ be an abelian group. We say that $M$ is a left $R$-module if there is a map
+    \[
+        R \times M \to M, \quad (r, m) \mapsto rm,
+    \]
+    such that
+    \[
+        \begin{aligned}
+            r(m+n) & = rm + rn, \\
+            (r+s)m & = rm + sm, \\
+            (rs)m  & = r(sm),   \\
+            1m     & = m
+        \end{aligned}
+    \]
+    for all $r, s \in R$ and $m, n \in M$.
+
+    A \textbf{right $R$-module} is defined similarly, using a map $(m, r) \mapsto mr$ and the axiom $m(rs) = (mr)s$. If $R$ is commutative, left $R$-modules and right $R$-modules coincide. In general, a right $R$-module may be viewed as a left $R^{\mathrm{op}}$-module.
+\end{definition}
+
+For each $r \in R$, the map $\varphi_r\colon M \to M$ given by $\varphi_r(m) = rm$ is a homomorphism of abelian groups. Let
+\[
+    \operatorname{End}(M) = \{\, \varphi\colon M \to M \mid \varphi \text{ is a homomorphism of abelian groups} \,\}.
+\]
+Then $\operatorname{End}(M)$ is a ring under composition.
+
+\begin{theorem}
+    Let $M$ be an abelian group. Then $M$ is an $R$-module if and only if there is a ring homomorphism
+    \[
+        \rho\colon R \to \operatorname{End}(M).
+    \]
+\end{theorem}
+
+\begin{proof}
+    $(\Rightarrow)$ Suppose $M$ is an $R$-module. Define $\rho\colon R \to \operatorname{End}(M)$ by
+    \[
+        \rho(r)(m) = rm \qquad (r \in R,\ m \in M).
+    \]
+    For each $r \in R$, the map $\rho(r)\colon M \to M$ is a homomorphism of abelian groups since
+    \[
+        \rho(r)(m_1+m_2) = r(m_1+m_2) = rm_1 + rm_2.
+    \]
+    Moreover, $\rho$ is a ring homomorphism:
+    \begin{itemize}
+        \item $\rho(r+s)(m) = (r+s)m = rm + sm = \rho(r)(m) + \rho(s)(m)$, so $\rho(r+s) = \rho(r) + \rho(s)$;
+        \item $\rho(rs)(m) = (rs)m = r(sm) = \rho(r)(\rho(s)(m))$, so $\rho(rs) = \rho(r) \circ \rho(s)$;
+        \item $\rho(1)(m) = 1m = m$, so $\rho(1) = \operatorname{id}_M$.
+    \end{itemize}
+
+    $(\Leftarrow)$ Suppose $\rho\colon R \to \operatorname{End}(M)$ is a ring homomorphism. Define scalar multiplication by
+    \[
+        (r, m) \mapsto \rho(r)(m).
+    \]
+    Then
+    \[
+        \begin{aligned}
+            r(m_1+m_2) & = \rho(r)(m_1+m_2) = \rho(r)(m_1) + \rho(r)(m_2), \\
+            (r+s)m     & = \rho(r+s)(m) = \rho(r)(m) + \rho(s)(m),         \\
+            (rs)m      & = \rho(rs)(m) = \rho(r)(\rho(s)(m)) = r(sm),      \\
+            1m         & = \rho(1)(m) = \operatorname{id}_M(m) = m.
+        \end{aligned}
+    \]
+    Hence $M$ is an $R$-module.
+\end{proof}
+
+\begin{example}
+    (1) A vector space over a field is a module over that field.
+
+    (2) An abelian group is a $\mathbb{Z}$-module.
+
+    (3) Any ideal of a ring $R$ is naturally an $R$-module.
+
+    (4) Let $M$ be an abelian group. Then $M$ is an $\operatorname{End}(M)$-module via
+    \[
+        \operatorname{End}(M) \times M \to M, \quad (\varphi, m) \mapsto \varphi(m).
+    \]
+
+    (5) Let $V$ be a vector space over a field $K$, and let $A\colon V \to V$ be a linear transformation. Then $V$ is a $K[x]$-module via
+    \[
+        K[x] \times V \to V, \quad (f(x), v) \mapsto f(A)v.
+    \]
+
+    (6) If $|M| = 1$, then $M$ is called the zero module.
+
+    (7) Let $R$ be a ring with $1$ and let $A \in M_n(R)$. Then the solution set of $AX=0$, where $X \in R^n$, is a right $R$-module.
+\end{example}
+
+\begin{definition}[$R$-submodule]
+    Let $R$ be a ring with $1$, and let $M$ be a left $R$-module. A subset $N \subseteq M$ is called an \emph{$R$-submodule} of $M$ if
+    \begin{enumerate}
+        \item $0 \in N$;
+        \item $n_1, n_2 \in N$ implies $n_1+n_2 \in N$;
+        \item $n \in N$ implies $-n \in N$;
+        \item $r \in R$ and $n \in N$ imply $rn \in N$.
+    \end{enumerate}
+    Equivalently, $N$ is a subgroup of the abelian group $(M,+)$ that is closed under the $R$-action.
+\end{definition}
+
+\begin{example}
+    (1) If $V$ is a vector space over a field $K$, then every subspace of $V$ is a $K$-submodule of $V$.
+
+    (2) If $G$ is an abelian group, then every subgroup of $G$ is a $\mathbb{Z}$-submodule of $G$.
+
+    (3) The left regular module ${}_R R$ has precisely the left ideals of $R$ as its submodules.
+
+    (4) Let $G$ be an abelian group, viewed as an $\operatorname{End}(G)$-module. Then the $\operatorname{End}(G)$-submodules of $G$ are exactly the fully invariant subgroups of $G$.
+\end{example}
+
+\begin{remark}
+    A natural question is the following: are submodules of finitely generated modules again finitely generated? In general the answer is no. This property holds for all submodules if and only if the ring is Noetherian.
+\end{remark}
+
+\begin{example}[Submodule of a finitely generated module that is not finitely generated]
+    Let $k$ be a field, and consider the polynomial ring
+    \[
+        R = k[x_1, x_2, x_3, \dots]
+    \]
+    in infinitely many variables.
+    \begin{itemize}
+        \item The ring $R$ is a cyclic left $R$-module, generated by $1$.
+        \item Let $I = \langle x_1, x_2, x_3, \dots \rangle$. Then $I$ is a submodule of the left $R$-module $R$.
+        \item The submodule $I$ is not finitely generated. Indeed, suppose
+              \[
+                  I = \langle f_1, \dots, f_n \rangle
+              \]
+              for some polynomials $f_1, \dots, f_n \in R$. Let $N$ be the largest index of any variable appearing in any of the $f_i$. Then every element of $\langle f_1, \dots, f_n \rangle$ lies in the subring $k[x_1, \dots, x_N]$, but $x_{N+1} \in I$ does not. This is a contradiction.
+    \end{itemize}
+    Thus $I$ is a submodule of the finitely generated $R$-module $R$ which is not finitely generated.
+\end{example}
+
+\begin{definition}
+    Let $M$ be an $R$-module, and let $(M_i)_{i \in I}$ be a family of submodules of $M$. Then
+    \[
+        \bigcap_{i \in I} M_i
+    \]
+    is an $R$-submodule of $M$. Moreover,
+    \[
+        \sum_{i \in I} M_i
+        =
+        \left\{ \sum_{i \in I}^{\mathrm{finite}} m_i \,\middle|\, m_i \in M_i \right\}
+    \]
+    is also an $R$-submodule of $M$.
+\end{definition}
+
+\begin{definition}
+    Let $M$ be an $R$-module, and let $S \subseteq M$. The submodule generated by $S$ is
+    \[
+        \langle S \rangle
+        =
+        \left\{ \sum_{j=1}^n a_j s_j \,\middle|\, n \ge 0,\ a_j \in R,\ s_j \in S \right\}.
+    \]
+    Equivalently,
+    \[
+        \langle S \rangle
+        =
+        \bigcap_{\substack{N \le M \\ S \subseteq N}} N.
+    \]
+    If $M = \langle S \rangle$, then we say that $M$ is generated by $S$. In particular, if $|S| = 1$, then $M$ is called \emph{cyclic}; if $|S| < \infty$, then $M$ is called \emph{finitely generated}.
+\end{definition}
+
+\begin{definition}
+    Let $R$ be a ring, and let $M$ be a left $R$-module. We say that $M$ is \emph{Noetherian} if every ascending chain of submodules
+    \[
+        M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots
+    \]
+    stabilizes; that is, there exists $n \ge 1$ such that
+    \[
+        M_n = M_{n+1} = M_{n+2} = \cdots.
+    \]
+    Equivalently, $M$ is Noetherian if every submodule of $M$ is finitely generated.
+\end{definition}
+
+
+

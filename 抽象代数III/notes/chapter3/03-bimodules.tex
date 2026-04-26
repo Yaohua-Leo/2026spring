@@ -1,0 +1,848 @@
+\section{Bimodules}
+
+\begin{definition}
+    Let $R$ and $S$ be rings. An abelian group $M$ is called a \emph{left-$R$-right-$S$-bimodule} if $M$ is both a left $R$-module and a right $S$-module such that the two scalar multiplications satisfy
+    \[
+        r(xs)=(rx)s
+        \qquad
+        \text{for all } r\in R,\ s\in S,\ x\in M.
+    \]
+\end{definition}
+
+\noindent\textbf{Notation.}
+\[
+    {}_R M \qquad \text{left } R\text{-module},
+\]
+\[
+    M_S \qquad \text{right } S\text{-module},
+\]
+\[
+    {}_R M_S \qquad \text{left } R\text{-right } S\text{-bimodule}.
+\]
+
+Let $R,S$ be rings, and let ${}_R U_S$ be a bimodule.
+
+For each left $R$-module ${}_R M$, there are two naturally induced $S$-module structures:
+
+\[
+    \operatorname{Hom}_R({}_R U_S, {}_R M),
+    \qquad \text{a left } S\text{-module},
+\]
+
+\[
+    \operatorname{Hom}_R({}_R M, {}_R U_S),
+    \qquad \text{a right } S\text{-module}.
+\]
+
+More precisely, for each $s\in S$:
+
+if
+\[
+    f\in \operatorname{Hom}_R({}_R U_S, {}_R M),
+\]
+define
+\[
+    s\cdot f: U\to M,\qquad u\mapsto f(us).
+\]
+
+Similarly, if
+\[
+    f\in \operatorname{Hom}_R({}_R M, {}_R U_S),
+\]
+define
+\[
+    f\cdot s: M\to U,\qquad m\mapsto f(m)s.
+\]
+
+Thus we obtain functors
+\[
+    \operatorname{Hom}_R({}_R U_S,-): R\text{-}\mathbf{Mod}\longrightarrow S\text{-}\mathbf{Mod},
+\]
+given on objects by
+\[
+    {}_R M\longmapsto \operatorname{Hom}_R({}_R U_S, {}_R M),
+\]
+which is covariant, and
+\[
+    \operatorname{Hom}_R(-,{}_R U_S): R\text{-}\mathbf{Mod}\longrightarrow \mathbf{Mod}\text{-}S,
+\]
+given on objects by
+\[
+    {}_R M\longmapsto \operatorname{Hom}_R({}_R M, {}_R U_S),
+\]
+which is contravariant.
+
+On morphisms, for
+\[
+    f:M\to M',
+\]
+the induced map
+\[
+    \operatorname{Hom}_R({}_R U_S, {}_R M)\longrightarrow \operatorname{Hom}_R({}_R U_S, {}_R M')
+\]
+is given by
+\[
+    h\longmapsto f\circ h.
+\]
+
+the induced map
+\[
+    \operatorname{Hom}_R({}_R M', {}_R U_S)\longrightarrow \operatorname{Hom}_R({}_R M, {}_R U_S)
+\]
+is given by
+\[
+    h\longmapsto  h \circ f.
+\]
+
+\begin{theorem}
+    The functor
+    \[
+        \operatorname{Hom}_R({}_R U_S,-): R\text{-}\mathbf{Mod}\longrightarrow S\text{-}\mathbf{Mod}
+    \]
+    is left exact.
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        0\longrightarrow N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N''
+    \]
+    be an exact sequence in $R$-\textbf{Mod}. Consider the induced sequence
+    \[
+        0\longrightarrow \operatorname{Hom}_R({}_R U_S,N')
+        \xrightarrow{\operatorname{Hom}_R(U,f)}
+        \operatorname{Hom}_R({}_R U_S,N)
+        \xrightarrow{\operatorname{Hom}_R(U,g)}
+        \operatorname{Hom}_R({}_R U_S,N'').
+    \]
+    We show that this sequence is exact.
+
+    First,$\operatorname{Hom}_R(U,f)$ is injective. Let
+    \[
+        \varphi\in \operatorname{Hom}_R(U,N')
+    \]
+    and suppose that
+    \[
+        \operatorname{Hom}_R(U,f)(\varphi)=f\circ \varphi=0.
+    \]
+    Then for every $u\in U$,
+    \[
+        f(\varphi(u))=0.
+    \]
+    Since $f$ is injective, it follows that $\varphi(u)=0$ for all $u\in U$. Hence $\varphi=0$, so $\operatorname{Hom}_R(U,f)$ is injective.
+
+    Next, we show that
+    \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        \subseteq
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+    \]
+    Indeed, if
+    \[
+        \varphi\in \operatorname{Hom}_R(U,N'),
+    \]
+    then
+    \[
+        \operatorname{Hom}_R(U,g)\bigl(\operatorname{Hom}_R(U,f)(\varphi)\bigr)
+        =
+        g\circ f\circ \varphi
+        =0,
+    \]
+    because $g\circ f=0$. Therefore
+    \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        \subseteq
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+    \]
+
+    Finally, let
+    \[
+        \psi\in \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+    \]
+    Then $\psi\in \operatorname{Hom}_R(U,N)$ and
+    \[
+        g\circ \psi=0.
+    \]
+    Thus for every $u\in U$,
+    \[
+        g(\psi(u))=0,
+    \]
+    so $\psi(u)\in \ker g=\operatorname{Im} f$ by exactness. Hence for each $u\in U$ there exists some $y\in N'$ such that
+    \[
+        f(y)=\psi(u).
+    \]
+    Since $f$ is injective, such $y$ is unique. Define
+    \[
+        \varphi:U\to N',\qquad u\mapsto y,
+    \]
+    where $y$ is the unique element satisfying $f(y)=\psi(u)$.
+
+    Then
+    \[
+        f\circ \varphi=\psi.
+    \]
+    It remains to check that $\varphi$ is $R$-linear. For $u,v\in U$,
+    \[
+        f(\varphi(u+v))=\psi(u+v)=\psi(u)+\psi(v)=f(\varphi(u))+f(\varphi(v))
+        =f(\varphi(u)+\varphi(v)).
+    \]
+    Since $f$ is injective,
+    \[
+        \varphi(u+v)=\varphi(u)+\varphi(v).
+    \]
+    Similarly, for $r\in R$ and $u\in U$,
+    \[
+        f(\varphi(ru))=\psi(ru)=r\psi(u)=rf(\varphi(u))=f(r\varphi(u)),
+    \]
+    so again by injectivity of $f$,
+    \[
+        \varphi(ru)=r\varphi(u).
+    \]
+    Thus $\varphi\in \operatorname{Hom}_R(U,N')$, and
+    \[
+        \operatorname{Hom}_R(U,f)(\varphi)=f\circ \varphi=\psi.
+    \]
+    Therefore
+    \[
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr)
+        \subseteq
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr).
+    \]
+
+    Combining the two inclusions, we get
+    \[
+        \operatorname{Im}\bigl(\operatorname{Hom}_R(U,f)\bigr)
+        =
+        \ker\bigl(\operatorname{Hom}_R(U,g)\bigr).
+    \]
+    Hence
+    \[
+        0\longrightarrow \operatorname{Hom}_R({}_R U_S,N')
+        \xrightarrow{\operatorname{Hom}_R(U,f)}
+        \operatorname{Hom}_R({}_R U_S,N)
+        \xrightarrow{\operatorname{Hom}_R(U,g)}
+        \operatorname{Hom}_R({}_R U_S,N'')
+    \]
+    is exact, and so the functor $\operatorname{Hom}_R({}_R U_S,-)$ is left exact.
+\end{proof}
+
+\begin{theorem}
+    Let ${}_R U_S$ be an $R$-$S$-bimodule. Then the contravariant functor
+    \[
+        \Hom_R(-,U): R\text{-}\mathrm{Mod}\longrightarrow \mathrm{Mod}\text{-}S
+    \]
+    is left exact.
+\end{theorem}
+
+\begin{proof}
+    Since $\Hom_R(-,U)$ is contravariant, to say that it is left exact means the following:
+
+    for every short exact sequence of left $R$-modules
+    \[
+        A \xrightarrow{\,f\,} B \xrightarrow{\,g\,} C  \longrightarrow 0,
+    \]
+    the induced sequence of right $S$-modules
+    \[
+        0 \longrightarrow \Hom_R(C,U)
+        \xrightarrow{\ \Hom_R(g,U)\ }
+        \Hom_R(B,U)
+        \xrightarrow{\ \Hom_R(f,U)\ }
+        \Hom_R(A,U)
+    \]
+    is exact.
+
+    We verify this.
+
+    First,$\Hom_R(g,U)$ is injective. Indeed, let $\varphi \in \Hom_R(C,U)$ and suppose
+    \[
+        \Hom_R(g,U)(\varphi)=\varphi\circ g=0.
+    \]
+    Since $g$ is surjective, it follows that $\varphi=0$. Hence $\Hom_R(g,U)$ is injective.
+
+    Next, we show
+    \[
+        \operatorname{Im}\bigl(\Hom_R(g,U)\bigr)\subseteq \ker\bigl(\Hom_R(f,U)\bigr).
+    \]
+    Let $\varphi\in \Hom_R(C,U)$. Then
+    \[
+        \Hom_R(f,U)\bigl(\Hom_R(g,U)(\varphi)\bigr)
+        =
+        (\varphi\circ g)\circ f
+        =
+        \varphi\circ (g\circ f)
+        =
+        0,
+    \]
+    because $g\circ f=0$. Therefore
+    \[
+        \operatorname{Im}\bigl(\Hom_R(g,U)\bigr)\subseteq \ker\bigl(\Hom_R(f,U)\bigr).
+    \]
+
+    Finally, we prove the reverse inclusion. Let $\psi\in \Hom_R(B,U)$ satisfy
+    \[
+        \Hom_R(f,U)(\psi)=\psi\circ f=0.
+    \]
+    Then $\psi$ vanishes on $\operatorname{Im}(f)=\ker(g)$. Hence $\psi$ factors through the quotient
+    \[
+        B/\ker(g).
+    \]
+    Since $g$ is surjective and $\ker(g)=\operatorname{Im}(f)$, we have
+    \[
+        B/\ker(g)\cong C.
+    \]
+    Therefore there exists a unique $R$-module homomorphism $\overline{\psi}:C\to U$ such that
+    \[
+        \psi=\overline{\psi}\circ g.
+    \]
+    Thus
+    \[
+        \psi\in\operatorname{Im}\bigl(\Hom_R(g,U)\bigr),
+    \]
+    so
+    \[
+        \ker\bigl(\Hom_R(f,U)\bigr)\subseteq\operatorname{Im}\bigl(\Hom_R(g,U)\bigr).
+    \]
+
+    Combining the two inclusions, we obtain
+    \[
+        \operatorname{Im}\bigl(\Hom_R(g,U)\bigr)=\ker\bigl(\Hom_R(f,U)\bigr).
+    \]
+    Hence the sequence
+    \[
+        0 \longrightarrow \Hom_R(C,U)
+        \xrightarrow{\ \Hom_R(g,U)\ }
+        \Hom_R(B,U)
+        \xrightarrow{\ \Hom_R(f,U)\ }
+        \Hom_R(A,U)
+    \]
+    is exact. This proves that $\Hom_R(-,U)$ is left exact.
+\end{proof}
+
+Let ${}_SM_R$ be a left-$S$-right-$R$-bimodule,${}_R N$ be a left $R$-module, consider the tensor product $M \otimes_R N$.
+
+For each \(s \in S\), the mapping
+\[
+    M \times N \longrightarrow M \otimes_R N,
+    \qquad
+    (m,n) \longmapsto (sm)\otimes n
+\]
+is balanced.
+
+So there is a unique abelian group homomorphism
+\[
+    u(s): M \otimes_R N \longrightarrow M \otimes_R N
+\]
+such that
+\[
+    u(s)(m\otimes n)=(sm)\otimes n.
+\]
+
+Only need to check:
+\[
+    u:S\longrightarrow \operatorname{End}_{\mathbb Z}(M\otimes_R N)
+\]
+is a ring homomorphism.
+
+If \(M_R,\ {}_R N_T\), then \(M\otimes_R N\) is a right \(T\)-module:
+\[
+    (m\otimes n)t = m\otimes (nt).
+\]
+
+\begin{lemma}
+    Let ${}_S M_R$ and ${}_R N_T$ be bimodules. Then $M \otimes_R N$ carries a natural structure of a left $S$-right $T$-bimodule, defined on elementary tensors by
+    \[
+        s(m\otimes n)=(sm)\otimes n,
+        \qquad
+        (m\otimes n)t=m\otimes (nt),
+    \]
+    for all $s\in S$,$t\in T$,$m\in M$, and $n\in N$.
+\end{lemma}
+
+\begin{proof}
+    Fix $s\in S$. Define
+    \[
+        \beta_s:M\times N\to M\otimes_R N,
+        \qquad
+        \beta_s(m,n)=sm\otimes n.
+    \]
+    We claim that $\beta_s$ is $R$-balanced. Indeed, it is additive in each variable, and for $r\in R$,
+    \[
+        \beta_s(mr,n)=s(mr)\otimes n=(sm)r\otimes n=sm\otimes rn=\beta_s(m,rn).
+    \]
+    Hence, by the universal property of the tensor product, there exists a unique group homomorphism
+    \[
+        \lambda_s:M\otimes_R N\to M\otimes_R N
+    \]
+    such that
+    \[
+        \lambda_s(m\otimes n)=sm\otimes n.
+    \]
+    We write $\lambda_s(x)=sx$.
+
+    Similarly, for fixed $t\in T$, define
+    \[
+        \gamma_t:M\times N\to M\otimes_R N,
+        \qquad
+        \gamma_t(m,n)=m\otimes nt.
+    \]
+    Again $\gamma_t$ is $R$-balanced, since for $r\in R$,
+    \[
+        \gamma_t(mr,n)=mr\otimes nt=m\otimes r(nt)=m\otimes (rn)t=\gamma_t(m,rn).
+    \]
+    Thus there exists a unique group homomorphism
+    \[
+        \rho_t:M\otimes_R N\to M\otimes_R N
+    \]
+    such that
+    \[
+        \rho_t(m\otimes n)=m\otimes nt.
+    \]
+    We write $\rho_t(x)=xt$.
+
+    It remains to verify the bimodule axioms. Since elementary tensors generate $M\otimes_R N$, it suffices to check them on $m\otimes n$:
+    \[
+        (s_1+s_2)(m\otimes n)=((s_1+s_2)m)\otimes n
+        =(s_1m)\otimes n+(s_2m)\otimes n
+        =s_1(m\otimes n)+s_2(m\otimes n),
+    \]
+    \[
+        (s_1s_2)(m\otimes n)=((s_1s_2)m)\otimes n
+        =s_1((s_2m)\otimes n)=s_1\bigl(s_2(m\otimes n)\bigr),
+    \]
+    \[
+        1_S(m\otimes n)=(1_Sm)\otimes n=m\otimes n,
+    \]
+    and similarly
+    \[
+        (m\otimes n)(t_1+t_2)=m\otimes n(t_1+t_2)
+        =(m\otimes nt_1)+(m\otimes nt_2),
+    \]
+    \[
+        ((m\otimes n)t_1)t_2
+        =(m\otimes nt_1)t_2
+        =m\otimes (nt_1)t_2
+        =m\otimes n(t_1t_2)
+        =(m\otimes n)(t_1t_2),
+    \]
+    \[
+        (m\otimes n)1_T=m\otimes n.
+    \]
+    Finally,
+    \[
+        \bigl(s(m\otimes n)\bigr)t=((sm)\otimes n)t=(sm)\otimes nt
+        =s(m\otimes nt)=s\bigl((m\otimes n)t\bigr).
+    \]
+    Therefore $M\otimes_R N$ is a left $S$-right $T$-bimodule.
+\end{proof}
+
+\begin{lemma}
+    Let $M_R$,$M'_R$ be right $R$-modules, and let ${}_R N$,${}_R N'$ be left $R$-modules. Suppose
+    \[
+        f_1,f_2,f\in \Hom_R(M,M'),
+        \qquad
+        g_1,g_2,g\in \Hom_R(N,N').
+    \]
+    Then for each pair $(f,g)$ there exists a unique group homomorphism
+    \[
+        f\otimes g:M\otimes_R N\to M'\otimes_R N'
+    \]
+    such that
+    \[
+        (f\otimes g)(m\otimes n)=f(m)\otimes g(n)
+        \qquad
+        (m\in M,\ n\in N).
+    \]
+    Moreover,
+    \begin{enumerate}
+        \item $(f_1+f_2)\otimes g=(f_1\otimes g)+(f_2\otimes g)$;
+        \item $f\otimes (g_1+g_2)=(f\otimes g_1)+(f\otimes g_2)$;
+        \item $f\otimes 0=0$ and $0\otimes g=0$;
+        \item $1_M\otimes 1_N=1_{M\otimes_R N}$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Define
+    \[
+        \beta:M\times N\to M'\otimes_R N',
+        \qquad
+        \beta(m,n)=f(m)\otimes g(n).
+    \]
+    We check that $\beta$ is $R$-balanced. It is additive in each variable because $f$ and $g$ are module homomorphisms. Also, for $r\in R$,
+    \[
+        \beta(mr,n)=f(mr)\otimes g(n)=f(m)r\otimes g(n)
+        =f(m)\otimes rg(n)=f(m)\otimes g(rn)=\beta(m,rn).
+    \]
+    Hence, by the universal property of $M\otimes_R N$, there exists a unique group homomorphism
+    \[
+        f\otimes g:M\otimes_R N\to M'\otimes_R N'
+    \]
+    such that
+    \[
+        (f\otimes g)(m\otimes n)=f(m)\otimes g(n).
+    \]
+
+    Now each asserted identity is verified on elementary tensors, and therefore on all of $M\otimes_R N$.
+
+    For $(1)$, for all $m\in M$ and $n\in N$,
+    \[
+        \bigl(((f_1+f_2)\otimes g)(m\otimes n)\bigr)
+        =(f_1+f_2)(m)\otimes g(n)
+        =f_1(m)\otimes g(n)+f_2(m)\otimes g(n),
+    \]
+    while
+    \[
+        \bigl((f_1\otimes g)+(f_2\otimes g)\bigr)(m\otimes n)
+        =(f_1\otimes g)(m\otimes n)+(f_2\otimes g)(m\otimes n)
+        =f_1(m)\otimes g(n)+f_2(m)\otimes g(n).
+    \]
+    Hence
+    \[
+        (f_1+f_2)\otimes g=(f_1\otimes g)+(f_2\otimes g).
+    \]
+
+    The proof of $(2)$ is analogous:
+    \[
+        (f\otimes (g_1+g_2))(m\otimes n)
+        =f(m)\otimes (g_1+g_2)(n)
+        =f(m)\otimes g_1(n)+f(m)\otimes g_2(n),
+    \]
+    which equals
+    \[
+        ((f\otimes g_1)+(f\otimes g_2))(m\otimes n).
+    \]
+
+    For $(3)$,
+    \[
+        (f\otimes 0)(m\otimes n)=f(m)\otimes 0=0,
+        \qquad
+        (0\otimes g)(m\otimes n)=0\otimes g(n)=0,
+    \]
+    so both maps are the zero homomorphism.
+
+    For $(4)$,
+    \[
+        (1_M\otimes 1_N)(m\otimes n)=1_M(m)\otimes 1_N(n)=m\otimes n,
+    \]
+    hence $1_M\otimes 1_N$ is the identity on $M\otimes_R N$.
+\end{proof}
+
+\begin{lemma}
+    Let $M_R$,$M'_R$,$M''_R$ be right $R$-modules, and let ${}_R N$,${}_R N'$,${}_R N''$ be left $R$-modules. Let
+    \[
+        f:M\to M',\qquad f':M'\to M'',
+        \qquad
+        g:N\to N',\qquad g':N'\to N''
+    \]
+    be $R$-module homomorphisms. Then
+    \[
+        (f'\otimes g')\circ (f\otimes g)=(f'\circ f)\otimes (g'\circ g).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Again it suffices to check the equality on elementary tensors. For $m\in M$ and $n\in N$,
+    \[
+        \bigl((f'\otimes g')\circ (f\otimes g)\bigr)(m\otimes n)
+        =(f'\otimes g')\bigl(f(m)\otimes g(n)\bigr)
+        =f'(f(m))\otimes g'(g(n)),
+    \]
+    while
+    \[
+        \bigl((f'\circ f)\otimes (g'\circ g)\bigr)(m\otimes n)
+        =(f'\circ f)(m)\otimes (g'\circ g)(n)
+        =f'(f(m))\otimes g'(g(n)).
+    \]
+    Thus both homomorphisms agree on the generators $m\otimes n$ of $M\otimes_R N$, hence they are equal.
+\end{proof}
+
+\begin{definition}
+    Let ${}_S U_R$ be a bimodule.
+    Define
+    \[
+        U \otimes_R - : R\text{-}\mathrm{Mod} \longrightarrow S\text{-}\mathrm{Mod}
+    \]
+    by
+    \[
+        M \longmapsto U \otimes_R M,
+        \qquad
+        f \longmapsto \operatorname{id}_U \otimes f.
+    \]
+\end{definition}
+
+Similarly, Let ${}_R U_S$ be a bimodule.
+\[
+    - \otimes_R U : \mathrm{Mod}\text{-}R \longrightarrow \mathrm{Mod}\text{-}S
+\]
+by
+\[
+    N \longmapsto N \otimes_R U,
+    \qquad
+    g \longmapsto g \otimes \operatorname{id}_U.
+\]
+
+\begin{proposition}
+    Let ${}_S U_R$ be a bimodule. Then
+    \[
+        U \otimes_R - : R\text{-}\mathrm{Mod} \longrightarrow S\text{-}\mathrm{Mod}
+    \]
+    is a covariant functor.
+
+    Similarly, if ${}_R U_S$ is a bimodule, then
+    \[
+        - \otimes_R U : \mathrm{Mod}\text{-}R \longrightarrow \mathrm{Mod}\text{-}S
+    \]
+    is a covariant functor.
+\end{proposition}
+
+\begin{proof}
+    We prove the first statement. For each left $R$-module $M$, the tensor product
+    \[
+        U \otimes_R M
+    \]
+    is naturally a left $S$-module via
+    \[
+        s(u \otimes m)=(su)\otimes m
+        \qquad
+        (s\in S,\ u\in U,\ m\in M).
+    \]
+    For each $R$-module homomorphism $f:M\to N$, define
+    \[
+        U\otimes_R f: U\otimes_R M \to U\otimes_R N
+    \]
+    by
+    \[
+        (U\otimes_R f)(u\otimes m)=u\otimes f(m).
+    \]
+    Equivalently,
+    \[
+        U\otimes_R f=\operatorname{id}_U\otimes f.
+    \]
+    This is well-defined and is an $S$-module homomorphism.
+
+    It remains to verify the functorial properties. For the identity map $\operatorname{id}_M:M\to M$, we have
+    \[
+        U\otimes_R \operatorname{id}_M=\operatorname{id}_U\otimes \operatorname{id}_M
+        =\operatorname{id}_{U\otimes_R M}.
+    \]
+    If
+    \[
+        M \xrightarrow{f} N \xrightarrow{g} P
+    \]
+    are $R$-module homomorphisms, then for every $u\otimes m\in U\otimes_R M$,
+    \[
+        (U\otimes_R (g\circ f))(u\otimes m)
+        = u\otimes (g\circ f)(m)
+        = g(u\otimes f(m))
+        = ((U\otimes_R g)\circ (U\otimes_R f))(u\otimes m).
+    \]
+    Hence
+    \[
+        U\otimes_R (g\circ f)=(U\otimes_R g)\circ (U\otimes_R f).
+    \]
+    Therefore $U\otimes_R -$ is a covariant functor from $R\text{-}\mathrm{Mod}$ to $S\text{-}\mathrm{Mod}$.
+
+    The proof of the second statement is entirely similar. If ${}_R U_S$ is a bimodule and $N$ is a right $R$-module, then
+    \[
+        N\otimes_R U
+    \]
+    is naturally a right $S$-module via
+    \[
+        (n\otimes u)s=n\otimes (us).
+    \]
+    For a homomorphism $g:N\to N'$ in $\mathrm{Mod}\text{-}R$, define
+    \[
+        g\otimes_R U = g\otimes \operatorname{id}_U : N\otimes_R U \to N'\otimes_R U
+    \]
+    by
+    \[
+        (g\otimes_R U)(n\otimes u)=g(n)\otimes u.
+    \]
+    One checks immediately that identities and compositions are preserved. Thus
+    \[
+        -\otimes_R U:\mathrm{Mod}\text{-}R\to \mathrm{Mod}\text{-}S
+    \]
+    is also a covariant functor.
+\end{proof}
+
+\begin{theorem}
+    Let ${}_S U_R$ be a bimodule. Then the functor
+    \[
+        U\otimes_R - \;:\; R\text{-Mod}\longrightarrow S\text{-Mod}
+    \]
+    is right exact. In other words, if
+    \[
+        N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N'' \longrightarrow 0
+    \]
+    is an exact sequence of left $R$-modules, then
+    \[
+        U\otimes_R N' \xrightarrow{\,\mathrm{id}_U\otimes f\,}
+        U\otimes_R N \xrightarrow{\,\mathrm{id}_U\otimes g\,}
+        U\otimes_R N'' \longrightarrow 0
+    \]
+    is exact.
+\end{theorem}
+
+\begin{proof}
+    Since
+    \[
+        N' \xrightarrow{\,f\,} N \xrightarrow{\,g\,} N'' \longrightarrow 0
+    \]
+    is exact, we have
+    \[
+        \ker g=\operatorname{Im} f
+        \qquad\text{and}\qquad
+        N''\cong N/\operatorname{Im} f.
+    \]
+    Let
+    \[
+        \pi:N\longrightarrow N/\operatorname{Im} f
+    \]
+    be the canonical projection. Then there exists an isomorphism
+    \[
+        \alpha:N/\operatorname{Im} f \longrightarrow N''
+    \]
+    such that
+    \[
+        g=\alpha\circ \pi.
+    \]
+
+    Now consider the map
+    \[
+        \Phi:U\otimes_R N \longrightarrow U\otimes_R (N/\operatorname{Im} f),
+        \qquad
+        u\otimes n \longmapsto u\otimes \pi(n).
+    \]
+    By the universal property of tensor products,$\Phi$ is a well-defined $S$-module homomorphism.
+
+    We claim that
+    \[
+        \ker \Phi=\operatorname{Im}(\mathrm{id}_U\otimes f).
+    \]
+
+    First, since $\pi\circ f=0$, functoriality gives
+    \[
+        \Phi\circ (\mathrm{id}_U\otimes f)
+        =
+        \mathrm{id}_U\otimes (\pi\circ f)
+        =
+        0.
+    \]
+    Hence
+    \[
+        \operatorname{Im}(\mathrm{id}_U\otimes f)\subseteq \ker\Phi.
+    \]
+
+    To prove the reverse inclusion, define
+    \[
+        \overline{\Phi}:(U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+        \longrightarrow
+        U\otimes_R (N/\operatorname{Im} f)
+    \]
+    by
+    \[
+        \overline{\Phi}\bigl((u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f)\bigr)
+        =
+        u\otimes \pi(n).
+    \]
+    This is well defined because $\Phi$ vanishes on $\operatorname{Im}(\mathrm{id}_U\otimes f)$.
+
+    Next define
+    \[
+        \Psi:U\times (N/\operatorname{Im} f)\longrightarrow
+        (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+    \]
+    by
+    \[
+        \Psi(u,\overline{n})
+        =
+        (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f),
+    \]
+    where $\overline{n}=n+\operatorname{Im} f$.
+
+    We check that $\Psi$ is well defined. If $\overline{n}=\overline{n'}$, then
+    \[
+        n-n'\in\operatorname{Im} f,
+    \]
+    so there exists $x\in N'$ such that
+    \[
+        n-n'=f(x).
+    \]
+    Hence
+    \[
+        (u\otimes n)-(u\otimes n')
+        =
+        u\otimes (n-n')
+        =
+        u\otimes f(x)
+        =
+        (\mathrm{id}_U\otimes f)(u\otimes x)
+        \in\operatorname{Im}(\mathrm{id}_U\otimes f).
+    \]
+    Thus
+    \[
+        (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f)
+        =
+        (u\otimes n')+\operatorname{Im}(\mathrm{id}_U\otimes f).
+    \]
+    So $\Psi$ is well defined. It is clearly $R$-balanced, hence induces an $S$-module homomorphism
+    \[
+        \overline{\Psi}:U\otimes_R (N/\operatorname{Im} f)
+        \longrightarrow
+        (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+    \]
+    such that
+    \[
+        \overline{\Psi}(u\otimes \overline{n})
+        =
+        (u\otimes n)+\operatorname{Im}(\mathrm{id}_U\otimes f).
+    \]
+
+    It is immediate that $\overline{\Phi}$ and $\overline{\Psi}$ are inverse to each other. Therefore
+    \[
+        (U\otimes_R N)/\operatorname{Im}(\mathrm{id}_U\otimes f)
+        \cong
+        U\otimes_R (N/\operatorname{Im} f).
+    \]
+    It follows that
+    \[
+        \ker\Phi=\operatorname{Im}(\mathrm{id}_U\otimes f).
+    \]
+
+    Finally, since $\alpha:N/\operatorname{Im} f\to N''$ is an isomorphism, the induced map
+    \[
+        \mathrm{id}_U\otimes \alpha:
+        U\otimes_R (N/\operatorname{Im} f)
+        \longrightarrow
+        U\otimes_R N''
+    \]
+    is an isomorphism. Moreover,
+    \[
+        \mathrm{id}_U\otimes g
+        =
+        (\mathrm{id}_U\otimes \alpha)\circ \Phi.
+    \]
+    Hence
+    \[
+        \ker(\mathrm{id}_U\otimes g)=\ker\Phi=\operatorname{Im}(\mathrm{id}_U\otimes f),
+    \]
+    and $\mathrm{id}_U\otimes g$ is surjective because $\Phi$ is surjective and $\mathrm{id}_U\otimes \alpha$ is an isomorphism.
+
+    Therefore
+    \[
+        U\otimes_R N' \xrightarrow{\,\mathrm{id}_U\otimes f\,}
+        U\otimes_R N \xrightarrow{\,\mathrm{id}_U\otimes g\,}
+        U\otimes_R N'' \longrightarrow 0
+    \]
+    is exact.
+\end{proof}
+
+
+\begin{theorem}
+    Let ${}_RU_{S}$ be a left-$R$-right-$S$-bimodule. Then the functor
+    \[
+        -\otimes_R U \;:\; \text{Mod}-R\longrightarrow \text{Mod}-S
+    \]
+    is right exact.
+\end{theorem}
+

@@ -1,0 +1,609 @@
+\section{Homework Week 3}
+
+\begin{exercise}
+    Let $M$, $N$, $(M_i)_{i \in I}$, and $(N_j)_{j \in J}$ be $R$-modules. Prove the following isomorphisms of abelian groups:
+    \begin{enumerate}
+        \item
+              \[
+                  \operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\, N\right)
+                  \cong
+                  \prod_{i\in I}\operatorname{Hom}_R(M_i,N).
+              \]
+        \item
+              \[
+                  \operatorname{Hom}_R\!\left(M,\, \prod_{j\in J} N_j\right)
+                  \cong
+                  \prod_{j\in J}\operatorname{Hom}_R(M,N_j).
+              \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    We prove the two statements separately.
+
+    \medskip
+
+    \noindent\textbf{(1)} Define
+    \[
+        \Phi:\operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\,N\right)\longrightarrow
+        \prod_{i\in I}\operatorname{Hom}_R(M_i,N)
+    \]
+    by
+    \[
+        \Phi(f)=(f\circ \iota_i)_{i\in I},
+    \]
+    where
+    \[
+        \iota_i:M_i\to \bigoplus_{i\in I} M_i
+    \]
+    is the canonical inclusion.
+
+    We show that $\Phi$ is an isomorphism.
+
+    First,$\Phi$ is a group homomorphism, since composition is compatible with addition:
+    \[
+        \Phi(f+g)=\bigl((f+g)\circ \iota_i\bigr)_{i\in I}
+        =\bigl(f\circ\iota_i+g\circ\iota_i\bigr)_{i\in I}
+        =\Phi(f)+\Phi(g).
+    \]
+
+    Now let $(f_i)_{i\in I}\in \prod_{i\in I}\operatorname{Hom}_R(M_i,N)$. Define
+    \[
+        f:\bigoplus_{i\in I} M_i\to N
+    \]
+    by
+    \[
+        f\bigl((m_i)_{i\in I}\bigr)=\sum_{i\in I} f_i(m_i).
+    \]
+    This is well-defined, because an element of $\bigoplus_{i\in I} M_i$ has only finitely many nonzero components, so the above sum is finite. It is immediate that $f$ is $R$-linear, and
+    \[
+        f\circ \iota_i=f_i
+        \qquad\text{for all } i\in I.
+    \]
+    Hence $\Phi(f)=(f_i)_{i\in I}$, so $\Phi$ is surjective.
+
+    To prove injectivity, suppose $\Phi(f)=\Phi(g)$. Then
+    \[
+        f\circ \iota_i=g\circ \iota_i
+        \qquad\text{for all } i\in I.
+    \]
+    Take any $x=(m_i)_{i\in I}\in \bigoplus_{i\in I} M_i$. Since $x$ has finite support, we may write
+    \[
+        x=\sum_{i\in I} \iota_i(m_i),
+    \]
+    with only finitely many nonzero terms. Therefore,
+    \[
+        f(x)=\sum_{i\in I} f(\iota_i(m_i))
+        =\sum_{i\in I} g(\iota_i(m_i))
+        =g(x).
+    \]
+    So $f=g$, and $\Phi$ is injective.
+
+    Thus $\Phi$ is an isomorphism:
+    \[
+        \operatorname{Hom}_R\!\left(\bigoplus_{i\in I} M_i,\,N\right)
+        \cong
+        \prod_{i\in I}\operatorname{Hom}_R(M_i,N).
+    \]
+
+    \medskip
+
+    \noindent\textbf{(2)} Let
+    \[
+        \pi_j:\prod_{j\in J} N_j\to N_j
+    \]
+    be the canonical projection. Define
+    \[
+        \Psi:\operatorname{Hom}_R\!\left(M,\prod_{j\in J} N_j\right)\longrightarrow
+        \prod_{j\in J}\operatorname{Hom}_R(M,N_j)
+    \]
+    by
+    \[
+        \Psi(f)=(\pi_j\circ f)_{j\in J}.
+    \]
+    Again,$\Psi$ is a group homomorphism.
+
+    We show that $\Psi$ is an isomorphism. Given a family
+    \[
+        (g_j)_{j\in J}\in \prod_{j\in J}\operatorname{Hom}_R(M,N_j),
+    \]
+    define
+    \[
+        g:M\to \prod_{j\in J} N_j
+    \]
+    by
+    \[
+        g(m)=(g_j(m))_{j\in J}.
+    \]
+    Since each $g_j$ is $R$-linear,$g$ is also $R$-linear. Moreover,
+    \[
+        \pi_j\circ g=g_j
+        \qquad\text{for all } j\in J,
+    \]
+    so
+    \[
+        \Psi(g)=(g_j)_{j\in J}.
+    \]
+    Hence $\Psi$ is surjective.
+
+    For injectivity, suppose $\Psi(f)=\Psi(g)$. Then
+    \[
+        \pi_j\circ f=\pi_j\circ g
+        \qquad\text{for all } j\in J.
+    \]
+    Thus for every $m\in M$ and every $j\in J$,
+    \[
+        \pi_j(f(m))=\pi_j(g(m)).
+    \]
+    Since two elements of $\prod_{j\in J} N_j$ are equal if and only if all their components are equal, it follows that
+    \[
+        f(m)=g(m)
+        \qquad\text{for all } m\in M.
+    \]
+    Hence $f=g$, and $\Psi$ is injective.
+
+    Therefore
+    \[
+        \operatorname{Hom}_R\!\left(M,\prod_{j\in J} N_j\right)
+        \cong
+        \prod_{j\in J}\operatorname{Hom}_R(M,N_j).
+    \]
+
+    This completes the proof.
+\end{proof}
+
+\begin{exercise}[Five Lemma]
+    Suppose that the following diagram of homomorphisms of $R$-modules
+    \[
+        \begin{tikzcd}[column sep=3em, row sep=3em]
+            M_1 \arrow[r] \arrow[d, "\varphi_1"'] &
+            M_2 \arrow[r] \arrow[d, "\varphi_2"'] &
+            M_3 \arrow[r] \arrow[d, "\varphi_3"'] &
+            M_4 \arrow[r] \arrow[d, "\varphi_4"'] &
+            M_5 \arrow[d, "\varphi_5"'] \\
+            N_1 \arrow[r] &
+            N_2 \arrow[r] &
+            N_3 \arrow[r] &
+            N_4 \arrow[r] &
+            N_5
+        \end{tikzcd}
+    \]
+    is commutative and has exact rows. Prove that:
+    \begin{enumerate}
+        \item If $\varphi_1$ is surjective, and $\varphi_2$ and $\varphi_4$ are injective, then $\varphi_3$ is injective.
+        \item If $\varphi_5$ is injective, and $\varphi_2$ and $\varphi_4$ are surjective, then $\varphi_3$ is surjective.
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    We prove the two assertions separately.
+
+    \medskip
+
+    \noindent\textbf{(1)} Assume that $\varphi_1$ is surjective and that $\varphi_2,\varphi_4$ are injective. We show that $\varphi_3$ is injective.
+
+    Let $x\in M_3$ and suppose that
+    \[
+        \varphi_3(x)=0.
+    \]
+    We must prove that $x=0$.
+
+    Let $\alpha_3:M_3\to M_4$ and $\beta_3:N_3\to N_4$ denote the third horizontal maps. By commutativity,
+    \[
+        \varphi_4(\alpha_3(x))=\beta_3(\varphi_3(x))=\beta_3(0)=0.
+    \]
+    Since $\varphi_4$ is injective, it follows that $\alpha_3(x)=0$. Exactness of the top row at $M_3$ yields
+    \[
+        x=\alpha_2(y)
+    \]
+    for some $y\in M_2$, where $\alpha_2:M_2\to M_3$ is the second horizontal map.
+
+    Again by commutativity,
+    \[
+        0=\varphi_3(x)=\varphi_3(\alpha_2(y))=\beta_2(\varphi_2(y)),
+    \]
+    where $\beta_2:N_2\to N_3$ is the second horizontal map. Hence $\varphi_2(y)\in\ker(\beta_2)$. By exactness of the bottom row at $N_2$,
+    \[
+        \ker(\beta_2)=\operatorname{Im}(\beta_1),
+    \]
+    so there exists $z\in N_1$ such that
+    \[
+        \beta_1(z)=\varphi_2(y),
+    \]
+    where $\beta_1:N_1\to N_2$ is the first horizontal map.
+
+    Since $\varphi_1$ is surjective, there exists $w\in M_1$ such that
+    \[
+        \varphi_1(w)=z.
+    \]
+    Using commutativity once more,
+    \[
+        \varphi_2(\alpha_1(w))
+        =
+        \beta_1(\varphi_1(w))
+        =
+        \beta_1(z)
+        =
+        \varphi_2(y),
+    \]
+    where $\alpha_1:M_1\to M_2$ is the first horizontal map. Because $\varphi_2$ is injective, we get
+    \[
+        \alpha_1(w)=y.
+    \]
+    Therefore
+    \[
+        x=\alpha_2(y)=\alpha_2(\alpha_1(w))=0,
+    \]
+    since the composition of two consecutive maps in an exact sequence is zero. Thus $\ker(\varphi_3)=0$, so $\varphi_3$ is injective.
+
+    \medskip
+
+    \noindent\textbf{(2)} Assume that $\varphi_5$ is injective and that $\varphi_2,\varphi_4$ are surjective. We show that $\varphi_3$ is surjective.
+
+    Let $n\in N_3$. We must find $m\in M_3$ such that
+    \[
+        \varphi_3(m)=n.
+    \]
+
+    Let $\beta_3:N_3\to N_4$ and $\alpha_3:M_3\to M_4$ denote the third horizontal maps. Since $\varphi_4$ is surjective, there exists $u\in M_4$ such that
+    \[
+        \varphi_4(u)=\beta_3(n).
+    \]
+    Let $\alpha_4:M_4\to M_5$ and $\beta_4:N_4\to N_5$ be the next horizontal maps. Then
+    \[
+        \varphi_5(\alpha_4(u))
+        =
+        \beta_4(\varphi_4(u))
+        =
+        \beta_4(\beta_3(n))
+        =
+        0.
+    \]
+    Because $\varphi_5$ is injective, it follows that $\alpha_4(u)=0$. Exactness of the top row at $M_4$ shows that there exists $m\in M_3$ such that
+    \[
+        \alpha_3(m)=u.
+    \]
+
+    Consider
+    \[
+        n-\varphi_3(m)\in N_3.
+    \]
+    By commutativity,
+    \[
+        \beta_3\bigl(n-\varphi_3(m)\bigr)
+        =
+        \beta_3(n)-\beta_3(\varphi_3(m))
+        =
+        \beta_3(n)-\varphi_4(\alpha_3(m))
+        =
+        \beta_3(n)-\varphi_4(u)
+        =
+        0.
+    \]
+    Hence $n-\varphi_3(m)\in\ker(\beta_3)$. By exactness of the bottom row at $N_3$,
+    \[
+        \ker(\beta_3)=\operatorname{Im}(\beta_2),
+    \]
+    so there exists $v\in N_2$ such that
+    \[
+        \beta_2(v)=n-\varphi_3(m),
+    \]
+    where $\beta_2:N_2\to N_3$ is the second horizontal map.
+
+    Since $\varphi_2$ is surjective, there exists $y\in M_2$ such that
+    \[
+        \varphi_2(y)=v.
+    \]
+    Then
+    \[
+        \varphi_3(\alpha_2(y))
+        =
+        \beta_2(\varphi_2(y))
+        =
+        \beta_2(v)
+        =
+        n-\varphi_3(m),
+    \]
+    where $\alpha_2:M_2\to M_3$ is the second horizontal map. Therefore
+    \[
+        n
+        =
+        \varphi_3(m)+\varphi_3(\alpha_2(y))
+        =
+        \varphi_3\bigl(m+\alpha_2(y)\bigr).
+    \]
+    Thus $n$ lies in the image of $\varphi_3$, proving that $\varphi_3$ is surjective.
+\end{proof}
+
+\begin{exercise}[Snake Lemma]
+    Suppose that the following diagram of homomorphisms of $R$-modules
+    \[
+        \begin{tikzcd}[column sep=3.2em, row sep=3em]
+            0 \arrow[r] &
+            M' \arrow[r, "\alpha"] \arrow[d, "\varphi'"'] &
+            M \arrow[r, "\beta"] \arrow[d, "\varphi"'] &
+            M'' \arrow[r] \arrow[d, "\varphi''"'] &
+            0 \\
+            0 \arrow[r] &
+            N' \arrow[r, "\mu"] &
+            N \arrow[r, "\nu"] &
+            N'' \arrow[r] &
+            0
+        \end{tikzcd}
+    \]
+    is commutative and has exact rows. Prove that
+    \[
+        0 \longrightarrow \ker\varphi'
+        \overset{\alpha'}{\longrightarrow} \ker\varphi
+        \overset{\beta'}{\longrightarrow} \ker\varphi''
+        \overset{\delta}{\longrightarrow} \operatorname{coker}\varphi'
+        \overset{\mu'}{\longrightarrow} \operatorname{coker}\varphi
+        \overset{\nu'}{\longrightarrow} \operatorname{coker}\varphi''
+        \longrightarrow 0
+    \]
+    is a long exact sequence, where $\alpha',\beta',\mu',\nu'$ are the homomorphisms induced by $\alpha,\beta,\mu,\nu$, respectively.
+\end{exercise}
+
+\begin{proof}
+    Since the rows are exact,$\alpha$ and $\mu$ are injective, while $\beta$ and $\nu$ are surjective.
+
+    We first define the connecting homomorphism
+    \[
+        \delta:\ker\varphi''\to \operatorname{coker}\varphi'.
+    \]
+    Let $x\in \ker\varphi''\subseteq M''$. Since $\beta:M\to M''$ is surjective, choose $y\in M$ such that
+    \[
+        \beta(y)=x.
+    \]
+    By commutativity,
+    \[
+        \nu(\varphi(y))=\varphi''(\beta(y))=\varphi''(x)=0.
+    \]
+    Hence $\varphi(y)\in \ker\nu=\operatorname{Im}\mu$. Therefore there exists $z\in N'$ such that
+    \[
+        \mu(z)=\varphi(y).
+    \]
+    Define
+    \[
+        \delta(x)=\overline{z}=z+\operatorname{Im}\varphi' \in \operatorname{coker}\varphi'.
+    \]
+
+    We must check that this is well-defined. First, suppose $y_1,y_2\in M$ both satisfy
+    \[
+        \beta(y_1)=\beta(y_2)=x.
+    \]
+    Then $y_1-y_2\in \ker\beta=\operatorname{Im}\alpha$, so there exists $m'\in M'$ such that
+    \[
+        y_1-y_2=\alpha(m').
+    \]
+    If $\mu(z_i)=\varphi(y_i)$ for $i=1,2$, then
+    \[
+        \mu(z_1-z_2)=\varphi(y_1)-\varphi(y_2)=\varphi(\alpha(m'))
+        =\mu(\varphi'(m')),
+    \]
+    where we used commutativity. Since $\mu$ is injective, it follows that
+    \[
+        z_1-z_2=\varphi'(m')\in \operatorname{Im}\varphi'.
+    \]
+    Thus $\overline{z_1}=\overline{z_2}$ in $\operatorname{coker}\varphi'$, so $\delta(x)$ is independent of the choice of $y$.
+
+    Next, if $z,z'\in N'$ both satisfy
+    \[
+        \mu(z)=\mu(z')=\varphi(y),
+    \]
+    then $\mu(z-z')=0$, and since $\mu$ is injective,$z=z'$. Hence $\delta(x)$ is also independent of the choice of $z$.
+
+    It is straightforward to verify that $\delta$ is a homomorphism.
+
+    Now we prove exactness.
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\ker\varphi'$.}
+    Since $\alpha$ induces $\alpha'$, we have
+    \[
+        \alpha'(\ker\varphi')\subseteq \ker\varphi.
+    \]
+    Because $\alpha$ is injective, so is $\alpha'$. Hence
+    \[
+        \ker\alpha'=0.
+    \]
+    Therefore the sequence is exact at $\ker\varphi'$.
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\ker\varphi$.}
+    We show that
+    \[
+        \operatorname{Im}\alpha'=\ker\beta'.
+    \]
+    Take $x'\in \ker\varphi'$. Then
+    \[
+        \beta'(\alpha'(x'))=\beta(\alpha(x'))=0,
+    \]
+    so $\operatorname{Im}\alpha'\subseteq \ker\beta'$.
+
+    Conversely, let $y\in \ker\varphi$ satisfy $\beta'(y)=0$. Then $\beta(y)=0$, hence by exactness
+    of the top row there exists $x'\in M'$ such that
+    \[
+        \alpha(x')=y.
+    \]
+    Since $\varphi(y)=0$, we get
+    \[
+        0=\varphi(\alpha(x'))=\mu(\varphi'(x')).
+    \]
+    As $\mu$ is injective,$\varphi'(x')=0$, so $x'\in \ker\varphi'$. Thus
+    \[
+        y=\alpha'(x'),
+    \]
+    proving $\ker\beta'\subseteq \operatorname{Im}\alpha'$.
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\ker\varphi''$.}
+    We show that
+    \[
+        \operatorname{Im}\beta'=\ker\delta.
+    \]
+
+    First let $y\in \ker\varphi$. Then $\beta(y)\in \ker\varphi''$, since
+    \[
+        \varphi''(\beta(y))=\nu(\varphi(y))=0.
+    \]
+    Thus $\beta'(y)\in \ker\varphi''$. To compute $\delta(\beta'(y))$, choose the lift $y$ itself.
+    Then $\varphi(y)=0$, so we may take $z=0$, and hence
+    \[
+        \delta(\beta'(y))=\overline{0}=0.
+    \]
+    Therefore $\operatorname{Im}\beta'\subseteq \ker\delta$.
+
+    Conversely, let $x\in \ker\varphi''$ and suppose $\delta(x)=0$. Choose $y\in M$ with
+    \[
+        \beta(y)=x,
+    \]
+    and choose $z\in N'$ such that
+    \[
+        \mu(z)=\varphi(y).
+    \]
+    Since $\delta(x)=\overline{z}=0$ in $\operatorname{coker}\varphi'$, there exists $x'\in M'$ such that
+    \[
+        z=\varphi'(x').
+    \]
+    Hence
+    \[
+        \varphi(y-\alpha(x'))
+        =
+        \varphi(y)-\varphi(\alpha(x'))
+        =
+        \mu(z)-\mu(\varphi'(x'))
+        =
+        0.
+    \]
+    So $y-\alpha(x')\in \ker\varphi$, and
+    \[
+        \beta'(y-\alpha(x'))=\beta(y-\alpha(x'))=\beta(y)=x,
+    \]
+    because $\beta\alpha=0$. Thus $x\in \operatorname{Im}\beta'$, proving
+    \[
+        \ker\delta\subseteq \operatorname{Im}\beta'.
+    \]
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\operatorname{coker}\varphi'$.}
+    We show that
+    \[
+        \operatorname{Im}\delta=\ker\mu'.
+    \]
+
+    Let $x\in \ker\varphi''$, and write
+    \[
+        \delta(x)=\overline{z}\in \operatorname{coker}\varphi'
+    \]
+    as above, with $\mu(z)=\varphi(y)$. Then
+    \[
+        \mu'(\delta(x))=\overline{\mu(z)}=\overline{\varphi(y)}=0
+    \]
+    in $\operatorname{coker}\varphi$. Hence $\operatorname{Im}\delta\subseteq \ker\mu'$.
+
+    Conversely, let $\overline{z}\in \operatorname{coker}\varphi'$ satisfy
+    \[
+        \mu'(\overline{z})=0.
+    \]
+    This means that $\mu(z)\in \operatorname{Im}\varphi$, so there exists $y\in M$ such that
+    \[
+        \varphi(y)=\mu(z).
+    \]
+    Applying $\nu$, we get
+    \[
+        \varphi''(\beta(y))=\nu(\varphi(y))=\nu(\mu(z))=0.
+    \]
+    Thus $\beta(y)\in \ker\varphi''$. By construction of $\delta$,
+    \[
+        \delta(\beta(y))=\overline{z}.
+    \]
+    So $\overline{z}\in \operatorname{Im}\delta$, proving
+    \[
+        \ker\mu'\subseteq \operatorname{Im}\delta.
+    \]
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\operatorname{coker}\varphi$.}
+    We show that
+    \[
+        \operatorname{Im}\mu'=\ker\nu'.
+    \]
+
+    For $\overline{z}\in \operatorname{coker}\varphi'$, we have
+    \[
+        \nu'(\mu'(\overline{z}))=\overline{\nu(\mu(z))}=\overline{0}=0,
+    \]
+    so $\operatorname{Im}\mu'\subseteq \ker\nu'$.
+
+    Conversely, let $\overline{n}\in \operatorname{coker}\varphi$ satisfy
+    \[
+        \nu'(\overline{n})=0.
+    \]
+    Then $\overline{\nu(n)}=0$ in $\operatorname{coker}\varphi''$, so there exists $m''\in M''$ such that
+    \[
+        \varphi''(m'')=\nu(n).
+    \]
+    Since $\beta$ is surjective, choose $m\in M$ such that
+    \[
+        \beta(m)=m''.
+    \]
+    Then
+    \[
+        \nu(n-\varphi(m))=\nu(n)-\varphi''(\beta(m))=\nu(n)-\varphi''(m'')=0.
+    \]
+    Hence
+    \[
+        n-\varphi(m)\in \ker\nu=\operatorname{Im}\mu,
+    \]
+    so there exists $z\in N'$ such that
+    \[
+        \mu(z)=n-\varphi(m).
+    \]
+    Therefore in $\operatorname{coker}\varphi$,
+    \[
+        \overline{n}=\overline{\mu(z)}=\mu'(\overline{z}),
+    \]
+    showing that $\overline{n}\in \operatorname{Im}\mu'$. Thus
+    \[
+        \ker\nu'\subseteq \operatorname{Im}\mu'.
+    \]
+
+    \medskip
+
+    \noindent\textbf{Exactness at $\operatorname{coker}\varphi''$ and termination.}
+    Since $\nu:N\to N''$ is surjective, the induced map
+    \[
+        \nu':\operatorname{coker}\varphi\to \operatorname{coker}\varphi''
+    \]
+    is surjective as well: for any $\overline{n''}\in \operatorname{coker}\varphi''$, choose $n\in N$ such that
+    \[
+        \nu(n)=n'',
+    \]
+    then
+    \[
+        \nu'(\overline{n})=\overline{n''}.
+    \]
+    Hence
+    \[
+        \operatorname{Im}\nu'=\operatorname{coker}\varphi'',
+    \]
+    which is equivalent to exactness at $\operatorname{coker}\varphi''$ and the final $0$.
+
+    Collecting all the above, we obtain the exact sequence
+    \[
+        0 \longrightarrow \ker\varphi'
+        \overset{\alpha'}{\longrightarrow} \ker\varphi
+        \overset{\beta'}{\longrightarrow} \ker\varphi''
+        \overset{\delta}{\longrightarrow} \operatorname{coker}\varphi'
+        \overset{\mu'}{\longrightarrow} \operatorname{coker}\varphi
+        \overset{\nu'}{\longrightarrow} \operatorname{coker}\varphi''
+        \longrightarrow 0.
+    \]
+\end{proof}
+
