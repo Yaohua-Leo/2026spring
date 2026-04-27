@@ -1,0 +1,782 @@
+\section{Homework Midterm}
+
+\begin{exercise}
+    Let \(R\) be a ring with \(1\).
+    
+    \begin{enumerate}
+        \item
+        \begin{enumerate}
+            \item[(i)]
+            Let
+            \[
+                h:U\longrightarrow V
+            \]
+            be a monomorphism of \(R\)-modules. Then the following two conditions are equivalent.
+            \begin{enumerate}
+                \item[(a)]
+                A homomorphism
+                \[
+                    k:V\longrightarrow Y
+                \]
+                must be a monomorphism whenever the composite map
+                \[
+                    U \xrightarrow{\,h\,} V \xrightarrow{\,k\,} Y
+                \]
+                is a monomorphism.
+    
+                \item[(b)]
+                If \(0\neq W\subset V\), then
+                \[
+                    h(U)\cap W\neq 0.
+                \]
+            \end{enumerate}
+    
+            The monomorphism \(h\) satisfying the above conditions is said to be
+            \emph{essential}. If there is an injective \(R\)-module \(Q\) with an essential
+            monomorphism
+            \[
+                h:V\longrightarrow Q,
+            \]
+            then the diagram
+            \[
+                V \xrightarrow{\,h\,} Q
+            \]
+            is called an \emph{injective hull} of \(V\).
+    
+            \item[(ii)]
+            Prove that any \(R\)-module \(V\) has an injective hull.
+        \end{enumerate}
+    
+        \item
+        \begin{enumerate}
+            \item[(i)]
+            Prove that the following holds for an idempotent \(e\in R\):
+            \[
+                J(eRe)=eJ(R)e=eRe\cap J(R).
+            \]
+    
+            \item[(ii)]
+            Prove that
+            \[
+                J(M_n(R))=M_n(J(R)).
+            \]
+            Here \(M_n(R)\) means the matrix ring.
+        \end{enumerate}
+    
+        \item
+        Prove that a submodule of a finitely generated free module over a PID is free.
+    \end{enumerate}
+    \end{exercise}
+
+    \begin{proof}[Proof of 1(i)]
+        We identify \(U\) with its image \(h(U)\subseteq V\).
+        
+        First assume (a). Suppose that there exists a nonzero submodule
+        \(W\subseteq V\) such that
+        \[
+            h(U)\cap W=0.
+        \]
+        Let
+        \[
+            q:V\longrightarrow V/W
+        \]
+        be the canonical quotient map. Since \(h(U)\cap W=0\), the composite
+        \[
+            U\xrightarrow{\,h\,}V\xrightarrow{\,q\,}V/W
+        \]
+        is a monomorphism. Hence by (a), \(q\) must be a monomorphism. But
+        \[
+            \ker q=W\neq 0,
+        \]
+        a contradiction. Therefore for every nonzero submodule \(W\subseteq V\), one has
+        \[
+            h(U)\cap W\neq 0.
+        \]
+        Thus (b) holds.
+        
+        Conversely, assume (b). Let
+        \[
+            k:V\longrightarrow Y
+        \]
+        be an \(R\)-homomorphism such that \(kh\) is a monomorphism. We prove that \(k\)
+        is a monomorphism.
+        
+        Let
+        \[
+            W=\ker k.
+        \]
+        If \(W\neq 0\), then by (b),
+        \[
+            h(U)\cap W\neq 0.
+        \]
+        Choose \(0\neq h(u)\in h(U)\cap W\). Then
+        \[
+            k(h(u))=0.
+        \]
+        Since \(kh\) is a monomorphism, this implies \(u=0\), hence \(h(u)=0\), a contradiction.
+        Therefore \(W=0\), so \(k\) is a monomorphism.
+        
+        Hence (a) and (b) are equivalent.
+        \end{proof}
+        
+        \begin{definition}[Essential extension]
+            Let \(V\subseteq E\) be an inclusion of \(R\)-modules. We say that \(V\) is
+            \emph{essential} in \(E\), or that \(E\) is an \emph{essential extension} of \(V\),
+            if for every nonzero submodule \(W\subseteq E\), one has
+            \[
+                W\cap V\neq 0.
+            \]
+            Equivalently, every nonzero submodule of \(E\) must meet \(V\) nontrivially.
+            \end{definition}
+            
+            \begin{remark}
+            Intuitively, the condition \(V\subseteq E\) being essential means that \(E\) contains
+            no nonzero submodule which is completely disjoint from \(V\). Thus \(E\) is obtained
+            from \(V\) in a way that does not create an independent ``new part'' away from \(V\).
+            \end{remark}
+            
+            \begin{lemma}[Existence of a maximal essential extension inside a fixed ambient module]
+            Let \(V\) be an \(R\)-module, and suppose that \(V\) is embedded into an \(R\)-module
+            \(I\):
+            \[
+                V\subseteq I.
+            \]
+            Consider the set
+            \[
+                \mathcal S
+                =
+                \{\,E\mid V\subseteq E\subseteq I,\ \text{and }V\subseteq E
+                \text{ is an essential extension}\,\}.
+            \]
+            Then \(\mathcal S\) has a maximal element.
+            \end{lemma}
+            
+            \begin{proof}
+            First, \(\mathcal S\neq \varnothing\). Indeed, \(V\in \mathcal S\), because
+            \(V\subseteq V\) is clearly essential: if \(0\neq W\subseteq V\), then
+            \[
+                W\cap V=W\neq 0.
+            \]
+            
+            We partially order \(\mathcal S\) by inclusion. To apply Zorn's lemma, we show that
+            every chain in \(\mathcal S\) has an upper bound in \(\mathcal S\).
+            
+            Let
+            \[
+                \{E_\alpha\}_{\alpha\in A}
+            \]
+            be a chain in \(\mathcal S\). This means that for any \(\alpha,\beta\in A\), either
+            \[
+                E_\alpha\subseteq E_\beta
+                \quad\text{or}\quad
+                E_\beta\subseteq E_\alpha.
+            \]
+            Define
+            \[
+                E=\bigcup_{\alpha\in A}E_\alpha.
+            \]
+            Because the family \(\{E_\alpha\}_{\alpha\in A}\) is a chain, the union \(E\) is again
+            an \(R\)-submodule of \(I\). Clearly,
+            \[
+                V\subseteq E\subseteq I.
+            \]
+            
+            It remains to prove that \(V\subseteq E\) is essential. Let
+            \[
+                0\neq W\subseteq E
+            \]
+            be a nonzero submodule. Choose a nonzero element
+            \[
+                0\neq w\in W.
+            \]
+            Since \(E=\bigcup_{\alpha\in A}E_\alpha\), there exists some \(\alpha\in A\) such that
+            \[
+                w\in E_\alpha.
+            \]
+            Hence
+            \[
+                Rw\subseteq E_\alpha.
+            \]
+            Because \(w\neq 0\) and \(R\) has identity, we have
+            \[
+                Rw\neq 0.
+            \]
+            Since \(E_\alpha\in \mathcal S\), the inclusion \(V\subseteq E_\alpha\) is essential.
+            Therefore
+            \[
+                Rw\cap V\neq 0.
+            \]
+            But \(Rw\subseteq W\), so
+            \[
+                W\cap V\neq 0.
+            \]
+            Thus \(V\subseteq E\) is essential, and hence
+            \[
+                E\in \mathcal S.
+            \]
+            
+            Therefore every chain in \(\mathcal S\) has an upper bound in \(\mathcal S\). By Zorn's
+            lemma, \(\mathcal S\) has a maximal element. Denote it by \(E\).
+            \end{proof}
+            
+            \begin{remark}
+            The maximality of \(E\) means the following: if \(E'\) is another submodule of \(I\)
+            such that
+            \[
+                E\subseteq E'\subseteq I
+            \]
+            and \(V\subseteq E'\) is still essential, then necessarily
+            \[
+                E'=E.
+            \]
+            Equivalently, there is no strictly larger submodule \(E'\) with
+            \[
+                E\subsetneq E'\subseteq I
+            \]
+            such that \(V\subseteq E'\) remains an essential extension.
+            \end{remark}
+            
+            \begin{remark}
+            In the proof of the existence of injective hulls, one usually first uses the standard
+            fact that every \(R\)-module \(V\) can be embedded into some injective module \(I\).
+            Then the above lemma gives a maximal essential extension
+            \[
+                V\subseteq E\subseteq I.
+            \]
+            The remaining step is to prove that this maximal essential extension \(E\) is itself
+            injective. Once this is done, the inclusion
+            \[
+                V\hookrightarrow E
+            \]
+            is an injective hull of \(V\).
+            \end{remark}
+
+            \begin{lemma}[Baer's criterion]
+                Let \(R\) be a ring with identity, and let \(E\) be a left \(R\)-module. Then \(E\)
+                is injective if and only if for every left ideal \(\mathfrak a\subseteq R\), every
+                \(R\)-homomorphism
+                \[
+                    f:\mathfrak a\longrightarrow E
+                \]
+                can be extended to an \(R\)-homomorphism
+                \[
+                    \widetilde f:R\longrightarrow E.
+                \]
+                Equivalently, for every left ideal \(\mathfrak a\subseteq R\), every diagram
+                \[
+                \begin{tikzcd}
+                \mathfrak a \arrow[r,"f"] \arrow[d,hook] & E \\
+                R \arrow[ru,dashed,"\widetilde f"'] &
+                \end{tikzcd}
+                \]
+                can be completed by some \(\widetilde f:R\to E\).
+                \end{lemma}
+                
+                \begin{proof}
+                First suppose that \(E\) is injective. Let \(\mathfrak a\subseteq R\) be a left ideal,
+                and let
+                \[
+                    f:\mathfrak a\longrightarrow E
+                \]
+                be an \(R\)-homomorphism. Since \(\mathfrak a\hookrightarrow R\) is a monomorphism
+                of left \(R\)-modules, the injectivity of \(E\) implies that \(f\) extends to an
+                \(R\)-homomorphism
+                \[
+                    \widetilde f:R\longrightarrow E.
+                \]
+                Thus the stated condition holds.
+                
+                Conversely, assume that every homomorphism from a left ideal of \(R\) to \(E\) can be
+                extended to \(R\). We prove that \(E\) is injective.
+                
+                Let \(A\subseteq B\) be an inclusion of left \(R\)-modules, and let
+                \[
+                    f:A\longrightarrow E
+                \]
+                be an \(R\)-homomorphism. We will prove that \(f\) extends to \(B\).
+                
+                Consider the set \(\mathcal S\) of pairs \((C,g)\), where
+                \[
+                    A\subseteq C\subseteq B
+                \]
+                is a submodule and
+                \[
+                    g:C\longrightarrow E
+                \]
+                is an \(R\)-homomorphism satisfying
+                \[
+                    g|_A=f.
+                \]
+                We partially order \(\mathcal S\) by declaring
+                \[
+                    (C,g)\leq (C',g')
+                \]
+                if
+                \[
+                    C\subseteq C'
+                    \quad\text{and}\quad
+                    g'|_C=g.
+                \]
+                
+                The set \(\mathcal S\) is nonempty, since \((A,f)\in \mathcal S\). If
+                \[
+                    \{(C_i,g_i)\}_{i\in I}
+                \]
+                is a chain in \(\mathcal S\), then
+                \[
+                    C=\bigcup_{i\in I}C_i
+                \]
+                is a submodule of \(B\), and we may define
+                \[
+                    g:C\longrightarrow E
+                \]
+                by
+                \[
+                    g(c)=g_i(c)
+                \]
+                whenever \(c\in C_i\). This is well-defined because the pairs form a chain. Hence
+                \((C,g)\) is an upper bound of the chain. By Zorn's lemma, \(\mathcal S\) has a
+                maximal element, say
+                \[
+                    (C,g).
+                \]
+                
+                We claim that \(C=B\). Suppose not. Choose
+                \[
+                    b\in B\setminus C.
+                \]
+                Define
+                \[
+                    \mathfrak a=\{\,r\in R\mid rb\in C\,\}.
+                \]
+                Then \(\mathfrak a\) is a left ideal of \(R\). Indeed, if \(r,s\in\mathfrak a\), then
+                \[
+                    (r+s)b=rb+sb\in C,
+                \]
+                and if \(t\in R\), then
+                \[
+                    (tr)b=t(rb)\in C.
+                \]
+                
+                Define an \(R\)-homomorphism
+                \[
+                    h:\mathfrak a\longrightarrow E
+                \]
+                by
+                \[
+                    h(r)=g(rb).
+                \]
+                This is well-defined and \(R\)-linear because \(g\) is \(R\)-linear.
+                
+                By the assumed condition, \(h\) extends to an \(R\)-homomorphism
+                \[
+                    \widetilde h:R\longrightarrow E.
+                \]
+                Let
+                \[
+                    e=\widetilde h(1).
+                \]
+                Then for every \(r\in R\),
+                \[
+                    \widetilde h(r)=re,
+                \]
+                and in particular, for every \(r\in\mathfrak a\),
+                \[
+                    g(rb)=h(r)=\widetilde h(r)=re.
+                \]
+                
+                Now define
+                \[
+                    g':C+Rb\longrightarrow E
+                \]
+                by
+                \[
+                    g'(c+rb)=g(c)+re,
+                    \qquad c\in C,\ r\in R.
+                \]
+                We check that \(g'\) is well-defined. Suppose
+                \[
+                    c+rb=c'+r'b.
+                \]
+                Then
+                \[
+                    (r-r')b=c'-c\in C,
+                \]
+                so \(r-r'\in\mathfrak a\). Hence
+                \[
+                    g((r-r')b)=(r-r')e.
+                \]
+                But
+                \[
+                    g((r-r')b)=g(c'-c)=g(c')-g(c).
+                \]
+                Therefore
+                \[
+                    g(c')-g(c)=(r-r')e,
+                \]
+                which implies
+                \[
+                    g(c)+re=g(c')+r'e.
+                \]
+                Thus \(g'\) is well-defined. It is straightforward to check that \(g'\) is an
+                \(R\)-homomorphism.
+                
+                Moreover, \(g'\) extends \(g\), since
+                \[
+                    g'(c)=g'(c+0b)=g(c).
+                \]
+                Thus
+                \[
+                    (C,g)<(C+Rb,g')
+                \]
+                unless \(C+Rb=C\). But \(b\notin C\), so \(C+Rb\neq C\). This contradicts the
+                maximality of \((C,g)\).
+                
+                Therefore \(C=B\). Hence \(f:A\to E\) extends to a homomorphism \(B\to E\).
+                This proves that \(E\) is injective.
+                \end{proof}
+
+        \begin{proof}[Proof of 1(ii)]
+        
+        It remains to prove that \(E\) is injective. We use Baer's criterion. Suppose, for
+        contradiction, that \(E\) is not injective. Then there exists a left ideal
+        \[
+            I\subseteq R
+        \]
+        and an \(R\)-homomorphism
+        \[
+            f:I\longrightarrow E
+        \]
+        which cannot be extended to a homomorphism \(R\to E\).
+        
+        Construct an \(R\)-module
+        \[
+            P=(E\oplus R)/N,
+        \]
+        where
+        \[
+            N=\{(f(a),-a)\mid a\in I\}.
+        \]
+        The natural map
+        \[
+            E\longrightarrow P,\qquad e\longmapsto (e,0)+N
+        \]
+        is injective. Indeed, if \((e,0)\in N\), then
+        \[
+            (e,0)=(f(a),-a)
+        \]
+        for some \(a\in I\), hence \(a=0\) and \(e=f(0)=0\).
+        
+        Choose, by Zorn's lemma, a submodule \(C\subseteq P\) maximal subject to
+        \[
+            C\cap E=0.
+        \]
+        Then the image of \(E\) in \(P/C\) is essential. Indeed, if \(D/C\) is a nonzero
+        submodule of \(P/C\), then \(D\supsetneq C\). By maximality of \(C\), we must have
+        \[
+            D\cap E\neq 0.
+        \]
+        Hence
+        \[
+            (D/C)\cap E\neq 0.
+        \]
+        Thus \(E\subseteq P/C\) is an essential extension.
+        
+        Since \(V\subseteq E\) is essential and \(E\subseteq P/C\) is essential, by transitivity
+        \(V\subseteq P/C\) is essential. But \(E\) was chosen to be a maximal essential
+        extension of \(V\). Therefore
+        \[
+            P/C=E.
+        \]
+        
+        Let
+        \[
+            x=(0,1)+N+C\in P/C.
+        \]
+        Since \(P/C=E\), there exists \(e\in E\) such that
+        \[
+            x=e.
+        \]
+        For every \(a\in I\), we have in \(P/C\)
+        \[
+            ax=(0,a)+N+C=(f(a),0)+N+C=f(a).
+        \]
+        On the other hand, since \(x=e\), we also have
+        \[
+            ax=ae.
+        \]
+        Therefore
+        \[
+            f(a)=ae
+            \qquad
+            \text{for all }a\in I.
+        \]
+        Hence \(f\) extends to an \(R\)-homomorphism
+        \[
+            R\longrightarrow E,\qquad r\longmapsto re,
+        \]
+        contradicting the choice of \(f\).
+        
+        Thus \(E\) is injective. Since \(V\subseteq E\) is an essential monomorphism and
+        \(E\) is injective, the inclusion
+        \[
+            V\hookrightarrow E
+        \]
+        is an injective hull of \(V\).
+        \end{proof}
+        
+        \begin{proof}[Proof of 2(i)]
+        We prove
+        \[
+            J(eRe)=eJ(R)e=eRe\cap J(R).
+        \]
+        
+        First observe that
+        \[
+            eJ(R)e\subseteq eRe\cap J(R),
+        \]
+        because \(J(R)\) is a two-sided ideal of \(R\). Conversely, if
+        \[
+            x\in eRe\cap J(R),
+        \]
+        then \(x=exe\), so
+        \[
+            x\in eJ(R)e.
+        \]
+        Hence
+        \[
+            eJ(R)e=eRe\cap J(R).
+        \]
+        
+        It remains to prove
+        \[
+            J(eRe)=eJ(R)e.
+        \]
+        
+        First let \(a\in eJ(R)e\). Then \(a\in eRe\). For every \(y\in eRe\), we have
+        \[
+            ya\in J(R).
+        \]
+        By the usual characterization of the Jacobson radical, \(1-ya\) has a left inverse in
+        \(R\). Thus there exists \(u\in R\) such that
+        \[
+            u(1-ya)=1.
+        \]
+        Multiplying by \(e\) on both sides gives
+        \[
+            eue(e-ya)=e.
+        \]
+        Hence \(e-ya\) has a left inverse in the ring \(eRe\), whose identity is \(e\). Therefore
+        \[
+            a\in J(eRe).
+        \]
+        Thus
+        \[
+            eJ(R)e\subseteq J(eRe).
+        \]
+        
+        Conversely, let
+        \[
+            a\in J(eRe).
+        \]
+        We show that \(a\in J(R)\). It is enough to show that \(a\) annihilates every simple
+        left \(R\)-module.
+        
+        Let \(S\) be a simple left \(R\)-module. Then \(eS\) is either \(0\) or a simple
+        left \(eRe\)-module. Indeed, if \(0\neq T\subseteq eS\) is an \(eRe\)-submodule and
+        \(0\neq t\in T\), then \(Rt=S\), and hence
+        \[
+            eS=eRt=eRe\,t\subseteq T.
+        \]
+        Therefore \(T=eS\).
+        
+        Since \(a\in J(eRe)\), it annihilates every simple \(eRe\)-module. Hence
+        \[
+            a(eS)=0.
+        \]
+        But \(a\in eRe\), so \(a=ae\). Therefore, for every \(s\in S\),
+        \[
+            as=ae s=a(es)=0.
+        \]
+        Thus \(a\) annihilates every simple left \(R\)-module, and hence
+        \[
+            a\in J(R).
+        \]
+        Since also \(a\in eRe\), we get
+        \[
+            a\in eRe\cap J(R)=eJ(R)e.
+        \]
+        Therefore
+        \[
+            J(eRe)\subseteq eJ(R)e.
+        \]
+        
+        Combining the two inclusions gives
+        \[
+            J(eRe)=eJ(R)e=eRe\cap J(R).
+        \]
+        \end{proof}
+        
+        \begin{proof}[Proof of 2(ii)]
+        Let
+        \[
+            S=M_n(R).
+        \]
+        We prove
+        \[
+            J(S)=M_n(J(R)).
+        \]
+        
+        Let \(E_{ij}\) denote the standard matrix units. Applying part \(2(i)\) to the
+        idempotent \(E_{11}\in S\), we obtain
+        \[
+            J(E_{11}SE_{11})=E_{11}J(S)E_{11}.
+        \]
+        But
+        \[
+            E_{11}SE_{11}\cong R,
+        \]
+        so
+        \[
+            E_{11}J(S)E_{11}\cong J(R).
+        \]
+        
+        Now take \(A=(a_{ij})\in J(S)\). Then
+        \[
+            E_{1i}AE_{j1}\in E_{11}J(S)E_{11}.
+        \]
+        But
+        \[
+            E_{1i}AE_{j1}=a_{ij}E_{11}.
+        \]
+        Therefore \(a_{ij}\in J(R)\) for all \(i,j\). Hence
+        \[
+            J(S)\subseteq M_n(J(R)).
+        \]
+        
+        Conversely, we show that
+        \[
+            M_n(J(R))\subseteq J(S).
+        \]
+        It is enough to prove that for every \(a\in J(R)\) and every \(i,j\),
+        \[
+            aE_{ij}\in J(S).
+        \]
+        
+        Let \(X=(x_{pq})\in S\). We must show that
+        \[
+            I_n-X(aE_{ij})
+        \]
+        has a left inverse in \(S\).
+        
+        Set
+        \[
+            u=
+            \begin{pmatrix}
+                x_{1i}a\\
+                x_{2i}a\\
+                \vdots\\
+                x_{ni}a
+            \end{pmatrix},
+            \qquad
+            v^{T}=
+            \begin{pmatrix}
+                0&\cdots&0&1&0&\cdots&0
+            \end{pmatrix},
+        \]
+        where the \(1\) occurs in the \(j\)-th position. Then
+        \[
+            X(aE_{ij})=uv^{T},
+        \]
+        and
+        \[
+            v^{T}u=x_{ji}a.
+        \]
+        Since \(a\in J(R)\), the element
+        \[
+            1-x_{ji}a
+        \]
+        has a left inverse in \(R\). Hence there exists \(c\in R\) such that
+        \[
+            c(1-x_{ji}a)=1.
+        \]
+        Equivalently,
+        \[
+            c-c(v^{T}u)=1.
+        \]
+        Now compute:
+        \[
+            (I_n+ucv^{T})(I_n-uv^{T})
+            =
+            I_n+u\bigl(c-1-c(v^{T}u)\bigr)v^{T}
+            =
+            I_n.
+        \]
+        Thus \(I_n-X(aE_{ij})\) has a left inverse for every \(X\in S\). Therefore
+        \[
+            aE_{ij}\in J(S).
+        \]
+        Since \(M_n(J(R))\) is generated additively by such elements \(aE_{ij}\), we get
+        \[
+            M_n(J(R))\subseteq J(S).
+        \]
+        
+        Therefore
+        \[
+            J(M_n(R))=M_n(J(R)).
+        \]
+        \end{proof}
+        
+        \begin{proof}[Proof of 3]
+        Let \(R\) be a PID, and let \(F\) be a finitely generated free \(R\)-module. Then
+        \[
+            F\cong R^n
+        \]
+        for some \(n\geq 0\). We prove by induction on \(n\) that every submodule of \(R^n\)
+        is free.
+        
+        For \(n=0\), the claim is trivial. For \(n=1\), every submodule of \(R\) is an ideal of
+        \(R\). Since \(R\) is a PID, every ideal is principal. Hence every submodule of \(R\)
+        is free.
+        
+        Assume now that \(n\geq 2\), and suppose the result is true for \(R^{n-1}\). Let
+        \[
+            N\subseteq R^n
+        \]
+        be a submodule. Consider the projection onto the first coordinate:
+        \[
+            \pi:R^n\longrightarrow R.
+        \]
+        Then \(\pi(N)\) is an ideal of \(R\). Since \(R\) is a PID, there exists \(d\in R\) such that
+        \[
+            \pi(N)=(d).
+        \]
+        
+        Let
+        \[
+            K=N\cap \ker\pi.
+        \]
+        Since
+        \[
+            \ker\pi\cong R^{n-1},
+        \]
+        the induction hypothesis implies that \(K\) is free.
+        
+        We have an exact sequence
+        \[
+            0\longrightarrow K\longrightarrow N\xrightarrow{\ \pi\ }\pi(N)\longrightarrow 0.
+        \]
+        Since
+        \[
+            \pi(N)=(d)
+        \]
+        is a principal ideal, it is a free \(R\)-module of rank \(1\) if \(d\neq 0\), and it is
+        the zero module if \(d=0\). In either case, \(\pi(N)\) is projective. Hence the short
+        exact sequence splits. Therefore
+        \[
+            N\cong K\oplus \pi(N).
+        \]
+        Since both \(K\) and \(\pi(N)\) are free, their direct sum is free. Hence \(N\) is free.
+        
+        By induction, every submodule of a finitely generated free module over a PID is free.
+        \end{proof}
