@@ -339,7 +339,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
 \end{definition}
 
 \begin{proposition}
-    Let $M,N$ be two finitely generated free $R$-modules. Denote
+    Let $M,N$ be two $R$-modules where $M$ is finitely generated and free. Denote
     \[
         M^{\vee} = \operatorname{Hom}_R(M, R)
     \]
@@ -406,6 +406,287 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     where the last equality uses $f = \sum_{i=1}^m f(e_i)\, e_i^*$(expansion of $f$ in the dual basis). Since elementary tensors generate $M^{\vee} \otimes_R N$ and $\Psi \circ \Phi$ is $R$-linear, we have $\Psi \circ \Phi = \operatorname{id}$.
 
     Therefore $\Phi$ is an $R$-module isomorphism, giving $M^{\vee} \otimes_R N \cong \operatorname{Hom}_R(M, N)$.
+\end{proof}
+
+\begin{lemma}
+    Let $P$ be a finitely generated projective $R$-module. Then there exists an
+    $R$-module $Q$ and an integer $t\geq 0$ such that
+    \[
+        P\oplus Q\cong R^t.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since $P$ is finitely generated, there exist elements
+    \[
+        p_1,\dots,p_t\in P
+    \]
+    such that
+    \[
+        P=Rp_1+\cdots+Rp_t.
+    \]
+    Therefore we have a surjective $R$-module homomorphism
+    \[
+        \pi:R^t\longrightarrow P
+    \]
+    defined by
+    \[
+        \pi(a_1,\dots,a_t)=a_1p_1+\cdots+a_tp_t.
+    \]
+    Equivalently, if $e_1,\dots,e_t$ denotes the standard basis of $R^t$, then
+    \[
+        \pi(e_i)=p_i
+        \qquad
+        (1\leq i\leq t).
+    \]
+    Since $p_1,\dots,p_t$ generate $P$, the map $\pi$ is surjective.
+
+    Now we use that $P$ is projective. Since $\pi:R^t\to P$ is an epimorphism and
+    $P$ is projective, the map $\pi$ splits. That is, there exists an $R$-module
+    homomorphism
+    \[
+        s:P\longrightarrow R^t
+    \]
+    such that
+    \[
+        \pi\circ s=\operatorname{id}_P.
+    \]
+    In particular, $s$ is injective, because if $s(p)=0$, then
+    \[
+        p=(\pi\circ s)(p)=\pi(0)=0.
+    \]
+
+    We claim that
+    \[
+        R^t=\operatorname{Im}(s)\oplus \ker\pi.
+    \]
+    First, let $x\in R^t$. Then
+    \[
+        x=s(\pi(x))+\bigl(x-s(\pi(x))\bigr).
+    \]
+    Clearly,
+    \[
+        s(\pi(x))\in \operatorname{Im}(s).
+    \]
+    Moreover,
+    \[
+        \pi\bigl(x-s(\pi(x))\bigr)
+        =
+        \pi(x)-(\pi\circ s)(\pi(x))
+        =
+        \pi(x)-\pi(x)
+        =
+        0.
+    \]
+    Hence
+    \[
+        x-s(\pi(x))\in \ker\pi.
+    \]
+    Therefore
+    \[
+        R^t=\operatorname{Im}(s)+\ker\pi.
+    \]
+
+    It remains to show that the sum is direct. Suppose
+    \[
+        y\in \operatorname{Im}(s)\cap \ker\pi.
+    \]
+    Then $y=s(p)$ for some $p\in P$, and also $\pi(y)=0$. Hence
+    \[
+        0=\pi(y)=\pi(s(p))=(\pi\circ s)(p)=p.
+    \]
+    Therefore
+    \[
+        y=s(p)=s(0)=0.
+    \]
+    Thus
+    \[
+        \operatorname{Im}(s)\cap \ker\pi=0.
+    \]
+    Hence
+    \[
+        R^t=\operatorname{Im}(s)\oplus \ker\pi.
+    \]
+
+    Since $s:P\to \operatorname{Im}(s)$ is an isomorphism, we obtain
+    \[
+        R^t\cong P\oplus \ker\pi.
+    \]
+    Taking
+    \[
+        Q:=\ker\pi,
+    \]
+    we get
+    \[
+        P\oplus Q\cong R^t.
+    \]
+\end{proof}
+
+\begin{remark}
+    This does not mean that $P$ itself is free. It only says that $P$ is a direct
+    summand of a finite free module. Thus a finitely generated projective module is
+    ``part of'' a finite free module:
+    \[
+        R^t\cong P\oplus Q.
+    \]
+\end{remark}
+
+\begin{corollary}
+    Let $R$ be a commutative ring with $1$, let $P$ be a finitely generated projective
+    $R$-module, and let $N$ be any $R$-module. Denote
+    \[
+        P^{\vee}:=\operatorname{Hom}_R(P,R).
+    \]
+    Then the canonical $R$-module homomorphism
+    \[
+        \tau_{P,N}:P^{\vee}\otimes_R N\longrightarrow \operatorname{Hom}_R(P,N)
+    \]
+    defined by
+    \[
+        \tau_{P,N}(\varphi\otimes n)(p)=\varphi(p)n
+        \qquad
+        (\varphi\in P^\vee,\ n\in N,\ p\in P)
+    \]
+    is an isomorphism.
+\end{corollary}
+
+\begin{proof}
+    Since $P$ is finitely generated and projective, there exist elements
+    \[
+        p_1,\dots,p_t\in P
+    \]
+    and homomorphisms
+    \[
+        \varphi_1,\dots,\varphi_t\in P^\vee
+    \]
+    such that
+    \[
+        p=\sum_{i=1}^t \varphi_i(p)p_i
+        \qquad
+        \text{for every }p\in P.
+    \]
+    Indeed, since $P$ is finitely generated projective, there exists an $R$-module $Q$
+    and an integer $t\geq 0$ such that
+    \[
+        P\oplus Q\cong R^t.
+    \]
+    Let
+    \[
+        \iota:P\longrightarrow R^t
+        \qquad\text{and}\qquad
+        \rho:R^t\longrightarrow P
+    \]
+    be the corresponding inclusion and projection, so that
+    \[
+        \rho\circ \iota=\operatorname{id}_P.
+    \]
+    Let $e_1,\dots,e_t$ be the standard basis of $R^t$, and let
+    $e_1^\vee,\dots,e_t^\vee$ be the dual basis of $(R^t)^\vee$. Define
+    \[
+        p_i:=\rho(e_i)\in P,
+        \qquad
+        \varphi_i:=e_i^\vee\circ \iota\in P^\vee.
+    \]
+    Then, for every $p\in P$,
+    \[
+        p
+        =
+        \rho(\iota(p))
+        =
+        \rho\left(\sum_{i=1}^t e_i^\vee(\iota(p))e_i\right)
+        =
+        \sum_{i=1}^t \varphi_i(p)p_i.
+    \]
+
+    Now define a map
+    \[
+        \sigma_{P,N}:\operatorname{Hom}_R(P,N)\longrightarrow P^\vee\otimes_R N
+    \]
+    by
+    \[
+        \sigma_{P,N}(f)
+        =
+        \sum_{i=1}^t \varphi_i\otimes f(p_i).
+    \]
+    We show that $\sigma_{P,N}$ is the inverse of $\tau_{P,N}$.
+
+    First, let $f\in \operatorname{Hom}_R(P,N)$. For every $p\in P$, we have
+    \[
+        \bigl(\tau_{P,N}\circ \sigma_{P,N}\bigr)(f)(p)
+        =
+        \tau_{P,N}\left(\sum_{i=1}^t \varphi_i\otimes f(p_i)\right)(p)
+        =
+        \sum_{i=1}^t \varphi_i(p)f(p_i).
+    \]
+    Since $f$ is $R$-linear,
+    \[
+        \sum_{i=1}^t \varphi_i(p)f(p_i)
+        =
+        f\left(\sum_{i=1}^t \varphi_i(p)p_i\right)
+        =
+        f(p).
+    \]
+    Hence
+    \[
+        \tau_{P,N}\circ \sigma_{P,N}
+        =
+        \operatorname{id}_{\operatorname{Hom}_R(P,N)}.
+    \]
+
+    Conversely, let $\psi\otimes n\in P^\vee\otimes_R N$ be an elementary tensor.
+    Then
+    \[
+        \bigl(\sigma_{P,N}\circ \tau_{P,N}\bigr)(\psi\otimes n)
+        =
+        \sigma_{P,N}\bigl(\tau_{P,N}(\psi\otimes n)\bigr)
+        =
+        \sum_{i=1}^t
+        \varphi_i\otimes \tau_{P,N}(\psi\otimes n)(p_i).
+    \]
+    By definition of $\tau_{P,N}$,
+    \[
+        \tau_{P,N}(\psi\otimes n)(p_i)
+        =
+        \psi(p_i)n.
+    \]
+    Therefore
+    \[
+        \bigl(\sigma_{P,N}\circ \tau_{P,N}\bigr)(\psi\otimes n)
+        =
+        \sum_{i=1}^t \varphi_i\otimes \psi(p_i)n
+        =
+        \left(\sum_{i=1}^t \psi(p_i)\varphi_i\right)\otimes n.
+    \]
+    But for every $p\in P$,
+    \[
+        \left(\sum_{i=1}^t \psi(p_i)\varphi_i\right)(p)
+        =
+        \sum_{i=1}^t \psi(p_i)\varphi_i(p)
+        =
+        \sum_{i=1}^t \varphi_i(p)\psi(p_i)
+        =
+        \psi\left(\sum_{i=1}^t \varphi_i(p)p_i\right)
+        =
+        \psi(p).
+    \]
+    Hence
+    \[
+        \sum_{i=1}^t \psi(p_i)\varphi_i=\psi.
+    \]
+    Thus
+    \[
+        \bigl(\sigma_{P,N}\circ \tau_{P,N}\bigr)(\psi\otimes n)
+        =
+        \psi\otimes n.
+    \]
+    Since elementary tensors generate $P^\vee\otimes_R N$, it follows that
+    \[
+        \sigma_{P,N}\circ \tau_{P,N}
+        =
+        \operatorname{id}_{P^\vee\otimes_R N}.
+    \]
+
+    Therefore $\tau_{P,N}$ is an isomorphism, with inverse $\sigma_{P,N}$.
 \end{proof}
 
 \begin{proposition}
