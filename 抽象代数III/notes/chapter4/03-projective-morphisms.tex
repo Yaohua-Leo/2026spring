@@ -138,6 +138,55 @@
     for the set of projective morphisms from $X$ to $Y$.
 \end{definition}
 
+\begin{example}
+    Let $k$ be a field, and consider the infinite-dimensional $k$-vector space
+    \[
+        V=\bigoplus_{n\geq 1} k e_n .
+    \]
+    Then the identity morphism
+    \[
+        \operatorname{id}_V:V\longrightarrow V
+    \]
+    is not a projective morphism. In other words,
+    \[
+        \operatorname{id}_V\notin \Hom_k^{\operatorname{pr}}(V,V).
+    \]
+
+    Indeed, suppose for contradiction that $\operatorname{id}_V$ is a projective morphism.
+    Then, by definition, there exists a finitely generated projective $k$-module $P$ and
+    $k$-linear maps
+    \[
+        V\xrightarrow{\alpha} P \xrightarrow{\beta} V
+    \]
+    such that
+    \[
+        \operatorname{id}_V=\beta\circ\alpha.
+    \]
+    Since $k$ is a field, every finitely generated projective $k$-module is a finite-dimensional
+    $k$-vector space. Hence $P$ is finite-dimensional over $k$.
+
+    Therefore
+    \[
+        \operatorname{Im}(\beta\circ\alpha)\subseteq \operatorname{Im}\beta
+    \]
+    is finite-dimensional. But
+    \[
+        \operatorname{Im}(\beta\circ\alpha)
+        =
+        \operatorname{Im}(\operatorname{id}_V)
+        =
+        V.
+    \]
+    Thus $V$ would be finite-dimensional, contradicting the definition
+    \[
+        V=\bigoplus_{n\geq 1} k e_n.
+    \]
+    Therefore $\operatorname{id}_V$ is not a projective morphism.
+
+    Equivalently, over a field $k$, projective morphisms are precisely finite-rank linear
+    maps. Since $\operatorname{id}_V$ has infinite rank, it is not projective.
+\end{example}
+
 \begin{lemma}
     For any $R$-module $M$, the set
     \[
