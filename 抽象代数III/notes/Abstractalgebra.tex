@@ -78,9 +78,26 @@
 %----------------------------------------------------------------------------------------
 %	THEOREM ENVIRONMENTS (环境美化核心)
 %----------------------------------------------------------------------------------------
+\declaretheoremstyle[
+    spaceabove=0pt,
+    spacebelow=0pt,
+    headfont=\bfseries,
+    bodyfont=\itshape,
+    headpunct={.},
+    postheadspace={ }
+]{aa-boxed-theorem}
+
+\tcbset{
+    aa boxed theorem/.style={
+        top=3pt,
+        bottom=3pt
+    }
+}
+
 % 1. Theorem (蓝色风格)
-\declaretheorem[name=Theorem, numberwithin=section]{theorem}
+\declaretheorem[name=Theorem, numberwithin=section, style=aa-boxed-theorem]{theorem}
 \tcolorboxenvironment{theorem}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=ThmColor,       % 边框颜色
     colback=ThmBg,           % 背景颜色
@@ -93,8 +110,9 @@
     drop shadow=black!5!white % 轻微阴影
 }
 % Corollary 使用与 Theorem 相同的风格，但通常紧随其后
-\declaretheorem[name=Corollary, numberlike=theorem]{corollary}
+\declaretheorem[name=Corollary, numberlike=theorem, style=aa-boxed-theorem]{corollary}
 \tcolorboxenvironment{corollary}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=ThmColor!80!white, 
     colback=ThmBg,
@@ -103,8 +121,9 @@
     parbox=false
 }
 % 2. Definition (绿色风格)
-\declaretheorem[name=Definition, numberlike=theorem]{definition}
+\declaretheorem[name=Definition, numberlike=theorem, style=aa-boxed-theorem]{definition}
 \tcolorboxenvironment{definition}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=DefColor,
     colback=DefBg,
@@ -115,9 +134,10 @@
     drop shadow=black!5!white
 }
 % 3. Lemma & Proposition (橙色风格)
-\declaretheorem[name=Lemma, numberlike=theorem]{lemma}
-\declaretheorem[name=Proposition, numberlike=theorem]{proposition}
+\declaretheorem[name=Lemma, numberlike=theorem, style=aa-boxed-theorem]{lemma}
+\declaretheorem[name=Proposition, numberlike=theorem, style=aa-boxed-theorem]{proposition}
 \tcolorboxenvironment{lemma}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=LemColor,
     colback=LemBg,
@@ -126,6 +146,7 @@
     parbox=false
 }
 \tcolorboxenvironment{proposition}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=LemColor,
     colback=LemBg,
@@ -134,10 +155,11 @@
     parbox=false
 }
 % 4. Example & Remark (简约风格)
-\declaretheorem[name=Example, numberlike=theorem]{example}
+\declaretheorem[name=Example, numberlike=theorem, style=aa-boxed-theorem]{example}
 \declaretheorem[name=Remark, numberlike=theorem]{remark}
 \declaretheorem[name=Exercise, numberlike=theorem]{exercise}
 \tcolorboxenvironment{example}{
+    aa boxed theorem,
     enhanced jigsaw,
     colframe=ExColor,
     colback=ExBg,
@@ -147,8 +169,9 @@
     parbox=false
 }
 % 5. Topic (靛紫色风格，带标题支持)
-\declaretheorem[name=Topic, numberlike=theorem]{topic}
+\declaretheorem[name=Topic, numberlike=theorem, style=aa-boxed-theorem]{topic}
 \tcolorboxenvironment{topic}{
+    aa boxed theorem,
     enhanced jigsaw,
     breakable,
     parbox=false,

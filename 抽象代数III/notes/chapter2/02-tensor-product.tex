@@ -163,7 +163,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
                   M_1 \otimes_R (\bigoplus_{i=1}^n M_i) \cong \bigoplus_{i=1}^n (M_1 \otimes_R M_i)
               \]
               where $m_1 \otimes (m_2 \oplus \cdots \oplus m_n) \mapsto (m_1 \otimes m_2) + \cdots + (m_1 \otimes m_n)$.
-        \item $R \otimes_R M \cong M$ where $r \otimes m \mapsto rm$. And more generally,$R^{(I)} \otimes_R M \cong M^{(I)}$ where $(r_i)_{i\in I} \otimes m \mapsto (r_i m)_{i\in I}$.
+        \item $R \otimes_R M \cong M$ where $r \otimes m \mapsto rm$. And more generally, $R^{(I)} \otimes_R M \cong M^{(I)}$ where $(r_i)_{i\in I} \otimes m \mapsto (r_i m)_{i\in I}$.
     \end{enumerate}
 \end{proposition}
 
@@ -218,7 +218,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \[
         (\varphi \circ \psi)(m_1 \otimes (m_2 \otimes m_3)) = \varphi((m_1 \otimes m_2) \otimes m_3) = m_1 \otimes (m_2 \otimes m_3).
     \]
-    Since elementary tensors generate both modules,$\psi \circ \varphi = \operatorname{id}$ and $\varphi \circ \psi = \operatorname{id}$. The overall situation is summarized by the following commutative diagram:
+    Since elementary tensors generate both modules, $\psi \circ \varphi = \operatorname{id}$ and $\varphi \circ \psi = \operatorname{id}$. The overall situation is summarized by the following commutative diagram:
     \begin{center}
         \begin{tikzcd}
             & M_1 \times M_2 \times M_3 \arrow[ld] \arrow[rd] & \\
@@ -249,7 +249,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
         \phi_{M,N,P}(f)(m)(rn)        & = f(m \otimes rn) = f(r(m\otimes n))                        \\
                                       & = rf(m\otimes n) = r\,\phi_{M,N,P}(f)(m)(n).
     \end{align*}
-    Next, we verify that $\phi_{M,N,P}(f) \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$: for $m_1, m_2 \in M$,$r \in R$, and any $n\in N$,
+    Next, we verify that $\phi_{M,N,P}(f) \in \operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$: for $m_1, m_2 \in M$, $r \in R$, and any $n\in N$,
     \begin{align*}
         \phi_{M,N,P}(f)(m_1+m_2)(n) & = f((m_1+m_2)\otimes n)             \\
                                     & = f(m_1\otimes n) + f(m_2\otimes n) \\
@@ -303,7 +303,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \end{align*}
     so $\phi_{M,N,P}(f_1+f_2)=\phi_{M,N,P}(f_1)+\phi_{M,N,P}(f_2)$. Hence $\phi_{M,N,P}$ is a $\mathbb{Z}$-module isomorphism.
 
-    If $R$ is commutative,$\operatorname{Hom}_R(M\otimes_R N, P)$ carries an $R$-module structure via $(r\cdot f)(x) = rf(x)$, and similarly for $\operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$. Then
+    If $R$ is commutative, $\operatorname{Hom}_R(M\otimes_R N, P)$ carries an $R$-module structure via $(r\cdot f)(x) = rf(x)$, and similarly for $\operatorname{Hom}_R(M, \operatorname{Hom}_R(N,P))$. Then
     \begin{align*}
         \phi_{M,N,P}(rf)(m)(n) & = (rf)(m\otimes n)           \\
                                & = r f(m\otimes n)            \\
@@ -312,7 +312,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \end{align*}
     so $\phi_{M,N,P}(rf) = r\,\phi_{M,N,P}(f)$, and $\phi_{M,N,P}$ is an $R$-module isomorphism.
 
-    If $R$ is not commutative,$\operatorname{Hom}_R(M\otimes_R N, P)$ does not naturally carry an $R$-module structure (scalar multiplication by $r$ need not commute with $R$-linearity), so $\phi_{M,N,P}$ is only a $\mathbb{Z}$-module isomorphism.
+    If $R$ is not commutative, $\operatorname{Hom}_R(M\otimes_R N, P)$ does not naturally carry an $R$-module structure (scalar multiplication by $r$ need not commute with $R$-linearity), so $\phi_{M,N,P}$ is only a $\mathbb{Z}$-module isomorphism.
 \end{proof}
 
 \begin{definition}
@@ -358,7 +358,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \[
         \beta(f, n)(m) = f(m)\, n, \qquad f \in M^{\vee},\; n \in N,\; m \in M.
     \]
-    We check $R$-bilinearity. For $f_1, f_2 \in M^{\vee}$,$n, n_1, n_2 \in N$,$m \in M$, and $r \in R$:
+    We check $R$-bilinearity. For $f_1, f_2 \in M^{\vee}$, $n, n_1, n_2 \in N$, $m \in M$, and $r \in R$:
     \begin{align*}
         \beta(f_1+f_2, n)(m) & = (f_1+f_2)(m)\,n = f_1(m)\,n + f_2(m)\,n     \\
                              & = \beta(f_1,n)(m)+\beta(f_2,n)(m),            \\
@@ -800,7 +800,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \]
     since $a+I=0$ in $R/I$. Hence $\varphi(IM)=0$, so $IM\subseteq \ker(\varphi)$.
 
-    Therefore, by the universal property of the quotient,$\varphi$ induces an $R$-module
+    Therefore, by the universal property of the quotient, $\varphi$ induces an $R$-module
     homomorphism
     \[
         \overline{\varphi}:M/IM\longrightarrow (R/I)\otimes_R M,
@@ -819,7 +819,7 @@ Let $R$ be a commutative ring, and let $M$ and $N$ be $R$-modules. Roughly speak
     \[
         rm+IM=r'm+IM.
     \]
-    Also,$\beta$ is $R$-balanced, since for any $a\in R$,
+    Also, $\beta$ is $R$-balanced, since for any $a\in R$,
     \[
         \beta((r+I)a,m)=\beta(ra+I,m)=ram+IM=\beta(r+I,am).
     \]

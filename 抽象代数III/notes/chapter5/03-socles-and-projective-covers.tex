@@ -1,6 +1,6 @@
-\section{Socles and Projective Covers}
+\section{Socles, Tops and Projective Covers}
 
-\begin{definition}
+\begin{definition}[Soc of a module]
     The unique largest semisimple submodule of an $R$-module $U$ is called the
     \emph{socle} of $U$ and is denoted by
     \[
@@ -8,32 +8,80 @@
     \]
 \end{definition}
 
+\begin{definition}[Top of a module]
+    Let $U$ be an $R$-module. The top, or head, of $U$ is defined by
+    \[
+        \operatorname{Top}(U):=U/\operatorname{Rad}(U).
+    \]
+\end{definition}
+
+\begin{example}
+    If $U$ is semisimple, then
+    \[
+        \operatorname{Rad}(U)=0,
+        \qquad
+        \operatorname{Soc}(U)=U,
+        \qquad
+        \operatorname{Top}(U)=U.
+    \]
+    In particular, if $S$ is simple, then
+    \[
+        \operatorname{Rad}(S)=0,
+        \qquad
+        \operatorname{Soc}(S)=S,
+        \qquad
+        \operatorname{Top}(S)=S.
+    \]
+\end{example}
+
+\begin{example}
+    Let
+    \[
+        A=k[x]/(x^n),
+    \]
+    and regard $A$ as a left $A$-module. Then
+    \[
+        J(A)=(x),
+    \]
+    so
+    \[
+        \operatorname{Rad}(A)=xA,
+        \qquad
+        \operatorname{Top}(A)=A/xA\cong k.
+    \]
+    On the other hand,
+    \[
+        \operatorname{Soc}(A)=\{a\in A\mid xa=0\}=kx^{n-1}.
+    \]
+    Thus
+    \[
+        \operatorname{Top}(A)\cong k,
+        \qquad
+        \operatorname{Soc}(A)\cong k,
+    \]
+    but they occur at opposite ends of the Loewy filtration.
+\end{example}
+
+\begin{remark}
+    In general, $\operatorname{Top}(U)$ need not be semisimple for an arbitrary module
+    $U$. However, if $U$ is finitely generated and Artinian, then
+    $\operatorname{Top}(U)$ is semisimple.
+\end{remark}
+
 \begin{lemma}
     Let
     \[
         U=S_1^{\oplus a_1}\oplus \cdots \oplus S_r^{\oplus a_r}
     \]
-    be a semisimple $R$-module, where the $S_i$ are pairwise nonisomorphic simple
-    modules. Then, for each $i$, the summand $S_i^{\oplus a_i}$ is uniquely determined:
-    it is the unique largest submodule of $U$ that is isomorphic to a direct sum of
-    copies of $S_i$.
+    be a semisimple \(R\)-module, where the \(S_i\) are pairwise nonisomorphic
+    simple modules. Then the summand \(S_i^{\oplus a_i}\) is the \(S_i\)-isotypic
+    component of \(U\), namely the sum of all submodules of \(U\) isomorphic to
+    \(S_i\). In particular, it is uniquely determined by \(U\) and the isomorphism
+    class of \(S_i\).
 \end{lemma}
 
 \begin{proof}
-    Let $T\leq U$ be a submodule which is a direct sum of copies of $S_i$. Write
-    \[
-        U_i:=S_i^{\oplus a_i}
-        \qquad\text{and}\qquad
-        U':=\bigoplus_{j\neq i} S_j^{\oplus a_j}.
-    \]
-    Consider the projection
-    \[
-        p:U=U_i\oplus U'\to U'.
-    \]
-    If $p(T)\neq 0$, then $p(T)$ contains a simple submodule isomorphic to a simple
-    submodule of $U'$, hence to some $S_j$ with $j\neq i$. This contradicts the fact that
-    every simple submodule of $T$ is isomorphic to $S_i$. Therefore $p(T)=0$, so $T\subseteq U_i$. Thus $U_i$ contains every submodule of $U$ which is a direct sum of
-    copies of $S_i$, and therefore $U_i$ is the unique largest such submodule.
+    This is precisely Corollary~5.2.5(2) applied to \(S=S_i\).
 \end{proof}
 
 \begin{lemma}
@@ -44,9 +92,10 @@
               \[
                   U/(M_1\cap \cdots \cap M_n)\cong \bigoplus_{i\in I} U/M_i.
               \]
-              In particular,$U/(M_1\cap \cdots \cap M_n)$ is semisimple.
+              In particular, $U/(M_1\cap \cdots \cap M_n)$ is semisimple.
         \item If $U$ is finitely generated and Artinian, then $U/\operatorname{Rad}(U)$ is
-              semisimple, and $\operatorname{Rad}(U)$ is the unique smallest submodule of $U$ with semisimple quotient.
+              semisimple, and $\operatorname{Rad}(U)$ is the unique smallest submodule
+              of $U$ with semisimple quotient.
     \end{enumerate}
 \end{lemma}
 
@@ -55,61 +104,247 @@
     Choose a subset $I\subseteq \{1,\dots,n\}$ maximal with the property that the
     diagonal map
     \[
-        \delta_I:U\to \bigoplus_{i\in I} U/M_i,\qquad
-        u\mapsto (u+M_i)_{i\in I}
+        \delta_I:U\longrightarrow \bigoplus_{i\in I} U/M_i,\qquad
+        u\longmapsto (u+M_i)_{i\in I}
     \]
-    is surjective. Then
+    is surjective. Such a subset exists because $\{1,\dots,n\}$ is finite; for instance
+    $I=\varnothing$ is allowed.
+
+    We have
     \[
-        \ker(\delta_I)=\bigcap_{i\in I} M_i.
+        \ker(\delta_I)=\bigcap_{i\in I}M_i.
     \]
-    If some $j\notin I$ satisfied
+    Put
     \[
-        \bigcap_{i\in I} M_i\nsubseteq M_j,
+        K:=\bigcap_{i\in I}M_i.
     \]
-    then the induced map
+    We claim that
     \[
-        U\to \left(\bigoplus_{i\in I} U/M_i\right)\oplus U/M_j
+        K\subseteq M_j
+        \qquad\text{for every }j\notin I.
     \]
-    would still be surjective, contradicting the maximality of $I$. Hence
+    Suppose not. Then for some $j\notin I$ we have
     \[
-        \bigcap_{i\in I} M_i\subseteq M_j
-        \qquad\text{for all } j\notin I,
+        K\nsubseteq M_j.
     \]
-    and therefore
+    Since $M_j$ is maximal, this implies
     \[
-        \bigcap_{i\in I} M_i=M_1\cap \cdots \cap M_n.
+        K+M_j=U.
     \]
-    Applying the first isomorphism theorem gives the required decomposition.
+    Hence the natural map
+    \[
+        K\longrightarrow U/M_j
+    \]
+    is surjective.
+
+    We now show that
+    \[
+        U\longrightarrow
+        \left(\bigoplus_{i\in I}U/M_i\right)\oplus U/M_j
+    \]
+    is surjective. Indeed, given
+    \[
+        \bigl((u_i+M_i)_{i\in I},\, u_j+M_j\bigr),
+    \]
+    first use the surjectivity of $\delta_I$ to choose $u\in U$ such that
+    \[
+        u+M_i=u_i+M_i
+        \qquad\text{for all }i\in I.
+    \]
+    Since $K\to U/M_j$ is surjective, choose $k\in K$ such that
+    \[
+        k+M_j=(u_j-u)+M_j.
+    \]
+    Then $u+k$ maps to the prescribed element in every component:
+    for $i\in I$ we have $k\in K\subseteq M_i$, so
+    \[
+        u+k+M_i=u+M_i=u_i+M_i,
+    \]
+    and for the $j$-component,
+    \[
+        u+k+M_j=u_j+M_j.
+    \]
+    This contradicts the maximality of $I$.
+
+    Therefore
+    \[
+        \bigcap_{i\in I}M_i\subseteq M_j
+        \qquad\text{for every }j\notin I.
+    \]
+    Hence
+    \[
+        \bigcap_{i\in I}M_i
+        =
+        M_1\cap\cdots\cap M_n.
+    \]
+    By the first isomorphism theorem,
+    \[
+        U/(M_1\cap\cdots\cap M_n)
+        =
+        U/\ker(\delta_I)
+        \cong
+        \bigoplus_{i\in I}U/M_i.
+    \]
+    Since each $M_i$ is maximal, each quotient $U/M_i$ is simple. Therefore the right
+    hand side is semisimple.
 
     \textbf{(2).}
-    Because $U$ is finitely generated and Artinian, every proper submodule is contained
-    in a maximal submodule, and the intersection of all maximal submodules stabilizes to a
-    finite intersection. Thus
+    If $U=0$, the statement is trivial. Assume $U\neq 0$.
+
+    Since $U$ is finitely generated, every proper submodule of $U$ is contained in a
+    maximal submodule. Indeed, if $W\subsetneq U$, then $U/W$ is finitely generated,
+    so by the maximal-submodule lemma there exists a maximal submodule $M$ of $U$
+    such that
     \[
-        \operatorname{Rad}(U)=M_1\cap \cdots \cap M_n
+        W\subseteq M\subsetneq U.
     \]
-    for suitable maximal submodules $M_i$. By part (1),
+
+    We now show that the intersection of all maximal submodules is in fact a finite
+    intersection. Consider the set
+    \[
+        \mathcal{F}
+        :=
+        \left\{
+            M_1\cap\cdots\cap M_t
+            \ \middle|\
+            t\geq 1,\ M_1,\dots,M_t\text{ maximal submodules of }U
+        \right\}.
+    \]
+    This is a nonempty set of submodules of $U$. Since $U$ is Artinian, every nonempty
+    set of submodules has a minimal element. Choose a minimal element
+    \[
+        K=M_1\cap\cdots\cap M_t
+        \]
+    in $\mathcal{F}$.
+
+    Let $M$ be any maximal submodule of $U$. Then
+    \[
+        K\cap M=M_1\cap\cdots\cap M_t\cap M
+    \]
+    also belongs to $\mathcal{F}$, and
+    \[
+        K\cap M\subseteq K.
+    \]
+    By the minimality of $K$, we must have
+    \[
+        K\cap M=K.
+    \]
+    Hence
+    \[
+        K\subseteq M.
+    \]
+    Since this holds for every maximal submodule $M$ of $U$, we get
+    \[
+        K\subseteq \operatorname{Rad}(U).
+    \]
+    The opposite inclusion is immediate because $K$ is an intersection of maximal
+    submodules. Therefore
+    \[
+        \operatorname{Rad}(U)=K=M_1\cap\cdots\cap M_t.
+    \]
+
+    By part (1), it follows that
     \[
         U/\operatorname{Rad}(U)
     \]
     is semisimple.
 
-    Now let $V\leq U$ be such that $U/V$ is semisimple. Then every maximal submodule
-    containing $V$ is the kernel of a simple quotient of $U/V$, so $V$ is contained in
-    every maximal submodule of $U$. Hence
+    It remains to prove the minimality statement. Let $V\leq U$ be a submodule such
+    that $U/V$ is semisimple. We show that
     \[
-        V\subseteq \operatorname{Rad}(U).
+        \operatorname{Rad}(U)\subseteq V.
     \]
-    Therefore $\operatorname{Rad}(U)$ is the unique smallest submodule with semisimple
-    quotient.
+    Since $U/V$ is semisimple, its radical is zero:
+    \[
+        \operatorname{Rad}(U/V)=0.
+    \]
+    Maximal submodules of $U/V$ correspond exactly to maximal submodules of $U$
+    containing $V$. Therefore
+    \[
+        \operatorname{Rad}(U/V)
+        =
+        \bigcap_{\substack{M\text{ maximal in }U\\ V\subseteq M}}
+        M/V.
+    \]
+    Thus
+    \[
+        0
+        =
+        \operatorname{Rad}(U/V)
+        =
+        \left(
+        \bigcap_{\substack{M\text{ maximal in }U\\ V\subseteq M}}
+        M
+        \right)/V.
+    \]
+    Hence
+    \[
+        \bigcap_{\substack{M\text{ maximal in }U\\ V\subseteq M}}M
+        =
+        V.
+    \]
+    Since $\operatorname{Rad}(U)$ is the intersection of all maximal submodules of $U$,
+    it is contained in the intersection over the smaller family of maximal submodules
+    containing $V$. Therefore
+    \[
+        \operatorname{Rad}(U)\subseteq V.
+    \]
+
+    Hence $\operatorname{Rad}(U)$ is contained in every submodule $V$ such that
+    $U/V$ is semisimple. Since we already proved that $U/\operatorname{Rad}(U)$ is
+    semisimple, $\operatorname{Rad}(U)$ is the unique smallest submodule of $U$ with
+    semisimple quotient.
 \end{proof}
+
+\begin{corollary}[Universal property of the top]
+    Let $U$ be a finitely generated Artinian $R$-module. Then
+    $\operatorname{Top}(U)$ is the largest semisimple quotient of $U$ in the following sense:
+    if $S$ is semisimple and
+    \[
+        f:U\to S
+    \]
+    is an $R$-module homomorphism, then $f$ factors uniquely through the canonical
+    quotient map
+    \[
+        \pi:U\to \operatorname{Top}(U).
+    \]
+    Equivalently, there exists a unique homomorphism
+    \[
+        \overline{f}:\operatorname{Top}(U)\to S
+    \]
+    such that
+    \[
+        f=\overline{f}\circ \pi.
+    \]
+\end{corollary}
+
+\begin{example}
+    Suppose $U$ has finite length. Since $\operatorname{Top}(U)$ is semisimple, we may write
+    \[
+        \operatorname{Top}(U)
+        \cong
+        S_1^{\oplus a_1}\oplus \cdots \oplus S_r^{\oplus a_r},
+    \]
+    where the $S_i$ are pairwise nonisomorphic simple modules. The integers $a_i$
+    measure how many copies of $S_i$ occur in the top layer of $U$.
+\end{example}
 
 \begin{lemma}
     For all $R$-modules $U$ and $V$,
     \[
-        \operatorname{Rad}(U\oplus V)=\operatorname{Rad}(U)\oplus \operatorname{Rad}(V)
-        \qquad\text{and}\qquad
-        \operatorname{Soc}(U\oplus V)=\operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+        \operatorname{Rad}(U\oplus V)
+        =
+        \operatorname{Rad}(U)\oplus \operatorname{Rad}(V),
+    \]
+    \[
+        \operatorname{Soc}(U\oplus V)
+        =
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V),
+    \]
+    \[
+        \operatorname{Top}(U\oplus V)
+        \cong
+        \operatorname{Top}(U)\oplus \operatorname{Top}(V).
     \]
 \end{lemma}
 
@@ -134,6 +369,19 @@
     \]
     and the reverse inclusion is clear.
 \end{proof}
+
+\begin{proposition}
+    Let
+    \[
+        f:P\to U
+    \]
+    be a projective cover, and assume that $P$ and $U$ are finitely generated Artinian.
+    Then the induced morphism
+    \[
+        \overline{f}:\operatorname{Top}(P)\to \operatorname{Top}(U)
+    \]
+    is an isomorphism.
+\end{proposition}
 
 \begin{proposition}
     Suppose that
@@ -185,7 +433,7 @@
         f=f\circ (\alpha\beta).
     \]
     Because $f$ is an essential epimorphism, the endomorphism $\alpha\beta$ of $P$ must
-    be surjective. Since $P$ is projective,$\alpha\beta$ splits. Let
+    be surjective. Since $P$ is projective, $\alpha\beta$ splits. Let
     \[
         P=\ker(\alpha\beta)\oplus P'.
     \]

@@ -38,7 +38,7 @@
     \[
         \mathcal{T}:=\{L\le N \mid L \text{ is finitely generated}\}.
     \]
-    This set is non-empty because $0\in \mathcal{T}$. By (3),$\mathcal{T}$ has a maximal
+    This set is non-empty because $0\in \mathcal{T}$. By (3), $\mathcal{T}$ has a maximal
     element, say $L$. If $L\neq N$, choose $x\in N\setminus L$. Then
     \[
         L+Rx
@@ -107,7 +107,7 @@
     \]
     Hence
     \[
-        x-\sum_{i=1}^r a_i x_i \in \ker(\pi)\cap N = M'\cap N = N\cap M'.
+        x-\sum_{i=1}^r a_i x_i \in \ker(\pi)\cap N = M'\cap N.
     \]
     Since $y_1,\dots,y_s$ generate $N\cap M'$, there exist $b_1,\dots,b_s\in R$ such
     that
@@ -120,7 +120,7 @@
     \]
     proving the claim. Thus $N$ is finitely generated.
 
-    Since every submodule $N\leq M$ is finitely generated,$M$ is Noetherian.
+    Since every submodule $N\leq M$ is finitely generated, $M$ is Noetherian.
 \end{proof}
 
 \begin{definition}
@@ -135,11 +135,62 @@
 \end{definition}
 
 \begin{lemma}
-    An $R$-module $M$ is Artinian if and only if every non-empty set of submodules of $M$ contains a minimal element.
+    An $R$-module $M$ is Artinian if and only if every non-empty set of
+    submodules of $M$ contains a minimal element.
 \end{lemma}
 
 \begin{proof}
-    The proof is the descending-chain analogue of the Noetherian case.
+    Recall that $M$ is Artinian if every descending chain of submodules
+    \[
+        L_1 \supseteq L_2 \supseteq L_3 \supseteq \cdots
+    \]
+    stabilizes.
+
+    First assume that $M$ is Artinian. Let $\mathcal{S}$ be a non-empty set
+    of submodules of $M$. We prove that $\mathcal{S}$ contains a minimal
+    element.
+
+    Suppose, for contradiction, that $\mathcal{S}$ has no minimal element.
+    Choose $L_1\in \mathcal{S}$. Since $L_1$ is not minimal in $\mathcal{S}$,
+    there exists $L_2\in \mathcal{S}$ such that
+    \[
+        L_2 \subsetneq L_1.
+    \]
+    Similarly, since $L_2$ is not minimal in $\mathcal{S}$, there exists
+    $L_3\in \mathcal{S}$ such that
+    \[
+        L_3 \subsetneq L_2.
+    \]
+    Continuing inductively, we obtain a strictly descending chain
+    \[
+        L_1 \supsetneq L_2 \supsetneq L_3 \supsetneq \cdots
+    \]
+    of submodules of $M$. This contradicts the assumption that $M$ is
+    Artinian. Hence $\mathcal{S}$ must contain a minimal element.
+
+    Conversely, assume that every non-empty set of submodules of $M$ contains
+    a minimal element. Let
+    \[
+        L_1 \supseteq L_2 \supseteq L_3 \supseteq \cdots
+    \]
+    be a descending chain of submodules of $M$. Consider the non-empty set
+    \[
+        \mathcal{S}:=\{L_n \mid n\geq 1\}.
+    \]
+    By assumption, $\mathcal{S}$ contains a minimal element, say $L_N$.
+
+    Since the chain is descending, for every $n\geq N$ we have
+    \[
+        L_n \subseteq L_N.
+    \]
+    But $L_N$ is minimal among the elements of $\mathcal{S}$, and each $L_n$
+    also belongs to $\mathcal{S}$. Therefore
+    \[
+        L_n = L_N
+    \]
+    for every $n\geq N$. Hence the descending chain stabilizes.
+
+    Therefore $M$ is Artinian.
 \end{proof}
 
 \begin{remark}
@@ -150,21 +201,147 @@
 \begin{proposition}
     Let
     \[
-        0\longrightarrow M' \longrightarrow M \longrightarrow M'' \longrightarrow 0
+        0\longrightarrow M' \xrightarrow{\iota} M \xrightarrow{\pi} M'' \longrightarrow 0
     \]
-    be a short exact sequence of $R$-modules. Then $M$ is Artinian if and only if both $M'$ and $M''$ are Artinian.
+    be a short exact sequence of $R$-modules. Then $M$ is Artinian if and only if
+    both $M'$ and $M''$ are Artinian.
 \end{proposition}
 
 \begin{proof}
-    The proof is completely analogous to the Noetherian case, using minimal elements instead of
-    maximal elements.
+    Since the sequence is exact, we may identify $M'$ with its image
+    $\iota(M')\subseteq M$. Thus $M'$ is regarded as a submodule of $M$, and
+    $M''\cong M/M'$ via the quotient map
+    \[
+        \pi:M\longrightarrow M''.
+    \]
+
+    First assume that $M$ is Artinian.
+
+    We show that $M'$ is Artinian. Let
+    \[
+        L_1\supseteq L_2\supseteq L_3\supseteq \cdots
+    \]
+    be a descending chain of submodules of $M'$. Since each $L_i$ is also a
+    submodule of $M$, this is a descending chain of submodules of $M$. Because
+    $M$ is Artinian, the chain stabilizes. Hence $M'$ is Artinian.
+
+    Next we show that $M''$ is Artinian. Let
+    \[
+        N_1\supseteq N_2\supseteq N_3\supseteq \cdots
+    \]
+    be a descending chain of submodules of $M''$. Consider their inverse images
+    under $\pi$:
+    \[
+        \pi^{-1}(N_1)\supseteq \pi^{-1}(N_2)\supseteq \pi^{-1}(N_3)\supseteq \cdots.
+    \]
+    This is a descending chain of submodules of $M$. Since $M$ is Artinian, there
+    exists $n_0$ such that
+    \[
+        \pi^{-1}(N_n)=\pi^{-1}(N_{n_0})
+        \qquad\text{for all } n\geq n_0.
+    \]
+    Applying $\pi$ to both sides, and using the fact that each $N_n$ is contained
+    in $\operatorname{Im}(\pi)=M''$, we get
+    \[
+        N_n=N_{n_0}
+        \qquad\text{for all } n\geq n_0.
+    \]
+    Therefore $M''$ is Artinian.
+
+    Conversely, assume that both $M'$ and $M''$ are Artinian. We prove that $M$
+    is Artinian.
+
+    Let
+    \[
+        L_1\supseteq L_2\supseteq L_3\supseteq \cdots
+    \]
+    be a descending chain of submodules of $M$. Intersecting with $M'$, we obtain
+    a descending chain of submodules of $M'$:
+    \[
+        L_1\cap M'\supseteq L_2\cap M'\supseteq L_3\cap M'\supseteq \cdots.
+    \]
+    Since $M'$ is Artinian, this chain stabilizes. Hence there exists $a$ such that
+    \[
+        L_n\cap M'=L_a\cap M'
+        \qquad\text{for all } n\geq a.
+    \]
+
+    Applying $\pi$ to the original chain, we obtain a descending chain of
+    submodules of $M''$:
+    \[
+        \pi(L_1)\supseteq \pi(L_2)\supseteq \pi(L_3)\supseteq \cdots.
+    \]
+    Since $M''$ is Artinian, this chain stabilizes. Hence there exists $b$ such that
+    \[
+        \pi(L_n)=\pi(L_b)
+        \qquad\text{for all } n\geq b.
+    \]
+
+    Let
+    \[
+        N=\max\{a,b\}.
+    \]
+    We claim that
+    \[
+        L_n=L_N
+        \qquad\text{for all } n\geq N.
+    \]
+    Since the chain is descending, we automatically have
+    \[
+        L_n\subseteq L_N
+        \qquad\text{for all } n\geq N.
+    \]
+    It remains to prove the reverse inclusion.
+
+    Fix $n\geq N$, and take any element $x\in L_N$. Since
+    \[
+        \pi(L_n)=\pi(L_N),
+    \]
+    there exists $y\in L_n$ such that
+    \[
+        \pi(y)=\pi(x).
+    \]
+    Therefore
+    \[
+        \pi(x-y)=0,
+    \]
+    so
+    \[
+        x-y\in \ker(\pi)=M'.
+    \]
+    Also, since $x\in L_N$ and $y\in L_n\subseteq L_N$, we have
+    \[
+        x-y\in L_N.
+    \]
+    Hence
+    \[
+        x-y\in L_N\cap M'.
+    \]
+    But the chain of intersections has stabilized, so
+    \[
+        L_N\cap M'=L_n\cap M'.
+    \]
+    Thus
+    \[
+        x-y\in L_n\cap M'\subseteq L_n.
+    \]
+    Since $y\in L_n$, it follows that
+    \[
+        x=y+(x-y)\in L_n.
+    \]
+    Therefore $L_N\subseteq L_n$. Combining this with $L_n\subseteq L_N$, we get
+    \[
+        L_n=L_N
+        \qquad\text{for all } n\geq N.
+    \]
+    Hence every descending chain of submodules of $M$ stabilizes, so $M$ is
+    Artinian.
+
+    Therefore $M$ is Artinian if and only if both $M'$ and $M''$ are Artinian.
 \end{proof}
 
 \begin{definition}
     An $R$-module $M$ is called \emph{simple} (or \emph{irreducible}) if it has exactly two
-    submodules:
-    \[
-        0 \qquad \text{and} \qquad M.
-    \]
+    submodules: $ 0 \ \text{and} \  M$.
 \end{definition}
 
