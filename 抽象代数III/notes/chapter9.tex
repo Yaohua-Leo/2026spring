@@ -107,3 +107,391 @@
     exactly $J(R)$. Since $J(R)$ is an ideal, the set of non-units forms an ideal.
     Hence $R$ is local.
 \end{proof}
+
+\begin{theorem}[Idempotents in a local ring]
+    Let $R$ be a local ring. Then $R$ has no non-trivial idempotents. In other words,
+    if $e\in R$ satisfies
+    \[
+        e^2=e,
+    \]
+    then
+    \[
+        e=0
+        \qquad\text{or}\qquad
+        e=1.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let $e\in R$ be an idempotent, so
+    \[
+        e^2=e.
+    \]
+    Then
+    \[
+        e(1-e)=e-e^2=0.
+    \]
+
+    We first observe that if $e$ is a unit, then $e=1$. Indeed, multiplying
+    $e^2=e$ by $e^{-1}$ gives
+    \[
+        e=1.
+    \]
+    Similarly, if $1-e$ is a unit, then from
+    \[
+        e(1-e)=0
+    \]
+    we get
+    \[
+        e=0.
+    \]
+
+    Therefore, if $e\neq 0$ and $e\neq 1$, then neither $e$ nor $1-e$ is a unit.
+    Since $R$ is local, the set of non-units of $R$ is precisely the Jacobson radical
+    $J(R)$. Hence
+    \[
+        e\in J(R),
+        \qquad
+        1-e\in J(R).
+    \]
+    Because $J(R)$ is an ideal, it follows that
+    \[
+        1=e+(1-e)\in J(R).
+    \]
+    This is impossible, since $J(R)$ is a proper ideal of $R$.
+
+    Hence our assumption $e\neq 0,1$ is false. Therefore every idempotent of $R$
+    is either $0$ or $1$.
+\end{proof}
+
+\begin{definition}[Valuation ring and valuation ideal]
+    Let \((K,v)\) be a valued field. Define
+    \[
+        R_v := \{a\in K \mid v(a)\geq 0\}
+    \]
+    and
+    \[
+        P_v := \{a\in K \mid v(a)>0\}.
+    \]
+    Then \(R_v\) is called the \emph{valuation ring} of \(v\), and \(P_v\) is called the
+    \emph{valuation ideal} of \(v\).
+    \end{definition}
+    
+    \begin{proposition}
+    Let \((K,v)\) be a valued field. Then:
+    \begin{enumerate}
+        \item \(R_v\) is a subring of \(K\).
+        \item \(P_v\) is an ideal of \(R_v\).
+        \item The group of units of \(R_v\) is
+        \[
+            R_v^\times=\{a\in K^\times \mid v(a)=0\}.
+        \]
+        \item One has
+        \[
+            K=R_v\cup R_v^{-1},
+        \]
+        where
+        \[
+            R_v^{-1}:=\{a^{-1}\mid a\in R_v,\ a\neq 0\}.
+        \]
+        In particular, \(K\) is the field of fractions of \(R_v\).
+        \item \(R_v\) is a local ring and
+        \[
+            J(R_v)=P_v.
+        \]
+        Equivalently, \(P_v\) is precisely the set of non-units of \(R_v\).
+        \item The quotient field
+        \[
+            \kappa(v):=R_v/P_v
+        \]
+        is called the \emph{residue field} of \(v\).
+    \end{enumerate}
+    \end{proposition}
+    
+    \begin{proof}
+    First, \(0,1\in R_v\). If \(a,b\in R_v\), then
+    \[
+        v(ab)=v(a)+v(b)\geq 0,
+    \]
+    so \(ab\in R_v\). Also,
+    \[
+        v(a+b)\geq \min\{v(a),v(b)\}\geq 0,
+    \]
+    so \(a+b\in R_v\). Finally, since \(v(-a)=v(a)\), we have \(-a\in R_v\).
+    Therefore \(R_v\) is a subring of \(K\).
+    
+    Now let \(a,b\in P_v\). Then
+    \[
+        v(a+b)\geq \min\{v(a),v(b)\}>0,
+    \]
+    so \(a+b\in P_v\). If \(r\in R_v\) and \(a\in P_v\), then
+    \[
+        v(ra)=v(r)+v(a)>0.
+    \]
+    Thus \(ra\in P_v\), and hence \(P_v\) is an ideal of \(R_v\).
+    
+    Next, let \(a\in R_v\). If \(a\) is a unit of \(R_v\), then \(a^{-1}\in R_v\), so
+    \[
+        0=v(1)=v(aa^{-1})=v(a)+v(a^{-1}).
+    \]
+    Since \(v(a)\geq 0\) and \(v(a^{-1})\geq 0\), we get \(v(a)=0\). Conversely, if
+    \(v(a)=0\), then
+    \[
+        v(a^{-1})=-v(a)=0,
+    \]
+    so \(a^{-1}\in R_v\). Therefore
+    \[
+        R_v^\times=\{a\in K^\times\mid v(a)=0\}.
+    \]
+    
+    For every \(a\in K^\times\), either \(v(a)\geq 0\), in which case \(a\in R_v\), or
+    \(v(a)<0\), in which case
+    \[
+        v(a^{-1})=-v(a)>0,
+    \]
+    so \(a^{-1}\in R_v\). Hence
+    \[
+        K=R_v\cup R_v^{-1}.
+    \]
+    In particular, every element of \(K\) is a fraction of elements of \(R_v\), so
+    \[
+        K=\operatorname{Frac}(R_v).
+    \]
+    
+    Finally, the non-units of \(R_v\) are exactly the elements \(a\in R_v\) satisfying
+    \(v(a)>0\), namely the elements of \(P_v\). Hence \(R_v\) has a unique maximal ideal
+    \(P_v\), so \(R_v\) is local and
+    \[
+        J(R_v)=P_v.
+    \]
+    Consequently,
+    \[
+        \kappa(v):=R_v/P_v
+    \]
+    is a field.
+    \end{proof}
+    
+    \begin{definition}[Equivalent valuations]
+    Let \(v\) be a valuation on \(K\), and let \(\lambda\in\mathbb{R}_{>0}\). Define
+    \[
+        v_\lambda(a):=\lambda v(a),\qquad a\in K^\times.
+    \]
+    Then \(v_\lambda\) is again a valuation on \(K\). We say that \(v\) is
+    \emph{equivalent} to \(v_\lambda\), and write
+    \[
+        v\sim v_\lambda.
+    \]
+    \end{definition}
+    
+    \begin{proposition}
+    Equivalent valuations have the same valuation ring, valuation ideal, group of units,
+    and residue field.
+    \end{proposition}
+    
+    \begin{proof}
+    Let \(v_\lambda=\lambda v\), where \(\lambda>0\). Then for \(a\in K^\times\),
+    \[
+        v_\lambda(a)\geq 0
+        \iff
+        \lambda v(a)\geq 0
+        \iff
+        v(a)\geq 0.
+    \]
+    Hence
+    \[
+        R_{v_\lambda}=R_v.
+    \]
+    Similarly,
+    \[
+        v_\lambda(a)>0
+        \iff
+        v(a)>0,
+    \]
+    so
+    \[
+        P_{v_\lambda}=P_v.
+    \]
+    Also,
+    \[
+        v_\lambda(a)=0
+        \iff
+        v(a)=0,
+    \]
+    and therefore
+    \[
+        R_{v_\lambda}^\times=R_v^\times.
+    \]
+    Since the valuation rings and valuation ideals are the same, the residue fields are also
+    the same:
+    \[
+        R_{v_\lambda}/P_{v_\lambda}=R_v/P_v.
+    \]
+    \end{proof}
+    
+    \begin{definition}[Discrete valuation]
+    A valuation \(v\) of \(K\) is called \emph{discrete} if its value group is isomorphic to
+    \(\mathbb{Z}\), that is,
+    \[
+        v(K^\times)\cong \mathbb{Z}.
+    \]
+    If moreover
+    \[
+        v(K^\times)=\mathbb{Z},
+    \]
+    then \(v\) is called a \emph{normalized discrete valuation}.
+    \end{definition}
+    
+    \begin{remark}
+    If \(v\) is a discrete valuation, then after replacing \(v\) by an equivalent valuation
+    \(\lambda v\) for a suitable \(\lambda>0\), one may assume that
+    \[
+        v(K^\times)=\mathbb{Z}.
+    \]
+    Thus every discrete valuation is equivalent to a normalized discrete valuation.
+    \end{remark}
+
+    \begin{definition} 
+        An element \(\pi\in R\) satisfying
+        \[
+            v(\pi)=1
+        \]
+        is called a uniformizer.
+    \end{definition}
+
+    \begin{theorem}
+        Let \((K,v)\) be a field with a normalized discrete valuation. Let
+        \[
+            R=\{x\in K\mid v(x)\geq 0\}
+        \]
+        be its valuation ring, and let
+        \[
+            P=\{x\in R\mid v(x)>0\}
+        \]
+        be its maximal ideal. Suppose \(\pi\in R\) satisfies \(v(\pi)=1\). Then:
+        \begin{enumerate}
+            \item For every \(\alpha\in K^\times\), one can write
+                  \[
+                      \alpha=\pi^{v(\alpha)}u
+                  \]
+                  for some unit \(u\in R^\times\).
+    
+            \item Every nonzero ideal \(I\) of \(R\) is of the form
+                  \[
+                      I=(\pi^i)
+                  \]
+                  for some integer \(i\geq 0\). In particular,
+                  \[
+                      P=(\pi),
+                      \qquad
+                      I=P^i,
+                  \]
+                  In particular, \(R\) is a principal ideal domain.
+    
+            \item The ring \(R\) is integrally closed.
+        \end{enumerate}
+    \end{theorem}
+    
+    \begin{proof}
+        \textbf{(1).}
+        Let \(\alpha\in K^\times\), and set
+        \[
+            i=v(\alpha).
+        \]
+        Since \(v(\pi)=1\), we have
+        \[
+            v(\pi^{-i}\alpha)
+            =
+            v(\alpha)-i v(\pi)
+            =
+            i-i
+            =
+            0.
+        \]
+        Therefore
+        \[
+            u:=\pi^{-i}\alpha\in R^\times.
+        \]
+        Hence
+        \[
+            \alpha=\pi^i u=\pi^{v(\alpha)}u,
+        \]
+        as desired.
+    
+        \medskip
+    
+        \textbf{(2).}
+        Let \(I\neq 0\) be an ideal of \(R\). Since \(I\subseteq R\), for every nonzero
+        \(a\in I\) we have
+        \[
+            v(a)\geq 0.
+        \]
+        Thus the set
+        \[
+            \{v(a)\mid 0\neq a\in I\}\subseteq \mathbb{Z}_{\geq 0}
+        \]
+        is nonempty, and therefore has a minimal element. Let
+        \[
+            i=\min\{v(a)\mid 0\neq a\in I\}.
+        \]
+        Choose \(a_0\in I\) such that
+        \[
+            v(a_0)=i.
+        \]
+        By part \((1)\), we may write
+        \[
+            a_0=\pi^i u
+        \]
+        for some \(u\in R^\times\). Hence
+        \[
+            \pi^i=a_0u^{-1}\in I.
+        \]
+        Therefore
+        \[
+            (\pi^i)\subseteq I.
+        \]
+    
+        Conversely, let \(a\in I\) be nonzero. Write
+        \[
+            v(a)=j.
+        \]
+        By the minimality of \(i\), we have \(j\geq i\). Again by part \((1)\), there exists
+        \(u\in R^\times\) such that
+        \[
+            a=\pi^j u.
+        \]
+        Then
+        \[
+            a
+            =
+            \pi^i\bigl(\pi^{j-i}u\bigr).
+        \]
+        Since \(j-i\geq 0\), we have \(\pi^{j-i}u\in R\). Therefore
+        \[
+            a\in (\pi^i).
+        \]
+        Hence
+        \[
+            I\subseteq (\pi^i).
+        \]
+        Combining the two inclusions, we obtain
+        \[
+            I=(\pi^i).
+        \]
+    
+        In particular, applying this to the maximal ideal \(P\), we get
+        \[
+            P=(\pi).
+        \]
+        Therefore every nonzero ideal of \(R\) is of the form
+        \[
+            I=(\pi^i)=P^i.
+        \]
+        Since the zero ideal is also principal, \(R\) is a principal ideal domain.
+    
+        \medskip
+    
+        \textbf{(3).}
+        By part \((2)\), the ring \(R\) is a principal ideal domain. Hence \(R\) is a unique
+        factorization domain. Since every unique factorization domain is integrally closed,
+        it follows that \(R\) is integrally closed.
+    \end{proof}
