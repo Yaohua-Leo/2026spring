@@ -1,0 +1,109 @@
+\chapter{Lecture 9}
+
+\begin{definition}[Local ring]
+    A ring $R$ is called \emph{local} if the set of non-units of $R$ forms an ideal of $R$.
+\end{definition}
+
+\begin{theorem}
+    Let $R$ be a ring with identity. The following conditions are equivalent:
+    \begin{enumerate}
+        \item $R$ is local.
+        \item The set of non-units of $R$ coincides with $J(R)$. Equivalently,
+              $J(R)$ is the unique maximal left ideal of $R$ and also the unique
+              maximal right ideal of $R$.
+        \item $R/J(R)$ is a division ring.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let $M$ denote the set of non-units of $R$.
+
+    \textbf{(1) $\Rightarrow$ (2).}
+    Assume that $R$ is local. By definition, $M$ is an ideal of $R$.
+    Since $1\notin M$, the ideal $M$ is proper.
+
+    We claim that $M$ contains every proper left ideal of $R$.
+    Indeed, let $L$ be a proper left ideal of $R$. If $L$ contained a unit $u$,
+    then $1=u^{-1}u\in L$, and hence $L=R$, a contradiction. Therefore every
+    element of $L$ is a non-unit, so
+    \[
+        L\subseteq M.
+    \]
+    Thus $M$ is the unique maximal left ideal of $R$.
+
+    Similarly, $M$ contains every proper right ideal of $R$, and hence $M$ is also
+    the unique maximal right ideal of $R$.
+
+    Since the Jacobson radical is the intersection of all maximal left ideals, we get
+    \[
+        J(R)=M.
+    \]
+    Hence the set of non-units of $R$ coincides with $J(R)$.
+
+    \textbf{(2) $\Rightarrow$ (3).}
+    Assume that the set of non-units of $R$ is exactly $J(R)$.
+    Let
+    \[
+        \overline{a}=a+J(R)\in R/J(R)
+    \]
+    be nonzero. Then $a\notin J(R)$, so by assumption $a$ is a unit in $R$.
+    Hence there exists $a^{-1}\in R$ such that
+    \[
+        aa^{-1}=a^{-1}a=1.
+    \]
+    Passing to the quotient gives
+    \[
+        \overline{a}\,\overline{a^{-1}}
+        =
+        \overline{a^{-1}}\,\overline{a}
+        =
+        \overline{1}.
+    \]
+    Thus every nonzero element of $R/J(R)$ is invertible, so $R/J(R)$ is a
+    division ring.
+
+    \textbf{(3) $\Rightarrow$ (1).}
+    Assume that $R/J(R)$ is a division ring.
+    We show that the set of non-units of $R$ is precisely $J(R)$.
+
+    First, every element of $J(R)$ is a non-unit, because $J(R)$ is contained in
+    every maximal left ideal, hence is a proper ideal.
+
+    Conversely, suppose $a\notin J(R)$. Then
+    \[
+        \overline{a}=a+J(R)\neq 0
+    \]
+    in $R/J(R)$. Since $R/J(R)$ is a division ring, $\overline{a}$ is invertible.
+    Hence there exist $b,d\in R$ such that
+    \[
+        \overline{b}\,\overline{a}=\overline{1},
+        \qquad
+        \overline{a}\,\overline{d}=\overline{1}.
+    \]
+    Equivalently, there exist $c,c'\in J(R)$ such that
+    \[
+        ba=1-c,
+        \qquad
+        ad=1-c'.
+    \]
+    Since $c,c'\in J(R)$, the elements $1-c$ and $1-c'$ are units in $R$.
+    Therefore $ba$ is a unit and $ad$ is a unit.
+
+    Since $ba$ is a unit, $a$ has a left inverse. Indeed,
+    \[
+        (ba)^{-1}ba=1,
+    \]
+    so
+    \[
+        \bigl((ba)^{-1}b\bigr)a=1.
+    \]
+    Similarly, since $ad$ is a unit, $a$ has a right inverse:
+    \[
+        a\bigl(d(ad)^{-1}\bigr)=1.
+    \]
+    Thus $a$ has both a left inverse and a right inverse, hence $a$ is a unit.
+
+    Therefore every element outside $J(R)$ is a unit, so the set of non-units is
+    exactly $J(R)$. Since $J(R)$ is an ideal, the set of non-units forms an ideal.
+    Hence $R$ is local.
+\end{proof}

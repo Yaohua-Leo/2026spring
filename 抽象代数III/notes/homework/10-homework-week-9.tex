@@ -1,0 +1,352 @@
+\section{Homework Week 9}
+
+\begin{exercise}
+    Let $\varphi$ be a multiplicative valuation of a field $K$. Then the following hold:
+    \begin{enumerate}
+        \item The sequence $(a_n)$ is a Cauchy sequence if and only if
+        \[
+            \lim_{n\to\infty}\varphi(a_{n+1}-a_n)=0.
+        \]
+    
+        \item If
+        \[
+            \lim_{n\to\infty}a_n=a\neq 0,
+        \]
+        then
+        \[
+            \varphi(a_n)=\varphi(a)
+        \]
+        for all sufficiently large $n$.
+    \end{enumerate}
+    \end{exercise}
+
+    \begin{proof}
+        We use the metric on $K$ induced by $\varphi$, namely
+        \[
+            d(x,y)=\varphi(x-y).
+        \]
+        
+        \begin{enumerate}
+            \item Suppose first that $(a_n)$ is a Cauchy sequence. Then, for every $\varepsilon>0$,
+            there exists $N$ such that for all $m,n\geq N$,
+            \[
+                \varphi(a_m-a_n)<\varepsilon.
+            \]
+            Taking $m=n+1$, we get
+            \[
+                \varphi(a_{n+1}-a_n)<\varepsilon
+            \]
+            for all $n\geq N$. Hence
+            \[
+                \lim_{n\to\infty}\varphi(a_{n+1}-a_n)=0.
+            \]
+        
+            Conversely, suppose that
+            \[
+                \lim_{n\to\infty}\varphi(a_{n+1}-a_n)=0.
+            \]
+            We show that $(a_n)$ is Cauchy. Let $\varepsilon>0$ be given. Then there exists
+            $N$ such that for all $k\geq N$,
+            \[
+                \varphi(a_{k+1}-a_k)<\varepsilon.
+            \]
+            If $m>n\geq N$, then
+            \[
+                a_m-a_n
+                =
+                (a_m-a_{m-1})+(a_{m-1}-a_{m-2})+\cdots+(a_{n+1}-a_n).
+            \]
+            Since $\varphi$ is non-archimedean, we have
+            \[
+                \varphi(a_m-a_n)
+                \leq
+                \max_{n\leq k\leq m-1}\varphi(a_{k+1}-a_k)
+                <
+                \varepsilon.
+            \]
+            Therefore $(a_n)$ is a Cauchy sequence.
+        
+            \item Suppose that
+            \[
+                \lim_{n\to\infty}a_n=a\neq 0.
+            \]
+            Then
+            \[
+                \lim_{n\to\infty}\varphi(a_n-a)=0.
+            \]
+            Since $a\neq 0$, we have $\varphi(a)>0$. Hence there exists $N$ such that for all
+            $n\geq N$,
+            \[
+                \varphi(a_n-a)<\varphi(a).
+            \]
+            For such $n$, we write
+            \[
+                a_n=a+(a_n-a).
+            \]
+            By the strong triangle inequality,
+            \[
+                \varphi(a_n)
+                \leq
+                \max\{\varphi(a),\varphi(a_n-a)\}
+                =
+                \varphi(a).
+            \]
+            On the other hand,
+            \[
+                a=a_n-(a_n-a),
+            \]
+            so
+            \[
+                \varphi(a)
+                \leq
+                \max\{\varphi(a_n),\varphi(a_n-a)\}.
+            \]
+            Since $\varphi(a_n-a)<\varphi(a)$, the maximum on the right-hand side must be
+            $\varphi(a_n)$. Thus
+            \[
+                \varphi(a)\leq \varphi(a_n).
+            \]
+            Combining the two inequalities gives
+            \[
+                \varphi(a_n)=\varphi(a)
+            \]
+            for all $n\geq N$.
+        \end{enumerate}
+        \end{proof}
+    
+    \begin{exercise}
+    Let $\varphi$ be a multiplicative valuation of a field $K$. Let $V$ be a finite dimensional
+    $K$-space with basis $u_1,\dots,u_n$. For
+    \[
+        v=a_1u_1+\cdots+a_nu_n\in V,
+    \]
+    define $\|v\|_0$ by
+    \[
+        \|v\|_0=\max\{\varphi(a_i)\mid 1\leq i\leq n\}.
+    \]
+    Then this is a norm on $V$. Moreover, the following hold concerning the metric induced by
+    this norm:
+    \begin{enumerate}
+        \item Let
+        \[
+            v_r=a_{r1}u_1+\cdots+a_{rn}u_n\in V
+        \]
+        be given for $r=1,2,\dots$. Then the sequence $(v_r)$ is a Cauchy sequence if and only if
+        the sequence $(a_{ri})_r$ in $K$ is a Cauchy sequence for every $i$.
+    
+        Also,
+        \[
+            \lim_{r\to\infty}v_r=\sum_{i=1}^n a_i u_i
+        \]
+        if and only if
+        \[
+            \lim_{r\to\infty}a_{ri}=a_i
+        \]
+        for every $i$.
+    
+        \item If $K$ is complete, then so is $V$.
+    \end{enumerate}
+    \end{exercise}
+
+    \begin{proof}
+        First we prove that $\|\cdot\|_0$ is a norm on $V$.
+        
+        Let
+        \[
+            v=a_1u_1+\cdots+a_nu_n.
+        \]
+        Then
+        \[
+            \|v\|_0=\max\{\varphi(a_i)\mid 1\leq i\leq n\}.
+        \]
+        Since $\varphi(a_i)\geq 0$ for every $i$, we have
+        \[
+            \|v\|_0\geq 0.
+        \]
+        Moreover,
+        \[
+            \|v\|_0=0
+        \]
+        if and only if
+        \[
+            \varphi(a_i)=0
+        \]
+        for every $i$, which is equivalent to
+        \[
+            a_i=0
+        \]
+        for every $i$. Since $u_1,\dots,u_n$ is a basis, this is equivalent to
+        \[
+            v=0.
+        \]
+        
+        Now let $\lambda\in K$. Then
+        \[
+            \lambda v
+            =
+            \lambda a_1u_1+\cdots+\lambda a_nu_n,
+        \]
+        and therefore
+        \[
+            \|\lambda v\|_0
+            =
+            \max_{1\leq i\leq n}\varphi(\lambda a_i)
+            =
+            \max_{1\leq i\leq n}\varphi(\lambda)\varphi(a_i).
+        \]
+        Hence
+        \[
+            \|\lambda v\|_0
+            =
+            \varphi(\lambda)\max_{1\leq i\leq n}\varphi(a_i)
+            =
+            \varphi(\lambda)\|v\|_0.
+        \]
+        
+        Finally, let
+        \[
+            v=a_1u_1+\cdots+a_nu_n,
+            \qquad
+            w=b_1u_1+\cdots+b_nu_n.
+        \]
+        Then
+        \[
+            v+w=(a_1+b_1)u_1+\cdots+(a_n+b_n)u_n.
+        \]
+        Thus
+        \[
+            \|v+w\|_0
+            =
+            \max_{1\leq i\leq n}\varphi(a_i+b_i).
+        \]
+        Since $\varphi$ is non-archimedean,
+        \[
+            \varphi(a_i+b_i)\leq \max\{\varphi(a_i),\varphi(b_i)\}
+        \]
+        for every $i$. Hence
+        \[
+            \|v+w\|_0
+            \leq
+            \max_{1\leq i\leq n}\max\{\varphi(a_i),\varphi(b_i)\}.
+        \]
+        Therefore
+        \[
+            \|v+w\|_0
+            \leq
+            \max\left\{
+                \max_{1\leq i\leq n}\varphi(a_i),
+                \max_{1\leq i\leq n}\varphi(b_i)
+            \right\}
+            =
+            \max\{\|v\|_0,\|w\|_0\}.
+        \]
+        So $\|\cdot\|_0$ is a non-archimedean norm on $V$.
+        
+        \begin{enumerate}
+            \item Let
+            \[
+                v_r=a_{r1}u_1+\cdots+a_{rn}u_n.
+            \]
+            For $r,s\geq 1$, we have
+            \[
+                v_r-v_s
+                =
+                (a_{r1}-a_{s1})u_1+\cdots+(a_{rn}-a_{sn})u_n.
+            \]
+            Hence
+            \[
+                \|v_r-v_s\|_0
+                =
+                \max_{1\leq i\leq n}\varphi(a_{ri}-a_{si}).
+            \]
+        
+            Suppose first that $(v_r)$ is Cauchy. Let $i$ be fixed. Since
+            \[
+                \varphi(a_{ri}-a_{si})
+                \leq
+                \max_{1\leq j\leq n}\varphi(a_{rj}-a_{sj})
+                =
+                \|v_r-v_s\|_0,
+            \]
+            it follows that $(a_{ri})_r$ is a Cauchy sequence in $K$.
+        
+            Conversely, suppose that for every $i$, the sequence $(a_{ri})_r$ is Cauchy in
+            $K$. Let $\varepsilon>0$ be given. For each $i$, there exists $N_i$ such that for
+            all $r,s\geq N_i$,
+            \[
+                \varphi(a_{ri}-a_{si})<\varepsilon.
+            \]
+            Let
+            \[
+                N=\max\{N_1,\dots,N_n\}.
+            \]
+            Then for all $r,s\geq N$ and all $i$, we have
+            \[
+                \varphi(a_{ri}-a_{si})<\varepsilon.
+            \]
+            Therefore
+            \[
+                \|v_r-v_s\|_0
+                =
+                \max_{1\leq i\leq n}\varphi(a_{ri}-a_{si})
+                <
+                \varepsilon.
+            \]
+            Hence $(v_r)$ is Cauchy in $V$.
+        
+            Next we prove the assertion about convergence. Let
+            \[
+                v=\sum_{i=1}^n a_i u_i.
+            \]
+            Then
+            \[
+                v_r-v
+                =
+                (a_{r1}-a_1)u_1+\cdots+(a_{rn}-a_n)u_n.
+            \]
+            Hence
+            \[
+                \|v_r-v\|_0
+                =
+                \max_{1\leq i\leq n}\varphi(a_{ri}-a_i).
+            \]
+            Therefore
+            \[
+                \lim_{r\to\infty}v_r=v
+            \]
+            if and only if
+            \[
+                \lim_{r\to\infty}\max_{1\leq i\leq n}\varphi(a_{ri}-a_i)=0.
+            \]
+            Since there are only finitely many indices $i$, this is equivalent to
+            \[
+                \lim_{r\to\infty}\varphi(a_{ri}-a_i)=0
+            \]
+            for every $i$, which is precisely
+            \[
+                \lim_{r\to\infty}a_{ri}=a_i
+            \]
+            for every $i$.
+        
+            \item Suppose that $K$ is complete. We show that $V$ is complete.
+        
+            Let $(v_r)$ be a Cauchy sequence in $V$, where
+            \[
+                v_r=a_{r1}u_1+\cdots+a_{rn}u_n.
+            \]
+            By part $(1)$, for each $i$, the sequence $(a_{ri})_r$ is Cauchy in $K$.
+            Since $K$ is complete, there exists $a_i\in K$ such that
+            \[
+                \lim_{r\to\infty}a_{ri}=a_i.
+            \]
+            Define
+            \[
+                v=\sum_{i=1}^n a_i u_i\in V.
+            \]
+            Again by part $(1)$, we get
+            \[
+                \lim_{r\to\infty}v_r=v.
+            \]
+            Thus every Cauchy sequence in $V$ converges in $V$. Hence $V$ is complete.
+        \end{enumerate}
+        \end{proof}
