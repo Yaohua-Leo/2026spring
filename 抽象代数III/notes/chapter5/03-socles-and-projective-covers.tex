@@ -318,6 +318,74 @@
     \]
 \end{corollary}
 
+\begin{proof}
+    Recall that
+    \[
+        \operatorname{Top}(U)=U/\operatorname{Rad}(U),
+    \]
+    and let
+    \[
+        \pi:U\longrightarrow \operatorname{Top}(U)
+    \]
+    be the canonical quotient map.
+
+    Let \(S\) be semisimple and let
+    \[
+        f:U\longrightarrow S
+    \]
+    be an \(R\)-module homomorphism. Since \(S\) is semisimple, every submodule of
+    \(S\) is semisimple. Hence
+    \[
+        \operatorname{Im}(f)\leq S
+    \]
+    is semisimple.
+
+    By the first isomorphism theorem, we have
+    \[
+        U/\ker(f)\cong \operatorname{Im}(f).
+    \]
+    Therefore \(U/\ker(f)\) is semisimple. Thus \(\ker(f)\) is a submodule of \(U\)
+    such that the quotient \(U/\ker(f)\) is semisimple.
+
+    Since \(U\) is finitely generated and Artinian, \(\operatorname{Rad}(U)\) is the
+    unique smallest submodule of \(U\) with semisimple quotient. Hence
+    \[
+        \operatorname{Rad}(U)\subseteq \ker(f).
+    \]
+
+    Therefore, by the universal property of the quotient module, the map \(f\)
+    factors through \(U/\operatorname{Rad}(U)\). That is, there exists an
+    \(R\)-module homomorphism
+    \[
+        \overline{f}:\operatorname{Top}(U)\longrightarrow S
+    \]
+    such that
+    \[
+        f=\overline{f}\circ \pi.
+    \]
+
+    Finally, since \(\pi\) is surjective, such a homomorphism \(\overline{f}\) is
+    unique. Indeed, if
+    \[
+        g:\operatorname{Top}(U)\longrightarrow S
+    \]
+    also satisfies
+    \[
+        f=g\circ \pi,
+    \]
+    then
+    \[
+        \overline{f}\circ \pi=g\circ \pi.
+    \]
+    Since \(\pi\) is surjective, it follows that
+    \[
+        \overline{f}=g.
+    \]
+
+    Hence \(f\) factors uniquely through \(\pi\), and therefore
+    \(\operatorname{Top}(U)\) is the largest semisimple quotient of \(U\).
+\end{proof}
+
 \begin{example}
     Suppose $U$ has finite length. Since $\operatorname{Top}(U)$ is semisimple, we may write
     \[
@@ -349,25 +417,207 @@
 \end{lemma}
 
 \begin{proof}
-    The projection maps show that every maximal submodule of $U\oplus V$ is of the form
+    We first prove the statement for radicals.
+
+    Let
+    \[
+        p_U:U\oplus V\longrightarrow U,
+        \qquad
+        p_V:U\oplus V\longrightarrow V
+    \]
+    be the canonical projections. We claim that
+    \[
+        p_U\bigl(\operatorname{Rad}(U\oplus V)\bigr)
+        \subseteq \operatorname{Rad}(U),
+        \qquad
+        p_V\bigl(\operatorname{Rad}(U\oplus V)\bigr)
+        \subseteq \operatorname{Rad}(V).
+    \]
+    Indeed, let \(x\in \operatorname{Rad}(U\oplus V)\). Suppose, for contradiction, that
+    \(p_U(x)\notin \operatorname{Rad}(U)\). Then there exists a maximal submodule
+    \(M\subsetneq U\) such that
+    \[
+        p_U(x)\notin M.
+    \]
+    Hence
     \[
         M\oplus V
-        \qquad\text{or}\qquad
-        U\oplus N,
     \]
-    where $M$ and $N$ are maximal submodules of $U$ and $V$, respectively. Intersecting
-    all such maximal submodules yields
+    is a maximal submodule of \(U\oplus V\), because
     \[
-        \operatorname{Rad}(U\oplus V)=\operatorname{Rad}(U)\oplus \operatorname{Rad}(V).
+        (U\oplus V)/(M\oplus V)\cong U/M
+    \]
+    is simple. But \(x\notin M\oplus V\), contradicting
+    \(x\in \operatorname{Rad}(U\oplus V)\). Therefore
+    \[
+        p_U(x)\in \operatorname{Rad}(U).
+    \]
+    The proof for \(p_V\) is identical. Thus
+    \[
+        \operatorname{Rad}(U\oplus V)
+        \subseteq
+        \operatorname{Rad}(U)\oplus \operatorname{Rad}(V).
     \]
 
-    For the socle, every simple submodule of $U\oplus V$ projects nontrivially onto at
-    least one of the two factors; by simplicity it must embed into one factor. Therefore
-    every simple submodule of $U\oplus V$ lies in
+    Conversely, let
     \[
-        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V),
+        u\in \operatorname{Rad}(U),
+        \qquad
+        v\in \operatorname{Rad}(V).
     \]
-    and the reverse inclusion is clear.
+    We show that \((u,v)\in \operatorname{Rad}(U\oplus V)\). Let
+    \[
+        L\subsetneq U\oplus V
+    \]
+    be a maximal submodule. Then
+    \[
+        (U\oplus V)/L
+    \]
+    is simple. Let
+    \[
+        q:U\oplus V\longrightarrow (U\oplus V)/L
+    \]
+    be the quotient map, and let
+    \[
+        i_U:U\longrightarrow U\oplus V,
+        \qquad
+        i_V:V\longrightarrow U\oplus V
+    \]
+    be the canonical inclusions.
+
+    Since \((U\oplus V)/L\) is simple, the homomorphism
+    \[
+        q\circ i_U:U\longrightarrow (U\oplus V)/L
+    \]
+    is either zero or surjective. In either case, its kernel contains
+    \(\operatorname{Rad}(U)\). Hence
+    \[
+        q(i_U(u))=0.
+    \]
+    Similarly,
+    \[
+        q(i_V(v))=0.
+    \]
+    Therefore
+    \[
+        q(u,v)
+        =
+        q(i_U(u)+i_V(v))
+        =
+        q(i_U(u))+q(i_V(v))
+        =
+        0.
+    \]
+    Hence
+    \[
+        (u,v)\in L.
+    \]
+    Since this holds for every maximal submodule \(L\subsetneq U\oplus V\), we get
+    \[
+        (u,v)\in \operatorname{Rad}(U\oplus V).
+    \]
+    Thus
+    \[
+        \operatorname{Rad}(U)\oplus \operatorname{Rad}(V)
+        \subseteq
+        \operatorname{Rad}(U\oplus V).
+    \]
+    Combining the two inclusions gives
+    \[
+        \operatorname{Rad}(U\oplus V)
+        =
+        \operatorname{Rad}(U)\oplus \operatorname{Rad}(V).
+    \]
+
+    Next we prove the statement for socles.
+
+    Since \(\operatorname{Soc}(U)\) and \(\operatorname{Soc}(V)\) are semisimple
+    submodules of \(U\) and \(V\), respectively, their direct sum
+    \[
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V)
+    \]
+    is a semisimple submodule of \(U\oplus V\). Hence
+    \[
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V)
+        \subseteq
+        \operatorname{Soc}(U\oplus V).
+    \]
+
+    Conversely, let \(S\) be a simple submodule of \(U\oplus V\). Consider the restrictions
+    of the two projections:
+    \[
+        p_U|_S:S\longrightarrow U,
+        \qquad
+        p_V|_S:S\longrightarrow V.
+    \]
+    Since \(S\) is simple, the images
+    \[
+        p_U(S)\leq U,
+        \qquad
+        p_V(S)\leq V
+    \]
+    are either zero or simple submodules. Hence
+    \[
+        p_U(S)\subseteq \operatorname{Soc}(U),
+        \qquad
+        p_V(S)\subseteq \operatorname{Soc}(V).
+    \]
+    For every \(s\in S\), we have
+    \[
+        s=(p_U(s),p_V(s)).
+    \]
+    Therefore
+    \[
+        s\in \operatorname{Soc}(U)\oplus \operatorname{Soc}(V),
+    \]
+    and so
+    \[
+        S\subseteq \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+    Since \(\operatorname{Soc}(U\oplus V)\) is the sum of all simple submodules of
+    \(U\oplus V\), it follows that
+    \[
+        \operatorname{Soc}(U\oplus V)
+        \subseteq
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+    Hence
+    \[
+        \operatorname{Soc}(U\oplus V)
+        =
+        \operatorname{Soc}(U)\oplus \operatorname{Soc}(V).
+    \]
+
+    Finally, by definition,
+    \[
+        \operatorname{Top}(X)=X/\operatorname{Rad}(X)
+    \]
+    for any \(R\)-module \(X\). Therefore, using the radical formula proved above, we get
+    \[
+        \operatorname{Top}(U\oplus V)
+        =
+        (U\oplus V)/\operatorname{Rad}(U\oplus V)
+    \]
+    \[
+        =
+        (U\oplus V)/
+        \bigl(\operatorname{Rad}(U)\oplus \operatorname{Rad}(V)\bigr).
+    \]
+    The canonical quotient isomorphism gives
+    \[
+        (U\oplus V)/
+        \bigl(\operatorname{Rad}(U)\oplus \operatorname{Rad}(V)\bigr)
+        \cong
+        U/\operatorname{Rad}(U)
+        \oplus
+        V/\operatorname{Rad}(V).
+    \]
+    Hence
+    \[
+        \operatorname{Top}(U\oplus V)
+        \cong
+        \operatorname{Top}(U)\oplus \operatorname{Top}(V).
+    \]
 \end{proof}
 
 \begin{proposition}
@@ -382,6 +632,110 @@
     \]
     is an isomorphism.
 \end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        \pi_P:P\longrightarrow \operatorname{Top}(P)=P/\operatorname{Rad}(P)
+    \]
+    and
+    \[
+        \pi_U:U\longrightarrow \operatorname{Top}(U)=U/\operatorname{Rad}(U)
+    \]
+    be the canonical quotient maps.
+
+    Since \(P\) and \(U\) are finitely generated, we have
+    \[
+        f(\operatorname{Rad}(P))\subseteq \operatorname{Rad}(U).
+    \]
+    Hence \(f\) induces a well-defined homomorphism
+    \[
+        \overline{f}:\operatorname{Top}(P)\longrightarrow \operatorname{Top}(U)
+    \]
+    such that
+    \[
+        \overline{f}\circ \pi_P=\pi_U\circ f.
+    \]
+
+    Since \(f:P\to U\) is a projective cover, it is in particular an epimorphism.
+    Therefore the induced map
+    \[
+        \overline{f}:\operatorname{Top}(P)\to \operatorname{Top}(U)
+    \]
+    is also an epimorphism.
+
+    It remains to prove that \(\overline{f}\) is injective. Suppose, for contradiction, that
+    \[
+        K:=\ker(\overline{f})\neq 0.
+    \]
+    Since \(P\) is finitely generated and Artinian, \(\operatorname{Top}(P)\) is semisimple.
+    Therefore \(K\) is a direct summand of \(\operatorname{Top}(P)\). Hence there exists a
+    submodule \(C\leq \operatorname{Top}(P)\) such that
+    \[
+        \operatorname{Top}(P)=K\oplus C.
+    \]
+    Since \(K\neq 0\), we have \(C\subsetneq \operatorname{Top}(P)\).
+
+    Let
+    \[
+        W:=\pi_P^{-1}(C).
+    \]
+    Then \(W\) is a proper submodule of \(P\), because
+    \[
+        \pi_P(W)=C\subsetneq \operatorname{Top}(P).
+    \]
+
+    We claim that \(f(W)=U\). Since \(\overline{f}\) is surjective and
+    \[
+        \operatorname{Top}(P)=K\oplus C,
+    \]
+    while \(K=\ker(\overline{f})\), the restriction
+    \[
+        \overline{f}|_C:C\longrightarrow \operatorname{Top}(U)
+    \]
+    is still surjective. Hence
+    \[
+        \overline{f}(C)=\operatorname{Top}(U).
+    \]
+    Using the commutative relation
+    \[
+        \overline{f}\circ \pi_P=\pi_U\circ f,
+    \]
+    we get
+    \[
+        \pi_U(f(W))
+        =
+        \overline{f}(\pi_P(W))
+        =
+        \overline{f}(C)
+        =
+        \operatorname{Top}(U).
+    \]
+    Therefore
+    \[
+        f(W)+\operatorname{Rad}(U)=U.
+    \]
+    Since \(U\) is finitely generated, Nakayama's lemma gives
+    \[
+        f(W)=U.
+    \]
+
+    But \(f:P\to U\) is an essential epimorphism, and \(W\subseteq P\) is a submodule
+    satisfying \(f(W)=U\). Hence
+    \[
+        W=P,
+    \]
+    contradicting the fact that \(W\subsetneq P\).
+
+    Therefore
+    \[
+        \ker(\overline{f})=0.
+    \]
+    Thus \(\overline{f}\) is both injective and surjective, hence an isomorphism:
+    \[
+        \operatorname{Top}(P)\cong \operatorname{Top}(U).
+    \]
+\end{proof}
 
 \begin{proposition}
     Suppose that

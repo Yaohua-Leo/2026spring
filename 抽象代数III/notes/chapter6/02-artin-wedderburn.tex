@@ -544,6 +544,77 @@
     \]
 \end{theorem}
 
+\begin{proof}
+    Since \(A\) is finite-dimensional over \(k\), it is Artinian. Hence \(A\) is a
+    semisimple Artinian ring.
+
+    Decompose the left regular \(A\)-module into simple summands:
+    \[
+        {}_A A
+        \cong
+        S_1^{\oplus n_1}\oplus \cdots \oplus S_r^{\oplus n_r},
+    \]
+
+    Here \(S_1,\dots,S_r\) are pairwise non-isomorphic simple left \(A\)-modules.
+    By the Artin--Wedderburn theorem,
+    \[
+        A
+        \cong
+        M_{n_1}(D_1)\oplus \cdots \oplus M_{n_r}(D_r),
+    \]
+    where
+    \[
+        D_i=\operatorname{End}_A(S_i)^{\operatorname{op}}.
+    \]
+
+    It remains to identify the division rings \(D_i\). Since \(A\) is a
+    finite-dimensional \(k\)-algebra, each simple \(A\)-module \(S_i\) is finite-dimensional
+    over \(k\). Indeed, for any \(0\neq s\in S_i\), the map
+    \[
+        A\longrightarrow S_i,\qquad a\longmapsto as
+    \]
+    is a surjective \(k\)-linear map, because \(S_i\) is simple. Therefore
+    \[
+        \dim_k S_i\leq \dim_k A<\infty.
+    \]
+
+    Now \(\operatorname{End}_A(S_i)\) is a division ring by Schur's lemma. Moreover,
+    every \(A\)-endomorphism of \(S_i\) is \(k\)-linear. Since \(k\) is algebraically
+    closed and \(S_i\) is finite-dimensional over \(k\), every
+    \(f\in \operatorname{End}_A(S_i)\) has an eigenvalue \(\lambda\in k\). Thus
+    \[
+        f-\lambda\operatorname{id}_{S_i}
+    \]
+    has nonzero kernel, so it is not injective. But
+    \(f-\lambda\operatorname{id}_{S_i}\in \operatorname{End}_A(S_i)\), and
+    \(\operatorname{End}_A(S_i)\) is a division ring. Hence a nonzero element of
+    \(\operatorname{End}_A(S_i)\) must be invertible, in particular injective. Therefore
+    \[
+        f-\lambda\operatorname{id}_{S_i}=0,
+    \]
+    and so
+    \[
+        f=\lambda\operatorname{id}_{S_i}.
+    \]
+    This proves that
+    \[
+        \operatorname{End}_A(S_i)=k.
+    \]
+
+    Hence
+    \[
+        D_i=\operatorname{End}_A(S_i)^{\operatorname{op}}
+        \cong k^{\operatorname{op}}=k,
+    \]
+    since \(k\) is commutative. Substituting this into the Artin--Wedderburn
+    decomposition gives
+    \[
+        A
+        \cong
+        M_{n_1}(k)\oplus \cdots \oplus M_{n_r}(k).
+    \]
+\end{proof}
+
 \begin{corollary}
     Let $A$ be a finite-dimensional semisimple $k$-algebra, where $k$ is a field.
 
