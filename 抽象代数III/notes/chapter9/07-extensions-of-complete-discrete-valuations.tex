@@ -1,0 +1,128 @@
+\section{Extensions of complete discrete valuations}
+
+\begin{definition}[Extension of a discretely valued field]
+    Let \(K\subseteq L\) be fields equipped with discrete multiplicative valuations
+    \[
+        \varphi:K\longrightarrow \mathbb{R}_{\geq 0},
+        \qquad
+        \psi:L\longrightarrow \mathbb{R}_{\geq 0},
+    \]
+    respectively.
+
+    We say that \(\psi\) is an extension of \(\varphi\) to \(L\) if
+    \[
+        \psi|_{K}=\varphi.
+    \]
+    In this case, we also say that the valued field \((L,\psi)\) is an extension of
+    the valued field \((K,\varphi)\).
+\end{definition}
+
+\begin{theorem}[Extension of a complete discrete valuation]
+    Let \(\varphi\) be a complete discrete multiplicative valuation on a field \(K\),
+    and let \(L/K\) be a finite field extension.
+
+    Suppose that there exists an extension \((L,\psi)\) of \((K,\varphi)\). Then
+    \(\psi\) is unique up to equivalence. Furthermore, the valued field
+    \[
+        (L,\psi)
+    \]
+    is complete.
+\end{theorem}
+
+\begin{proof}
+    Let \(\psi_1\) and \(\psi_2\) be two extensions of \(\varphi\) to \(L\).
+    We first prove uniqueness up to equivalence.
+
+    Since \(L/K\) is finite, \(L\) is a finite-dimensional \(K\)-vector space.
+    Moreover, each \(\psi_i\) is a non-archimedean norm on \(L\) as a
+    \(K\)-vector space, because for every \(a\in K\) and \(x\in L\),
+    \[
+        \psi_i(ax)=\psi_i(a)\psi_i(x)=\varphi(a)\psi_i(x).
+    \]
+    Thus \(\psi_i\) is compatible with the scalar norm \(\varphi\) on \(K\).
+
+    Since \((K,\varphi)\) is complete and \(L\) is finite-dimensional over \(K\),
+    the equivalence theorem for norms on finite-dimensional vector spaces over a
+    complete non-archimedean field implies that the two norms \(\psi_1\) and
+    \(\psi_2\) induce the same topology on \(L\).
+
+    Now use the standard fact that two discrete valuations on a field which induce
+    the same topology are equivalent. Indeed, if \(w_1,w_2\) are two discrete
+    valuations inducing the same topology, then their valuation ideals are determined
+    topologically by
+    \[
+        P_{w_i}
+        =
+        \{x\in L\mid x^n\to 0 \text{ as } n\to \infty\}.
+    \]
+    Hence
+    \[
+        P_{w_1}=P_{w_2}.
+    \]
+    The valuation ring is recovered from the valuation ideal by
+    \[
+        R_{w_i}
+        =
+        \{x\in L\mid xP_{w_i}\subseteq P_{w_i}\},
+    \]
+    so
+    \[
+        R_{w_1}=R_{w_2}.
+    \]
+    Since the valuations are discrete, choosing a uniformizer \(\pi\) for \(w_1\),
+    every \(x\in L^\times\) can be written uniquely in the form
+    \[
+        x=\pi^m u,
+        \qquad
+        m\in\mathbb{Z},\quad u\in R_{w_1}^{\times}.
+    \]
+    Because the valuation rings agree, the unit groups also agree. Therefore
+    \(w_2(u)=0\), and hence
+    \[
+        w_2(x)=m\,w_2(\pi)=w_2(\pi)\,w_1(x).
+    \]
+    Thus
+    \[
+        w_2=\lambda w_1
+    \]
+    for some \(\lambda>0\), so \(w_1\) and \(w_2\) are equivalent.
+
+    Applying this to \(\psi_1\) and \(\psi_2\), we conclude that
+    \[
+        \psi_1\sim \psi_2.
+    \]
+    Hence the extension of \(\varphi\) to \(L\), if it exists, is unique up to
+    equivalence.
+
+    It remains to prove that \((L,\psi)\) is complete. Choose a \(K\)-basis
+    \[
+        u_1,\dots,u_n
+    \]
+    of \(L\), and define the associated supremum norm
+    \[
+        \left\|\sum_{i=1}^{n}a_i u_i\right\|_{\infty}
+        =
+        \max_{1\leq i\leq n}\varphi(a_i).
+    \]
+    Since \(K\) is complete with respect to \(\varphi\), the finite-dimensional
+    normed \(K\)-vector space \((L,\|\cdot\|_{\infty})\) is complete.
+
+    On the other hand, \(\psi\) is another non-archimedean norm on the same
+    finite-dimensional \(K\)-vector space \(L\). Hence, by the equivalence theorem
+    for finite-dimensional norms, \(\psi\) and \(\|\cdot\|_{\infty}\) induce the
+    same topology on \(L\). In particular, a sequence in \(L\) is \(\psi\)-Cauchy
+    if and only if it is \(\|\cdot\|_{\infty}\)-Cauchy.
+
+    Let \((x_m)\) be a \(\psi\)-Cauchy sequence in \(L\). Then it is
+    \(\|\cdot\|_{\infty}\)-Cauchy, so by completeness of
+    \((L,\|\cdot\|_{\infty})\), there exists \(x\in L\) such that
+    \[
+        x_m\longrightarrow x
+    \]
+    with respect to \(\|\cdot\|_{\infty}\). Since \(\psi\) and
+    \(\|\cdot\|_{\infty}\) induce the same topology, the same convergence holds
+    with respect to \(\psi\). Therefore every \(\psi\)-Cauchy sequence converges in
+    \(L\).
+
+    Hence \((L,\psi)\) is complete.
+\end{proof}

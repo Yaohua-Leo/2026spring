@@ -1,0 +1,411 @@
+\section{Norms on finite-dimensional vector spaces}
+
+\begin{definition}[Norm over a multiplicatively valued field]
+    Let \((K,\varphi)\) be a field equipped with a multiplicative valuation, and let
+    \(V\) be a vector space over \(K\). A function
+    \[
+        \|\cdot\|:V\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    is called a non-archimedean norm on \(V\) compatible with \(\varphi\) if the
+    following conditions hold:
+    \begin{enumerate}
+        \item For every \(v\in V\),
+              \[
+                  \|v\|\geq 0,
+              \]
+              and
+              \[
+                  \|v\|=0 \Longleftrightarrow v=0.
+              \]
+
+        \item For every \(\alpha\in K\) and every \(v\in V\),
+              \[
+                  \|\alpha v\|=\varphi(\alpha)\|v\|.
+              \]
+
+        \item For every \(u,v\in V\),
+              \[
+                  \|u+v\|\leq \max\{\|u\|,\|v\|\}.
+              \]
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let \(V\) be a vector space over a multiplicatively valued field \((K,\varphi)\).
+    Suppose that \(V\) is equipped with a non-archimedean norm \(\|\cdot\|\).
+    Then \(V\) becomes a metric space with metric
+    \[
+        d(u,v):=\|u-v\|.
+    \]
+    Moreover, the maps
+    \[
+        V\times V\longrightarrow V,
+        \qquad
+        (u,v)\longmapsto u+v,
+    \]
+    and
+    \[
+        K\times V\longrightarrow V,
+        \qquad
+        (\alpha,v)\longmapsto \alpha v,
+    \]
+    are both continuous.
+\end{proposition}
+
+\begin{proof}
+    The function \(d(u,v)=\|u-v\|\) is a metric. Indeed, for \(u,v\in V\),
+    \[
+        d(u,v)=0
+        \Longleftrightarrow
+        \|u-v\|=0
+        \Longleftrightarrow
+        u=v.
+    \]
+    Also,
+    \[
+        d(u,v)=\|u-v\|=\|-(v-u)\|=\|v-u\|=d(v,u),
+    \]
+    because \(\varphi(-1)=1\). Finally, for \(u,v,w\in V\),
+    \[
+        d(u,w)
+        =
+        \|u-w\|
+        =
+        \|(u-v)+(v-w)\|
+        \leq
+        \max\{\|u-v\|,\|v-w\|\}
+        =
+        \max\{d(u,v),d(v,w)\}.
+    \]
+    Hence \(d\) is a non-archimedean metric on \(V\).
+
+    The addition map is continuous because
+    \[
+        \|(u+v)-(u_0+v_0)\|
+        =
+        \|(u-u_0)+(v-v_0)\|
+        \leq
+        \max\{\|u-u_0\|,\|v-v_0\|\}.
+    \]
+
+    The scalar multiplication map is continuous because
+    \[
+        \|\alpha v-\alpha_0v_0\|
+        =
+        \|\alpha(v-v_0)+(\alpha-\alpha_0)v_0\|
+        \leq
+        \max\{\varphi(\alpha)\|v-v_0\|,
+               \varphi(\alpha-\alpha_0)\|v_0\|\}.
+    \]
+    Since \(\varphi(\alpha)\) is locally bounded near \(\alpha_0\), the right-hand side
+    tends to \(0\) whenever \(\alpha\to\alpha_0\) in \(K\) and \(v\to v_0\) in \(V\).
+    Thus scalar multiplication is continuous.
+\end{proof}
+
+\begin{lemma}
+    Let \((K,\varphi)\) be a multiplicatively valued field, and let \(V\) be a
+    finite-dimensional \(K\)-vector space with \(K\)-basis
+    \[
+        u_1,\dots,u_n.
+    \]
+    For
+    \[
+        v=a_1u_1+\cdots+a_nu_n\in V,
+    \]
+    define
+    \[
+        \|v\|_0:=\max\{\,\varphi(a_i)\mid 1\leq i\leq n\,\}.
+    \]
+    Then \(\|\cdot\|_0\) is a non-archimedean norm on \(V\). Moreover, the following
+    hold:
+    \begin{enumerate}
+        \item Let
+              \[
+                  v_r=a_{r,1}u_1+\cdots+a_{r,n}u_n\in V
+                  \qquad (r\geq 1).
+              \]
+              Then the sequence \((v_r)\) is a Cauchy sequence in \(V\) if and only if
+              each coordinate sequence \((a_{r,i})_{r\geq 1}\) is a Cauchy sequence in
+              \(K\).
+
+              Also, for
+              \[
+                  v=a_1u_1+\cdots+a_nu_n\in V,
+              \]
+              one has
+              \[
+                  \lim_{r\to\infty} v_r=v
+                  \Longleftrightarrow
+                  \lim_{r\to\infty} a_{r,i}=a_i
+                  \quad\text{for all }1\leq i\leq n.
+              \]
+
+        \item If \(K\) is complete, then \(V\) is complete with respect to the norm
+              \(\|\cdot\|_0\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    First we verify that \(\|\cdot\|_0\) is a norm. Clearly
+    \[
+        \|v\|_0\geq 0.
+    \]
+    Moreover,
+    \[
+        \|v\|_0=0
+        \Longleftrightarrow
+        \varphi(a_i)=0\quad\text{for all }i
+        \Longleftrightarrow
+        a_i=0\quad\text{for all }i
+        \Longleftrightarrow
+        v=0.
+    \]
+    For \(\lambda\in K\), we have
+    \[
+        \|\lambda v\|_0
+        =
+        \max_i \varphi(\lambda a_i)
+        =
+        \varphi(\lambda)\max_i\varphi(a_i)
+        =
+        \varphi(\lambda)\|v\|_0.
+    \]
+    Finally, if
+    \[
+        v=a_1u_1+\cdots+a_nu_n,\qquad
+        w=b_1u_1+\cdots+b_nu_n,
+    \]
+    then
+    \[
+        v+w=(a_1+b_1)u_1+\cdots+(a_n+b_n)u_n.
+    \]
+    Hence
+    \[
+        \|v+w\|_0
+        =
+        \max_i\varphi(a_i+b_i)
+        \leq
+        \max_i\max\{\varphi(a_i),\varphi(b_i)\}
+        =
+        \max\{\|v\|_0,\|w\|_0\}.
+    \]
+    Thus \(\|\cdot\|_0\) is a non-archimedean norm.
+
+    Now let
+    \[
+        v_r=a_{r,1}u_1+\cdots+a_{r,n}u_n.
+    \]
+    For \(r,s\geq 1\), we have
+    \[
+        v_r-v_s
+        =
+        \sum_{i=1}^n (a_{r,i}-a_{s,i})u_i.
+    \]
+    Therefore
+    \[
+        \|v_r-v_s\|_0
+        =
+        \max_{1\leq i\leq n}
+        \varphi(a_{r,i}-a_{s,i}).
+    \]
+    It follows immediately that \((v_r)\) is Cauchy in \(V\) if and only if each
+    \((a_{r,i})_{r\geq 1}\) is Cauchy in \(K\).
+
+    Similarly,
+    \[
+        v_r-v
+        =
+        \sum_{i=1}^n (a_{r,i}-a_i)u_i,
+    \]
+    so
+    \[
+        \|v_r-v\|_0
+        =
+        \max_{1\leq i\leq n}
+        \varphi(a_{r,i}-a_i).
+    \]
+    Hence
+    \[
+        \lim_{r\to\infty} v_r=v
+        \Longleftrightarrow
+        \lim_{r\to\infty} a_{r,i}=a_i
+        \quad\text{for all }i.
+    \]
+
+    Finally, assume that \(K\) is complete. Let \((v_r)\) be a Cauchy sequence in
+    \(V\). By the first part, each coordinate sequence \((a_{r,i})\) is Cauchy in
+    \(K\). Since \(K\) is complete, there exists \(a_i\in K\) such that
+    \[
+        \lim_{r\to\infty}a_{r,i}=a_i.
+    \]
+    Put
+    \[
+        v=a_1u_1+\cdots+a_nu_n.
+    \]
+    By the convergence criterion above,
+    \[
+        \lim_{r\to\infty}v_r=v.
+    \]
+    Therefore \(V\) is complete.
+\end{proof}
+
+\begin{theorem}[Equivalence of norms over a complete non-archimedean field]
+    Let \((K,\varphi)\) be a complete non-archimedean normed field, and let
+    \(V\) be a finite-dimensional \(K\)-vector space with basis
+    \[
+        u_1,\dots,u_n.
+    \]
+    Define the associated supremum norm by
+    \[
+        \left\|\sum_{i=1}^{n} a_i u_i\right\|_{\infty}
+        :=
+        \max_{1\leq i\leq n}\varphi(a_i).
+    \]
+    Then, for any non-archimedean norm \(\|\cdot\|\) on \(V\), there exist constants
+    \(\lambda,\mu>0\) such that
+    \[
+        \|v\|\leq \lambda \|v\|_{\infty},
+        \qquad
+        \|v\|_{\infty}\leq \mu \|v\|
+    \]
+    for all \(v\in V\). Consequently, \(\|\cdot\|\) and \(\|\cdot\|_{\infty}\) induce the same
+    topology on \(V\). In particular, any two norms on \(V\) induce the same topology.
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        \lambda=\max_{1\leq i\leq n}\|u_i\|.
+    \]
+    For
+    \[
+        v=\sum_{i=1}^{n}a_i u_i,
+    \]
+    the non-archimedean triangle inequality gives
+    \[
+        \|v\|
+        \leq
+        \max_{1\leq i\leq n}\|a_i u_i\|
+        =
+        \max_{1\leq i\leq n}\varphi(a_i)\|u_i\|
+        \leq
+        \lambda \|v\|_{\infty}.
+    \]
+    Hence the first inequality holds.
+
+    It remains to prove that there exists \(\mu>0\) such that
+    \[
+        \|v\|_{\infty}\leq \mu \|v\|
+    \]
+    for all \(v\in V\). We prove this by induction on \(n=\dim_K V\).
+
+    If \(n=1\), then every \(v\in V\) can be written as \(v=a_1u_1\). Hence
+    \[
+        \|v\|=\varphi(a_1)\|u_1\|,
+        \qquad
+        \|v\|_{\infty}=\varphi(a_1).
+    \]
+    Therefore
+    \[
+        \|v\|_{\infty}
+        =
+        \frac{1}{\|u_1\|}\|v\|,
+    \]
+    so the claim holds.
+
+    Now assume \(n>1\), and suppose the result is known for all vector spaces of
+    dimension \(n-1\). For
+    \[
+        v=\sum_{i=1}^{n}a_i u_i,
+    \]
+    define
+    \[
+        \psi_i(v):=\varphi(a_i).
+    \]
+    We claim that, for each \(i\), there exists a constant \(\mu_i>0\) such that
+    \[
+        \psi_i(v)\leq \mu_i\|v\|
+    \]
+    for all \(v\in V\). Once this is proved, taking
+    \[
+        \mu=\max_{1\leq i\leq n}\mu_i
+    \]
+    gives
+    \[
+        \|v\|_{\infty}
+        =
+        \max_{1\leq i\leq n}\psi_i(v)
+        \leq
+        \mu\|v\|.
+    \]
+
+    It suffices to prove the claim for \(i=n\), since the other cases follow by
+    reordering the basis. Put
+    \[
+        V' = Ku_1\oplus\cdots\oplus Ku_{n-1}.
+    \]
+    By the induction hypothesis, the restrictions of \(\|\cdot\|\) and
+    \(\|\cdot\|_{\infty}\) to \(V'\) induce the same topology.
+
+    Since \(K\) is complete, \(V'\) is complete with respect to the norm
+    \(\|\cdot\|_{\infty}\). Hence \(V'\) is also complete with respect to
+    \(\|\cdot\|\). Therefore \(V'\) is closed in \(V\) with respect to the topology
+    induced by \(\|\cdot\|\).
+
+    Suppose, for contradiction, that there is no constant \(\mu_n>0\) such that
+    \[
+        \psi_n(v)\leq \mu_n\|v\|
+    \]
+    for all \(v\in V\). Then, for every integer \(j\geq 1\), there exists
+    \(v_j\in V\) such that
+    \[
+        \psi_n(v_j)>j\|v_j\|.
+    \]
+    Since the inequality is homogeneous, we may multiply \(v_j\) by a nonzero scalar
+    and assume that the coefficient of \(u_n\) in \(v_j\) is \(1\). Thus we may write
+    \[
+        v_j=a_{1j}u_1+\cdots+a_{n-1,j}u_{n-1}+u_n.
+    \]
+    Then
+    \[
+        \psi_n(v_j)=1,
+    \]
+    and the inequality above gives
+    \[
+        \|v_j\|<\frac{1}{j}.
+    \]
+    Hence
+    \[
+        v_j\longrightarrow 0
+    \]
+    with respect to \(\|\cdot\|\).
+
+    On the other hand,
+    \[
+        v_j-u_n\in V'
+    \]
+    for every \(j\), and
+    \[
+        v_j-u_n\longrightarrow -u_n
+    \]
+    with respect to \(\|\cdot\|\). Since \(V'\) is closed in \(V\), it follows that
+    \[
+        -u_n\in V'.
+    \]
+    This is impossible, because \(u_1,\dots,u_n\) are linearly independent.
+
+    Therefore there exists \(\mu_n>0\) such that
+    \[
+        \psi_n(v)\leq \mu_n\|v\|
+    \]
+    for all \(v\in V\). As explained above, the same argument applies to each
+    coordinate \(\psi_i\). Hence there exists \(\mu>0\) such that
+    \[
+        \|v\|_{\infty}\leq \mu\|v\|
+    \]
+    for all \(v\in V\).
+
+    Combining the two inequalities, we conclude that \(\|\cdot\|\) and
+    \(\|\cdot\|_{\infty}\) are equivalent norms. Therefore they induce the same
+    topology on \(V\).
+\end{proof}

@@ -1,0 +1,339 @@
+\section{Completion of valued fields}
+
+\begin{definition}[Cauchy sequence]
+    Let \(K\) be a field equipped with a metric
+    \[
+        d:K\times K\longrightarrow \mathbb{R}_{\geq 0}.
+    \]
+    A sequence
+    \[
+        (a_n)_{n\geq 1}=(a_1,a_2,\dots,a_n,\dots)
+    \]
+    of elements of \(K\) is called a Cauchy sequence if for every
+    \[
+        \varepsilon>0,
+    \]
+    there exists an integer \(N\geq 1\) such that
+    \[
+        d(a_m,a_n)<\varepsilon
+        \qquad
+        \text{for all } m,n\geq N.
+    \]
+\end{definition}
+
+\begin{definition}[Convergent sequence]
+    Let \(K\) be a field equipped with a metric \(d\). A sequence
+    \[
+        (a_n)_{n\geq 1}
+    \]
+    in \(K\) is said to converge to an element \(a\in K\) if
+    \[
+        \lim_{n\to\infty} d(a_n,a)=0.
+    \]
+    In this case, we write
+    \[
+        \lim_{n\to\infty} a_n=a.
+    \]
+
+    If the metric \(d\) is induced by a multiplicative valuation \(\varphi\), namely
+    \[
+        d(x,y)=\varphi(x-y),
+    \]
+    then the above condition is equivalently
+    \[
+        \lim_{n\to\infty} \varphi(a_n-a)=0.
+    \]
+\end{definition}
+
+\begin{definition}[Complete valued field]
+    Let \(K\) be a field equipped with a metric \(d\), or equivalently with a
+    valuation inducing \(d\). We say that \(K\) is complete if every Cauchy
+    sequence in \(K\) converges to an element of \(K\).
+
+    If \(K\) is complete with respect to the metric induced by a valuation
+    \(\varphi\), then \(K\) is also called a complete valued field.
+\end{definition}
+
+\begin{definition}[Complete valuation ring]
+    Let \((K,\varphi)\) be a valued field, and let
+    \[
+        R_{\varphi}=\{x\in K\mid \varphi(x)\leq 1\}
+    \]
+    be its valuation ring in the multiplicative convention.
+    If \(K\) is complete with respect to the metric induced by \(\varphi\), then
+    \(R_{\varphi}\) is called a complete valuation ring.
+\end{definition}
+
+\begin{definition}[Ring of Cauchy sequences]
+    Let \((K,\varphi)\) be a valued field, and let
+    \[
+        d(a,b)=\varphi(a-b)
+    \]
+    be the metric induced by \(\varphi\). Denote by \(\mathcal{C}\) the set of all
+    Cauchy sequences in \(K\):
+    \[
+        \mathcal{C}
+        :=
+        \left\{
+            (a_n)_{n\geq 1}
+            \ \middle|\
+            (a_n)_{n\geq 1}\text{ is a Cauchy sequence in }K
+        \right\}.
+    \]
+    For \((a_n),(b_n)\in \mathcal{C}\), define
+    \[
+        (a_n)+(b_n):=(a_n+b_n),
+    \]
+    and
+    \[
+        (a_n)(b_n):=(a_nb_n).
+    \]
+    With these operations, \(\mathcal{C}\) is a commutative ring.
+\end{definition}
+
+\begin{definition}[Null sequences]
+    Let
+    \[
+        \mathcal{I}
+        :=
+        \left\{
+            (a_n)\in \mathcal{C}
+            \ \middle|\
+            \lim_{n\to\infty} a_n=0
+        \right\}.
+    \]
+    Equivalently,
+    \[
+        (a_n)\in \mathcal{I}
+        \Longleftrightarrow
+        \lim_{n\to\infty}\varphi(a_n)=0.
+    \]
+    The elements of \(\mathcal{I}\) are called null sequences.
+\end{definition}
+
+\begin{proposition}
+    The subset \(\mathcal{I}\) is a maximal ideal of \(\mathcal{C}\). Consequently,
+    the quotient
+    \[
+        \widehat{K}:=\mathcal{C}/\mathcal{I}
+    \]
+    is a field.
+\end{proposition}
+
+\begin{proof}
+    It is straightforward to check that \(\mathcal{I}\) is an ideal of
+    \(\mathcal{C}\).
+
+    To show that \(\mathcal{I}\) is maximal, let
+    \[
+        (a_n)\in \mathcal{C}\setminus \mathcal{I}.
+    \]
+    Then \((a_n)\) does not converge to \(0\). Since \((a_n)\) is Cauchy, there exist
+    \(N\geq 1\) and \(\varepsilon>0\) such that
+    \[
+        \varphi(a_n)\geq \varepsilon
+        \qquad
+        \text{for all } n\geq N.
+    \]
+    Hence \(a_n\neq 0\) for all sufficiently large \(n\). Define a sequence
+    \[
+        b_n=
+        \begin{cases}
+            0, & n<N,\\
+            a_n^{-1}, & n\geq N.
+        \end{cases}
+    \]
+    Then \((b_n)\) is again a Cauchy sequence in \(K\), and
+    \[
+        (a_n)(b_n)-1\in \mathcal{I}.
+    \]
+    Therefore the class of \((a_n)\) in \(\mathcal{C}/\mathcal{I}\) is invertible.
+    Thus every nonzero element of \(\mathcal{C}/\mathcal{I}\) is invertible, so
+    \(\mathcal{C}/\mathcal{I}\) is a field. Hence \(\mathcal{I}\) is maximal.
+\end{proof}
+
+\begin{definition}[Completion of a valued field]
+    The field
+    \[
+        \widehat{K}:=\mathcal{C}/\mathcal{I}
+    \]
+    is called the completion of \(K\) with respect to the valuation \(\varphi\).
+\end{definition}
+
+\begin{proposition}[Extension of the valuation]
+    Let \((a_n)\in \mathcal{C}\). Then the sequence
+    \[
+        \bigl(\varphi(a_n)\bigr)_{n\geq 1}
+    \]
+    converges in \(\mathbb{R}_{\geq 0}\).
+
+    Moreover, if
+    \[
+        (a_n)-(b_n)\in \mathcal{I},
+    \]
+    then
+    \[
+        \lim_{n\to\infty}\varphi(a_n)
+        =
+        \lim_{n\to\infty}\varphi(b_n).
+    \]
+    Hence the rule
+    \[
+        \widehat{\varphi}\bigl((a_n)+\mathcal{I}\bigr)
+        :=
+        \lim_{n\to\infty}\varphi(a_n)
+    \]
+    defines a well-defined multiplicative valuation on \(\widehat{K}\).
+\end{proposition}
+
+\begin{proof}
+    Since \((a_n)\) is Cauchy in \(K\), for every \(\varepsilon>0\) there exists
+    \(N\geq 1\) such that
+    \[
+        \varphi(a_n-a_m)<\varepsilon
+        \qquad
+        \text{for all } m,n\geq N.
+    \]
+    By the reverse triangle inequality,
+    \[
+        \left|\varphi(a_n)-\varphi(a_m)\right|
+        \leq
+        \varphi(a_n-a_m).
+    \]
+    Therefore \(\bigl(\varphi(a_n)\bigr)_{n\geq 1}\) is a Cauchy sequence in
+    \(\mathbb{R}_{\geq 0}\). Since \(\mathbb{R}\) is complete, the limit
+    \[
+        \lim_{n\to\infty}\varphi(a_n)
+    \]
+    exists.
+
+    Now assume that
+    \[
+        (a_n)-(b_n)\in \mathcal{I}.
+    \]
+    Then
+    \[
+        \lim_{n\to\infty}\varphi(a_n-b_n)=0.
+    \]
+    Again by the reverse triangle inequality,
+    \[
+        \left|\varphi(a_n)-\varphi(b_n)\right|
+        \leq
+        \varphi(a_n-b_n).
+    \]
+    Taking limits gives
+    \[
+        \lim_{n\to\infty}\varphi(a_n)
+        =
+        \lim_{n\to\infty}\varphi(b_n).
+    \]
+    Thus \(\widehat{\varphi}\) is well-defined.
+
+    Finally, for \((a_n),(b_n)\in \mathcal{C}\), we have
+    \[
+        \widehat{\varphi}
+        \left(
+            \bigl((a_n)+\mathcal{I}\bigr)
+            \bigl((b_n)+\mathcal{I}\bigr)
+        \right)
+        =
+        \lim_{n\to\infty}\varphi(a_nb_n)
+        =
+        \lim_{n\to\infty}\varphi(a_n)\varphi(b_n),
+    \]
+    hence
+    \[
+        \widehat{\varphi}
+        \left(
+            \bigl((a_n)+\mathcal{I}\bigr)
+            \bigl((b_n)+\mathcal{I}\bigr)
+        \right)
+        =
+        \widehat{\varphi}\bigl((a_n)+\mathcal{I}\bigr)
+        \widehat{\varphi}\bigl((b_n)+\mathcal{I}\bigr).
+    \]
+    Similarly, the triangle inequality for \(\varphi\) passes to the limit. Hence
+    \(\widehat{\varphi}\) is a multiplicative valuation on \(\widehat{K}\).
+\end{proof}
+
+\begin{proposition}
+    There is a natural embedding of valued fields
+    \[
+        K\hookrightarrow \widehat{K}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Define
+    \[
+        \iota:K\longrightarrow \widehat{K}
+    \]
+    by sending \(a\in K\) to the class of the constant sequence:
+    \[
+        \iota(a):=(a,a,a,\dots)+\mathcal{I}.
+    \]
+    This is a field homomorphism. If \(\iota(a)=0\), then the constant sequence
+    \((a,a,a,\dots)\) belongs to \(\mathcal{I}\), so
+    \[
+        \lim_{n\to\infty}\varphi(a)=0.
+    \]
+    Hence \(\varphi(a)=0\), and therefore \(a=0\). Thus \(\iota\) is injective.
+
+    Moreover,
+    \[
+        \widehat{\varphi}(\iota(a))
+        =
+        \widehat{\varphi}\bigl((a,a,a,\dots)+\mathcal{I}\bigr)
+        =
+        \varphi(a),
+    \]
+    so the embedding preserves the valuation.
+\end{proof}
+
+\begin{theorem}[Completion of a valued field]
+    Let \((K,\varphi)\) be a valued field. Then there exists a complete valued field
+    \[
+        (\widehat{K},\widehat{\varphi})
+    \]
+    together with a valuation-preserving embedding
+    \[
+        K\hookrightarrow \widehat{K}
+    \]
+    such that the image of \(K\) is dense in \(\widehat{K}\).
+
+    Moreover, \(\widehat{K}\) is unique up to a unique \(K\)-isomorphism of valued
+    fields.
+\end{theorem}
+
+\begin{proof}
+    The field \(\widehat{K}=\mathcal{C}/\mathcal{I}\), together with the valuation
+    \(\widehat{\varphi}\), is complete. Indeed, every Cauchy sequence in
+    \(\widehat{K}\) can be represented by a suitable diagonal sequence of Cauchy
+    sequences in \(K\), and this diagonal sequence gives its limit in
+    \(\widehat{K}\).
+
+    The image of \(K\) is dense in \(\widehat{K}\). If
+    \[
+        x=(a_n)+\mathcal{I}\in \widehat{K},
+    \]
+    then the sequence of constant classes
+    \[
+        \iota(a_n)\in \widehat{K}
+    \]
+    converges to \(x\).
+
+    Finally, if \(L\) is another complete valued field containing \(K\) densely and
+    preserving the valuation, then every Cauchy sequence in \(K\) has a unique limit
+    in \(L\). Thus the rule
+    \[
+        (a_n)+\mathcal{I}
+        \longmapsto
+        \lim_{n\to\infty}a_n
+    \]
+    defines a unique \(K\)-isomorphism
+    \[
+        \widehat{K}\cong L
+    \]
+    of valued fields. Hence the completion is unique up to \(K\)-isomorphism of
+    valued fields.
+\end{proof}  

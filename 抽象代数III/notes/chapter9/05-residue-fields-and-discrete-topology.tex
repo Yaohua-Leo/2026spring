@@ -1,0 +1,428 @@
+\section{Residue fields and the discrete valuation topology}
+
+\begin{theorem}[Residue field and completion]
+    Let \((K,\varphi)\) be a valued field with valuation ring
+    \[
+        R=\{x\in K\mid \varphi(x)\leq 1\}
+    \]
+    and valuation ideal
+    \[
+        P=\{x\in K\mid \varphi(x)<1\}.
+    \]
+    Let \((\widehat{K},\widehat{\varphi})\) be the completion of \(K\), and let
+    \[
+        \widehat{R}
+        =
+        \{x\in \widehat{K}\mid \widehat{\varphi}(x)\leq 1\}
+    \]
+    be its valuation ring, with valuation ideal
+    \[
+        \widehat{P}
+        =
+        \{x\in \widehat{K}\mid \widehat{\varphi}(x)<1\}.
+    \]
+    Then there is a canonical isomorphism of residue fields
+    \[
+        R/P \cong \widehat{R}/\widehat{P}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We identify \(K\) with its image in \(\widehat{K}\). Since the embedding
+    \[
+        K\hookrightarrow \widehat{K}
+    \]
+    preserves the valuation, we have
+    \[
+        \widehat{\varphi}|_K=\varphi.
+    \]
+    Hence
+    \[
+        R\subseteq \widehat{R},
+        \qquad
+        P=R\cap \widehat{P}.
+    \]
+
+    It remains to show that
+    \[
+        \widehat{R}=R+\widehat{P}.
+    \]
+    The inclusion
+    \[
+        R+\widehat{P}\subseteq \widehat{R}
+    \]
+    is clear, since \(R\subseteq \widehat{R}\) and \(\widehat{P}\subseteq \widehat{R}\).
+
+    Conversely, let \(a\in \widehat{R}\). If \(a=0\), then \(a\in R+\widehat{P}\).
+    Suppose \(a\neq 0\). Since \(K\) is dense in \(\widehat{K}\), there exists a sequence
+    \[
+        (a_n)_{n\geq 1}
+    \]
+    in \(K\) such that
+    \[
+        \lim_{n\to\infty} a_n=a.
+    \]
+    Thus
+    \[
+        \lim_{n\to\infty}\widehat{\varphi}(a_n-a)=0.
+    \]
+    Since \(a\neq 0\), we have
+    \[
+        \widehat{\varphi}(a)>0.
+    \]
+    Therefore, for some sufficiently large \(n\),
+    \[
+        \widehat{\varphi}(a_n-a)<\widehat{\varphi}(a).
+    \]
+    Since
+    \[
+        a_n=a+(a_n-a)
+    \]
+    and
+    \[
+        \widehat{\varphi}(a_n-a)<\widehat{\varphi}(a),
+    \]
+    the strong triangle inequality for a non-archimedean multiplicative valuation implies
+    \[
+        \widehat{\varphi}(a_n)
+        =
+        \widehat{\varphi}\bigl(a+(a_n-a)\bigr)
+        =
+        \widehat{\varphi}(a).
+    \]
+    Indeed, for a multiplicative non-archimedean valuation, if
+    \[
+        \widehat{\varphi}(x)<\widehat{\varphi}(y),
+    \]
+    then
+    \[
+        \widehat{\varphi}(x+y)=\widehat{\varphi}(y).
+    \]
+    Since \(a\in \widehat{R}\), we have
+    \[
+        \widehat{\varphi}(a)\leq 1.
+    \]
+    Hence
+    \[
+        \varphi(a_n)=\widehat{\varphi}(a_n)\leq 1,
+    \]
+    so
+    \[
+        a_n\in R.
+    \]
+    Moreover,
+    \[
+        \widehat{\varphi}(a-a_n)<\widehat{\varphi}(a)\leq 1,
+    \]
+    hence
+    \[
+        a-a_n\in \widehat{P}.
+    \]
+    Therefore
+    \[
+        a=a_n+(a-a_n)\in R+\widehat{P}.
+    \]
+    Thus
+    \[
+        \widehat{R}\subseteq R+\widehat{P}.
+    \]
+    Hence
+    \[
+        \widehat{R}=R+\widehat{P}.
+    \]
+
+    Now by the second isomorphism theorem,
+    \[
+        \widehat{R}/\widehat{P}
+        =
+        (R+\widehat{P})/\widehat{P}
+        \cong
+        R/(R\cap \widehat{P}).
+    \]
+    Since
+    \[
+        R\cap \widehat{P}=P,
+    \]
+    we obtain
+    \[
+        \widehat{R}/\widehat{P}\cong R/P.
+    \]
+\end{proof}
+
+\begin{proposition}[Fundamental system of neighbourhoods]
+    Let \((K,v)\) be a field with a normalized discrete valuation. Let
+    \[
+        R=\{x\in K\mid v(x)\geq 0\}
+    \]
+    be its valuation ring, and let
+    \[
+        P=\{x\in K\mid v(x)>0\}
+    \]
+    be its valuation ideal. Then
+    \[
+        P=J(R),
+    \]
+    and the decreasing sequence of ideals
+    \[
+        R=P^0\supset P\supset P^2\supset \cdots \supset P^\ell\supset \cdots
+    \]
+    forms a fundamental system of neighbourhoods of \(0\) in \(K\).
+\end{proposition}
+
+\begin{proof}
+    Since \(v\) is a normalized discrete valuation, we have
+    \[
+        v(K^\times)=\mathbb{Z}.
+    \]
+    Choose a uniformizer \(\pi\in R\), so that
+    \[
+        v(\pi)=1.
+    \]
+    Then
+    \[
+        P=(\pi),
+    \]
+    and more generally
+    \[
+        P^\ell=(\pi^\ell)
+        =
+        \{x\in R\mid v(x)\geq \ell\}
+        \qquad
+        \text{for every } \ell\geq 0.
+    \]
+    Thus saying that an element is sufficiently close to \(0\) is equivalent to
+    saying that it lies in \(P^\ell\) for large \(\ell\). Hence the ideals
+    \[
+        P^\ell,\qquad \ell\geq 0,
+    \]
+    form a fundamental system of neighbourhoods of \(0\).
+\end{proof}
+
+\begin{corollary}[Cauchy criterion]
+    Let \((a_n)_{n\geq 1}\) be a sequence in \(K\). Then \((a_n)\) is a Cauchy
+    sequence if and only if for every natural number \(\ell\geq 1\), there exists
+    a natural number \(N\geq 1\) such that
+    \[
+        a_m-a_n\in P^\ell
+        \qquad
+        \text{whenever } m,n\geq N.
+    \]
+\end{corollary}
+
+\begin{proof}
+    By definition, \((a_n)\) is Cauchy if and only if for every neighbourhood
+    \(U\) of \(0\), there exists \(N\geq 1\) such that
+    \[
+        a_m-a_n\in U
+        \qquad
+        \text{for all } m,n\geq N.
+    \]
+    Since the ideals \(P^\ell\) form a fundamental system of neighbourhoods of
+    \(0\), it is enough to test this condition on \(U=P^\ell\). Hence
+    \((a_n)\) is Cauchy if and only if for every \(\ell\geq 1\), there exists
+    \(N\geq 1\) such that
+    \[
+        a_m-a_n\in P^\ell
+        \qquad
+        \text{for all } m,n\geq N.
+    \]
+\end{proof}
+
+\begin{corollary}[Convergence criterion]
+    Let \((a_n)_{n\geq 1}\) be a sequence in \(K\), and let \(a\in K\). Then
+    \[
+        \lim_{n\to\infty} a_n=a
+    \]
+    if and only if for every natural number \(\ell\geq 1\), there exists a natural
+    number \(N\geq 1\) such that
+    \[
+        a_n-a\in P^\ell
+        \qquad
+        \text{whenever } n\geq N.
+    \]
+\end{corollary}
+
+\begin{proof}
+    The sequence \((a_n)\) converges to \(a\) if and only if
+    \[
+        a_n-a\longrightarrow 0.
+    \]
+    Since the ideals \(P^\ell\) form a fundamental system of neighbourhoods of
+    \(0\), this is equivalent to saying that for every \(\ell\geq 1\), there exists
+    \(N\geq 1\) such that
+    \[
+        a_n-a\in P^\ell
+        \qquad
+        \text{for all } n\geq N.
+    \]
+\end{proof}
+
+\begin{lemma}[Equivalent discrete multiplicative valuations]
+    Let \(\varphi_1\) and \(\varphi_2\) be discrete multiplicative valuations of a field
+    \(K\). The following conditions are equivalent:
+    \begin{enumerate}
+        \item \(\varphi_1\sim \varphi_2\), that is, there exists \(\lambda>0\) such that
+              \[
+                  \varphi_2(x)=\varphi_1(x)^\lambda
+                  \qquad
+                  \text{for all }x\in K.
+              \]
+        \item The valuation ideals are the same:
+              \[
+                  \{\,x\in K\mid \varphi_1(x)<1\,\}
+                  =
+                  \{\,x\in K\mid \varphi_2(x)<1\,\}.
+              \]
+        \item The topologies on \(K\) induced by \(\varphi_1\) and \(\varphi_2\) are the same.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    For \(i=1,2\), let
+    \[
+        R_i:=\{\,x\in K\mid \varphi_i(x)\leq 1\,\}
+    \]
+    be the valuation ring of \(\varphi_i\), and let
+    \[
+        P_i:=\{\,x\in K\mid \varphi_i(x)<1\,\}
+    \]
+    be its valuation ideal.
+
+    We first note that condition \((2)\) is precisely the assertion
+    \[
+        P_1=P_2.
+    \]
+
+    \((1)\Rightarrow (2)\).
+    Suppose that \(\varphi_2=\varphi_1^\lambda\) for some \(\lambda>0\). Then, for every
+    \(x\in K\),
+    \[
+        \varphi_2(x)<1
+        \Longleftrightarrow
+        \varphi_1(x)^\lambda<1
+        \Longleftrightarrow
+        \varphi_1(x)<1.
+    \]
+    Hence \(P_1=P_2\).
+
+    \((2)\Rightarrow (1)\).
+    Assume that
+    \[
+        P_1=P_2=:P.
+    \]
+    Since \(\varphi_1\) and \(\varphi_2\) are discrete valuations, their valuation rings
+    are discrete valuation rings with maximal ideal \(P\). Hence the common ideal \(P\)
+    is principal. Choose a uniformizer
+    \[
+        \pi\in P.
+    \]
+    Then every element \(x\in K^\times\) admits a unique expression
+    \[
+        x=\pi^n u,
+        \qquad n\in \mathbb Z,\quad u\in R_i^\times.
+    \]
+    Therefore, for \(i=1,2\),
+    \[
+        \varphi_i(x)=\varphi_i(\pi)^n.
+    \]
+    Put
+    \[
+        \rho_i:=\varphi_i(\pi).
+    \]
+    Since \(\pi\in P\), we have \(0<\rho_i<1\). Choose
+    \[
+        \lambda:=\frac{\log \rho_2}{\log \rho_1}>0.
+    \]
+    Then
+    \[
+        \rho_2=\rho_1^\lambda.
+    \]
+    Hence for every \(x=\pi^n u\in K^\times\),
+    \[
+        \varphi_2(x)
+        =
+        \rho_2^n
+        =
+        (\rho_1^\lambda)^n
+        =
+        (\rho_1^n)^\lambda
+        =
+        \varphi_1(x)^\lambda.
+    \]
+    Thus
+    \[
+        \varphi_2=\varphi_1^\lambda,
+    \]
+    so \(\varphi_1\sim \varphi_2\).
+
+    \((1)\Rightarrow (3)\).
+    If \(\varphi_2=\varphi_1^\lambda\) with \(\lambda>0\), then for any sequence
+    \((x_n)\) in \(K\),
+    \[
+        \varphi_1(x_n)\to 0
+        \Longleftrightarrow
+        \varphi_1(x_n)^\lambda\to 0
+        \Longleftrightarrow
+        \varphi_2(x_n)\to 0.
+    \]
+    Therefore the two valuations define the same convergent sequences to \(0\), and hence
+    induce the same topology on \(K\).
+
+    \((3)\Rightarrow (2)\).
+    Assume that the topologies induced by \(\varphi_1\) and \(\varphi_2\) are the same.
+    Let \(a\in P_1\). Then
+    \[
+        \varphi_1(a)<1.
+    \]
+    Hence
+    \[
+        \lim_{n\to\infty}\varphi_1(a^n)
+        =
+        \lim_{n\to\infty}\varphi_1(a)^n
+        =
+        0.
+    \]
+    Thus
+    \[
+        a^n\longrightarrow 0
+    \]
+    with respect to the topology induced by \(\varphi_1\). Since the two topologies are
+    the same, we also have
+    \[
+        a^n\longrightarrow 0
+    \]
+    with respect to the topology induced by \(\varphi_2\). Therefore
+    \[
+        \lim_{n\to\infty}\varphi_2(a^n)
+        =
+        \lim_{n\to\infty}\varphi_2(a)^n
+        =
+        0.
+    \]
+    This implies
+    \[
+        \varphi_2(a)<1,
+    \]
+    so \(a\in P_2\). Hence
+    \[
+        P_1\subseteq P_2.
+    \]
+    By symmetry, we also get
+    \[
+        P_2\subseteq P_1.
+    \]
+    Therefore
+    \[
+        P_1=P_2.
+    \]
+
+    We have proved
+    \[
+        (1)\Rightarrow (2)\Rightarrow (1),
+        \qquad
+        (1)\Rightarrow (3),
+        \qquad
+        (3)\Rightarrow (2).
+    \]
+    Hence the three conditions are equivalent.
+\end{proof}

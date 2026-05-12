@@ -1,0 +1,445 @@
+\section{Multiplicative valuations}
+
+\begin{definition}[Multiplicative valuation associated to a discrete valuation]
+    Let \(K\) be a field, and let
+    \[
+        v:K^\times\longrightarrow \mathbb{Z}
+    \]
+    be a normalized discrete valuation. We extend \(v\) to \(K\) by setting
+    \[
+        v(0)=+\infty.
+    \]
+    Fix a real number
+    \[
+        0<\gamma<1.
+    \]
+    Define a function
+    \[
+        \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    by
+    \[
+        \varphi(a)=
+        \begin{cases}
+            \gamma^{v(a)}, & a\neq 0,\\
+            0, & a=0.
+        \end{cases}
+    \]
+    Then \(\varphi\) is called the multiplicative valuation associated to \(v\)
+    with parameter \(\gamma\).
+\end{definition}
+
+\begin{proposition}
+    The function
+    \[
+        \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    defined above satisfies the following properties:
+    \begin{enumerate}
+        \item \(\varphi(a)=0\) if and only if \(a=0\).
+        \item For all \(a,b\in K\),
+              \[
+                  \varphi(ab)=\varphi(a)\varphi(b).
+              \]
+        \item For all \(a,b\in K\),
+              \[
+                  \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The first assertion follows immediately from the definition, because
+    \[
+        \gamma^{v(a)}>0
+    \]
+    whenever \(a\neq 0\), while \(\varphi(0)=0\).
+
+    For the multiplicativity, if \(a,b\neq 0\), then
+    \[
+        v(ab)=v(a)+v(b).
+    \]
+    Hence
+    \[
+        \varphi(ab)
+        =
+        \gamma^{v(ab)}
+        =
+        \gamma^{v(a)+v(b)}
+        =
+        \gamma^{v(a)}\gamma^{v(b)}
+        =
+        \varphi(a)\varphi(b).
+    \]
+    If \(a=0\) or \(b=0\), both sides are zero, so the formula still holds.
+
+    Finally, assume first that \(a+b\neq 0\). Since \(v\) is a valuation,
+    \[
+        v(a+b)\geq \min\{v(a),v(b)\}.
+    \]
+    Because \(0<\gamma<1\), the function \(x\mapsto \gamma^x\) is decreasing.
+    Therefore
+    \[
+        \gamma^{v(a+b)}
+        \leq
+        \gamma^{\min\{v(a),v(b)\}}
+        =
+        \max\{\gamma^{v(a)},\gamma^{v(b)}\}.
+    \]
+    Thus
+    \[
+        \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+    \]
+    If \(a+b=0\), then \(\varphi(a+b)=0\), and the same inequality is obvious.
+\end{proof}
+
+\begin{definition}[Multiplicative valuation]
+    Let \(K\) be a field. A function
+    \[
+        \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    is called a multiplicative valuation, or a non-archimedean absolute value, if
+    it satisfies:
+    \begin{enumerate}
+        \item \(\varphi(a)=0\) if and only if \(a=0\);
+        \item
+              \[
+                  \varphi(ab)=\varphi(a)\varphi(b)
+              \]
+              for all \(a,b\in K\);
+        \item
+              \[
+                  \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}
+              \]
+              for all \(a,b\in K\).
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Basic properties of multiplicative valuations]
+    Let
+    \[
+        \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    be a multiplicative valuation. Then for all \(a,b\in K^\times\), the following
+    hold:
+    \begin{enumerate}
+        \item
+              \[
+                  \varphi(1)=1,
+                  \qquad
+                  \varphi(-1)=1.
+              \]
+        \item
+              \[
+                  \varphi(-a)=\varphi(a).
+              \]
+        \item
+              \[
+                  \varphi(a^{-1})=\varphi(a)^{-1}.
+              \]
+        \item If
+              \[
+                  \varphi(a)<\varphi(b),
+              \]
+              then
+              \[
+                  \varphi(a+b)=\varphi(b).
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Since \(1\cdot 1=1\), we have
+    \[
+        \varphi(1)=\varphi(1)^2.
+    \]
+    Since \(\varphi(1)\neq 0\), it follows that
+    \[
+        \varphi(1)=1.
+    \]
+    Also, since \((-1)^2=1\), we get
+    \[
+        \varphi(-1)^2=\varphi(1)=1.
+    \]
+    Since \(\varphi(-1)>0\), we have
+    \[
+        \varphi(-1)=1.
+    \]
+
+    Hence, for \(a\in K^\times\),
+    \[
+        \varphi(-a)=\varphi((-1)a)=\varphi(-1)\varphi(a)=\varphi(a).
+    \]
+
+    Also,
+    \[
+        1=\varphi(1)=\varphi(aa^{-1})=\varphi(a)\varphi(a^{-1}),
+    \]
+    so
+    \[
+        \varphi(a^{-1})=\varphi(a)^{-1}.
+    \]
+
+    Finally, suppose that
+    \[
+        \varphi(a)<\varphi(b).
+    \]
+    By the non-archimedean triangle inequality,
+    \[
+        \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}=\varphi(b).
+    \]
+    On the other hand,
+    \[
+        b=(a+b)-a.
+    \]
+    Hence
+    \[
+        \varphi(b)
+        \leq
+        \max\{\varphi(a+b),\varphi(a)\}.
+    \]
+    If \(\varphi(a+b)<\varphi(b)\), then both \(\varphi(a+b)\) and \(\varphi(a)\) are
+    strictly smaller than \(\varphi(b)\), contradicting the above inequality. Therefore
+    \[
+        \varphi(a+b)=\varphi(b).
+    \]
+\end{proof}
+
+\begin{definition}[Valuation ring and valuation ideal]
+    Let \(\varphi\) be a multiplicative valuation on \(K\). Define
+    \[
+        R_\varphi
+        :=
+        \{a\in K\mid \varphi(a)\leq 1\},
+    \]
+    and
+    \[
+        P_\varphi
+        :=
+        \{a\in K\mid \varphi(a)<1\}.
+    \]
+    Then \(R_\varphi\) is called the valuation ring of \(\varphi\), and
+    \(P_\varphi\) is called the valuation ideal of \(\varphi\).
+\end{definition}
+
+\begin{proposition}
+    Let \(\varphi\) be a multiplicative valuation on \(K\). Then \(R_\varphi\) is a
+    subring of \(K\), and \(P_\varphi\) is an ideal of \(R_\varphi\).
+\end{proposition}
+
+\begin{proof}
+    We first show that \(R_\varphi\) is a subring. Clearly,
+    \[
+        \varphi(0)=0\leq 1,
+        \qquad
+        \varphi(1)=1,
+    \]
+    so \(0,1\in R_\varphi\). If \(a,b\in R_\varphi\), then
+    \[
+        \varphi(ab)=\varphi(a)\varphi(b)\leq 1,
+    \]
+    hence \(ab\in R_\varphi\). Also,
+    \[
+        \varphi(-a)=\varphi(a)\leq 1,
+    \]
+    so \(-a\in R_\varphi\). Finally,
+    \[
+        \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}\leq 1,
+    \]
+    so \(a+b\in R_\varphi\). Therefore \(R_\varphi\) is a subring of \(K\).
+
+    Next we show that \(P_\varphi\) is an ideal of \(R_\varphi\). If \(a,b\in P_\varphi\),
+    then
+    \[
+        \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}<1,
+    \]
+    so \(a+b\in P_\varphi\). Also, if \(r\in R_\varphi\) and \(a\in P_\varphi\), then
+    \[
+        \varphi(ra)=\varphi(r)\varphi(a)<1.
+    \]
+    Hence \(ra\in P_\varphi\). Thus \(P_\varphi\) is an ideal of \(R_\varphi\).
+\end{proof}
+
+\begin{remark}
+    If \(\varphi(a)=\gamma^{v(a)}\) for a normalized discrete valuation \(v\), where
+    \(0<\gamma<1\), then
+    \[
+        R_\varphi
+        =
+        \{a\in K\mid \varphi(a)\leq 1\}
+        =
+        \{a\in K\mid v(a)\geq 0\}
+        =
+        R_v,
+    \]
+    and
+    \[
+        P_\varphi
+        =
+        \{a\in K\mid \varphi(a)<1\}
+        =
+        \{a\in K\mid v(a)>0\}
+        =
+        P_v.
+    \]
+\end{remark}
+
+\begin{proposition}[From multiplicative valuations to additive valuations]
+    Let \(\varphi\) be a multiplicative valuation on \(K\), and fix
+    \[
+        0<\gamma<1.
+    \]
+    Define
+    \[
+        v_\varphi:K^\times\longrightarrow \mathbb{R}
+    \]
+    by
+    \[
+        v_\varphi(a):=\log_\gamma \varphi(a).
+    \]
+    Then \(v_\varphi\) is an additive valuation on \(K\), that is,
+    \[
+        v_\varphi(ab)=v_\varphi(a)+v_\varphi(b),
+    \]
+    and
+    \[
+        v_\varphi(a+b)\geq \min\{v_\varphi(a),v_\varphi(b)\}
+    \]
+    whenever \(a+b\neq 0\).
+\end{proposition}
+
+\begin{proof}
+    For \(a,b\in K^\times\), we have
+    \[
+        \varphi(ab)=\varphi(a)\varphi(b).
+    \]
+    Taking logarithms with base \(\gamma\), we get
+    \[
+        v_\varphi(ab)
+        =
+        \log_\gamma \varphi(ab)
+        =
+        \log_\gamma \varphi(a)+\log_\gamma \varphi(b)
+        =
+        v_\varphi(a)+v_\varphi(b).
+    \]
+
+    Now suppose \(a+b\neq 0\). Since \(\varphi\) is non-archimedean,
+    \[
+        \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+    \]
+    Because \(0<\gamma<1\), the function \(\log_\gamma(x)\) is decreasing. Therefore
+    \[
+        \log_\gamma \varphi(a+b)
+        \geq
+        \log_\gamma \max\{\varphi(a),\varphi(b)\}.
+    \]
+    But
+    \[
+        \log_\gamma \max\{\varphi(a),\varphi(b)\}
+        =
+        \min\{\log_\gamma \varphi(a),\log_\gamma \varphi(b)\}.
+    \]
+    Hence
+    \[
+        v_\varphi(a+b)\geq \min\{v_\varphi(a),v_\varphi(b)\}.
+    \]
+    Thus \(v_\varphi\) is an additive valuation.
+\end{proof}
+
+\begin{definition}[Value group]
+    Let \(\varphi\) be a multiplicative valuation on \(K\). Then
+    \[
+        \varphi(K^\times)\subseteq \mathbb{R}_{>0}
+    \]
+    is a multiplicative subgroup of \(\mathbb{R}_{>0}\). It is called the value group
+    of \(\varphi\).
+\end{definition}
+
+\begin{definition}[Equivalent multiplicative valuations]
+    Let \(K\) be a field, and let
+    \[
+        \varphi,\psi:K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    be two multiplicative valuations on \(K\). We say that \(\varphi\) and \(\psi\)
+    are equivalent if there exists a positive real number
+    \[
+        \gamma\in \mathbb{R}_{>0}
+    \]
+    such that
+    \[
+        \psi(a)=\varphi(a)^{\gamma}
+        \qquad
+        \text{for all } a\in K.
+    \]
+\end{definition}
+
+\begin{definition}[Metric induced by a multiplicative valuation]
+    Let \(\varphi\) be a multiplicative valuation on a field \(K\). Define
+    \[
+        d:K\times K\longrightarrow \mathbb{R}_{\geq 0}
+    \]
+    by
+    \[
+        d(a,b)=\varphi(a-b).
+    \]
+    Then \(d\) is a metric on \(K\).
+\end{definition}
+
+\begin{proposition}
+    Let \(K\) be a field equipped with a multiplicative valuation \(\varphi\).
+    Then the function
+    \[
+        d(a,b)=\varphi(a-b)
+    \]
+    defines a metric on \(K\). In particular, \(K\) is a Hausdorff topological space
+    with respect to the topology induced by \(d\).
+\end{proposition}
+
+\begin{proof}
+    We verify the axioms of a metric.
+
+    First, for any \(a,b\in K\), we have
+    \[
+        d(a,b)=\varphi(a-b)\geq 0.
+    \]
+    Moreover,
+    \[
+        d(a,b)=0
+        \Longleftrightarrow
+        \varphi(a-b)=0
+        \Longleftrightarrow
+        a-b=0
+        \Longleftrightarrow
+        a=b.
+    \]
+
+    Next, since \(\varphi(-1)=1\), we have
+    \[
+        d(a,b)=\varphi(a-b)
+        =
+        \varphi\bigl(-(b-a)\bigr)
+        =
+        \varphi(b-a)
+        =
+        d(b,a).
+    \]
+
+    Finally, for any \(a,b,c\in K\), the valuation inequality gives
+    \[
+        d(a,c)
+        =
+        \varphi(a-c)
+        =
+        \varphi\bigl((a-b)+(b-c)\bigr)
+        \leq
+        \varphi(a-b)+\varphi(b-c).
+    \]
+    Hence
+    \[
+        d(a,c)\leq d(a,b)+d(b,c).
+    \]
+
+    Therefore \(d\) is a metric on \(K\). Since every metric space is Hausdorff,
+    the field \(K\) is Hausdorff with respect to the topology induced by \(d\).
+\end{proof}
