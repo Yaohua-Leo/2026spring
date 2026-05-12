@@ -434,25 +434,49 @@
     Thus the multiplicity of $P_S$ in ${}_A A$ is exactly the multiplicity of $S$ in
     $A/J(A)$.
 
-    It remains to identify $n_S$. Since $A/J(A)$ is semisimple Artinian, the Wedderburn--Artin
-    decomposition shows that the multiplicity of a simple module $S$ in the left regular
-    module of $A/J(A)$ is
+    It remains to identify the integer \(n_S\). Put
     \[
-        n_S=\dim_{D_S}S,
-        \qquad
-        D_S=\operatorname{End}_A(S).
+        \overline{A}:=A/J(A).
     \]
-    Here $S$ is regarded as a right $D_S$-vector space via
+    Since \(A\) is Artinian, the quotient \(\overline{A}\) is semisimple Artinian. Hence the
+    Wedderburn--Artin theorem applies to \(\overline{A}\), not necessarily to \(A\) itself.
+    
+    Every simple left \(A\)-module \(S\) is annihilated by \(J(A)\), and therefore may be
+    regarded naturally as a simple left \(\overline{A}\)-module. Conversely, every simple left
+    \(\overline{A}\)-module is naturally a simple left \(A\)-module via the quotient map
+    \(A\to \overline{A}\). Moreover,
     \[
-        s\cdot \varphi=\varphi(s).
+        \operatorname{End}_{\overline{A}}(S)=\operatorname{End}_A(S).
     \]
-
-    Finally, if $A$ is a finite-dimensional $k$-algebra over an algebraically closed field
-    $k$, then by Schur's lemma,
+    
+    By the Wedderburn--Artin theorem applied to \(\overline{A}\), the multiplicity of \(S\)
+    in the left regular \(\overline{A}\)-module \({}_{\overline{A}}\overline{A}\) is
+    \[
+        n_S=\dim_{D_S} S,
+    \]
+    where
+    \[
+        D_S:=\operatorname{End}_{\overline{A}}(S)^{\operatorname{op}}
+                 =\operatorname{End}_A(S)^{\operatorname{op}}.
+    \]
+    Here \(S\) is regarded as a right \(D_S\)-vector space by
+    \[
+        s\cdot \varphi=\varphi(s),
+        \qquad s\in S,\ \varphi\in \operatorname{End}_A(S).
+    \]
+    Equivalently, this is the usual right action of
+    \(\operatorname{End}_A(S)^{\operatorname{op}}\) on \(S\).
+    
+    Finally, if \(A\) is a finite-dimensional \(k\)-algebra over an algebraically closed field
+    \(k\), then Schur's lemma gives
     \[
         \operatorname{End}_A(S)\cong k.
     \]
-    Therefore
+    Thus also
+    \[
+        D_S\cong k,
+    \]
+    and hence
     \[
         n_S=\dim_{D_S}S=\dim_k S.
     \]
@@ -522,30 +546,20 @@
         q\circ \widetilde{\pi}=\pi.
     \]
 
-    We claim that $\widetilde{\pi}$ is an essential epimorphism. Since $\pi$ is surjective,
-    $q\circ\widetilde{\pi}$ is surjective. Moreover, $q$ is essential by Nakayama's lemma.
-    Therefore $\widetilde{\pi}$ is surjective.
-
-    Now let $W\subseteq P$ be a submodule such that
+    We claim that \(\widetilde{\pi}\) is an essential epimorphism. Since
     \[
-        \widetilde{\pi}(W)=U.
+        q\circ \widetilde{\pi}=\pi,
     \]
-    Then
-    \[
-        \pi(W)=q\bigl(\widetilde{\pi}(W)\bigr)=q(U)=U/\operatorname{Rad}(U).
-    \]
-    Since $\pi:P\to U/\operatorname{Rad}(U)$ is essential, it follows that
-    \[
-        W=P.
-    \]
-    Thus $\widetilde{\pi}$ is essential.
-
+    and since both \(q\) and \(\pi\) are essential epimorphisms, it follows from the
+    two-out-of-three property for essential epimorphisms that \(\widetilde{\pi}\) is also an
+    essential epimorphism.
+    
     Therefore
     \[
         \widetilde{\pi}:P_{S_1}\oplus\cdots\oplus P_{S_n}\longrightarrow U
     \]
-    is an essential epimorphism from a projective module onto $U$. Hence it is a projective
-    cover of $U$.
+    is an essential epimorphism from a projective module onto \(U\). Hence it is a
+    projective cover of \(U\).
 \end{proof}
 
 \begin{lemma}\label{lem:artinian-noetherian}

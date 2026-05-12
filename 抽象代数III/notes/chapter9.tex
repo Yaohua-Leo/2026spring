@@ -495,3 +495,702 @@
         factorization domain. Since every unique factorization domain is integrally closed,
         it follows that \(R\) is integrally closed.
     \end{proof}
+
+    \begin{corollary}
+        Let \(v\) and \(v'\) be two discrete valuations on a field \(K\). Then \(v\)
+        and \(v'\) are equivalent if and only if they have the same valuation ideal, that is,
+        \[
+            P_v=P_{v'},
+        \]
+        where
+        \[
+            P_v=\{x\in K\mid v(x)>0\},
+            \qquad
+            P_{v'}=\{x\in K\mid v'(x)>0\}.
+        \]
+    \end{corollary}
+    
+    \begin{proof}
+        If \(v\) and \(v'\) are equivalent, then there exists \(\lambda\in \mathbb{R}_{>0}\)
+        such that
+        \[
+            v'=\lambda v.
+        \]
+        Hence, for every \(x\in K\),
+        \[
+            v'(x)>0 \Longleftrightarrow \lambda v(x)>0
+            \Longleftrightarrow v(x)>0.
+        \]
+        Therefore
+        \[
+            P_v=P_{v'}.
+        \]
+    
+        Conversely, suppose that
+        \[
+            P_v=P_{v'}=:P.
+        \]
+        We first show that the valuation ring can be recovered from the valuation ideal. Namely,
+        \[
+            R_v=K\setminus P^{-1},
+        \]
+        where
+        \[
+            P^{-1}:=\{a^{-1}\mid a\in P,\ a\neq 0\}.
+        \]
+        Indeed, if \(x\in R_v\), then \(v(x)\geq 0\). Hence \(x\) cannot be of the form
+        \(a^{-1}\) with \(a\in P\), because then
+        \[
+            v(x)=v(a^{-1})=-v(a)<0.
+        \]
+        Thus \(x\notin P^{-1}\). Conversely, if \(x\notin R_v\), then \(x\neq 0\) and
+        \(v(x)<0\). Hence
+        \[
+            v(x^{-1})=-v(x)>0,
+        \]
+        so \(x^{-1}\in P\), and therefore
+        \[
+            x=(x^{-1})^{-1}\in P^{-1}.
+        \]
+        This proves
+        \[
+            R_v=K\setminus P^{-1}.
+        \]
+        Since \(P_v=P_{v'}\), we get
+        \[
+            R_v=R_{v'}=:R.
+        \]
+    
+        Now replace \(v\) and \(v'\) by equivalent normalized discrete valuations. This does
+        not change the valuation ring or the valuation ideal. Hence we may assume that
+        \[
+            v(K^\times)=\mathbb{Z},
+            \qquad
+            v'(K^\times)=\mathbb{Z}.
+        \]
+    
+        Choose \(\pi\in K^\times\) such that
+        \[
+            v(\pi)=1.
+        \]
+        Then \(\pi\) is a uniformizer for \(v\), so by Theorem~9.0.11,
+        \[
+            P=(\pi)
+        \]
+        as an ideal of \(R\).
+    
+        Let \(\pi'\) be a uniformizer for \(v'\). Then similarly
+        \[
+            P=(\pi').
+        \]
+        Since
+        \[
+            (\pi)=(\pi'),
+        \]
+        there exist \(r,s\in R\) such that
+        \[
+            \pi=r\pi',
+            \qquad
+            \pi'=s\pi.
+        \]
+        Applying \(v'\), we obtain
+        \[
+            v'(\pi)=v'(r)+v'(\pi')\geq 1,
+        \]
+        and
+        \[
+            1=v'(\pi')=v'(s)+v'(\pi)\geq v'(\pi).
+        \]
+        Therefore
+        \[
+            v'(\pi)=1.
+        \]
+    
+        Now let \(a\in K^\times\). By Theorem~9.0.11, there exists \(u\in R^\times\) such
+        that
+        \[
+            a=\pi^{v(a)}u.
+        \]
+        Since \(R=R_{v'}\), the units of \(R\) are exactly the elements of valuation \(0\) with
+        respect to \(v'\). Hence
+        \[
+            v'(u)=0.
+        \]
+        Therefore
+        \[
+            v'(a)=v\left(a\right)v'(\pi)+v'(u)=v(a).
+        \]
+        Thus \(v'=v\) after normalization.
+    
+        Hence the original discrete valuations differ by multiplication by a positive real
+        constant. Therefore \(v\) and \(v'\) are equivalent.
+    \end{proof}
+
+    \begin{theorem}[Discrete valuation rings and local PIDs]
+        Let \(R\) be an integral domain which is not a field, and let
+        \(K=\operatorname{Frac}(R)\). Then \(R\) is a discrete valuation ring if and only if
+        \(R\) is a local principal ideal domain.
+    \end{theorem}
+    
+    \begin{proof}
+        Suppose first that \(R\) is a discrete valuation ring. Then there exists a normalized
+        discrete valuation
+        \[
+            v:K^\times\longrightarrow \mathbb{Z}
+        \]
+        such that
+        \[
+            R=\{x\in K\mid v(x)\geq 0\}.
+        \]
+        By the structure theorem for valuation rings of normalized discrete valuations, \(R\)
+        is a local principal ideal domain. More precisely, if \(\pi\in R\) satisfies
+        \(v(\pi)=1\), then the maximal ideal of \(R\) is
+        \[
+            P=\{x\in R\mid v(x)>0\}=(\pi),
+        \]
+        and every nonzero ideal of \(R\) is of the form
+        \[
+            P^n=(\pi^n)
+        \]
+        for some integer \(n\geq 0\). Hence \(R\) is a local PID.
+    
+        Conversely, suppose that \(R\) is a local principal ideal domain. Since \(R\) is not
+        a field, its unique maximal ideal is nonzero. Denote it by
+        \[
+            P=J(R).
+        \]
+        Since \(R\) is a PID, there exists a nonzero nonunit \(\pi\in R\) such that
+        \[
+            P=(\pi).
+        \]
+    
+        We first claim that
+        \[
+            \bigcap_{n\geq 1}P^n=0.
+        \]
+        Suppose, for contradiction, that
+        \[
+            0\neq a\in \bigcap_{n\geq 1}P^n.
+        \]
+        Since \(P^n=(\pi^n)\), for each \(n\geq 1\) there exists \(a_n\in R\) such that
+        \[
+            a=\pi^n a_n.
+        \]
+        Then
+        \[
+            \pi^n a_n=\pi^{n+1}a_{n+1}.
+        \]
+        Since \(R\) is an integral domain and \(\pi\neq 0\), we may cancel \(\pi^n\), obtaining
+        \[
+            a_n=\pi a_{n+1}.
+        \]
+        Hence
+        \[
+            (a_n)\subseteq (a_{n+1}).
+        \]
+        This inclusion is strict. Indeed, if \((a_n)=(a_{n+1})\), then
+        \(a_{n+1}=r a_n\) for some \(r\in R\). Hence
+        \[
+            a_{n+1}=r\pi a_{n+1}.
+        \]
+        Since \(a_{n+1}\neq 0\), we get \(1=r\pi\), which means that \(\pi\) is a unit, a
+        contradiction. Thus we obtain a strictly ascending chain of ideals
+        \[
+            (a_1)\subsetneq (a_2)\subsetneq (a_3)\subsetneq\cdots.
+        \]
+        This contradicts the fact that \(R\) is Noetherian, because every PID is Noetherian.
+        Therefore
+        \[
+            \bigcap_{n\geq 1}P^n=0.
+        \]
+    
+        Now let \(0\neq a\in R\). Since \(P^0=R\), the set
+        \[
+            \{n\geq 0\mid a\in P^n\}
+        \]
+        is nonempty. By the claim above, \(a\) cannot belong to all powers \(P^n\). Hence
+        there exists a unique integer \(n\geq 0\) such that
+        \[
+            a\in P^n
+            \qquad\text{and}\qquad
+            a\notin P^{n+1}.
+        \]
+        Since \(P^n=(\pi^n)\), we may write
+        \[
+            a=\pi^n u
+        \]
+        for some \(u\in R\). If \(u\in P\), then
+        \[
+            a=\pi^n u\in \pi^n P=P^{n+1},
+        \]
+        contradicting the choice of \(n\). Thus \(u\notin P\). Since \(R\) is local and \(P\)
+        is the set of nonunits, it follows that
+        \[
+            u\in R^\times.
+        \]
+        Therefore every nonzero element \(a\in R\) can be written uniquely in the form
+        \[
+            a=\pi^n u,
+            \qquad n\geq 0,\quad u\in R^\times.
+        \]
+    
+        We now extend this to \(K^\times\). Every \(x\in K^\times\) can be written as
+        \[
+            x=\frac{a}{b},
+            \qquad a,b\in R\setminus\{0\}.
+        \]
+        Write
+        \[
+            a=\pi^m u,\qquad b=\pi^n w,
+        \]
+        where \(m,n\geq 0\) and \(u,w\in R^\times\). Then
+        \[
+            x=\pi^{m-n}uw^{-1}.
+        \]
+        Hence every \(x\in K^\times\) has a representation
+        \[
+            x=\pi^r u,
+            \qquad r\in \mathbb{Z},\quad u\in R^\times.
+        \]
+        This representation is unique. Indeed, if
+        \[
+            \pi^r u=\pi^s w,
+            \qquad u,w\in R^\times,
+        \]
+        and say \(r<s\), then
+        \[
+            u=\pi^{s-r}w\in P,
+        \]
+        contradicting that \(u\) is a unit. Hence \(r=s\).
+    
+        Define
+        \[
+            v:K^\times\longrightarrow \mathbb{Z}
+        \]
+        by
+        \[
+            v(\pi^r u)=r,
+            \qquad r\in\mathbb{Z},\quad u\in R^\times.
+        \]
+        This is well-defined by the uniqueness just proved.
+    
+        We verify that \(v\) is a valuation. If
+        \[
+            x=\pi^r u,\qquad y=\pi^s w,
+        \]
+        with \(u,w\in R^\times\), then
+        \[
+            xy=\pi^{r+s}uw,
+        \]
+        and \(uw\in R^\times\). Therefore
+        \[
+            v(xy)=r+s=v(x)+v(y).
+        \]
+        Next, suppose \(x+y\neq 0\). Without loss of generality, assume \(r\leq s\). Then
+        \[
+            x+y=\pi^r\left(u+\pi^{s-r}w\right).
+        \]
+        Since
+        \[
+            u+\pi^{s-r}w\in R,
+        \]
+        its valuation is nonnegative whenever it is nonzero. Thus
+        \[
+            v(x+y)\geq r=\min\{r,s\}=\min\{v(x),v(y)\}.
+        \]
+        Hence \(v\) is a valuation.
+    
+        Moreover,
+        \[
+            v(\pi)=1,
+        \]
+        so
+        \[
+            v(K^\times)=\mathbb{Z}.
+        \]
+        Therefore \(v\) is a normalized discrete valuation.
+    
+        Finally, we show that \(R\) is exactly the valuation ring of \(v\). Let
+        \[
+            R_v:=\{x\in K\mid v(x)\geq 0\}.
+        \]
+        If \(x\in R\setminus\{0\}\), then by the decomposition above,
+        \[
+            x=\pi^n u
+        \]
+        with \(n\geq 0\), so \(v(x)=n\geq 0\). Hence \(R\subseteq R_v\).
+    
+        Conversely, if \(x\in R_v\setminus\{0\}\), write
+        \[
+            x=\pi^r u,
+            \qquad r\in\mathbb{Z},\quad u\in R^\times.
+        \]
+        Since \(v(x)=r\geq 0\), we have
+        \[
+            x=\pi^r u\in R.
+        \]
+        Hence \(R_v\subseteq R\).
+    
+        Therefore
+        \[
+            R=R_v.
+        \]
+        Thus \(R\) is the valuation ring of a normalized discrete valuation, and hence \(R\)
+        is a discrete valuation ring.
+    \end{proof}
+
+    \begin{definition}[Multiplicative valuation associated to a discrete valuation]
+        Let \(K\) be a field, and let
+        \[
+            v:K^\times\longrightarrow \mathbb{Z}
+        \]
+        be a normalized discrete valuation. We extend \(v\) to \(K\) by setting
+        \[
+            v(0)=+\infty.
+        \]
+        Fix a real number
+        \[
+            0<\gamma<1.
+        \]
+        Define a function
+        \[
+            \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+        \]
+        by
+        \[
+            \varphi(a)=
+            \begin{cases}
+                \gamma^{v(a)}, & a\neq 0,\\
+                0, & a=0.
+            \end{cases}
+        \]
+        Then \(\varphi\) is called the multiplicative valuation associated to \(v\)
+        with parameter \(\gamma\).
+    \end{definition}
+    
+    \begin{proposition}
+        The function
+        \[
+            \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+        \]
+        defined above satisfies the following properties:
+        \begin{enumerate}
+            \item \(\varphi(a)=0\) if and only if \(a=0\).
+            \item For all \(a,b\in K\),
+                  \[
+                      \varphi(ab)=\varphi(a)\varphi(b).
+                  \]
+            \item For all \(a,b\in K\),
+                  \[
+                      \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+                  \]
+        \end{enumerate}
+    \end{proposition}
+    
+    \begin{proof}
+        The first assertion follows immediately from the definition, because
+        \[
+            \gamma^{v(a)}>0
+        \]
+        whenever \(a\neq 0\), while \(\varphi(0)=0\).
+    
+        For the multiplicativity, if \(a,b\neq 0\), then
+        \[
+            v(ab)=v(a)+v(b).
+        \]
+        Hence
+        \[
+            \varphi(ab)
+            =
+            \gamma^{v(ab)}
+            =
+            \gamma^{v(a)+v(b)}
+            =
+            \gamma^{v(a)}\gamma^{v(b)}
+            =
+            \varphi(a)\varphi(b).
+        \]
+        If \(a=0\) or \(b=0\), both sides are zero, so the formula still holds.
+    
+        Finally, assume first that \(a+b\neq 0\). Since \(v\) is a valuation,
+        \[
+            v(a+b)\geq \min\{v(a),v(b)\}.
+        \]
+        Because \(0<\gamma<1\), the function \(x\mapsto \gamma^x\) is decreasing.
+        Therefore
+        \[
+            \gamma^{v(a+b)}
+            \leq
+            \gamma^{\min\{v(a),v(b)\}}
+            =
+            \max\{\gamma^{v(a)},\gamma^{v(b)}\}.
+        \]
+        Thus
+        \[
+            \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+        \]
+        If \(a+b=0\), then \(\varphi(a+b)=0\), and the same inequality is obvious.
+    \end{proof}
+    
+    \begin{definition}[Multiplicative valuation]
+        Let \(K\) be a field. A function
+        \[
+            \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+        \]
+        is called a multiplicative valuation, or a non-archimedean absolute value, if
+        it satisfies:
+        \begin{enumerate}
+            \item \(\varphi(a)=0\) if and only if \(a=0\);
+            \item
+                  \[
+                      \varphi(ab)=\varphi(a)\varphi(b)
+                  \]
+                  for all \(a,b\in K\);
+            \item
+                  \[
+                      \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}
+                  \]
+                  for all \(a,b\in K\).
+        \end{enumerate}
+    \end{definition}
+    
+    \begin{proposition}[Basic properties of multiplicative valuations]
+        Let
+        \[
+            \varphi:K\longrightarrow \mathbb{R}_{\geq 0}
+        \]
+        be a multiplicative valuation. Then for all \(a,b\in K^\times\), the following
+        hold:
+        \begin{enumerate}
+            \item
+                  \[
+                      \varphi(1)=1,
+                      \qquad
+                      \varphi(-1)=1.
+                  \]
+            \item
+                  \[
+                      \varphi(-a)=\varphi(a).
+                  \]
+            \item
+                  \[
+                      \varphi(a^{-1})=\varphi(a)^{-1}.
+                  \]
+            \item If
+                  \[
+                      \varphi(a)<\varphi(b),
+                  \]
+                  then
+                  \[
+                      \varphi(a+b)=\varphi(b).
+                  \]
+        \end{enumerate}
+    \end{proposition}
+    
+    \begin{proof}
+        Since \(1\cdot 1=1\), we have
+        \[
+            \varphi(1)=\varphi(1)^2.
+        \]
+        Since \(\varphi(1)\neq 0\), it follows that
+        \[
+            \varphi(1)=1.
+        \]
+        Also, since \((-1)^2=1\), we get
+        \[
+            \varphi(-1)^2=\varphi(1)=1.
+        \]
+        Since \(\varphi(-1)>0\), we have
+        \[
+            \varphi(-1)=1.
+        \]
+    
+        Hence, for \(a\in K^\times\),
+        \[
+            \varphi(-a)=\varphi((-1)a)=\varphi(-1)\varphi(a)=\varphi(a).
+        \]
+    
+        Also,
+        \[
+            1=\varphi(1)=\varphi(aa^{-1})=\varphi(a)\varphi(a^{-1}),
+        \]
+        so
+        \[
+            \varphi(a^{-1})=\varphi(a)^{-1}.
+        \]
+    
+        Finally, suppose that
+        \[
+            \varphi(a)<\varphi(b).
+        \]
+        By the non-archimedean triangle inequality,
+        \[
+            \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}=\varphi(b).
+        \]
+        On the other hand,
+        \[
+            b=(a+b)-a.
+        \]
+        Hence
+        \[
+            \varphi(b)
+            \leq
+            \max\{\varphi(a+b),\varphi(a)\}.
+        \]
+        If \(\varphi(a+b)<\varphi(b)\), then both \(\varphi(a+b)\) and \(\varphi(a)\) are
+        strictly smaller than \(\varphi(b)\), contradicting the above inequality. Therefore
+        \[
+            \varphi(a+b)=\varphi(b).
+        \]
+    \end{proof}
+    
+    \begin{definition}[Valuation ring and valuation ideal]
+        Let \(\varphi\) be a multiplicative valuation on \(K\). Define
+        \[
+            R_\varphi
+            :=
+            \{a\in K\mid \varphi(a)\leq 1\},
+        \]
+        and
+        \[
+            P_\varphi
+            :=
+            \{a\in K\mid \varphi(a)<1\}.
+        \]
+        Then \(R_\varphi\) is called the valuation ring of \(\varphi\), and
+        \(P_\varphi\) is called the valuation ideal of \(\varphi\).
+    \end{definition}
+    
+    \begin{proposition}
+        Let \(\varphi\) be a multiplicative valuation on \(K\). Then \(R_\varphi\) is a
+        subring of \(K\), and \(P_\varphi\) is an ideal of \(R_\varphi\).
+    \end{proposition}
+    
+    \begin{proof}
+        We first show that \(R_\varphi\) is a subring. Clearly,
+        \[
+            \varphi(0)=0\leq 1,
+            \qquad
+            \varphi(1)=1,
+        \]
+        so \(0,1\in R_\varphi\). If \(a,b\in R_\varphi\), then
+        \[
+            \varphi(ab)=\varphi(a)\varphi(b)\leq 1,
+        \]
+        hence \(ab\in R_\varphi\). Also,
+        \[
+            \varphi(-a)=\varphi(a)\leq 1,
+        \]
+        so \(-a\in R_\varphi\). Finally,
+        \[
+            \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}\leq 1,
+        \]
+        so \(a+b\in R_\varphi\). Therefore \(R_\varphi\) is a subring of \(K\).
+    
+        Next we show that \(P_\varphi\) is an ideal of \(R_\varphi\). If \(a,b\in P_\varphi\),
+        then
+        \[
+            \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}<1,
+        \]
+        so \(a+b\in P_\varphi\). Also, if \(r\in R_\varphi\) and \(a\in P_\varphi\), then
+        \[
+            \varphi(ra)=\varphi(r)\varphi(a)<1.
+        \]
+        Hence \(ra\in P_\varphi\). Thus \(P_\varphi\) is an ideal of \(R_\varphi\).
+    \end{proof}
+    
+    \begin{remark}
+        If \(\varphi(a)=\gamma^{v(a)}\) for a normalized discrete valuation \(v\), where
+        \(0<\gamma<1\), then
+        \[
+            R_\varphi
+            =
+            \{a\in K\mid \varphi(a)\leq 1\}
+            =
+            \{a\in K\mid v(a)\geq 0\}
+            =
+            R_v,
+        \]
+        and
+        \[
+            P_\varphi
+            =
+            \{a\in K\mid \varphi(a)<1\}
+            =
+            \{a\in K\mid v(a)>0\}
+            =
+            P_v.
+        \]
+    \end{remark}
+    
+    \begin{proposition}[From multiplicative valuations to additive valuations]
+        Let \(\varphi\) be a multiplicative valuation on \(K\), and fix
+        \[
+            0<\gamma<1.
+        \]
+        Define
+        \[
+            v_\varphi:K^\times\longrightarrow \mathbb{R}
+        \]
+        by
+        \[
+            v_\varphi(a):=\log_\gamma \varphi(a).
+        \]
+        Then \(v_\varphi\) is an additive valuation on \(K\), that is,
+        \[
+            v_\varphi(ab)=v_\varphi(a)+v_\varphi(b),
+        \]
+        and
+        \[
+            v_\varphi(a+b)\geq \min\{v_\varphi(a),v_\varphi(b)\}
+        \]
+        whenever \(a+b\neq 0\).
+    \end{proposition}
+    
+    \begin{proof}
+        For \(a,b\in K^\times\), we have
+        \[
+            \varphi(ab)=\varphi(a)\varphi(b).
+        \]
+        Taking logarithms with base \(\gamma\), we get
+        \[
+            v_\varphi(ab)
+            =
+            \log_\gamma \varphi(ab)
+            =
+            \log_\gamma \varphi(a)+\log_\gamma \varphi(b)
+            =
+            v_\varphi(a)+v_\varphi(b).
+        \]
+    
+        Now suppose \(a+b\neq 0\). Since \(\varphi\) is non-archimedean,
+        \[
+            \varphi(a+b)\leq \max\{\varphi(a),\varphi(b)\}.
+        \]
+        Because \(0<\gamma<1\), the function \(\log_\gamma(x)\) is decreasing. Therefore
+        \[
+            \log_\gamma \varphi(a+b)
+            \geq
+            \log_\gamma \max\{\varphi(a),\varphi(b)\}.
+        \]
+        But
+        \[
+            \log_\gamma \max\{\varphi(a),\varphi(b)\}
+            =
+            \min\{\log_\gamma \varphi(a),\log_\gamma \varphi(b)\}.
+        \]
+        Hence
+        \[
+            v_\varphi(a+b)\geq \min\{v_\varphi(a),v_\varphi(b)\}.
+        \]
+        Thus \(v_\varphi\) is an additive valuation.
+    \end{proof}
+    
+    \begin{definition}[Value group]
+        Let \(\varphi\) be a multiplicative valuation on \(K\). Then
+        \[
+            \varphi(K^\times)\subseteq \mathbb{R}_{>0}
+        \]
+        is a multiplicative subgroup of \(\mathbb{R}_{>0}\). It is called the value group
+        of \(\varphi\).
+    \end{definition}

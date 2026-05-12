@@ -1,0 +1,282 @@
+\section{Homework Week 10}
+
+\begin{exercise}
+    Let \(R\) be a ring and let \(V\) be an \(R\)-module. Let \(I\) be an ideal of
+    \(R\). Suppose that \(d_I\) is defined on \(V\) and on \(R\). Then:
+    \begin{enumerate}
+        \item Addition is continuous from \(V\times V\) to \(V\).
+        \item Multiplication is continuous from \(R\times V\) to \(V\).
+        \item If \(d_I\) is defined on the \(R\)-module \(W\) and
+              \(f\in \operatorname{Hom}_R(V,W)\), then \(f\) is continuous.
+    \end{enumerate}
+    \end{exercise}
+    
+    \begin{proof}
+    Recall that, for an \(R\)-module \(M\), the \(I\)-adic topology induced by
+    \(d_I\) has a basis of neighbourhoods of \(x\in M\) given by
+    \[
+        x+I^nM,\qquad n\geq 1.
+    \]
+    
+    \begin{enumerate}
+        \item Let \((v_0,w_0)\in V\times V\). We show that addition is continuous at
+              \((v_0,w_0)\). Let
+              \[
+                  v_0+w_0+I^nV
+              \]
+              be a neighbourhood of \(v_0+w_0\). If
+              \[
+                  v-v_0\in I^nV,\qquad w-w_0\in I^nV,
+              \]
+              then
+              \[
+                  (v+w)-(v_0+w_0)=(v-v_0)+(w-w_0)\in I^nV.
+              \]
+              Hence
+              \[
+                  v+w\in v_0+w_0+I^nV.
+              \]
+              Therefore addition \(V\times V\to V\) is continuous.
+    
+        \item Let \((r_0,v_0)\in R\times V\). We show that scalar multiplication is
+              continuous at \((r_0,v_0)\). Let
+              \[
+                  r_0v_0+I^nV
+              \]
+              be a neighbourhood of \(r_0v_0\). Suppose
+              \[
+                  r-r_0\in I^n,\qquad v-v_0\in I^nV.
+              \]
+              Then
+              \[
+                  rv-r_0v_0=(r-r_0)v+r_0(v-v_0).
+              \]
+              Since \(r-r_0\in I^n\), we have
+              \[
+                  (r-r_0)v\in I^nV.
+              \]
+              Also, because \(I^nV\) is an \(R\)-submodule of \(V\),
+              \[
+                  r_0(v-v_0)\in I^nV.
+              \]
+              Therefore
+              \[
+                  rv-r_0v_0\in I^nV.
+              \]
+              Hence
+              \[
+                  rv\in r_0v_0+I^nV.
+              \]
+              Thus multiplication \(R\times V\to V\) is continuous.
+    
+        \item Let \(f\in \operatorname{Hom}_R(V,W)\). We first observe that
+              \[
+                  f(I^nV)\subseteq I^nW
+              \]
+              for every \(n\geq 1\). Indeed, if
+              \[
+                  x=\sum_{j=1}^m a_jv_j\in I^nV,
+                  \qquad a_j\in I^n,\ v_j\in V,
+              \]
+              then
+              \[
+                  f(x)
+                  =
+                  f\left(\sum_{j=1}^m a_jv_j\right)
+                  =
+                  \sum_{j=1}^m a_jf(v_j)
+                  \in I^nW.
+              \]
+              Now let \(v_0\in V\), and let
+              \[
+                  f(v_0)+I^nW
+              \]
+              be a neighbourhood of \(f(v_0)\). If
+              \[
+                  v-v_0\in I^nV,
+              \]
+              then
+              \[
+                  f(v)-f(v_0)=f(v-v_0)\in I^nW.
+              \]
+              Hence
+              \[
+                  f(v)\in f(v_0)+I^nW.
+              \]
+              Therefore \(f\) is continuous.
+    \end{enumerate}
+    \end{proof}
+    
+    
+    \begin{exercise}
+    Let \(R\) be a commutative ring, and let \(A\) and \(B\) be \(R\)-algebras.
+    Prove the following algebra isomorphisms:
+    \begin{enumerate}
+        \item
+        \[
+            M_n(A)\otimes_R B \cong M_n(A\otimes_R B).
+        \]
+        \item
+        \[
+            M_n(A)\otimes_R M_m(B) \cong M_{nm}(A\otimes_R B).
+        \]
+    \end{enumerate}
+    \end{exercise}
+    
+    \begin{proof}
+    \begin{enumerate}
+        \item Define a map
+              \[
+                  \Phi:M_n(A)\otimes_R B\longrightarrow M_n(A\otimes_R B)
+              \]
+              on elementary tensors by
+              \[
+                  \Phi\bigl((a_{ij})\otimes b\bigr)
+                  =
+                  (a_{ij}\otimes b).
+              \]
+              This is well-defined and \(R\)-linear by the universal property of the
+              tensor product.
+    
+              We construct its inverse. Every element of \(M_n(A\otimes_R B)\) can be
+              written as a matrix whose \((i,j)\)-entry is a finite sum of elementary
+              tensors. Define
+              \[
+                  \Psi:M_n(A\otimes_R B)\longrightarrow M_n(A)\otimes_R B
+              \]
+              by
+              \[
+                  \Psi\bigl((x_{ij})\bigr)
+                  =
+                  \sum_{i,j}\sum_\ell
+                  a_{ij\ell}E_{ij}\otimes b_{ij\ell},
+              \]
+              whenever
+              \[
+                  x_{ij}=\sum_\ell a_{ij\ell}\otimes b_{ij\ell}.
+              \]
+              This is well-defined because tensor product distributes over finite
+              direct sums. It is immediate that
+              \[
+                  \Phi\circ \Psi=\operatorname{id},
+                  \qquad
+                  \Psi\circ \Phi=\operatorname{id}.
+              \]
+              Hence \(\Phi\) is an \(R\)-module isomorphism.
+    
+              It remains to check that \(\Phi\) is an algebra homomorphism. Let
+              \(X=(x_{ij})\), \(Y=(y_{ij})\in M_n(A)\), and let \(b,b'\in B\). Then
+              \[
+                  \Phi\bigl((X\otimes b)(Y\otimes b')\bigr)
+                  =
+                  \Phi(XY\otimes bb')
+                  =
+                  ( (XY)_{ik}\otimes bb')_{i,k}.
+              \]
+              On the other hand,
+              \[
+                  \Phi(X\otimes b)\Phi(Y\otimes b')
+                  =
+                  (x_{ij}\otimes b)_{i,j}(y_{jk}\otimes b')_{j,k},
+              \]
+              whose \((i,k)\)-entry is
+              \[
+                  \sum_j (x_{ij}\otimes b)(y_{jk}\otimes b')
+                  =
+                  \sum_j x_{ij}y_{jk}\otimes bb'
+                  =
+                  (XY)_{ik}\otimes bb'.
+              \]
+              Thus
+              \[
+                  \Phi\bigl((X\otimes b)(Y\otimes b')\bigr)
+                  =
+                  \Phi(X\otimes b)\Phi(Y\otimes b').
+              \]
+              Also,
+              \[
+                  \Phi(I_n\otimes 1_B)=I_n.
+              \]
+              Therefore
+              \[
+                  M_n(A)\otimes_R B \cong M_n(A\otimes_R B)
+              \]
+              as \(R\)-algebras.
+    
+        \item Let \(E_{ij}\) denote the standard matrix units in \(M_n(A)\), and let
+              \(F_{kl}\) denote the standard matrix units in \(M_m(B)\). We identify
+              the rows and columns of \(M_{nm}(A\otimes_R B)\) with pairs
+              \[
+                  (i,k),\qquad 1\leq i\leq n,\quad 1\leq k\leq m.
+              \]
+              Let \(G_{(i,k),(j,l)}\) be the corresponding standard matrix unit in
+              \(M_{nm}(A\otimes_R B)\).
+    
+              Define
+              \[
+                  \Theta:M_n(A)\otimes_R M_m(B)
+                  \longrightarrow
+                  M_{nm}(A\otimes_R B)
+              \]
+              by
+              \[
+                  \Theta\bigl((aE_{ij})\otimes (bF_{kl})\bigr)
+                  =
+                  (a\otimes b)G_{(i,k),(j,l)}.
+              \]
+              Since
+              \[
+                  M_n(A)=\bigoplus_{i,j} AE_{ij},
+                  \qquad
+                  M_m(B)=\bigoplus_{k,l} BF_{kl},
+              \]
+              and tensor product distributes over finite direct sums, \(\Theta\) is an
+              \(R\)-module isomorphism.
+    
+              We check multiplicativity on elementary generators. We have
+              \[
+                  (aE_{ij})(a'E_{i'j'})
+                  =
+                  \delta_{j,i'}aa'E_{ij'},
+              \]
+              and
+              \[
+                  (bF_{kl})(b'F_{k'l'})
+                  =
+                  \delta_{l,k'}bb'F_{kl'}.
+              \]
+              Therefore
+              \[
+              \begin{aligned}
+                  &\Theta\left(
+                  \bigl((aE_{ij})\otimes (bF_{kl})\bigr)
+                  \bigl((a'E_{i'j'})\otimes (b'F_{k'l'})\bigr)
+                  \right) \\
+                  &=
+                  \delta_{j,i'}\delta_{l,k'}
+                  (aa'\otimes bb')G_{(i,k),(j',l')}.
+              \end{aligned}
+              \]
+              On the other hand,
+              \[
+              \begin{aligned}
+                  &\Theta\bigl((aE_{ij})\otimes (bF_{kl})\bigr)
+                  \Theta\bigl((a'E_{i'j'})\otimes (b'F_{k'l'})\bigr) \\
+                  &=
+                  (a\otimes b)G_{(i,k),(j,l)}
+                  (a'\otimes b')G_{(i',k'),(j',l')} \\
+                  &=
+                  \delta_{j,i'}\delta_{l,k'}
+                  (aa'\otimes bb')G_{(i,k),(j',l')}.
+              \end{aligned}
+              \]
+              Hence \(\Theta\) preserves multiplication. It also sends the identity to
+              the identity. Therefore
+              \[
+                  M_n(A)\otimes_R M_m(B)
+                  \cong
+                  M_{nm}(A\otimes_R B)
+              \]
+              as \(R\)-algebras.
+    \end{enumerate}
+    \end{proof}
