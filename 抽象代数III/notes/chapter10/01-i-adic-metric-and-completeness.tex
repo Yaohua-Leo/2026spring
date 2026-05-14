@@ -1,0 +1,442 @@
+\section{\texorpdfstring{The \(I\)-adic metric and completeness}{The I-adic metric and completeness}}
+
+Let \(R\) be a ring, let \(V\) be an \(R\)-module, and let \(I\) be an ideal of \(R\).
+Assume that
+\[
+    \bigcap_{i=1}^{\infty} I^i V = 0.
+\]
+We set \(I^0V:=V\).
+
+Fix a real number \(\gamma\) such that
+\[
+    0<\gamma<1.
+\]
+For \(v\in V\), define
+\[
+    \|0\|_I=0.
+\]
+If \(v\neq 0\), then there exists a unique integer \(i\geq 0\) such that
+\[
+    v\in I^iV\setminus I^{i+1}V.
+\]
+We define
+\[
+    \|v\|_I=\gamma^i.
+\]
+
+Equivalently, if
+\[
+    \operatorname{ord}_I(v)
+    :=
+    \max\{\,i\geq 0\mid v\in I^iV\,\},
+\]
+then
+\[
+    \|v\|_I=\gamma^{\operatorname{ord}_I(v)}
+    \qquad (v\neq 0).
+\]
+
+\begin{definition}[\(I\)-adic metric]
+    Define
+    \[
+        d_I(v,w)=\|v-w\|_I,
+        \qquad v,w\in V.
+    \]
+    We call \(d_I\) the \(I\)-adic metric on \(V\).
+\end{definition}
+
+\begin{proposition}
+    The function \(d_I\) is a metric on \(V\). More precisely, for all
+    \(u,v,w\in V\), one has
+    \[
+        d_I(v,u)
+        \leq
+        \max\{\,d_I(v,w),d_I(w,u)\,\}.
+    \]
+    In particular, \(d_I\) is a non-archimedean metric.
+\end{proposition}
+
+\begin{proof}
+    It is clear that
+    \[
+        d_I(v,w)\geq 0
+    \]
+    and that
+    \[
+        d_I(v,w)=d_I(w,v).
+    \]
+    Moreover,
+    \[
+        d_I(v,w)=0
+    \]
+    if and only if \(v-w\in \bigcap_{i\geq 1} I^iV\). By assumption,
+    \[
+        \bigcap_{i\geq 1} I^iV=0,
+    \]
+    so \(d_I(v,w)=0\) if and only if \(v=w\).
+
+    It remains to prove the triangle inequality. Let
+    \[
+        a=v-w,\qquad b=w-u.
+    \]
+    Then
+    \[
+        v-u=a+b.
+    \]
+    Suppose
+    \[
+        a\in I^rV,\qquad b\in I^sV.
+    \]
+    If \(m=\min\{r,s\}\), then
+    \[
+        a,b\in I^mV,
+    \]
+    hence
+    \[
+        a+b\in I^mV.
+    \]
+    Therefore
+    \[
+        \operatorname{ord}_I(a+b)
+        \geq
+        \min\{\operatorname{ord}_I(a),\operatorname{ord}_I(b)\}.
+    \]
+    Since \(0<\gamma<1\), this gives
+    \[
+        \|a+b\|_I
+        \leq
+        \max\{\|a\|_I,\|b\|_I\}.
+    \]
+    Thus
+    \[
+        d_I(v,u)
+        =
+        \|v-u\|_I
+        =
+        \|a+b\|_I
+        \leq
+        \max\{\|a\|_I,\|b\|_I\}
+        =
+        \max\{d_I(v,w),d_I(w,u)\}.
+    \]
+    Hence \(d_I\) is a non-archimedean metric on \(V\).
+\end{proof}
+
+\begin{proposition}[Cauchy sequences and convergence]
+    Let \((v_i)_{i\geq 1}\) be a sequence of elements of \(V\).
+    Then:
+    \begin{enumerate}
+        \item The sequence \((v_i)\) is Cauchy with respect to \(d_I\) if and only if
+        for every integer \(m>0\), there exists an integer \(n>0\) such that
+        \[
+            v_i-v_j\in I^mV
+        \]
+        for all \(i,j>n\).
+
+        \item The sequence \((v_i)\) converges to \(v\in V\) with respect to \(d_I\) if
+        and only if for every integer \(m>0\), there exists an integer \(n>0\) such that
+        \[
+            v_i-v\in I^mV
+        \]
+        for all \(i>n\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove the first statement. The second is analogous.
+
+    Suppose first that \((v_i)\) is Cauchy. Let \(m>0\). Since
+    \[
+        \gamma^m>0,
+    \]
+    there exists \(n>0\) such that
+    \[
+        d_I(v_i,v_j)<\gamma^m
+    \]
+    for all \(i,j>n\). This means
+    \[
+        \|v_i-v_j\|_I<\gamma^m.
+    \]
+    By the definition of the \(I\)-adic norm, this implies
+    \[
+        v_i-v_j\in I^mV.
+    \]
+
+    Conversely, suppose that for every \(m>0\), there exists \(n>0\) such that
+    \[
+        v_i-v_j\in I^mV
+    \]
+    for all \(i,j>n\). Let \(\varepsilon>0\). Since \(0<\gamma<1\), we may choose
+    \(m>0\) such that
+    \[
+        \gamma^m<\varepsilon.
+    \]
+    By assumption, there exists \(n>0\) such that
+    \[
+        v_i-v_j\in I^mV
+    \]
+    for all \(i,j>n\). Hence
+    \[
+        d_I(v_i,v_j)=\|v_i-v_j\|_I\leq \gamma^m<\varepsilon.
+    \]
+    Therefore \((v_i)\) is a Cauchy sequence.
+\end{proof}
+
+\begin{lemma}
+    With respect to the \(I\)-adic metrics, the following maps are continuous:
+    \[
+        V\times V \longrightarrow V,
+        \qquad
+        (a,b)\longmapsto a+b,
+    \]
+    \[
+        R\times V \longrightarrow V,
+        \qquad
+        (r,v)\longmapsto rv,
+    \]
+    \[
+        R\times R \longrightarrow R,
+        \qquad
+        (r,s)\longmapsto r+s,
+    \]
+    \[
+        R\times R \longrightarrow R,
+        \qquad
+        (r,s)\longmapsto rs.
+    \]
+    Moreover, if \(W\) is another \(R\)-module endowed with its \(I\)-adic metric, then
+    every \(R\)-module homomorphism
+    \[
+        f\in \operatorname{Hom}_R(V,W)
+    \]
+    is continuous.
+\end{lemma}
+
+\begin{proof}
+    We indicate the main estimates.
+
+    For addition in \(V\), one has
+    \[
+        \|(a+b)-(a'+b')\|_I
+        =
+        \|(a-a')+(b-b')\|_I
+        \leq
+        \max\{\|a-a'\|_I,\|b-b'\|_I\}.
+    \]
+    Hence addition is continuous.
+
+    For scalar multiplication, suppose \(r-r'\in I^m\) and \(v-v'\in I^mV\).
+    Then
+    \[
+        rv-r'v'
+        =
+        r(v-v')+(r-r')v'.
+    \]
+    Since
+    \[
+        r(v-v')\in I^mV,
+        \qquad
+        (r-r')v'\in I^mV,
+    \]
+    we get
+    \[
+        rv-r'v'\in I^mV.
+    \]
+    Thus scalar multiplication is continuous.
+
+    The proofs for addition and multiplication in \(R\) are the special cases obtained
+    by taking \(V=R\).
+
+    Finally, let \(f:V\to W\) be an \(R\)-module homomorphism. If
+    \[
+        v-v'\in I^mV,
+    \]
+    then
+    \[
+        f(v)-f(v')=f(v-v')\in I^mW.
+    \]
+    Hence \(f\) is continuous.
+\end{proof}
+
+Before discussing completeness, one should first check that all the maps considered
+are well-defined. Once this is done, the continuity statements from the previous 
+show that the \(I\)-adic topology is compatible with the algebraic operations.
+
+\begin{definition}[\(I\)-adic completeness]
+    Let \(R\) be a ring and let \(I\) be an ideal of \(R\). Suppose that the
+    \(I\)-adic metric \(d_I\) is defined on \(R\), namely
+    \[
+        \bigcap_{n\geq 1} I^n = 0.
+    \]
+    We say that \(R\) is complete with respect to \(I\) if the metric space
+    \[
+        (R,d_I)
+    \]
+    is complete.
+
+    Similarly, if \(V\) is an \(R\)-module and the \(I\)-adic metric \(d_I\) is
+    defined on \(V\), namely
+    \[
+        \bigcap_{n\geq 1} I^nV=0,
+    \]
+    then we say that \(V\) is complete with respect to \(I\) if the metric space
+    \[
+        (V,d_I)
+    \]
+    is complete.
+\end{definition}
+
+\begin{theorem}
+    Suppose that the \(I\)-adic metric \(d_I\) is defined on every finitely generated
+    \(R\)-module. Let \(V\) be a finitely generated \(R\)-module. Then every submodule
+    of \(V\) is closed with respect to the \(I\)-adic metric on \(V\).
+\end{theorem}
+
+\begin{proof}
+    Let \(W\leq V\) be a submodule. Consider the quotient map
+    \[
+        f:V\longrightarrow V/W.
+    \]
+    Since \(V\) is finitely generated, the quotient \(V/W\) is also finitely generated.
+    By assumption, the \(I\)-adic metric is defined on \(V/W\).
+
+    The quotient map \(f\) is an \(R\)-module homomorphism, and hence is continuous
+    with respect to the \(I\)-adic metrics. Moreover,
+    \[
+        W=f^{-1}(0).
+    \]
+    Since \(\{0\}\) is closed in the metric space \(V/W\), its inverse image under the
+    continuous map \(f\) is closed in \(V\). Therefore \(W\) is closed in \(V\).
+\end{proof}
+
+\begin{theorem}
+    Let \(V\) be a finitely generated \(R\)-module. Assume that the \(I\)-adic
+    metric is defined on \(V\). If \(R\) is complete with respect to the
+    \(I\)-adic metric, then \(V\) is complete with respect to the \(I\)-adic metric.
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        v_1,\dots,v_s
+    \]
+    be a finite set of generators of \(V\), and let
+    \[
+        (w_n)_{n\geq 1}
+    \]
+    be a Cauchy sequence in \(V\).
+
+    Since \((w_n)\) is Cauchy, there exists a nondecreasing sequence of nonnegative
+    integers
+    \[
+        m(n)\qquad (n\geq 1)
+    \]
+    such that
+    \[
+        m(n)\longrightarrow \infty
+    \]
+    and
+    \[
+        w_i-w_j\in I^{m(n)}V
+    \]
+    for all \(i,j>n\). In particular, if
+    \[
+        \Delta_n:=w_{n+1}-w_n,
+    \]
+    then
+    \[
+        \Delta_n\in I^{m(n)}V.
+    \]
+
+    Write
+    \[
+        w_1=\sum_{t=1}^s b_{1t}v_t,
+        \qquad b_{1t}\in R.
+    \]
+    Since \(\Delta_n\in I^{m(n)}V\), and since \(v_1,\dots,v_s\) generate \(V\), we may
+    choose elements
+    \[
+        a_{nt}\in I^{m(n)}
+        \qquad (1\leq t\leq s)
+    \]
+    such that
+    \[
+        \Delta_n=w_{n+1}-w_n=\sum_{t=1}^s a_{nt}v_t.
+    \]
+    For \(n\geq 1\), define
+    \[
+        b_{nt}:=b_{1t}+\sum_{j=1}^{n-1}a_{jt}.
+    \]
+    We claim that
+    \[
+        w_n=\sum_{t=1}^s b_{nt}v_t
+    \]
+    for every \(n\geq 1\). Indeed, this is clear for \(n=1\), and if it holds for
+    \(n\), then
+    \[
+        w_{n+1}
+        =
+        w_n+\Delta_n
+        =
+        \sum_{t=1}^s b_{nt}v_t+\sum_{t=1}^s a_{nt}v_t
+        =
+        \sum_{t=1}^s (b_{nt}+a_{nt})v_t
+        =
+        \sum_{t=1}^s b_{n+1,t}v_t.
+    \]
+    Hence the claim follows by induction.
+
+    We now show that each sequence \((b_{nt})_{n\geq 1}\) is Cauchy in \(R\). Fix
+    \(t\) and let \(\ell\geq 1\). Since \(m(n)\to\infty\), there exists \(N\) such that
+    \[
+        m(N)\geq \ell.
+    \]
+    If \(q>p\geq N\), then
+    \[
+        b_{qt}-b_{pt}
+        =
+        \sum_{j=p}^{q-1}a_{jt}.
+    \]
+    Since \(m(j)\geq m(p)\geq \ell\) for \(j\geq p\), we have
+    \[
+        a_{jt}\in I^{m(j)}\subseteq I^\ell.
+    \]
+    Therefore
+    \[
+        b_{qt}-b_{pt}\in I^\ell.
+    \]
+    Thus \((b_{nt})_{n\geq 1}\) is Cauchy in \(R\).
+
+    Since \(R\) is complete, for each \(t=1,\dots,s\), there exists \(b_t\in R\) such that
+    \[
+        b_{nt}\longrightarrow b_t
+    \]
+    in the \(I\)-adic metric on \(R\). Define
+    \[
+        w:=\sum_{t=1}^s b_tv_t\in V.
+    \]
+
+    It remains to prove that \(w_n\to w\). Let \(\ell\geq 1\). For each \(t\), since
+    \(b_{nt}\to b_t\), there exists \(N_t\) such that
+    \[
+        b_{nt}-b_t\in I^\ell
+    \]
+    for all \(n\geq N_t\). Put
+    \[
+        N=\max\{N_1,\dots,N_s\}.
+    \]
+    Then for \(n\geq N\),
+    \[
+        w_n-w
+        =
+        \sum_{t=1}^s (b_{nt}-b_t)v_t
+        \in I^\ell V.
+    \]
+    Since \(\ell\geq 1\) was arbitrary, this shows that
+    \[
+        w_n\longrightarrow w
+    \]
+    in the \(I\)-adic metric on \(V\).
+
+    Therefore every Cauchy sequence in \(V\) converges in \(V\). Hence \(V\) is complete.
+\end{proof}

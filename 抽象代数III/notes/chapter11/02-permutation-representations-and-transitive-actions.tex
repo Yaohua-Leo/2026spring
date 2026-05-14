@@ -1,0 +1,632 @@
+\section{Permutation representations and transitive actions}
+
+Let
+\[
+    \mathcal{C}=\operatorname{Set}.
+\]
+
+An object of \(\operatorname{Rep}(G,\operatorname{Set})\) is a pair
+\[
+    (X,\rho),
+\]
+where \(X\) is a set and
+\[
+    \rho:G\longrightarrow \operatorname{Sym}(X)
+\]
+is a group homomorphism. Equivalently, \(G\) acts on \(X\) by
+\[
+    g\cdot x:=\rho(g)(x),
+    \qquad g\in G,\ x\in X.
+\]
+
+A morphism
+\[
+    f:(X,\rho)\longrightarrow (Y,\sigma)
+\]
+is a map of sets
+\[
+    f:X\longrightarrow Y
+\]
+such that, for every \(g\in G\), the following diagram commutes:
+\[
+\begin{tikzcd}
+    X \arrow[r,"f"] \arrow[d,"\rho(g)"']
+        & Y \arrow[d,"\sigma(g)"] \\
+    X \arrow[r,"f"']
+        & Y
+\end{tikzcd}
+\]
+Equivalently,
+\[
+    f(\rho(g)(x))=\sigma(g)(f(x)),
+    \qquad g\in G,\ x\in X.
+\]
+In action notation, this condition is written as
+\[
+    f(g\cdot x)=g\cdot f(x).
+\]
+
+\begin{lemma}
+    Let
+    \[
+        f:(X,\rho)\longrightarrow (Y,\sigma)
+    \]
+    be a morphism in \(\operatorname{Rep}(G,\operatorname{Set})\). If the
+    underlying map \(f:X\to Y\) is bijective, then \(f\) is an isomorphism in
+    \(\operatorname{Rep}(G,\operatorname{Set})\).
+\end{lemma}
+
+\begin{proof}
+    Since \(f:X\to Y\) is bijective, it has an inverse map
+    \[
+        f^{-1}:Y\longrightarrow X.
+    \]
+    We need to show that \(f^{-1}\) is \(G\)-equivariant.
+
+    Let \(y\in Y\). Write \(y=f(x)\) for a unique \(x\in X\). For every \(g\in G\),
+    since \(f\) is equivariant, we have
+    \[
+        f(g\cdot x)=g\cdot f(x)=g\cdot y.
+    \]
+    Applying \(f^{-1}\), we get
+    \[
+        f^{-1}(g\cdot y)=g\cdot x=g\cdot f^{-1}(y).
+    \]
+    Hence \(f^{-1}\) is \(G\)-equivariant. Therefore \(f\) is an isomorphism in
+    \(\operatorname{Rep}(G,\operatorname{Set})\).
+\end{proof}
+
+For sets \(X\) and \(Y\), recall the product
+\[
+    X\times Y
+\]
+and the disjoint union
+\[
+    X\sqcup Y.
+\]
+If \(Z\) is another set, then there is a natural bijection
+\[
+    Z\times (X\sqcup Y)
+    \cong
+    (Z\times X)\sqcup (Z\times Y).
+\]
+
+Let \((X,\rho)\) and \((Y,\sigma)\) be two \(G\)-sets.
+
+\begin{definition}
+    The disjoint union of \((X,\rho)\) and \((Y,\sigma)\) is the \(G\)-set
+    \[
+        (X,\rho)\sqcup (Y,\sigma)
+        :=
+        (X\sqcup Y,\rho\sqcup\sigma),
+    \]
+    where the action is defined by
+    \[
+        (\rho\sqcup\sigma)(g)(z)
+        =
+        \begin{cases}
+            \rho(g)(z), & z\in X,\\
+            \sigma(g)(z), & z\in Y.
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}
+    The product of \((X,\rho)\) and \((Y,\sigma)\) is the \(G\)-set
+    \[
+        (X,\rho)\times (Y,\sigma)
+        :=
+        (X\times Y,\rho\times\sigma),
+    \]
+    where
+    \[
+        (\rho\times\sigma)(g)(x,y)
+        =
+        \bigl(\rho(g)(x),\sigma(g)(y)\bigr).
+    \]
+    In action notation,
+    \[
+        g\cdot (x,y)=(g\cdot x,g\cdot y).
+    \]
+\end{definition}
+
+\begin{definition}
+    Let \((X,\rho)\) be a set-representation of \(G\). A subset
+    \[
+        X_1\subseteq X
+    \]
+    is called \(G\)-stable if
+    \[
+        \rho(g)(X_1)\subseteq X_1
+    \]
+    for every \(g\in G\).
+
+    If \(X_1\subseteq X\) is \(G\)-stable, then the restricted action
+    \[
+        \rho_1(g):=\rho(g)|_{X_1}
+    \]
+    defines a representation
+    \[
+        (X_1,\rho_1),
+    \]
+    called a subrepresentation of \((X,\rho)\).
+\end{definition}
+
+\begin{remark}
+    Since every \(\rho(g)\) is a bijection and \(\rho(g^{-1})=\rho(g)^{-1}\), the
+    condition
+    \[
+        \rho(g)(X_1)\subseteq X_1
+    \]
+    for every \(g\in G\) implies
+    \[
+        \rho(g)(X_1)=X_1
+    \]
+    for every \(g\in G\).
+\end{remark}
+
+\begin{example}
+    Let \((X,\rho)\) be a \(G\)-set and let \(x\in X\). The orbit of \(x\) is
+    \[
+        X_1:=Gx:=\{\,g\cdot x\mid g\in G\,\}.
+    \]
+    Then \(X_1\) is \(G\)-stable. Indeed, for \(h\in G\),
+    \[
+        h\cdot (g\cdot x)=(hg)\cdot x\in Gx.
+    \]
+    Therefore
+    \[
+        (X_1,\rho|_{X_1})
+    \]
+    is a subrepresentation of \((X,\rho)\).
+\end{example}
+
+\begin{proposition}
+    Let \((X,\rho)\) be a \(G\)-set and let
+    \[
+        X_1=Gx
+    \]
+    be the orbit of some \(x\in X\). Put
+    \[
+        X_2:=X\setminus X_1.
+    \]
+    Then \(X_2\) is also \(G\)-stable. Hence
+    \[
+        (X,\rho)
+        =
+        (X_1,\rho_1)\sqcup (X_2,\rho_2),
+    \]
+    where
+    \[
+        \rho_1=\rho|_{X_1},
+        \qquad
+        \rho_2=\rho|_{X_2}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    We already know that \(X_1\) is \(G\)-stable. We prove that \(X_2\) is
+    \(G\)-stable.
+
+    Let \(y\in X_2\) and \(g\in G\). Suppose, for contradiction, that
+    \[
+        g\cdot y\in X_1.
+    \]
+    Since \(X_1\) is \(G\)-stable and \(g^{-1}\in G\), applying \(g^{-1}\) gives
+    \[
+        y=g^{-1}\cdot (g\cdot y)\in X_1,
+    \]
+    contradicting \(y\in X_2=X\setminus X_1\). Hence
+    \[
+        g\cdot y\in X_2.
+    \]
+    Therefore \(X_2\) is \(G\)-stable.
+
+    Since
+    \[
+        X=X_1\sqcup X_2
+    \]
+    as sets and both \(X_1\) and \(X_2\) are \(G\)-stable, the action \(\rho\)
+    restricts to actions \(\rho_1\) and \(\rho_2\), and we obtain
+    \[
+        (X,\rho)
+        =
+        (X_1,\rho_1)\sqcup (X_2,\rho_2).
+    \]
+\end{proof}
+
+Let \((X,\rho)\) be a set-representation of \(G\), that is,
+\[
+    \rho:G\longrightarrow \operatorname{Sym}(X).
+\]
+We write
+\[
+    g\cdot x:=\rho(g)(x),
+    \qquad g\in G,\ x\in X.
+\]
+
+\begin{proposition}
+    Let \((X,\rho)\) be a set-representation of \(G\), and assume that
+    \[
+        X\neq \varnothing.
+    \]
+    The following conditions are equivalent:
+    \begin{enumerate}
+        \item \((X,\rho)\) is simple, or irreducible. That is, if
+        \((X_1,\rho_1)\) is a subrepresentation of \((X,\rho)\), then
+        \[
+            X_1=X
+            \qquad\text{or}\qquad
+            X_1=\varnothing.
+        \]
+
+        \item \((X,\rho)\) is indecomposable. That is, if
+        \[
+            (X,\rho)
+            =
+            (X_1,\rho_1)\sqcup (X_2,\rho_2),
+        \]
+        then
+        \[
+            X_1=\varnothing
+            \qquad\text{or}\qquad
+            X_2=\varnothing.
+        \]
+
+        \item \((X,\rho)\) is transitive. That is, for every \(x,y\in X\), there
+        exists \(g\in G\) such that
+        \[
+            y=g\cdot x.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove the equivalence of the three conditions.
+
+    \textup{(1) \(\Rightarrow\) (2).}
+    Suppose that \((X,\rho)\) is simple and that
+    \[
+        (X,\rho)
+        =
+        (X_1,\rho_1)\sqcup (X_2,\rho_2).
+    \]
+    Then \(X_1\subseteq X\) is a \(G\)-stable subset, hence
+    \((X_1,\rho_1)\) is a subrepresentation of \((X,\rho)\). By simplicity,
+    \[
+        X_1=X
+        \qquad\text{or}\qquad
+        X_1=\varnothing.
+    \]
+    If \(X_1=X\), then \(X_2=\varnothing\). Therefore \((X,\rho)\) is
+    indecomposable.
+
+    \textup{(2) \(\Rightarrow\) (1).}
+    Suppose that \((X,\rho)\) is indecomposable. Let \(X_1\subseteq X\) be a
+    \(G\)-stable subset. Then its complement
+    \[
+        X_2:=X\setminus X_1
+    \]
+    is also \(G\)-stable. Hence
+    \[
+        (X,\rho)
+        =
+        (X_1,\rho|_{X_1})\sqcup (X_2,\rho|_{X_2}).
+    \]
+    By indecomposability,
+    \[
+        X_1=\varnothing
+        \qquad\text{or}\qquad
+        X_2=\varnothing.
+    \]
+    In the second case \(X_1=X\). Thus \((X,\rho)\) is simple.
+
+    \textup{(1) \(\Leftrightarrow\) (3).}
+    For \(x\in X\), the orbit
+    \[
+        Gx:=\{\,g\cdot x\mid g\in G\,\}
+    \]
+    is a \(G\)-stable subset of \(X\). If \((X,\rho)\) is simple, then since
+    \(Gx\neq \varnothing\), we must have
+    \[
+        Gx=X.
+    \]
+    Thus every element of \(X\) lies in the orbit of \(x\), so the action is
+    transitive.
+
+    Conversely, if the action is transitive and \(X_1\subseteq X\) is a nonempty
+    \(G\)-stable subset, choose \(x\in X_1\). For any \(y\in X\), transitivity gives
+    some \(g\in G\) such that
+    \[
+        y=g\cdot x.
+    \]
+    Since \(X_1\) is \(G\)-stable, \(g\cdot x\in X_1\). Hence \(y\in X_1\), so
+    \(X_1=X\). Therefore there are no nontrivial subrepresentations, and
+    \((X,\rho)\) is simple.
+\end{proof}
+
+\begin{example}[The transitive \(G\)-set \(G/H\)]
+    Let \(H\leq G\). Consider the set of left cosets
+    \[
+        G/H:=\{\,xH\mid x\in G\,\}.
+    \]
+    Define an action of \(G\) on \(G/H\) by
+    \[
+        \rho_H(g)(xH)=gxH.
+    \]
+    This action is transitive. Indeed, for any two cosets \(xH,yH\in G/H\), we have
+    \[
+        yH=(yx^{-1})xH.
+    \]
+    Hence
+    \[
+        (G/H,\rho_H)
+    \]
+    is a simple set-representation of \(G\).
+
+    Moreover, the stabilizer of the coset \(yH\) is
+    \[
+        G_{yH}=yHy^{-1}.
+    \]
+    Indeed,
+    \[
+        g\in G_{yH}
+        \iff
+        gyH=yH
+        \iff
+        y^{-1}gy\in H
+        \iff
+        g\in yHy^{-1}.
+    \]
+\end{example}
+
+Let \((X,\rho)\) be a \(G\)-set. Define a relation \(\sim_G\) on \(X\) by
+\[
+    x\sim_G y
+    \iff
+    \exists g\in G \text{ such that } y=g\cdot x.
+\]
+This is an equivalence relation. Its equivalence classes are precisely the orbits of
+the \(G\)-action.
+
+We denote by
+\[
+    G\backslash X
+\]
+the set of equivalence classes, or equivalently, the set of \(G\)-orbits in \(X\).
+
+\begin{proposition}
+    Let \((X,\rho)\) be a \(G\)-set.
+    \begin{enumerate}
+        \item Any equivalence class \(\Omega\in G\backslash X\) defines a simple
+        subrepresentation
+        \[
+            (\Omega,\rho|_{\Omega}).
+        \]
+
+        \item There is a decomposition
+        \[
+            (X,\rho)
+            =
+            \bigsqcup_{\Omega\in G\backslash X}
+            (\Omega,\rho|_{\Omega}).
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Each equivalence class \(\Omega\in G\backslash X\) is an orbit. Hence it is
+    \(G\)-stable, and the restriction
+    \[
+        \rho|_{\Omega}:G\longrightarrow \operatorname{Sym}(\Omega)
+    \]
+    defines a subrepresentation \((\Omega,\rho|_{\Omega})\).
+
+    The action of \(G\) on \(\Omega\) is transitive by definition of an orbit.
+    Therefore, by the previous proposition, \((\Omega,\rho|_{\Omega})\) is simple.
+
+    Finally, the set \(X\) is the disjoint union of its equivalence classes:
+    \[
+        X=\bigsqcup_{\Omega\in G\backslash X}\Omega.
+    \]
+    Since each \(\Omega\) is \(G\)-stable, this gives a decomposition of
+    \(G\)-sets:
+    \[
+        (X,\rho)
+        =
+        \bigsqcup_{\Omega\in G\backslash X}
+        (\Omega,\rho|_{\Omega}).
+    \]
+\end{proof}
+
+\begin{theorem}
+    Let \((X,\rho)\) be a transitive set-representation of \(G\). For \(x\in X\),
+    let
+    \[
+        G_x:=\{\,g\in G\mid g\cdot x=x\,\}
+    \]
+    be the stabilizer of \(x\). Then the map
+    \[
+        \Phi:G/G_x\longrightarrow X,
+        \qquad
+        gG_x\longmapsto g\cdot x
+    \]
+    defines an isomorphism of \(G\)-sets
+    \[
+        (G/G_x,\rho_{G_x})
+        \cong
+        (X,\rho).
+    \]
+\end{theorem}
+
+\begin{proof}
+    First we show that \(\Phi\) is well-defined. Suppose
+    \[
+        gG_x=g'G_x.
+    \]
+    Then \(g'=gh\) for some \(h\in G_x\). Hence
+    \[
+        g'\cdot x=(gh)\cdot x=g\cdot (h\cdot x)=g\cdot x,
+    \]
+    since \(h\in G_x\). Thus \(\Phi(gG_x)=\Phi(g'G_x)\).
+
+    The map \(\Phi\) is surjective because the action of \(G\) on \(X\) is
+    transitive.
+
+    It is injective as well. If
+    \[
+        \Phi(gG_x)=\Phi(g'G_x),
+    \]
+    then
+    \[
+        g\cdot x=g'\cdot x.
+    \]
+    Hence
+    \[
+        (g'^{-1}g)\cdot x=x,
+    \]
+    so \(g'^{-1}g\in G_x\). Therefore
+    \[
+        gG_x=g'G_x.
+    \]
+
+    Finally, \(\Phi\) is \(G\)-equivariant. For \(a\in G\),
+    \[
+        \Phi\bigl(\rho_{G_x}(a)(gG_x)\bigr)
+        =
+        \Phi(agG_x)
+        =
+        ag\cdot x,
+    \]
+    while
+    \[
+        \rho(a)\bigl(\Phi(gG_x)\bigr)
+        =
+        a\cdot (g\cdot x)
+        =
+        ag\cdot x.
+    \]
+    Hence
+    \[
+        \Phi\circ \rho_{G_x}(a)
+        =
+        \rho(a)\circ \Phi.
+    \]
+    Thus \(\Phi\) is an isomorphism of \(G\)-sets.
+\end{proof}
+
+\begin{theorem}
+    Let \(H,H'\leq G\). Then the \(G\)-sets
+    \[
+        (G/H,\rho_H)
+        \qquad\text{and}\qquad
+        (G/H',\rho_{H'})
+    \]
+    are isomorphic if and only if \(H\) and \(H'\) are conjugate in \(G\).
+\end{theorem}
+
+\begin{proof}
+    Suppose first that
+    \[
+        F:G/H\longrightarrow G/H'
+    \]
+    is an isomorphism of \(G\)-sets. Write
+    \[
+        F(H)=aH'
+    \]
+    for some \(a\in G\). Since \(F\) is \(G\)-equivariant, the stabilizer of \(H\)
+    must equal the stabilizer of \(F(H)\). Now
+    \[
+        G_H=H,
+    \]
+    and
+    \[
+        G_{aH'}=aH'a^{-1}.
+    \]
+    Hence
+    \[
+        H=aH'a^{-1}.
+    \]
+    Thus \(H\) and \(H'\) are conjugate in \(G\).
+
+    Conversely, suppose that \(H\) and \(H'\) are conjugate. Write
+    \[
+        H=aH'a^{-1}
+    \]
+    for some \(a\in G\). Define
+    \[
+        F:G/H\longrightarrow G/H'
+    \]
+    by
+    \[
+        F(gH)=gaH'.
+    \]
+    This is well-defined. Indeed, if \(gH=g_1H\), then \(g_1=gh\) for some
+    \(h\in H\). Since \(H=aH'a^{-1}\), we have
+    \[
+        a^{-1}ha\in H'.
+    \]
+    Therefore
+    \[
+        g_1aH'=ghaH'=ga(a^{-1}ha)H'=gaH'.
+    \]
+    Thus \(F(gH)=F(g_1H)\).
+
+    The map \(F\) is bijective, with inverse
+    \[
+        F^{-1}(gH')=ga^{-1}H.
+    \]
+    It is also \(G\)-equivariant, since for \(t\in G\),
+    \[
+        F(tgH)=tgaH'=tF(gH).
+    \]
+    Hence \(F\) is an isomorphism of \(G\)-sets:
+    \[
+        (G/H,\rho_H)\cong (G/H',\rho_{H'}).
+    \]
+\end{proof}
+
+\begin{definition}[Degree]
+    Let \((X,\rho)\) be a set-representation of \(G\), that is,
+    \[
+        \rho:G\longrightarrow \operatorname{Sym}(X).
+    \]
+    The degree of \((X,\rho)\) is defined to be the cardinality of \(X\), denoted by
+    \[
+        \deg(X,\rho):=|X|.
+    \]
+\end{definition}
+
+\begin{corollary}
+    Let \(G\) be a finite group. Then the degree of any irreducible
+    set-representation of \(G\) divides \(|G|\).
+\end{corollary}
+
+\begin{proof}
+    Let \((X,\rho)\) be an irreducible set-representation of \(G\). Irreducible set-representations are transitive \(G\)-sets, the action
+    of \(G\) on \(X\) is transitive.
+
+    Choose \(x\in X\), and let
+    \[
+        G_x:=\{\,g\in G\mid g\cdot x=x\,\}
+    \]
+    be the stabilizer of \(x\). By the classification of transitive \(G\)-sets, we
+    have an isomorphism of \(G\)-sets
+    \[
+        X\cong G/G_x.
+    \]
+    Hence
+    \[
+        |X|=|G/G_x|=[G:G_x].
+    \]
+    Since \(G\) is finite, Lagrange's theorem gives
+    \[
+        |G|=[G:G_x]\cdot |G_x|.
+    \]
+    Therefore
+    \[
+        |X|=[G:G_x]
+    \]
+    divides \(|G|\). Thus the degree of \((X,\rho)\) divides \(|G|\).
+\end{proof}
+

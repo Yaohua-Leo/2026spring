@@ -1,0 +1,683 @@
+\section{Linearization, regular representation, and group algebra}
+
+Let \(k\) be a field and let \((\Omega,\rho)\) be a set-representation of \(G\). Thus
+\[
+    \rho:G\longrightarrow \operatorname{Sym}(\Omega)
+\]
+is a group homomorphism.
+
+Denote by
+\[
+    k\Omega
+\]
+the \(k\)-vector space with basis \(\Omega\). That is, every element of \(k\Omega\) is a
+finite \(k\)-linear combination
+\[
+    \sum_{\omega\in \Omega} a_\omega \omega,
+    \qquad a_\omega\in k.
+\]
+
+The action of \(G\) on \(\Omega\) induces a \(k\)-linear representation
+\[
+    k\rho:G\longrightarrow \operatorname{GL}(k\Omega)
+\]
+defined on basis elements by
+\[
+    (k\rho)(g)(\omega)=\rho(g)(\omega)=g\cdot \omega,
+    \qquad g\in G,\ \omega\in \Omega,
+\]
+and extended \(k\)-linearly.
+
+\begin{lemma}
+    The map
+    \[
+        k\rho:G\longrightarrow \operatorname{GL}(k\Omega)
+    \]
+    is a group homomorphism.
+\end{lemma}
+
+\begin{proof}
+    For each \(g\in G\), the map \(\rho(g):\Omega\to\Omega\) is a bijection. Hence
+    its \(k\)-linear extension
+    \[
+        (k\rho)(g):k\Omega\to k\Omega
+    \]
+    is an invertible \(k\)-linear map.
+
+    For \(g,h\in G\) and \(\omega\in \Omega\), we have
+    \[
+        (k\rho)(gh)(\omega)
+        =
+        (gh)\cdot \omega
+        =
+        g\cdot(h\cdot \omega)
+        =
+        (k\rho)(g)\bigl((k\rho)(h)(\omega)\bigr).
+    \]
+    Since the basis elements \(\omega\in\Omega\) span \(k\Omega\), it follows that
+    \[
+        (k\rho)(gh)=(k\rho)(g)\circ (k\rho)(h).
+    \]
+    Also,
+    \[
+        (k\rho)(1_G)=\operatorname{id}_{k\Omega}.
+    \]
+    Therefore \(k\rho\) is a group homomorphism.
+\end{proof}
+
+\begin{definition}[Linearization of a \(G\)-set]
+    The \(k\)-linear representation
+    \[
+        (k\Omega,k\rho)
+    \]
+    is called the linearization of the \(G\)-set \((\Omega,\rho)\).
+\end{definition}
+
+Let
+\[
+    f:(\Omega,\rho)\longrightarrow (\Lambda,\sigma)
+\]
+be a morphism of \(G\)-sets. Thus \(f:\Omega\to \Lambda\) is a map satisfying
+\[
+    f(g\cdot \omega)=g\cdot f(\omega)
+\]
+for all \(g\in G\) and \(\omega\in\Omega\).
+
+Define a \(k\)-linear map
+\[
+    kf:k\Omega\longrightarrow k\Lambda
+\]
+by
+\[
+    kf(\omega)=f(\omega),
+    \qquad \omega\in\Omega,
+\]
+and extend \(k\)-linearly.
+
+Then \(kf\) is a morphism of \(k\)-linear representations. Indeed, for \(g\in G\) and
+\(\omega\in\Omega\),
+\[
+    kf\bigl((k\rho)(g)(\omega)\bigr)
+    =
+    kf(g\cdot\omega)
+    =
+    f(g\cdot\omega)
+    =
+    g\cdot f(\omega)
+    =
+    (k\sigma)(g)(kf(\omega)).
+\]
+Hence
+\[
+    kf\circ (k\rho)(g)=(k\sigma)(g)\circ kf.
+\]
+
+Therefore the construction
+\[
+    (\Omega,\rho)\longmapsto (k\Omega,k\rho)
+\]
+induces a functor
+\[
+    k[-]:
+    \operatorname{Rep}(G,\operatorname{Set})
+    \longrightarrow
+    \operatorname{Rep}(G,\operatorname{vect}_k).
+\]
+
+
+Let \((\Omega,\rho)\) and \((\Lambda,\sigma)\) be two \(G\)-sets.
+
+\begin{proposition}
+    There is a natural isomorphism of \(k\)-linear representations
+    \[
+        k(\Omega\sqcup \Lambda)
+        \cong
+        k\Omega\oplus k\Lambda.
+    \]
+\end{proposition}
+
+\begin{proof}
+    The disjoint union \(\Omega\sqcup\Lambda\) has basis elements coming either from
+    \(\Omega\) or from \(\Lambda\). Hence the assignment
+    \[
+        \omega\longmapsto (\omega,0),
+        \qquad
+        \lambda\longmapsto (0,\lambda)
+    \]
+    induces a \(k\)-linear isomorphism
+    \[
+        k(\Omega\sqcup\Lambda)
+        \cong
+        k\Omega\oplus k\Lambda.
+    \]
+    This isomorphism is \(G\)-equivariant because \(G\) acts on each summand by the
+    corresponding action.
+\end{proof}
+
+\begin{proposition}
+    There is a natural isomorphism of \(k\)-linear representations
+    \[
+        k(\Omega\times \Lambda)
+        \cong
+        k\Omega\otimes_k k\Lambda.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Define
+    \[
+        \Phi:k(\Omega\times\Lambda)\longrightarrow k\Omega\otimes_k k\Lambda
+    \]
+    on basis elements by
+    \[
+        \Phi(\omega,\lambda)=\omega\otimes \lambda.
+    \]
+    Since the elements \((\omega,\lambda)\) form a basis of \(k(\Omega\times\Lambda)\),
+    this defines a \(k\)-linear map.
+
+    The elements
+    \[
+        \omega\otimes\lambda,
+        \qquad \omega\in\Omega,\ \lambda\in\Lambda,
+    \]
+    form a basis of \(k\Omega\otimes_k k\Lambda\), so \(\Phi\) is a \(k\)-linear
+    isomorphism.
+
+    It is \(G\)-equivariant because
+    \[
+        \Phi\bigl(g\cdot(\omega,\lambda)\bigr)
+        =
+        \Phi(g\cdot\omega,g\cdot\lambda)
+        =
+        (g\cdot\omega)\otimes(g\cdot\lambda),
+    \]
+    while
+    \[
+        g\cdot\Phi(\omega,\lambda)
+        =
+        g\cdot(\omega\otimes\lambda)
+        =
+        (g\cdot\omega)\otimes(g\cdot\lambda).
+    \]
+    Hence
+    \[
+        k(\Omega\times \Lambda)
+        \cong
+        k\Omega\otimes_k k\Lambda
+    \]
+    as \(k\)-linear representations of \(G\).
+\end{proof}
+
+\begin{remark}
+    Thus linearization transforms disjoint unions of \(G\)-sets into direct sums of
+    \(k\)-linear representations, and transforms products of \(G\)-sets into tensor
+    products of \(k\)-linear representations.
+\end{remark}
+
+\begin{remark}
+    Even if \((\Omega,\rho)\) is transitive as a \(G\)-set and
+    \[
+        |\Omega|>1,
+    \]
+    the linearized representation
+    \[
+        (k\Omega,k\rho)
+    \]
+    need not be irreducible.
+
+    Indeed, define
+    \[
+        S_\Omega:=\sum_{\omega\in\Omega}\omega\in k\Omega.
+    \]
+    Since \(\Omega\) is a basis of \(k\Omega\), we have
+    \[
+        S_\Omega\neq 0.
+    \]
+    For every \(g\in G\),
+    \[
+        g\cdot S_\Omega
+        =
+        \sum_{\omega\in\Omega} g\cdot \omega.
+    \]
+    Since \(g:\Omega\to\Omega\) is a bijection, the set
+    \[
+        \{g\cdot \omega\mid \omega\in\Omega\}
+    \]
+    is again \(\Omega\). Hence
+    \[
+        g\cdot S_\Omega=S_\Omega.
+    \]
+    Therefore the line
+    \[
+        kS_\Omega
+    \]
+    is \(G\)-stable. If \(|\Omega|>1\), this is a nonzero proper subrepresentation
+    of \(k\Omega\). Hence \(k\Omega\) is not irreducible.
+\end{remark}
+
+
+\begin{definition}[Left regular representation]
+    Let \(G\) act on itself by left multiplication:
+    \[
+        g\cdot x:=gx,
+        \qquad g,x\in G.
+    \]
+    The linearization of this \(G\)-set is the representation
+    \[
+        kG
+    \]
+    with basis \(G\), where \(G\) acts by
+    \[
+        g\cdot x=gx.
+    \]
+    This representation is called the left regular representation of \(G\).
+\end{definition}
+
+Let
+\[
+    S_G:=\sum_{g\in G}g\in kG.
+\]
+Then the line
+\[
+    kS_G
+\]
+is \(G\)-stable, since
+\[
+    h\cdot S_G
+    =
+    \sum_{g\in G} hg
+    =
+    \sum_{g\in G} g
+    =
+    S_G
+\]
+for every \(h\in G\).
+
+\begin{lemma}
+    Assume that \(k\) has characteristic \(p>0\) and that
+    \[
+        p\mid |G|.
+    \]
+    Then the \(G\)-stable line
+    \[
+        kS_G\subseteq kG
+    \]
+    has no \(G\)-stable complement in the left regular representation \(kG\).
+\end{lemma}
+
+\begin{proof}
+    Suppose, for contradiction, that there exists a \(G\)-stable subspace \(V'\subseteq kG\)
+    such that
+    \[
+        kG=kS_G\oplus V'.
+    \]
+    Let
+    \[
+        \pi:kG\longrightarrow kS_G
+    \]
+    be the projection with kernel \(V'\). Thus
+    \[
+        \pi|_{kS_G}=\operatorname{id}_{kS_G}.
+    \]
+    Since both \(kS_G\) and \(V'\) are \(G\)-stable, the projection \(\pi\) is
+    \(G\)-equivariant:
+    \[
+        \pi(gx)=g\pi(x),
+        \qquad g\in G,\ x\in kG.
+    \]
+
+    Write
+    \[
+        \pi(1)=\lambda S_G
+    \]
+    for some \(\lambda\in k\). Then, for every \(g\in G\),
+    \[
+        \pi(g)=\pi(g\cdot 1)=g\cdot \pi(1)=g\cdot(\lambda S_G)=\lambda S_G.
+    \]
+    Therefore
+    \[
+        \pi(S_G)
+        =
+        \pi\left(\sum_{g\in G}g\right)
+        =
+        \sum_{g\in G}\pi(g)
+        =
+        \sum_{g\in G}\lambda S_G
+        =
+        |G|\lambda S_G.
+    \]
+    Since \(\operatorname{char}(k)=p\) and \(p\mid |G|\), we have
+    \[
+        |G|=0
+        \qquad\text{in } k.
+    \]
+    Hence
+    \[
+        \pi(S_G)=0.
+    \]
+    But \(S_G\in kS_G\) and \(\pi\) restricts to the identity on \(kS_G\), so
+    \[
+        \pi(S_G)=S_G.
+    \]
+    This is a contradiction, because \(S_G\neq 0\). Therefore \(kS_G\) has no
+    \(G\)-stable complement in \(kG\).
+\end{proof}
+
+Let \(k\) be a field, and let
+\[
+    (M,\rho),\qquad (N,\sigma)
+\]
+be two \(k\)-linear representations of a group \(G\).
+
+The group \(G\) acts on the \(k\)-vector space
+\[
+    \operatorname{Hom}_k(M,N)
+\]
+by
+\[
+    g\cdot \alpha
+    :=
+    \sigma(g)\circ \alpha\circ \rho(g)^{-1},
+    \qquad
+    g\in G,\quad \alpha\in \operatorname{Hom}_k(M,N).
+\]
+Equivalently, the following diagram commutes:
+\[
+\begin{tikzcd}
+    M \arrow[r,"\alpha"] \arrow[d,"\rho(g)"']
+        & N \arrow[d,"\sigma(g)"] \\
+    M \arrow[r,"g\cdot \alpha"']
+        & N .
+\end{tikzcd}
+\]
+
+\begin{lemma}
+    The formula
+    \[
+        g\cdot \alpha
+        =
+        \sigma(g)\circ \alpha\circ \rho(g)^{-1}
+    \]
+    defines a \(k\)-linear representation of \(G\) on
+    \(\operatorname{Hom}_k(M,N)\).
+\end{lemma}
+
+\begin{proof}
+    For each \(g\in G\), the map
+    \[
+        \alpha\longmapsto \sigma(g)\circ \alpha\circ \rho(g)^{-1}
+    \]
+    is \(k\)-linear. Moreover, for \(g,h\in G\),
+    \[
+    \begin{aligned}
+        g\cdot (h\cdot \alpha)
+        &=
+        \sigma(g)\circ
+        \bigl(\sigma(h)\circ \alpha\circ \rho(h)^{-1}\bigr)
+        \circ \rho(g)^{-1}  \\
+        &=
+        \sigma(gh)\circ \alpha\circ
+        \bigl(\rho(h)^{-1}\circ \rho(g)^{-1}\bigr) \\
+        &=
+        \sigma(gh)\circ \alpha\circ \rho(gh)^{-1} \\
+        &=
+        (gh)\cdot \alpha .
+    \end{aligned}
+    \]
+    Also \(1_G\cdot \alpha=\alpha\). Hence this is a representation of \(G\).
+\end{proof}
+
+Taking \(N=k\) with the trivial representation, we obtain a natural representation on
+the dual vector space
+\[
+    M^*:=\operatorname{Hom}_k(M,k).
+\]
+
+\begin{definition}[Contragredient representation]
+    Let \((M,\rho)\) be a \(k\)-linear representation of \(G\). Its contragredient
+    representation is the representation on
+    \[
+        M^*=\operatorname{Hom}_k(M,k)
+    \]
+    defined by
+    \[
+        (g\cdot \alpha)(m)
+        =
+        \alpha\bigl(\rho(g)^{-1}m\bigr),
+        \qquad
+        g\in G,\ \alpha\in M^*,\ m\in M.
+    \]
+    Equivalently,
+    \[
+        g\cdot \alpha=\alpha\circ \rho(g)^{-1}.
+    \]
+\end{definition}
+
+The tensor product
+\[
+    M\otimes_k N
+\]
+also carries a natural \(G\)-representation.
+
+\begin{definition}[Tensor product representation]
+    The tensor product of \((M,\rho)\) and \((N,\sigma)\) is
+    \[
+        (M,\rho)\otimes (N,\sigma)
+        :=
+        (M\otimes_k N,\rho\otimes\sigma),
+    \]
+    where
+    \[
+        (\rho\otimes\sigma)(g)(m\otimes n)
+        :=
+        \rho(g)m\otimes \sigma(g)n.
+    \]
+    In action notation,
+    \[
+        g\cdot(m\otimes n)=(g\cdot m)\otimes(g\cdot n).
+    \]
+\end{definition}
+
+A representation of degree \(1\) is the same as a group homomorphism
+\[
+    \rho:G\longrightarrow k^\times.
+\]
+Indeed, if \(M=k\), then
+\[
+    \operatorname{GL}(M)=\operatorname{GL}_1(k)\cong k^\times.
+\]
+
+\begin{definition}
+    A one-dimensional representation of \(G\) over \(k\) is a pair
+    \[
+        (k,\rho),
+    \]
+    where
+    \[
+        \rho:G\longrightarrow k^\times
+    \]
+    is a group homomorphism.
+\end{definition}
+
+\begin{remark}
+    Since \(k^\times\) is abelian, every homomorphism
+    \[
+        \rho:G\longrightarrow k^\times
+    \]
+    kills the commutator subgroup \([G,G]\). Hence \(\rho\) factors uniquely
+    through the abelianization:
+    \[
+        G/[G,G]\longrightarrow k^\times.
+    \]
+    Therefore one-dimensional representations of \(G\) over \(k\) are naturally
+    the same as group homomorphisms
+    \[
+        G/[G,G]\longrightarrow k^\times.
+    \]
+\end{remark}
+
+\begin{example}[One-dimensional representations of \(D_8\)]
+    Let
+    \[
+        G=D_8=\langle \sigma,\tau\mid \sigma^2=\tau^2=(\sigma\tau)^4=1\rangle.
+    \]
+    Then
+    \[
+        [G,G]=Z(G)=\langle(\sigma\tau)^2\rangle,
+    \]
+    and hence
+    \[
+        G/[G,G]\cong \mathbb{Z}_2\times \mathbb{Z}_2.
+    \]
+    Therefore, over a field \(k\) with \(\operatorname{char}(k)\neq 2\), the group
+    \(G\) has four one-dimensional representations:
+    \[
+    \begin{array}{c|cc}
+        & \sigma & \tau \\ \hline
+        \rho_1 & 1 & 1 \\
+        \rho_2 & 1 & -1 \\
+        \rho_3 & -1 & 1 \\
+        \rho_4 & -1 & -1
+    \end{array}
+    \]
+\end{example}
+
+Let \((M,\rho)\) be a \(k\)-linear representation of \(G\), and let
+\[
+    (k,\sigma)
+\]
+be a one-dimensional representation of \(G\). Then
+\[
+    M\otimes_k k\cong M
+\]
+as \(k\)-vector spaces. Under this identification, the tensor product representation
+\[
+    (M,\rho)\otimes(k,\sigma)
+\]
+corresponds to the representation
+\[
+    (M,\rho\otimes\sigma),
+\]
+where
+\[
+    (\rho\otimes\sigma)(g)=\sigma(g)\rho(g).
+\]
+
+\begin{lemma}
+    Let \((S,\rho)\) be an irreducible \(k\)-linear representation of \(G\), and
+    let \((k,\sigma)\) be a one-dimensional representation of \(G\). Then
+    \[
+        (S,\rho)\otimes(k,\sigma)
+    \]
+    is irreducible.
+\end{lemma}
+
+\begin{proof}
+    Under the identification \(S\otimes_k k\cong S\), the tensor product
+    representation is given by
+    \[
+        g\longmapsto \sigma(g)\rho(g).
+    \]
+    Let \(W\subseteq S\) be a nonzero subspace stable under this twisted action.
+    For \(w\in W\) and \(g\in G\), we have
+    \[
+        \sigma(g)\rho(g)w\in W.
+    \]
+    Since \(\sigma(g)\in k^\times\), multiplication by \(\sigma(g)\) is invertible.
+    Hence
+    \[
+        \rho(g)w\in W.
+    \]
+    Thus \(W\) is stable under the original action \(\rho\). Since \((S,\rho)\) is
+    irreducible, we must have
+    \[
+        W=S.
+    \]
+    Therefore the twisted representation is irreducible.
+\end{proof}
+
+Let \(G\) be a finite group and \(k\) a field.
+
+\begin{definition}[Group algebra]
+    The group algebra \(kG\) is the \(k\)-vector space with basis \(G\):
+    \[
+        kG
+        =
+        \left\{
+            \sum_{g\in G} x_g g
+            \ \middle|\ 
+            x_g\in k
+        \right\}.
+    \]
+    Multiplication is defined by extending the group multiplication \(k\)-bilinearly.
+    Thus, if
+    \[
+        x=\sum_{s\in G}x_s s,
+        \qquad
+        y=\sum_{t\in G}y_t t,
+    \]
+    then
+    \[
+        xy
+        =
+        \sum_{s,t\in G}x_s y_t\, st.
+    \]
+    Equivalently,
+    \[
+        xy
+        =
+        \sum_{g\in G}
+        \left(
+            \sum_{s\in G}x_s y_{s^{-1}g}
+        \right)g.
+    \]
+\end{definition}
+
+\begin{proposition}
+    The group algebra \(kG\) is a \(k\)-algebra.
+\end{proposition}
+
+\begin{proof}
+    The multiplication on \(kG\) is defined by \(k\)-bilinear extension of the
+    multiplication in \(G\). Since multiplication in \(G\) is associative, the
+    induced multiplication on \(kG\) is associative. The identity element is
+    \(1_G\in G\subseteq kG\). Hence \(kG\) is a unital associative \(k\)-algebra.
+\end{proof}
+
+\begin{theorem}
+    The category of \(k\)-linear representations of \(G\) is naturally equivalent
+    to the category of left \(kG\)-modules:
+    \[
+        \operatorname{Rep}(G,\operatorname{vect}_k)
+        \simeq
+        kG\text{-}\operatorname{mod}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let \((M,\rho)\) be a \(k\)-linear representation of \(G\). Define an action of
+    \(kG\) on \(M\) by
+    \[
+        \left(\sum_{g\in G} a_g g\right)m
+        :=
+        \sum_{g\in G} a_g\,\rho(g)(m).
+    \]
+    This makes \(M\) into a left \(kG\)-module.
+
+    Conversely, if \(M\) is a left \(kG\)-module, then each \(g\in G\subseteq kG\)
+    acts on \(M\) by a \(k\)-linear automorphism, since \(g^{-1}\in G\) acts as its
+    inverse. Hence we obtain a group homomorphism
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(M),
+        \qquad
+        \rho(g)(m)=g m.
+    \]
+    This gives a \(k\)-linear representation of \(G\).
+
+    These two constructions are inverse to each other, and morphisms are exactly
+    the \(k\)-linear maps commuting with the \(G\)-action, equivalently the
+    \(kG\)-module homomorphisms. Therefore the two categories are naturally
+    equivalent.
+\end{proof}
+
+

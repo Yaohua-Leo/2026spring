@@ -1,0 +1,591 @@
+\section{Extension of scalars and splitting fields}
+
+    Let \(R\) be a commutative ring, let \(A\) be an \(R\)-algebra, and let \(U\)
+    be an \(A\)-module. Suppose that
+    \[
+        \varphi:R\longrightarrow R'
+    \]
+    is a homomorphism of commutative rings. Then \(R'\) is naturally an
+    \(R\)-algebra via \(\varphi\).
+
+\begin{definition}[Extension of scalars]
+    With the notation above, the tensor product
+    \[
+        R'\otimes_R A
+    \]
+    is naturally an \(R'\)-algebra. Moreover,
+    \[
+        R'\otimes_R U
+    \]
+    is naturally a module over the \(R'\)-algebra \(R'\otimes_R A\).
+
+    Explicitly, the action is given on elementary tensors by
+    \[
+        (r'\otimes a)\cdot (s'\otimes u)
+        :=
+        r's'\otimes au,
+    \]
+    where \(r',s'\in R'\), \(a\in A\), and \(u\in U\).
+\end{definition}
+
+\begin{example}
+    Let
+    \[
+        R=\mathbb{Q},
+        \qquad
+        R'=\mathbb{C},
+        \qquad
+        A=M_n(\mathbb{Q}).
+    \]
+    Then
+    \[
+        \mathbb{C}\otimes_{\mathbb{Q}}M_n(\mathbb{Q})
+        \cong M_n(\mathbb{C}).
+    \]
+    Thus extending scalars from \(\mathbb{Q}\) to \(\mathbb{C}\) turns the
+    \(\mathbb{Q}\)-algebra \(M_n(\mathbb{Q})\) into the \(\mathbb{C}\)-algebra
+    \(M_n(\mathbb{C})\).
+\end{example}
+
+\begin{remark}
+    If \(R\subseteq R'\) is a subring and \(U\) is an \(A\)-module, then we say that
+    the module
+    \[
+        V:=R'\otimes_R U
+    \]
+    is obtained from \(U\) by extending scalars from \(R\) to \(R'\).
+\end{remark}
+
+\begin{definition}
+    Let \(V\) be an \(R'\otimes_R A\)-module. If there exists an \(A\)-module \(U\)
+    such that
+    \[
+        V\cong R'\otimes_R U
+    \]
+    as \(R'\otimes_R A\)-modules, then we say that \(V\) can be written over \(R\),
+    or that \(V\) is obtained from \(U\) by extension of scalars.
+\end{definition}
+
+\begin{example}
+    Let \(R\) be a discrete valuation ring, and let \(K=\operatorname{Frac}(R)\) be
+    its fraction field. If \(A\) is an \(R\)-algebra which is finitely generated as
+    an \(R\)-module, then
+    \[
+        K\otimes_R A
+    \]
+    is a finite-dimensional \(K\)-algebra.
+\end{example}
+
+\begin{proof}
+    Since \(A\) is finitely generated as an \(R\)-module, there exist elements
+    \[
+        a_1,\dots,a_m\in A
+    \]
+    such that
+    \[
+        A=Ra_1+\cdots+Ra_m.
+    \]
+    We first show that \(K\otimes_R A\) is finite-dimensional as a \(K\)-vector
+    space.
+
+    The \(K\)-vector space structure on \(K\otimes_R A\) is given by
+    \[
+        \lambda\cdot(\mu\otimes a):=(\lambda\mu)\otimes a,
+        \qquad
+        \lambda,\mu\in K,\ a\in A.
+    \]
+    Every element of \(K\otimes_R A\) is a finite sum of elementary tensors
+    \[
+        \lambda\otimes a,
+        \qquad \lambda\in K,\ a\in A.
+    \]
+    Since \(a_1,\dots,a_m\) generate \(A\) as an \(R\)-module, for each \(a\in A\)
+    there exist \(r_1,\dots,r_m\in R\) such that
+    \[
+        a=r_1a_1+\cdots+r_ma_m.
+    \]
+    Hence
+    \[
+        \lambda\otimes a
+        =
+        \lambda\otimes \left(\sum_{i=1}^m r_i a_i\right)
+        =
+        \sum_{i=1}^m \lambda r_i\otimes a_i.
+    \]
+    Since
+    \[
+        \lambda r_i\otimes a_i
+        =
+        (\lambda r_i)\cdot (1\otimes a_i),
+    \]
+    it follows that
+    \[
+        1\otimes a_1,\dots,1\otimes a_m
+    \]
+    span \(K\otimes_R A\) as a \(K\)-vector space. Therefore
+    \[
+        \dim_K(K\otimes_R A)\leq m<\infty.
+    \]
+
+    It remains to describe the algebra structure. Since \(A\) is an \(R\)-algebra
+    and \(K\) is an \(R\)-algebra via the inclusion
+    \[
+        R\hookrightarrow K,
+    \]
+    the tensor product \(K\otimes_R A\) carries a natural multiplication defined on
+    elementary tensors by
+    \[
+        (\lambda\otimes a)(\mu\otimes b)
+        :=
+        \lambda\mu\otimes ab,
+        \qquad
+        \lambda,\mu\in K,\ a,b\in A.
+    \]
+    This multiplication is \(K\)-bilinear and associative, and its identity element is
+    \[
+        1_K\otimes 1_A.
+    \]
+    Hence \(K\otimes_R A\) is a \(K\)-algebra.
+
+    Since it is finite-dimensional as a \(K\)-vector space, we conclude that
+    \[
+        K\otimes_R A
+    \]
+    is a finite-dimensional \(K\)-algebra.
+\end{proof}
+
+\begin{remark}
+    Suppose that \(V=R'\otimes_R U\) can be written over \(R\). If \(U\) is free as
+    an \(R\)-module, then we identify \(U\) with its image
+    \[
+        1_{R'}\otimes_R U\subseteq R'\otimes_R U.
+    \]
+    In this case, an \(R\)-basis of \(U\) becomes an \(R'\)-basis of
+    \(R'\otimes_R U\).
+\end{remark}
+
+\begin{example}[Reduction modulo an ideal]
+    Let \(I\) be an ideal of \(R\), and take
+    \[
+        R'=R/I.
+    \]
+    Then applying the functor
+    \[
+        R'\otimes_R -
+    \]
+    to an \(R\)-module \(U\) is the same as reducing \(U\) modulo \(I\). More
+    precisely,
+    \[
+        (R/I)\otimes_R U\cong U/IU.
+    \]
+\end{example}
+
+\begin{definition}[Lifting of modules]
+    Let \(V\) be an \(R'\otimes_R A\)-module. If there exists an \(A\)-module \(U\)
+    such that
+    \[
+        V\cong R'\otimes_R U,
+    \]
+    then we say that \(V\) can be lifted to \(U\), and that \(U\) is a lift of \(V\).
+\end{definition}
+
+\begin{example}
+    Let \(R\) be a discrete valuation ring with maximal ideal
+    \[
+        (\pi)=J(R),
+    \]
+    and let \(A\) be an \(R\)-algebra. Put
+    \[
+        F=R/(\pi).
+    \]
+    Then
+    \[
+        F\otimes_R A\cong A/\pi A.
+    \]
+    If \(V\) is an \(A\)-module, then
+    \[
+        F\otimes_R V\cong V/\pi V.
+    \]
+    Thus tensoring with the residue field \(F\) corresponds to reducing modulo
+    \(\pi\).
+\end{example}
+
+\begin{proposition}
+    Let
+    \[
+        F\subseteq E
+    \]
+    be an algebraic extension of fields. Let \(A\) be a finite-dimensional
+    \(F\)-algebra, and let \(V\) be an \(E\otimes_F A\)-module which is finite-dimensional
+    as an \(E\)-vector space.
+
+    Then there exists a field \(K\) such that
+    \[
+        F\subseteq K\subseteq E,
+        \qquad
+        [K:F]<\infty,
+    \]
+    and \(V\) can be written over \(K\). More precisely, there exists a
+    \(K\otimes_F A\)-module \(V_K\) such that
+    \[
+        V\cong E\otimes_K V_K
+    \]
+    as \(E\otimes_F A\)-modules.
+\end{proposition}
+
+\begin{proof}
+    If \(V=0\), the result is trivial. Assume \(V\neq 0\), and write
+    \[
+        d=\dim_E V.
+    \]
+    Choose an \(E\)-basis
+    \[
+        v_1,\dots,v_d
+    \]
+    of \(V\).
+
+    Let
+    \[
+        a^1,\dots,a^n
+    \]
+    be an \(F\)-basis of \(A\). Since \(V\) is an \(E\otimes_F A\)-module, each element
+    \(a^t\in A\) acts \(E\)-linearly on \(V\). With respect to the chosen \(E\)-basis of
+    \(V\), write the action of \(a^t\) as
+    \[
+        a^t v_j=\sum_{i=1}^d a_{ij}^t v_i,
+        \qquad
+        a_{ij}^t\in E.
+    \]
+    Define
+    \[
+        K:=F\bigl(a_{ij}^t\mid 1\leq t\leq n,\ 1\leq i,j\leq d\bigr)
+        \subseteq E.
+    \]
+    Since \(E/F\) is algebraic, each \(a_{ij}^t\) is algebraic over \(F\). Hence the
+    field obtained by adjoining finitely many such elements is a finite extension of
+    \(F\). Therefore
+    \[
+        [K:F]<\infty.
+    \]
+
+    Now define
+    \[
+        V_K:=Kv_1+\cdots+Kv_d.
+    \]
+    This is a \(K\)-vector space with basis \(v_1,\dots,v_d\). By construction, for
+    every \(t\) and every \(j\),
+    \[
+        a^t v_j=\sum_{i=1}^d a_{ij}^t v_i\in V_K,
+    \]
+    because all coefficients \(a_{ij}^t\) lie in \(K\). Thus \(V_K\) is stable under
+    the action of \(A\).
+
+    Hence \(V_K\) becomes a \(K\otimes_F A\)-module by
+    \[
+        (\lambda\otimes a)\cdot v
+        :=
+        \lambda(av),
+        \qquad
+        \lambda\in K,\ a\in A,\ v\in V_K.
+    \]
+
+    Finally, consider the natural \(E\)-linear map
+    \[
+        E\otimes_K V_K\longrightarrow V,
+        \qquad
+        \lambda\otimes v\longmapsto \lambda v.
+    \]
+    Since \(v_1,\dots,v_d\) is both a \(K\)-basis of \(V_K\) and an \(E\)-basis of
+    \(V\), this map is an isomorphism of \(E\)-vector spaces.
+
+    Moreover, it is compatible with the \(E\otimes_F A\)-module structures. Indeed,
+    for \(\mu,\lambda\in E\), \(a\in A\), and \(v\in V_K\),
+    \[
+        (\mu\otimes a)\cdot(\lambda\otimes v)
+        =
+        \mu\lambda\otimes av
+        \longmapsto
+        \mu\lambda av,
+    \]
+    which is exactly the action of \(\mu\otimes a\) on \(\lambda v\in V\).
+
+    Therefore
+    \[
+        V\cong E\otimes_K V_K
+    \]
+    as \(E\otimes_F A\)-modules. Hence \(V\) can be written over the finite extension
+    \(K/F\).
+\end{proof}
+
+\begin{definition}[Absolutely simple module]
+    Let \(F\) be a field, and let \(A\) be a finite-dimensional \(F\)-algebra.
+    A simple \(A\)-module \(U\) is called absolutely simple if, for every field
+    extension \(E/F\), the \(E\otimes_F A\)-module
+    \[
+        E\otimes_F U
+    \]
+    is simple.
+\end{definition}
+
+\begin{definition}[Splitting field]
+    Let \(F\) be a field, and \(A\) be a finite-dimensional \(F\)-algebra.
+    A field extension \(E/F\) is called a splitting field for \(A\) if every simple
+    \(E\otimes_F A\)-module is absolutely simple.
+\end{definition}
+
+\begin{proposition}
+    Let \(A\) be a finite-dimensional algebra over a field \(F\), and let \(U\) be
+    a simple \(A\)-module. Then the following conditions are equivalent:
+    \begin{enumerate}
+        \item \(U\) is absolutely simple.
+        \item
+        \[
+            \operatorname{End}_A(U)=F.
+        \]
+        \item The matrix algebra summand of \(A/J(A)\) corresponding to \(U\) has
+        the form
+        \[
+            M_n(F),
+        \]
+        where
+        \[
+            n=\dim_F U.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove the equivalences.
+
+    \((1)\Rightarrow (2)\).
+    Let \(\overline{F}\) be an algebraic closure of \(F\). Since \(U\) is absolutely
+    simple,
+    \[
+        \overline{F}\otimes_F U
+    \]
+    is a simple \(\overline{F}\otimes_F A\)-module.
+
+    By Schur's lemma,
+    \[
+        \operatorname{End}_{\overline{F}\otimes_F A}
+        \bigl(\overline{F}\otimes_F U\bigr)
+    \]
+    is a division algebra over \(\overline{F}\). Since \(\overline{F}\) is algebraically
+    closed and \(\overline{F}\otimes_F U\) is finite-dimensional over \(\overline{F}\),
+    we get
+    \[
+        \operatorname{End}_{\overline{F}\otimes_F A}
+        \bigl(\overline{F}\otimes_F U\bigr)
+        =
+        \overline{F}.
+    \]
+    On the other hand, by base change for endomorphism rings,
+    \[
+        \operatorname{End}_{\overline{F}\otimes_F A}
+        \bigl(\overline{F}\otimes_F U\bigr)
+        \cong
+        \overline{F}\otimes_F \operatorname{End}_A(U).
+    \]
+    Therefore
+    \[
+        \overline{F}\otimes_F \operatorname{End}_A(U)
+        \cong
+        \overline{F}.
+    \]
+    Taking dimensions over \(\overline{F}\), we obtain
+    \[
+        \dim_F\operatorname{End}_A(U)=1.
+    \]
+    Since \(F\) embeds into \(\operatorname{End}_A(U)\) by scalar multiplication, it
+    follows that
+    \[
+        \operatorname{End}_A(U)=F.
+    \]
+
+    \((2)\Rightarrow (3)\).
+    By the Artin--Wedderburn theorem, the simple module \(U\) corresponds to a matrix
+    algebra summand of \(A/J(A)\) of the form
+    \[
+        M_n(D),
+    \]
+    where
+    \[
+        D=\operatorname{End}_A(U)^{\operatorname{op}}.
+    \]
+    If
+    \[
+        \operatorname{End}_A(U)=F,
+    \]
+    then
+    \[
+        D=F.
+    \]
+    Hence the corresponding summand is
+    \[
+        M_n(F).
+    \]
+    In this case the natural simple module for \(M_n(F)\) is \(F^n\), and therefore
+    \[
+        n=\dim_F U.
+    \]
+
+    \((3)\Rightarrow (1)\).
+    Suppose that the matrix algebra summand of \(A/J(A)\) corresponding to \(U\) is
+    \[
+        M_n(F),
+    \]
+    with
+    \[
+        n=\dim_F U.
+    \]
+    Then \(A\) acts on \(U\) through a surjective algebra homomorphism
+    \[
+        A\longrightarrow M_n(F),
+    \]
+    and under this action we may identify
+    \[
+        U\cong F^n.
+    \]
+
+    Let \(E/F\) be any field extension. After extending scalars, \(E\otimes_F A\) acts
+    on \(E\otimes_F U\) through the induced homomorphism
+    \[
+        E\otimes_F A
+        \longrightarrow
+        E\otimes_F M_n(F)
+        \cong
+        M_n(E).
+    \]
+    Moreover,
+    \[
+        E\otimes_F U
+        \cong
+        E\otimes_F F^n
+        \cong
+        E^n.
+    \]
+    The natural \(M_n(E)\)-module \(E^n\) is simple. Therefore
+    \[
+        E\otimes_F U
+    \]
+    is a simple \(E\otimes_F A\)-module for every field extension \(E/F\).
+
+    Hence \(U\) is absolutely simple.
+\end{proof}
+
+\begin{example}
+    Let
+\[
+    f(x)=x^4-2\in \mathbb{Q}[x],
+\]
+and let
+\[
+    \alpha=\sqrt[4]{2},\qquad i=\sqrt{-1}.
+\]
+The roots of \(f(x)\) in \(\mathbb{C}\) are
+\[
+    \alpha,\quad i\alpha,\quad -\alpha,\quad -i\alpha.
+\]
+Thus the splitting field of \(x^4-2\) over \(\mathbb{Q}\) is
+\[
+    K=\mathbb{Q}(\alpha,i).
+\]
+Since \(x^4-2\) is irreducible over \(\mathbb{Q}\) and \(i\notin \mathbb{Q}(\alpha)\), we have
+\[
+    [K:\mathbb{Q}]=8.
+\]
+Therefore
+\[
+    \left|\operatorname{Gal}(K/\mathbb{Q})\right|=8.
+\]
+
+The Galois group acts on the set of roots
+\[
+    \Omega=\{\alpha,i\alpha,-\alpha,-i\alpha\}.
+\]
+Consider the automorphisms \(\sigma,\tau\in \operatorname{Gal}(K/\mathbb{Q})\) defined by
+\[
+    \sigma(\alpha)=-i\alpha,\qquad \sigma(i)=-i,
+\]
+and
+\[
+    \tau(\alpha)=\alpha,\qquad \tau(i)=-i.
+\]
+Their actions on the roots are
+\[
+    \sigma:\quad
+    \alpha\leftrightarrow -i\alpha,\qquad
+    -\alpha\leftrightarrow i\alpha,
+\]
+and
+\[
+    \tau:\quad
+    i\alpha\leftrightarrow -i\alpha,
+    \qquad
+    \alpha\mapsto \alpha,\qquad -\alpha\mapsto -\alpha.
+\]
+Hence
+\[
+    \sigma^2=\tau^2=(\sigma\tau)^4=1.
+\]
+Moreover,
+\[
+    \langle \sigma,\tau\rangle=\operatorname{Gal}(K/\mathbb{Q}).
+\]
+Therefore
+\[
+    \operatorname{Gal}(K/\mathbb{Q})
+    \cong
+    D_8,
+\]
+where
+\[
+    D_8
+    =
+    \left\langle \sigma,\tau
+    \mid
+    \sigma^2=\tau^2=(\sigma\tau)^4=1
+    \right\rangle
+\]
+is the dihedral group of order \(8\).
+
+The group \(D_8\) can be represented as a subgroup of
+\[
+    \operatorname{GL}_2(\mathbb{R}).
+\]
+Indeed, consider the real vector space
+\[
+    E=\mathbb{R}\alpha\oplus \mathbb{R}i\alpha
+\]
+with ordered basis
+\[
+    (\alpha,i\alpha).
+\]
+With respect to this basis, the above actions are represented by the matrices
+\[
+    \sigma\longmapsto
+    \begin{pmatrix}
+        0 & -1\\
+        -1 & 0
+    \end{pmatrix},
+    \qquad
+    \tau\longmapsto
+    \begin{pmatrix}
+        1 & 0\\
+        0 & -1
+    \end{pmatrix}.
+\]
+These matrices satisfy
+\[
+    \sigma^2=\tau^2=I_2,
+    \qquad
+    (\sigma\tau)^4=I_2.
+\]
+Thus they generate a subgroup of \(\operatorname{GL}_2(\mathbb{R})\) isomorphic to
+\(D_8\).
+
+Geometrically, this is the usual symmetry group of a square whose vertices are
+\[
+    \alpha,\quad i\alpha,\quad -\alpha,\quad -i\alpha.
+\]
+\end{example}

@@ -1,0 +1,671 @@
+\section{Categorical representations and outer automorphisms}
+
+Recall the category
+\[
+    \operatorname{Rep}(G,\mathcal{C}),
+\]
+whose objects are pairs \((X,\rho)\), where \(X\in \mathcal{C}\) and
+\[
+    \rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+\]
+is a group homomorphism. A morphism
+\[
+    f:(X,\rho)\longrightarrow (X',\rho')
+\]
+is a morphism \(f:X\to X'\) in \(\mathcal{C}\) such that, for every \(g\in G\),
+\[
+    \rho'(g)\circ f=f\circ \rho(g).
+\]
+
+\begin{lemma}
+    A morphism
+    \[
+        f:(X,\rho)\longrightarrow (X',\rho')
+    \]
+    in \(\operatorname{Rep}(G,\mathcal{C})\) is an isomorphism if and only if the
+    underlying morphism
+    \[
+        f:X\longrightarrow X'
+    \]
+    is an isomorphism in \(\mathcal{C}\).
+\end{lemma}
+
+\begin{proof}
+    If \(f\) is an isomorphism in \(\operatorname{Rep}(G,\mathcal{C})\), then its
+    underlying morphism in \(\mathcal{C}\) is clearly an isomorphism.
+
+    Conversely, suppose that \(f:X\to X'\) is an isomorphism in \(\mathcal{C}\).
+    Since \(f\) is a morphism of representations, for every \(g\in G\) we have
+    \[
+        \rho'(g)\circ f=f\circ \rho(g).
+    \]
+    Multiplying by \(f^{-1}\), we obtain
+    \[
+        f^{-1}\circ \rho'(g)=\rho(g)\circ f^{-1}.
+    \]
+    Hence \(f^{-1}:X'\to X\) is also a morphism of representations. Therefore
+    \(f\) is an isomorphism in \(\operatorname{Rep}(G,\mathcal{C})\).
+\end{proof}
+
+\begin{definition}
+    Let \((X,\rho)\) and \((X,\rho')\) be two representations of \(G\) on the same
+    object \(X\). We say that \((X,\rho)\) and \((X,\rho')\) are isomorphic if there
+    exists an automorphism
+    \[
+        f:X\longrightarrow X
+    \]
+    in \(\mathcal{C}\) such that, for every \(g\in G\),
+    \[
+        \rho'(g)=f\circ \rho(g)\circ f^{-1}.
+    \]
+    In this case, we also say that \(\rho\) and \(\rho'\) are uniformly conjugate.
+\end{definition}
+
+If two representations \((X,\rho)\) and \((X',\rho')\) are isomorphic, we write
+    \[
+        (X,\rho)\cong (X',\rho').
+    \]
+
+Let \((X,\rho)\) and \((Y,\sigma)\) be two \(\mathcal{C}\)-representations of \(G\).
+Then the group
+\[
+    \operatorname{Aut}_{\mathcal{C}}(X)\times \operatorname{Aut}_{\mathcal{C}}(Y)
+\]
+acts on the set
+\[
+    \operatorname{Hom}_{\mathcal{C}}(X,Y)
+\]
+by
+\[
+    (\alpha,\beta)\cdot f
+    :=
+    \beta\circ f\circ \alpha^{-1},
+\]
+where
+\[
+    \alpha\in \operatorname{Aut}_{\mathcal{C}}(X),\qquad
+    \beta\in \operatorname{Aut}_{\mathcal{C}}(Y),\qquad
+    f\in \operatorname{Hom}_{\mathcal{C}}(X,Y).
+\]
+
+The diagonal group homomorphism
+\[
+    G\longrightarrow
+    \operatorname{Aut}_{\mathcal{C}}(X)\times \operatorname{Aut}_{\mathcal{C}}(Y)
+\]
+is given by
+\[
+    g\longmapsto \bigl(\rho(g),\sigma(g)\bigr).
+\]
+Therefore it induces an action of \(G\) on \(\operatorname{Hom}_{\mathcal{C}}(X,Y)\):
+\[
+    g\cdot f
+    :=
+    \sigma(g)\circ f\circ \rho(g)^{-1},
+    \qquad
+    g\in G,\quad f\in \operatorname{Hom}_{\mathcal{C}}(X,Y).
+\]
+
+Equivalently, the following diagram commutes:
+\[
+\begin{tikzcd}
+    X \arrow[r,"f"] \arrow[d,"\rho(g)"']
+        & Y \arrow[d,"\sigma(g)"] \\
+    X \arrow[r,"g\cdot f"']
+        & Y
+\end{tikzcd}
+\]
+where
+\[
+    g\cdot f=\sigma(g)\circ f\circ \rho(g)^{-1}.
+\]
+
+\begin{remark}
+    A morphism \(f:X\to Y\) is a morphism of representations
+    \[
+        f:(X,\rho)\longrightarrow (Y,\sigma)
+    \]
+    if and only if it is fixed by the above \(G\)-action, that is,
+    \[
+        g\cdot f=f
+        \qquad
+        \text{for all } g\in G.
+    \]
+    Indeed, this condition is equivalent to
+    \[
+        \sigma(g)\circ f=f\circ \rho(g),
+    \]
+    which is exactly the equivariance condition.
+\end{remark}
+
+\begin{lemma}
+    Let \((X,\rho)\) and \((Y,\sigma)\) be two objects of
+    \(\operatorname{Rep}(G,\mathcal{C})\). Then the set of morphisms
+    \[
+        (X,\rho)\longrightarrow (Y,\sigma)
+    \]
+    in \(\operatorname{Rep}(G,\mathcal{C})\) is precisely the set of fixed points
+    of \(G\) in its action on
+    \[
+        \operatorname{Hom}_{\mathcal{C}}(X,Y).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Recall that \(G\) acts on \(\operatorname{Hom}_{\mathcal{C}}(X,Y)\) by
+    \[
+        g\cdot f
+        :=
+        \sigma(g)\circ f\circ \rho(g)^{-1}.
+    \]
+    Thus \(f\) is fixed by every \(g\in G\) if and only if
+    \[
+        \sigma(g)\circ f\circ \rho(g)^{-1}=f
+    \]
+    for every \(g\in G\). This is equivalent to
+    \[
+        \sigma(g)\circ f=f\circ \rho(g),
+    \]
+    which is exactly the condition that \(f\) is a morphism of representations
+    \[
+        f:(X,\rho)\longrightarrow (Y,\sigma).
+    \]
+    Therefore the morphisms in \(\operatorname{Rep}(G,\mathcal{C})\) are precisely
+    the \(G\)-fixed points of \(\operatorname{Hom}_{\mathcal{C}}(X,Y)\).
+\end{proof}
+
+Assume further that \(\mathcal{C}\) is a category whose objects are sets and whose
+morphisms are maps between sets.
+
+Let \((X,\rho)\) be a \(\mathcal{C}\)-representation of \(G\). We write
+\[
+    g\cdot x := \rho(g)(x),
+    \qquad x\in X,\quad g\in G.
+\]
+Thus the representation \(\rho:G\to \operatorname{Aut}_{\mathcal{C}}(X)\) gives an
+action of \(G\) on the set \(X\).
+
+A morphism
+\[
+    f:(X,\rho)\longrightarrow (Y,\sigma)
+\]
+is a morphism \(f:X\to Y\) in \(\mathcal{C}\) satisfying
+\[
+    f(g\cdot x)=g\cdot f(x)
+\]
+for all \(x\in X\) and \(g\in G\). Such a map is also called a \(G\)-equivariant
+map.
+
+\begin{definition}
+    Let \(G\) act on a set \(X\). For \(x\in X\), the stabilizer of \(x\) is the
+    subgroup
+    \[
+        G_x:=\{\,g\in G\mid g\cdot x=x\,\}.
+    \]
+\end{definition}
+
+\begin{lemma}
+    Let \((X,\rho)\) be a \(\mathcal{C}\)-representation of \(G\). Then:
+    \begin{enumerate}
+        \item For every \(g\in G\) and every \(x\in X\),
+        \[
+            G_{g\cdot x}=gG_xg^{-1}.
+        \]
+
+        \item If
+        \[
+            f:(X,\rho)\longrightarrow (Y,\sigma)
+        \]
+        is an isomorphism of \(G\)-representations, then
+        \[
+            G_{f(x)}=G_x
+        \]
+        for every \(x\in X\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \textup{(1)} Let \(h\in G\). Then
+    \[
+        h\in G_{g\cdot x}
+    \]
+    if and only if
+    \[
+        h\cdot (g\cdot x)=g\cdot x.
+    \]
+    This is equivalent to
+    \[
+        (g^{-1}hg)\cdot x=x,
+    \]
+    that is,
+    \[
+        g^{-1}hg\in G_x.
+    \]
+    Therefore
+    \[
+        h\in gG_xg^{-1}.
+    \]
+    Hence
+    \[
+        G_{g\cdot x}=gG_xg^{-1}.
+    \]
+
+    \textup{(2)} Since \(f\) is an isomorphism of \(G\)-representations, it is
+    \(G\)-equivariant and bijective. For \(g\in G\), we have
+    \[
+        g\in G_x
+        \iff g\cdot x=x.
+    \]
+    Applying \(f\) and using equivariance gives
+    \[
+        f(g\cdot x)=f(x)
+        \iff g\cdot f(x)=f(x).
+    \]
+    Hence
+    \[
+        g\in G_x
+        \iff g\in G_{f(x)}.
+    \]
+    Therefore
+    \[
+        G_x=G_{f(x)}.
+    \]
+\end{proof}
+
+Let \(G\) be a group. Denote by
+\[
+    \operatorname{Aut}(G)
+\]
+the automorphism group of \(G\).
+
+For each \(g\in G\), define a map
+\[
+    \operatorname{Inn}(g):G\longrightarrow G
+\]
+by
+\[
+    \operatorname{Inn}(g)(x)=gxg^{-1},
+    \qquad x\in G.
+\]
+This is called the inner automorphism of \(G\) induced by \(g\).
+
+\begin{definition}
+    The group of inner automorphisms of \(G\) is
+    \[
+        \operatorname{Inn}(G)
+        :=
+        \{\,\operatorname{Inn}(g)\mid g\in G\,\}.
+    \]
+\end{definition}
+
+\begin{remark}
+    For every \(g\in G\), the map \(\operatorname{Inn}(g)\) is an automorphism of
+    \(G\). Indeed,
+    \[
+        \operatorname{Inn}(g)(xy)
+        =
+        gxyg^{-1}
+        =
+        (gxg^{-1})(gyg^{-1})
+        =
+        \operatorname{Inn}(g)(x)\operatorname{Inn}(g)(y),
+    \]
+    and its inverse is
+    \[
+        \operatorname{Inn}(g^{-1}).
+    \]
+\end{remark}
+
+\begin{proposition}
+    There is a group isomorphism
+    \[
+        \operatorname{Inn}(G)\cong G/Z(G),
+    \]
+    where
+    \[
+        Z(G):=\{\,z\in G\mid zg=gz \text{ for all } g\in G\,\}
+    \]
+    is the center of \(G\).
+\end{proposition}
+
+\begin{proof}
+    Define
+    \[
+        \Phi:G\longrightarrow \operatorname{Aut}(G)
+    \]
+    by
+    \[
+        \Phi(g)=\operatorname{Inn}(g).
+    \]
+    We first check that \(\Phi\) is a group homomorphism. For \(g,h\in G\) and
+    \(x\in G\), we have
+    \[
+        \bigl(\operatorname{Inn}(g)\circ \operatorname{Inn}(h)\bigr)(x)
+        =
+        \operatorname{Inn}(g)(hxh^{-1})
+        =
+        ghxh^{-1}g^{-1}
+        =
+        (gh)x(gh)^{-1}.
+    \]
+    Hence
+    \[
+        \operatorname{Inn}(g)\circ \operatorname{Inn}(h)
+        =
+        \operatorname{Inn}(gh),
+    \]
+    so
+    \[
+        \Phi(gh)=\Phi(g)\Phi(h).
+    \]
+    Thus \(\Phi\) is a group homomorphism.
+
+    By definition,
+    \[
+        \operatorname{Im}(\Phi)=\operatorname{Inn}(G).
+    \]
+    Now we compute the kernel. We have
+    \[
+        g\in \operatorname{Ker}(\Phi)
+    \]
+    if and only if
+    \[
+        \operatorname{Inn}(g)=\operatorname{id}_G.
+    \]
+    This means that for every \(x\in G\),
+    \[
+        gxg^{-1}=x.
+    \]
+    Equivalently,
+    \[
+        gx=xg
+    \]
+    for every \(x\in G\). Hence
+    \[
+        \operatorname{Ker}(\Phi)=Z(G).
+    \]
+    Therefore, by the first isomorphism theorem,
+    \[
+        G/Z(G)\cong \operatorname{Im}(\Phi)=\operatorname{Inn}(G).
+    \]
+\end{proof}
+
+\begin{proposition}
+    The group of inner automorphisms is a normal subgroup of the automorphism
+    group:
+    \[
+        \operatorname{Inn}(G)\trianglelefteq \operatorname{Aut}(G).
+    \]
+    More precisely, for every \(g\in G\) and every \(a\in \operatorname{Aut}(G)\),
+    one has
+    \[
+        a\circ \operatorname{Inn}(g)\circ a^{-1}
+        =
+        \operatorname{Inn}(a(g)).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let \(a\in \operatorname{Aut}(G)\), \(g\in G\), and \(x\in G\). Then
+    \[
+        \bigl(a\circ \operatorname{Inn}(g)\circ a^{-1}\bigr)(x)
+        =
+        a\Bigl(g\,a^{-1}(x)\,g^{-1}\Bigr).
+    \]
+    Since \(a\) is a group homomorphism, this equals
+    \[
+        a(g)\,a(a^{-1}(x))\,a(g^{-1}).
+    \]
+    Hence
+    \[
+        \bigl(a\circ \operatorname{Inn}(g)\circ a^{-1}\bigr)(x)
+        =
+        a(g)\,x\,a(g)^{-1}.
+    \]
+    Therefore
+    \[
+        a\circ \operatorname{Inn}(g)\circ a^{-1}
+        =
+        \operatorname{Inn}(a(g)).
+    \]
+    Since \(a(g)\in G\), we have
+    \[
+        \operatorname{Inn}(a(g))\in \operatorname{Inn}(G).
+    \]
+    Thus every conjugate of an inner automorphism by an automorphism is again an
+    inner automorphism. Hence
+    \[
+        \operatorname{Inn}(G)\trianglelefteq \operatorname{Aut}(G).
+    \]
+\end{proof}
+
+Let \(G\) be a group. Recall that
+\[
+    \operatorname{Aut}(G)
+\]
+denotes the automorphism group of \(G\).
+
+Let \((X,\rho)\) be a \(\mathcal{C}\)-representation of \(G\), where
+\[
+    \rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+\]
+is a group homomorphism. For \(a\in \operatorname{Aut}(G)\), define a new
+representation
+\[
+    {}^{a}(X,\rho):=(X,{}^{a}\rho),
+\]
+where
+\[
+    {}^{a}\rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+\]
+is given by
+\[
+    {}^{a}\rho=\rho\circ a^{-1}.
+\]
+Equivalently, for \(g\in G\),
+\[
+    {}^{a}\rho(g)=\rho(a^{-1}(g)).
+\]
+
+\begin{lemma}
+    For every \(a\in \operatorname{Aut}(G)\), the pair
+    \[
+        {}^{a}(X,\rho)=(X,{}^{a}\rho)
+    \]
+    is again a \(\mathcal{C}\)-representation of \(G\).
+\end{lemma}
+
+\begin{proof}
+    Since \(a^{-1}:G\to G\) is a group automorphism and
+    \(\rho:G\to \operatorname{Aut}_{\mathcal{C}}(X)\) is a group homomorphism,
+    their composite
+    \[
+        {}^{a}\rho=\rho\circ a^{-1}
+    \]
+    is again a group homomorphism. Therefore
+    \[
+        {}^{a}\rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+    \]
+    defines a \(\mathcal{C}\)-representation of \(G\).
+\end{proof}
+
+\begin{lemma}
+    Let
+    \[
+        f:(X,\rho)\longrightarrow (X',\rho')
+    \]
+    be a morphism of \(\mathcal{C}\)-representations of \(G\). Then, for every
+    \(a\in \operatorname{Aut}(G)\), the same underlying morphism
+    \[
+        f:X\longrightarrow X'
+    \]
+    induces a morphism of representations
+    \[
+        f:{}^{a}(X,\rho)\longrightarrow {}^{a}(X',\rho').
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since \(f:(X,\rho)\to (X',\rho')\) is a morphism of representations, for every
+    \(h\in G\) one has
+    \[
+        \rho'(h)\circ f=f\circ \rho(h).
+    \]
+    Now let \(g\in G\). Applying the above identity to \(h=a^{-1}(g)\), we get
+    \[
+        \rho'(a^{-1}(g))\circ f
+        =
+        f\circ \rho(a^{-1}(g)).
+    \]
+    By definition of the twisted representations, this is precisely
+    \[
+        {}^{a}\rho'(g)\circ f
+        =
+        f\circ {}^{a}\rho(g).
+    \]
+    Hence \(f\) is a morphism
+    \[
+        {}^{a}(X,\rho)\longrightarrow {}^{a}(X',\rho').
+    \]
+\end{proof}
+
+Therefore \(\operatorname{Aut}(G)\) acts on the set of isomorphism classes of
+\(\mathcal{C}\)-representations of \(G\) by
+\[
+    a\cdot [(X,\rho)]
+    :=
+    [\,{}^{a}(X,\rho)\,].
+\]
+
+\begin{remark}
+    This is indeed a left action. For \(a,b\in \operatorname{Aut}(G)\), we have
+    \[
+        {}^{a}({}^{b}\rho)
+        =
+        (\rho\circ b^{-1})\circ a^{-1}
+        =
+        \rho\circ b^{-1}a^{-1}
+        =
+        \rho\circ (ab)^{-1}
+        =
+        {}^{ab}\rho.
+    \]
+    Hence
+    \[
+        {}^{a}\bigl({}^{b}(X,\rho)\bigr)
+        =
+        {}^{ab}(X,\rho).
+    \]
+\end{remark}
+
+For \(g\in G\), recall that the inner automorphism induced by \(g\) is
+\[
+    \operatorname{Inn}(g):G\longrightarrow G,
+    \qquad
+    x\longmapsto gxg^{-1}.
+\]
+Thus
+\[
+    \operatorname{Inn}(g)^{-1}=\operatorname{Inn}(g^{-1}).
+\]
+
+Let \((X,\rho)\) be a \(\mathcal{C}\)-representation of \(G\). Then
+\[
+    {}^{\operatorname{Inn}(g)}\rho(h)
+    =
+    \rho\bigl(\operatorname{Inn}(g)^{-1}(h)\bigr)
+    =
+    \rho(g^{-1}hg)
+\]
+for every \(h\in G\).
+
+\begin{proposition}
+    For every \(g\in G\), the morphism
+    \[
+        \rho(g):X\longrightarrow X
+    \]
+    is an isomorphism of representations
+    \[
+        \rho(g):
+        {}^{\operatorname{Inn}(g)}(X,\rho)
+        \xrightarrow{\ \cong\ }
+        (X,\rho).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(\rho(g)\in \operatorname{Aut}_{\mathcal{C}}(X)\), the underlying
+    morphism \(\rho(g):X\to X\) is an isomorphism in \(\mathcal{C}\).
+
+    It remains to check equivariance. For \(h\in G\), we need to prove
+    \[
+        \rho(h)\circ \rho(g)
+        =
+        \rho(g)\circ {}^{\operatorname{Inn}(g)}\rho(h).
+    \]
+    The left-hand side is
+    \[
+        \rho(h)\circ \rho(g)=\rho(hg).
+    \]
+    On the other hand,
+    \[
+        \rho(g)\circ {}^{\operatorname{Inn}(g)}\rho(h)
+        =
+        \rho(g)\circ \rho(g^{-1}hg)
+        =
+        \rho(hg).
+    \]
+    Hence
+    \[
+        \rho(h)\circ \rho(g)
+        =
+        \rho(g)\circ {}^{\operatorname{Inn}(g)}\rho(h).
+    \]
+    Therefore \(\rho(g)\) is an isomorphism of representations
+    \[
+        {}^{\operatorname{Inn}(g)}(X,\rho)
+        \cong
+        (X,\rho).
+    \]
+\end{proof}
+
+\begin{corollary}
+    Every inner automorphism of \(G\) acts trivially on the set of isomorphism
+    classes of \(\mathcal{C}\)-representations of \(G\).
+\end{corollary}
+
+\begin{proof}
+    By the previous proposition, for every \(g\in G\) and every representation
+    \((X,\rho)\), we have an isomorphism
+    \[
+        {}^{\operatorname{Inn}(g)}(X,\rho)
+        \cong
+        (X,\rho).
+    \]
+    Hence
+    \[
+        \operatorname{Inn}(g)\cdot [(X,\rho)]
+        =
+        [(X,\rho)].
+    \]
+    Therefore inner automorphisms act trivially on isomorphism classes.
+\end{proof}
+
+Since
+\[
+    \operatorname{Inn}(G)\trianglelefteq \operatorname{Aut}(G),
+\]
+the action of \(\operatorname{Aut}(G)\) on isomorphism classes descends to an
+action of the outer automorphism group
+\[
+    \operatorname{Out}(G)
+    :=
+    \operatorname{Aut}(G)/\operatorname{Inn}(G).
+\]
+
+Thus
+\[
+    \operatorname{Out}(G)
+\]
+acts naturally on the set of isomorphism classes of \(\mathcal{C}\)-representations
+of \(G\).

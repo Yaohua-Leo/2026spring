@@ -1,0 +1,580 @@
+\section{Finite-dimensional linear representations}
+
+Let \(k\) be a field and let \(G\) be a finite group.
+
+\begin{definition}[Finite-dimensional \(k\)-linear representation]
+    A finite dimensional \(k\)-linear representation of \(G\) is a pair
+    \[
+        (M,\rho),
+    \]
+    where \(M\) is a finite-dimensional \(k\)-vector space and
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(M)
+    \]
+    is a group homomorphism. Here
+    \[
+        \operatorname{GL}(M)
+        =
+        \{\,f:M\to M\mid f \text{ is an invertible } k\text{-linear map}\,\}.
+    \]
+\end{definition}
+
+For \(g\in G\) and \(m\in M\), we often write
+\[
+    g\cdot m:=\rho(g)(m).
+\]
+Thus the representation condition says
+\[
+    (gh)\cdot m=g\cdot(h\cdot m),
+    \qquad
+    1_G\cdot m=m.
+\]
+
+\begin{definition}[The category of \(k\)-linear representations]
+    The category of finite-dimensional \(k\)-linear representations of \(G\) is
+    denoted by
+    \[
+        \operatorname{Rep}(G,\operatorname{vect}_k).
+    \]
+    Its objects are finite-dimensional \(k\)-linear representations
+    \[
+        (M,\rho).
+    \]
+    A morphism
+    \[
+        f:(M,\rho)\longrightarrow (N,\sigma)
+    \]
+    is a \(k\)-linear map
+    \[
+        f:M\longrightarrow N
+    \]
+    such that
+    \[
+        f(g\cdot m)=g\cdot f(m)
+    \]
+    for every \(m\in M\) and \(g\in G\). Equivalently,
+    \[
+        \sigma(g)\circ f=f\circ \rho(g),
+        \qquad g\in G.
+    \]
+\end{definition}
+
+\begin{definition}[Degree]
+    Let \((M,\rho)\) be a finite-dimensional \(k\)-linear representation of \(G\).
+    The dimension of \(M\) is called the degree of the representation:
+    \[
+        \deg(M,\rho):=\dim_k M.
+    \]
+\end{definition}
+
+\begin{example}[The trivial representation]
+    The trivial representation, also called the principal representation, is the
+    one-dimensional representation
+    \[
+        \rho_{\operatorname{triv}}:G\longrightarrow \operatorname{GL}_1(k)
+        \cong k^\times
+    \]
+    given by
+    \[
+        \rho_{\operatorname{triv}}(g)=1
+    \]
+    for all \(g\in G\). Equivalently, \(G\) acts on the one-dimensional vector
+    space \(k\) by
+    \[
+        g\cdot x=x,
+        \qquad g\in G,\ x\in k.
+    \]
+\end{example}
+
+\begin{example}[One-dimensional representations]
+    If \((M,\rho)\) is a \(k\)-linear representation with
+    \[
+        \dim_k M=1,
+    \]
+    then after choosing a basis of \(M\), we may identify
+    \[
+        \operatorname{GL}(M)\cong k^\times.
+    \]
+    Hence a one-dimensional representation is the same as a group homomorphism
+    \[
+        \rho:G\longrightarrow k^\times.
+    \]
+\end{example}
+
+Let \((M,\rho)\) be a finite-dimensional \(k\)-linear representation of \(G\), and
+assume
+\[
+    r:=\dim_k M.
+\]
+After fixing a basis of \(M\), we obtain an isomorphism of groups
+\[
+    \operatorname{GL}(M)\cong \operatorname{GL}_r(k),
+\]
+where
+\[
+    \operatorname{GL}_r(k)
+\]
+is the group of invertible \(r\times r\) matrices over \(k\).
+
+Therefore a \(k\)-linear representation of \(G\) may be represented by a pair
+\[
+    (r,\rho),
+\]
+where
+\[
+    r\in \mathbb{Z}_{\geq 1}
+\]
+and
+\[
+    \rho:G\longrightarrow \operatorname{GL}_r(k)
+\]
+is a group homomorphism. Such a pair is called a matrix representation of \(G\)
+over \(k\).
+
+\begin{remark}
+    Choosing a basis of \(M\) transforms each linear automorphism
+    \[
+        \rho(g):M\longrightarrow M
+    \]
+    into an invertible matrix. Thus a representation may be viewed concretely as
+    assigning to every \(g\in G\) an invertible matrix \(\rho(g)\in
+    \operatorname{GL}_r(k)\), satisfying
+    \[
+        \rho(gh)=\rho(g)\rho(h),
+        \qquad
+        \rho(1_G)=I_r.
+    \]
+\end{remark}
+
+\begin{proposition}
+    Let
+    \[
+        (r,\rho)
+        \qquad\text{and}\qquad
+        (s,\sigma)
+    \]
+    be two matrix representations of \(G\). Then they are isomorphic if and only
+    if
+    \[
+        r=s
+    \]
+    and there exists a matrix
+    \[
+        A\in \operatorname{GL}_r(k)
+    \]
+    such that
+    \[
+        \sigma(g)=A\rho(g)A^{-1}
+    \]
+    for every \(g\in G\).
+\end{proposition}
+
+\begin{proof}
+    Suppose first that the two representations are isomorphic. Then there exists
+    a \(k\)-linear isomorphism
+    \[
+        f:k^r\longrightarrow k^s
+    \]
+    such that
+    \[
+        \sigma(g)\circ f=f\circ \rho(g)
+    \]
+    for every \(g\in G\). Since \(f\) is an isomorphism, we must have
+    \[
+        r=s.
+    \]
+    Let \(A\in \operatorname{GL}_r(k)\) be the matrix of \(f\) with respect to the
+    chosen bases. Then the equivariance condition becomes
+    \[
+        \sigma(g)A=A\rho(g).
+    \]
+    Multiplying on the right by \(A^{-1}\), we obtain
+    \[
+        \sigma(g)=A\rho(g)A^{-1}.
+    \]
+
+    Conversely, suppose that \(r=s\) and that there exists
+    \(A\in \operatorname{GL}_r(k)\) such that
+    \[
+        \sigma(g)=A\rho(g)A^{-1}
+    \]
+    for all \(g\in G\). Let
+    \[
+        f:k^r\longrightarrow k^r
+    \]
+    be the linear isomorphism whose matrix is \(A\). Then
+    \[
+        \sigma(g)A=A\rho(g),
+    \]
+    which means precisely that
+    \[
+        \sigma(g)\circ f=f\circ \rho(g)
+    \]
+    for every \(g\in G\). Hence \(f\) is an isomorphism of representations.
+\end{proof}
+
+\begin{remark}
+    Thus two matrix representations \((r,\rho)\) and \((r,\sigma)\) are
+    isomorphic precisely when the matrices
+    \[
+        \rho(g)
+        \qquad\text{and}\qquad
+        \sigma(g)
+    \]
+    are uniformly similar, meaning that the same change-of-basis matrix
+    \(A\in \operatorname{GL}_r(k)\) satisfies
+    \[
+        \sigma(g)=A\rho(g)A^{-1}
+    \]
+    for every \(g\in G\).
+\end{remark}
+
+Let \(k\subseteq k'\) be a field extension, and let \(G\) be a group.
+
+\begin{definition}[Extension of scalars]
+    Let \((M,\rho)\) be a finite-dimensional \(k\)-linear representation of \(G\),
+    where
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(M).
+    \]
+    The extension of scalars of \((M,\rho)\) from \(k\) to \(k'\) is the
+    \(k'\)-linear representation
+    \[
+        \bigl(k'\otimes_k M,\; k'\otimes_k \rho\bigr),
+    \]
+    where
+    \[
+        k'\otimes_k \rho:G\longrightarrow
+        \operatorname{GL}_{k'}(k'\otimes_k M)
+    \]
+    is defined by
+    \[
+        g\longmapsto 1_{k'}\otimes \rho(g).
+    \]
+    Explicitly,
+    \[
+        (1_{k'}\otimes \rho(g))(\lambda\otimes m)
+        =
+        \lambda\otimes \rho(g)(m),
+        \qquad
+        \lambda\in k',\ m\in M.
+    \]
+\end{definition}
+
+\begin{remark}
+    If
+    \[
+        e_1,\dots,e_n
+    \]
+    is a \(k\)-basis of \(M\), then
+    \[
+        1\otimes e_1,\dots,1\otimes e_n
+    \]
+    is a \(k'\)-basis of \(k'\otimes_k M\). In particular,
+    \[
+        \dim_{k'}(k'\otimes_k M)=\dim_k M.
+    \]
+\end{remark}
+
+\begin{remark}[Matrix form]
+    Suppose that \((M,\rho)\) is given by a matrix representation
+    \[
+        \rho:G\longrightarrow \operatorname{GL}_n(k).
+    \]
+    Extending scalars to \(k'\) amounts to viewing each matrix
+    \[
+        \rho(g)\in \operatorname{GL}_n(k)
+    \]
+    as a matrix with entries in \(k'\):
+    \[
+        \rho(g)\in \operatorname{GL}_n(k')
+    \]
+    via the inclusion \(k\subseteq k'\).
+\end{remark}
+
+\begin{definition}[Representations rational over a subfield]
+    Let \((M',\rho')\) be a \(k'\)-linear representation of \(G\). We say that
+    \((M',\rho')\) is rational over \(k\) if there exists a \(k\)-linear
+    representation \((M,\rho)\) of \(G\) such that
+    \[
+        (M',\rho')
+        \cong
+        \bigl(k'\otimes_k M,\; k'\otimes_k \rho\bigr)
+    \]
+    as \(k'\)-linear representations of \(G\).
+\end{definition}
+
+\begin{proposition}[Matrix criterion for rationality]
+    Let
+    \[
+        \rho:G\longrightarrow \operatorname{GL}_n(k')
+    \]
+    be a matrix representation of \(G\) over \(k'\). Then \(\rho\) is rational
+    over \(k\) if and only if there exists a matrix
+    \[
+        U\in \operatorname{GL}_n(k')
+    \]
+    such that, for every \(g\in G\), all entries of
+    \[
+        U\rho(g)U^{-1}
+    \]
+    belong to \(k\).
+\end{proposition}
+
+\begin{proof}
+    The representation \(\rho\) is rational over \(k\) precisely when it is
+    isomorphic over \(k'\) to the scalar extension of some representation
+    \[
+        \rho_0:G\longrightarrow \operatorname{GL}_n(k).
+    \]
+    An isomorphism of matrix representations over \(k'\) is given by a change of
+    basis matrix \(U\in \operatorname{GL}_n(k')\), and the isomorphism condition is
+    exactly
+    \[
+        U\rho(g)U^{-1}=\rho_0(g)
+    \]
+    for every \(g\in G\). Since \(\rho_0(g)\) has entries in \(k\), this proves one
+    direction.
+
+    Conversely, if such a matrix \(U\) exists, then the matrices
+    \[
+        U\rho(g)U^{-1}
+    \]
+    define a representation of \(G\) over \(k\), and \(\rho\) is obtained from it by
+    extension of scalars to \(k'\). Hence \(\rho\) is rational over \(k\).
+\end{proof}
+
+Let
+\[
+    (M,\rho),\qquad (N,\sigma)
+\]
+be two \(k\)-linear representations of \(G\).
+
+\begin{definition}[Direct sum]
+    The direct sum of \((M,\rho)\) and \((N,\sigma)\) is the representation
+    \[
+        (M,\rho)\oplus (N,\sigma)
+        :=
+        (M\oplus N,\rho\oplus\sigma),
+    \]
+    where
+    \[
+        (\rho\oplus\sigma)(g)(m,n)
+        =
+        (\rho(g)m,\sigma(g)n).
+    \]
+\end{definition}
+
+\begin{definition}[Tensor product]
+    The tensor product of \((M,\rho)\) and \((N,\sigma)\) is the representation
+    \[
+        (M,\rho)\otimes (N,\sigma)
+        :=
+        (M\otimes_k N,\rho\otimes\sigma),
+    \]
+    where
+    \[
+        (\rho\otimes\sigma)(g)(m\otimes n)
+        =
+        \rho(g)m\otimes \sigma(g)n.
+    \]
+\end{definition}
+
+\begin{definition}[Subrepresentation]
+    Let \((M,\rho)\) be a \(k\)-linear representation of \(G\). A \(k\)-subspace
+    \[
+        M_1\subseteq M
+    \]
+    is called \(G\)-stable if
+    \[
+        \rho(g)(M_1)\subseteq M_1
+    \]
+    for every \(g\in G\).
+
+    If \(M_1\subseteq M\) is \(G\)-stable, then the restricted maps
+    \[
+        \rho_1(g):=\rho(g)|_{M_1}
+    \]
+    define a representation
+    \[
+        (M_1,\rho_1),
+    \]
+    called a subrepresentation of \((M,\rho)\).
+\end{definition}
+
+\begin{remark}
+    Since each \(\rho(g)\) is invertible and
+    \[
+        \rho(g)^{-1}=\rho(g^{-1}),
+    \]
+    the condition
+    \[
+        \rho(g)(M_1)\subseteq M_1
+    \]
+    for all \(g\in G\) implies
+    \[
+        \rho(g)(M_1)=M_1
+    \]
+    for all \(g\in G\).
+\end{remark}
+
+\begin{definition}[Quotient representation]
+    Let \((M,\rho)\) be a \(k\)-linear representation of \(G\), and let
+    \(M_1\subseteq M\) be a \(G\)-stable subspace. Then the quotient vector space
+    \[
+        M/M_1
+    \]
+    carries a natural representation
+    \[
+        \overline{\rho}:G\longrightarrow \operatorname{GL}(M/M_1)
+    \]
+    defined by
+    \[
+        \overline{\rho}(g)(m+M_1)
+        :=
+        \rho(g)(m)+M_1.
+    \]
+    This is called the quotient representation of \((M,\rho)\) by
+    \((M_1,\rho_1)\).
+\end{definition}
+
+\begin{definition}[Simple representation]
+    A \(k\)-linear representation \((M,\rho)\) of \(G\) is called simple, or
+    irreducible, if its only \(G\)-stable subspaces are
+    \[
+        0
+        \qquad\text{and}\qquad
+        M.
+    \]
+\end{definition}
+
+\begin{definition}[Indecomposable representation]
+    A \(k\)-linear representation of \(G\) is called indecomposable if
+    whenever
+    \[
+        (M,\rho)\cong
+        (M_1,\rho_1)\oplus (M_2,\rho_2),
+    \]
+    one has
+    \[
+        M_1=0
+        \qquad\text{or}\qquad
+        M_2=0.
+    \]
+\end{definition}
+
+\begin{remark}
+    Every simple representation is indecomposable. The converse need not hold in
+    general.
+\end{remark}
+
+\begin{theorem}[Krull--Schmidt theorem for finite-dimensional representations]
+    Let \(G\) be a finite group, let \(k\) be a field, and let
+    \[
+        (M,\rho)
+    \]
+    be a finite-dimensional \(k\)-linear representation of \(G\).
+
+    \begin{enumerate}
+        \item The representation \((M,\rho)\) is a finite direct sum of
+        indecomposable representations.
+
+        \item Suppose that
+        \[
+            (M,\rho)
+            \cong
+            \bigoplus_{i\in I}(M_i,\rho_i)
+            \cong
+            \bigoplus_{j\in J}(M'_j,\rho'_j),
+        \]
+        where every \((M_i,\rho_i)\) and every \((M'_j,\rho'_j)\) is
+        indecomposable. Then there exists a bijection
+        \[
+            \alpha:I\longrightarrow J
+        \]
+        such that, for every \(i\in I\),
+        \[
+            (M_i,\rho_i)\cong (M'_{\alpha(i)},\rho'_{\alpha(i)}).
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We regard \(k\)-linear representations of \(G\) as modules over the group
+    algebra \(kG\). More precisely, a representation
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(M)
+    \]
+    determines a left \(kG\)-module structure on \(M\) by
+    \[
+        \left(\sum_{g\in G} a_g g\right)m
+        :=
+        \sum_{g\in G} a_g\,\rho(g)(m),
+        \qquad a_g\in k,\ m\in M.
+    \]
+    Conversely, every left \(kG\)-module gives a \(k\)-linear representation of
+    \(G\). Hence \(\operatorname{Rep}(G,\operatorname{vect}_k)\) is equivalent to
+    the category of finite-dimensional left \(kG\)-modules.
+
+    Since \(G\) is finite, the group algebra \(kG\) is finite-dimensional over
+    \(k\). Therefore every finite-dimensional \(kG\)-module has finite
+    composition length.
+
+    Applying the Krull--Schmidt theorem for finite-length modules to the
+    \(kG\)-module \(M\), we obtain a decomposition
+    \[
+        M\cong M_1\oplus\cdots\oplus M_r
+    \]
+    into indecomposable \(kG\)-modules. Translating this back into
+    representations gives a decomposition
+    \[
+        (M,\rho)
+        \cong
+        (M_1,\rho_1)\oplus\cdots\oplus(M_r,\rho_r)
+    \]
+    into indecomposable representations. This proves \textup{(1)}.
+
+    For \textup{(2)}, suppose that
+    \[
+        (M,\rho)
+        \cong
+        \bigoplus_{i\in I}(M_i,\rho_i)
+        \cong
+        \bigoplus_{j\in J}(M'_j,\rho'_j),
+    \]
+    where all summands are indecomposable. Since \(M\) is finite-dimensional,
+    both index sets \(I\) and \(J\) are finite.
+
+    Passing again to \(kG\)-modules, this gives two decompositions of the same
+    finite-length \(kG\)-module \(M\) into indecomposable direct summands:
+    \[
+        M\cong \bigoplus_{i\in I}M_i
+        \cong
+        \bigoplus_{j\in J}M'_j.
+    \]
+    By the Krull--Schmidt uniqueness theorem for finite-length modules, there
+    exists a bijection
+    \[
+        \alpha:I\longrightarrow J
+    \]
+    such that
+    \[
+        M_i\cong M'_{\alpha(i)}
+    \]
+    as \(kG\)-modules for every \(i\in I\).
+
+    Translating the \(kG\)-module isomorphisms back into 
+    \(k\)-linear isomorphisms, we obtain
+    \[
+        (M_i,\rho_i)
+        \cong
+        (M'_{\alpha(i)},\rho'_{\alpha(i)})
+    \]
+    as \(k\)-linear representations of \(G\). This proves the desired uniqueness.
+\end{proof}
+
+\begin{remark}
+    The theorem says that a finite-dimensional representation can be decomposed
+    into indecomposable pieces, and that these pieces are unique up to
+    isomorphism and reordering.
+\end{remark}

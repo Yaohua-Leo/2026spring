@@ -1,0 +1,194 @@
+\section{Representations in categories}
+
+A representation of a group is a way to view the group as acting on some mathematical
+object while preserving the structure of that object.
+
+For example, a group may act on:
+
+\begin{itemize}
+    \item a set;
+    \item the set of roots of a polynomial;
+    \item a vector space;
+    \item a topological space;
+    \item an object of a category.
+\end{itemize}
+
+The key idea is that a group action should preserve the underlying structure of the object.
+
+
+Let \(\mathcal{C}\) be a category. Examples include:
+
+\begin{itemize}
+    \item \(\mathbf{Set}\), the category of sets;
+    \item \(\mathbf{FinSet}\), the category of finite sets;
+    \item \(\mathbf{Top}\), the category of topological spaces;
+    \item \(\mathbf{Vect}_k\), the category of vector spaces over a field \(k\);
+    \item \(\mathbf{vect}_k\), the category of finite-dimensional vector spaces over \(k\).
+\end{itemize}
+
+If \(X\) is an object of \(\mathcal{C}\), then the automorphism group of \(X\) is
+\[
+    \operatorname{Aut}_{\mathcal{C}}(X)
+    =
+    \{\, f:X\to X \mid f \text{ is an isomorphism in } \mathcal{C}\,\}.
+\]
+Equivalently, \(\operatorname{Aut}_{\mathcal{C}}(X)\) consists of all morphisms
+\[
+    f:X\to X
+\]
+which admit an inverse morphism.
+
+\begin{definition}[Representation in a category]
+    Let \(G\) be a group and let \(X\) be an object of a category \(\mathcal{C}\).
+    A representation of \(G\) on \(X\) is a group homomorphism
+    \[
+        \rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X).
+    \]
+\end{definition}
+
+\begin{example}[Permutation representations]
+    If \(\mathcal{C}=\mathbf{Set}\), then a representation of \(G\) on a set \(X\) is a
+    group homomorphism
+    \[
+        \rho:G\longrightarrow \operatorname{Aut}_{\mathbf{Set}}(X).
+    \]
+    Since
+    \[
+        \operatorname{Aut}_{\mathbf{Set}}(X)=\operatorname{Sym}(X),
+    \]
+    this is precisely a permutation representation
+    \[
+        \rho:G\longrightarrow \operatorname{Sym}(X).
+    \]
+\end{example}
+
+\begin{example}[Linear representations]
+    If \(\mathcal{C}=\mathbf{Vect}_k\), then for a vector space \(V\) over \(k\),
+    \[
+        \operatorname{Aut}_{\mathbf{Vect}_k}(V)=\operatorname{GL}(V).
+    \]
+    Therefore a linear representation of \(G\) on \(V\) is a group homomorphism
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(V).
+    \]
+\end{example}
+
+\begin{example}[Topological representations]
+    If \(\mathcal{C}=\mathbf{Top}\), then for a topological space \(X\),
+    \[
+        \operatorname{Aut}_{\mathbf{Top}}(X)=\operatorname{Homeo}(X),
+    \]
+    the group of homeomorphisms of \(X\). Thus a topological action of \(G\) on \(X\)
+    is a homomorphism
+    \[
+        \rho:G\longrightarrow \operatorname{Homeo}(X).
+    \]
+\end{example}
+
+\begin{definition}[\(\mathcal{C}\)-representation of a group]
+    Let \(G\) be a group, and let \(\mathcal{C}\) be a category.
+    A representation of \(G\) on \(\mathcal{C}\), or a
+    \(\mathcal{C}\)-representation of \(G\), is a pair
+    \[
+        (X,\rho),
+    \]
+    where
+    \[
+        X\in \operatorname{Ob}(\mathcal{C})
+    \]
+    is an object of \(\mathcal{C}\), and
+    \[
+        \rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+    \]
+    is a group homomorphism.
+\end{definition}
+
+\begin{remark}
+    If \((X,\rho)\) is a representation of \(G\), we also say that
+    \(G\) acts on \(X\). For each \(g\in G\), the morphism
+    \[
+        \rho(g):X\longrightarrow X
+    \]
+    is an automorphism of \(X\) in the category \(\mathcal{C}\).
+\end{remark}
+
+\begin{definition}[Faithful representation]
+    A representation \((X,\rho)\) of \(G\) is called faithful if
+    \[
+        \rho:G\longrightarrow \operatorname{Aut}_{\mathcal{C}}(X)
+    \]
+    is injective.
+\end{definition}
+
+\begin{definition}[Morphism of representations]
+    Let \((X,\rho)\) and \((X',\rho')\) be two
+    \(\mathcal{C}\)-representations of \(G\).
+    A morphism
+    \[
+        f:(X,\rho)\longrightarrow (X',\rho')
+    \]
+    is a morphism
+    \[
+        f:X\longrightarrow X'
+    \]
+    in \(\mathcal{C}\) such that for every \(g\in G\), the following diagram
+    commutes:
+    \[
+    \begin{tikzcd}
+        X \arrow[r,"f"] \arrow[d,"\rho(g)"'] &
+        X' \arrow[d,"\rho'(g)"] \\
+        X \arrow[r,"f"'] &
+        X'
+    \end{tikzcd}
+    \]
+    Equivalently,
+    \[
+        f\circ \rho(g)=\rho'(g)\circ f
+        \qquad
+        \text{for all } g\in G.
+    \]
+\end{definition}
+
+\begin{definition}[The category of representations]
+    Let \(G\) be a group and let \(\mathcal{C}\) be a category.
+    We define
+    \[
+        \operatorname{Rep}(G,\mathcal{C})
+    \]
+    to be the category whose objects are \(\mathcal{C}\)-representations
+    of \(G\), and whose morphisms are morphisms of representations.
+
+    More explicitly:
+    \begin{itemize}
+        \item an object of \(\operatorname{Rep}(G,\mathcal{C})\) is a pair
+        \[
+            (X,\rho),
+        \]
+        where \(X\in \operatorname{Ob}(\mathcal{C})\) and
+        \[
+            \rho:G\to \operatorname{Aut}_{\mathcal{C}}(X)
+        \]
+        is a group homomorphism;
+
+        \item a morphism
+        \[
+            (X,\rho)\longrightarrow (X',\rho')
+        \]
+        is a morphism \(f:X\to X'\) in \(\mathcal{C}\) satisfying
+        \[
+            f\circ \rho(g)=\rho'(g)\circ f
+            \qquad
+            \text{for all } g\in G.
+        \]
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    The identity morphism of a representation \((X,\rho)\) is
+    \[
+        \operatorname{id}_X:X\to X,
+    \]
+    and the composition of morphisms is inherited from the category
+    \(\mathcal{C}\). Hence \(\operatorname{Rep}(G,\mathcal{C})\) is itself
+    a category.
+\end{remark}

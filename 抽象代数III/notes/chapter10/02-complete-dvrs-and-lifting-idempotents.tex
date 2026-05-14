@@ -1,0 +1,557 @@
+\section{Complete discrete valuation rings and lifting idempotents}
+
+    Let \(R\) be a complete discrete valuation ring with normalized valuation
+    \[
+        v:K^\times \longrightarrow \mathbb{Z},
+    \]
+    where \(K=\operatorname{Frac}(R)\). Let \(\pi\in R\) be a uniformizer, so that
+    \[
+        v(\pi)=1.
+    \]
+    Denote the maximal ideal of \(R\) by
+    \[
+        P=J(R)=(\pi),
+    \]
+    and denote the residue field by
+    \[
+        F=R/P.
+    \]
+
+\begin{lemma}
+    We have
+    \[
+        \bigcap_{n\geq 1} P^n=0.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since \(R\) is a discrete valuation ring, every nonzero element \(x\in R\) can be
+    written uniquely in the form
+    \[
+        x=\pi^m u,
+    \]
+    where \(m\geq 0\) and \(u\in R^\times\). Hence \(x\in P^m\), but
+    \[
+        x\notin P^{m+1}.
+    \]
+    Therefore no nonzero element can lie in every \(P^n\). Thus
+    \[
+        \bigcap_{n\geq 1}P^n=0.
+    \]
+\end{proof}
+
+\begin{proposition}
+    Let \(V\) be a finitely generated \(R\)-module. Then \(V\) is a finite direct sum
+    of cyclic \(R\)-modules. Thus we may write
+    \[
+        V=Ru_1\oplus \cdots \oplus Ru_r.
+    \]
+    For every \(n\geq 0\), one has
+    \[
+        P^nV=\pi^n V
+        =
+        (\pi^n R)u_1\oplus \cdots \oplus (\pi^n R)u_r.
+    \]
+    Moreover,
+    \[
+        \bigcap_{n\geq 1}P^nV=0.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(R\) is a discrete valuation ring, it is a principal ideal domain. Hence, by
+    the structure theorem for finitely generated modules over a principal ideal domain,
+    \(V\) is a finite direct sum of cyclic \(R\)-modules:
+    \[
+        V=Ru_1\oplus \cdots \oplus Ru_r.
+    \]
+    Therefore, for every \(n\geq 0\),
+    \[
+        P^nV=(\pi^n)V
+        =
+        (\pi^n R)u_1\oplus \cdots \oplus (\pi^n R)u_r.
+    \]
+
+    Since
+    \[
+        \bigcap_{n\geq 1}(\pi^n)=0,
+    \]
+    it follows componentwise that
+    \[
+        \bigcap_{n\geq 1}P^nV=0.
+    \]
+\end{proof}
+
+\begin{definition}[\(P\)-adic metric]
+    Let \(V\) be a finitely generated \(R\)-module. For \(0\neq x\in V\), define
+    \[
+        \nu_V(x):=\max\{\,n\geq 0\mid x\in P^nV\,\}.
+    \]
+    This is well-defined because
+    \[
+        \bigcap_{n\geq 1}P^nV=0.
+    \]
+    We also set
+    \[
+        \nu_V(0)=+\infty.
+    \]
+    Fix a real number \(0<c<1\). The \(P\)-adic metric on \(V\) is defined by
+    \[
+        d_P(x,y)=c^{\nu_V(x-y)}.
+    \]
+\end{definition}
+
+\begin{theorem}
+    Let \(V\) be a finitely generated \(R\)-module. If \(R\) is complete with respect
+    to the \(P\)-adic metric, then \(V\) is complete with respect to the \(P\)-adic metric.
+\end{theorem}
+
+\begin{proof}
+    Since \(V\) is finitely generated over the discrete valuation ring \(R\), it is a
+    finite direct sum of cyclic \(R\)-modules:
+    \[
+        V=Ru_1\oplus \cdots \oplus Ru_r.
+    \]
+    Each cyclic summand \(Ru_i\) is isomorphic either to \(R\) or to \(R/(\pi^{m_i})\)
+    for some \(m_i\geq 1\). Since \(R\) is complete, and quotients of complete
+    \(P\)-adic modules by closed submodules are complete, each cyclic summand \(Ru_i\)
+    is complete.
+
+    A finite direct sum of complete metric \(R\)-modules is complete. Hence \(V\) is
+    complete with respect to the \(P\)-adic metric.
+\end{proof}
+
+    Now let \(A\) be an \(R\)-algebra which is finitely generated as an \(R\)-module.
+    For \(n\geq 0\), define
+    \[
+        A_n:=P^nA=\pi^n A.
+    \]
+    Since \(A\) is a finitely generated \(R\)-module and \(R\) is complete, the
+    \(R\)-module \(A\) is complete with respect to the \(P\)-adic metric.
+
+\begin{proposition}
+    The multiplication map
+    \[
+        A\times A\longrightarrow A,
+        \qquad
+        (a,b)\longmapsto ab
+    \]
+    is continuous with respect to the \(P\)-adic topology.
+\end{proposition}
+
+\begin{proof}
+    It is enough to check continuity at an arbitrary point \((a,b)\in A\times A\).
+    Let \(\ell\geq 0\). Suppose
+    \[
+        a'-a\in P^\ell A,
+        \qquad
+        b'-b\in P^\ell A.
+    \]
+    Then
+    \[
+        a'b'-ab
+        =
+        (a'-a)b+a(b'-b)+(a'-a)(b'-b).
+    \]
+    Since \(P^\ell A\) is a two-sided ideal of \(A\), we have
+    \[
+        (a'-a)b\in P^\ell A,
+        \qquad
+        a(b'-b)\in P^\ell A,
+    \]
+    and also
+    \[
+        (a'-a)(b'-b)\in P^{2\ell}A\subseteq P^\ell A.
+    \]
+    Hence
+    \[
+        a'b'-ab\in P^\ell A.
+    \]
+    Therefore multiplication is continuous.
+\end{proof}
+
+\begin{proposition}
+    The quotient
+    \[
+        \overline{A}:=A/A_1=A/PA
+    \]
+    is a finite-dimensional \(F\)-algebra, where
+    \[
+        F=R/P.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(A\) is finitely generated as an \(R\)-module, choose generators
+    \[
+        a_1,\dots,a_m\in A.
+    \]
+    Then their images
+    \[
+        \overline{a}_1,\dots,\overline{a}_m\in A/PA
+    \]
+    generate \(A/PA\) as an \(F=R/P\)-vector space. Hence \(A/PA\) is finite-dimensional
+    over \(F\).
+
+    The multiplication on \(A\) induces a multiplication on \(A/PA\), because \(PA\) is
+    a two-sided ideal of \(A\). Therefore
+    \[
+        A/PA
+    \]
+    is a finite-dimensional \(F\)-algebra.
+\end{proof}
+
+\begin{theorem}
+    Let \(A\) be a finitely generated \(R\)-algebra. Then:
+    \begin{enumerate}
+        \item
+        \[
+            A\pi \subseteq J(A).
+        \]
+        \item There exists an integer \(n>0\) such that
+        \[
+            J(A)^n \subseteq A\pi.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let \(V\) be a simple left \(A\)-module. Since \(A\pi\) is a two-sided ideal of
+    \(A\), the subspace
+    \[
+        \pi V
+    \]
+    is an \(A\)-submodule of \(V\). Hence, by simplicity,
+    \[
+        \pi V=V
+        \qquad\text{or}\qquad
+        \pi V=0.
+    \]
+
+    Choose \(0\neq v\in V\). Since \(V\) is simple, we have
+    \[
+        V=Av.
+    \]
+    Since \(A\) is finitely generated over \(R\), it follows that \(V\) is finitely
+    generated as an \(R\)-module.
+
+    By Nakayama's lemma, because
+    \[
+        \pi\in J(R),
+    \]
+    the equality \(\pi V=V\) is impossible. Therefore
+    \[
+        \pi V=0.
+    \]
+    Thus \(A\pi\) annihilates every simple \(A\)-module. Hence
+    \[
+        A\pi \subseteq J(A).
+    \]
+
+    This proves \((1)\).
+
+    For \((2)\), set
+    \[
+        A^\ast := A/A\pi.
+    \]
+    Since \(A\) is finitely generated as an \(R\)-module, \(A^\ast\) is a finite-dimensional
+    algebra over the residue field
+    \[
+        F=R/(\pi).
+    \]
+    Hence \(A^\ast\) is an Artinian ring. Therefore its Jacobson radical is nilpotent.
+
+    Since \(A\pi\subseteq J(A)\), we have
+    \[
+        J(A^\ast)=J(A/A\pi)=J(A)/A\pi.
+    \]
+    Hence there exists some \(n>0\) such that
+    \[
+        \bigl(J(A)/A\pi\bigr)^n=0.
+    \]
+    Equivalently,
+    \[
+        J(A)^n\subseteq A\pi.
+    \]
+    This proves \((2)\).
+\end{proof}
+
+\begin{theorem}
+    Let \(R\) be a complete discrete valuation ring with uniformizer \(\pi\), and let
+    \(A\) be an \(R\)-algebra which is finitely generated as an \(R\)-module. Let
+    \(I\) be a two-sided ideal of \(A\) such that
+    \[
+        I\subseteq J(A).
+    \]
+    Write
+    \[
+        \overline{A}:=A/I.
+    \]
+    Let \(\overline{c}\in \overline{A}\) be an idempotent, and suppose
+    \[
+        \overline{c}
+        =
+        \overline{c}_1+\cdots+\overline{c}_n
+    \]
+    is an idempotent decomposition in \(\overline{A}\). Then:
+    \begin{enumerate}
+        \item The idempotent \(\overline{c}\) lifts to an idempotent \(e\in A\), and
+        there exist orthogonal idempotents
+        \[
+            e_1,\dots,e_n\in A
+        \]
+        such that
+        \[
+            \overline{e_i}=\overline{c_i},
+            \qquad 1\leq i\leq n,
+        \]
+        and
+        \[
+            e=e_1+\cdots+e_n.
+        \]
+
+        \item An idempotent \(e\in A\) is primitive if and only if its image
+        \[
+            \overline{e}\in \overline{A}
+        \]
+        is primitive.
+
+        \item If \(e,f\in A\) are primitive idempotents, then
+        \[
+            Ae\cong Af
+            \qquad\Longleftrightarrow\qquad
+            \overline{A}\,\overline{e}\cong \overline{A}\,\overline{f}.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Since \(I\subseteq J(A)\), by the previous theorem there exists an integer
+    \(m>0\) such that
+    \[
+        I^m\subseteq A\pi.
+    \]
+    Hence, for every \(r\geq 1\),
+    \[
+        I^{mr}\subseteq A\pi^r.
+    \]
+    For each \(r\geq 1\), set
+    \[
+        A^{(r)}:=A/I^{mr}.
+    \]
+
+    We first prove that every idempotent of \(\overline{A}=A/I\) lifts to an
+    idempotent of \(A\). Since \(I/I^m\) is a nilpotent ideal of \(A/I^m\), the
+    idempotent \(\overline{c}\in A/I\) lifts to an idempotent in \(A/I^m\). Thus
+    there exists \(c^{(1)}\in A\) such that
+    \[
+        \bigl(c^{(1)}\bigr)^2\equiv c^{(1)} \pmod{I^m},
+        \qquad
+        c^{(1)}\equiv c \pmod I.
+    \]
+
+    Next, since \(I^m/I^{2m}\) is a nilpotent ideal of \(A/I^{2m}\), the idempotent
+    \(c^{(1)}+I^m\in A/I^m\) lifts to an idempotent in \(A/I^{2m}\). Hence there
+    exists \(c^{(2)}\in A\) such that
+    \[
+        \bigl(c^{(2)}\bigr)^2\equiv c^{(2)} \pmod{I^{2m}},
+        \qquad
+        c^{(2)}\equiv c^{(1)} \pmod{I^m}.
+    \]
+
+    Repeating this argument, we obtain a sequence \(\{c^{(r)}\}_{r\geq 1}\) in \(A\)
+    such that
+    \[
+        \bigl(c^{(r)}\bigr)^2\equiv c^{(r)} \pmod{I^{rm}},
+    \]
+    and
+    \[
+        c^{(r)}\equiv c^{(r-1)} \pmod{I^{(r-1)m}}
+        \qquad (r\geq 2).
+    \]
+    Since
+    \[
+        I^{(r-1)m}\subseteq A\pi^{r-1},
+    \]
+    the sequence \(\{c^{(r)}\}_{r\geq 1}\) is Cauchy with respect to the
+    \(\pi\)-adic topology on \(A\).
+
+    As \(A\) is finitely generated over the complete ring \(R\), the \(R\)-module
+    \(A\) is complete. Therefore the limit
+    \[
+        e:=\lim_{r\to\infty} c^{(r)}
+    \]
+    exists in \(A\). Since multiplication
+    \[
+        A\times A\longrightarrow A
+    \]
+    is continuous, passing to the limit in
+    \[
+        \bigl(c^{(r)}\bigr)^2-c^{(r)}\longrightarrow 0
+    \]
+    gives
+    \[
+        e^2=e.
+    \]
+    Moreover, \(e\equiv c\pmod I\), so \(e\) lifts \(\overline{c}\).
+
+    We now lift the idempotent decomposition. Let \(e\in A\) be any idempotent lifting
+    \(\overline{c}\). We construct, for each \(r\geq 1\), elements
+    \[
+        c_1^{(r)},\dots,c_n^{(r)}\in A
+    \]
+    such that their images in \(A^{(r)}=A/I^{rm}\) are orthogonal idempotents satisfying
+    \[
+        e\equiv c_1^{(r)}+\cdots+c_n^{(r)}
+        \pmod{I^{rm}},
+    \]
+    and
+    \[
+        c_i^{(r)}\equiv c_i^{(r-1)}
+        \pmod{I^{(r-1)m}}
+        \qquad (r\geq 2).
+    \]
+
+    This is obtained inductively by applying the lifting theorem for idempotent
+    decompositions modulo nilpotent ideals. Indeed, the kernel of
+    \[
+        A/I^{rm}\longrightarrow A/I^{(r-1)m}
+    \]
+    is
+    \[
+        I^{(r-1)m}/I^{rm},
+    \]
+    which is nilpotent.
+
+    For each fixed \(i\), the sequence
+    \[
+        \{c_i^{(r)}\}_{r\geq 1}
+    \]
+    is Cauchy, because
+    \[
+        c_i^{(r)}-c_i^{(r-1)}\in I^{(r-1)m}\subseteq A\pi^{r-1}.
+    \]
+    Hence the limit
+    \[
+        e_i:=\lim_{r\to\infty}c_i^{(r)}
+    \]
+    exists in \(A\).
+
+    Passing to the limit, and using the continuity of multiplication, we get
+    \[
+        e_i^2=e_i,
+        \qquad
+        e_ie_j=0\quad (i\neq j),
+    \]
+    and
+    \[
+        e=e_1+\cdots+e_n.
+    \]
+    Moreover,
+    \[
+        \overline{e_i}=\overline{c_i}.
+    \]
+    This proves \((1)\).
+
+    We prove \((2)\). Recall that \(J(A)\) contains no nonzero idempotents. Indeed, if
+    \(x\in J(A)\) and \(x^2=x\), then \(1-x\) is a unit, and
+    \[
+        x(1-x)=0
+    \]
+    implies \(x=0\).
+
+    Suppose first that \(\overline{e}\) is primitive. If
+    \[
+        e=e_1+e_2
+    \]
+    is an idempotent decomposition in \(A\), then reducing modulo \(I\) gives
+    \[
+        \overline{e}
+        =
+        \overline{e_1}+\overline{e_2}.
+    \]
+    Since \(\overline{e}\) is primitive, one of \(\overline{e_1}\), \(\overline{e_2}\)
+    is zero. Suppose \(\overline{e_1}=0\). Then
+    \[
+        e_1\in I\subseteq J(A).
+    \]
+    Since \(e_1\) is an idempotent and \(J(A)\) contains no nonzero idempotents, we
+    get
+    \[
+        e_1=0.
+    \]
+    Hence \(e\) is primitive.
+
+    Conversely, suppose that \(e\) is primitive. If \(\overline{e}\) were not primitive,
+    then there would be a nontrivial idempotent decomposition
+    \[
+        \overline{e}
+        =
+        \overline{d}_1+\overline{d}_2
+    \]
+    in \(\overline{A}\). By part \((1)\), this decomposition lifts to an idempotent
+    decomposition
+    \[
+        e=d_1+d_2
+    \]
+    in \(A\). Since \(\overline{d}_1\neq 0\) and \(\overline{d}_2\neq 0\), both \(d_1\)
+    and \(d_2\) are nonzero. This contradicts the primitiveness of \(e\). Therefore
+    \(\overline{e}\) is primitive.
+
+    This proves \((2)\).
+
+    Finally, we prove \((3)\). Since \(I\subseteq J(A)\), for every idempotent \(e\in A\)
+    we have
+    \[
+        Ie\subseteq J(A)e=\operatorname{Rad}(Ae).
+    \]
+    Therefore the natural epimorphism
+    \[
+        Ae\longrightarrow Ae/Ie
+    \]
+    is essential. Moreover,
+    \[
+        Ae/Ie\cong \overline{A}\,\overline{e}.
+    \]
+    Since \(Ae\) is projective, the map
+    \[
+        Ae\longrightarrow \overline{A}\,\overline{e}
+    \]
+    is a projective cover.
+
+    Similarly,
+    \[
+        Af\longrightarrow \overline{A}\,\overline{f}
+    \]
+    is a projective cover.
+
+    If
+    \[
+        Ae\cong Af,
+    \]
+    then passing to the quotient modulo \(I\) gives
+    \[
+        \overline{A}\,\overline{e}
+        \cong
+        \overline{A}\,\overline{f}.
+    \]
+
+    Conversely, if
+    \[
+        \overline{A}\,\overline{e}
+        \cong
+        \overline{A}\,\overline{f},
+    \]
+    then \(Ae\) and \(Af\) are projective covers of isomorphic modules. By uniqueness
+    of projective covers, we obtain
+    \[
+        Ae\cong Af.
+    \]
+
+    Hence
+    \[
+        Ae\cong Af
+        \qquad\Longleftrightarrow\qquad
+        \overline{A}\,\overline{e}\cong \overline{A}\,\overline{f}.
+    \]
+\end{proof}
