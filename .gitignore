@@ -3,6 +3,8 @@
 *.out
 *.toc
 *.synctex.gz
+*.bbl
+*.blg
 *.bcf
 *.run.xml
 *.fdb_latexmk
@@ -12,9 +14,17 @@
 Jordan algebra/topics in algebra/photo of notes.zip
 __pycache__/
 *.pyc
-tmp/metanote_pipeline/
+tmp/
 node_modules/
 *.xdv
+*.texfrag
+*.state
+Untitled
+_tmp_*
+rewrite_*
+raw.*
+.omx/
+.agents/
 
 # Conference handbook / poster assets (local only)
 会议手册/

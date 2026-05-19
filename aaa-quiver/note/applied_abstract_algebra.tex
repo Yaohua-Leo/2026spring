@@ -33,6 +33,7 @@
 \usepackage{tikz-cd}
 \usepackage{ytableau} % 杨表
 \usetikzlibrary{decorations.pathreplacing, calc, shadows}
+\usetikzlibrary{arrows.meta,positioning}
 
 % Define reusable graph styles
 \tikzset{
@@ -76,7 +77,7 @@
     enhanced jigsaw,
     colframe=ThmColor,       % 边框颜色
     colback=ThmBg,           % 背景颜色
-    coltitle=white,          
+    coltitle=white,
     boxrule=0.5pt,           % 边框粗细
     leftrule=2pt,            % 左边框加粗
     sharp corners=downhill,  % 样式
@@ -87,7 +88,7 @@
 \declaretheorem[name=Corollary, numberlike=theorem]{corollary}
 \tcolorboxenvironment{corollary}{
     enhanced jigsaw,
-    colframe=ThmColor!80!white, 
+    colframe=ThmColor!80!white,
     colback=ThmBg,
     boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
     breakable
@@ -149,16 +150,16 @@
 %----------------------------------------------------------------------------------------
 %	MATH MACROS (保留你的常用定义)
 %----------------------------------------------------------------------------------------
-\newcommand{\g}{\mathfrak{g}}  
-\newcommand{\der}{\mathrm{d}} 
-\newcommand{\h}{\mathfrak{h}} 
-\newcommand{\n}{\mathfrak{n}}  
-\newcommand{\U}{\mathcal{U}}  
-\newcommand{\C}{\mathbb{C}} 
-\newcommand{\R}{\mathbb{R}} 
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\der}{\mathrm{d}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\n}{\mathfrak{n}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\borel}{\mathfrak{b}}
-\newcommand{\Ind}{\mathrm{Ind}} 
-\newcommand{\Hom}{\mathrm{Hom}}  
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Hom}{\mathrm{Hom}}
 \newcommand{\Ext}{\mathrm{Ext}}
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 %----------------------------------------------------------------------------------------
@@ -3417,7 +3418,7 @@ Clearly, the representations $S(i)$ are irreducible.
 \begin{proof}
     It is clear that each representation $S(i)$ is simple: indeed, its only
     subrepresentations are $0$ and $S(i)$ itself, since $S(i)$ is one-dimensional at
-    the vertex $i$ and zero at every other vertex. 
+    the vertex $i$ and zero at every other vertex.
 
     Conversely, let $M=(M_j,\varphi_\alpha)$ be a simple representation of $Q$.
     We show that $M \cong S(i)$ for some vertex $i \in Q_0$.
@@ -3478,16 +3479,16 @@ Clearly, the representations $S(i)$ are irreducible.
     A vertex \(i \in Q_0\) is a sink if and only if \(P(i)=S(i)\) is simple; a vertex
     \(i \in Q_0\) is a source if and only if \(I(i)=S(i)\) is simple.
     \end{proposition}
-    
+
     \begin{proof}
     We prove the two statements separately.
-    
+
     First, recall that for the projective representation \(P(i)\), the vector space
     \(P(i)_j\) has as a basis the set of all paths from \(i\) to \(j\). In particular,
     \(P(i)_i\) is one-dimensional, with basis given by the trivial path \(e_i\).
-    
+
     We first show that \(i\) is a sink if and only if \(P(i)=S(i)\).
-    
+
     Assume that \(i\) is a sink. Then there is no arrow starting at \(i\). Hence the only
     path starting at \(i\) is the trivial path \(e_i\). Therefore
     \[
@@ -3501,7 +3502,7 @@ Clearly, the representations $S(i)$ are irreducible.
     P(i)\cong S(i).
     \]
     Since \(S(i)\) is simple, it follows that \(P(i)=S(i)\) is simple.
-    
+
     Conversely, assume that \(P(i)=S(i)\) is simple. Then in particular
     \[
     P(i)_j=0 \qquad \text{for all } j\neq i.
@@ -3513,13 +3514,13 @@ Clearly, the representations $S(i)$ are irreducible.
     for some vertex \(j\neq i\). But then \(\alpha\) is a path from \(i\) to \(j\), so it
     gives a basis element of \(P(i)_j\). Hence \(P(i)_j\neq 0\), a contradiction.
     Therefore \(i\) must be a sink.
-    
+
     Now consider the injective representation \(I(i)\). By definition, \(I(i)_j\) has as a
     basis the set of all paths from \(j\) to \(i\). In particular, \(I(i)_i\) is
     one-dimensional, with basis given by the trivial path \(e_i\).
-    
+
     We show that \(i\) is a source if and only if \(I(i)=S(i)\).
-    
+
     Assume that \(i\) is a source. Then there is no arrow ending at \(i\). Hence the only
     path ending at \(i\) is the trivial path \(e_i\). Therefore
     \[
@@ -3533,7 +3534,7 @@ Clearly, the representations $S(i)$ are irreducible.
     I(i)\cong S(i).
     \]
     So \(I(i)=S(i)\) is simple.
-    
+
     Conversely, assume that \(I(i)=S(i)\) is simple. Then
     \[
     I(i)_j=0 \qquad \text{for all } j\neq i.
@@ -3545,7 +3546,7 @@ Clearly, the representations $S(i)$ are irreducible.
     for some vertex \(j\neq i\). But then \(\alpha\) is a path from \(j\) to \(i\), so it
     gives a basis element of \(I(i)_j\). Hence \(I(i)_j\neq 0\), a contradiction.
     Therefore \(i\) must be a source.
-    
+
     This proves the proposition.
     \end{proof}
 
@@ -3842,7 +3843,7 @@ I & & I'
             \cdots \longrightarrow P_3 \longrightarrow P_2 \longrightarrow P_1 \longrightarrow P_0 \longrightarrow M \longrightarrow 0,
         \]
         where each $P_i$ is a projective representation.
-    
+
         \item An \emph{injective resolution} of $M$ is an exact sequence
         \[
             0 \longrightarrow M \longrightarrow I_0 \longrightarrow I_1 \longrightarrow I_2 \longrightarrow I_3 \longrightarrow \cdots,
@@ -3858,14 +3859,14 @@ I & & I'
         \[
             0 \longrightarrow P_1 \longrightarrow P_0 \longrightarrow M \longrightarrow 0.
         \]
-    
+
         \item There exists an injective resolution of $M$ of the form
         \[
             0 \longrightarrow M \longrightarrow I_0 \longrightarrow I_1 \longrightarrow 0.
         \]
     \end{enumerate}
     \end{theorem}
-    
+
     \begin{proof}
         We will show only~(1), and to achieve this, we will construct the so-called
         standard projective resolution of~$M$. Let
@@ -3879,7 +3880,7 @@ I & & I'
         P_0=\bigoplus_{i\in Q_0} d_iP(i),
         \]
         where $d_iP(i)$ stands for the direct sum of $d_i$ copies of $P(i)$.
-        
+
         Before defining the morphisms of the projective resolution, let us examine the
         representations $P_0$ and $P_1$. For every vector space $M_i$, we have
         $d_i=\dim M_i$ copies of $P(i)$ in $P_0$. The natural map $g$ from $P_0$ to $M$
@@ -3888,7 +3889,7 @@ I & & I'
         for every $\alpha$ that starts at $i$. So, for every arrow $\alpha$ with $s(\alpha)=i$,
         we have $d_{s(\alpha)}$ copies of $P(t(\alpha))$ in the kernel of $g$, which justifies
         the definition of $P_1$.
-        
+
         To define the morphisms of the projective resolution, we introduce specific bases
         for each of the representations $P_1$, $P_0$ and $M$ as follows: For each
         $i\in Q_0$, let $\{m_{i1},\ldots,m_{id_i}\}$ be a basis for $M_i$, and thus
@@ -3924,7 +3925,7 @@ I & & I'
         \varphi_\alpha(m_{s(\alpha)j})=\sum_{\ell=1}^{d_{t(\alpha)}} \theta_\ell m_{t(\alpha)\ell}.
         \tag{2.2}
         \end{equation}
-        
+
         We will now prove that the sequence
         \begin{equation}
         0 \longrightarrow \bigoplus_{\alpha\in Q_1} d_{s(\alpha)}P(t(\alpha))
@@ -3935,10 +3936,10 @@ I & & I'
         \tag{2.3}
         \end{equation}
         is exact.
-        
+
         \emph{$g$ is surjective}, because for any basis vector $m_{ij}$ of $M$, we have
         $m_{ij}=g(e_{ij})$, where $e_i$ is the constant path at vertex $i$.
-        
+
         \emph{$\ker g \supset \operatorname{im} f$}: It suffices to show that
         $g\circ f(b_{\alpha j})=0$ for any $b_{\alpha j}$ in the basis $B'$. We compute
         \[
@@ -3954,7 +3955,7 @@ I & & I'
         \end{aligned}
         \]
         where the next to last equation follows from~(2.2).
-        
+
         \emph{$\ker g \subset \operatorname{im} f$}: First note that any
         $x\in \bigoplus_{i\in Q_0} d_iP(i)$ can be written as a linear combination of the basis
         $B$; thus
@@ -3981,25 +3982,25 @@ I & & I'
         +\lambda_{c_{ij}}b_\alpha^M.
         \tag{2.4}
         \end{equation}
-        
+
         Let
         \[
         x_1=x_0+\sum_{c_i=\alpha b_\alpha}\lambda_{c_{ij}}b_\alpha^M.
         \]
         Note that $x-x_1\in \operatorname{im} f$.
-        
+
         Define the degree of a linear combination of paths to be the length of the longest
         path that appears in it with nonzero coefficient. Note that $\deg x_1<\deg x$ and
         $\deg x_0=0$.
-        
+
         Now let us suppose that $x\in \ker g$. We want to show that $x\in \operatorname{im} f$.
         Using~(2.4) and the fact that $g\circ f=0$, we get
         \[
         0=g(x)=g(x_1).
         \]
-        
+
         Summarizing, we have $x_1\in \ker g$, $\deg x_1<\deg x$ and $x-x_1\in \operatorname{im} f$.
-        
+
         Now we repeat the argument with $x_1$ instead of $x$. We get
         $x_2\in \ker g$, $\deg x_2<\deg x_1<\deg x$, and $x-x_2\in \operatorname{im} f$.
         Continuing like this, we will eventually get $x_h\in \ker g$, $x-x_h\in \operatorname{im} f$,
@@ -4013,7 +4014,7 @@ I & & I'
         \]
         and since the $m_{ij}$ form a basis of $M$, this implies that all $\mu_{ij}$ are zero.
         Hence $x_h=0$ and thus $x\in \operatorname{im} f$.
-        
+
         \emph{$f$ is injective}. Suppose that
         \[
         0=f\Bigl(\sum \lambda_{b\alpha h}b_{\alpha h}\Bigr)
@@ -4027,7 +4028,7 @@ I & & I'
         =
         \sum \lambda_{b\alpha h}\sum \theta_\ell b_{\alpha \ell}.
         \]
-        
+
         Let $i_0$ be a source in $M$, that is, $i_0$ is such that there is no arrow
         $j\to i_0$ with $d_j\neq 0$. Note that such an $i_0$ exists since $Q$ has no oriented
         cycles. Then, since each of the paths $b_\alpha$ starts at the endpoint of the arrow $\alpha$,
@@ -4044,7 +4045,7 @@ I & & I'
 
 \section{Examples; Covers, Envelopes, and Minimality}
 
-\begin{example} 
+\begin{example}
 \[
 Q:\quad
 \begin{tikzcd}[column sep=large]
@@ -4268,7 +4269,7 @@ This is exact by the general standard-resolution construction.
 \begin{remark}
     There are other projective resolutions than the standard resolution.
     \end{remark}
-    
+
     \begin{example}
     Let $Q$ be the quiver
     \[
@@ -4301,7 +4302,7 @@ This is exact by the general standard-resolution construction.
     \end{matrix}
     \longrightarrow 0.
     \]
-    
+
     The second resolution is not minimal in the sense that one can eliminate a direct
     summand $S(2)=2$ in each of the projective modules and still have a projective
     resolution:
@@ -4316,7 +4317,7 @@ This is exact by the general standard-resolution construction.
     \longrightarrow 0.
     \]
     \end{example}
-    
+
     \begin{example}
     Let $Q$ be the quiver
     \[
@@ -4367,7 +4368,7 @@ This is exact by the general standard-resolution construction.
     \end{matrix}
     \longrightarrow 0.
     \]
-    
+
     Again, this resolution is not minimal in the sense that one can eliminate three direct
     summands in each of the projective modules and still have a projective resolution:
     \[
@@ -4389,14 +4390,14 @@ This is exact by the general standard-resolution construction.
     \end{matrix}
     \longrightarrow 0.
     \]
-    
+
     To make this notion of minimality more precise, we need the definitions of
     projective covers and injective envelopes.
     \end{example}
-       
+
     \begin{definition}[Projective cover and injective envelope]
         Let $M \in \operatorname{Rep}Q$.
-        
+
         A \emph{projective cover} of $M$ is a projective representation $P$ together with a surjective morphism
         \[
         g \colon P \to M
@@ -4417,7 +4418,7 @@ This is exact by the general standard-resolution construction.
         \end{tikzcd}
         \]
         commutes, that is, $gh=g'$.
-        
+
         An \emph{injective envelope} of $M$ is an injective representation $I$ together with an injective morphism
         \[
         f \colon M \to I
@@ -4439,7 +4440,7 @@ This is exact by the general standard-resolution construction.
         \]
         commutes, that is, $hf=f'$.
         \end{definition}
-        
+
         \begin{definition}[Minimal projective and injective resolutions]
         A projective resolution
         \[
@@ -4450,7 +4451,7 @@ This is exact by the general standard-resolution construction.
         f_i \colon P_i \to \ker f_{i-1}
         \]
         is a projective cover, for every $i>0$.
-        
+
         An injective resolution
         \[
         0 \longrightarrow M \xrightarrow{f_0} I_0 \xrightarrow{f_1} I_1 \xrightarrow{f_2} I_2 \xrightarrow{f_3} I_3 \longrightarrow \cdots
@@ -4473,19 +4474,19 @@ This is exact by the general standard-resolution construction.
         \]
         Since $P$ is projective, this sequence splits.
         \end{proof}
-        
+
         \begin{proposition}
             Let $g:P\to M$ and $g':P'\to M$ be projective covers of $M$. Then $P$ is isomorphic to $P'$.
         \end{proposition}
-        
+
         \begin{proof}
         $P$ is isomorphic to a direct summand of $P'$, and $P'$ is isomorphic to a direct summand of $P$. Thus $P\simeq P'$.
         \end{proof}
-        
+
         \begin{remark}
-            The dual statements to the propositions 8.2.8 and 8.2.9 about injective envelopes hold too. 
+            The dual statements to the propositions 8.2.8 and 8.2.9 about injective envelopes hold too.
         \end{remark}
-        
+
         \begin{definition}
             Let
         \[
@@ -4496,11 +4497,11 @@ This is exact by the general standard-resolution construction.
         F\simeq A\oplus \cdots \oplus A.
         \]
         \end{definition}
-        
+
         \begin{proposition}
             A representation $M\in \operatorname{Rep}Q$ is projective if and only if there exists a free representation $F\in \operatorname{Rep}Q$ such that $M$ is isomorphic to a direct summand of $F$.
         \end{proposition}
-        
+
         \begin{proof}
             \[
                 (\Longleftarrow)\qquad
@@ -4513,7 +4514,7 @@ This is exact by the general standard-resolution construction.
             \]
             Since each $P(i)$ is projective, it is enough to observe that a finite direct sum
             of projective representations is again projective.
-        
+
             Indeed, let $X_1,\dots,X_t$ be projective representations and put
             \[
                 X:=X_1\oplus\cdots\oplus X_t.
@@ -4541,7 +4542,7 @@ This is exact by the general standard-resolution construction.
                 u\widetilde{h}=h.
             \]
             Hence $X$ is projective. Therefore $F$ is projective.
-        
+
             Now we show that every direct summand of a projective representation is projective.
             Suppose
             \[
@@ -4582,7 +4583,7 @@ This is exact by the general standard-resolution construction.
                 =h.
             \]
             Thus $M$ is projective.
-        
+
             \[
                 (\Longrightarrow)\qquad
             \]
@@ -4601,7 +4602,7 @@ This is exact by the general standard-resolution construction.
                 0\longrightarrow \ker g\longrightarrow P_0\xrightarrow{\,g\,} M\longrightarrow 0.
             \]
             Since $M$ is projective, this sequence splits. Therefore $M$ is isomorphic to a direct summand of $P_0$.
-        
+
             It remains to embed $P_0$ into a free representation as a direct summand.
             Let
             \[
@@ -4629,22 +4630,22 @@ This is exact by the general standard-resolution construction.
                 P_0\oplus P'
             \]
             for some representation $P'$.
-        
+
             Thus $P_0$ is a direct summand of the free representation $F$. Since $M$ is a direct summand of $P_0$, it follows that $M$ is also a direct summand of $F$.
-        
+
             Therefore there exists a free representation $F$ such that $M$ is isomorphic to a direct summand of $F$.
         \end{proof}
-        
+
         \begin{corollary}\label{cor:8.2.13}
             Any projective representation $P\in \operatorname{Rep}Q$ is a direct sum of $P(i)$'s, that is,
         \[
         P\simeq P(i_1)\oplus \cdots \oplus P(i_t),
         \]
         with $i_1,\ldots,i_t$ not necessarily distinct.
-        \end{corollary} 
-        
+        \end{corollary}
+
         Our next goal is to show that, in $\operatorname{Rep}Q$, subrepresentations of projective representations are projective. We start by introducing a particular subrepresentation of $P(i)$.
-        
+
         \begin{definition}
             Let $P(i)=\bigl(P(i)_j,\varphi_\alpha\bigr)$ be the projective representation at vertex $i$. The \textbf{radical} of $P(i)$ is the representation $\operatorname{rad}P(i)=\bigl(R_j,\varphi'_\alpha\bigr)$ defined by
         \[
@@ -4656,11 +4657,11 @@ This is exact by the general standard-resolution construction.
         \end{cases}
         \]
         \end{definition}
-        
+
         \begin{lemma}
             Any proper subrepresentation of $P(i)$ is contained in $\operatorname{rad}P(i)$.
         \end{lemma}
-        
+
         \begin{proof}
         Suppose $f:M\hookrightarrow P(i)$ is an injective morphism of representations. Let $M=(M_i,\psi_\alpha)$ and $P(i)=\bigl(P(i)_j,\varphi_\alpha\bigr)$. It is clear that if $M_i=0$, we have that $f(M_i)\subset \operatorname{rad}P(i)$, so let us suppose that $M_i\neq 0$. We will show that this implies that the morphism $f$ is an isomorphism. Since $P(i)_i\simeq k$, it follows that $M_i\simeq k$, and there is an element $m_i\in M_i$ such that $f_i(m_i)=e_i$. Now let $j$ be any vertex, and let $c$ be a path from $i$ to $j$. Then
         \[
@@ -4668,11 +4669,11 @@ This is exact by the general standard-resolution construction.
         \]
      Thus we see that the arbitrary element $c$ of the basis of $P(i)_j$ lies in the image of $f_j$, which implies that $f$ is surjective, hence an isomorphism, and so $M$ is not a proper subrepresentation of $P(i)$.
         \end{proof}
-        
+
         \begin{lemma}
             If $P(i)$ is simple, then $\operatorname{rad}P(i)=0$. If $P(i)$ is not simple, then the radical of $P(i)$ is projective.
         \end{lemma}
-        
+
         \begin{proof}
         We will show that $\operatorname{rad}P(i)$ is isomorphic to the projective representation
         \[
@@ -4692,11 +4693,11 @@ This is exact by the general standard-resolution construction.
         \begin{theorem}\label{thm:8.2.17}
             Subrepresentations of projective representations in $\operatorname{rep} Q$ are projective.
             \end{theorem}
-            
+
             \begin{remark}
             The subrepresentation inherits the projectivity. Categories with this property are called hereditary.
             \end{remark}
-            
+
             \begin{proof}
             Suppose that $P$ is a projective representation with dimension vector
             \[
@@ -4707,14 +4708,14 @@ This is exact by the general standard-resolution construction.
             d=\sum_{i\in Q_0} d_i,
             \]
             the dimension of $P$.
-            
+
             If $d=1$, then $P$ is simple and there is nothing to prove. So suppose that $d>1$.
             Let $M$ be a subrepresentation of $P$ and let
             \[
             u\colon M \to P
             \]
             be the inclusion morphism.
-            
+
             By Corollary~\ref{cor:8.2.13}, we have
             \[
             P \cong P(i_1)\oplus \cdots \oplus P(i_t)
@@ -4732,14 +4733,14 @@ This is exact by the general standard-resolution construction.
             \[
             \operatorname{im} u_j \subseteq P(i_j).
             \]
-            
+
             It follows that
             \[
             M \cong \operatorname{im} u_1 \oplus \cdots \oplus \operatorname{im} u_t,
             \]
             and, by Proposition~\ref{prop:7.2.1}, it suffices to show that $\operatorname{im} u_j$ is projective
             for each $j$.
-            
+
             This is obvious in the case where
             \[
             \operatorname{im} u_j = P(i_j),
@@ -4840,7 +4841,7 @@ This is exact by the general standard-resolution construction.
     :\operatorname{Rep}(Q)\to \operatorname{Rep}(Q^{\operatorname{op}})
     \]
     this is a contravariant functor.
-    
+
     If
     \[
     M=(M_i,\varphi_\alpha),
@@ -4853,7 +4854,7 @@ This is exact by the general standard-resolution construction.
     \qquad
     D\varphi_{\alpha}=\operatorname{Hom}_k(\varphi_\alpha,k).
     \]
-    
+
     If
     \[
     \alpha:i\to j \text{ in } Q,
@@ -4878,7 +4879,7 @@ This is exact by the general standard-resolution construction.
     \[
     D\varphi_{\alpha}(f)=f\circ \varphi_\alpha.
     \]
-    
+
     For a morphism
     \[
     h:M\to N,
@@ -4957,7 +4958,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
     2
     \end{matrix}.
     \]
-    
+
     The opposite quiver is
     \[
     Q^{\operatorname{op}}:\qquad
@@ -4965,7 +4966,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
     1 \& 2 \arrow[l] \arrow[r] \& 3
     \end{tikzcd}
     \]
-    
+
     Moreover,
     \[
     D\bigl(k \xrightarrow{\,1\,} k \xleftarrow{\,0\,} 0\bigr)
@@ -5004,7 +5005,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         D:\operatorname{proj}Q\longrightarrow \operatorname{inj}Q^{\operatorname{op}}.
         \]
         \end{proposition}
-        
+
         \begin{proof}
         For each vertex \(j\in Q_0\), the vector space \(P_Q(i)_j\) has a basis given by the set
         of all paths from \(i\) to \(j\) in \(Q\). Hence
@@ -5016,12 +5017,12 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         \{\delta_c \mid c:i\rightsquigarrow j \text{ a path in }Q\},
         \]
         where \(\delta_c(c')=\delta_{c,c'}\).
-        
+
         On the other hand, \(I_{Q^{\operatorname{op}}}(i)_j\) has a basis given by the set of all
         paths from \(j\) to \(i\) in \(Q^{\operatorname{op}}\). These are naturally in bijection with
         the paths from \(i\) to \(j\) in \(Q\): if \(c:i\rightsquigarrow j\) is a path in \(Q\), then
         \(c^{\operatorname{op}}:j\rightsquigarrow i\) is the corresponding path in \(Q^{\operatorname{op}}\).
-        
+
         Thus for each \(j\in Q_0\), we define a \(k\)-linear isomorphism
         \[
         \Phi_j:D\bigl(P_Q(i)\bigr)_j\longrightarrow I_{Q^{\operatorname{op}}}(i)_j
@@ -5030,9 +5031,9 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         \[
         \Phi_j(\delta_c)=c^{\operatorname{op}}.
         \]
-        
+
         It remains to show that these maps are compatible with the arrow maps.
-        
+
         Let \(\alpha:j\to \ell\) be an arrow in \(Q\). Then \(\alpha^{\operatorname{op}}:\ell\to j\)
         is an arrow in \(Q^{\operatorname{op}}\). In the projective representation \(P_Q(i)\), the map
         \[
@@ -5048,7 +5049,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         D\bigl(P_Q(i)\bigr)_\ell\longrightarrow D\bigl(P_Q(i)\bigr)_j
         \]
         is given by precomposition.
-        
+
         Take a basis element \(\delta_d\in D\bigl(P_Q(i)\bigr)_\ell\), where \(d:i\rightsquigarrow \ell\)
         is a path in \(Q\). Then for any path \(c:i\rightsquigarrow j\), we have
         \[
@@ -5067,7 +5068,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         0, & \text{otherwise.}
         \end{cases}
         \]
-        
+
         Now consider the injective representation \(I_{Q^{\operatorname{op}}}(i)\). The arrow map
         corresponding to \(\alpha^{\operatorname{op}}:\ell\to j\) is defined by deleting the initial arrow
         \(\alpha^{\operatorname{op}}\) from a path in \(Q^{\operatorname{op}}\) when possible, and sending the
@@ -5090,7 +5091,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
         \[
         D\bigl(P_Q(i)\bigr)\cong I_{Q^{\operatorname{op}}}(i).
         \]
-        
+
         Finally, every projective representation in \(\operatorname{Rep}Q\) is a finite direct sum of
         indecomposable projectives \(P_Q(i)\), and \(D\) commutes with finite direct sums. Therefore
         \(D\) sends projective representations to injective representations in
@@ -5108,13 +5109,13 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
             \]
             be the free representation given by the direct sum of the indecomposable projective
             representations of \(Q\).
-            
+
             For each representation \(X\in \operatorname{rep}Q\), we define a representation
             \[
             \operatorname{Hom}(X,A)\in \operatorname{rep}Q^{\operatorname{op}}
             \]
             as follows.
-            
+
             For every vertex \(i\in Q_0\), set
             \[
             \operatorname{Hom}(X,A)_i:=\operatorname{Hom}(X,P(i)).
@@ -5134,7 +5135,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
             \alpha:P(j)\longrightarrow P(i)
             \]
             corresponding to the path \(\alpha\).
-            
+
             Moreover, if \(g:X\to X'\) is a morphism in \(\operatorname{rep}Q\), define
             \[
             \operatorname{Hom}(g,A):\operatorname{Hom}(X',A)\longrightarrow \operatorname{Hom}(X,A)
@@ -5147,14 +5148,14 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
             f\longmapsto f\circ g.
             \]
             \end{definition}
-            
+
             \begin{proposition}
             The assignment above defines a contravariant functor
             \[
             \operatorname{Hom}(-,A):\operatorname{rep}Q\longrightarrow \operatorname{rep}Q^{\operatorname{op}}.
             \]
             \end{proposition}
-            
+
             \begin{proof}
             Fix \(X\in \operatorname{rep}Q\). For each vertex \(i\in Q_0\), the space
             \[
@@ -5171,7 +5172,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
             \bigl(\operatorname{Hom}(X,P(i)),\varphi_{\alpha^{\operatorname{op}}}\bigr)_{i\in Q_0,\alpha\in Q_1}
             \]
             is a representation of \(Q^{\operatorname{op}}\).
-            
+
             Now let \(g:X\to X'\) be a morphism in \(\operatorname{rep}Q\). We must show that
             \[
             \operatorname{Hom}(g,A):\operatorname{Hom}(X',A)\to \operatorname{Hom}(X,A)
@@ -5213,7 +5214,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
             \]
             Thus the diagram commutes, so \(\operatorname{Hom}(g,A)\) is indeed a morphism in
             \(\operatorname{rep}Q^{\operatorname{op}}\).
-            
+
             Finally, the functorial identities are immediate:
             \[
             \operatorname{Hom}(\operatorname{id}_X,A)=\operatorname{id}_{\operatorname{Hom}(X,A)},
@@ -5261,7 +5262,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                     \]
                     be a nonzero morphism from an indecomposable representation \(M\) to a projective representation \(P\). Then \(M\) is projective, and \(f\) is injective.
                     \end{lemma}
-                    
+
                     \begin{proof}
                     Since the image of \(f\) is a subrepresentation of \(P\), it is projective by Theorem~\ref{thm:8.2.17}. Therefore, the short exact sequence
                     \[
@@ -5285,7 +5286,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                 is zero on all representations which have no projective direct summands.
                 Therefore we must study the behavior of the Nakayama functor when applied to an
                 indecomposable projective representation, say, $P_Q(i)$.
-                
+
                 Let us first consider the functor $\operatorname{Hom}(-,A)$ only. Let
                 \[
                 M=\operatorname{Hom}(P_Q(i),A),
@@ -5302,7 +5303,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                 paths from $j$ to $i$ in $Q$. In terms of $Q^{\operatorname{op}}$, this can be
                 rephrased as: $M_j$ has a basis consisting of all paths from $i$ to $j$ in
                 $Q^{\operatorname{op}}$.
-                
+
                 Moreover, for any arrow
                 \[
                 h \xrightarrow{\alpha} j
@@ -5325,7 +5326,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                 P_{Q^{\operatorname{op}}}(i)
                 \]
                 at vertex $i$.
-                
+
                 Thus the restriction of $\operatorname{Hom}(-,A)$ to the subcategory
                 $\operatorname{proj} Q$ gives a duality of categories
                 \[
@@ -5337,7 +5338,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                 \]
                 where $A^{\operatorname{op}}$ is the sum of all indecomposable projective
                 $Q^{\operatorname{op}}$-representations.
-                
+
                 To obtain the Nakayama functor $\nu$, we must now form the composition with the
                 duality $D$. Note that
                 \[
@@ -5353,7 +5354,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                     \[
                     \nu^{-1}=\operatorname{Hom}(DA^{\operatorname{op}},-)\colon \operatorname{inj} Q \longrightarrow \operatorname{proj} Q.
                     \]
-                    
+
                     Moreover, for any vertex $i$,
                     \[
                     \nu P(i)=I(i),
@@ -5368,7 +5369,7 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                     \]
                     is the morphism given by the cancellation of the path $c$.
                     \end{proposition}
-                    
+
                     \begin{proof}
                     The functor $\nu$ is an equivalence because it is the composition of the two dualities
                     $D$ and $\operatorname{Hom}(-,A)$. Its quasi-inverse $\nu^{-1}$ is the composition of the
@@ -5390,14 +5391,14 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                     \[
                     \nu^{-1}=\operatorname{Hom}(DA^{\operatorname{op}},-).
                     \]
-                    
+
                     Finally,
                     \[
                     \nu P_Q(i)=D\operatorname{Hom}(P_Q(i),A)
                     = D\bigl(P_{Q^{\operatorname{op}}}(i)\bigr)
                     = I_Q(i).
                     \]
-                    
+
                     To show the last statement, let $c$ be a path from $i$ to $j$, and let
                     \[
                     f_c\colon P_Q(j)\to P_Q(i)
@@ -5438,6 +5439,2357 @@ So \(D\) has a quasi-inverse, namely \(D^{\operatorname{op}}\).
                     \]
                     \end{proof}
 
+\chapter{Lecture 10}
+
+\section{The Nakayama Functor and Exactness}
+
+\begin{example}
+Let \(Q\) be the quiver
+\[
+\begin{tikzcd}
+1 \arrow[r] & 2 \arrow[r] & 3 .
+\end{tikzcd}
+\]
+Its Auslander--Reiten quiver is
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+&& \substack{1\\2\\3} \arrow[dr] && \\
+& \substack{2\\3} \arrow[ur] \arrow[dr] && \substack{1\\2} \arrow[dr] & \\
+3 \arrow[ur] && 2 \arrow[ur] && 1 .
+\end{tikzcd}
+\]
+The indecomposable projective representations are
+\[
+P(1)=\substack{1\\2\\3},
+\qquad
+P(2)=\substack{2\\3},
+\qquad
+P(3)=3.
+\]
+The indecomposable injective representations are
+\[
+I(1)=1,
+\qquad
+I(2)=\substack{1\\2},
+\qquad
+I(3)=\substack{1\\2\\3}.
+\]
+Hence the Nakayama functor \(\nu\) sends projective representations to injective
+representations as follows:
+\[
+\nu P(1)=I(1)=1,
+\qquad
+\nu P(2)=I(2)=\substack{1\\2},
+\qquad
+\nu P(3)=I(3)=\substack{1\\2\\3}=P(1).
+\]
+Equivalently, in the Auslander--Reiten quiver we have
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+P(3) \arrow[r] & P(2) \arrow[r] & P(1)=\nu P(3) \arrow[r] & \nu P(2) \arrow[r] & \nu P(1).
+\end{tikzcd}
+\]
+\end{example}
+
+\begin{example}
+Let \(Q\) be the quiver
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+& & 4 \\
+1 \arrow[r] & 2 \arrow[ur] \arrow[dr] & \\
+& & 3 .
+\end{tikzcd}
+\]
+Then the indecomposable projective representations are
+\[
+P(1)=\substack{1\\2\\3\;4},
+\qquad
+P(2)=\substack{2\\3\;4},
+\qquad
+P(3)=3,
+\qquad
+P(4)=4.
+\]
+The indecomposable injective representations are
+\[
+I(1)=1,
+\qquad
+I(2)=\substack{1\\2},
+\qquad
+I(3)=\substack{1\\2\\3},
+\qquad
+I(4)=\substack{1\\2\\4}.
+\]
+Thus the subcategory \(\operatorname{proj} Q\) is generated by the \(P(i)\), and the
+subcategory \(\operatorname{inj} Q\) is generated by the \(I(i)\).
+\end{example}
+
+\section{Exactness for Functors}
+
+\begin{definition}
+Let \(\mathcal C\) and \(\mathcal D\) be abelian categories. A covariant or
+contravariant functor
+\[
+F:\mathcal C\longrightarrow \mathcal D
+\]
+is called \emph{exact} if it sends exact sequences in \(\mathcal C\) to exact
+sequences in \(\mathcal D\).
+
+For example, every equivalence of abelian categories and every duality of abelian
+categories is exact.
+\end{definition}
+
+\begin{remark}
+Many important functors, such as the Hom functors, are not exact. However, they
+often satisfy weaker exactness properties, namely left exactness or right exactness.
+The definitions are slightly different for covariant and contravariant functors.
+\end{remark}
+
+\begin{definition}
+Let
+\[
+F:\mathcal C\longrightarrow \mathcal D
+\]
+be a covariant functor.
+
+\begin{enumerate}
+    \item \(F\) is called \emph{left exact} if for every exact sequence
+    \[
+    0 \longrightarrow L \xrightarrow{f} M \xrightarrow{g} N
+    \]
+    in \(\mathcal C\), the sequence
+    \[
+    0 \longrightarrow F(L)
+    \xrightarrow{F(f)}
+    F(M)
+    \xrightarrow{F(g)}
+    F(N)
+    \]
+    is exact in \(\mathcal D\).
+
+    \item \(F\) is called \emph{right exact} if for every exact sequence
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    in \(\mathcal C\), the sequence
+    \[
+    F(L)
+    \xrightarrow{F(f)}
+    F(M)
+    \xrightarrow{F(g)}
+    F(N)
+    \longrightarrow 0
+    \]
+    is exact in \(\mathcal D\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Let
+\[
+G:\mathcal C\longrightarrow \mathcal D
+\]
+be a contravariant functor.
+
+\begin{enumerate}
+    \item \(G\) is called \emph{left exact} if for every exact sequence
+    \[
+    L \xrightarrow{f} M \xrightarrow{g} N \longrightarrow 0
+    \]
+    in \(\mathcal C\), the sequence
+    \[
+    0 \longrightarrow G(N)
+    \xrightarrow{G(g)}
+    G(M)
+    \xrightarrow{G(f)}
+    G(L)
+    \]
+    is exact in \(\mathcal D\).
+
+    \item \(G\) is called \emph{right exact} if for every exact sequence
+    \[
+    0 \longrightarrow L \xrightarrow{f} M \xrightarrow{g} N
+    \]
+    in \(\mathcal C\), the sequence
+    \[
+    G(N)
+    \xrightarrow{G(g)}
+    G(M)
+    \xrightarrow{G(f)}
+    G(L)
+    \longrightarrow 0
+    \]
+    is exact in \(\mathcal D\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+The Nakayama functor
+\[
+\nu = D\operatorname{Hom}(-,A)
+\]
+is right exact.
+\end{proposition}
+
+\begin{proof}
+The functor
+\[
+\operatorname{Hom}(-,A)
+\]
+is a contravariant left exact functor. The duality
+\[
+D=\operatorname{Hom}_k(-,k)
+\]
+is an exact contravariant functor. Therefore their composition
+\[
+\nu=D\operatorname{Hom}(-,A)
+\]
+is a covariant right exact functor.
+\end{proof}
+
+\begin{example}
+Let \(Q\) be the quiver
+\[
+\begin{tikzcd}
+1 \arrow[r] & 2 \arrow[r] & 3 .
+\end{tikzcd}
+\]
+Consider the short exact sequence
+\[
+0
+\longrightarrow
+3
+\xrightarrow{f}
+\substack{1\\2\\3}
+\xrightarrow{g}
+\substack{1\\2}
+\longrightarrow
+0.
+\]
+Applying the Nakayama functor \(\nu\) gives the exact sequence
+\[
+\substack{1\\2\\3}
+\xrightarrow{\nu f}
+1
+\xrightarrow{\nu g}
+0
+\longrightarrow
+0.
+\]
+This confirms that \(\nu\) is right exact.
+
+However, the morphism
+\[
+\nu f:\substack{1\\2\\3}\longrightarrow 1
+\]
+is clearly not injective. Therefore the Nakayama functor \(\nu\) is not exact in
+general.
+\end{example}
+
+\section{The Auslander--Reiten Translations}
+
+\begin{definition}
+Let \(Q\) be a quiver without oriented cycles, and let \(M\) be an indecomposable
+representation of \(Q\).
+
+Let
+\[
+0
+\longrightarrow
+P_1
+\xrightarrow{p_1}
+P_0
+\xrightarrow{p_0}
+M
+\longrightarrow
+0
+\]
+be a minimal projective resolution of \(M\). Applying the Nakayama functor \(\nu\),
+we obtain an exact sequence
+\[
+0
+\longrightarrow
+\tau M
+\longrightarrow
+\nu P_1
+\xrightarrow{\nu p_1}
+\nu P_0
+\xrightarrow{\nu p_0}
+\nu M
+\longrightarrow
+0.
+\]
+Here
+\[
+\tau M:=\operatorname{Ker}(\nu p_1)
+\]
+is called the \emph{Auslander--Reiten translate} of \(M\), and \(\tau\) is called the
+\emph{Auslander--Reiten translation}.
+\end{definition}
+
+\begin{definition}
+Let
+\[
+0
+\longrightarrow
+M
+\xrightarrow{i_0}
+I_0
+\xrightarrow{i_1}
+I_1
+\longrightarrow
+0
+\]
+be a minimal injective resolution of \(M\). Applying the inverse Nakayama functor
+\(\nu^{-1}\), we obtain an exact sequence
+\[
+0
+\longrightarrow
+\nu^{-1}M
+\xrightarrow{\nu^{-1}i_0}
+\nu^{-1}I_0
+\xrightarrow{\nu^{-1}i_1}
+\nu^{-1}I_1
+\longrightarrow
+\tau^{-1}M
+\longrightarrow
+0.
+\]
+Here
+\[
+\tau^{-1}M:=\operatorname{Coker}(\nu^{-1}i_1)
+\]
+is called the \emph{inverse Auslander--Reiten translate} of \(M\), and \(\tau^{-1}\)
+is called the \emph{inverse Auslander--Reiten translation}.
+\end{definition}
+
+\begin{example}
+For the quiver
+\[
+\begin{tikzcd}
+1 \arrow[r] & 2 \arrow[r] & 3 ,
+\end{tikzcd}
+\]
+we compute
+\[
+\tau\left(\substack{1\\2}\right).
+\]
+A minimal projective resolution of \(\substack{1\\2}\) is
+\[
+0
+\longrightarrow
+3
+\xrightarrow{f}
+\substack{1\\2\\3}
+\longrightarrow
+\substack{1\\2}
+\longrightarrow
+0.
+\]
+Applying the Nakayama functor gives
+\[
+\substack{1\\2\\3}
+\xrightarrow{\nu f}
+1
+\longrightarrow
+0
+\longrightarrow
+0.
+\]
+Therefore
+\[
+\tau\left(\substack{1\\2}\right)
+=
+\operatorname{Ker}(\nu f)
+=
+\substack{2\\3}.
+\]
+\end{example}
+
+\begin{remark}
+The Auslander--Reiten translation was introduced by Auslander and Reiten.
+\end{remark}
+
+\section{Extensions and Ext}
+
+\begin{definition}
+Let \(M\in \operatorname{rep} Q\), and take a projective resolution
+\[
+0
+\longrightarrow
+P_1
+\xrightarrow{f}
+P_0
+\xrightarrow{g}
+M
+\longrightarrow
+0
+\]
+of \(M\) in \(\operatorname{rep} Q\). Let \(N\) be any representation in
+\(\operatorname{rep} Q\).
+
+Applying the functor
+\[
+\operatorname{Hom}(-,N)
+\]
+to this projective resolution gives an exact sequence
+\[
+0
+\longrightarrow
+\operatorname{Hom}(M,N)
+\xrightarrow{g^\ast}
+\operatorname{Hom}(P_0,N)
+\xrightarrow{f^\ast}
+\operatorname{Hom}(P_1,N)
+\longrightarrow
+\operatorname{Ext}^1(M,N)
+\longrightarrow
+0.
+\]
+The vector space
+\[
+\operatorname{Ext}^1(M,N)
+:=
+\operatorname{Coker}(f^\ast)
+\]
+is called the \emph{first group of extensions} of \(M\) and \(N\).
+\end{definition}
+
+\begin{remark}
+In an arbitrary abelian category, projective resolutions do not necessarily stop after
+two steps. In fact, they might not stop at all. A projective resolution in a general
+category is of the form
+\[
+\cdots
+\longrightarrow
+P_n
+\xrightarrow{f_n}
+P_{n-1}
+\longrightarrow
+\cdots
+\longrightarrow
+P_1
+\xrightarrow{f_1}
+P_0
+\xrightarrow{f_0}
+M
+\longrightarrow
+0.
+\]
+Applying \(\operatorname{Hom}(-,N)\) yields a cochain complex
+\[
+0
+\longrightarrow
+\operatorname{Hom}(M,N)
+\xrightarrow{f_0^\ast}
+\operatorname{Hom}(P_0,N)
+\xrightarrow{f_1^\ast}
+\operatorname{Hom}(P_1,N)
+\xrightarrow{f_2^\ast}
+\cdots
+\xrightarrow{f_n^\ast}
+\operatorname{Hom}(P_n,N)
+\longrightarrow
+\cdots .
+\]
+More precisely, this is a cochain complex, meaning that
+\[
+f_i^\ast f_{i-1}^\ast=0
+\qquad
+\text{for all } i.
+\]
+One then defines the \(i\)-th extension group, for \(i\geq 1\), by
+\[
+\operatorname{Ext}^i(M,N)
+=
+\frac{\operatorname{Ker} f_{i+1}^\ast}
+     {\operatorname{Im} f_i^\ast}.
+\]
+One can show that this definition does not depend on the choice of the projective
+resolution.
+
+In \(\operatorname{rep}Q\), where \(Q\) has no oriented cycles, all the
+extension groups \(\operatorname{Ext}^i(M,N)\) with \(i\geq 2\) vanish, because
+minimal projective resolutions are of the form
+\[
+0
+\longrightarrow
+P_1
+\xrightarrow{f}
+P_0
+\xrightarrow{g}
+M
+\longrightarrow
+0.
+\]
+On the other hand, the first extension group \(\operatorname{Ext}^1(M,N)\)
+contains very interesting information.
+\end{remark}
+
+    \begin{definition}[Extensions]
+    Let \(M,N\in \operatorname{rep}Q\). An \emph{extension} \(\xi\) of \(M\) by \(N\)
+    is a short exact sequence
+    \[
+        \xi:\qquad
+        0
+        \longrightarrow
+        N
+        \xrightarrow{f}
+        E
+        \xrightarrow{g}
+        M
+        \longrightarrow
+        0.
+    \]
+    Two extensions
+    \[
+        \xi:\quad
+        0\longrightarrow N\xrightarrow{f}E\xrightarrow{g}M\longrightarrow 0
+    \]
+    and
+    \[
+        \xi':\quad
+        0\longrightarrow N\xrightarrow{f'}E'\xrightarrow{g'}M\longrightarrow 0
+    \]
+    are called \emph{equivalent} if there exists a commutative diagram
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] &
+    N \arrow[r,"f"] \arrow[d,equal] &
+    E \arrow[r,"g"] \arrow[d,"\sim"] &
+    M \arrow[r] \arrow[d,equal] &
+    0 \\
+    0 \arrow[r] &
+    N \arrow[r,"f'"] &
+    E' \arrow[r,"g'"] &
+    M \arrow[r] &
+    0 .
+    \end{tikzcd}
+    \]
+    \end{definition}
+
+    \begin{example}
+    Let \(Q\) be the Kronecker quiver
+    \[
+    \begin{tikzcd}
+    1 \arrow[r,shift left=0.6ex,"\alpha"]
+      \arrow[r,shift right=0.6ex,"\beta"'] & 2 .
+    \end{tikzcd}
+    \]
+    Let
+    \[
+        N=S(2),
+        \qquad
+        M=S(1).
+    \]
+    Consider the two representations
+    \[
+        E=
+        \begin{tikzcd}
+        k \arrow[r,shift left=0.6ex,"1"]
+          \arrow[r,shift right=0.6ex,"0"'] & k
+        \end{tikzcd},
+        \qquad
+        E'=
+        \begin{tikzcd}
+        k \arrow[r,shift left=0.6ex,"0"]
+          \arrow[r,shift right=0.6ex,"1"'] & k .
+        \end{tikzcd}
+    \]
+    Then we have two short exact sequences
+    \[
+        \xi:\quad
+        0
+        \longrightarrow
+        S(2)
+        \xrightarrow{f}
+        E
+        \xrightarrow{g}
+        S(1)
+        \longrightarrow
+        0,
+    \]
+    and
+    \[
+        \xi':\quad
+        0
+        \longrightarrow
+        S(2)
+        \xrightarrow{f'}
+        E'
+        \xrightarrow{g'}
+        S(1)
+        \longrightarrow
+        0.
+    \]
+    These two extensions are not equivalent, because \(E\) and \(E'\) are not
+    isomorphic as representations of \(Q\).
+    \end{example}
+
+    \begin{definition}[Split extensions]
+    An extension
+    \[
+        0
+        \longrightarrow
+        N
+        \longrightarrow
+        E
+        \longrightarrow
+        M
+        \longrightarrow
+        0
+    \]
+    is called \emph{split} if the corresponding short exact sequence is split. Equivalently,
+    it is equivalent to the split short exact sequence
+    \[
+        0
+        \longrightarrow
+        N
+        \longrightarrow
+        N\oplus M
+        \longrightarrow
+        M
+        \longrightarrow
+        0.
+    \]
+    \end{definition}
+
+    \begin{definition}[Baer sum of extensions]
+    Let
+    \[
+        \xi:\quad
+        0
+        \longrightarrow
+        N
+        \xrightarrow{f}
+        E
+        \xrightarrow{g}
+        M
+        \longrightarrow
+        0
+    \]
+    and
+    \[
+        \xi':\quad
+        0
+        \longrightarrow
+        N
+        \xrightarrow{f'}
+        E'
+        \xrightarrow{g'}
+        M
+        \longrightarrow
+        0
+    \]
+    be two extensions of \(M\) by \(N\). Define the pullback
+    \[
+        E''
+        =
+        \left\{
+            (x,x')\in E\times E'
+            \mid
+            g(x)=g'(x')
+        \right\}.
+    \]
+    Then define \(F\) to be the quotient of \(E''\) by the subspace
+    \[
+        \left\{
+            \bigl(f(n),-f'(n)\bigr)
+            \mid
+            n\in N
+        \right\}.
+    \]
+    The \emph{sum} \(\xi+\xi'\) is the extension
+    \[
+        \xi+\xi':\quad
+        0
+        \longrightarrow
+        N
+        \longrightarrow
+        F
+        \longrightarrow
+        M
+        \longrightarrow
+        0.
+    \]
+    \end{definition}
+
+    \begin{remark}
+    The set of equivalence classes of extensions of \(M\) by \(N\), denoted by
+    \[
+        \mathcal E(M,N),
+    \]
+    together with the above sum of extensions, is an abelian group. The class of the
+    split extension is the zero element of this group.
+    \end{remark}
+
+    \begin{proposition}
+    There is a group isomorphism
+    \[
+        \mathcal E(M,N)
+        \xrightarrow{\;\sim\;}
+        \operatorname{Ext}^1(M,N).
+    \]
+    \end{proposition}
+
+    \begin{proof}
+    Let
+    \[
+        \xi:\quad
+        0
+        \longrightarrow
+        N
+        \xrightarrow{u'}
+        E
+        \xrightarrow{v'}
+        M
+        \longrightarrow
+        0
+    \]
+    be a representative of an extension class in \(\mathcal E(M,N)\), and let
+    \[
+        0
+        \longrightarrow
+        P_1
+        \xrightarrow{f}
+        P_0
+        \xrightarrow{g}
+        M
+        \longrightarrow
+        0
+    \]
+    be a projective resolution of \(M\).
+
+    Since \(P_0\) is projective and \(v'\colon E\to M\) is surjective, there exists a
+    morphism
+    \[
+        f'\in \operatorname{Hom}(P_0,E)
+    \]
+    such that
+    \[
+        g=v'f'.
+    \]
+    Since \(g f=0\), the morphism \(f'f\colon P_1\to E\) has image inside
+    \(\operatorname{Ker}v'=\operatorname{Im}u'\). Hence, by the universal property of
+    the kernel, there exists a morphism
+    \[
+        u\in \operatorname{Hom}(P_1,N)
+    \]
+    such that the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    0 \arrow[r] &
+    P_1 \arrow[r,"f"] \arrow[d,"u"'] &
+    P_0 \arrow[r,"g"] \arrow[d,"f'"] &
+    M \arrow[r] \arrow[d,equal] &
+    0 \\
+    0 \arrow[r] &
+    N \arrow[r,"u'"] &
+    E \arrow[r,"v'"] &
+    M \arrow[r] &
+    0 .
+    \end{tikzcd}
+    \]
+    Recall that
+    \[
+        \operatorname{Ext}^1(M,N)
+        =
+        \operatorname{Coker} f^\ast
+        =
+        \frac{\operatorname{Hom}(P_1,N)}
+             {\operatorname{Im} f^\ast}.
+    \]
+    The required map
+    \[
+        \mathcal E(M,N)
+        \longrightarrow
+        \operatorname{Ext}^1(M,N)
+    \]
+    sends the class of \(\xi\) to the class of \(u\). This gives the desired group
+    isomorphism.
+    \end{proof}
+
+    \begin{example}
+        Let \(\zeta,\zeta'\) be two extensions for the quiver
+        \[
+        Q:
+        \begin{tikzcd}[column sep=large]
+        1
+        \arrow[r, shift left=0.6ex, "\alpha"]
+        \arrow[r, shift right=0.6ex, "\beta"']
+        &
+        2
+        \end{tikzcd}
+        \]
+        with
+        \[
+        N=S(2),\qquad M=S(1).
+        \]
+        Let
+        \[
+        E=
+        \begin{tikzcd}[column sep=large]
+        k
+        \arrow[r, shift left=0.6ex, "1"]
+        \arrow[r, shift right=0.6ex, "0"']
+        &
+        k
+        \end{tikzcd}
+        \qquad\text{and}\qquad
+        E'=
+        \begin{tikzcd}[column sep=large]
+        k
+        \arrow[r, shift left=0.6ex, "0"]
+        \arrow[r, shift right=0.6ex, "1"']
+        &
+        k .
+        \end{tikzcd}
+        \]
+        Using the notation
+        \[
+        E=(E_i,\varphi_\alpha)_{i\in Q_0,\alpha\in Q_1},
+        \qquad
+        E'=(E_i',\varphi_\alpha')_{i\in Q_0,\alpha\in Q_1},
+        \]
+        we have
+        \[
+        E_1\simeq E_2\simeq k,
+        \qquad
+        \varphi_\alpha=1,\qquad
+        \varphi_\beta=0,
+        \]
+        and
+        \[
+        E_1'\simeq E_2'\simeq k,
+        \qquad
+        \varphi_\alpha'=0,\qquad
+        \varphi_\beta'=1.
+        \]
+
+        To compute the sum \(\zeta+\zeta'\), we first compute the pullback \(E''\).
+        By definition,
+        \[
+        E''
+        =
+        \left\{
+        \bigl((e_1,e_2),(e_1',e_2')\bigr)\in E\times E'
+        \ \middle|\
+        g(e_1,e_2)=g'(e_1',e_2')
+        \right\}.
+        \]
+        Since \(g\) and \(g'\) are both projections onto the first component, we have
+        \[
+        E''
+        =
+        \left\{
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)\in E\times E'
+        \right\}.
+        \]
+
+        We want to write \(E''\) as a representation
+        \[
+        E''=(E_i'',\varphi_\alpha'')_{i\in Q_0,\alpha\in Q_1}.
+        \]
+        Our computation above shows that
+        \[
+        E_1''\simeq k,
+        \qquad
+        E_2''\simeq k^2.
+        \]
+        Let us compute \(\varphi_\alpha''\) and \(\varphi_\beta''\). We have
+        \[
+        \varphi_\alpha''
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)
+        =
+        \bigl(
+        \varphi_\alpha(e_1,e_2),
+        \varphi_\alpha'(e_1,e_2')
+        \bigr)
+        =
+        \bigl((0,e_1),(0,0)\bigr),
+        \]
+        and
+        \[
+        \varphi_\beta''
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)
+        =
+        \bigl(
+        \varphi_\beta(e_1,e_2),
+        \varphi_\beta'(e_1,e_2')
+        \bigr)
+        =
+        \bigl((0,0),(0,e_1)\bigr).
+        \]
+        This shows that
+        \[
+        E''
+        \simeq
+        \begin{tikzcd}[column sep=large]
+        k
+        \arrow[r, shift left=0.6ex, "{\begin{bmatrix}1\\0\end{bmatrix}}"]
+        \arrow[r, shift right=0.6ex, "{\begin{bmatrix}0\\1\end{bmatrix}}"']
+        &
+        k^2 .
+        \end{tikzcd}
+        \]
+
+        Now we compute \(F\). By definition, and using the fact that both \(f\) and \(f'\)
+        are inclusions in the second component, we have
+        \[
+        F
+        =
+        E''/
+        \left\{
+        \bigl((0,n),(0,n)\bigr)\mid n\in k
+        \right\}.
+        \]
+        Writing
+        \[
+        F=(F_i,\psi_\alpha)_{i\in Q_0,\alpha\in Q_1},
+        \]
+        we see that
+        \[
+        F_1\simeq F_2\simeq k.
+        \]
+        Moreover, if
+        \[
+        \overline{\bigl((e_1,e_2),(e_1,e_2')\bigr)}\in F
+        \]
+        denotes the class of
+        \[
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)\in E'',
+        \]
+        then
+        \[
+        \psi_\alpha
+        \left(
+        \overline{\bigl((e_1,e_2),(e_1,e_2')\bigr)}
+        \right)
+        =
+        \overline{
+        \varphi_\alpha''
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)
+        }
+        =
+        \overline{\bigl((0,e_1),(0,0)\bigr)},
+        \]
+        and
+        \[
+        \psi_\beta
+        \left(
+        \overline{\bigl((e_1,e_2),(e_1,e_2')\bigr)}
+        \right)
+        =
+        \overline{
+        \varphi_\beta''
+        \bigl((e_1,e_2),(e_1,e_2')\bigr)
+        }
+        =
+        \overline{\bigl((0,0),(0,e_1)\bigr)}.
+        \]
+        In particular,
+        \[
+        \psi_\alpha
+        \left(
+        \overline{\bigl((e_1,e_2),(e_1,e_2')\bigr)}
+        \right)
+        =
+        -
+        \psi_\beta
+        \left(
+        \overline{\bigl((e_1,e_2),(e_1,e_2')\bigr)}
+        \right).
+        \]
+        This shows that
+        \[
+        F
+        \simeq
+        \begin{tikzcd}[column sep=large]
+        k
+        \arrow[r, shift left=0.6ex, "1"]
+        \arrow[r, shift right=0.6ex, "-1"']
+        &
+        k .
+        \end{tikzcd}
+        \]
+
+        Finally, we see that the sum \(\zeta+\zeta'\) is the short exact sequence
+        \[
+        0
+        \longrightarrow
+        S(2)
+        \xrightarrow{\,f''\,}
+        F
+        \xrightarrow{\,g''\,}
+        S(1)
+        \longrightarrow
+        0,
+        \]
+        where \(f''\) is the inclusion in the second component and \(g''\) is the projection
+        onto the first component.
+        \end{example}
+
+    \section{Examples of Auslander--Reiten Quivers}
+
+    The Auslander--Reiten quiver provides a threefold description of the representation
+    theory of a quiver:
+    \[
+        \text{indecomposable representations,}
+        \qquad
+        \text{irreducible morphisms,}
+        \qquad
+        \text{almost split sequences.}
+    \]
+
+    \subsection{Auslander--Reiten Quivers of Type \texorpdfstring{\(A_n\)}{A\_n}}
+
+    Let \(Q\) be a quiver of type \(A_n\), that is, the underlying unoriented graph of
+    \(Q\) is the Dynkin diagram
+    \[
+        1-2-3-\cdots-(n-1)-n.
+    \]
+
+    \begin{definition}[The knitting algorithm]
+    The Auslander--Reiten quiver of a quiver of type \(A_n\) may be constructed as
+    follows.
+
+    \begin{enumerate}
+        \item Compute the indecomposable projective representations
+        \[
+            P(1),P(2),\dots,P(n).
+        \]
+
+        \item Draw an arrow
+        \[
+            P(i)\longrightarrow P(j)
+        \]
+        whenever there exists an arrow
+        \[
+            j\longrightarrow i
+        \]
+        in \(Q_1\), in such a way that each \(P(i)\) lies on a different level.
+
+        \item Complete meshes. There are three possible local shapes:
+
+        \begin{tikzpicture}[
+            >=Stealth,
+            node distance=1.4cm and 1.8cm,
+            every node/.style={font=\small}
+        ]
+
+        %================================================
+        % First row: two arrows L -> M_1, M_2
+        %================================================
+        \node (L1) at (0,0) {$L$};
+        \node (M11) at (1.4,0.7) {$M_1$};
+        \node (M21) at (1.4,-0.7) {$M_2$};
+
+        \draw[->] (L1) -- (M11);
+        \draw[->] (L1) -- (M21);
+
+        \node at (2.7,0) {$\longrightarrow$};
+
+        \node (L1r) at (4.2,0) {$L$};
+        \node (M11r) at (5.6,0.7) {$M_1$};
+        \node (M21r) at (5.6,-0.7) {$M_2$};
+        \node (T1r) at (7.1,0) {$\tau^{-1}L$};
+
+        \draw[->] (L1r) -- (M11r);
+        \draw[->] (L1r) -- (M21r);
+        \draw[->] (M11r) -- (T1r);
+        \draw[->] (M21r) -- (T1r);
+
+        %================================================
+        % Second row: upper boundary mesh
+        %================================================
+        \node (L2) at (0,-2.4) {$L$};
+        \node (M12) at (1.4,-1.7) {$M_1$};
+
+        \draw[->] (L2) -- (M12);
+
+        \node at (2.7,-2.4) {$\longrightarrow$};
+
+        \node (L2r) at (4.2,-2.4) {$L$};
+        \node (M12r) at (5.6,-1.7) {$M_1$};
+        \node (T2r) at (7.1,-2.4) {$\tau^{-1}L$};
+
+        \draw[->] (L2r) -- (M12r);
+        \draw[->] (M12r) -- (T2r);
+
+        %================================================
+        % Third row: lower boundary mesh
+        %================================================
+        \node (L3) at (0,-4.2) {$L$};
+        \node (M23) at (1.4,-4.9) {$M_2$};
+
+        \draw[->] (L3) -- (M23);
+
+        \node at (2.7,-4.2) {$\longrightarrow$};
+
+        \node (L3r) at (4.2,-4.2) {$L$};
+        \node (M23r) at (5.6,-4.9) {$M_2$};
+        \node (T3r) at (7.1,-4.2) {$\tau^{-1}L$};
+
+        \draw[->] (L3r) -- (M23r);
+        \draw[->] (M23r) -- (T3r);
+
+        \end{tikzpicture}
+
+
+        In each case, the unknown representation \(\tau^{-1}L\) is determined by
+        \[
+            \dim L+\dim \tau^{-1}L
+            =
+            \sum_i \dim M_i,
+        \]
+        where the sum is taken over the middle terms of the mesh.
+
+        \item Repeat the third step until a negative integer appears in the dimension
+        vector. At that point, the construction stops in that direction.
+    \end{enumerate}
+    \end{definition}
+
+    \begin{remark}
+    Every time we perform the third step, the representations \(L\) and \(M_i\) have
+    already been computed. The only unknown representation is \(\tau^{-1}L\).
+    \end{remark}
+
+    \begin{remark}
+    The isomorphism classes of indecomposable representations of a quiver of type
+    \(A_n\) are determined by their dimension vectors. These dimension vectors are
+    always of the form
+    \[
+        (0,\dots,0,1,\dots,1,0,\dots,0).
+    \]
+    The corresponding representation
+    \[
+        M=(M_i,\varphi_\alpha)
+    \]
+    is given by
+    \[
+        M_i=
+        \begin{cases}
+            k, & \text{if the dimension at } i \text{ is }1,\\
+            0, & \text{otherwise,}
+        \end{cases}
+    \]
+    and
+    \[
+        \varphi_\alpha=
+        \begin{cases}
+            1, & \text{if both }M_{s(\alpha)}\text{ and }M_{t(\alpha)}
+            \text{ are }k,\\
+            0, & \text{otherwise.}
+        \end{cases}
+    \]
+    \end{remark}
+
+    \begin{example}
+    Let \(Q\) be the quiver
+    \[
+    \begin{tikzcd}
+    1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l].
+    \end{tikzcd}
+    \]
+    Then the indecomposable projective representations are
+    \[
+        P(1)=1,
+        \qquad
+        P(2)=\substack{2\\1},
+        \qquad
+        P(3)=\substack{3\\2\;4\\1},
+        \qquad
+        P(4)=4,
+        \qquad
+        P(5)=\substack{5\\4}.
+    \]
+    The indecomposable injective representations are
+    \[
+        I(1)=\substack{3\\2\\1},
+        \qquad
+        I(2)=\substack{3\\2},
+        \qquad
+        I(3)=3,
+        \qquad
+        I(4)=\substack{3\;5\\4},
+        \qquad
+        I(5)=5.
+    \]
+
+    One convenient drawing of the Auslander--Reiten quiver is the following:
+    \[
+    \begin{tikzpicture}[scale=1.05,>=stealth]
+    \node (a11) at (0,0) {$1$};
+    \node (a44) at (0,3) {$4$};
+
+    \node (a12) at (1,1) {$\substack{2\\1}$};
+    \node (a45) at (1,4) {$\substack{5\\4}$};
+
+    \node (a14) at (2,2.6) {$\substack{3\\2\;4\\1}$};
+    \node (a22) at (2,0) {$2$};
+
+    \node (a15) at (3,3.6) {$\substack{3\;5\\2\;4\\1}$};
+    \node (a24) at (3,1.4) {$\substack{3\\2\;4}$};
+
+    \node (a13) at (4,4.6) {$\substack{3\\2\\1}$};
+    \node (a25) at (4,2.6) {$\substack{3\;5\\2\;4}$};
+    \node (a34) at (4,0.6) {$\substack{3\\4}$};
+
+    \node (a23) at (5,3.6) {$\substack{3\\2}$};
+    \node (a35) at (5,1.6) {$\substack{3\;5\\4}$};
+
+    \node (a33) at (6,2.8) {$3$};
+    \node (a55) at (6,0.8) {$5$};
+
+    \draw[->] (a11) -- (a12);
+    \draw[->] (a12) -- (a14);
+    \draw[->] (a12) -- (a22);
+    \draw[->] (a44) -- (a14);
+    \draw[->] (a44) -- (a45);
+    \draw[->] (a45) -- (a15);
+
+    \draw[->] (a14) -- (a15);
+    \draw[->] (a14) -- (a24);
+    \draw[->] (a22) -- (a24);
+
+    \draw[->] (a15) -- (a13);
+    \draw[->] (a15) -- (a25);
+    \draw[->] (a24) -- (a25);
+    \draw[->] (a24) -- (a34);
+
+    \draw[->] (a13) -- (a23);
+    \draw[->] (a25) -- (a23);
+    \draw[->] (a25) -- (a35);
+    \draw[->] (a34) -- (a35);
+
+    \draw[->] (a23) -- (a33);
+    \draw[->] (a35) -- (a33);
+    \draw[->] (a35) -- (a55);
+    \end{tikzpicture}
+    \]
+    The left boundary consists of projective representations, while the right boundary
+    consists of injective representations.
+    \end{example}
+
+    \begin{example}
+    For the same quiver
+    \[
+    \begin{tikzcd}
+    1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l],
+    \end{tikzcd}
+    \]
+    consider the simple representation \(S(3)=3\). Since vertex \(3\) is a source, we have
+    \[
+        I(3)=S(3).
+    \]
+    Hence
+    \[
+        \tau^{-1}S(3)=0.
+    \]
+    On the projective side, a minimal projective resolution of \(S(3)\) is
+    \[
+        0
+        \longrightarrow
+        \operatorname{rad}P(3)
+        \longrightarrow
+        P(3)
+        \longrightarrow
+        S(3)
+        \longrightarrow
+        0.
+    \]
+    Here
+    \[
+        \operatorname{rad}P(3)
+        =
+        P(2)\oplus P(4)
+        =
+        \substack{2\\1}
+        \oplus
+        4.
+    \]
+    Applying the Nakayama functor gives
+    \[
+        I(2)\oplus I(4)
+        \longrightarrow
+        I(3)
+        \longrightarrow
+        \nu S(3)
+        \longrightarrow
+        0.
+    \]
+    \end{example}
+
+    \chapter{Lecture 11}
+
+    \section{\texorpdfstring{\(\tau\)-Orbits}{tau-Orbits}}
+
+Let \(Q\) be a quiver of Dynkin type \(A_n\). Recall that the Auslander--Reiten
+translation is denoted by
+\[
+    \tau.
+\]
+In the Auslander--Reiten quiver, \(\tau\) is the translation which sends the
+rightmost point of a mesh to the leftmost point of the same mesh.
+
+\begin{definition}[\(\tau\)-orbit]
+    Let \(M\) be an indecomposable representation. The \(\tau\)-orbit of \(M\) is
+    the collection of indecomposable representations obtained from \(M\) by
+    repeatedly applying \(\tau\) and \(\tau^{-1}\), whenever these are defined.
+\end{definition}
+
+Thus \(\tau^{-1}\) can be thought of as the translation to the right in the
+Auslander--Reiten quiver.
+
+\subsection{First Method: Auslander--Reiten Translation}
+
+Let \(M\) be an indecomposable representation which is not injective. We want to
+compute the translate to the right,
+\[
+    \tau^{-1}M.
+\]
+
+Start with an injective resolution
+\[
+    0
+    \longrightarrow
+    M
+    \longrightarrow
+    I_0
+    \xrightarrow{g}
+    I_1
+    \longrightarrow
+    0.
+\]
+Applying the inverse Nakayama functor \(\nu^{-1}\), which maps each
+indecomposable injective representation \(I(j)\) to the corresponding
+indecomposable projective representation \(P(j)\), we obtain a projective
+presentation of \(\tau^{-1}M\):
+\[
+    0
+    \longrightarrow
+    \nu^{-1}I_0
+    \xrightarrow{\nu^{-1}(g)}
+    \nu^{-1}I_1
+    \longrightarrow
+    \tau^{-1}M
+    \longrightarrow
+    0.
+\]
+
+\begin{example}
+    Consider the quiver
+    \[
+    Q:
+    \begin{tikzcd}[column sep=large]
+        1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l]
+    \end{tikzcd}
+    \]
+    and let
+    \[
+        M=4.
+    \]
+    An injective resolution of \(M\) is
+    \[
+        0
+        \longrightarrow
+        4
+        \longrightarrow
+        \begin{array}{ccc}
+            3 && 5\\[-1mm]
+            &4&
+        \end{array}
+        \longrightarrow
+        3\oplus 5
+        \longrightarrow
+        0.
+    \]
+    Applying \(\nu^{-1}\), we obtain
+    \[
+        0
+        \longrightarrow
+        4
+        \longrightarrow
+        \begin{array}{ccc}
+            &3&\\[-1mm]
+            2&&4\\[-1mm]
+            1&&
+        \end{array}
+        \oplus
+        \begin{array}{c}
+            5\\[-1mm]
+            4
+        \end{array}
+        \longrightarrow
+        \begin{array}{ccc}
+            3&&5\\[-1mm]
+            2&&4\\[-1mm]
+            1&&
+        \end{array}
+        \longrightarrow
+        0.
+    \]
+    Hence
+    \[
+        \tau^{-1}M
+        =
+        \tau^{-1}4
+        =
+        \begin{array}{ccc}
+            3&&5\\[-1mm]
+            2&&4\\[-1mm]
+            1&&
+        \end{array}.
+    \]
+\end{example}
+
+\subsection{Second Method: Coxeter Functor}
+
+Choose a sequence of vertices
+\[
+    (i_1,i_2,\dots,i_n)
+\]
+such that \(i_r\neq i_s\) for \(r\neq s\), as follows:
+
+\begin{enumerate}
+    \item \(i_1\) is a sink of \(Q\).
+    \item \(i_2\) is a sink of the quiver \(s_{i_2}Q\), obtained from \(Q\) by
+    reversing all arrows incident to \(i_1\).
+    \item More generally, \(i_t\) is a sink of
+    \[
+        s_{i_{t-1}}\cdots s_{i_2}s_{i_1}Q,
+        \qquad t=2,\dots,n.
+    \]
+\end{enumerate}
+
+For the quiver
+\[
+    \begin{tikzcd}[column sep=large]
+        1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l]
+    \end{tikzcd}
+\]
+one possible choice is
+\[
+    (1,4,2,3,5).
+\]
+
+Next define reflections
+\[
+    s_i:\mathbb{R}^n\longrightarrow \mathbb{R}^n
+\]
+by
+\[
+    s_i(x)=x-2B(x,e_i)e_i,
+\]
+where \(e_1,\dots,e_n\) is the standard basis of \(\mathbb{R}^n\), and \(B\) is
+the symmetric bilinear form determined by
+\[
+    B(e_i,e_j)=
+    \begin{cases}
+        1, & i=j,\\[1mm]
+        -\dfrac{1}{2}, & i \text{ is adjacent to } j \text{ in } Q,\\[2mm]
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+
+Equivalently, if
+\[
+    x=\sum_j a_j e_j,
+\]
+then
+\[
+    s_i(x)=\sum_j a'_j e_j,
+\]
+where
+\[
+    a'_j=a_j \quad \text{for } j\neq i,
+\]
+and
+\[
+    a'_i=-a_i+\sum_{j\sim i}a_j.
+\]
+Here \(j\sim i\) means that \(j\) is adjacent to \(i\) in the underlying graph of
+\(Q\).
+
+\begin{definition}[Coxeter element]
+    The Coxeter element associated with the chosen sequence
+    \((i_1,\dots,i_n)\) is
+    \[
+        c=s_{i_1}s_{i_2}\cdots s_{i_n}.
+    \]
+\end{definition}
+
+For the running example,
+\[
+    c=s_1s_4s_2s_3s_5.
+\]
+
+This Coxeter element can be used to compute the dimension vector of
+\(\tau^{-1}M\). If
+\[
+    \dim M=(d_1,\dots,d_n),
+\]
+and
+\[
+    c\left(\sum_i d_i e_i\right)=\sum_i d'_i e_i,
+\]
+then
+\[
+    \dim(\tau^{-1}M)=(d'_1,\dots,d'_n).
+\]
+
+\begin{example}
+    Let \(M=4\). Then
+    \[
+        \dim M=(0,0,0,1,0),
+    \]
+    hence
+    \[
+        \dim M=e_4.
+    \]
+    Applying the Coxeter element, we get
+    \[
+    \begin{aligned}
+        c(e_4)
+        &=s_1s_4s_2s_3s_5(e_4)\\
+        &=s_1s_4s_2s_3(e_4+e_5)\\
+        &=s_1s_4s_2(e_3+e_4+e_5)\\
+        &=s_1s_4(e_2+e_3+e_4+e_5)\\
+        &=s_1(e_2+e_3+e_4+e_5)\\
+        &=e_1+e_2+e_3+e_4+e_5.
+    \end{aligned}
+    \]
+    Therefore
+    \[
+        \dim(\tau^{-1}M)=(1,1,1,1,1),
+    \]
+    and hence
+    \[
+        \tau^{-1}4
+        =
+        \begin{array}{ccc}
+            3&&5\\[-1mm]
+            2&&4\\[-1mm]
+            1&&
+        \end{array}.
+    \]
+\end{example}
+
+\begin{remark}[Cartan matrix method]
+    An equivalent method uses the Cartan matrix \(C\) of the quiver \(Q\).
+    The Cartan matrix is defined by
+    \[
+        C=(c_{ij}),
+        \qquad
+        c_{ij}=\#\{\text{paths from }j\text{ to }i\}.
+    \]
+    If \(Q\) has no oriented cycles, then \(C\) is invertible. The Coxeter matrix
+    is
+    \[
+        \Phi=-C^tC^{-1},
+    \]
+    and its inverse is
+    \[
+        \Phi^{-1}=-C(C^{-1})^t.
+    \]
+    For an indecomposable non-injective representation \(M\), one has
+    \[
+        \Phi^{-1}\dim M=\dim(\tau^{-1}M).
+    \]
+\end{remark}
+
+\section{Diagonals of a Polygon with \texorpdfstring{\(n+3\)}{n+3} Vertices}
+
+We now describe a geometric model for the Auslander--Reiten quiver of type
+\(A_n\).
+
+Start with a regular polygon with \(n+3\) vertices.
+
+\begin{definition}[Diagonal]
+    A diagonal of the polygon is a straight line segment joining two vertices of
+    the polygon and passing through the interior of the polygon.
+\end{definition}
+
+\begin{definition}[Triangulation]
+    A triangulation of the polygon is a maximal collection of pairwise non-crossing
+    diagonals. Such a collection cuts the polygon into triangles.
+\end{definition}
+
+Given a triangle with sides \(a,b,c\), we say that the side \(a\) is clockwise from
+the side \(b\) if, when one travels along the boundary of the triangle in the
+clockwise direction, the sides occur in the repeating order
+\[
+    a,b,c,a,b,c,\dots.
+\]
+
+\subsection{Constructing a Triangulation from a Quiver}
+
+Let \(Q\) be a quiver of type \(A_n\). We construct a triangulation \(T_Q\) of an
+\((n+3)\)-gon as follows.
+
+Choose a vertex \(1\) of \(Q\) with only one neighbor. Draw a diagonal cutting
+off a triangle and label this diagonal by \(1\).
+
+Suppose that the next vertex is \(2\).
+
+\begin{itemize}
+    \item If
+    \[
+        1\longleftarrow 2
+    \]
+    is an arrow in \(Q\), then draw the unique diagonal labelled \(2\) such that
+    the diagonals \(1,2\) and one boundary segment form a triangle, with diagonal
+    \(2\) clockwise from diagonal \(1\).
+
+    \item If
+    \[
+        1\longrightarrow 2
+    \]
+    is an arrow in \(Q\), then draw the unique diagonal labelled \(2\) such that
+    the diagonals \(1,2\) and one boundary segment form a triangle, with diagonal
+    \(2\) counterclockwise from diagonal \(1\).
+\end{itemize}
+
+Continue this procedure inductively until all diagonals
+\[
+    1,2,\dots,n
+\]
+have been constructed. The resulting triangulation is denoted by \(T_Q\).
+
+\begin{example}
+    For the quiver
+    \[
+    Q:
+    \begin{tikzcd}[column sep=large]
+        1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l]
+    \end{tikzcd}
+    \]
+    the construction gives a triangulation of an octagon, since here
+    \[
+        n=5,
+        \qquad
+        n+3=8.
+    \]
+\end{example}
+
+\subsection{Diagonals and Indecomposable Representations}
+
+Let \(\gamma\) be a diagonal of the polygon which does not belong to the fixed
+triangulation \(T_Q\). Since \(T_Q\) is a triangulation, the diagonal \(\gamma\)
+crosses a certain set of diagonals in \(T_Q\).
+
+Moreover, \(\gamma\) is uniquely determined by the set of diagonals in \(T_Q\)
+which it crosses.
+
+To such a diagonal \(\gamma\), we associate a representation
+\[
+    M_\gamma=(M_i,\varphi_\alpha)
+\]
+of \(Q\) as follows:
+\[
+    M_i=
+    \begin{cases}
+        k, & \gamma \text{ crosses the diagonal labelled } i,\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+For each arrow \(\alpha:i\to j\) in \(Q\), define
+\[
+    \varphi_\alpha:M_i\longrightarrow M_j
+\]
+by
+\[
+    \varphi_\alpha=
+    \begin{cases}
+        \operatorname{id}_k, & M_i=M_j=k,\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+
+This gives a bijection
+\[
+    \left\{
+    \begin{array}{c}
+        \text{diagonals not belonging}\\
+        \text{to }T_Q
+    \end{array}
+    \right\}
+    \longleftrightarrow
+    \left\{
+    \begin{array}{c}
+        \text{isomorphism classes of}\\
+        \text{indecomposable representations of }Q
+    \end{array}
+    \right\}.
+\]
+
+\subsection{Auslander--Reiten Translation in the Polygon Model}
+
+In the polygon model, the Auslander--Reiten translation \(\tau\) is given by
+elementary clockwise rotation of the polygon.
+
+Equivalently, if \(\gamma\) is a diagonal, then \(\tau\gamma\) is obtained by
+rotating both endpoints of \(\gamma\) one step clockwise.
+
+If \(\gamma_i\) denotes the diagonal labelled \(i\) in the triangulation \(T_Q\),
+then the projective and injective representations are given by
+\[
+    P(i)=M_{\tau^{-1}\gamma_i},
+    \qquad
+    I(i)=M_{\tau\gamma_i}.
+\]
+
+Thus the whole Auslander--Reiten quiver may be constructed geometrically by
+starting with the projective diagonals and repeatedly applying clockwise rotation.
+
+\subsection{Counting Diagonals}
+
+An \((n+3)\)-gon has
+\[
+    \frac{(n+3)n}{2}
+\]
+diagonals.
+
+Indeed, each of the \(n+3\) vertices can be joined to \(n\) non-adjacent vertices,
+and each diagonal is counted twice. Hence the number of diagonals is
+\[
+    \frac{(n+3)n}{2}.
+\]
+
+For example, when \(n=5\), the polygon has \(8\) vertices, and the number of
+diagonals is
+\[
+    \frac{8\cdot 5}{2}=20.
+\]
+
+Since a triangulation of an \((n+3)\)-gon contains exactly \(n\) diagonals, the
+number of diagonals not in \(T_Q\) is
+\[
+    \frac{(n+3)n}{2}-n
+    =
+    \frac{n(n+1)}{2}.
+\]
+Therefore the number of indecomposable representations of a quiver of type
+\(A_n\) is
+\[
+    \frac{n(n+1)}{2}.
+\]
+
+\chapter{Lecture 12}
+
+% Requires:
+% \usepackage{amsmath,amssymb,amsthm}
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta,positioning}
+
+\section{Computing Dimensions and Short Exact Sequences}
+
+Let \(M\) and \(N\) be two indecomposable representations. We want to obtain
+information about the vector space
+\[
+    \operatorname{Hom}(M,N).
+\]
+The Auslander--Reiten quiver allows us to compute the dimension of this space
+quite efficiently, at least when \(M\) and \(N\) lie in the same connected component
+of the Auslander--Reiten quiver.
+
+\subsection{Dimension of \texorpdfstring{\(\operatorname{Hom}(M,N)\)}{Hom(M,N)}}
+
+Let \(Q\) be a quiver of type \(A\), and let \(M,N\) be two indecomposable
+representations of \(Q\). We can compute
+\[
+    \dim_k \operatorname{Hom}(M,N)
+\]
+from the relative positions of \(M\) and \(N\) in the Auslander--Reiten quiver.
+
+We first introduce some terminology.
+
+\begin{definition}[Sectional path]
+    A path
+    \[
+        M_0 \longrightarrow M_1 \longrightarrow \cdots \longrightarrow M_s
+    \]
+    in the Auslander--Reiten quiver is called a \textbf{sectional path} if
+    \[
+        \tau M_{i+1} \neq M_{i-1}
+        \qquad
+        \text{for all } i=1,\dots,s-1.
+    \]
+\end{definition}
+
+\begin{definition}
+    Let \(M\) be an indecomposable representation.
+    We denote by
+    \[
+        \Sigma_{\rightarrow}(M)
+    \]
+    the set of all indecomposable representations which can be reached from \(M\)
+    by a sectional path.
+
+    Dually, we denote by
+    \[
+        \Sigma_{\leftarrow}(M)
+    \]
+    the set of all indecomposable representations from which one can reach \(M\)
+    by a sectional path.
+\end{definition}
+
+\begin{definition}[Maximal slanted rectangle]
+    Let \(M\) be an indecomposable representation. We denote by
+    \[
+        R_{\rightarrow}(M)
+    \]
+    the set of all indecomposable representations whose positions in the
+    Auslander--Reiten quiver lie in the maximal slanted rectangular region whose
+    left boundary is \(\Sigma_{\rightarrow}(M)\).
+
+    Equivalently, \(R_{\rightarrow}(M)\) is the maximal slanted rectangle in the
+    Auslander--Reiten quiver whose leftmost point is \(M\).
+\end{definition}
+
+Schematically, one should think of \(R_{\rightarrow}(M)\) as follows:
+\[
+\begin{tikzpicture}[scale=1.05,>=Stealth]
+    \node (M) at (-2,0) {\(M\)};
+    \node (a) at (0,1.2) {};
+    \node (b) at (2,0) {};
+    \node (c) at (0,-1.2) {};
+
+    \draw[thick] (M) -- (a) -- (b) -- (c) -- (M);
+    \draw[decorate,decoration={brace,amplitude=5pt}] (-2.25,-0.9) -- (-2.25,0.9)
+        node[midway,left=6pt] {\(\Sigma_{\rightarrow}(M)\)};
+    \node at (0,0) {\(R_{\rightarrow}(M)\)};
+\end{tikzpicture}
+\]
+
+\begin{theorem}[Hom dimensions in type \(A\)]
+    Let \(Q\) be a quiver of type \(A\), and let \(M,N\) be indecomposable
+    representations of \(Q\). Then
+    \[
+        \dim_k \operatorname{Hom}(M,N)
+        \in \{0,1\}.
+    \]
+    More precisely,
+    \[
+        \dim_k \operatorname{Hom}(M,N)=1
+    \]
+    if and only if
+    \[
+        N\in R_{\rightarrow}(M).
+    \]
+    Otherwise,
+    \[
+        \dim_k \operatorname{Hom}(M,N)=0.
+    \]
+\end{theorem}
+
+\begin{example}
+    For \(M=P(4)\), the Auslander--Reiten quiver can be labelled by numbers
+    \(0\) and \(1\), where the number at the vertex corresponding to an
+    indecomposable representation \(N\) is
+    \[
+        \dim_k \operatorname{Hom}(M,N).
+    \]
+    The vertex corresponding to \(M=P(4)\) itself is the leftmost vertex labelled
+    by \(1\), since
+    \[
+        \operatorname{Hom}(M,M)\cong k.
+    \]
+\end{example}
+
+\begin{example}
+    For \(M=S(2)\), the region \(R_{\rightarrow}(M)\) degenerates to a single
+    sectional line in the Auslander--Reiten quiver. The labels \(0\) and \(1\)
+    again indicate the dimensions
+    \[
+        \dim_k \operatorname{Hom}(M,N)
+    \]
+    for the corresponding indecomposable representations \(N\).
+\end{example}
+
+Symmetrically, we denote by
+\[
+    R_{\leftarrow}(N)
+\]
+the maximal slanted rectangle in the Auslander--Reiten quiver whose rightmost
+point is \(N\). Then we can compute
+\[
+    \dim_k \operatorname{Hom}(-,N)
+\]
+using \(R_{\leftarrow}(N)\).
+
+In particular, the computation of \(\dim_k\operatorname{Hom}(P(4),-)\) also gives
+the computation of
+\[
+    \dim_k\operatorname{Hom}(-,I(4)),
+\]
+because the corresponding rectangles coincide.
+
+\begin{remark}
+    If \(M=P(i)\) is an indecomposable projective representation, then by the
+    standard isomorphism
+    \[
+        \operatorname{Hom}(P(i),N)\cong N_i,
+    \]
+    the representations in \(R_{\rightarrow}(P(i))\) are precisely the
+    indecomposable representations \(N\) such that
+    \[
+        N_i\neq 0.
+    \]
+
+    Dually, using
+    \[
+        \operatorname{Hom}(M,I(i))\cong M_i,
+    \]
+    there is a unique rightmost point in \(R_{\rightarrow}(P(i))\), namely the
+    position of the indecomposable injective representation \(I(i)\). Hence
+    \[
+        R_{\rightarrow}(P(i))
+        =
+        R_{\leftarrow}(I(i)).
+    \]
+\end{remark}
+
+\subsection{Dimension of \texorpdfstring{\(\operatorname{Ext}^1(M,N)\)}{Ext1(M,N)}}
+
+We now consider
+\[
+    \operatorname{Ext}^1(M,N).
+\]
+
+If \(M\) is projective, then
+\[
+    \operatorname{Ext}^1(M,N)=0.
+\]
+Therefore, we assume that \(M\) is not projective. In this case \(\tau M\) is
+defined and appears as a vertex in the Auslander--Reiten quiver.
+
+The Auslander--Reiten formula gives an isomorphism
+\[
+    \operatorname{Ext}^1(M,N)
+    \cong
+    D\operatorname{Hom}(N,\tau M),
+\]
+where
+\[
+    D=\operatorname{Hom}_k(-,k)
+\]
+is the \(k\)-linear duality.
+
+Therefore
+\[
+    \dim_k \operatorname{Ext}^1(M,N)
+    =
+    \dim_k \operatorname{Hom}(N,\tau M).
+\]
+
+Thus the dimension of
+\[
+    \operatorname{Ext}^1(M,-)
+\]
+can be computed using the maximal slanted rectangle
+\[
+    R_{\leftarrow}(\tau M).
+\]
+
+\begin{example}
+    For \(M=I(3)\), the dimensions of
+    \[
+        \operatorname{Ext}^1(M,N)
+    \]
+    are obtained by labelling the Auslander--Reiten quiver according to the
+    maximal slanted rectangle ending at \(\tau M\). The labels \(0\) and \(1\)
+    indicate whether
+    \[
+        \operatorname{Ext}^1(M,N)
+    \]
+    is zero or one-dimensional.
+\end{example}
+
+\subsection{Short Exact Sequences}
+
+The elements of \(\operatorname{Ext}^1(M,N)\) can be represented by short exact
+sequences of the form
+\[
+    0
+    \longrightarrow
+    N
+    \longrightarrow
+    E
+    \longrightarrow
+    M
+    \longrightarrow
+    0,
+\]
+where \(E\) is some representation of \(Q\).
+
+Let \(M\) and \(N\) be indecomposable representations. We want to compute the
+possible middle terms \(E\) occurring in such short exact sequences.
+
+If
+\[
+    \dim_k \operatorname{Ext}^1(M,N)=0,
+\]
+then the only possibility is the split extension, namely
+\[
+    E\cong M\oplus N.
+\]
+
+If, on the other hand,
+\[
+    \dim_k \operatorname{Ext}^1(M,N)=1,
+\]
+then, up to isomorphism, there is exactly one other possibility for \(E\), namely
+the middle term of the unique non-split extension.
+
+For representations of type \(A\), this middle term \(E\) can be computed directly
+from the relative positions of \(M\) and \(N\) in the Auslander--Reiten quiver.
+
+\begin{proposition}[Middle terms from sectional paths]
+    Let \(M,N\) be indecomposable representations of a quiver of type \(A\), and
+    assume that
+    \[
+        \operatorname{Ext}^1(M,N)\neq 0.
+    \]
+    Then
+    \[
+        N\in R_{\leftarrow}(\tau M).
+    \]
+    Consequently, the sets
+    \[
+        \Sigma_{\rightarrow}(N)
+        \qquad\text{and}\qquad
+        \Sigma_{\leftarrow}(M)
+    \]
+    have either one or two points in common. These common points correspond
+    exactly to the indecomposable direct summands of the middle term \(E\).
+\end{proposition}
+
+In pictures, we mark \(N\) by \(\ominus\) and \(M\) by \(\oplus\). The
+representations in \(\Sigma_{\rightarrow}(N)\) are marked by \(-\), while the
+representations in \(\Sigma_{\leftarrow}(M)\) are marked by \(+\). The points of
+intersection are marked by \(\pm\). These intersection points give the
+indecomposable summands of \(E\).
+
+\begin{example}
+    One possible configuration gives the short exact sequence
+    \[
+        0
+        \longrightarrow
+        \begin{matrix}
+            5\\[-1mm]
+            4
+        \end{matrix}
+        \longrightarrow
+        \begin{matrix}
+            3 & 5\\[-1mm]
+              & 4
+        \end{matrix}
+        \longrightarrow
+        3
+        \longrightarrow
+        0.
+    \]
+\end{example}
+
+\begin{example}
+    Another possible configuration gives the short exact sequence
+    \[
+        0
+        \longrightarrow
+        \begin{matrix}
+            3 & 5\\[-1mm]
+            2 & 4\\[-1mm]
+            1 &
+        \end{matrix}
+        \longrightarrow
+        \begin{matrix}
+            3 & 5\\[-1mm]
+              & 4
+        \end{matrix}
+        \oplus
+        \begin{matrix}
+            3\\[-1mm]
+            2\\[-1mm]
+            1
+        \end{matrix}
+        \longrightarrow
+        3
+        \longrightarrow
+        0.
+    \]
+\end{example}
+
+\section{Representation Type}
+
+\begin{definition}[Finite representation type]
+    A quiver \(Q\) is said to be of \textbf{finite representation type} if the
+    number of isomorphism classes of indecomposable representations of \(Q\) is
+    finite.
+\end{definition}
+
+It turns out that this classification depends only on the shape of the quiver and
+not on the particular orientation of the arrows. We therefore introduce the following
+notion.
+
+\begin{definition}[Underlying graph]
+    The \textbf{underlying graph} of a quiver \(Q\) is the unoriented graph obtained
+    from \(Q\) by forgetting the directions of all arrows.
+\end{definition}
+
+\begin{theorem}[Gabriel's theorem]
+    A connected quiver \(Q\) is of finite representation type if and only if its
+    underlying graph is one of the Dynkin diagrams of type
+    \[
+        A_n,\qquad D_n,\qquad E_6,\qquad E_7,\qquad E_8.
+    \]
+\end{theorem}
+
+\begin{remark}
+    Dynkin diagrams also occur in several other classification problems in
+    mathematics, for example in the classification of semisimple Lie algebras,
+    root systems, Coxeter groups, and cluster algebras.
+\end{remark}
+
+\section{Auslander--Reiten Quivers of Type \texorpdfstring{\(D_n\)}{Dn}}
+
+Let \(Q\) be a quiver of type \(D_n\). This means that the underlying unoriented
+graph of \(Q\) is the Dynkin diagram of type \(D_n\):
+\[
+\begin{tikzpicture}[>=Stealth,scale=1]
+    \node (1) at (0,0) {\(1\)};
+    \node (2) at (1.2,0) {\(2\)};
+    \node (dots) at (2.4,0) {\(\cdots\)};
+    \node (n2) at (3.8,0) {\(n-2\)};
+    \node (n1) at (5,0.7) {\(n-1\)};
+    \node (n) at (5,-0.7) {\(n\)};
+
+    \draw (1) -- (2);
+    \draw (2) -- (dots);
+    \draw (dots) -- (n2);
+    \draw (n2) -- (n1);
+    \draw (n2) -- (n);
+\end{tikzpicture}
+\]
+
+\subsection{The Knitting Algorithm in Type \texorpdfstring{\(D_n\)}{Dn}}
+
+For quivers of type \(D_n\), the knitting algorithm is similar to the type \(A\)
+case, but there is a fourth type of mesh.
+
+Besides the meshes occurring in type \(A\), we also have a mesh of the following
+form:
+\[
+\begin{tikzpicture}[>=Stealth,scale=1.1]
+    \node (L) at (0,0) {\(L\)};
+    \node (M1) at (2,1.2) {\(M_1\)};
+    \node (M2) at (2,0) {\(M_2\)};
+    \node (M3) at (2,-1.2) {\(M_3\)};
+    \node (T) at (4,0) {\(\tau^{-1}L\)};
+
+    \draw[->] (L) -- (M1);
+    \draw[->] (L) -- (M2);
+    \draw[->] (L) -- (M3);
+
+    \draw[->] (M1) -- (T);
+    \draw[->] (M2) -- (T);
+    \draw[->] (M3) -- (T);
+\end{tikzpicture}
+\]
+
+In this case, the mesh relation for dimension vectors is
+\[
+    \dim L+\dim \tau^{-1}L
+    =
+    \dim M_1+\dim M_2+\dim M_3.
+\]
+
+Thus, once \(L,M_1,M_2,M_3\) are known, the dimension vector of
+\(\tau^{-1}L\) is determined by
+\[
+    \dim \tau^{-1}L
+    =
+    \dim M_1+\dim M_2+\dim M_3-\dim L.
+\]
+
+\subsection{Indecomposable Representations of Type \texorpdfstring{\(D_n\)}{Dn}}
+
+The isomorphism classes of indecomposable representations of quivers of type
+\(D_n\) are determined by their dimension vectors
+\[
+    d=(d_1,\dots,d_n).
+\]
+
+The entries of such a dimension vector satisfy
+\[
+    d_i\in \{0,1,2\}.
+\]
+
+Moreover, if some entry \(d_i\) is equal to \(2\), then the following conditions hold:
+
+\begin{enumerate}
+    \item The vertex \(i\) is one of
+    \[
+        2,3,\dots,n-2.
+    \]
+
+    \item For every vertex \(j\) satisfying
+    \[
+        i\leq j\leq n-2,
+    \]
+    one has
+    \[
+        d_j=2.
+    \]
+
+    \item One has
+    \[
+        d_{i-1}\geq 1,
+        \qquad
+        d_{n-1}=d_n=1.
+    \]
+\end{enumerate}
+
+Thus the vertices \(i\) with \(d_i=2\) form a subgraph of type \(A\) containing
+the vertex \(n-2\).
+
+The vertices \(i\neq n-1,n\) with \(d_i=1\) also form a subgraph of type \(A\).
+If no entry \(d_j\) is equal to \(2\), then all vertices \(i\) with \(d_i=1\) form
+a subgraph of type \(A\) or a subgraph of type \(D\).
+
+Graphically, some possible configurations have the following forms:
+\[
+\begin{tikzpicture}[>=Stealth,scale=1]
+    \node (a1) at (0,0) {\(0\)};
+    \node (a2) at (1,0) {\(\cdots\)};
+    \node (a3) at (2,0) {\(0\)};
+    \node (b1) at (3,0) {\(1\)};
+    \node (b2) at (4,0) {\(\cdots\)};
+    \node (b3) at (5,0) {\(1\)};
+    \node (c1) at (6,0) {\(2\)};
+    \node (c2) at (7,0) {\(\cdots\)};
+    \node (c3) at (8,0) {\(2\)};
+    \node (u) at (9,0.7) {\(1\)};
+    \node (v) at (9,-0.7) {\(1\)};
+
+    \draw (a1) -- (a2) -- (a3) -- (b1) -- (b2) -- (b3) -- (c1) -- (c2) -- (c3);
+    \draw (c3) -- (u);
+    \draw (c3) -- (v);
+\end{tikzpicture}
+\]
+and
+\[
+\begin{tikzpicture}[>=Stealth,scale=1]
+    \node (a1) at (0,0) {\(0\)};
+    \node (a2) at (1,0) {\(\cdots\)};
+    \node (a3) at (2,0) {\(0\)};
+    \node (b1) at (3,0) {\(1\)};
+    \node (b2) at (4,0) {\(\cdots\)};
+    \node (b3) at (5,0) {\(1\)};
+    \node (c1) at (6,0) {\(1\)};
+    \node (c2) at (7,0) {\(\cdots\)};
+    \node (c3) at (8,0) {\(1\)};
+    \node (u) at (9,0.7) {\(1\)};
+    \node (v) at (9,-0.7) {\(1\)};
+
+    \draw (a1) -- (a2) -- (a3) -- (b1) -- (b2) -- (b3) -- (c1) -- (c2) -- (c3);
+    \draw (c3) -- (u);
+    \draw (c3) -- (v);
+\end{tikzpicture}
+\]
+
+The corresponding representation is
+\[
+    M=(M_i,\varphi_\alpha),
+\]
+where
+\[
+    M_i=k^{d_i}.
+\]
+
+For an arrow \(\alpha\), the map
+\[
+    \varphi_\alpha:M_{s(\alpha)}\longrightarrow M_{t(\alpha)}
+\]
+is given as follows:
+
+\[
+    \varphi_\alpha=
+    \begin{cases}
+        \operatorname{id}, & d_{s(\alpha)}=d_{t(\alpha)},\\[1mm]
+        0, & d_{s(\alpha)}=0 \text{ or } d_{t(\alpha)}=0.
+    \end{cases}
+\]
+
+It remains to specify the maps between one-dimensional and two-dimensional
+vector spaces.
+
+Suppose that one of the entries \(d_i\) is equal to \(2\). Then there are exactly
+three arrows connecting a vertex with dimension \(1\) to a vertex with dimension
+\(2\).
+
+Two of these arrows, denoted by
+\[
+    \beta_1,\beta_2,
+\]
+connect the vertex \(n-2\) with the vertices \(n-1\) and \(n\). The vector space
+of dimension \(2\) is at the vertex \(n-2\).
+
+The third arrow, denoted by
+\[
+    \alpha_i,
+\]
+connects the vertices \(i\) and \(i+1\), with the vector space of dimension \(2\)
+at the vertex \(i+1\).
+
+Consider the one-dimensional subspace of \(M_{i+1}\) defined by
+\[
+    \ell_1'=
+    \begin{cases}
+        \operatorname{Im}\varphi_{\alpha_i},
+        & \text{if } \alpha_i \text{ points to } i+1,\\[1mm]
+        \operatorname{Ker}\varphi_{\alpha_i},
+        & \text{otherwise}.
+    \end{cases}
+\]
+Transporting this subspace along the identity maps between the two-dimensional
+vertices gives a one-dimensional subspace
+\[
+    \ell_1\subseteq M_{n-2}.
+\]
+
+Similarly, define
+\[
+    \ell_2=
+    \begin{cases}
+        \operatorname{Im}\varphi_{\beta_1},
+        & \text{if } \beta_1 \text{ points to } n-2,\\[1mm]
+        \operatorname{Ker}\varphi_{\beta_1},
+        & \text{otherwise},
+    \end{cases}
+\]
+and
+\[
+    \ell_3=
+    \begin{cases}
+        \operatorname{Im}\varphi_{\beta_2},
+        & \text{if } \beta_2 \text{ points to } n-2,\\[1mm]
+        \operatorname{Ker}\varphi_{\beta_2},
+        & \text{otherwise}.
+    \end{cases}
+\]
+
+The condition on the maps is that the three one-dimensional subspaces
+\[
+    \ell_1,\ell_2,\ell_3\subseteq M_{n-2}
+\]
+are pairwise distinct.
+
+\begin{remark}
+    This condition excludes the degenerate cases where two of the relevant
+    one-dimensional subspaces coincide. In type \(D_n\), this is the extra feature
+    which does not appear in type \(A_n\).
+\end{remark}
 
 
 \end{document}
