@@ -1,0 +1,237 @@
+\chapter{Lecture 12}
+
+\begin{definition}[Group algebra]
+    Let \(G\) be a finite group, and let \(R\) be a commutative unital ring.
+    The group algebra \(RG\) is the free \(R\)-module with basis \(G\), whose
+    multiplication is determined by the group multiplication of \(G\).
+    
+    Thus every element of \(RG\) can be written uniquely in the form
+    \[
+        x=\sum_{s\in G} x_s s,
+        \qquad
+        y=\sum_{t\in G} y_t t,
+    \]
+    where \(x_s,y_t\in R\). Their product is given by
+    \[
+        xy
+        =
+        \sum_{s,t\in G} x_s y_t st
+        =
+        \sum_{g\in G}
+        \left(
+            \sum_{\substack{s,t\in G\\ st=g}} x_s y_t
+        \right) g.
+    \]
+    \end{definition}
+    
+    From now on, let \(k\) be a field, and consider the group algebra \(kG\).
+    
+    \begin{definition}
+    Define a \(k\)-linear form
+    \[
+        \pi:kG\longrightarrow k
+    \]
+    by
+    \[
+        \pi(g)=
+        \begin{cases}
+            1, & g=1,\\
+            0, & g\neq 1,
+        \end{cases}
+    \]
+    for all \(g\in G\). Equivalently, \(\pi(x)\) is the coefficient of the identity
+    element \(1\in G\) in \(x\in kG\).
+    \end{definition}
+    
+    \begin{lemma}
+    Let \(x,y\in kG\). Then
+    \[
+        \pi(xy)=\pi(yx).
+    \]
+    \end{lemma}
+    
+    \begin{proof}
+    Write
+    \[
+        x=\sum_{s\in G}x_s s,
+        \qquad
+        y=\sum_{t\in G}y_t t.
+    \]
+    Then the coefficient of \(1\in G\) in \(xy\) is
+    \[
+        \pi(xy)
+        =
+        \sum_{\substack{s,t\in G\\ st=1}}x_s y_t
+        =
+        \sum_{s\in G}x_s y_{s^{-1}}.
+    \]
+    Similarly,
+    \[
+        \pi(yx)
+        =
+        \sum_{\substack{t,s\in G\\ ts=1}}y_t x_s
+        =
+        \sum_{t\in G}y_t x_{t^{-1}}.
+    \]
+    After replacing \(t\) by \(s^{-1}\), we get
+    \[
+        \pi(yx)
+        =
+        \sum_{s\in G}y_{s^{-1}}x_s
+        =
+        \sum_{s\in G}x_s y_{s^{-1}}
+        =
+        \pi(xy),
+    \]
+    because \(k\) is commutative.
+    \end{proof}
+    
+    \begin{lemma}
+    The map
+    \[
+        \psi:kG\longrightarrow \operatorname{Hom}_k(kG,k),
+        \qquad
+        x\longmapsto \bigl(y\mapsto \pi(xy)\bigr),
+    \]
+    is a \(k\)-linear isomorphism.
+    \end{lemma}
+    
+    \begin{proof}
+    It is clear that \(\psi\) is \(k\)-linear.
+    
+    Let \(f\in \operatorname{Hom}_k(kG,k)\). We claim that the inverse image of
+    \(f\) under \(\psi\) is
+    \[
+        \psi^{-1}(f)
+        =
+        \sum_{g\in G} f(g^{-1})g.
+    \]
+    Indeed, set
+    \[
+        x=\sum_{g\in G} f(g^{-1})g.
+    \]
+    For any \(h\in G\), we have
+    \[
+        \psi(x)(h)
+        =
+        \pi(xh)
+        =
+        \pi\left(
+            \sum_{g\in G} f(g^{-1})gh
+        \right).
+    \]
+    The coefficient of \(1\) occurs precisely when \(gh=1\), that is,
+    \(g=h^{-1}\). Therefore
+    \[
+        \psi(x)(h)
+        =
+        f\bigl((h^{-1})^{-1}\bigr)
+        =
+        f(h).
+    \]
+    Since \(G\) is a basis of \(kG\), this proves \(\psi(x)=f\). Hence \(\psi\) is
+    surjective. The same formula also shows uniqueness of \(x\), so \(\psi\) is
+    injective. Therefore \(\psi\) is a \(k\)-linear isomorphism.
+    \end{proof}
+    
+    \begin{definition}[Class function]
+    A function
+    \[
+        f:G\longrightarrow k
+    \]
+    is called a class function if
+    \[
+        f(gxg^{-1})=f(x)
+    \]
+    for all \(g,x\in G\).
+    \end{definition}
+    
+    \begin{remark}
+    If \(f:G\to k\) is a class function, then
+    \[
+        f(xy)=f(yx)
+    \]
+    for all \(x,y\in G\). Indeed,
+    \[
+        xy=x(yx)x^{-1},
+    \]
+    so \(xy\) and \(yx\) are conjugate.
+    
+    Extending \(f\) linearly, we obtain a \(k\)-linear map
+    \[
+        f:kG\longrightarrow k.
+    \]
+    Thus class functions on \(G\) may be regarded as special linear forms on
+    \(kG\).
+    \end{remark}
+    
+    \begin{remark}
+    There is a natural identification
+    \[
+        \{\,\text{functions }G\to k\,\}
+        \cong
+        \operatorname{Hom}_k(kG,k)
+        =
+        (kG)^*.
+    \]
+    Indeed, since \(G\) is a \(k\)-basis of \(kG\), a linear form on \(kG\) is
+    uniquely determined by its values on the basis elements \(g\in G\).
+    \end{remark}
+
+    \begin{definition}[Symmetric algebra]
+        Let \(A\) be a finite-dimensional \(k\)-algebra. We say that \(A\) is a
+        \emph{symmetric algebra} if there exists a \(k\)-bilinear form
+        \[
+            \langle -,-\rangle:A\times A\longrightarrow k
+        \]
+        such that:
+        
+        \begin{enumerate}
+            \item \(\langle -,-\rangle\) is nondegenerate;
+            \item \(\langle a,b\rangle=\langle b,a\rangle\) for all \(a,b\in A\);
+            \item \(\langle ab,c\rangle=\langle a,bc\rangle\) for all \(a,b,c\in A\).
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}[Equivalent definition]
+        A finite-dimensional \(k\)-algebra \(A\) is called symmetric if
+        \[
+            A\cong A^*
+        \]
+        as \(A\)-bimodules, where
+        \[
+            A^*=\operatorname{Hom}_k(A,k).
+        \]
+    \end{definition}
+    
+    \begin{corollary}
+    The group algebra \(kG\) is a symmetric algebra.
+    \end{corollary}
+    
+    \begin{proof}
+    The bilinear form
+    \[
+        \langle x,y\rangle
+        =
+        \pi(xy)
+    \]
+    is symmetric by the first lemma:
+    \[
+        \langle x,y\rangle
+        =
+        \pi(xy)
+        =
+        \pi(yx)
+        =
+        \langle y,x\rangle.
+    \]
+    The second lemma says precisely that the induced map
+    \[
+        kG\longrightarrow (kG)^*,
+        \qquad
+        x\longmapsto \langle x,-\rangle,
+    \]
+    is a \(k\)-linear isomorphism. Therefore the bilinear form is nondegenerate,
+    and hence \(kG\) is a symmetric algebra.
+    \end{proof} 
+
