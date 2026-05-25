@@ -1,0 +1,422 @@
+\section{Splitting fields and the structure of group algebras}
+\begin{definition}
+    Let \(A\) be a finite-dimensional \(k\)-algebra. We say that \(A\) is
+    \emph{split} over \(k\) if for every simple left \(A\)-module \(S\), one has
+    \[
+        \operatorname{End}_A(S)=k\operatorname{id}_S.
+    \]
+    Equivalently, every simple \(A\)-module has endomorphism ring exactly \(k\).
+
+    If \(A=kG\), then we say that \(k\) is a \emph{splitting field} for \(G\) if
+    \(kG\) is split over \(k\).
+\end{definition}
+
+\begin{proposition}
+    Let \(A\) be a finite-dimensional \(k\)-algebra, and let \(S\) be a simple
+    left \(A\)-module. Then the following are equivalent:
+
+    \begin{enumerate}
+        \item \[
+                  \operatorname{End}_A(S)=k\operatorname{id}_S.
+              \]
+
+        \item For every field extension \(K/k\), the scalar extension
+              \[
+                  S_K:=K\otimes_k S
+              \]
+              is a simple left \(A_K\)-module, where
+              \[
+                  A_K:=K\otimes_k A.
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        D=\operatorname{End}_A(S).
+    \]
+    By Schur's lemma, \(D\) is a division algebra over \(k\).
+
+    Assume first that
+    \[
+        D=k.
+    \]
+    Let
+    \[
+        I=\operatorname{Ann}_A(S).
+    \]
+    By the density theorem, since \(S\) is a finite-dimensional simple
+    \(A\)-module, the natural map
+    \[
+        A/I\longrightarrow \operatorname{End}_D(S)
+    \]
+    is an isomorphism. Since \(D=k\), this becomes
+    \[
+        A/I\cong \operatorname{End}_k(S).
+    \]
+    After extending scalars from \(k\) to \(K\), we get
+    \[
+        A_K/(K\otimes_k I)
+        \cong
+        \operatorname{End}_K(K\otimes_k S).
+    \]
+    Thus the action of \(A_K\) on \(S_K=K\otimes_k S\) contains the full matrix
+    algebra
+    \[
+        \operatorname{End}_K(S_K).
+    \]
+    Hence every nonzero \(A_K\)-submodule of \(S_K\) is stable under the full
+    endomorphism algebra of \(S_K\), and therefore must be all of \(S_K\). Thus
+    \(S_K\) is simple.
+
+    Conversely, assume that for every field extension \(K/k\), the \(A_K\)-module
+    \(S_K\) is simple. Since \(A\) is finite-dimensional and \(S\) is finite-dimensional,
+    base change gives
+    \[
+        K\otimes_k \operatorname{End}_A(S)
+        \cong
+        \operatorname{End}_{A_K}(S_K).
+    \]
+    Take \(K=\overline{k}\). Then \(S_{\overline{k}}\) is simple by assumption, so
+    Schur's lemma implies that
+    \[
+        \operatorname{End}_{A_{\overline{k}}}(S_{\overline{k}})
+    \]
+    is a division algebra. Therefore
+    \[
+        \overline{k}\otimes_k D
+    \]
+    is a finite-dimensional division algebra over the algebraically closed field
+    \(\overline{k}\).
+
+    But any finite-dimensional division algebra over an algebraically closed field
+    is just the field itself. Hence
+    \[
+        \overline{k}\otimes_k D\cong \overline{k}.
+    \]
+    Taking dimensions over \(\overline{k}\), this implies
+    \[
+        \dim_k D=1.
+    \]
+    Therefore
+    \[
+        D=k,
+    \]
+    that is,
+    \[
+        \operatorname{End}_A(S)=k\operatorname{id}_S.
+    \]
+\end{proof}
+
+\begin{remark}
+    If \(k=\overline{k}\), then Schur's lemma implies that \(k\) is a splitting
+    field for \(G\). Indeed, for every simple \(kG\)-module \(S\),
+    \[
+        \operatorname{End}_{kG}(S)=k\operatorname{id}_S.
+    \]
+\end{remark}
+
+\begin{theorem}[Brauer]
+    Let \(G\) be a finite group. If \(k\) contains a primitive
+    \(|G|\)-th root of unity, then \(k\) is a splitting field for \(G\).
+\end{theorem}
+
+\begin{proof}
+    Put
+    \[
+        n=|G|.
+    \]
+    Since \(k\) contains a primitive \(n\)-th root of unity, we have
+    \[
+        \operatorname{char}k\nmid n.
+    \]
+    Hence, by Maschke's theorem, \(kG\) is semisimple.
+
+    Let \(\overline{k}\) be an algebraic closure of \(k\). It is enough to prove
+    that every simple \(\overline{k}G\)-module is realizable over \(k\). Indeed, if
+    every simple \(\overline{k}G\)-module has a \(k\)-form, then for every simple
+    \(kG\)-module \(S\), the scalar extension
+    \[
+        \overline{k}\otimes_k S
+    \]
+    is again simple. Equivalently,
+    \[
+        \operatorname{End}_{kG}(S)=k,
+    \]
+    so \(k\) is a splitting field for \(G\).
+
+    Let \(V\) be a simple \(\overline{k}G\)-module, and let
+    \[
+        \chi:G\longrightarrow \overline{k}
+    \]
+    be its character. For each \(g\in G\), the order of \(g\) divides \(n\), so
+    \[
+        g^n=1.
+    \]
+    Therefore the linear operator representing \(g\) on \(V\) satisfies
+    \[
+        X^n-1=0.
+    \]
+    Since \(k\) contains all \(n\)-th roots of unity and
+    \(\operatorname{char}k\nmid n\), the polynomial \(X^n-1\) splits over \(k\)
+    with distinct roots. Hence all eigenvalues of \(g\) on \(V\) lie in \(k\).
+    It follows that
+    \[
+        \chi(g)\in k
+    \]
+    for all \(g\in G\). Thus every irreducible character of \(G\) over
+    \(\overline{k}\) is \(k\)-valued.
+
+    We now use Brauer's induction theorem. It says that every irreducible character
+    \(\chi\) of \(G\) is an integral linear combination of characters induced from
+    linear characters of subgroups. More precisely,
+    \[
+        \chi
+        =
+        \sum_i a_i\,\operatorname{Ind}_{H_i}^G(\lambda_i),
+        \qquad a_i\in \mathbb{Z},
+    \]
+    where each \(H_i\leq G\), and each \(\lambda_i\) is a one-dimensional character
+    of \(H_i\).
+
+    Since every element of \(H_i\) has order dividing \(n\), the values of
+    \(\lambda_i\) are \(n\)-th roots of unity. Hence
+    \[
+        \lambda_i(H_i)\subseteq k.
+    \]
+    Therefore each \(\lambda_i\) is afforded by a one-dimensional \(kH_i\)-module.
+    Consequently,
+    \[
+        \operatorname{Ind}_{H_i}^G(\lambda_i)
+    \]
+    is afforded by a \(kG\)-module.
+
+    Thus \(\chi\) is an integral linear combination of characters afforded by
+    \(kG\)-modules.
+
+    Now recall the standard Schur-index criterion: if \(\chi\) is an irreducible
+    \(\overline{k}\)-character which is \(k\)-valued, then the Schur index
+    \(m_k(\chi)\) is the greatest common divisor of the multiplicities with which
+    \(\chi\) occurs in scalar extensions of \(kG\)-modules. In particular, if
+    \(\chi\) is an integral linear combination of \(kG\)-characters, then
+    \[
+        m_k(\chi)\mid 1.
+    \]
+    Hence
+    \[
+        m_k(\chi)=1.
+    \]
+    Therefore \(V\) is realizable over \(k\). That is, there exists a simple
+    \(kG\)-module \(S\) such that
+    \[
+        \overline{k}\otimes_k S\cong V.
+    \]
+
+    Since this holds for every simple \(\overline{k}G\)-module \(V\), every simple
+    \(kG\)-module remains simple after extension of scalars to \(\overline{k}\).
+    Equivalently,
+    \[
+        \operatorname{End}_{kG}(S)=k
+    \]
+    for every simple \(kG\)-module \(S\). Hence \(k\) is a splitting field for
+    \(G\).
+\end{proof}
+
+\begin{proposition}
+    Assume that
+    \[
+        \operatorname{char} k=p
+    \]
+    and that \(G\) is a finite \(p\)-group. Then the only simple \(kG\)-module is
+    the trivial module \(k\).
+\end{proposition}
+
+\begin{proof}
+    Let \(S\) be a simple \(kG\)-module. We show that \(S\) contains a nonzero
+    \(G\)-fixed vector.
+
+    Choose
+    \[
+        0\neq x\in S.
+    \]
+    Consider the finite subset
+    \[
+        X=\{\,gx\mid g\in G\,\}\subseteq S.
+    \]
+    Let \(S_0\) be the subgroup of the additive group of \(S\) generated by \(X\).
+    Since \(\operatorname{char}k=p\), the additive group of \(S\) has exponent
+    \(p\). Hence \(S_0\) is a finite abelian \(p\)-group.
+
+    Moreover, \(S_0\) is stable under the action of \(G\). Indeed, if \(h\in G\)
+    and \(gx\in X\), then
+    \[
+        h(gx)=(hg)x\in X.
+    \]
+    Thus \(G\) acts on the finite \(p\)-group \(S_0\).
+
+    We now use the standard fact that if a finite \(p\)-group acts on a finite
+    \(p\)-group, then the set of fixed points has cardinality congruent to the
+    whole set modulo \(p\). Equivalently,
+    \[
+        |S_0^G|\equiv |S_0|\pmod p.
+    \]
+    Since \(S_0\) is a finite \(p\)-group, we have
+    \[
+        |S_0|\equiv 0\pmod p.
+    \]
+    Therefore
+    \[
+        |S_0^G|\equiv 0\pmod p.
+    \]
+    But \(0\in S_0^G\), so \(S_0^G\) is not empty. Since its cardinality is
+    divisible by \(p\), it must contain an element different from \(0\). Hence
+    there exists
+    \[
+        0\neq y\in S_0
+    \]
+    such that
+    \[
+        gy=y
+        \qquad
+        \text{for all }g\in G.
+    \]
+
+    Now consider the \(k\)-subspace
+    \[
+        ky\subseteq S.
+    \]
+    Since \(gy=y\) for all \(g\in G\), the subspace \(ky\) is stable under the
+    action of \(G\). Hence \(ky\) is a nonzero \(kG\)-submodule of \(S\).
+
+    Because \(S\) is simple, we must have
+    \[
+        S=ky.
+    \]
+    Therefore \(S\) is one-dimensional, and \(G\) acts trivially on \(S\). Hence
+    \[
+        S\cong k
+    \]
+    as \(kG\)-modules, where \(k\) is the trivial \(kG\)-module.
+\end{proof}
+
+\begin{remark}
+    Thus, when \(\operatorname{char}k=p\) and \(G\) is a finite \(p\)-group, the
+    group algebra \(kG\) has only one simple module up to isomorphism, namely the
+    trivial module.
+\end{remark}
+
+\begin{theorem}
+    Assume that
+    \[
+        \operatorname{char}k\nmid |G|,
+    \]
+    or equivalently, that \(|G|\) is invertible in \(k\). Then \(kG\) is
+    semisimple. Hence, as a ring,
+    \[
+        kG
+        \cong
+        \bigoplus_{i=1}^r M_{n_i}(D_i),
+    \]
+    where each \(D_i\) is a finite-dimensional division algebra over \(k\).
+\end{theorem}
+
+\begin{proof}
+    By Maschke's theorem, \(kG\) is semisimple. Since \(kG\) is finite-dimensional
+    over \(k\), it is an Artinian semisimple ring. Therefore the Artin--Wedderburn
+    theorem implies that
+    \[
+        kG
+        \cong
+        \bigoplus_{i=1}^r M_{n_i}(D_i),
+    \]
+    where each \(D_i\) is a division algebra finite-dimensional over \(k\).
+\end{proof}
+
+\begin{theorem}
+    Assume further that \(k\) is a splitting field for \(G\). In particular, this
+    holds if \(k=\overline{k}\). Let
+    \[
+        S_1,\dots,S_r
+    \]
+    be a complete set of pairwise non-isomorphic simple \(kG\)-modules, and set
+    \[
+        d_i=\dim_k S_i.
+    \]
+    Then, as a left \(kG\)-module,
+    \[
+        kG
+        \cong
+        S_1^{\oplus d_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus d_r}.
+    \]
+    Consequently,
+    \[
+        |G|
+        =
+        d_1^2+\cdots+d_r^2.
+    \]
+    Moreover, as a \(k\)-algebra,
+    \[
+        kG
+        \cong
+        M_{d_1}(k)
+        \oplus
+        \cdots
+        \oplus
+        M_{d_r}(k).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Since \(kG\) is semisimple, every simple module is projective and every
+    \(kG\)-module is semisimple. Thus the regular module decomposes as
+    \[
+        kG
+        \cong
+        S_1^{\oplus m_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus m_r}
+    \]
+    for some multiplicities \(m_i\).
+
+    Because \(k\) is a splitting field, Schur's lemma gives
+    \[
+        \operatorname{End}_{kG}(S_i)=k.
+    \]
+    The Artin--Wedderburn decomposition therefore has the form
+    \[
+        kG
+        \cong
+        M_{d_1}(k)\oplus\cdots\oplus M_{d_r}(k),
+    \]
+    where \(d_i=\dim_k S_i\). As a left module over \(M_{d_i}(k)\), the algebra
+    \(M_{d_i}(k)\) is a direct sum of \(d_i\) copies of its natural simple module
+    \(k^{d_i}\). Hence
+    \[
+        kG
+        \cong
+        S_1^{\oplus d_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus d_r}
+    \]
+    as a left \(kG\)-module.
+
+    Taking \(k\)-dimensions gives
+    \[
+        |G|
+        =
+        \dim_k kG
+        =
+        \sum_{i=1}^r d_i\dim_k S_i
+        =
+        \sum_{i=1}^r d_i^2.
+    \]
+\end{proof}

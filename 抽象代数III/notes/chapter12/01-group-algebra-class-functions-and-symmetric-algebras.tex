@@ -1,0 +1,641 @@
+\section{Group algebra, class functions, and symmetric algebras}
+\begin{definition}[Group algebra]
+    Let \(G\) be a finite group, and let \(R\) be a commutative unital ring.
+    The group algebra \(RG\) is the free \(R\)-module with basis \(G\), whose
+    multiplication is determined by the group multiplication of \(G\).
+
+    Thus every element of \(RG\) can be written uniquely in the form
+    \[
+        x=\sum_{s\in G} x_s s,
+        \qquad
+        y=\sum_{t\in G} y_t t,
+    \]
+    where \(x_s,y_t\in R\). Their product is given by
+    \[
+        xy
+        =
+        \sum_{s,t\in G} x_s y_t st
+        =
+        \sum_{g\in G}
+        \left(
+        \sum_{\substack{s,t\in G\\ st=g}} x_s y_t
+        \right) g.
+    \]
+\end{definition}
+
+From now on, let \(k\) be a field, and consider the group algebra \(kG\).
+
+\begin{definition}
+    Define a \(k\)-linear form
+    \[
+        \pi:kG\longrightarrow k
+    \]
+    by
+    \[
+        \pi(g)=
+        \begin{cases}
+            1, & g=1,     \\
+            0, & g\neq 1,
+        \end{cases}
+    \]
+    for all \(g\in G\). Equivalently, \(\pi(x)\) is the coefficient of the identity
+    element \(1\in G\) in \(x\in kG\).
+\end{definition}
+
+\begin{lemma}
+    Let \(x,y\in kG\). Then
+    \[
+        \pi(xy)=\pi(yx).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Write
+    \[
+        x=\sum_{s\in G}x_s s,
+        \qquad
+        y=\sum_{t\in G}y_t t.
+    \]
+    Then the coefficient of \(1\in G\) in \(xy\) is
+    \[
+        \pi(xy)
+        =
+        \sum_{\substack{s,t\in G\\ st=1}}x_s y_t
+        =
+        \sum_{s\in G}x_s y_{s^{-1}}.
+    \]
+    Similarly,
+    \[
+        \pi(yx)
+        =
+        \sum_{\substack{t,s\in G\\ ts=1}}y_t x_s
+        =
+        \sum_{t\in G}y_t x_{t^{-1}}.
+    \]
+    After replacing \(t\) by \(s^{-1}\), we get
+    \[
+        \pi(yx)
+        =
+        \sum_{s\in G}y_{s^{-1}}x_s
+        =
+        \sum_{s\in G}x_s y_{s^{-1}}
+        =
+        \pi(xy),
+    \]
+    because \(k\) is commutative.
+\end{proof}
+
+\begin{lemma}
+    The map
+    \[
+        \psi:kG\longrightarrow \operatorname{Hom}_k(kG,k),
+        \qquad
+        x\longmapsto \bigl(y\mapsto \pi(xy)\bigr),
+    \]
+    is a \(k\)-linear isomorphism.
+\end{lemma}
+
+\begin{proof}
+    It is clear that \(\psi\) is \(k\)-linear.
+
+    Let \(f\in \operatorname{Hom}_k(kG,k)\). We claim that the inverse image of
+    \(f\) under \(\psi\) is
+    \[
+        \psi^{-1}(f)
+        =
+        \sum_{g\in G} f(g^{-1})g.
+    \]
+    Indeed, set
+    \[
+        x=\sum_{g\in G} f(g^{-1})g.
+    \]
+    For any \(h\in G\), we have
+    \[
+        \psi(x)(h)
+        =
+        \pi(xh)
+        =
+        \pi\left(
+        \sum_{g\in G} f(g^{-1})gh
+        \right).
+    \]
+    The coefficient of \(1\) occurs precisely when \(gh=1\), that is,
+    \(g=h^{-1}\). Therefore
+    \[
+        \psi(x)(h)
+        =
+        f\bigl((h^{-1})^{-1}\bigr)
+        =
+        f(h).
+    \]
+    Since \(G\) is a basis of \(kG\), this proves \(\psi(x)=f\). Hence \(\psi\) is
+    surjective. The same formula also shows uniqueness of \(x\), so \(\psi\) is
+    injective. Therefore \(\psi\) is a \(k\)-linear isomorphism.
+\end{proof}
+
+\begin{definition}[Class function]
+    A function
+    \[
+        f:G\longrightarrow k
+    \]
+    is called a class function if
+    \[
+        f(gxg^{-1})=f(x)
+    \]
+    for all \(g,x\in G\).
+\end{definition}
+
+\begin{remark}
+    If \(f:G\to k\) is a class function, then
+    \[
+        f(xy)=f(yx)
+    \]
+    for all \(x,y\in G\). Indeed,
+    \[
+        xy=x(yx)x^{-1},
+    \]
+    so \(xy\) and \(yx\) are conjugate.
+
+    Extending \(f\) linearly, we obtain a \(k\)-linear map
+    \[
+        f:kG\longrightarrow k.
+    \]
+    Thus class functions on \(G\) may be regarded as special linear forms on
+    \(kG\).
+\end{remark}
+
+\begin{remark}
+    There is a natural identification
+    \[
+        \{\,\text{functions }G\to k\,\}
+        \cong
+        \operatorname{Hom}_k(kG,k)
+        =
+        (kG)^*.
+    \]
+    Indeed, since \(G\) is a \(k\)-basis of \(kG\), a linear form on \(kG\) is
+    uniquely determined by its values on the basis elements \(g\in G\).
+\end{remark}
+
+\begin{definition}[Symmetric algebra]
+    Let \(A\) be a finite-dimensional \(k\)-algebra. We say that \(A\) is a
+    \emph{symmetric algebra} if there exists a \(k\)-bilinear form
+    \[
+        \langle -,-\rangle:A\times A\longrightarrow k
+    \]
+    such that:
+
+    \begin{enumerate}
+        \item \(\langle -,-\rangle\) is nondegenerate;
+        \item \(\langle a,b\rangle=\langle b,a\rangle\) for all \(a,b\in A\);
+        \item \(\langle ab,c\rangle=\langle a,bc\rangle\) for all \(a,b,c\in A\).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Equivalent definition]
+    A finite-dimensional \(k\)-algebra \(A\) is called symmetric if
+    \[
+        A\cong A^*
+    \]
+    as \(A\)-bimodules, where
+    \[
+        A^*=\operatorname{Hom}_k(A,k).
+    \]
+\end{definition}
+
+\begin{proposition}[Equivalent definitions of symmetric algebras]
+    Let \(A\) be a finite-dimensional unital associative \(k\)-algebra. Put
+    \[
+        A^*=\operatorname{Hom}_k(A,k),
+    \]
+    and give \(A^*\) the \(A\)-bimodule structure
+    \[
+        (a\cdot f\cdot b)(x)
+        =
+        f(bxa),
+        \qquad a,b,x\in A,\ f\in A^*.
+    \]
+    Then the following are equivalent:
+
+    \begin{enumerate}
+        \item[\textup{(i)}] There exists a nondegenerate \(k\)-bilinear form
+              \[
+                  \langle -,-\rangle:A\times A\longrightarrow k
+              \]
+              such that
+              \[
+                  \langle a,b\rangle=\langle b,a\rangle
+              \]
+              for all \(a,b\in A\), and
+              \[
+                  \langle ab,c\rangle=\langle a,bc\rangle
+              \]
+              for all \(a,b,c\in A\).
+
+        \item[\textup{(ii)}] There is an isomorphism
+              \[
+                  A\cong A^*
+              \]
+              as \(A\)-bimodules.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Assume first that \(\langle -,-\rangle\) is a nondegenerate symmetric
+    associative bilinear form on \(A\). Define
+    \[
+        \Phi:A\longrightarrow A^*,
+        \qquad
+        \Phi(a)(x)=\langle x,a\rangle .
+    \]
+    Since the bilinear form is nondegenerate and \(A\) is finite-dimensional,
+    \(\Phi\) is a \(k\)-linear isomorphism.
+
+    We claim that \(\Phi\) is an \(A\)-bimodule homomorphism. Let
+    \(a,c,d,x\in A\). Then
+    \[
+        \begin{aligned}
+            (c\cdot \Phi(a)\cdot d)(x)
+             & =\Phi(a)(dxc)         \\
+             & =\langle dxc,a\rangle \\
+             & =\langle dx,ca\rangle \\
+             & =\langle d,xca\rangle \\
+             & =\langle xca,d\rangle \\
+             & =\langle xc,ad\rangle \\
+             & =\langle x,cad\rangle \\
+             & =\Phi(cad)(x).
+        \end{aligned}
+    \]
+    Therefore
+    \[
+        \Phi(cad)=c\cdot \Phi(a)\cdot d.
+    \]
+    Hence \(\Phi:A\to A^*\) is an isomorphism of \(A\)-bimodules.
+
+    Conversely, assume that there is an \(A\)-bimodule isomorphism
+    \[
+        \Phi:A\longrightarrow A^*.
+    \]
+    Define a \(k\)-bilinear form on \(A\) by
+    \[
+        \langle x,y\rangle=\Phi(y)(x).
+    \]
+    Since \(\Phi\) is a \(k\)-linear isomorphism, this bilinear form is
+    nondegenerate.
+
+    We first prove associativity. For \(a,b,c\in A\), since \(\Phi\) is a left
+    \(A\)-module homomorphism, we have
+    \[
+        \Phi(bc)=b\cdot \Phi(c).
+    \]
+    Thus
+    \[
+        \begin{aligned}
+            \langle a,bc\rangle
+             & =\Phi(bc)(a)           \\
+             & =(b\cdot \Phi(c))(a)   \\
+             & =\Phi(c)(ab)           \\
+             & =\langle ab,c\rangle .
+        \end{aligned}
+    \]
+    Hence
+    \[
+        \langle ab,c\rangle=\langle a,bc\rangle .
+    \]
+
+    It remains to prove symmetry. Let
+    \[
+        \lambda=\Phi(1)\in A^*.
+    \]
+    Since \(\Phi\) is an \(A\)-bimodule homomorphism, for every \(y\in A\) we have
+    \[
+        \Phi(y)=\Phi(y\cdot 1)=y\cdot \Phi(1)=y\cdot \lambda
+    \]
+    and also
+    \[
+        \Phi(y)=\Phi(1\cdot y)=\Phi(1)\cdot y=\lambda\cdot y.
+    \]
+    Therefore, for all \(x,y\in A\),
+    \[
+        \Phi(y)(x)
+        =
+        (y\cdot \lambda)(x)
+        =
+        \lambda(xy),
+    \]
+    and also
+    \[
+        \Phi(y)(x)
+        =
+        (\lambda\cdot y)(x)
+        =
+        \lambda(yx).
+    \]
+    Thus
+    \[
+        \lambda(xy)=\lambda(yx)
+    \]
+    for all \(x,y\in A\). Hence
+    \[
+        \begin{aligned}
+            \langle x,y\rangle
+             & =\Phi(y)(x)           \\
+             & =\lambda(xy)          \\
+             & =\lambda(yx)          \\
+             & =\Phi(x)(y)           \\
+             & =\langle y,x\rangle .
+        \end{aligned}
+    \]
+    So the bilinear form is symmetric.
+
+    Therefore the existence of a nondegenerate symmetric associative bilinear form
+    on \(A\) is equivalent to the existence of an \(A\)-bimodule isomorphism
+    \[
+        A\cong A^*.
+    \]
+\end{proof}
+
+\begin{corollary}
+    The group algebra \(kG\) is a symmetric algebra.
+\end{corollary}
+
+\begin{proof}
+    The bilinear form
+    \[
+        \langle x,y\rangle
+        =
+        \pi(xy)
+    \]
+    is symmetric by the first lemma:
+    \[
+        \langle x,y\rangle
+        =
+        \pi(xy)
+        =
+        \pi(yx)
+        =
+        \langle y,x\rangle.
+    \]
+    The second lemma says precisely that the induced map
+    \[
+        kG\longrightarrow (kG)^*,
+        \qquad
+        x\longmapsto \langle x,-\rangle,
+    \]
+    is a \(k\)-linear isomorphism. Therefore the bilinear form is nondegenerate,
+    and hence \(kG\) is a symmetric algebra.
+\end{proof}
+
+Let
+\[
+    F(G,k)
+\]
+denote the \(k\)-vector space of all functions \(G\to k\). We identify
+\(F(G,k)\) with \((kG)^*=\operatorname{Hom}_k(kG,k)\) by extending functions
+linearly from \(G\) to \(kG\).
+
+Let
+\[
+    \operatorname{CF}(G,k)
+\]
+denote the subspace of class functions on \(G\), that is,
+\[
+    \operatorname{CF}(G,k)
+    =
+    \{\,f:G\to k \mid f(hgh^{-1})=f(g)
+    \text{ for all } g,h\in G\,\}.
+\]
+
+Recall that for \(f\in F(G,k)\), we define
+\[
+    f^\circ
+    =
+    \sum_{g\in G} f(g^{-1})g
+    \in kG.
+\]
+
+\begin{lemma}
+    Let \(a\in kG\) and \(f\in F(G,k)\). Define \(a\cdot f\in F(G,k)\) by
+    \[
+        (a\cdot f)(x)=f(xa),
+        \qquad x\in kG.
+    \]
+    Then
+    \[
+        (a\cdot f)^\circ=a f^\circ .
+    \]
+\end{lemma}
+
+\begin{proof}
+    Write
+    \[
+        a=\sum_{h\in G}a_hh.
+    \]
+    Then
+    \[
+        \begin{aligned}
+            (a\cdot f)^\circ
+             & =\sum_{g\in G}(a\cdot f)(g^{-1})g            \\
+             & =\sum_{g\in G}f(g^{-1}a)g                    \\
+             & =\sum_{g\in G}\sum_{h\in G}a_h f(g^{-1}h)g .
+        \end{aligned}
+    \]
+    On the other hand,
+    \[
+        \begin{aligned}
+            af^\circ
+             & =
+            \left(\sum_{h\in G}a_hh\right)
+            \left(\sum_{t\in G}f(t^{-1})t\right) \\
+             & =
+            \sum_{h,t\in G}a_h f(t^{-1})ht.
+        \end{aligned}
+    \]
+    Putting \(g=ht\), equivalently \(t=h^{-1}g\), we get
+    \[
+        t^{-1}=g^{-1}h.
+    \]
+    Hence
+    \[
+        af^\circ
+        =
+        \sum_{g\in G}\sum_{h\in G}a_h f(g^{-1}h)g
+        =
+        (a\cdot f)^\circ .
+    \]
+\end{proof}
+
+Let
+\[
+    \operatorname{Cl}(G)
+\]
+denote the set of conjugacy classes of \(G\). For each
+\(C\in \operatorname{Cl}(G)\), define the characteristic function
+\[
+    \gamma_C:G\longrightarrow k
+\]
+by
+\[
+    \gamma_C(g)
+    =
+    \begin{cases}
+        1, & g\in C,    \\
+        0, & g\notin C.
+    \end{cases}
+\]
+Also define the class sum
+\[
+    \widehat{C}
+    =
+    \sum_{g\in C}g
+    \in kG.
+\]
+
+For a class function \(f\in \operatorname{CF}(G,k)\), if \(g_C\in C\) is a
+chosen representative for each conjugacy class \(C\), then
+\[
+    f
+    =
+    \sum_{C\in \operatorname{Cl}(G)} f(g_C)\gamma_C.
+\]
+Moreover,
+\[
+    f^\circ
+    =
+    \sum_{C\in \operatorname{Cl}(G)} f(g_C^{-1})\widehat{C}.
+\]
+
+\begin{lemma}
+    Let \(Z(kG)\) denote the center of the group algebra \(kG\), that is,
+    \[
+        Z(kG)
+        =
+        \{\,x\in kG\mid xy=yx \text{ for all } y\in kG\,\}.
+    \]
+    Then:
+
+    \begin{enumerate}
+        \item The family
+              \[
+                  \{\,\gamma_C\mid C\in \operatorname{Cl}(G)\,\}
+              \]
+              is a basis of \(\operatorname{CF}(G,k)\).
+
+        \item The family
+              \[
+                  \{\,\widehat{C}\mid C\in \operatorname{Cl}(G)\,\}
+              \]
+              is a basis of \(Z(kG)\).
+
+        \item Hence
+              \[
+                  \dim_k \operatorname{CF}(G,k)
+                  =
+                  |\operatorname{Cl}(G)|.
+              \]
+
+        \item The map
+              \[
+                  F(G,k)\longrightarrow kG,
+                  \qquad
+                  f\longmapsto f^\circ,
+              \]
+              restricts to a \(k\)-linear isomorphism
+              \[
+                  \operatorname{CF}(G,k)
+                  \xrightarrow{\sim}
+                  Z(kG).
+              \]
+              In particular,
+              \[
+                  \dim_k Z(kG)=|\operatorname{Cl}(G)|.
+              \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    First, every class function is constant on each conjugacy class. Therefore, if
+    \(g_C\in C\) is a chosen representative for each \(C\in \operatorname{Cl}(G)\),
+    then every \(f\in \operatorname{CF}(G,k)\) can be written uniquely as
+    \[
+        f
+        =
+        \sum_{C\in \operatorname{Cl}(G)} f(g_C)\gamma_C.
+    \]
+    Thus
+    \[
+        \{\,\gamma_C\mid C\in \operatorname{Cl}(G)\,\}
+    \]
+    is a basis of \(\operatorname{CF}(G,k)\). In particular,
+    \[
+        \dim_k\operatorname{CF}(G,k)=|\operatorname{Cl}(G)|.
+    \]
+
+    Next, we prove that the class sums form a basis of the center. Let
+    \[
+        x=\sum_{g\in G}x_g g\in kG.
+    \]
+    Then \(x\in Z(kG)\) if and only if
+    \[
+        hxh^{-1}=x
+    \]
+    for every \(h\in G\). But
+    \[
+        hxh^{-1}
+        =
+        \sum_{g\in G}x_g hgh^{-1}.
+    \]
+    Therefore \(hxh^{-1}=x\) for all \(h\in G\) if and only if the coefficient
+    \(x_g\) is constant on conjugacy classes. Hence every central element has a
+    unique expression of the form
+    \[
+        x
+        =
+        \sum_{C\in \operatorname{Cl}(G)} a_C \widehat{C},
+        \qquad a_C\in k.
+    \]
+    Thus
+    \[
+        \{\,\widehat{C}\mid C\in \operatorname{Cl}(G)\,\}
+    \]
+    is a basis of \(Z(kG)\).
+
+    Finally, for \(C\in \operatorname{Cl}(G)\), we have
+    \[
+        \gamma_C^\circ
+        =
+        \sum_{g\in G}\gamma_C(g^{-1})g
+        =
+        \sum_{g^{-1}\in C}g
+        =
+        \sum_{g\in C^{-1}}g
+        =
+        \widehat{C^{-1}}.
+    \]
+    Since the map
+    \[
+        C\longmapsto C^{-1}
+    \]
+    is a permutation of the set of conjugacy classes, the map
+    \[
+        f\longmapsto f^\circ
+    \]
+    sends the basis
+    \[
+        \{\,\gamma_C\mid C\in \operatorname{Cl}(G)\,\}
+    \]
+    of \(\operatorname{CF}(G,k)\) onto the basis
+    \[
+        \{\,\widehat{C}\mid C\in \operatorname{Cl}(G)\,\}
+    \]
+    of \(Z(kG)\). Therefore it restricts to a \(k\)-linear isomorphism
+    \[
+        \operatorname{CF}(G,k)
+        \xrightarrow{\sim}
+        Z(kG).
+    \]
+    Consequently,
+    \[
+        \dim_k Z(kG)=|\operatorname{Cl}(G)|.
+    \]
+\end{proof}

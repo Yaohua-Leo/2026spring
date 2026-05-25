@@ -1,0 +1,1224 @@
+\section{Characters and orthogonality relations}
+Let now
+\[
+    k=\mathbb{C}.
+\]
+Let \((V,\rho)\) be a finite-dimensional complex representation of \(G\), so
+\[
+    \rho:G\longrightarrow \operatorname{GL}(V).
+\]
+After choosing a basis of \(V\), this may be written as
+\[
+    \rho:G\longrightarrow \operatorname{GL}_d(\mathbb{C}),
+    \qquad
+    d=\dim_{\mathbb{C}}V.
+\]
+
+\begin{definition}[Character]
+    Given a complex representation \((V,\rho)\) of \(G\), its character is the
+    function
+    \[
+        \chi_V:G\longrightarrow \mathbb{C}
+    \]
+    defined by
+    \[
+        \chi_V(g)=\operatorname{tr}\rho(g).
+    \]
+\end{definition}
+
+\begin{proposition}
+    Let \(V\) and \(W\) be finite-dimensional complex representations of \(G\).
+    Then:
+
+    \begin{enumerate}
+        \item \(\chi_V\) is a class function.
+
+        \item For every \(g\in G\),
+              \[
+                  \chi_V(g^{-1})=\overline{\chi_V(g)}.
+              \]
+
+        \item If \(V\cong W\) as \(\mathbb{C}G\)-modules, then
+              \[
+                  \chi_V=\chi_W.
+              \]
+
+        \item We have
+              \[
+                  \chi_{V\oplus W}=\chi_V+\chi_W,
+                  \qquad
+                  \chi_{V\otimes W}=\chi_V\chi_W.
+              \]
+
+        \item For the dual representation \(V^*\),
+              \[
+                  \chi_{V^*}(g)
+                  =
+                  \chi_V(g^{-1})
+                  =
+                  \overline{\chi_V(g)}.
+              \]
+              Hence
+              \[
+                  \chi_{V^*}=\overline{\chi_V}.
+              \]
+
+        \item For the representation \(\operatorname{Hom}_{\mathbb{C}}(V,W)\),
+              \[
+                  \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)}(g)
+                  =
+                  \chi_V(g^{-1})\chi_W(g).
+              \]
+              Equivalently,
+              \[
+                  \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)}
+                  =
+                  \overline{\chi_V}\chi_W.
+              \]
+
+        \item One has
+              \[
+                  \chi_V(1)=\dim_{\mathbb{C}}V.
+              \]
+              Moreover,
+              \[
+                  |\chi_V(g)|\leq \dim_{\mathbb{C}}V.
+              \]
+              Equality holds if and only if \(g\) acts on \(V\) as a scalar. In particular,
+              \[
+                  \chi_V(g)=\dim_{\mathbb{C}}V
+              \]
+              if and only if \(g\) acts trivially on \(V\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    For \((1)\), let \(h,g\in G\). Then
+    \[
+        \rho(hgh^{-1})
+        =
+        \rho(h)\rho(g)\rho(h)^{-1}.
+    \]
+    Since trace is invariant under conjugation,
+    \[
+        \chi_V(hgh^{-1})
+        =
+        \operatorname{tr}\rho(hgh^{-1})
+        =
+        \operatorname{tr}\rho(g)
+        =
+        \chi_V(g).
+    \]
+    Thus \(\chi_V\) is a class function.
+
+    For \((2)\), since \(g\) has finite order, \(\rho(g)\) also has finite order.
+    Hence its eigenvalues are roots of unity. If the eigenvalues of \(\rho(g)\)
+    are
+    \[
+        \lambda_1,\dots,\lambda_d,
+    \]
+    then the eigenvalues of \(\rho(g^{-1})=\rho(g)^{-1}\) are
+    \[
+        \lambda_1^{-1},\dots,\lambda_d^{-1}.
+    \]
+    Since each \(\lambda_i\) is a root of unity, we have
+    \[
+        \lambda_i^{-1}=\overline{\lambda_i}.
+    \]
+    Therefore
+    \[
+        \chi_V(g^{-1})
+        =
+        \sum_{i=1}^d\lambda_i^{-1}
+        =
+        \sum_{i=1}^d\overline{\lambda_i}
+        =
+        \overline{\chi_V(g)}.
+    \]
+
+    For \((3)\), if \(V\cong W\), then after choosing compatible bases, the matrices
+    of \(\rho_V(g)\) and \(\rho_W(g)\) are conjugate for every \(g\in G\). Hence
+    their traces are equal.
+
+    For \((4)\), the matrix of \(g\) on \(V\oplus W\) is block diagonal:
+    \[
+        \rho_{V\oplus W}(g)
+        =
+        \begin{pmatrix}
+            \rho_V(g) & 0         \\
+            0         & \rho_W(g)
+        \end{pmatrix}.
+    \]
+    Therefore
+    \[
+        \chi_{V\oplus W}(g)
+        =
+        \chi_V(g)+\chi_W(g).
+    \]
+    Also,
+    \[
+        \rho_{V\otimes W}(g)
+        =
+        \rho_V(g)\otimes \rho_W(g),
+    \]
+    so
+    \[
+        \operatorname{tr}(\rho_V(g)\otimes \rho_W(g))
+        =
+        \operatorname{tr}\rho_V(g)\operatorname{tr}\rho_W(g).
+    \]
+    Thus
+    \[
+        \chi_{V\otimes W}(g)=\chi_V(g)\chi_W(g).
+    \]
+
+    For \((5)\), the action of \(g\) on \(V^*\) is dual to the action of \(g^{-1}\)
+    on \(V\). Hence
+    \[
+        \chi_{V^*}(g)
+        =
+        \operatorname{tr}\rho_V(g^{-1})
+        =
+        \chi_V(g^{-1})
+        =
+        \overline{\chi_V(g)}.
+    \]
+
+    For \((6)\), we use the natural identification
+    \[
+        \operatorname{Hom}_{\mathbb{C}}(V,W)
+        \cong
+        V^*\otimes W.
+    \]
+    Therefore, by \((4)\) and \((5)\),
+    \[
+        \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)}
+        =
+        \chi_{V^*}\chi_W
+        =
+        \overline{\chi_V}\chi_W.
+    \]
+    Equivalently, for every \(g\in G\),
+    \[
+        \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)}(g)
+        =
+        \chi_V(g^{-1})\chi_W(g).
+    \]
+
+    Finally, for \((7)\), we have
+    \[
+        \rho(1)=\operatorname{id}_V,
+    \]
+    so
+    \[
+        \chi_V(1)=\operatorname{tr}(\operatorname{id}_V)=\dim_{\mathbb{C}}V.
+    \]
+    Let the eigenvalues of \(\rho(g)\) be
+    \[
+        \lambda_1,\dots,\lambda_d.
+    \]
+    Since \(g\) has finite order, each \(\lambda_i\) is a root of unity, hence
+    \[
+        |\lambda_i|=1.
+    \]
+    Therefore
+    \[
+        |\chi_V(g)|
+        =
+        \left|\lambda_1+\cdots+\lambda_d\right|
+        \leq
+        |\lambda_1|+\cdots+|\lambda_d|
+        =
+        d.
+    \]
+    Equality holds if and only if all \(\lambda_i\) have the same argument, that is,
+    if and only if all \(\lambda_i\) are equal. Since \(\rho(g)\) is diagonalizable,
+    this is equivalent to saying that \(\rho(g)\) is a scalar operator.
+
+    Moreover,
+    \[
+        \chi_V(g)=d
+    \]
+    if and only if all eigenvalues of \(\rho(g)\) are equal to \(1\), which is
+    equivalent to
+    \[
+        \rho(g)=\operatorname{id}_V.
+    \]
+    Thus \(g\) acts trivially on \(V\).
+\end{proof}
+
+For simplicity, write
+\[
+    \operatorname{CF}(G)
+    =
+    \operatorname{CF}(G,\mathbb{C}).
+\]
+Thus \(\operatorname{CF}(G)\) is the \(\mathbb{C}\)-vector space of complex
+class functions on \(G\).
+
+\begin{definition}
+    For \(f_1,f_2\in \operatorname{CF}(G)\), define
+    \[
+        \langle f_1,f_2\rangle
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}
+        f_1(g)\overline{f_2(g)}.
+    \]
+\end{definition}
+
+Since \(f_1\) and \(f_2\) are class functions, the above sum may be written as
+a sum over conjugacy classes. Let \(\operatorname{Cl}(G)\) denote the set of
+conjugacy classes of \(G\). For each \(C\in \operatorname{Cl}(G)\), choose a
+representative \(g_C\in C\). Then
+\[
+    \begin{aligned}
+        \langle f_1,f_2\rangle
+         & =
+        \frac{1}{|G|}
+        \sum_{C\in \operatorname{Cl}(G)}
+        |C| f_1(g_C)\overline{f_2(g_C)} \\
+         & =
+        \frac{1}{|G|}
+        \sum_{C\in \operatorname{Cl}(G)}
+        \frac{|G|}{|C_G(g_C)|}
+        f_1(g_C)\overline{f_2(g_C)}     \\
+         & =
+        \sum_{C\in \operatorname{Cl}(G)}
+        \frac{1}{|C_G(g_C)|}
+        f_1(g_C)\overline{f_2(g_C)}.
+    \end{aligned}
+\]
+Here
+\[
+    C_G(g_C)
+    =
+    \{\,h\in G\mid hg_C=g_Ch\,\}
+\]
+is the centralizer of \(g_C\) in \(G\), and we used the orbit-stabilizer formula
+\[
+    |C|
+    =
+    \frac{|G|}{|C_G(g_C)|}.
+\]
+
+\begin{proposition}
+    The pairing
+    \[
+        \langle -,-\rangle:
+        \operatorname{CF}(G)\times \operatorname{CF}(G)
+        \longrightarrow \mathbb{C}
+    \]
+    defined by
+    \[
+        \langle f_1,f_2\rangle
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G} f_1(g)\overline{f_2(g)}
+    \]
+    is a Hermitian inner product on the complex vector space
+    \(\operatorname{CF}(G)\).
+
+    Moreover, if \(f_1\) and \(f_2\) are characters of complex representations of
+    \(G\), then
+    \[
+        \langle f_1,f_2\rangle\in \mathbb{R}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    It is clear that the pairing is linear in the first variable and conjugate
+    linear in the second variable. Also,
+    \[
+        \begin{aligned}
+            \overline{\langle f_1,f_2\rangle}
+             & =
+            \overline{
+                \frac{1}{|G|}\sum_{g\in G} f_1(g)\overline{f_2(g)}
+            }                                    \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}\overline{f_1(g)}f_2(g) \\
+             & =
+            \langle f_2,f_1\rangle.
+        \end{aligned}
+    \]
+    Finally,
+    \[
+        \langle f,f\rangle
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}|f(g)|^2\geq 0,
+    \]
+    and equality holds if and only if \(f(g)=0\) for all \(g\in G\), that is,
+    \(f=0\). Thus \(\langle -,-\rangle\) is a Hermitian inner product.
+
+    Now suppose that \(f_1\) and \(f_2\) are characters. For every \(g\in G\), one
+    has
+    \[
+        \overline{f_i(g)}=f_i(g^{-1}),
+        \qquad i=1,2.
+    \]
+    Hence
+    \[
+        \begin{aligned}
+            \langle f_1,f_2\rangle
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G} f_1(g)\overline{f_2(g)} \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G} f_1(g)f_2(g^{-1})       \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G} f_1(g^{-1})f_2(g)       \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G} \overline{f_1(g)}f_2(g) \\
+             & =
+            \langle f_2,f_1\rangle.
+        \end{aligned}
+    \]
+    But Hermitian symmetry gives
+    \[
+        \langle f_2,f_1\rangle
+        =
+        \overline{\langle f_1,f_2\rangle}.
+    \]
+    Therefore
+    \[
+        \langle f_1,f_2\rangle
+        =
+        \overline{\langle f_1,f_2\rangle},
+    \]
+    and hence
+    \[
+        \langle f_1,f_2\rangle\in \mathbb{R}.
+    \]
+\end{proof}
+
+\begin{lemma}
+    Let \(V\) be a finite-dimensional \(\mathbb{C}G\)-module. Define
+    \[
+        V^G
+        =
+        \{\,v\in V\mid gv=v \text{ for all } g\in G\,\}.
+    \]
+    Then \(V^G\) is a \(\mathbb{C}G\)-submodule of \(V\), and
+    \[
+        \dim_{\mathbb{C}} V^G
+        =
+        \langle \chi_V,1_G\rangle
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}\chi_V(g),
+    \]
+    where \(1_G\) denotes the character of the trivial representation.
+\end{lemma}
+
+\begin{proof}
+    It is clear that \(V^G\) is a complex subspace of \(V\). Moreover, if
+    \(v\in V^G\), then for every \(h\in G\),
+    \[
+        hv=v.
+    \]
+    Thus \(V^G\) is stable under the action of \(G\), and the induced action on
+    \(V^G\) is trivial. Hence \(V^G\) is a \(\mathbb{C}G\)-submodule of \(V\).
+
+    Define a linear map
+    \[
+        \pi:V\longrightarrow V
+    \]
+    by
+    \[
+        \pi(v)
+        =
+        \left(
+        \frac{1}{|G|}
+        \sum_{g\in G}g
+        \right)v
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}gv.
+    \]
+    We claim that
+    \[
+        \operatorname{Im}\pi=V^G.
+    \]
+
+    First, for \(h\in G\), we have
+    \[
+        \begin{aligned}
+            h\pi(v)
+             & =
+            h\left(
+            \frac{1}{|G|}
+            \sum_{g\in G}gv
+            \right)          \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}hgv \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}gv  \\
+             & =
+            \pi(v),
+        \end{aligned}
+    \]
+    because \(g\mapsto hg\) is a permutation of \(G\). Hence
+    \[
+        \operatorname{Im}\pi\subseteq V^G.
+    \]
+
+    Conversely, if \(v\in V^G\), then
+    \[
+        \pi(v)
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}gv
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}v
+        =
+        v.
+    \]
+    Thus \(V^G\subseteq \operatorname{Im}\pi\). Therefore
+    \[
+        \operatorname{Im}\pi=V^G.
+    \]
+
+    Also,
+    \[
+        \pi^2
+        =
+        \left(
+        \frac{1}{|G|}
+        \sum_{g\in G}g
+        \right)
+        \left(
+        \frac{1}{|G|}
+        \sum_{h\in G}h
+        \right)
+        =
+        \frac{1}{|G|^2}
+        \sum_{g,h\in G}gh.
+    \]
+    For each \(x\in G\), there are exactly \(|G|\) pairs \((g,h)\in G\times G\)
+    such that \(gh=x\). Hence
+    \[
+        \pi^2
+        =
+        \frac{1}{|G|}
+        \sum_{x\in G}x
+        =
+        \pi.
+    \]
+    Thus \(\pi\) is a projection onto \(V^G\). Therefore
+    \[
+        V=\ker\pi\oplus \operatorname{Im}\pi,
+        \qquad
+        \pi|_{\operatorname{Im}\pi}=\operatorname{id}_{\operatorname{Im}\pi}.
+    \]
+    It follows that
+    \[
+        \operatorname{tr}(\pi)=\dim_{\mathbb{C}}\operatorname{Im}\pi
+        =
+        \dim_{\mathbb{C}}V^G.
+    \]
+
+    On the other hand,
+    \[
+        \begin{aligned}
+            \operatorname{tr}(\pi)
+             & =
+            \operatorname{tr}\left(
+            \frac{1}{|G|}
+            \sum_{g\in G}\rho(g)
+            \right)                                 \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}\operatorname{tr}(\rho(g)) \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}\chi_V(g).
+        \end{aligned}
+    \]
+    Since \(1_G(g)=1\) for all \(g\in G\), we have
+    \[
+        \frac{1}{|G|}
+        \sum_{g\in G}\chi_V(g)
+        =
+        \langle \chi_V,1_G\rangle.
+    \]
+    Therefore
+    \[
+        \dim_{\mathbb{C}}V^G
+        =
+        \langle \chi_V,1_G\rangle.
+    \]
+\end{proof}
+
+\begin{lemma}
+    Let \(k\) be any field, and let \(V,W\) be \(kG\)-modules. Give
+    \(\operatorname{Hom}_k(V,W)\) the \(G\)-action defined by
+    \[
+        (g\varphi)(v)
+        =
+        g\varphi(g^{-1}v),
+        \qquad
+        g\in G,\ \varphi\in\operatorname{Hom}_k(V,W),\ v\in V.
+    \]
+    Then
+    \[
+        \operatorname{Hom}_k(V,W)^G
+        =
+        \operatorname{Hom}_{kG}(V,W).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let \(\varphi\in \operatorname{Hom}_k(V,W)\). Then
+    \[
+        \varphi\in \operatorname{Hom}_k(V,W)^G
+    \]
+    if and only if
+    \[
+        g\varphi=\varphi
+    \]
+    for all \(g\in G\). By definition of the action, this means
+    \[
+        g\varphi(g^{-1}v)=\varphi(v)
+    \]
+    for all \(g\in G\) and \(v\in V\). Replacing \(v\) by \(gv\), this is
+    equivalent to
+    \[
+        g\varphi(v)=\varphi(gv)
+    \]
+    for all \(g\in G\) and \(v\in V\). This is precisely the condition that
+    \(\varphi\) be a \(kG\)-module homomorphism. Hence
+    \[
+        \operatorname{Hom}_k(V,W)^G
+        =
+        \operatorname{Hom}_{kG}(V,W).
+    \]
+\end{proof}
+
+\begin{theorem}[Row orthogonality relations]
+    Let \(V\) and \(W\) be simple \(\mathbb{C}G\)-modules. Then
+    \[
+        \langle \chi_V,\chi_W\rangle
+        =
+        \begin{cases}
+            1, & V\cong W,     \\
+            0, & V\not\cong W.
+        \end{cases}
+    \]
+\end{theorem}
+
+\begin{proof}
+    By Schur's lemma,
+    \[
+        \dim_{\mathbb{C}}\operatorname{Hom}_{\mathbb{C}G}(V,W)
+        =
+        \begin{cases}
+            1, & V\cong W,     \\
+            0, & V\not\cong W.
+        \end{cases}
+    \]
+    On the other hand, by the previous lemma,
+    \[
+        \operatorname{Hom}_{\mathbb{C}G}(V,W)
+        =
+        \operatorname{Hom}_{\mathbb{C}}(V,W)^G.
+    \]
+    Therefore
+    \[
+        \begin{aligned}
+            \dim_{\mathbb{C}}\operatorname{Hom}_{\mathbb{C}G}(V,W)
+             & =
+            \dim_{\mathbb{C}}\operatorname{Hom}_{\mathbb{C}}(V,W)^G \\
+             & =
+            \left\langle
+            \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)},
+            1_G
+            \right\rangle.
+        \end{aligned}
+    \]
+    But
+    \[
+        \operatorname{Hom}_{\mathbb{C}}(V,W)
+        \cong
+        V^*\otimes W
+    \]
+    as \(\mathbb{C}G\)-modules. Hence
+    \[
+        \chi_{\operatorname{Hom}_{\mathbb{C}}(V,W)}
+        =
+        \chi_{V^*}\chi_W
+        =
+        \overline{\chi_V}\chi_W.
+    \]
+    Thus
+    \[
+        \begin{aligned}
+            \dim_{\mathbb{C}}\operatorname{Hom}_{\mathbb{C}G}(V,W)
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}\overline{\chi_V(g)}\chi_W(g) \\
+             & =
+            \langle \chi_W,\chi_V\rangle.
+        \end{aligned}
+    \]
+    Since \(\chi_V\) and \(\chi_W\) are characters, the previous proposition gives
+    \[
+        \langle \chi_W,\chi_V\rangle
+        =
+        \langle \chi_V,\chi_W\rangle.
+    \]
+    Therefore
+    \[
+        \langle \chi_V,\chi_W\rangle
+        =
+        \dim_{\mathbb{C}}\operatorname{Hom}_{\mathbb{C}G}(V,W).
+    \]
+    By Schur's lemma, this dimension is \(1\) if \(V\cong W\), and \(0\) otherwise.
+    Hence
+    \[
+        \langle \chi_V,\chi_W\rangle
+        =
+        \begin{cases}
+            1, & V\cong W,     \\
+            0, & V\not\cong W.
+        \end{cases}
+    \]
+\end{proof}
+
+\begin{definition}
+    The set of irreducible characters of \(G\) is denoted by
+    \[
+        \operatorname{Irr}(G).
+    \]
+    Thus
+    \[
+        \operatorname{Irr}(G)
+        =
+        \{\,\chi_S\mid S \text{ is a simple } \mathbb{C}G\text{-module}\,\}.
+    \]
+    Equivalently, \(\operatorname{Irr}(G)\) is the set of characters afforded by
+    simple complex representations of \(G\).
+\end{definition}
+
+\begin{corollary}
+    The set \(\operatorname{Irr}(G)\) is \(\mathbb{C}\)-linearly independent in
+    \(\operatorname{CF}(G)\).
+\end{corollary}
+
+\begin{proof}
+    Suppose that
+    \[
+        \sum_{\chi\in \operatorname{Irr}(G)} a_\chi \chi=0,
+        \qquad a_\chi\in \mathbb{C}.
+    \]
+    Let \(\psi\in \operatorname{Irr}(G)\). Taking the inner product with \(\psi\),
+    and using the row orthogonality relations, we get
+    \[
+        0
+        =
+        \left\langle
+        \sum_{\chi\in \operatorname{Irr}(G)} a_\chi \chi,\psi
+        \right\rangle
+        =
+        \sum_{\chi\in \operatorname{Irr}(G)} a_\chi
+        \langle \chi,\psi\rangle
+        =
+        a_\chi.
+    \]
+    Since this holds for every \(\psi\in \operatorname{Irr}(G)\), all coefficients
+    are zero. Hence \(\operatorname{Irr}(G)\) is \(\mathbb{C}\)-linearly
+    independent.
+\end{proof}
+
+\begin{corollary}
+    The set \(\operatorname{Irr}(G)\) is a \(\mathbb{C}\)-basis of
+    \(\operatorname{CF}(G)\).
+\end{corollary}
+
+\begin{proof}
+    Let
+    \[
+        \operatorname{Irr}(G)=\{\chi_1,\dots,\chi_r\},
+    \]
+    where \(\chi_i\) is afforded by the simple \(\mathbb{C}G\)-module \(S_i\).
+    Since \(\mathbb{C}\) is a splitting field for \(G\), the Artin--Wedderburn
+    decomposition gives
+    \[
+        \mathbb{C}G
+        \cong
+        M_{d_1}(\mathbb{C})
+        \oplus
+        \cdots
+        \oplus
+        M_{d_r}(\mathbb{C}),
+    \]
+    where
+    \[
+        d_i=\dim_{\mathbb{C}}S_i.
+    \]
+    Taking centers, we get
+    \[
+        Z(\mathbb{C}G)
+        \cong
+        Z(M_{d_1}(\mathbb{C}))
+        \oplus
+        \cdots
+        \oplus
+        Z(M_{d_r}(\mathbb{C})).
+    \]
+    Since
+    \[
+        Z(M_{d_i}(\mathbb{C}))=\mathbb{C}I_{d_i},
+    \]
+    we have
+    \[
+        \dim_{\mathbb{C}}Z(\mathbb{C}G)=r.
+    \]
+    On the other hand, we have already seen that
+    \[
+        \operatorname{CF}(G)\cong Z(\mathbb{C}G)
+    \]
+    as \(\mathbb{C}\)-vector spaces. Therefore
+    \[
+        \dim_{\mathbb{C}}\operatorname{CF}(G)
+        =
+        r
+        =
+        |\operatorname{Irr}(G)|.
+    \]
+    Since \(\operatorname{Irr}(G)\) is linearly independent and has cardinality
+    equal to \(\dim_{\mathbb{C}}\operatorname{CF}(G)\), it is a basis of
+    \(\operatorname{CF}(G)\).
+\end{proof}
+
+\begin{corollary}
+    The number of irreducible complex characters of \(G\) is equal to the number
+    of conjugacy classes of \(G\). That is,
+    \[
+        |\operatorname{Irr}(G)|
+        =
+        |\operatorname{Cl}(G)|.
+    \]
+\end{corollary}
+
+\begin{proof}
+    Since \(\operatorname{Irr}(G)\) is a basis of \(\operatorname{CF}(G)\), we have
+    \[
+        |\operatorname{Irr}(G)|
+        =
+        \dim_{\mathbb{C}}\operatorname{CF}(G).
+    \]
+    But \(\operatorname{CF}(G)\) has a basis given by the characteristic functions
+    of the conjugacy classes. Hence
+    \[
+        \dim_{\mathbb{C}}\operatorname{CF}(G)
+        =
+        |\operatorname{Cl}(G)|.
+    \]
+    Therefore
+    \[
+        |\operatorname{Irr}(G)|
+        =
+        |\operatorname{Cl}(G)|.
+    \]
+\end{proof}
+
+\begin{lemma}
+    One has
+    \[
+        |G|
+        =
+        \sum_{\chi\in \operatorname{Irr}(G)} \chi(1)^2.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        S_1,\dots,S_r
+    \]
+    be a complete set of pairwise non-isomorphic simple \(\mathbb{C}G\)-modules,
+    and let
+    \[
+        \chi_i=\chi_{S_i},
+        \qquad
+        d_i=\dim_{\mathbb{C}}S_i.
+    \]
+    As a left \(\mathbb{C}G\)-module, the regular module decomposes as
+    \[
+        \mathbb{C}G
+        \cong
+        S_1^{\oplus d_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus d_r}.
+    \]
+    Taking dimensions gives
+    \[
+        |G|
+        =
+        \dim_{\mathbb{C}}\mathbb{C}G
+        =
+        \sum_{i=1}^r d_i\dim_{\mathbb{C}}S_i
+        =
+        \sum_{i=1}^r d_i^2.
+    \]
+    Since
+    \[
+        d_i=\chi_i(1),
+    \]
+    we obtain
+    \[
+        |G|
+        =
+        \sum_{i=1}^r \chi_i(1)^2
+        =
+        \sum_{\chi\in \operatorname{Irr}(G)} \chi(1)^2.
+    \]
+\end{proof}
+
+\begin{corollary}
+    Let \(V\) be a finite-dimensional \(\mathbb{C}G\)-module. Then
+    \[
+        \langle \chi_V,\chi_V\rangle=1
+    \]
+    if and only if \(V\) is simple.
+\end{corollary}
+
+\begin{proof}
+    Since \(\mathbb{C}G\) is semisimple, we may write
+    \[
+        V
+        \cong
+        S_1^{\oplus n_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus n_r},
+    \]
+    where \(S_1,\dots,S_r\) are pairwise non-isomorphic simple
+    \(\mathbb{C}G\)-modules and \(n_i\geq 0\). Then
+    \[
+        \chi_V
+        =
+        n_1\chi_{S_1}
+        +
+        \cdots
+        +
+        n_r\chi_{S_r}.
+    \]
+    By row orthogonality,
+    \[
+        \langle \chi_V,\chi_V\rangle
+        =
+        n_1^2+\cdots+n_r^2.
+    \]
+    Therefore
+    \[
+        \langle \chi_V,\chi_V\rangle=1
+    \]
+    if and only if exactly one of the \(n_i\)'s is equal to \(1\), and all the
+    others are \(0\). This is equivalent to saying that \(V\) is simple.
+\end{proof}
+
+\begin{lemma}
+    Let \(V\) and \(W\) be finite-dimensional \(\mathbb{C}G\)-modules. Suppose
+    \[
+        V
+        \cong
+        S_1^{\oplus n_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus n_r},
+    \]
+    and
+    \[
+        W
+        \cong
+        S_1^{\oplus m_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus m_r},
+    \]
+    where \(S_1,\dots,S_r\) are pairwise non-isomorphic simple
+    \(\mathbb{C}G\)-modules and \(n_i,m_i\geq 0\). Then
+    \[
+        \langle \chi_V,\chi_W\rangle
+        =
+        n_1m_1+\cdots+n_rm_r.
+    \]
+\end{lemma}
+
+\begin{proof}
+    We have
+    \[
+        \chi_V
+        =
+        \sum_{i=1}^r n_i\chi_{S_i},
+        \qquad
+        \chi_W
+        =
+        \sum_{i=1}^r m_i\chi_{S_i}.
+    \]
+    Therefore, by bilinearity of the inner product and row orthogonality,
+    \[
+        \begin{aligned}
+            \langle \chi_V,\chi_W\rangle
+             & =
+            \left\langle
+            \sum_{i=1}^r n_i\chi_{S_i},
+            \sum_{j=1}^r m_j\chi_{S_j}
+            \right\rangle                        \\
+             & =
+            \sum_{i,j}n_i m_j
+            \langle \chi_{S_i},\chi_{S_j}\rangle \\
+             & =
+            \sum_{i=1}^r n_i m_i.
+        \end{aligned}
+    \]
+\end{proof}
+
+\begin{corollary}
+    Let \(V\) and \(W\) be finite-dimensional \(\mathbb{C}G\)-modules. Then
+    \[
+        \chi_V=\chi_W
+    \]
+    if and only if
+    \[
+        V\cong W.
+    \]
+\end{corollary}
+
+\begin{proof}
+    If \(V\cong W\), then clearly \(\chi_V=\chi_W\).
+
+    Conversely, write
+    \[
+        V
+        \cong
+        S_1^{\oplus n_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus n_r},
+    \]
+    and
+    \[
+        W
+        \cong
+        S_1^{\oplus m_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus m_r}.
+    \]
+    If \(\chi_V=\chi_W\), then for each \(i\),
+    \[
+        n_i
+        =
+        \langle \chi_V,\chi_{S_i}\rangle
+        =
+        \langle \chi_W,\chi_{S_i}\rangle
+        =
+        m_i.
+    \]
+    Hence \(V\) and \(W\) have the same simple direct summands with the same
+    multiplicities. Therefore
+    \[
+        V\cong W.
+    \]
+\end{proof}
+
+\begin{corollary}
+    Let \(V\) be a finite-dimensional \(\mathbb{C}G\)-module, and suppose
+    \[
+        V
+        \cong
+        S_1^{\oplus n_1}
+        \oplus
+        \cdots
+        \oplus
+        S_r^{\oplus n_r},
+    \]
+    where \(S_1,\dots,S_r\) are pairwise non-isomorphic simple
+    \(\mathbb{C}G\)-modules. Then
+    \[
+        n_i
+        =
+        \langle \chi_V,\chi_{S_i}\rangle
+    \]
+    for every \(i\).
+\end{corollary}
+
+\begin{proof}
+    Since
+    \[
+        \chi_V
+        =
+        \sum_{j=1}^r n_j\chi_{S_j},
+    \]
+    row orthogonality gives
+    \[
+        \langle \chi_V,\chi_{S_i}\rangle
+        =
+        \sum_{j=1}^r n_j\langle \chi_{S_j},\chi_{S_i}\rangle
+        =
+        n_i.
+    \]
+\end{proof}
+
+Let
+\[
+    \operatorname{Irr}(G)=\{\chi_1,\dots,\chi_r\},
+\]
+and let
+\[
+    \operatorname{Cl}(G)=\{C_1,\dots,C_r\}
+\]
+be the set of conjugacy classes of \(G\). Choose a representative
+\[
+    g_j\in C_j
+\]
+for each \(j\). The character table of \(G\) is the matrix
+\[
+    X=(\chi_i(g_j))_{1\leq i,j\leq r}.
+\]
+
+\begin{theorem}[Column orthogonality relations]
+    With the notation above, for \(1\leq j,\ell\leq r\), one has
+    \[
+        \sum_{i=1}^r
+        \chi_i(g_j)\overline{\chi_i(g_\ell)}
+        =
+        \begin{cases}
+            |C_G(g_j)|, & j=\ell,     \\
+            0,          & j\neq \ell.
+        \end{cases}
+    \]
+    Equivalently, for arbitrary \(g,h\in G\),
+    \[
+        \sum_{\chi\in \operatorname{Irr}(G)}
+        \chi(g)\overline{\chi(h)}
+        =
+        \begin{cases}
+            |C_G(g)|, & g \text{ and } h \text{ are conjugate in }G,     \\
+            0,        & g \text{ and } h \text{ are not conjugate in }G.
+        \end{cases}
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        D
+        =
+        \frac{1}{|G|}
+        \operatorname{diag}(|C_1|,\dots,|C_r|).
+    \]
+    The row orthogonality relations say that
+    \[
+        \langle \chi_i,\chi_\ell\rangle
+        =
+        \delta_{i\ell}.
+    \]
+    Writing the inner product as a sum over conjugacy classes gives
+    \[
+        \frac{1}{|G|}
+        \sum_{j=1}^r
+        |C_j|\chi_i(g_j)\overline{\chi_\ell(g_j)}
+        =
+        \delta_{i\ell}.
+    \]
+    In matrix form, this is
+    \[
+        X D \overline{X}^{\,t}=I_r.
+    \]
+    Hence \(X\) is invertible, and
+    \[
+        D\overline{X}^{\,t}=X^{-1}.
+    \]
+    Multiplying on the right by \(X\), we get
+    \[
+        D\overline{X}^{\,t}X=I_r.
+    \]
+    Therefore
+    \[
+        \overline{X}^{\,t}X
+        =
+        D^{-1}.
+    \]
+    But
+    \[
+        D^{-1}
+        =
+        \operatorname{diag}\left(
+        \frac{|G|}{|C_1|},
+        \dots,
+        \frac{|G|}{|C_r|}
+        \right).
+    \]
+    By the orbit-stabilizer formula for the conjugation action,
+    \[
+        |C_j|
+        =
+        \frac{|G|}{|C_G(g_j)|}.
+    \]
+    Hence
+    \[
+        D^{-1}
+        =
+        \operatorname{diag}\left(
+        |C_G(g_1)|,
+        \dots,
+        |C_G(g_r)|
+        \right).
+    \]
+    The \((j,\ell)\)-entry of \(\overline{X}^{\,t}X\) is
+    \[
+        \sum_{i=1}^r
+        \overline{\chi_i(g_j)}\chi_i(g_\ell).
+    \]
+    Thus
+    \[
+        \sum_{i=1}^r
+        \overline{\chi_i(g_j)}\chi_i(g_\ell)
+        =
+        \begin{cases}
+            |C_G(g_j)|, & j=\ell,     \\
+            0,          & j\neq \ell.
+        \end{cases}
+    \]
+    Taking complex conjugates gives
+    \[
+        \sum_{i=1}^r
+        \chi_i(g_j)\overline{\chi_i(g_\ell)}
+        =
+        \begin{cases}
+            |C_G(g_j)|, & j=\ell,     \\
+            0,          & j\neq \ell.
+        \end{cases}
+    \]
+
+    Finally, if \(g,h\in G\) are arbitrary, then their character values depend only
+    on their conjugacy classes. Therefore the formula above is equivalent to
+    \[
+        \sum_{\chi\in \operatorname{Irr}(G)}
+        \chi(g)\overline{\chi(h)}
+        =
+        \begin{cases}
+            |C_G(g)|, & g \text{ and } h \text{ are conjugate in }G,     \\
+            0,        & g \text{ and } h \text{ are not conjugate in }G.
+        \end{cases}
+    \]
+\end{proof}

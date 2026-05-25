@@ -1,0 +1,400 @@
+\section{Homework Week 12}
+
+\begin{exercise}
+    Write out a proof of Maschke's Theorem in the case of representations over
+    \(\mathbb{C}\) along the following lines.
+    
+    Given a representation
+    \[
+        \rho : G \longrightarrow \operatorname{GL}(V),
+    \]
+    where \(V\) is a vector space over \(\mathbb{C}\), let
+    \[
+        (\cdot,\cdot)
+    \]
+    be any positive definite Hermitian form on \(V\). Define a new form
+    \[
+        (\cdot,\cdot)_1
+    \]
+    on \(V\) by
+    \[
+        (v,w)_1
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G} (gv,gw).
+    \]
+    Show that \((\cdot,\cdot)_1\) is a positive definite Hermitian form, preserved
+    under the action of \(G\); that is,
+    \[
+        (v,w)_1 = (gv,gw)_1
+    \]
+    always.
+    
+    If \(W\) is a subrepresentation of \(V\), show that
+    \[
+        V = W \oplus W^\perp
+    \]
+    as representations.
+    \end{exercise}
+    
+    \begin{proof}
+        Throughout, write \(gv\) for \(\rho(g)(v)\).
+        
+        First we show that \((\cdot,\cdot)_1\) is Hermitian. Since each map
+        \[
+            v \longmapsto gv
+        \]
+        is linear, and since \((\cdot,\cdot)\) is Hermitian, the averaged form
+        \[
+            (v,w)_1
+            =
+            \frac{1}{|G|}
+            \sum_{g\in G}(gv,gw)
+        \]
+        is again sesquilinear and Hermitian.
+        
+        Next we prove positive definiteness. If \(v\neq 0\), then \(gv\neq 0\) for every
+        \(g\in G\), because \(g\) acts invertibly on \(V\). Hence
+        \[
+            (gv,gv)>0
+        \]
+        for all \(g\in G\). Therefore
+        \[
+            (v,v)_1
+            =
+            \frac{1}{|G|}
+            \sum_{g\in G}(gv,gv)
+            >0.
+        \]
+        Thus \((\cdot,\cdot)_1\) is positive definite.
+        
+        Now let \(h\in G\). Then
+        \[
+            (hv,hw)_1
+            =
+            \frac{1}{|G|}
+            \sum_{g\in G}(ghv,ghw).
+        \]
+        As \(g\) runs through \(G\), so does \(gh\). Hence, after the change of variable
+        \(t=gh\), we obtain
+        \[
+            (hv,hw)_1
+            =
+            \frac{1}{|G|}
+            \sum_{t\in G}(tv,tw)
+            =
+            (v,w)_1.
+        \]
+        Therefore \((\cdot,\cdot)_1\) is preserved by the action of \(G\).
+        
+        Let \(W\subseteq V\) be a subrepresentation, and let \(W^\perp\) denote the
+        orthogonal complement of \(W\) with respect to \((\cdot,\cdot)_1\). Since
+        \((\cdot,\cdot)_1\) is positive definite and \(V\) is finite-dimensional, we have
+        a vector space direct sum
+        \[
+            V = W \oplus W^\perp.
+        \]
+        It remains to show that \(W^\perp\) is \(G\)-stable.
+        
+        Take \(u\in W^\perp\), \(h\in G\), and \(w\in W\). Since \(W\) is a subrepresentation,
+        we have
+        \[
+            h^{-1}w\in W.
+        \]
+        Using the \(G\)-invariance of \((\cdot,\cdot)_1\), we get
+        \[
+            (hu,w)_1
+            =
+            (hu,h(h^{-1}w))_1
+            =
+            (u,h^{-1}w)_1
+            =
+            0,
+        \]
+        because \(u\in W^\perp\) and \(h^{-1}w\in W\). Hence \(hu\in W^\perp\).
+        
+        Thus \(W^\perp\) is a subrepresentation of \(V\). Consequently,
+        \[
+            V = W \oplus W^\perp
+        \]
+        as representations. This proves Maschke's theorem over \(\mathbb{C}\).
+        \end{proof}
+
+    \begin{exercise}
+    Prove the following theorem of Burnside: let \(G\) be a finite group, let \(k\)
+    be an algebraically closed field in which \(|G|\) is invertible, and let
+    \[
+        \rho : G \longrightarrow \operatorname{GL}(V)
+    \]
+    be a representation over \(k\). By taking a basis of \(V\), write each
+    endomorphism \(\rho(g)\) as a matrix. Let
+    \[
+        \dim V = n.
+    \]
+    Show that the representation is simple if and only if there exist \(n^2\)
+    elements
+    \[
+        g_1,\ldots,g_{n^2}\in G
+    \]
+    so that the matrices
+    \[
+        \rho(g_1),\ldots,\rho(g_{n^2})
+    \]
+    are linearly independent, and that this happens if and only if the algebra
+    homomorphism
+    \[
+        kG \longrightarrow \operatorname{End}_k(V)
+    \]
+    is surjective. Note that \(\rho\) itself is generally not surjective.
+    \end{exercise}
+
+    \begin{proof}
+        Let
+        \[
+            \Phi : kG \longrightarrow \operatorname{End}_k(V)
+        \]
+        be the algebra homomorphism induced by the representation, namely
+        \[
+            \Phi\left(\sum_{g\in G} a_g g\right)
+            =
+            \sum_{g\in G} a_g \rho(g).
+        \]
+        Set
+        \[
+            A := \operatorname{Im}\Phi.
+        \]
+        Then \(A\) is the \(k\)-subalgebra of \(\operatorname{End}_k(V)\) spanned by the
+        matrices
+        \[
+            \rho(g), \qquad g\in G.
+        \]
+        
+        A subspace \(W\subseteq V\) is \(G\)-stable if and only if it is stable under every
+        element of \(A\). Hence the representation \(V\) is simple as a representation of
+        \(G\) if and only if \(V\) is a simple left \(A\)-module.
+        
+        Since \(|G|\) is invertible in \(k\), Maschke's theorem implies that \(kG\) is
+        semisimple. Therefore its quotient algebra \(A\) is also semisimple. Since \(k\) is
+        algebraically closed and \(A\) is finite-dimensional semisimple, the Artin--Wedderburn
+        theorem gives
+        \[
+            A \cong
+            M_{m_1}(k)\oplus \cdots \oplus M_{m_r}(k).
+        \]
+        
+        Suppose first that \(V\) is simple as an \(A\)-module. Since \(A\subseteq
+        \operatorname{End}_k(V)\), the action of \(A\) on \(V\) is faithful. But for the algebra
+        \[
+            M_{m_1}(k)\oplus \cdots \oplus M_{m_r}(k),
+        \]
+        a simple module is supported on exactly one simple matrix-algebra summand. If \(r>1\),
+        then all other summands act by zero, contradicting faithfulness. Hence \(r=1\), and
+        therefore
+        \[
+            A \cong M_m(k)
+        \]
+        for some \(m\).
+        
+        The unique simple left \(M_m(k)\)-module is \(k^m\), so
+        \[
+            \dim_k V = m.
+        \]
+        Since \(\dim_k V=n\), we have \(m=n\). Hence
+        \[
+            \dim_k A = m^2 = n^2.
+        \]
+        But \(A\subseteq \operatorname{End}_k(V)\), and
+        \[
+            \dim_k \operatorname{End}_k(V)=n^2.
+        \]
+        Therefore
+        \[
+            A=\operatorname{End}_k(V).
+        \]
+        Thus \(\Phi:kG\to \operatorname{End}_k(V)\) is surjective.
+        
+        Conversely, suppose that
+        \[
+            \Phi:kG\longrightarrow \operatorname{End}_k(V)
+        \]
+        is surjective. Then \(A=\operatorname{End}_k(V)\). Let \(0\neq W\subseteq V\) be an
+        \(A\)-submodule. Choose \(0\neq w\in W\). For any \(v\in V\), there exists a linear
+        endomorphism \(T\in \operatorname{End}_k(V)\) such that
+        \[
+            T(w)=v.
+        \]
+        Since \(A=\operatorname{End}_k(V)\), we have \(T\in A\). Because \(W\) is stable under
+        \(A\), it follows that
+        \[
+            v=T(w)\in W.
+        \]
+        Thus \(W=V\). Hence \(V\) is simple.
+        
+        So the representation is simple if and only if
+        \[
+            \Phi:kG\longrightarrow \operatorname{End}_k(V)
+        \]
+        is surjective.
+        
+        It remains to relate this to the existence of \(n^2\) linearly independent matrices
+        \(\rho(g_i)\). Since
+        \[
+            A=\operatorname{Span}_k\{\rho(g)\mid g\in G\},
+        \]
+        there exist elements
+        \[
+            g_1,\ldots,g_{n^2}\in G
+        \]
+        such that
+        \[
+            \rho(g_1),\ldots,\rho(g_{n^2})
+        \]
+        are linearly independent if and only if
+        \[
+            \dim_k A \geq n^2.
+        \]
+        But \(A\subseteq \operatorname{End}_k(V)\), and
+        \[
+            \dim_k \operatorname{End}_k(V)=n^2.
+        \]
+        Hence this happens if and only if
+        \[
+            \dim_k A=n^2,
+        \]
+        which is equivalent to
+        \[
+            A=\operatorname{End}_k(V).
+        \]
+        Therefore this happens if and only if \(\Phi\) is surjective.
+        
+        Combining the previous equivalences, the representation is simple if and only if there
+        exist \(n^2\) elements
+        \[
+            g_1,\ldots,g_{n^2}\in G
+        \]
+        such that
+        \[
+            \rho(g_1),\ldots,\rho(g_{n^2})
+        \]
+        are linearly independent, and this is equivalent to the surjectivity of
+        \[
+            kG\longrightarrow \operatorname{End}_k(V).
+        \]
+        \end{proof}
+    
+    \begin{exercise}
+    Let
+    \[
+        G = \langle x \mid x^n = 1 \rangle
+    \]
+    be a cyclic group of order \(n\), and let \(\zeta_n\in\mathbb{C}\) be a primitive
+    \(n\)-th root of unity. Then the simple complex characters of \(G\) are the
+    \(n\) functions
+    \[
+        \chi_r(x^s) = \zeta_n^{rs},
+    \]
+    where
+    \[
+        0 \leq r \leq n-1.
+    \]
+    \end{exercise}
+
+    \begin{proof}
+        Let
+        \[
+            G=\langle x\mid x^n=1\rangle.
+        \]
+        For each \(0\leq r\leq n-1\), define a one-dimensional representation
+        \[
+            \rho_r:G\longrightarrow \operatorname{GL}_1(\mathbb{C})
+        \]
+        by
+        \[
+            \rho_r(x)=\zeta_n^r.
+        \]
+        Since \((\zeta_n^r)^n=1\), this is a well-defined representation of \(G\). Its character
+        is given by
+        \[
+            \chi_r(x^s)
+            =
+            \operatorname{tr}(\rho_r(x^s))
+            =
+            \operatorname{tr}\bigl((\zeta_n^r)^s\bigr)
+            =
+            \zeta_n^{rs}.
+        \]
+        Each \(\rho_r\) is one-dimensional, hence simple.
+        
+        It remains to prove that every simple complex representation of \(G\) is one of these.
+        Let
+        \[
+            \rho:G\longrightarrow \operatorname{GL}(V)
+        \]
+        be a simple complex representation, and write
+        \[
+            T:=\rho(x).
+        \]
+        Since \(x^n=1\), we have
+        \[
+            T^n=I.
+        \]
+        Therefore the minimal polynomial of \(T\) divides
+        \[
+            X^n-1.
+        \]
+        Over \(\mathbb{C}\), the polynomial \(X^n-1\) splits into distinct linear factors:
+        \[
+            X^n-1=\prod_{r=0}^{n-1}(X-\zeta_n^r).
+        \]
+        Hence \(T\) is diagonalizable, and
+        \[
+            V=\bigoplus_{\lambda^n=1} V_\lambda,
+        \]
+        where
+        \[
+            V_\lambda=\{v\in V\mid T v=\lambda v\}.
+        \]
+        
+        Each eigenspace \(V_\lambda\) is \(G\)-stable, because \(G\) is generated by \(x\), and
+        \(x\) acts on \(V_\lambda\) by the scalar \(\lambda\). Since \(V\) is simple, exactly one
+        eigenspace is nonzero. Thus
+        \[
+            V=V_\lambda
+        \]
+        for some \(n\)-th root of unity \(\lambda\).
+        
+        Moreover, if \(\dim_{\mathbb{C}}V>1\), then any one-dimensional subspace of \(V\) is
+        stable under \(G\), because \(x\) acts on all of \(V\) by the scalar \(\lambda\). This would
+        contradict the simplicity of \(V\). Hence
+        \[
+            \dim_{\mathbb{C}}V=1.
+        \]
+        Therefore \(V\) is a one-dimensional representation on which
+        \[
+            x
+        \]
+        acts by some \(n\)-th root of unity \(\lambda\). Since \(\zeta_n\) is primitive, there is a
+        unique \(r\) with
+        \[
+            0\leq r\leq n-1
+        \]
+        such that
+        \[
+            \lambda=\zeta_n^r.
+        \]
+        Thus \(V\cong \rho_r\), and its character is
+        \[
+            \chi_r(x^s)=\zeta_n^{rs}.
+        \]
+        
+        Finally, the characters \(\chi_0,\ldots,\chi_{n-1}\) are distinct, since
+        \[
+            \chi_r(x)=\zeta_n^r
+        \]
+        are distinct for \(0\leq r\leq n-1\). Therefore the simple complex characters of \(G\)
+        are precisely
+        \[
+            \chi_r(x^s)=\zeta_n^{rs},
+            \qquad 0\leq r\leq n-1.
+        \]
+        \end{proof}

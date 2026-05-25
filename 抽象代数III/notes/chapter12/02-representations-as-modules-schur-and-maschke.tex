@@ -1,0 +1,551 @@
+\section{Representations as modules, Schur's lemma, and Maschke's theorem}
+Let \(G\) be a finite group and let \(k\) be a field. A \(k\)-representation
+of \(G\) is a pair \((M,\rho)\), where \(M\) is a \(k\)-vector space and
+\[
+    \rho:G\longrightarrow \operatorname{GL}(M)
+\]
+is a group homomorphism.
+
+\begin{proposition}
+    Let \((M,\rho)\) be a \(k\)-representation of \(G\). Then \(\rho\) extends
+    uniquely by \(k\)-linearity to a unital \(k\)-algebra homomorphism
+    \[
+        \widetilde{\rho}:kG\longrightarrow \operatorname{End}_k(M).
+    \]
+    Explicitly, if
+    \[
+        x=\sum_{g\in G}a_g g\in kG,
+    \]
+    then
+    \[
+        \widetilde{\rho}(x)
+        =
+        \sum_{g\in G}a_g \rho(g).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(kG\) is the free \(k\)-vector space with basis \(G\), the map
+    \(\rho:G\to \operatorname{GL}(M)\subseteq \operatorname{End}_k(M)\) extends
+    uniquely to a \(k\)-linear map
+    \[
+        \widetilde{\rho}:kG\to \operatorname{End}_k(M).
+    \]
+    We need to check that \(\widetilde{\rho}\) is multiplicative.
+
+    Let
+    \[
+        x=\sum_{g\in G}a_g g,
+        \qquad
+        y=\sum_{h\in G}b_h h.
+    \]
+    Then
+    \[
+        xy
+        =
+        \sum_{g,h\in G}a_gb_h gh.
+    \]
+    Therefore
+    \[
+        \begin{aligned}
+            \widetilde{\rho}(xy)
+             & =
+            \sum_{g,h\in G}a_gb_h \rho(gh)       \\
+             & =
+            \sum_{g,h\in G}a_gb_h \rho(g)\rho(h) \\
+             & =
+            \left(\sum_{g\in G}a_g\rho(g)\right)
+            \left(\sum_{h\in G}b_h\rho(h)\right) \\
+             & =
+            \widetilde{\rho}(x)\widetilde{\rho}(y).
+        \end{aligned}
+    \]
+    Moreover,
+    \[
+        \widetilde{\rho}(1_G)=\rho(1_G)=\operatorname{id}_M.
+    \]
+    Hence \(\widetilde{\rho}\) is a unital \(k\)-algebra homomorphism.
+\end{proof}
+
+Conversely, suppose we are given a unital \(k\)-algebra homomorphism
+\[
+    \rho:kG\longrightarrow \operatorname{End}_k(M).
+\]
+Then its restriction to \(G\subseteq kG\) gives a group homomorphism
+\[
+    G\longrightarrow \operatorname{GL}(M).
+\]
+Indeed, for \(g\in G\), the inverse of \(g\) in \(kG\) is \(g^{-1}\), so
+\[
+    \rho(g)\rho(g^{-1})
+    =
+    \rho(gg^{-1})
+    =
+    \rho(1)
+    =
+    \operatorname{id}_M.
+\]
+Thus \(\rho(g)\in \operatorname{GL}(M)\).
+
+\begin{proposition}
+    Giving a \(k\)-representation of \(G\) on \(M\) is equivalent to giving a
+    left \(kG\)-module structure on \(M\).
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        \rho:kG\longrightarrow \operatorname{End}_k(M)
+    \]
+    be the algebra homomorphism associated to a representation. Define
+    \[
+        kG\times M\longrightarrow M,
+        \qquad
+        (x,m)\longmapsto x\cdot m:=\rho(x)(m).
+    \]
+    Since \(\rho\) is a unital algebra homomorphism, we have
+    \[
+        (xy)\cdot m
+        =
+        x\cdot (y\cdot m),
+        \qquad
+        1\cdot m=m.
+    \]
+    Thus \(M\) becomes a left \(kG\)-module.
+
+    Conversely, if \(M\) is a left \(kG\)-module, then every \(g\in G\) acts on
+    \(M\) by an invertible \(k\)-linear map, with inverse given by the action of
+    \(g^{-1}\). Hence we get a group homomorphism
+    \[
+        G\longrightarrow \operatorname{GL}(M),
+        \qquad
+        g\longmapsto (m\mapsto g\cdot m).
+    \]
+    These two constructions are inverse to each other.
+\end{proof}
+
+Therefore one has an equivalence of categories
+\[
+    \operatorname{Rep}_k(G)
+    \simeq
+    kG\text{-}\operatorname{Mod}.
+\]
+Under this equivalence, morphisms of representations are precisely
+\(kG\)-module homomorphisms.
+
+\begin{definition}[Regular representation]
+    The \emph{left regular representation} of \(G\) is the representation on
+    \(kG\) given by left multiplication:
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(kG),
+        \qquad
+        \rho(g)(x)=gx.
+    \]
+    Equivalently, it is the \(kG\)-module \(kG\) acting on itself by left
+    multiplication.
+\end{definition}
+
+The associated algebra homomorphism is
+\[
+    \rho:kG\longrightarrow \operatorname{End}_k(kG),
+    \qquad
+    \rho(a)(x)=ax.
+\]
+
+\begin{lemma}
+    The algebra homomorphism
+    \[
+        \rho:kG\longrightarrow \operatorname{End}_k(kG)
+    \]
+    associated with the regular representation is injective. In particular, the
+    regular representation is faithful.
+\end{lemma}
+
+\begin{proof}
+    Suppose \(a\in kG\) satisfies
+    \[
+        \rho(a)=0.
+    \]
+    Then \(\rho(a)\) is the zero endomorphism of \(kG\). Applying it to the identity
+    element \(1\in kG\), we get
+    \[
+        0=\rho(a)(1)=a\cdot 1=a.
+    \]
+    Therefore \(a=0\), and hence \(\rho\) is injective.
+\end{proof}
+
+\begin{lemma}[Schur's lemma]
+    Let \((S,\rho)\) and \((S',\rho')\) be two irreducible \(k\) representations of
+    \(G\). Equivalently, let \(S\) and \(S'\) be simple left \(kG\)-modules. Then:
+
+    \begin{enumerate}
+        \item If \(S\) and \(S'\) are not isomorphic, then
+              \[
+                  \operatorname{Hom}_{kG}(S,S')=0.
+              \]
+
+        \item The endomorphism algebra
+              \[
+                  \operatorname{End}_{kG}(S)
+                  =
+                  \operatorname{Hom}_{kG}(S,S)
+              \]
+              is a division \(k\)-algebra.
+
+        \item If \(k=\overline{k}\), then
+              \[
+                  \operatorname{End}_{kG}(S)=k\operatorname{id}_S.
+              \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        f:S\longrightarrow S'
+    \]
+    be a \(kG\)-module homomorphism. Then \(\ker f\) is a submodule of \(S\), and
+    \(\operatorname{Im} f\) is a submodule of \(S'\). Since \(S\) and \(S'\) are
+    simple, we have
+    \[
+        \ker f=0 \quad \text{or} \quad \ker f=S,
+    \]
+    and
+    \[
+        \operatorname{Im} f=0 \quad \text{or} \quad \operatorname{Im} f=S'.
+    \]
+    If \(f\neq 0\), then \(\ker f\neq S\) and \(\operatorname{Im} f\neq 0\). Hence
+    \[
+        \ker f=0,
+        \qquad
+        \operatorname{Im} f=S'.
+    \]
+    Thus every nonzero \(kG\)-module homomorphism
+    \[
+        f:S\to S'
+    \]
+    is an isomorphism. Therefore, if \(S\not\cong S'\), no nonzero homomorphism can
+    exist, and so
+    \[
+        \operatorname{Hom}_{kG}(S,S')=0.
+    \]
+
+    Taking \(S'=S\), we see that every nonzero element of
+    \(\operatorname{End}_{kG}(S)\) is an automorphism of \(S\). Hence
+    \[
+        \operatorname{End}_{kG}(S)
+    \]
+    is a division \(k\)-algebra.
+
+    Finally, assume that \(k=\overline{k}\). Let
+    \[
+        f\in \operatorname{End}_{kG}(S).
+    \]
+    Since \(S\) is finite-dimensional over the algebraically closed field \(k\),
+    the \(k\)-linear map \(f:S\to S\) has an eigenvalue \(\lambda\in k\). Thus
+    \[
+        f-\lambda\operatorname{id}_S
+    \]
+    is not invertible as a \(k\)-linear map. But it is still a \(kG\)-module
+    endomorphism of \(S\). Since \(\operatorname{End}_{kG}(S)\) is a division
+    algebra, every nonzero element is invertible. Therefore
+    \[
+        f-\lambda\operatorname{id}_S=0.
+    \]
+    Hence
+    \[
+        f=\lambda\operatorname{id}_S.
+    \]
+    So
+    \[
+        \operatorname{End}_{kG}(S)=k\operatorname{id}_S.
+    \]
+\end{proof}
+
+\begin{corollary}
+    Let \(k=\overline{k}\), and let
+    \[
+        \rho:G\longrightarrow \operatorname{GL}_n(k)
+    \]
+    be an irreducible representation of \(G\). If \(M\in \operatorname{GL}_n(k)\)
+    satisfies
+    \[
+        M^{-1}\rho(g)M=\rho(g)
+    \]
+    for all \(g\in G\), then \(M\) is a scalar matrix.
+\end{corollary}
+
+\begin{proof}
+    The condition
+    \[
+        M^{-1}\rho(g)M=\rho(g)
+    \]
+    is equivalent to
+    \[
+        \rho(g)M=M\rho(g)
+    \]
+    for all \(g\in G\). Thus \(M\) is an endomorphism of the representation
+    \((k^n,\rho)\), that is,
+    \[
+        M\in \operatorname{End}_{kG}(k^n).
+    \]
+    Since the representation is irreducible and \(k\) is algebraically closed,
+    Schur's lemma gives
+    \[
+        \operatorname{End}_{kG}(k^n)=k\operatorname{id}_{k^n}.
+    \]
+    Therefore
+    \[
+        M=\lambda I_n
+    \]
+    for some \(\lambda\in k\).
+\end{proof}
+
+\begin{theorem}
+    If
+    \[
+        \operatorname{char} k \mid |G|,
+    \]
+    then \(kG\) is not semisimple.
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        \varepsilon:kG\longrightarrow k
+    \]
+    be the augmentation map, defined by
+    \[
+        \varepsilon\left(\sum_{g\in G}a_g g\right)
+        =
+        \sum_{g\in G}a_g.
+    \]
+    This is a homomorphism of left \(kG\)-modules, where \(k\) is the trivial
+    \(kG\)-module.
+
+    Assume, for contradiction, that \(kG\) is semisimple. Then the surjection
+    \[
+        \varepsilon:kG\longrightarrow k
+    \]
+    splits as a \(kG\)-module homomorphism. Hence there exists a \(kG\)-module
+    homomorphism
+    \[
+        s:k\longrightarrow kG
+    \]
+    such that
+    \[
+        \varepsilon\circ s=\operatorname{id}_k.
+    \]
+    Let
+    \[
+        x=s(1)\in kG.
+    \]
+    Since \(s\) is a \(kG\)-module homomorphism and \(k\) is the trivial module, for
+    every \(h\in G\) we have
+    \[
+        hx=x.
+    \]
+    Thus \(x\) is fixed by left multiplication by every element of \(G\).
+
+    Write
+    \[
+        x=\sum_{g\in G}a_g g.
+    \]
+    The condition \(hx=x\) for all \(h\in G\) implies that all coefficients
+    \(a_g\) are equal. Therefore
+    \[
+        x=a\sum_{g\in G}g
+    \]
+    for some \(a\in k\). Hence
+    \[
+        \varepsilon(x)
+        =
+        a|G|.
+    \]
+    But \(\operatorname{char} k\mid |G|\), so \(|G|=0\) in \(k\). Thus
+    \[
+        \varepsilon(x)=0.
+    \]
+    On the other hand,
+    \[
+        \varepsilon(x)
+        =
+        \varepsilon(s(1))
+        =
+        1,
+    \]
+    a contradiction. Therefore \(kG\) is not semisimple.
+\end{proof}
+
+\begin{theorem}[Maschke's theorem]
+    If
+    \[
+        \operatorname{char} k\nmid |G|,
+    \]
+    then \(kG\) is semisimple.
+\end{theorem}
+
+\begin{proof}
+    Let \(V\) be a left \(kG\)-module, and let
+    \[
+        W\subseteq V
+    \]
+    be a \(kG\)-submodule. We prove that \(W\) has a \(kG\)-submodule complement in
+    \(V\).
+
+    Let
+    \[
+        \iota:W\hookrightarrow V
+    \]
+    be the inclusion map. Since \(W\) is a \(kG\)-submodule, \(\iota\) is a
+    \(kG\)-module homomorphism.
+
+    As \(k\)-vector spaces, choose a complement \(W'\) of \(W\) in \(V\), so that
+    \[
+        V=W\oplus W'.
+    \]
+    Let
+    \[
+        p:V\longrightarrow W
+    \]
+    be the \(k\)-linear projection onto \(W\) with respect to this decomposition.
+    Thus
+    \[
+        p\circ \iota=\operatorname{id}_W.
+    \]
+    The map \(p\) need not be a \(kG\)-module homomorphism. We now average it over
+    the group.
+
+    Let
+    \[
+        \rho:G\longrightarrow \operatorname{GL}(V)
+    \]
+    be the representation corresponding to the \(kG\)-module \(V\). Define
+    \[
+        \pi:V\longrightarrow W
+    \]
+    by
+    \[
+        \pi(v)
+        =
+        \frac{1}{|G|}
+        \sum_{g\in G}
+        \rho(g)^{-1}p(\rho(g)v).
+    \]
+    This is well-defined because \(|G|\neq 0\) in \(k\).
+
+    We claim that \(\pi\) is a \(kG\)-module homomorphism. Let \(h\in G\). Then
+    \[
+        \begin{aligned}
+            \rho(h)^{-1}\pi\rho(h)
+             & =
+            \rho(h)^{-1}
+            \left(
+            \frac{1}{|G|}
+            \sum_{g\in G}
+            \rho(g)^{-1}p\rho(g)
+            \right)
+            \rho(h)                                 \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}
+            \rho(h)^{-1}\rho(g)^{-1}p\rho(g)\rho(h) \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}
+            \rho(gh)^{-1}p\rho(gh).
+        \end{aligned}
+    \]
+    Since \(g\mapsto gh\) is a permutation of \(G\), we get
+    \[
+        \rho(h)^{-1}\pi\rho(h)=\pi.
+    \]
+    Equivalently,
+    \[
+        \pi\rho(h)=\rho(h)\pi
+    \]
+    for all \(h\in G\). Hence \(\pi\) is a \(kG\)-module homomorphism.
+
+    Next, for \(w\in W\), since \(W\) is a \(kG\)-submodule, we have
+    \[
+        \rho(g)w\in W
+    \]
+    for all \(g\in G\). Therefore
+    \[
+        p(\rho(g)w)=\rho(g)w.
+    \]
+    Thus
+    \[
+        \begin{aligned}
+            \pi(w)
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}
+            \rho(g)^{-1}p(\rho(g)w) \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}
+            \rho(g)^{-1}\rho(g)w    \\
+             & =
+            \frac{1}{|G|}
+            \sum_{g\in G}w          \\
+             & =
+            w.
+        \end{aligned}
+    \]
+    Hence
+    \[
+        \pi\circ \iota=\operatorname{id}_W.
+    \]
+
+    Now set
+    \[
+        U=\ker \pi.
+    \]
+    Since \(\pi\) is a \(kG\)-module homomorphism, \(U\) is a \(kG\)-submodule of
+    \(V\). We claim that
+    \[
+        V=W\oplus U.
+    \]
+
+    For every \(v\in V\), we have
+    \[
+        v=\pi(v)+\bigl(v-\pi(v)\bigr).
+    \]
+    Here \(\pi(v)\in W\), and
+    \[
+        \pi\bigl(v-\pi(v)\bigr)
+        =
+        \pi(v)-\pi^2(v)
+        =
+        \pi(v)-\pi(v)
+        =
+        0,
+    \]
+    because \(\pi\) is the identity on \(W\). Hence
+    \[
+        v-\pi(v)\in U.
+    \]
+    Thus \(V=W+U\).
+
+    Finally, if \(w\in W\cap U\), then
+    \[
+        \pi(w)=w
+    \]
+    because \(\pi\) is the identity on \(W\), while
+    \[
+        \pi(w)=0
+    \]
+    because \(w\in U=\ker\pi\). Hence \(w=0\). Therefore
+    \[
+        W\cap U=0.
+    \]
+    So
+    \[
+        V=W\oplus U
+    \]
+    as \(kG\)-modules.
+
+    Thus every \(kG\)-submodule of every \(kG\)-module has a complement. Therefore
+    \(kG\) is semisimple.
+\end{proof}
