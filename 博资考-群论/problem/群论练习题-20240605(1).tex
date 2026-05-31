@@ -1,0 +1,1727 @@
+% Extracted from 群论练习题-20240605(1).pdf.
+
+\providecommand{\rank}{\operatorname{rank}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Syl}{\operatorname{Syl}}
+\providecommand{\Hall}{\operatorname{Hall}}
+\providecommand{\Hol}{\operatorname{Hol}}
+\providecommand{\Inn}{\operatorname{Inn}}
+\providecommand{\Out}{\operatorname{Out}}
+\providecommand{\Fit}{\operatorname{Fit}}
+\providecommand{\Core}{\operatorname{Core}}
+
+\begin{exercise}
+Find conjugacy classes and fusion classes of \(A_5\).
+\end{exercise}
+
+\begin{proof}
+The conjugacy classes of \(A_5\) are obtained by intersecting the \(S_5\)
+cycle-type classes with \(A_5\). The result is
+\[
+    \{1\},
+\]
+the \(15\) double transpositions,
+\[
+    (ab)(cd),
+\]
+the \(20\) \(3\)-cycles, and two classes of \(5\)-cycles, each of size \(12\).
+For example, if \(x=(1\,2\,3\,4\,5)\), then the two \(A_5\)-classes of
+\(5\)-cycles are represented by \(x\) and \(x^2\).
+
+The fusion classes are the \(\Aut(A_5)\)-orbits. Since
+\[
+    \Aut(A_5)\cong S_5,
+\]
+these are just the \(S_5\)-conjugacy classes contained in \(A_5\):
+\[
+    \{1\},\qquad
+    \{x\in A_5: |x|=2\},\qquad
+    \{x\in A_5: |x|=3\},\qquad
+    \{x\in A_5: |x|=5\}.
+\]
+Thus the two \(A_5\)-classes of \(5\)-cycles fuse under \(\Aut(A_5)\).
+\end{proof}
+
+\begin{exercise}
+    Determine the conjugacy classes and fusion classes of
+    \[
+        (\mathbb Z/p^e\mathbb Z)^d
+        \qquad\text{and}\qquad
+        \mathbb Z/p^a\mathbb Z\times \mathbb Z/p^b\mathbb Z.
+    \]
+    \end{exercise}
+    
+    \begin{proof}
+    Both groups are abelian. Hence every conjugacy class is a singleton.
+    Therefore it remains only to determine the fusion classes, that is, the
+    orbits under the automorphism group.
+    
+    First let
+    \[
+        G=(\mathbb Z/p^e\mathbb Z)^d.
+    \]
+    Put
+    \[
+        R=\mathbb Z/p^e\mathbb Z.
+    \]
+    Then \(G\) is a free \(R\)-module of rank \(d\), and
+    \[
+        \Aut(G)=\GL_d(R).
+    \]
+    
+    For \(0\neq v\in G\), define
+    \[
+        \nu(v)=\max\{i\mid v\in p^iG\}.
+    \]
+    Equivalently,
+    \[
+        v\in p^iG\setminus p^{i+1}G
+        \quad\Longleftrightarrow\quad
+        \nu(v)=i.
+    \]
+    Since each subgroup \(p^iG\) is characteristic in \(G\), the integer
+    \(\nu(v)\) is invariant under \(\Aut(G)\).
+    
+    Conversely, suppose
+    \[
+        v\in p^iG\setminus p^{i+1}G.
+    \]
+    Then
+    \[
+        v=p^i u
+    \]
+    for some \(u\in G\setminus pG\). Since \(R\) is local with maximal ideal
+    \((p)\), the condition \(u\notin pG\) means that \(u\) is a primitive vector.
+    Hence \(u\) can be extended to an \(R\)-basis of \(G\). Therefore some element
+    of \(\GL_d(R)\) sends \(u\) to \(e_1\), and hence sends \(v\) to
+    \[
+        p^i e_1.
+    \]
+    Thus the fusion classes of \(G=(\mathbb Z/p^e\mathbb Z)^d\) are
+    \[
+        \{0\},
+        \qquad
+        p^iG\setminus p^{i+1}G
+        \quad (0\leq i<e).
+    \]
+    Since an element of \(p^iG\setminus p^{i+1}G\) has order \(p^{e-i}\), this is
+    equivalently the statement that two nonzero elements are fused if and only if
+    they have the same order.
+    
+    Now let
+    \[
+        G=\langle x\rangle\oplus \langle y\rangle
+        \cong C_{p^a}\times C_{p^b},
+        \qquad a\geq b,
+    \]
+    where
+    \[
+        |x|=p^a,
+        \qquad
+        |y|=p^b.
+    \]
+    We shall write
+    \[
+        p^a x=0,
+        \qquad
+        p^b y=0.
+    \]
+    
+    We claim that the fusion classes are represented uniquely by the elements
+    \[
+        p^i x+p^j y,
+    \]
+    where
+    \[
+        0\leq i\leq a,
+        \qquad
+        0\leq j\leq b,
+    \]
+    and the pair \((i,j)\) satisfies the canonical conditions
+    \[
+        j\leq i,
+        \qquad
+        b-j\leq a-i.
+    \]
+    Equivalently,
+    \[
+        j\leq i\leq a-b+j.
+    \]
+    Thus the fusion classes are precisely
+    \[
+        \Aut(G)\cdot (p^i x+p^j y)
+    \]
+    for all such canonical pairs \((i,j)\).
+    
+    We prove existence first. We shall use the following elementary automorphisms:
+    \[
+        x\mapsto ux,\qquad y\mapsto vy,
+    \]
+    where \(u\in(\mathbb Z/p^a\mathbb Z)^\times\) and
+    \(v\in(\mathbb Z/p^b\mathbb Z)^\times\), and also
+    \[
+        x\mapsto x+cy,\qquad y\mapsto y,
+    \]
+    as well as
+    \[
+        x\mapsto x,\qquad y\mapsto y+p^{a-b}dx.
+    \]
+    These are automorphisms because their inverses are obtained by replacing
+    \(c\) or \(d\) by \(-c\) or \(-d\), and because \(p^{a-b}x\) has order
+    dividing \(p^b\).
+    
+    Let
+    \[
+        g=\alpha x+\beta y\in G.
+    \]
+    If \(g=0\), then
+    \[
+        g=p^a x+p^b y,
+    \]
+    which corresponds to the canonical pair \((a,b)\).
+    
+    Assume now that \(g\neq 0\). Define
+    \[
+        r=v_p(\alpha),
+        \qquad
+        s=v_p(\beta),
+    \]
+    with the conventions
+    \[
+        r=a \quad\text{if } \alpha=0,
+        \qquad
+        s=b \quad\text{if } \beta=0.
+    \]
+    Then the order of \(g\) is
+    \[
+        |g|=p^m,
+        \qquad
+        m=\max\{a-r,\ b-s\}.
+    \]
+    
+    There are two cases.
+    
+    First suppose
+    \[
+        a-r\geq b-s.
+    \]
+    Then the \(x\)-component has maximal order. In this case \(r<a\). By scaling
+    \(x\), we may assume that the \(x\)-coefficient is exactly \(p^r\). Thus
+    \[
+        g\sim p^r x+\beta y.
+    \]
+    If \(s<r\), then either \(\beta=0\), in which case \(s=b\), or we may scale
+    \(y\) so that \(\beta=p^s\). Hence
+    \[
+        g\sim p^r x+p^s y.
+    \]
+    The pair \((r,s)\) is canonical, since
+    \[
+        s<r
+    \]
+    and
+    \[
+        b-s\leq a-r
+    \]
+    by assumption.
+    
+    If \(s\geq r\), then \(r\leq b\). If \(r=b\), then \(\beta=0\), and
+    \[
+        g\sim p^r x=p^r x+p^b y.
+    \]
+    The pair \((r,b)\) is canonical. If \(r<b\), write
+    \[
+        \beta=p^r w
+        \qquad
+        \text{in } \mathbb Z/p^b\mathbb Z.
+    \]
+    Using the automorphism
+    \[
+        x\mapsto x+cy,
+        \qquad
+        y\mapsto y,
+    \]
+    we may replace the \(y\)-coefficient by
+    \[
+        p^r(w+c).
+    \]
+    Choosing \(c\) so that
+    \[
+        w+c\equiv 1\pmod{p^{b-r}},
+    \]
+    we obtain
+    \[
+        g\sim p^r x+p^r y.
+    \]
+    The pair \((r,r)\) is canonical.
+    
+    Now suppose
+    \[
+        b-s>a-r.
+    \]
+    Then the \(y\)-component has maximal order, so \(s<b\). Put
+    \[
+        i=a-b+s.
+    \]
+    The inequality
+    \[
+        b-s>a-r
+    \]
+    is equivalent to
+    \[
+        r>i.
+    \]
+    After scaling \(y\), we may assume
+    \[
+        g=\alpha x+p^s y.
+    \]
+    Using the automorphism
+    \[
+        x\mapsto x,
+        \qquad
+        y\mapsto y+p^{a-b}x,
+    \]
+    we obtain
+    \[
+        g\mapsto
+        \bigl(\alpha+p^{s+a-b}\bigr)x+p^s y
+        =
+        \bigl(\alpha+p^i\bigr)x+p^s y.
+    \]
+    Since \(r>i\), the element \(\alpha\) is divisible by \(p^{i+1}\). Hence
+    \[
+        \alpha+p^i=p^i u
+    \]
+    for some unit \(u\). Scaling \(x\), we get
+    \[
+        g\sim p^i x+p^s y.
+    \]
+    The pair \((i,s)\) is canonical because
+    \[
+        s\leq a-b+s=i
+    \]
+    and
+    \[
+        b-s=a-i.
+    \]
+    This proves that every element is automorphic to some canonical representative.
+    
+    It remains to prove uniqueness. For \(g\in G\), define its height by
+    \[
+        h(g)=\max\{t\mid g\in p^tG\},
+    \]
+    with the convention \(h(0)=\infty\). Since each \(p^tG\) is characteristic,
+    height is invariant under automorphisms. Of course, the order of an element is
+    also invariant under automorphisms.
+    
+    Let
+    \[
+        g_{i,j}=p^i x+p^j y
+    \]
+    be a canonical representative. The canonical condition
+    \[
+        b-j\leq a-i
+    \]
+    implies
+    \[
+        |g_{i,j}|=p^{a-i}.
+    \]
+    Therefore the order of \(g_{i,j}\) determines \(i\).
+    
+    For fixed \(i\), the height of \(g_{i,j}\) is
+    \[
+        h(g_{i,j})=
+        \begin{cases}
+            j, & j<b,\\
+            i, & j=b.
+        \end{cases}
+    \]
+    This determines \(j\) among the canonical possibilities. Indeed, if \(j<b\), then
+    \(j=h(g_{i,j})\). If \(j=b\), then the condition \(j\leq i\) gives \(b\leq i\).
+    Thus no canonical representative with \(j'<b\) can have the same height \(i\),
+    because \(j'=i\) would force \(i<b\), contradicting \(b\leq i\).
+    
+    Hence two canonical representatives are automorphic only if their pairs
+    \((i,j)\) are equal. This proves uniqueness.
+    
+    Therefore, for
+    \[
+        G\cong C_{p^a}\times C_{p^b},
+        \qquad a\geq b,
+    \]
+    the fusion classes are represented uniquely by
+    \[
+        p^i x+p^j y
+    \]
+    with
+    \[
+        0\leq i\leq a,
+        \qquad
+        0\leq j\leq b,
+        \qquad
+        j\leq i,
+        \qquad
+        b-j\leq a-i.
+    \]
+    If \(b>a\), the same description applies after interchanging the two cyclic
+    factors.
+    \end{proof}
+
+\begin{exercise}
+Let \(G = \mathrm{D}_{2n}\), a dihedral group of order \(2n\). Find
+\(\operatorname{Aut}(G)\), and determine the conjugacy classes and fusion classes of
+elements of \(G\).
+\end{exercise}
+
+\begin{proof}
+Write
+\[
+    G=\langle r,s\mid r^n=s^2=1,\ srs=r^{-1}\rangle.
+\]
+The cyclic subgroup \(\langle r\rangle\) is characteristic, since it is the
+unique cyclic subgroup of index \(2\) except in the small cases where the same
+formula is checked directly. Hence an automorphism has the form
+\[
+    r\mapsto r^u,\qquad s\mapsto r^v s,
+\]
+where \(u\in(\mathbb Z/n\mathbb Z)^\times\) and \(v\in\mathbb Z/n\mathbb Z\).
+Conversely, every such choice defines an automorphism. Therefore
+\[
+    \Aut(D_{2n})\cong \mathbb Z_n\rtimes (\mathbb Z/n\mathbb Z)^\times,
+\]
+the affine group on \(\mathbb Z_n\).
+
+The conjugacy classes of rotations are
+\[
+    \{r^i,r^{-i}\},
+\]
+with the obvious singleton exceptions \(r^0=1\), and \(r^{n/2}\) when \(n\) is
+even. If \(n\) is odd, all reflections lie in one conjugacy class:
+\[
+    \{r^i s\mid 0\leq i<n\}.
+\]
+If \(n\) is even, the reflections split into two conjugacy classes:
+\[
+    \{r^{2i}s\mid 0\leq i<n/2\},
+    \qquad
+    \{r^{2i+1}s\mid 0\leq i<n/2\}.
+\]
+
+For fusion classes, the automorphism group sends \(r^i\) to \(r^{ui}\), with
+\(u\) a unit modulo \(n\). Thus the rotation fusion classes are determined by
+\(\gcd(i,n)\), equivalently by the order of \(r^i\). The formula
+\[
+    s\mapsto r^v s
+\]
+shows that all reflections are fused by \(\Aut(G)\). Hence the fusion classes
+are the identity, the sets of rotations of each fixed order \(>1\), and one
+class consisting of all reflections.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a \(p\)-group, where \(p\) be a prime.
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that the center \(Z(G) \neq 1\).
+    \item Classify groups of order \(p^3\).
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\((a)\) The class equation gives
+\[
+    |G|
+    =
+    |Z(G)|+\sum_i [G:C_G(x_i)],
+\]
+where \(x_i\) runs over representatives of the noncentral conjugacy classes.
+Each noncentral class has size divisible by \(p\). Hence
+\[
+    |Z(G)|\equiv |G|\equiv 0\pmod p.
+\]
+Thus \(p\mid |Z(G)|\), and so \(Z(G)\neq 1\).
+
+\((b)\) If \(|G|=p^3\) and \(G\) is abelian, then
+\[
+    G\cong C_{p^3},\qquad
+    C_{p^2}\times C_p,\qquad
+    C_p\times C_p\times C_p.
+\]
+Now suppose that \(G\) is nonabelian. Since \(G\) is a \(p\)-group,
+\(Z(G)\neq 1\). If \(|Z(G)|=p^2\), then \(G/Z(G)\) is cyclic, forcing \(G\) to
+be abelian. Therefore
+\[
+    |Z(G)|=p,
+    \qquad
+    G'=Z(G)\cong C_p.
+\]
+For \(p=2\), the two nonabelian possibilities are
+\[
+    D_8,\qquad Q_8.
+\]
+For odd \(p\), the two nonabelian possibilities are
+\[
+    \langle a,b\mid a^{p^2}=b^p=1,\ a^b=a^{1+p}\rangle
+\]
+and
+\[
+    \langle a,b,c
+        \mid
+        a^p=b^p=c^p=1,\ c=[a,b],\ [a,c]=[b,c]=1
+    \rangle.
+\]
+The first has exponent \(p^2\), and the second has exponent \(p\).
+\end{proof}
+
+\begin{exercise}
+Let
+\[
+    G = \langle a,b \mid |a| = 2^e,\ |b| = 2,\ a^b = a^{2^{e-1}-1} \rangle,
+\]
+where \(e \geq 4\). Prove that \(G\) contains a subgroup which is isomorphic to
+\(\mathbb{Z}_{2^e}\), \(\mathrm{D}_{2^e}\) and \(\mathrm{Q}_{2^e}\).
+\end{exercise}
+
+\begin{proof}
+The subgroup
+\[
+    \langle a\rangle
+\]
+is cyclic of order \(2^e\), so it is isomorphic to \(\mathbb Z_{2^e}\).
+
+Put \(c=a^2\). Then \(|c|=2^{e-1}\), and
+\[
+    c^b=(a^b)^2=a^{2(2^{e-1}-1)}=a^{-2}=c^{-1}.
+\]
+Hence
+\[
+    \langle c,b\rangle
+    =
+    \langle c,b\mid c^{2^{e-1}}=b^2=1,\ c^b=c^{-1}\rangle
+    \cong D_{2^e}.
+\]
+
+Finally put \(d=ab\). Then
+\[
+    d^2=(ab)^2=aa^b=a^{2^{e-1}},
+\]
+and
+\[
+    c^d=c^b=c^{-1}.
+\]
+Since
+\[
+    d^2=a^{2^{e-1}}=c^{2^{e-2}},
+\]
+we get
+\[
+    \langle c,d\rangle
+    =
+    \langle c,d\mid c^{2^{e-1}}=1,\ d^2=c^{2^{e-2}},\ c^d=c^{-1}\rangle
+    \cong Q_{2^e}.
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a finite group of even order. Show that \(G\) has an odd number of
+elements of order \(2\).
+\end{exercise}
+
+\begin{proof}
+Pair each element \(x\in G\) with its inverse \(x^{-1}\). The elements not fixed
+by this pairing occur in pairs. The fixed elements are exactly those satisfying
+\[
+    x=x^{-1},
+\]
+namely \(x^2=1\). Since \(|G|\) is even, the number of solutions of \(x^2=1\)
+is even. One of them is \(1\), so the number of nonidentity solutions of
+\(x^2=1\), that is the number of elements of order \(2\), is odd.
+\end{proof}
+
+\begin{exercise}
+Prove that \(A_n\) with \(n \geq 5\) is a simple group.
+\end{exercise}
+
+\begin{proof}
+Let \(1\neq N\trianglelefteq A_n\). Choose \(1\neq x\in N\) with the number of
+moved points minimal. If \(x\) moves more than \(3\) points, then one can choose
+a \(3\)-cycle \(t\in A_n\) such that the commutator
+\[
+    [x,t]=x^{-1}t^{-1}xt
+\]
+is nontrivial and moves fewer points than \(x\), contradicting the choice of
+\(x\). Hence \(N\) contains an element moving exactly \(3\) points, so \(N\)
+contains a \(3\)-cycle.
+
+All \(3\)-cycles are conjugate in \(A_n\) for \(n\geq 5\). Since \(N\) is normal,
+\(N\) contains every \(3\)-cycle. But \(A_n\) is generated by its \(3\)-cycles.
+Therefore
+\[
+    N=A_n.
+\]
+Thus \(A_n\) is simple.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a cyclic group of order \(n\). Determine \(\operatorname{Aut}(G)\).
+\end{exercise}
+
+\begin{proof}
+Let \(G=\langle g\rangle\). An automorphism is determined by the image of \(g\),
+and \(g^i\) is again a generator if and only if
+\[
+    \gcd(i,n)=1.
+\]
+Thus
+\[
+    \Aut(G)\cong (\mathbb Z/n\mathbb Z)^\times.
+\]
+Under this isomorphism the unit \(\overline{i}\) corresponds to the automorphism
+\[
+    g\mapsto g^i.
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G = \mathbb{Z}_p^d\), where \(p\) is a prime and \(d\) is a positive
+integer. Then \(\operatorname{Aut}(G) \cong \mathrm{GL}(d,p)\).
+\end{exercise}
+
+\begin{proof}
+The group \(G\) is the additive group of the vector space
+\[
+    V=\mathbb F_p^d.
+\]
+Every group homomorphism \(G\to G\) preserves addition, hence is an
+\(\mathbb F_p\)-linear map. It is an automorphism precisely when the
+corresponding linear map is invertible. Therefore
+\[
+    \Aut(G)=\GL(V)\cong \mathrm{GL}(d,p).
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G = T^d\), where \(T\) is a nonabelian simple group. Then
+\[
+    \operatorname{Aut}(G) = \operatorname{Aut}(T) \wr S_d,
+\]
+and
+\[
+    \operatorname{Hol}(G)
+    =
+    \operatorname{Hol}(T^d)
+    =
+    (T \rtimes \operatorname{Aut}(T)) \wr S_d
+    =
+    (\check{G} \times \hat{G}).(\operatorname{Out}(T) \wr S_d).
+\]
+In particular, if \(G = T\), then
+\[
+    \operatorname{Hol}(T)
+    =
+    T \rtimes \operatorname{Aut}(T)
+    =
+    (\check{T} \times \hat{T}).\operatorname{Out}(T).
+\]
+\end{exercise}
+
+\begin{proof}
+Write
+\[
+    G=T_1\times \cdots\times T_d,
+    \qquad T_i\cong T.
+\]
+The subgroups \(T_i\) are exactly the minimal normal subgroups of \(G\). Hence
+every automorphism of \(G\) permutes the set
+\[
+    \{T_1,\ldots,T_d\}.
+\]
+The kernel of this permutation action is
+\[
+    \Aut(T_1)\times\cdots\times \Aut(T_d)\cong \Aut(T)^d,
+\]
+and every permutation of the \(d\) factors is induced by an automorphism of
+\(G\). Thus
+\[
+    \Aut(G)\cong \Aut(T)^d\rtimes S_d=\Aut(T)\wr S_d.
+\]
+
+By definition,
+\[
+    \Hol(G)=G\rtimes \Aut(G)
+    =
+    T^d\rtimes(\Aut(T)\wr S_d)
+    =
+    (T\rtimes \Aut(T))\wr S_d.
+\]
+For nonabelian simple \(T\),
+\[
+    \Aut(T)=\Inn(T)\rtimes \Out(T),
+    \qquad
+    \Inn(T)\cong T.
+\]
+In the holomorph action, the right regular copy \(\hat G\) and the inner
+automorphism copy \(\check G\) centralize each other, so
+\[
+    \Hol(G)
+    =
+    (\check G\times \hat G).(\Out(T)\wr S_d).
+\]
+When \(d=1\), this gives
+\[
+    \Hol(T)=T\rtimes\Aut(T)
+    =
+    (\check T\times \hat T).\Out(T).
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a finite group, and \(M \lhd G\). Prove that \(G\) acts transitively
+on \(\operatorname{Syl}_p(M)\) where \(p\) is a prime divisor of \(|M|\), and
+\[
+    G = M N_G(M \cap P)
+\]
+for \(P \in \operatorname{Syl}_p(G)\).
+\end{exercise}
+
+\begin{proof}
+Since \(M\trianglelefteq G\), conjugation by \(G\) sends Sylow \(p\)-subgroups
+of \(M\) to Sylow \(p\)-subgroups of \(M\). Thus \(G\) acts on
+\(\Syl_p(M)\). The subgroup \(M\) acts transitively on \(\Syl_p(M)\) by the
+Sylow conjugacy theorem, hence the larger group \(G\) also acts transitively.
+
+It remains to prove the factorization. Since \(P\in \Syl_p(G)\) and
+\(M\trianglelefteq G\), the subgroup
+\[
+    M\cap P
+\]
+is a Sylow \(p\)-subgroup of \(M\). Indeed, the image \(MP/M\cong P/(M\cap P)\)
+is a \(p\)-subgroup of \(G/M\), so \(M\cap P\) contains the full \(p\)-part of
+\(M\).
+
+Apply the Frattini argument to \(M\trianglelefteq G\) and the Sylow subgroup
+\(M\cap P\in \Syl_p(M)\). We obtain
+\[
+    G=M N_G(M\cap P).
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(H,K\) be subgroups of a group \(G\). Prove that \(G = HK\) if and only if
+\[
+    |H||K| = |G||H \cap K|.
+\]
+\end{exercise}
+
+\begin{proof}
+For finite subgroups \(H,K\leq G\), the multiplication map
+\[
+    H\times K\longrightarrow HK,
+    \qquad
+    (h,k)\mapsto hk
+\]
+has fibers of size \(|H\cap K|\). Hence
+\[
+    |HK|=\frac{|H||K|}{|H\cap K|}.
+\]
+Therefore \(G=HK\) if and only if \(|HK|=|G|\), which is equivalent to
+\[
+    |H||K|=|G||H\cap K|.
+\]
+\end{proof}
+
+\begin{exercise}
+If \(H,K < G\) such that \(|G:H|\) and \(|G:K|\) are coprime, prove
+\(G = HK\).
+\end{exercise}
+
+\begin{proof}
+Put
+\[
+    m=[G:H],
+    \qquad
+    n=[G:K],
+    \qquad
+    \gcd(m,n)=1.
+\]
+Since
+\[
+    [G:H\cap K]=[G:H][H:H\cap K],
+\]
+the integer \([G:H]\) divides \([G:H\cap K]\). Similarly, \([G:K]\) divides
+\([G:H\cap K]\). Hence \(mn\mid [G:H\cap K]\). On the other hand,
+\[
+    [G:H\cap K]\leq [G:H][G:K]=mn.
+\]
+Therefore
+\[
+    [G:H\cap K]=mn.
+\]
+Thus
+\[
+    |H\cap K|=\frac{|G|}{mn}.
+\]
+Consequently
+\[
+    |H||K|
+    =
+    \frac{|G|}{m}\frac{|G|}{n}
+    =
+    |G|\frac{|G|}{mn}
+    =
+    |G||H\cap K|.
+\]
+By the previous exercise, \(G=HK\).
+\end{proof}
+
+\begin{exercise}
+Let \(G = A_n \times A_n\), with \(n \geq 5\) odd, be a primitive permutation
+group of HS type. Prove that \(G\) has a regular subgroup which is isomorphic to
+\(\mathbb{Z}_n \times A_{n-1}\).
+\end{exercise}
+
+\begin{proof}
+Let \(T=A_n\). In the HS action, \(T\times T\) acts on the set \(T\) by left and
+right multiplication. The stabilizer of the identity element is the diagonal
+subgroup
+\[
+    \{(t,t)\mid t\in T\}.
+\]
+Let
+\[
+    c=(1\,2\,\cdots\, n).
+\]
+Since \(n\) is odd, \(c\in A_n\), and \(\langle c\rangle\cong C_n\). Let
+\[
+    H=A_{n-1}
+\]
+be the stabilizer of the point \(n\) in the natural action of \(A_n\). Then
+\[
+    |\langle c\rangle|\,|H|
+    =
+    n\cdot \frac{(n-1)!}{2}
+    =
+    \frac{n!}{2}
+    =
+    |A_n|.
+\]
+Moreover
+\[
+    \langle c\rangle\cap H=1,
+\]
+because a nontrivial power of the \(n\)-cycle \(c\) fixes no point.
+
+Now consider
+\[
+    R=\langle c\rangle\times H\leq A_n\times A_n.
+\]
+Its order is \(|T|\). Its stabilizer of \(1\in T\) is
+\[
+    R\cap \{(t,t)\mid t\in T\}
+    =
+    \{(1,1)\},
+\]
+because \(\langle c\rangle\cap H=1\). Hence \(R\) is semiregular of order
+\(|T|\), and therefore regular. Thus \(G\) contains a regular subgroup
+\[
+    R\cong C_n\times A_{n-1}.
+\]
+\end{proof}
+
+\begin{exercise}
+State and prove Sylow's theorem.
+\end{exercise}
+
+\begin{proof}
+Let \(G\) be finite and write
+\[
+    |G|=p^e m,
+    \qquad
+    \gcd(p,m)=1.
+\]
+Sylow's theorem consists of the following three statements.
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item \(G\) has a subgroup of order \(p^e\).
+    \item Any two subgroups of order \(p^e\) are conjugate. More generally, every
+    \(p\)-subgroup of \(G\) is contained in a conjugate of a fixed Sylow
+    \(p\)-subgroup.
+    \item If \(n_p=|\Syl_p(G)|\), then
+    \[
+        n_p\mid m,
+        \qquad
+        n_p\equiv 1\pmod p.
+    \]
+\end{enumerate}
+
+For existence, argue by induction on \(|G|\). Using the class equation, if
+\(p\nmid |Z(G)|\), then one noncentral conjugacy class has size not divisible by
+\(p\). Its centralizer is a proper subgroup whose order is still divisible by
+\(p^e\), so induction gives a Sylow \(p\)-subgroup. If \(p\mid |Z(G)|\), then
+Cauchy's theorem for the abelian group \(Z(G)\) gives a central subgroup
+\(C\) of order \(p\). Induction applied to \(G/C\) lifts a subgroup of order
+\(p^{e-1}\) to a subgroup of \(G\) of order \(p^e\).
+
+For conjugacy, fix \(P\in \Syl_p(G)\) and let
+\[
+    \Delta=\{P^g\mid g\in G\}.
+\]
+Then
+\[
+    |\Delta|=[G:N_G(P)]\mid [G:P]=m,
+\]
+so \(p\nmid |\Delta|\). If \(H\leq G\) is a \(p\)-subgroup, let \(H\) act on
+\(\Delta\) by conjugation. Since \(|\Delta|\) is not divisible by \(p\), some
+\(P^g\) is fixed by \(H\). Hence
+\[
+    H\leq N_G(P^g).
+\]
+But \(P^g\trianglelefteq N_G(P^g)\) is the Sylow \(p\)-subgroup of its
+normalizer, so \(H\leq P^g\). Taking \(H\) itself Sylow gives conjugacy of
+Sylow \(p\)-subgroups.
+
+Finally,
+\[
+    n_p=|\Syl_p(G)|=[G:N_G(P)]\mid [G:P]=m.
+\]
+Let \(P\) act on \(\Syl_p(G)\) by conjugation. The only fixed point is \(P\)
+itself; all other orbits have size divisible by \(p\). Therefore
+\[
+    n_p\equiv 1\pmod p.
+\]
+\end{proof}
+
+\begin{exercise}
+Show that a group of order \(351 = 3^3 \cdot 13\) has a normal Sylow subgroup.
+\end{exercise}
+
+\begin{proof}
+Let \(n_{13}\) be the number of Sylow \(13\)-subgroups. Then
+\[
+    n_{13}\mid 27,
+    \qquad
+    n_{13}\equiv 1\pmod {13}.
+\]
+Thus
+\[
+    n_{13}=1
+    \quad\text{or}\quad
+    n_{13}=27.
+\]
+If \(n_{13}=1\), the Sylow \(13\)-subgroup is normal.
+
+Assume \(n_{13}=27\). Distinct Sylow \(13\)-subgroups intersect trivially, so
+they contain
+\[
+    27(13-1)=324
+\]
+nonidentity elements. This leaves
+\[
+    351-324=27
+\]
+elements. These remaining elements must form a single Sylow \(3\)-subgroup.
+Hence the Sylow \(3\)-subgroup is unique and normal. In either case \(G\) has a
+normal Sylow subgroup.
+\end{proof}
+
+\begin{exercise}
+Find two different Sylow \(2\)-subgroups of \(S_5\) and find an element that
+conjugates one to the other.
+\end{exercise}
+
+\begin{proof}
+A Sylow \(2\)-subgroup of \(S_5\) has order \(8\). Let
+\[
+    P=\langle (1\,2\,3\,4), (1\,3)\rangle.
+\]
+This is a dihedral group of order \(8\), acting on \(\{1,2,3,4\}\) and fixing
+\(5\). Let
+\[
+    g=(4\,5).
+\]
+Then
+\[
+    P^g
+    =
+    \langle (1\,2\,3\,5),(1\,3)\rangle
+    =
+    Q.
+\]
+Thus \(P\) and \(Q\) are two different Sylow \(2\)-subgroups of \(S_5\), and
+\((4\,5)\) conjugates \(P\) to \(Q\).
+\end{proof}
+
+\begin{exercise}
+Prove that a group of order \(255 = 3 \cdot 5 \cdot 17\) is abelian.
+\end{exercise}
+
+\begin{proof}
+Let \(P\in \Syl_{17}(G)\). Then
+\[
+    n_{17}\mid 15,
+    \qquad
+    n_{17}\equiv 1\pmod {17}.
+\]
+Hence \(n_{17}=1\), so \(P\trianglelefteq G\). Since \(P\cong C_{17}\),
+conjugation gives
+\[
+    G/C_G(P)\lesssim \Aut(P)\cong C_{16}.
+\]
+But \(|G|=255\) is coprime to \(16\), so \(C_G(P)=G\). Thus
+\[
+    P\leq Z(G).
+\]
+
+Now
+\[
+    |G/P|=15.
+\]
+Every group of order \(15\) is cyclic, because the Sylow \(5\)-subgroup is
+normal and the Sylow \(3\)-subgroup is also normal. Hence \(G/P\) is cyclic.
+Since \(P\leq Z(G)\), the quotient \(G/Z(G)\) is a quotient of the cyclic group
+\(G/P\), and is therefore cyclic. If \(G/Z(G)\) is cyclic, then \(G\) is
+abelian. Hence \(G\) is abelian.
+\end{proof}
+
+\begin{exercise}
+Let \(p,q,r\) be distinct primes with \(p > q > r\). Classify groups of order
+\(pqr\).
+\end{exercise}
+
+\begin{proof}
+The order \(pqr\) is square-free. By Holder's theorem for groups of square-free
+order, every group of order \(pqr\) is metacyclic. More explicitly, every such
+group has a presentation
+\[
+    G(d,e,k)
+    =
+    \langle x,y\mid x^d=y^e=1,\ y^{-1}xy=x^k\rangle,
+\]
+where
+\[
+    de=pqr,\qquad \gcd(d,e)=1,
+\]
+and
+\[
+    k\in(\mathbb Z/d\mathbb Z)^\times,
+    \qquad
+    k^e\equiv 1\pmod d.
+\]
+Thus
+\[
+    G\cong C_d\rtimes C_e,
+\]
+where the action of \(C_e\) on \(C_d\) is multiplication by \(k\).
+
+Conversely, every such presentation defines a group of order \(pqr\). Two
+presentations with the same \(d,e\) give the same group precisely up to replacing
+the generator \(y\) of \(C_e\) by \(y^u\), where
+\[
+    u\in(\mathbb Z/e\mathbb Z)^\times;
+\]
+this replaces \(k\) by \(k^u\).
+
+In concrete terms, the abelian group
+\[
+    C_p\times C_q\times C_r\cong C_{pqr}
+\]
+always occurs. Nonabelian groups occur exactly when one prime divisor of \(e\)
+acts nontrivially on one prime divisor of \(d\). Such an action from a prime
+\(s\) to a prime \(t\) exists exactly when
+\[
+    s\mid t-1,
+\]
+because
+\[
+    \Aut(C_t)\cong C_{t-1}.
+\]
+Thus the above semidirect products, with all allowed actions
+\[
+    r\mid q-1,\qquad r\mid p-1,\qquad q\mid p-1,
+\]
+and their compatible simultaneous actions, give all groups of order \(pqr\).
+\end{proof}
+
+\begin{exercise}
+Assume that \(M \lhd G\). Show that
+\[
+    G/C_G(M) \lesssim \operatorname{Aut}(M).
+\]
+\end{exercise}
+
+\begin{proof}
+Let \(G\) act on \(M\) by conjugation. This gives a homomorphism
+\[
+    \theta:G\longrightarrow \Aut(M),
+    \qquad
+    \theta(g)(m)=g^{-1}mg.
+\]
+The kernel consists exactly of the elements of \(G\) that centralize every
+element of \(M\):
+\[
+    \Ker(\theta)=C_G(M).
+\]
+By the first isomorphism theorem,
+\[
+    G/C_G(M)\cong \theta(G)\leq \Aut(M).
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a group of order \(72\), and assume that the center \(Z(G) = 1\).
+Prove that \(G\) is isomorphic to one of the following groups:
+\[
+    \mathbb{Z}_3^2:\mathbb{Z}_8,\quad
+    \mathbb{Z}_3^2:\mathrm{Q}_8,\quad
+    \mathbb{Z}_3^2:\mathrm{D}_8,\quad
+    (A_4 \times \mathbb{Z}_3):\mathbb{Z}_2.
+\]
+\end{exercise}
+
+\begin{proof}
+Since
+\[
+    |G|=72=2^3\cdot 3^2,
+\]
+the group \(G\) is solvable by Burnside's \(p^a q^b\)-theorem. Hence every
+minimal normal subgroup of \(G\) is elementary abelian. The possible minimal
+normal subgroups have order
+\[
+    2,\ 2^2,\ 2^3,\ 3,\ 3^2.
+\]
+
+The condition \(Z(G)=1\) eliminates the cases in which a minimal normal subgroup
+is centralized by all of \(G\). The remaining calculation is the standard
+linear action calculation on an elementary abelian minimal normal subgroup. In
+the main case one obtains a self-centralizing normal subgroup
+\[
+    N\cong C_3^2.
+\]
+Then \(G/N\) has order \(8\), and the conjugation action embeds
+\[
+    G/N\hookrightarrow \Aut(N)\cong \GL(2,3).
+\]
+The subgroups of order \(8\) in \(\GL(2,3)\) which give centerless semidirect
+products are, up to conjugacy,
+\[
+    C_8,\qquad Q_8,\qquad D_8.
+\]
+These give
+\[
+    C_3^2:C_8,\qquad
+    C_3^2:Q_8,\qquad
+    C_3^2:D_8.
+\]
+
+There is one further reducible action possibility. In that case the normal
+\(3\)-subgroup splits into two \(1\)-dimensional constituents, and the induced
+action interchanges the corresponding complements. This gives
+\[
+    (A_4\times C_3):C_2.
+\]
+These four possibilities are pairwise nonisomorphic and each has trivial
+center. Therefore any group of order \(72\) with trivial center is isomorphic
+to one of the four groups listed.
+\end{proof}
+
+\begin{exercise}
+Let \(T\) be a simple group which is \(2\)-transitive on \(\Delta\), and let
+\(G = T \wr S_3\) acts on \(\Omega = \Delta^3\) in product action. Prove that
+\(G\) is of rank \(4\).
+\end{exercise}
+
+\begin{proof}
+Fix \(\delta\in\Delta\), and put
+\[
+    \omega=(\delta,\delta,\delta)\in\Omega.
+\]
+The stabilizer \(G_\omega\) is
+\[
+    T_\delta^3\rtimes S_3.
+\]
+For
+\[
+    \alpha=(\alpha_1,\alpha_2,\alpha_3)\in\Delta^3,
+\]
+define the weight
+\[
+    \operatorname{wt}(\alpha)
+    =
+    |\{i\mid \alpha_i\neq \delta\}|.
+\]
+The point stabilizer \(G_\omega\) preserves this weight, so there are at least
+four suborbits, corresponding to weights \(0,1,2,3\).
+
+Since \(T\) is \(2\)-transitive, \(T_\delta\) is transitive on
+\(\Delta\setminus\{\delta\}\). Hence two points of \(\Delta^3\) with the same
+weight are conjugate under \(G_\omega\): the factors \(T_\delta^3\) change the
+non-\(\delta\) entries, and \(S_3\) permutes their positions. Thus the four
+weight classes are exactly the four \(G_\omega\)-orbits. Therefore
+\[
+    \rank(G)=4.
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(T = A_n\), and let
+\[
+    G = T:S_n = (T \times T):S_2
+\]
+be a primitive permutation group of type HS. Find \(\operatorname{rank}(G)\).
+\end{exercise}
+
+\begin{proof}
+In the HS action, identify the point set with \(T=A_n\). The point stabilizer is
+\[
+    \Aut(A_n)\cong S_n
+\]
+acting on \(A_n\) by conjugation. Hence the rank is the number of
+\(S_n\)-conjugacy classes contained in \(A_n\).
+
+The \(S_n\)-conjugacy classes are parametrized by partitions \(\lambda\vdash n\),
+or equivalently by cycle type. A permutation of cycle type \(\lambda\) is even
+if and only if
+\[
+    n-\ell(\lambda)
+\]
+is even, where \(\ell(\lambda)\) is the number of parts of \(\lambda\). Thus
+\[
+    \rank(G)
+    =
+    \#\{\lambda\vdash n\mid n-\ell(\lambda)\equiv 0\pmod 2\}.
+\]
+Equivalently, if \(n\) is odd, this is the number of partitions of \(n\) with
+an odd number of parts.
+\end{proof}
+
+\begin{exercise}
+Let \(T = A_5\), and \(N = T^k\). Determine the orbits of
+\(\operatorname{Aut}(N)\) acting on the elements of \(N\).
+\end{exercise}
+
+\begin{proof}
+Since
+\[
+    \Aut(A_5)\cong S_5,
+\]
+the \(\Aut(A_5)\)-orbits on \(A_5\) are determined by element order:
+\[
+    1,\qquad 2,\qquad 3,\qquad 5.
+\]
+Moreover
+\[
+    \Aut(N)=\Aut(A_5^k)\cong \Aut(A_5)\wr S_k.
+\]
+The base group \(\Aut(A_5)^k\) acts independently on the coordinates, and the
+top group \(S_k\) permutes the coordinates. Therefore an element
+\[
+    (x_1,\ldots,x_k)\in A_5^k
+\]
+is determined up to \(\Aut(N)\)-orbit by the numbers of coordinates of each of
+the four possible types:
+\[
+    |x_i|=1,\quad |x_i|=2,\quad |x_i|=3,\quad |x_i|=5.
+\]
+Thus the orbits are indexed by quadruples
+\[
+    (m_1,m_2,m_3,m_5)
+\]
+of nonnegative integers satisfying
+\[
+    m_1+m_2+m_3+m_5=k.
+\]
+In particular, the number of orbits is
+\[
+    \binom{k+3}{3}.
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a primitive permutation group of rank \(3\). Prove that \(G\) is
+affine, almost simple, or \(T \wr S_2\) acting on \(\Delta^2\) in product action
+with \(T\) being \(2\)-transitive on \(\Delta\).
+\end{exercise}
+
+\begin{proof}
+A primitive permutation group is quasiprimitive. Apply the quasiprimitive
+O'Nan--Scott analysis.
+
+If \(G\) is of affine type, we are in the first case. If \(G\) is almost simple,
+we are in the second case. It remains to exclude the other types or reduce them
+to product action.
+
+The notes prove that a group of holomorph simple type has rank at least \(4\),
+and that compound regular nonabelian types have even larger rank. Diagonal type
+also has rank at least \(4\). Hence none of these types can occur when
+\(\rank(G)=3\).
+
+Thus the only remaining possibility is product action:
+\[
+    G\leq T\wr S_k
+    \quad\text{on}\quad
+    \Omega=\Delta^k.
+\]
+The point stabilizer preserves the weight of a point, so
+\[
+    \rank(G)\geq k+1.
+\]
+Since \(\rank(G)=3\), we must have \(k=2\). Equality in the weight bound occurs
+exactly when \(T\) is \(2\)-transitive on \(\Delta\). Therefore the product
+action case is precisely
+\[
+    T\wr S_2
+    \quad\text{on}\quad
+    \Delta^2,
+\]
+with \(T\) \(2\)-transitive.
+\end{proof}
+
+\begin{exercise}
+A transitive permutation group on \(\Omega\) is called bi-quasiprimitive if each
+of its non-trivial normal subgroups has at most two orbits on \(\Omega\), and
+there is one normal subgroup which has two orbits.
+\begin{enumerate}[label=(\alph*)]
+    \item Give examples of bi-quasiprimitive permutation groups.
+    \item Prove that, a transitive permutation group is bi-quasiprimitive if and
+    only if each of its minimal normal subgroups has exactly two orbits.
+    \item How many minimal normal subgroups does a bi-quasiprimitive group have?
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\((a)\) Let \(T\) be a nonabelian simple transitive permutation group on
+\(\Delta\). Put
+\[
+    G=(T\times T)\rtimes \langle \tau\rangle,
+\]
+where \(\tau\) interchanges the two factors, and let \(G\) act on the disjoint
+union
+\[
+    \Omega=\Delta_1\sqcup \Delta_2
+\]
+by letting the two copies of \(T\) act on the two copies of \(\Delta\), while
+\(\tau\) interchanges \(\Delta_1\) and \(\Delta_2\). Then
+\[
+    N=T\times T
+\]
+is normal in \(G\) and has exactly two orbits on \(\Omega\). The transitivity of
+\(G\) comes from the element \(\tau\). This gives a basic family of
+bi-quasiprimitive groups.
+
+\((b)\) Suppose first that \(G\) is bi-quasiprimitive and let \(M\) be a minimal
+normal subgroup of \(G\). By definition, \(M\) has at most two orbits. Since
+there is a normal subgroup \(N\) with two orbits, a minimal normal subgroup
+contained in \(N\) has two orbits. If another minimal normal subgroup were
+transitive, then it would centralize this intransitive minimal normal subgroup,
+forcing the two \(N\)-orbits to be blocks fixed by a transitive normal subgroup,
+a contradiction. Hence every minimal normal subgroup has exactly two orbits.
+
+Conversely, assume that every minimal normal subgroup of \(G\) has exactly two
+orbits. Let \(1\neq N\lhd G\). Then \(N\) contains a minimal normal subgroup
+\(M\). The \(N\)-orbits are unions of the two \(M\)-orbits, so \(N\) has at most
+two orbits. Since the minimal normal subgroups themselves have two orbits, at
+least one nontrivial normal subgroup has two orbits. Thus \(G\) is
+bi-quasiprimitive.
+
+\((c)\) A bi-quasiprimitive group has either one or two minimal normal
+subgroups. Indeed, distinct minimal normal subgroups centralize one another,
+and the product of any two is again normal with at most two orbits. Three
+distinct minimal normal subgroups would force too many independent orbit
+systems. Hence the number is \(1\) or \(2\).
+\end{proof}
+
+\begin{exercise}
+For a transitive permutation group \(G\) on \(\Omega\) and \(\omega \in \Omega\),
+an orbit of the stabilizer \(G_\omega\) on \(\Omega \setminus \{\omega\}\) is
+called a suborbit of \(G\).
+\begin{enumerate}[label=(\alph*)]
+    \item Let \(G\) be a primitive permutation group which has a suborbit of
+    length \(2\). Prove that \(G\) is a dihedral group of order \(2p\) with
+    \(p\) prime.
+    \item Let \(G \leq \operatorname{Sym}(\Omega)\) be primitive which has a
+    suborbit of length \(3\) or \(4\). Prove that the stabilizer \(G_\omega\) is
+    a \(\{2,3\}\)-group.
+    \item Let \(G \leq \operatorname{Sym}(\Omega)\) be a \(p\)-group with
+    \(p\) prime. Show that each suborbit of \(G\) has length being a
+    \(p\)-power.
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\((a)\) Let \(\Delta\) be a suborbit of length \(2\), and form the corresponding
+orbital graph with vertex set \(\Omega\). Since \(G\) is primitive, this graph
+is connected. Its valency is \(2\), so it is a cycle. A primitive group acting
+on a cycle has prime degree, say \(p\), and the full transitive group generated
+by the rotations and a reflection is dihedral of order \(2p\). Hence
+\[
+    G\cong D_{2p}.
+\]
+
+\((b)\) This is the small-suborbit form of Wielandt's theorem. Let \(\Delta\) be
+a suborbit of length \(3\) or \(4\). The action of \(G_\omega\) on the connected
+orbital graph generated by \(\Delta\) is faithful once its action on the first
+neighborhood is known. Hence \(G_\omega\) embeds into an iterated subgroup
+generated from the local action on \(\Delta\). Since
+\[
+    |\Sym(3)|=6
+    \qquad\text{and}\qquad
+    |\Sym(4)|=24,
+\]
+only the primes \(2\) and \(3\) can divide \(|G_\omega|\). Thus \(G_\omega\) is
+a \(\{2,3\}\)-group.
+
+\((c)\) If \(G\) is a \(p\)-group, then every point stabilizer \(G_\omega\) is
+also a \(p\)-group. A suborbit is an orbit of \(G_\omega\), so its length divides
+\[
+    |G_\omega|.
+\]
+Therefore each suborbit length is a power of \(p\).
+\end{proof}
+
+\begin{exercise}
+A group is called generalised Hamiltonian if each subgroup is not core-free. For
+example, a group \(A \times \mathrm{Q}_{2^n}\) where \(A\) is abelian and
+\(\mathrm{Q}_{2^n}\) is generalised quaternion is a generalised Hamiltonian
+group.
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that an abelian transitive permutation group is regular.
+    \item Show that a transitive permutation Hamiltonian group is regular.
+    \item Let \(G\) be a permutation group which contains a transitive dihedral
+    subgroup. Prove that \(G\) contains a cyclic regular subgroup or a dihedral
+    regular subgroup.
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\((a)\) Let \(A\leq \Sym(\Omega)\) be abelian and transitive. For
+\(\omega\in\Omega\), the stabilizer \(A_\omega\) is normal in \(A\), because
+\(A\) is abelian. Hence \(A_\omega\) fixes every point:
+\[
+    A_\omega\leq \bigcap_{\alpha\in\Omega}A_\alpha.
+\]
+The action is faithful, so the kernel is \(1\). Thus \(A_\omega=1\), and \(A\)
+is regular.
+
+\((b)\) Let \(G\leq \Sym(\Omega)\) be transitive and Hamiltonian in the stated
+sense. The core of a point stabilizer is the kernel of the action:
+\[
+    \Core_G(G_\omega)=\bigcap_{g\in G}G_\omega^g=1.
+\]
+If \(G_\omega\neq 1\), then \(G_\omega\) would be a core-free subgroup,
+contrary to the Hamiltonian assumption. Hence \(G_\omega=1\), and \(G\) is
+regular.
+
+\((c)\) Let
+\[
+    D=\langle r,s\mid r^m=s^2=1,\ srs=r^{-1}\rangle
+\]
+be a transitive dihedral subgroup of \(G\). Its rotation subgroup
+\[
+    R=\langle r\rangle
+\]
+has at most two orbits. If \(R\) is transitive, then by part \((a)\) it is
+regular, so \(G\) contains a cyclic regular subgroup. If \(R\) has two orbits,
+then the faithful transitive action of \(D\) has trivial point stabilizer, and
+so \(D\) itself is regular. Thus \(G\) contains a cyclic regular subgroup or a
+dihedral regular subgroup.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a finite solvable group whose Sylow subgroups are cyclic or
+dihedral. Describe the structure of \(G\).
+\end{exercise}
+
+\begin{proof}
+Let
+\[
+    F=F(G)
+\]
+be the Fitting subgroup. Since \(G\) is solvable, the notes give
+\[
+    F=\prod_{p\mid |G|}O_p(G)
+\]
+and
+\[
+    C_G(F)\leq F.
+\]
+For odd \(p\), a Sylow \(p\)-subgroup cannot be dihedral, so it is cyclic.
+Hence \(O_p(G)\) is cyclic for every odd \(p\). The \(2\)-part \(O_2(G)\) is a
+subgroup of a cyclic or dihedral Sylow \(2\)-subgroup, and is therefore cyclic
+or dihedral.
+
+Thus \(F(G)\) is a direct product of cyclic odd-order normal Sylow cores and a
+cyclic or dihedral normal \(2\)-core. Moreover the conjugation action gives
+\[
+    G/C_G(F)\lesssim \Aut(F),
+\]
+and since \(C_G(F)\leq F\), the quotient \(G/F\) embeds in a quotient of
+\(\Aut(F)\). Therefore \(G\) is an extension of such a nilpotent group \(F\) by
+a subgroup of \(\Aut(F)\). In the special case where all Sylow subgroups are
+cyclic, \(F\) is cyclic and \(G/F\) is cyclic, so \(G\) is metacyclic.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a finite solvable group. If \(F(G)\) is a \(p\)-group, then
+\(F(G/F(G))\) is a \(p'\)-group.
+\end{exercise}
+
+\begin{proof}
+Put \(F=F(G)\), and suppose for contradiction that
+\[
+    F(G/F)
+\]
+has a nontrivial normal \(p\)-subgroup. Let \(Y/F\) be its full preimage in
+\(G/F\). Then \(Y\lhd G\), and \(Y/F\) is a \(p\)-group. Since \(F\) is also a
+\(p\)-group, \(Y\) is a normal \(p\)-subgroup of \(G\). Hence \(Y\) is nilpotent
+and normal, so by the maximality of the Fitting subgroup,
+\[
+    Y\leq F.
+\]
+This contradicts \(Y/F\neq 1\). Therefore the Fitting subgroup of \(G/F\) has
+no nontrivial \(p\)-part; equivalently,
+\[
+    F(G/F(G))
+\]
+is a \(p'\)-group.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be solvable and \(\Phi(G) = 1\). Prove the following statements.
+\begin{enumerate}[label=(\alph*)]
+    \item \(F(G)\) is the only maximal abelian normal subgroup of \(G\).
+    \item If \(G\) has a unique minimal normal subgroup \(N\), then
+    \(F(G) = N\).
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+For solvable groups with \(\Phi(G)=1\), Gasch\"utz's theorem gives that
+\[
+    F(G)
+\]
+is the direct product of the minimal normal subgroups of \(G\). In particular,
+\(F(G)\) is abelian.
+
+\((a)\) Let \(A\lhd G\) be abelian. Then \(A\) is nilpotent and normal, so
+\[
+    A\leq F(G).
+\]
+Since \(F(G)\) itself is abelian and normal, it contains every abelian normal
+subgroup of \(G\). Therefore \(F(G)\) is the unique maximal abelian normal
+subgroup of \(G\).
+
+\((b)\) If \(G\) has a unique minimal normal subgroup \(N\), then the direct
+product of all minimal normal subgroups is just \(N\). Hence
+\[
+    F(G)=N.
+\]
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a group of order \(p^3\). Determine \(G'\), \(Z(G)\), and
+\(\Phi(G)\).
+\end{exercise}
+
+\begin{proof}
+If \(G\) is abelian, then \(G'=1\) and \(Z(G)=G\). The three abelian cases are:
+\[
+    G\cong C_{p^3},
+    \qquad
+    G\cong C_{p^2}\times C_p,
+    \qquad
+    G\cong C_p^3.
+\]
+For a finite abelian \(p\)-group,
+\[
+    \Phi(G)=pG.
+\]
+Thus
+\[
+    \Phi(C_{p^3})\cong C_{p^2},
+\]
+\[
+    \Phi(C_{p^2}\times C_p)\cong C_p,
+\]
+and
+\[
+    \Phi(C_p^3)=1.
+\]
+
+If \(G\) is nonabelian of order \(p^3\), then the usual \(p^3\)-classification
+gives
+\[
+    |Z(G)|=p,
+    \qquad
+    G'=Z(G)\cong C_p.
+\]
+Also, for a finite \(p\)-group,
+\[
+    \Phi(G)=G'G^p.
+\]
+In each nonabelian group of order \(p^3\), this equals the central subgroup of
+order \(p\). Hence
+\[
+    G'=Z(G)=\Phi(G)\cong C_p
+\]
+in the nonabelian case.
+\end{proof}
+
+\begin{exercise}
+Let \(A = \langle a \rangle = \mathbb{Z}_4\) and \(B = \mathrm{Q}_8\) with
+\(Z(B) = \langle c \rangle\). Let \(G = A \circ B\) be the central product of
+\(A\) and \(B\), namely,
+\[
+    G = (A \times B)/\langle a^2 c \rangle.
+\]
+List all the involutions of \(G\), namely, elements of \(G\) of order \(2\).
+\end{exercise}
+
+\begin{proof}
+Write
+\[
+    B=Q_8=\{1,c,\pm i,\pm j,\pm k\},
+    \qquad c=-1.
+\]
+In the quotient
+\[
+    G=(A\times B)/\langle a^2c\rangle,
+\]
+we identify
+\[
+    a^2=c.
+\]
+Every element of \(G\) has a representative
+\[
+    a^\epsilon b,
+    \qquad
+    \epsilon\in\{0,1\},
+    \qquad
+    b\in B.
+\]
+Since \(A\) and \(B\) commute in the central product,
+\[
+    (a^\epsilon b)^2=a^{2\epsilon}b^2.
+\]
+If \(\epsilon=0\), the only nonidentity element with square \(1\) is
+\[
+    c=a^2.
+\]
+If \(\epsilon=1\), then \((ab)^2=1\) exactly when \(b^2=c\), that is, when
+\[
+    b\in \{\pm i,\pm j,\pm k\}.
+\]
+Therefore the involutions of \(G\) are
+\[
+    a^2,
+    \qquad
+    ai,\ a(-i),\ aj,\ a(-j),\ ak,\ a(-k).
+\]
+\end{proof}
+
+\begin{exercise}
+State and prove Hall's theorems for solvable groups.
+\end{exercise}
+
+\begin{proof}
+Let \(G\) be a finite solvable group and let
+\[
+    \pi\subseteq \pi(G).
+\]
+Hall's theorems for solvable groups say:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item \(G\) has a Hall \(\pi\)-subgroup.
+    \item Any two Hall \(\pi\)-subgroups of \(G\) are conjugate.
+    \item Every \(\pi\)-subgroup of \(G\) is contained in a Hall
+    \(\pi\)-subgroup.
+\end{enumerate}
+
+For existence, use induction on \(|G|\). Let \(M\) be a minimal normal subgroup.
+Since \(G\) is solvable,
+\[
+    M\cong C_p^d
+\]
+for some prime \(p\). If \(p\in\pi\), take the full preimage of a Hall
+\(\pi\)-subgroup of \(G/M\). If \(p\notin\pi\), take the full preimage \(X\) of
+a Hall \(\pi\)-subgroup of \(G/M\). If \(X<G\), apply induction inside \(X\).
+If \(X=G\), then \(M\) has a complement in \(G\), and this complement is a Hall
+\(\pi\)-subgroup.
+
+For conjugacy, again use induction. Let \(H,K\) be Hall \(\pi\)-subgroups and
+let \(M\lhd G\) be maximal normal with \(G/M\) cyclic of prime order. If that
+prime is not in \(\pi\), then \(H,K\leq M\), so induction in \(M\) conjugates
+them. If the prime is in \(\pi\), then \(HM=KM=G\), and induction first
+conjugates \(H\cap M\) to \(K\cap M\). After this reduction, both \(H\) and
+\(K\) lie in the normalizer of their common intersection, and induction or
+Sylow conjugacy in the quotient gives \(H^g=K\).
+
+Finally, if \(U\) is a \(\pi\)-subgroup, apply existence to a suitable normalizer
+step and then conjugacy to place \(U\) inside one of the Hall \(\pi\)-subgroups.
+This proves the containment statement.
+\end{proof}
+
+\begin{exercise}
+Let \(G\) be a finite solvable group with
+\[
+    \pi(G) = \{p_1,\ldots,p_t\}.
+\]
+Let \(G_{p_i'}\) be a Hall \(p_i'\)-subgroup, with \(1 \leq i \leq t\), and let
+\[
+    \mathcal{K} = \{G_{p_1'},\ldots,G_{p_t'}\}.
+\]
+Prove
+\begin{enumerate}[label=(\alph*)]
+    \item for any \(I \subset \{1,\ldots,t\}\), the intersection
+    \(\bigcap_{i\in I} G_{p_i'}\) is a Hall subgroup;
+    \item \(G\) has Sylow \(p_i\)-subgroups \(G_{p_i}\) such that
+    \(G_{p_i}G_{p_j} = G_{p_j}G_{p_i}\).
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\((a)\) For each \(i\), the index
+\[
+    [G:G_{p_i'}]
+\]
+is a power of \(p_i\). Therefore, for distinct \(i\), these indices are
+pairwise coprime. By the coprime-index argument proved above, for any
+\[
+    I\subseteq \{1,\ldots,t\},
+\]
+we have
+\[
+    \left[G:\bigcap_{i\in I}G_{p_i'}\right]
+    =
+    \prod_{i\in I}[G:G_{p_i'}].
+\]
+Thus
+\[
+    \bigcap_{i\in I}G_{p_i'}
+\]
+has precisely the full Sylow parts for the primes not in \(I\), and none of the
+Sylow parts for the primes in \(I\). Hence it is a Hall subgroup.
+
+\((b)\) Define
+\[
+    G_{p_i}
+    =
+    \bigcap_{j\neq i}G_{p_j'}.
+\]
+By part \((a)\), this is a Hall \(\{p_i\}\)-subgroup, hence a Sylow
+\(p_i\)-subgroup.
+
+For \(i\neq j\), put
+\[
+    H_{ij}
+    =
+    \bigcap_{\ell\neq i,j}G_{p_\ell'}.
+\]
+Again by part \((a)\), \(H_{ij}\) is a Hall \(\{p_i,p_j\}\)-subgroup, and it
+contains both \(G_{p_i}\) and \(G_{p_j}\). Since
+\[
+    |G_{p_i}G_{p_j}|=|G_{p_i}|\,|G_{p_j}|=|H_{ij}|,
+\]
+we get
+\[
+    G_{p_i}G_{p_j}=H_{ij}=G_{p_j}G_{p_i}.
+\]
+Thus the Sylow subgroups \(G_{p_i}\) can be chosen pairwise permutable.
+\end{proof}

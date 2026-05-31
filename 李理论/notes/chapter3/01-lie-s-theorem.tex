@@ -1,0 +1,357 @@
+\section{Lie's theorem}
+
+\begin{lemma}
+    Let $F$ be a field with $\operatorname{char} F=0$ or $\operatorname{char} F>n$.
+    Let $a,b\in M_n(F)$ satisfy
+    \[
+        [a,[a,b]]=0.
+    \]
+    Then $[a,b]$ is nilpotent. In fact,
+    \[
+        [a,b]^n=0.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Set
+    \[
+        \delta:=\operatorname{ad}(a),\qquad \delta(x)=[a,x].
+    \]
+    Since $\delta$ is an inner derivation of the associative algebra $M_n(F)$, we have
+    \[
+        \delta(xy)=\delta(x)y+x\delta(y)
+        \qquad\text{for all }x,y\in M_n(F).
+    \]
+    Our assumption is precisely
+    \[
+        \delta^2(b)=0.
+    \]
+
+    Now let us prove the following two facts:
+
+    \medskip
+    \noindent
+    \textit{Claim 1.} For every $m\ge 1$ and every $r>m$,
+    \[\operatorname{End}
+        \delta^r(b^m)=0.
+    \]
+
+    \noindent
+    Indeed, each application of $\delta$ to the product $b^m$ differentiates one of the $m$
+    factors. Since $\delta^2(b)=0$, no factor can be differentiated twice. Hence after more
+    than $m$ applications, every term vanishes.
+
+    \medskip
+    \noindent
+    \textit{Claim 2.} For every $m\ge 1$,
+    \[
+        \delta^m(b^m)=m!\,\delta(b)^m=m!\,[a,b]^m.
+    \]
+
+    \noindent
+    We prove this by induction on $m$. The case $m=1$ is clear. Assume the formula holds
+    for $m-1$. Using the derivation rule,
+    \[
+        \delta(b^m)=\delta(b)b^{m-1}+b\,\delta(b^{m-1}).
+    \]
+    Applying $\delta^{m-1}$ and using Leibniz repeatedly, together with $\delta^2(b)=0$,
+    one finds that the only surviving terms are those in which each of the $m$ copies of $b$
+    is hit exactly once. There are exactly $m!$ such terms, and each contributes
+    \[
+        \delta(b)^m.
+    \]
+    Hence
+    \[
+        \delta^m(b^m)=m!\,\delta(b)^m.
+    \]
+
+    \medskip
+    Now apply Cayley--Hamilton to $b$:
+    \[
+        b^n+\beta_{n-1}b^{n-1}+\cdots+\beta_1 b+\beta_0 I=0.
+    \]
+    Apply $\delta^n$ to both sides. By Claim 1, for every $i<n$ we have
+    \[
+        \delta^n(b^i)=0,
+    \]
+    and also $\delta^n(I)=0$. Therefore
+    \[
+        \delta^n(b^n)=0.
+    \]
+    By Claim 2 with $m=n$, this becomes
+    \[
+        n!\,[a,b]^n=0.
+    \]
+    Since $\operatorname{char} F=0$ or $\operatorname{char} F>n$, we have $n!\neq 0$ in $F$.
+    Hence
+    \[
+        [a,b]^n=0.
+    \]
+    Therefore $[a,b]$ is nilpotent.
+\end{proof}
+
+\begin{theorem}[Lie's theorem]
+    Assume that $\operatorname{char} F = 0$ or $\operatorname{char} F > \dim_F M$. $F$ is algebraically closed.
+    Let $L$ be a solvable Lie algebra and let $M$ be an $L$-module with
+    \[
+        \dim_F M = n < \infty.
+    \]
+    Then there exists a basis of $M$ such that, relative to this basis, the image of $L$ (from here when talk about $L$ acting on its module $M$, we simply use $L$ instead of $\varphi(L)$)
+    consists of upper triangular matrices; that is,
+    \[
+        L \subseteq
+        \left\{
+        \begin{pmatrix}
+            *      & *      & \cdots & *      \\
+            0      & *      & \cdots & *      \\
+            \vdots & \ddots & \ddots & \vdots \\
+            0      & \cdots & 0      & *
+        \end{pmatrix}
+        \right\}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We argue first that $M$ has a common eigenvector for the action of $L$.
+
+    Assume first that $M$ is irreducible as an $L$-module. Since we are mainly concerned
+    with the image of
+    \[
+        L \to \mathfrak{gl}_F(M),
+    \]
+    we may replace $L$ by its image and assume that $L \subseteq \mathfrak{gl}_F(M)$.
+
+    Because $L$ is solvable, its derived series
+    \[
+        L \supseteq L^{[1]} \supseteq L^{[2]} \supseteq \cdots
+    \]
+    terminates at $0$. Hence there exists an integer $s \ge 0$ such that
+    \[
+        L^{[s]} \neq 0,
+        \qquad
+        L^{[s+1]} = [L^{[s]},L^{[s]}]=0.
+    \]
+    If $s=0$, then $L$ is abelian, and since $F$ is algebraically closed, there exists
+    an eigenvector $v \in M$ for some $x \in L$. As $L$ is abelian, every element of $L$
+    preserves the eigenspace of $x$, and by irreducibility this gives a common eigenvector
+    for all $x \in L$.
+
+    Now assume $s \ge 1$. Choose $a \in L^{[s]}$ and $b \in L$. Then
+    \[
+        [a,[a,b]] \in [L^{[s]},L^{[s]}] = L^{[s+1]} = 0,
+    \]
+    so
+    \[
+        (\operatorname{ad} a)^2(b)=0.
+    \]
+    Consider the set
+    \[
+        S=\{[a,b]\mid a\in L^{[s]},\ b\in L\}.
+    \]
+    This is a Lie subset of $L$, and every element of $S$ is nilpotent in $\mathfrak{gl}_F(M)$.
+    By Engel's theorem,
+    \[
+        \operatorname{span}_F(S)=[L^{[s]},L]
+    \]
+    is a nilpotent Lie algebra of linear transformations on $M$.
+
+    Now let $I$ be any ideal of $L$. Then $IM$ is an $L$-submodule of $M$, because for
+    $x\in L$, $y\in I$, and $m\in M$,
+    \[
+        x\cdot (y\cdot m)=y\cdot (x\cdot m)+[x,y]\cdot m \in IM,
+    \]
+    since $[x,y]\in I$. As $M$ is irreducible, it follows that
+    \[
+        IM=0 \quad \text{or} \quad IM=M.
+    \]
+    Applying this to the ideal $I=L^{[s]}$, we cannot have $L^{[s]}M=M$, because
+    $L^{[s]}$ acts nilpotently on $M$. Hence
+    \[
+        L^{[s]}M=0,
+    \]
+    that is, $L^{[s]}$ acts trivially on $M$.
+
+    Thus every element of $L^{[s]}$ commutes with the action of $L$ on $M$. In particular,
+    for any $c\in L^{[s-1]}$ and $d\in L^{[s-1]}$,
+    \[
+        [c,d]\in L^{[s]}
+    \]
+    acts as $0$ on $M$. Therefore $L^{[s]}=0$ in the image of $L$ in $\mathfrak{gl}_F(M)$,
+    contrary to the choice of $s$. This contradiction shows that $s=0$, so $L$ is abelian
+    (on $M$), and hence $M$ contains a common eigenvector for all elements of $L$.
+
+    Now let $0\neq v_1\in M$ be such a common eigenvector. Then $Fv_1$ is a one-dimensional
+    $L$-submodule of $M$. Consider the quotient $M/Fv_1$, which is again a finite-dimensional
+    $L$-module. By induction on $\dim_F M$, there exists a basis of $M/Fv_1$ with respect to
+    which the induced action of $L$ is upper triangular. Lifting this basis to $M$ and adjoining
+    $v_1$, we obtain a basis of $M$ relative to which every element of $L$ is represented by an
+    upper triangular matrix.
+
+    Therefore there exists a basis of $M$ such that the image of $L$ consists of upper triangular
+    matrices.
+\end{proof}
+
+\begin{proposition}
+    Let $L$ be a solvable Lie algebra over $F$ with $\operatorname{char} F = 0$ or $\operatorname{char} F > \dim_F M$. $F$ is algebraically closed. Then the followings are equivalent:
+    \begin{enumerate}
+        \item Any irreducible finite dimensional $L$-module is 1-dimensional.
+        \item If $M$ is a finite dimensional $L$-module, then there exist a basis of $M$ such that the image of $L$ consists of upper triangular matrices.
+        \item If $M$ is any finite dimensional $L$-module. Then $[L,L]$ acts nilpotently on $M$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We prove
+    \[
+        (2)\Rightarrow(1),\qquad (1)\Rightarrow(2),\qquad (2)\Rightarrow(3),\qquad (3)\Rightarrow(1).
+    \]
+
+    $(2)\Rightarrow(1)$.
+    Let $M$ be an irreducible finite-dimensional $L$-module. By (2), there exists a basis of $M$ relative to which every operator in the image of $L$ is upper triangular. Then the subspace spanned by the first basis vector is stable under $L$, hence is a nonzero submodule of $M$. Since $M$ is irreducible, this submodule must be all of $M$. Therefore $\dim_F M=1$.
+
+    $(1)\Rightarrow(2)$.
+    We argue by induction on $\dim_F M$.
+
+    If $\dim_F M=1$, there is nothing to prove. Assume $\dim_F M>1$, and suppose the statement is known for all modules of smaller dimension. Since $M$ is finite-dimensional, it contains an irreducible submodule $N$. By (1), we have $\dim_F N=1$.
+
+    Choose $0\neq v_1\in N$, so that $N=Fv_1$. Then $N$ is an $L$-submodule, and hence $M/N$ is again a finite-dimensional $L$-module. By the induction hypothesis, there exists a basis
+    \[
+        \overline{v_2},\dots,\overline{v_n}
+    \]
+    of $M/N$ such that the induced action of $L$ on $M/N$ is given by upper triangular matrices. Choose representatives $v_2,\dots,v_n\in M$ of these cosets. Then
+    \[
+        v_1,v_2,\dots,v_n
+    \]
+    is a basis of $M$.
+
+    Since $Fv_1$ is $L$-stable, every element of $L$ sends $v_1$ into $Fv_1$. Since the induced action on $M/Fv_1$ is upper triangular with respect to
+    \[
+        \overline{v_2},\dots,\overline{v_n},
+    \]
+    it follows that the action of $L$ on $M$ is upper triangular with respect to
+    \[
+        v_1,v_2,\dots,v_n.
+    \]
+    Thus (2) holds.
+
+    $(2)\Rightarrow(3)$.
+    Let $M$ be a finite-dimensional $L$-module, and choose a basis of $M$ such that every element of the image of $L$ is represented by an upper triangular matrix. Then for any $x,y\in L$,
+    \[
+        \rho([x,y])=[\rho(x),\rho(y)].
+    \]
+    Since the commutator of two upper triangular matrices has zero diagonal entries, $\rho([x,y])$ is strictly upper triangular. Hence every element of $\rho([L,L])$ is strictly upper triangular, and therefore nilpotent. Thus $[L,L]$ acts nilpotently on $M$.
+
+    $(3)\Rightarrow(1)$.
+    Let $M$ be an irreducible finite-dimensional $L$-module. By (3), every element of $[L,L]$ acts nilpotently on $M$. Hence the Lie algebra $\rho([L,L])\subseteq \mathfrak{gl}(M)$ consists entirely of nilpotent endomorphisms. By Engel's theorem, there exists a nonzero vector $v\in M$ such that
+    \[
+        \rho([L,L])v=0.
+    \]
+    Thus $[L,L]$ annihilates $v$.
+
+    Let $N=U(L)v$ be the submodule generated by $v$. Since $[L,L]v=0$, the action of $L$ on $N$ factors through the abelian Lie algebra $L/[L,L]$. Therefore $N$ is a finite-dimensional module for the abelian Lie algebra $L/[L,L]$.
+
+    Because $F$ is algebraically closed, every irreducible finite-dimensional module over an abelian Lie algebra is $1$-dimensional. Hence $N$ contains a $1$-dimensional submodule. Since $M$ is irreducible and $0\neq N\subseteq M$, we have $N=M$. Therefore $M$ itself contains a $1$-dimensional submodule, and irreducibility forces $\dim_F M=1$.
+
+    This proves (1).
+
+    \smallskip
+
+    Therefore
+    \[
+        (1)\Longleftrightarrow(2)\Longleftrightarrow(3).
+    \]
+\end{proof}
+
+\begin{remark}
+    The assumption that $F$ is algebraically closed is used in the last step of the proof of $(3)\Rightarrow(1)$, namely in the fact that every irreducible finite-dimensional module over the abelian Lie algebra $L/[L,L]$ is $1$-dimensional. Equivalently, one needs the existence of eigenvalues and eigenvectors for commuting linear operators.
+\end{remark}
+
+\begin{example}
+    Assume that $\operatorname{char} F = 2$. Then $\mathfrak{gl}(2,F)$ is solvable.
+
+    Indeed, every element of $\mathfrak{gl}(2,F)$ has the form
+    \[
+        \begin{pmatrix}
+            \alpha & \gamma \\
+            \beta  & \delta
+        \end{pmatrix},
+        \qquad \alpha,\beta,\gamma,\delta \in F.
+    \]
+    A direct computation shows that the commutator of two such matrices is always of the form
+    \[
+        \left[
+            \begin{pmatrix}
+                \alpha & \gamma \\
+                \beta  & \delta
+            \end{pmatrix},
+            \begin{pmatrix}
+                \alpha' & \gamma' \\
+                \beta'  & \delta'
+            \end{pmatrix}
+            \right]
+        =
+        \begin{pmatrix}
+            d & x \\
+            y & d
+        \end{pmatrix},
+    \]
+    for some $d,x,y \in F$.
+    Hence
+    \[
+        \mathfrak{gl}(2,F)^{(1)}=[\mathfrak{gl}(2,F),\mathfrak{gl}(2,F)]
+        \subseteq
+        \left\{
+        \begin{pmatrix}
+            d & x \\
+            y & d
+        \end{pmatrix}
+        :\ d,x,y\in F
+        \right\}.
+    \]
+
+    Now if
+    \[
+        A
+        =
+        \begin{pmatrix}
+            \alpha & \gamma \\
+            \beta  & \alpha
+        \end{pmatrix}
+        \qquad (\text{since } \operatorname{char} F=2),
+    \]
+    and similarly
+    \[
+        B=
+        \begin{pmatrix}
+            \alpha' & \gamma' \\
+            \beta'  & \alpha'
+        \end{pmatrix},
+    \]
+    then their commutator is of the form
+    \[
+        [A,B]=
+        \begin{pmatrix}
+            d & 0 \\
+            0 & d
+        \end{pmatrix}
+    \]
+    for some $d\in F$.
+    Therefore
+    \[
+        \mathfrak{gl}(2,F)^{(2)}
+        \subseteq
+        \left\{
+        \begin{pmatrix}
+            d & 0 \\
+            0 & d
+        \end{pmatrix}
+        :\ d\in F
+        \right\},
+    \]
+    and so
+    \[
+        \mathfrak{gl}(2,F)^{(3)}=0.
+    \]
+    Thus $\mathfrak{gl}(2,F)$ is solvable.
+\end{example}
+

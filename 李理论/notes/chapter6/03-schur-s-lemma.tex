@@ -1,0 +1,80 @@
+\section{Schur's Lemma}
+
+\begin{lemma}[Schur's Lemma]
+    Let $L$ be a Lie algebra over a field $F$, and let $V,W$ be irreducible $L$-modules.
+    Suppose
+    \[
+        \varphi:V\to W
+    \]
+    is an $L$-module homomorphism. Then either $\varphi=0$, or $\varphi$ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+    Since $\varphi$ is an $L$-module homomorphism, its kernel
+    \[
+        \ker\varphi=\{v\in V\mid \varphi(v)=0\}
+    \]
+    is a submodule of $V$, and its image
+    \[
+        \operatorname{Im}\varphi=\varphi(V)
+    \]
+    is a submodule of $W$.
+
+    Because $V$ is irreducible, $\ker\varphi$ is either $0$ or $V$.
+    If $\ker\varphi=V$, then $\varphi=0$.
+    So if $\varphi\neq 0$, we must have $\ker\varphi=0$, hence $\varphi$ is injective.
+
+    Likewise, since $W$ is irreducible and $\operatorname{Im}\varphi\neq 0$, we must have
+    \[
+        \operatorname{Im}\varphi=W.
+    \]
+    Thus $\varphi$ is surjective.
+
+    Therefore, if $\varphi\neq 0$, then $\varphi$ is both injective and surjective, hence an isomorphism.
+\end{proof}
+
+\begin{corollary}[Schur's Lemma, endomorphism form]
+    Let $V$ be an irreducible $L$-module. Then every nonzero element of
+    \[
+        \operatorname{End}_L(V)
+    \]
+    is invertible. In particular, $\operatorname{End}_L(V)$ is a division algebra over $F$.
+\end{corollary}
+
+\begin{proof}
+    Apply Schur's Lemma with $W=V$. Any nonzero $L$-module endomorphism
+    \[
+        \varphi:V\to V
+    \]
+    must be an isomorphism, hence invertible.
+    Therefore $\operatorname{End}_L(V)$ is a division algebra.
+\end{proof}
+
+\begin{corollary}
+    Assume moreover that $F$ is algebraically closed and $\dim_F V<\infty$.
+    If $V$ is an irreducible $L$-module, then every $L$-module endomorphism of $V$ is a scalar multiple of the identity:
+    \[
+        \operatorname{End}_L(V)=F\,\operatorname{id}_V.
+    \]
+\end{corollary}
+
+\begin{proof}
+    Let $\varphi\in \operatorname{End}_L(V)$. Since $F$ is algebraically closed and $V$ is finite-dimensional, $\varphi$ has an eigenvalue $\lambda\in F$.
+    Then
+    \[
+        \psi:=\varphi-\lambda \operatorname{id}_V
+    \]
+    is an $L$-module endomorphism of $V$, and $\psi$ is not injective because $\lambda$ is an eigenvalue of $\varphi$.
+    By Schur's Lemma, a nonzero $L$-module endomorphism of an irreducible module must be an isomorphism, hence injective. Therefore $\psi=0$.
+    So
+    \[
+        \varphi=\lambda \operatorname{id}_V.
+    \]
+    This proves that every $L$-module endomorphism of $V$ is scalar.
+\end{proof}
+
+\begin{remark}
+    The last corollary is the form most often used in representation theory.
+    It says that, over an algebraically closed field, an irreducible finite-dimensional module has only scalar $L$-equivariant endomorphisms.
+\end{remark}
+

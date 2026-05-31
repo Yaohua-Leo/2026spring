@@ -1,0 +1,281 @@
+\section{\texorpdfstring{\(\mathfrak{sl}_2\)-modules}{sl2-modules}}
+
+Recall the standard \(\mathfrak{sl}_2\)-triple
+\[
+    e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+    f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+    h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+satisfying
+\[
+    [e,f]=h,\qquad [h,e]=2e,\qquad [h,f]=-2f.
+\]
+
+\begin{theorem}\label{thm:sl2-irreducible}
+    Let \(F\) be an algebraically closed field of characteristic \(0\), and let \(V\) be a finite-dimensional irreducible \(\mathfrak{sl}_2(F)\)-module. Then there exist
+    \[
+        m\in \mathbb Z_{\ge 0},\qquad 0\neq v\in V
+    \]
+    such that
+    \[
+        hv=mv,\qquad ev=0,
+    \]
+    and
+    \[
+        \{v,fv,f^2v,\dots,f^mv\}
+    \]
+    is a basis of \(V\). In particular,
+    \[
+        \dim V=m+1,
+    \]
+    and the weights of \(h\) on \(V\) are
+    \[
+        m,m-2,m-4,\dots,-m.
+    \]
+    Moreover, for \(0\le i\le m\),
+    \[
+        h(f^iv)=(m-2i)f^iv,
+    \]
+    and for \(1\le i\le m\),
+    \[
+        e(f^iv)=i(m-i+1)f^{i-1}v.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Choose an eigenvector \(0\neq u\in V\) of \(h\), say
+    \[
+        hu=\alpha u.
+    \]
+    Then
+    \[
+        h(eu)=[h,e]u+e(hu)=2eu+\alpha eu=(\alpha+2)eu,
+    \]
+    and similarly
+    \[
+        h(fu)=[h,f]u+f(hu)=-2fu+\alpha fu=(\alpha-2)fu.
+    \]
+    Thus \(e\) raises weights by \(2\), and \(f\) lowers weights by \(2\).
+
+    Since \(V\) is finite-dimensional, the vectors
+    \[
+        u,eu,e^2u,\dots
+    \]
+    cannot all be nonzero. Let \(r\ge 0\) be minimal such that
+    \[
+        e^{r+1}u=0,
+    \]
+    and set
+    \[
+        v=e^ru.
+    \]
+    Then \(v\neq 0\), \(ev=0\), and \(v\) is again an eigenvector of \(h\); write
+    \[
+        hv=\lambda v.
+    \]
+
+    Now consider the subspace
+    \[
+        W=\operatorname{span}\{v,fv,f^2v,\dots\}.
+    \]
+    It is stable under \(f\) by definition, and it is stable under \(h\) because
+    \[
+        h(f^iv)=(\lambda-2i)f^iv.
+    \]
+    We claim that \(W\) is also stable under \(e\).
+
+    For \(i\ge 1\),
+    \[
+        ef^iv=[e,f]f^{i-1}v+fef^{i-1}v
+        =hf^{i-1}v+fef^{i-1}v.
+    \]
+    Iterating this identity, we obtain
+    \[
+        ef^iv=\sum_{j=0}^{i-1}f^jhf^{i-1-j}v.
+    \]
+    Since
+    \[
+        hf^{i-1-j}v=(\lambda-2(i-1-j))f^{i-1-j}v,
+    \]
+    it follows that
+    \[
+        ef^iv=\sum_{j=0}^{i-1}(\lambda-2(i-1-j))f^{i-1}v
+        =i(\lambda-i+1)f^{i-1}v.
+    \]
+    Hence \(eW\subseteq W\), so \(W\) is a nonzero submodule of \(V\). By irreducibility of \(V\), we have
+    \[
+        W=V.
+    \]
+
+    Now let \(m\ge 0\) satisfy
+    \[
+        f^mv\neq 0,\qquad f^{m+1}v=0.
+    \]
+    Then
+    \[
+        V=\operatorname{span}\{v,fv,\dots,f^mv\}.
+    \]
+    These vectors are linearly independent, since they are eigenvectors of \(h\) with distinct eigenvalues
+    \[
+        \lambda,\lambda-2,\dots,\lambda-2m.
+    \]
+    Thus \(\{v,fv,\dots,f^mv\}\) is a basis of \(V\).
+
+    Finally, applying the formula for \(ef^iv\) with \(i=m+1\), we get
+    \[
+        0=ef^{m+1}v=(m+1)(\lambda-m)f^mv.
+    \]
+    Since \(f^mv\neq 0\), we must have
+    \[
+        \lambda=m.
+    \]
+    Therefore
+    \[
+        hv=mv,\qquad ev=0,
+    \]
+    and the weights are exactly
+    \[
+        m,m-2,\dots,-m.
+    \]
+\end{proof}
+
+\begin{corollary}\label{cor:sl2-unique}
+    For each \(m\in\mathbb Z_{\ge 0}\), there exists, up to isomorphism, a unique irreducible \(\mathfrak{sl}_2(F)\)-module of dimension \(m+1\).
+\end{corollary}
+
+\begin{proof}
+    By Theorem~\ref{thm:sl2-irreducible}, any such module admits a basis
+    \[
+        v,fv,\dots,f^mv
+    \]
+    with
+    \[
+        hv=mv,\qquad ev=0,
+    \]
+    and
+    \[
+        h(f^iv)=(m-2i)f^iv,\qquad
+        e(f^iv)=i(m-i+1)f^{i-1}v,\qquad
+        f(f^iv)=f^{i+1}v.
+    \]
+    Thus the action is completely determined by \(m\).
+\end{proof}
+
+\begin{remark}
+    Once complete reducibility of finite-dimensional \(\mathfrak{sl}_2(F)\)-modules is known, one obtains the following consequences.
+\end{remark}
+
+\begin{corollary}\label{cor:h-integral}
+    Let \(V\) be a finite-dimensional \(\mathfrak{sl}_2(F)\)-module. Then every eigenvalue of \(h\) on \(V\) is an integer.
+\end{corollary}
+
+\begin{proof}
+    Decompose \(V\) as a direct sum of irreducible submodules. By Theorem~\ref{thm:sl2-irreducible}, each irreducible summand has highest weight \(m\in\mathbb Z_{\ge0}\), hence all of its weights are
+    \[
+        m,m-2,\dots,-m,
+    \]
+    which are integers.
+\end{proof}
+
+\begin{proposition}\label{prop:weight-q-minus-p}
+    Let \(V\) be a finite-dimensional \(\mathfrak{sl}_2(F)\)-module, and let \(0\neq w\in V\) be an eigenvector of \(h\) with eigenvalue \(\alpha\). Suppose
+    \[
+        f^{q+1}w=0,\qquad f^qw\neq 0,
+    \]
+    and
+    \[
+        e^{p+1}w=0,\qquad e^pw\neq 0.
+    \]
+    Then
+    \[
+        \alpha=q-p.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Write \(V\) as a direct sum of irreducible submodules:
+    \[
+        V=\bigoplus_j V_j.
+    \]
+    Then
+    \[
+        w=\sum_j w_j,\qquad w_j\in V_j,
+    \]
+    where each nonzero \(w_j\) is again an eigenvector of \(h\) of eigenvalue \(\alpha\).
+
+    Fix a nonzero \(w_j\). By Theorem~\ref{thm:sl2-irreducible}, there exists a highest weight vector \(v_j\in V_j\) and an integer \(i_j\ge 0\) such that
+    \[
+        w_j=f^{i_j}v_j.
+    \]
+    If the highest weight of \(V_j\) is \(m_j\), then
+    \[
+        \alpha=m_j-2i_j.
+    \]
+    Set
+    \[
+        p_j=i_j,\qquad q_j=m_j-i_j.
+    \]
+    Then
+    \[
+        \alpha=q_j-p_j.
+    \]
+
+    Because the decomposition is direct, the integers \(p\) and \(q\) attached to \(w\) satisfy
+    \[
+        p=\max_j p_j,\qquad q=\max_j q_j.
+    \]
+    Since \(q_j-p_j=\alpha\) for every nonzero \(w_j\), we get
+    \[
+        q=\max_j(\alpha+p_j)=\alpha+\max_j p_j=\alpha+p,
+    \]
+    hence
+    \[
+        \alpha=q-p.
+    \]
+\end{proof}
+
+\begin{proposition}\label{prop:existence-all-dimensions}
+    For every \(m\in\mathbb Z_{\ge 0}\), there exists an irreducible \(\mathfrak{sl}_2(F)\)-module of dimension \(m+1\).
+\end{proposition}
+
+\begin{proof}
+    Consider the polynomial algebra \(F[x,y]\). Define operators on \(F[x,y]\) by
+    \[
+        e=y\frac{\partial}{\partial x},\qquad
+        f=x\frac{\partial}{\partial y},\qquad
+        h=[e,f]=y\frac{\partial}{\partial y}-x\frac{\partial}{\partial x}.
+    \]
+    A direct computation shows that
+    \[
+        [e,f]=h,\qquad [h,e]=2e,\qquad [h,f]=-2f,
+    \]
+    so this defines an \(\mathfrak{sl}_2(F)\)-action on \(F[x,y]\).
+
+    Fix \(m\ge 0\), and let
+    \[
+        V_m=\operatorname{span}_F\{x^iy^j\mid i+j=m\}.
+    \]
+    Then \(V_m\) is stable under \(e,f,h\), so \(V_m\) is an \(\mathfrak{sl}_2(F)\)-submodule. Clearly,
+    \[
+        \dim V_m=m+1.
+    \]
+
+    Take
+    \[
+        v=y^m.
+    \]
+    Then
+    \[
+        ev=0,\qquad hv=my^m=mv,
+    \]
+    so \(v\) is a highest weight vector of weight \(m\). Moreover,
+    \[
+        f^i(v)=m(m-1)\cdots(m-i+1)x^iy^{m-i}\qquad (0\le i\le m),
+    \]
+    so the vectors
+    \[
+        v,fv,\dots,f^mv
+    \]
+    span \(V_m\). Hence, by Corollary~\ref{cor:sl2-unique}, \(V_m\) is the irreducible module of highest weight \(m\).
+\end{proof}
+

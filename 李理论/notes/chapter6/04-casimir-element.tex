@@ -1,0 +1,112 @@
+\section{Casimir element}
+
+\begin{definition}
+    Let $L$ be a finite-dimensional Lie algebra over $F$, and let
+    $B(\cdot,\cdot)$ be a nondegenerate invariant symmetric bilinear form on $L$.
+    Choose a basis $x_1,\dots,x_n$ of $L$, and let $x^1,\dots,x^n$ be the
+    $B$-dual basis, so that
+    \[
+        B(x_i,x^j)=\delta_{ij}.
+    \]
+    The element
+    \[
+        \Omega_B=\sum_{i=1}^n x_i x^i \in U(L)
+    \]
+    is called the Casimir element associated with $B$.
+\end{definition}
+
+\begin{remark}
+    The definition is independent of the choice of basis. Indeed, $\Omega$ is the element corresponding to the identity map of $L$ under the natural identification
+    \[
+        L \otimes L \cong \operatorname{End}_F(L),\qquad
+        x \otimes y \mapsto \bigl(z \mapsto (y,z)x\bigr).
+    \]
+\end{remark}
+
+\begin{proposition}
+    Let $L$ be a finite-dimensional Lie algebra equipped with a nondegenerate invariant symmetric bilinear form $B$, and let
+    \[
+        \Omega_B=\sum_{i=1}^n x_i x^i
+    \]
+    be the associated Casimir element. If $\rho:L\to\mathfrak{gl}(V)$ is a representation of $L$, define
+    \[
+        C_V:=\sum_{i=1}^n \rho(x_i)\rho(x^i)\in \operatorname{End}_F(V).
+    \]
+    Then
+    \[
+        \rho(a)C_V=C_V\rho(a)
+        \qquad\text{for all } a\in L.
+    \]
+\end{proposition}
+
+\begin{proof}
+    For any $a\in L$, we compute
+    \[
+        [\rho(a),C_V]
+        =
+        \sum_{i=1}^n \bigl([\rho(a),\rho(x_i)]\rho(x^i)+\rho(x_i)[\rho(a),\rho(x^i)]\bigr).
+    \]
+    Since $\rho$ is a representation, this becomes
+    \[
+        [\rho(a),C_V]
+        =
+        \sum_{i=1}^n \bigl(\rho([a,x_i])\rho(x^i)+\rho(x_i)\rho([a,x^i])\bigr).
+    \]
+
+    Write
+    \[
+        [a,x_i]=\sum_{j=1}^n c_{ji}x_j.
+    \]
+    We claim that
+    \[
+        [a,x^i]=-\sum_{j=1}^n c_{ij}x^j.
+    \]
+    Indeed, for every $k$,
+    \[
+        B([a,x^i],x_k)=-B(x^i,[a,x_k])
+    \]
+    by invariance and symmetry of $B$. Since
+    \[
+        [a,x_k]=\sum_{j=1}^n c_{jk}x_j,
+    \]
+    we get
+    \[
+        B([a,x^i],x_k)
+        =
+        -\sum_{j=1}^n c_{jk}B(x^i,x_j)
+        =
+        -c_{ik}.
+    \]
+    If
+    \[
+        [a,x^i]=\sum_{j=1}^n d_{ji}x^j,
+    \]
+    then
+    \[
+        d_{ki}=B([a,x^i],x_k)=-c_{ik},
+    \]
+    because $B(x^j,x_k)=\delta_{jk}$. This proves the claim.
+
+    Therefore
+    \[
+        \sum_{i=1}^n \rho([a,x_i])\rho(x^i)
+        =
+        \sum_{i,j=1}^n c_{ji}\rho(x_j)\rho(x^i),
+    \]
+    while
+    \[
+        \sum_{i=1}^n \rho(x_i)\rho([a,x^i])
+        =
+        -\sum_{i,j=1}^n c_{ij}\rho(x_i)\rho(x^j).
+    \]
+    After relabeling indices in the first sum, these two sums cancel. Hence
+    \[
+        [\rho(a),C_V]=0.
+    \]
+    Equivalently,
+    \[
+        \rho(a)C_V=C_V\rho(a)
+        \qquad\text{for all } a\in L.
+    \]
+\end{proof}
+

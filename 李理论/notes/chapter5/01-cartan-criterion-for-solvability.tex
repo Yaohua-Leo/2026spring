@@ -1,0 +1,43 @@
+\section{Cartan Criterion for Solvability}
+
+\begin{proposition}
+    Let $L \subseteq \mathfrak{gl}(V)$ with $\dim_F V<\infty$. Assume
+    \[
+        \operatorname{Tr}(xy)=0 \quad \text{for all }x\in L,\ y\in [L,L]
+    \]
+    (equivalently, $\operatorname{Tr}(L[L,L])=0$). Then every element of $[L,L]$ is nilpotent as an endomorphism of $V$. In particular, $[L,L]$ acts nilpotently on $V$.
+\end{proposition}
+
+\begin{proof}
+    Apply the main lemma with
+    \[
+        A:=[L,L],\qquad B:=L,\qquad
+        M:=\{\varphi\in\mathfrak{gl}(V)\mid [\varphi,B]\subseteq A\}.
+    \]
+    Then $M$ is a Lie subalgebra, and $L\subseteq M$.
+
+    Fix $a,b\in L$, and set $c \in M$.
+    To use the lemma, it suffices to prove
+    \[
+        \operatorname{Tr}([a,b]c)=0.
+    \]
+    For any $c\in M$, we compute
+    \[
+        [a,b]c=[ac,b]-a[c,b].
+    \]
+    Hence
+    \[
+        \operatorname{Tr}([a,b]c)=\operatorname{Tr}([ac,b])-\operatorname{Tr}(a[c,b]).
+    \]
+    The first term is $0$ because the trace of a commutator is $0$.
+    For the second term, $[c,b]\in A=[L,L]$ (since $c\in M$, $b\in B=L$), and $a\in L$; by the assumption $\operatorname{Tr}(L[L,L])=0$, we get $\operatorname{Tr}(a[c,b])=0$.
+
+    Therefore $\operatorname{Tr}([a,b]c)=0$ for all $c\in M$. By the main lemma, each $[a,b]$ is nilpotent.
+
+    Now let
+    \[
+        S:=\{[a,b]\mid a,b\in L\}\subseteq [L,L].
+    \]
+    Since $[L,L]=\langle S\rangle_{\text{Lie}}$, and every element of $S$ is nilpotent on $V$, Engel's theorem implies that $[L,L]$ is a nilpotent Lie algebra. Consequently, $[L,L]$ is solvable, so $L$ is solvable.
+\end{proof}
+

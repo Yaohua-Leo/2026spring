@@ -1,0 +1,203 @@
+\section{Some Basics of Representation of Lie algebra}
+
+\begin{definition}
+    Let \(L\) be a Lie algebra over a field \(F\), and let \(V\) be a vector space over \(F\).
+    An \emph{\(L\)-module structure} on \(V\) is a bilinear map
+    \[
+        L\times V \to V,\qquad (x,v)\mapsto x\cdot v,
+    \]
+    such that
+    \[
+        [x,y]\cdot v = x\cdot (y\cdot v)-y\cdot (x\cdot v)
+    \]
+    for all \(x,y\in L\) and \(v\in V\).
+\end{definition}
+
+\begin{definition}
+    Let \(V\) and \(W\) be \(L\)-modules. The \emph{tensor product module}
+    \(V\otimes W\) is the vector space \(V\otimes_F W\) equipped with the action
+    \[
+        x\cdot (v\otimes w)=(x\cdot v)\otimes w+v\otimes (x\cdot w),
+        \qquad x\in L,\ v\in V,\ w\in W,
+    \]
+    extended linearly to all of \(V\otimes W\).
+\end{definition}
+
+\begin{proof}
+    We verify that this defines an \(L\)-module structure. Since the formula is bilinear in
+    \(x\), \(v\), and \(w\), it extends uniquely to a linear action on \(V\otimes W\).
+    It remains to check the bracket identity.
+
+    For \(x,y\in L\), \(v\in V\), and \(w\in W\), we have
+    \begin{align*}
+        x\cdot \bigl(y\cdot (v\otimes w)\bigr)
+         & =x\cdot \bigl((y\cdot v)\otimes w+v\otimes (y\cdot w)\bigr) \\
+         & =(x\cdot (y\cdot v))\otimes w+(y\cdot v)\otimes (x\cdot w)
+        +(x\cdot v)\otimes (y\cdot w)+v\otimes (x\cdot (y\cdot w)),
+    \end{align*}
+    and similarly
+    \begin{align*}
+        y\cdot \bigl(x\cdot (v\otimes w)\bigr)
+         & =(y\cdot (x\cdot v))\otimes w+(x\cdot v)\otimes (y\cdot w)
+        +(y\cdot v)\otimes (x\cdot w)+v\otimes (y\cdot (x\cdot w)).
+    \end{align*}
+    Subtracting, we obtain
+    \begin{align*}
+        x\cdot \bigl(y\cdot (v\otimes w)\bigr)-y\cdot \bigl(x\cdot (v\otimes w)\bigr)
+         & =\bigl([x,y]\cdot v\bigr)\otimes w+v\otimes \bigl([x,y]\cdot w\bigr) \\
+         & =[x,y]\cdot (v\otimes w).
+    \end{align*}
+    Thus \(V\otimes W\) is an \(L\)-module.
+\end{proof}
+
+\begin{definition}
+    Let \(V\) and \(W\) be \(L\)-modules. The vector space
+    \[
+        \operatorname{Hom}_F(V,W)
+    \]
+    becomes an \(L\)-module by defining
+    \[
+        (x\cdot f)(v)=x\cdot f(v)-f(x\cdot v),
+        \qquad x\in L,\ f\in \operatorname{Hom}_F(V,W),\ v\in V.
+    \]
+    This is called the \emph{Hom-module}.
+\end{definition}
+
+\begin{proof}
+    We first note that for fixed \(x\in L\) and \(f\in \operatorname{Hom}_F(V,W)\),
+    the map \(x\cdot f\) is again \(F\)-linear in \(v\), so \(x\cdot f\in \operatorname{Hom}_F(V,W)\).
+
+    Now let \(x,y\in L\), \(f\in \operatorname{Hom}_F(V,W)\), and \(v\in V\). Then
+    \begin{align*}
+        \bigl(x\cdot (y\cdot f)\bigr)(v)
+         & =x\cdot \bigl((y\cdot f)(v)\bigr)-(y\cdot f)(x\cdot v)                            \\
+         & =x\cdot \bigl(y\cdot f(v)-f(y\cdot v)\bigr)
+        -\bigl(y\cdot f(x\cdot v)-f(y\cdot (x\cdot v))\bigr)                                 \\
+         & =x\cdot (y\cdot f(v))-x\cdot f(y\cdot v)-y\cdot f(x\cdot v)+f(y\cdot (x\cdot v)),
+    \end{align*}
+    and similarly
+    \begin{align*}
+        \bigl(y\cdot (x\cdot f)\bigr)(v)
+         & =y\cdot (x\cdot f(v))-y\cdot f(x\cdot v)-x\cdot f(y\cdot v)+f(x\cdot (y\cdot v)).
+    \end{align*}
+    Subtracting gives
+    \begin{align*}
+        \bigl(x\cdot (y\cdot f)-y\cdot (x\cdot f)\bigr)(v)
+         & =[x,y]\cdot f(v)-f([x,y]\cdot v) \\
+         & =\bigl([x,y]\cdot f\bigr)(v).
+    \end{align*}
+    Hence
+    \[
+        [x,y]\cdot f=x\cdot (y\cdot f)-y\cdot (x\cdot f),
+    \]
+    so \(\operatorname{Hom}_F(V,W)\) is an \(L\)-module.
+\end{proof}
+
+\begin{definition}
+    Let \(V\) be an \(L\)-module. The dual space
+    \[
+        V^*=\operatorname{Hom}_F(V,F)
+    \]
+    is called the \emph{dual module} of \(V\), where \(F\) is regarded as the trivial
+    \(L\)-module. Its action is given by
+    \[
+        (x\cdot \varphi)(v)=-\,\varphi(x\cdot v),
+        \qquad x\in L,\ \varphi\in V^*,\ v\in V.
+    \]
+\end{definition}
+
+\begin{proof}
+    This is the special case \(W=F\) of the Hom-module construction, where the action of
+    \(L\) on \(F\) is trivial. Indeed, if \(\varphi\in \operatorname{Hom}_F(V,F)\), then
+    \[
+        (x\cdot \varphi)(v)=x\cdot \varphi(v)-\varphi(x\cdot v)=0-\varphi(x\cdot v)
+        =-\varphi(x\cdot v).
+    \]
+    Thus \(V^*\) is an \(L\)-module.
+\end{proof}
+
+\begin{remark}
+    The subspace of \(L\)-invariants in \(\operatorname{Hom}_F(V,W)\) is precisely
+    \[
+        \operatorname{Hom}_L(V,W)
+        =
+        \{f\in \operatorname{Hom}_F(V,W)\mid x\cdot f=0 \text{ for all } x\in L\}.
+    \]
+    Indeed, the condition \(x\cdot f=0\) means
+    \[
+        x\cdot f(v)=f(x\cdot v)
+        \qquad \text{for all } x\in L,\ v\in V,
+    \]
+    which is exactly the condition that \(f\) be an \(L\)-module homomorphism.
+\end{remark}
+
+\begin{proposition}
+    Assume that \(V\) is finite-dimensional. Then there is a natural vector space isomorphism
+    \[
+        V^*\otimes W \cong \operatorname{Hom}_F(V,W),
+    \]
+    given by
+    \[
+        \varphi\otimes w \longmapsto \bigl(v\mapsto \varphi(v)w\bigr).
+    \]
+    This is in fact an isomorphism of \(L\)-modules.
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        \Phi:V^*\otimes W \to \operatorname{Hom}_F(V,W)
+    \]
+    be defined by
+    \[
+        \Phi(\varphi\otimes w)(v)=\varphi(v)w.
+    \]
+    It is the usual canonical isomorphism of vector spaces when \(V\) is finite-dimensional.
+    We check that it is \(L\)-equivariant.
+
+    For \(x\in L\), \(\varphi\in V^*\), \(w\in W\), and \(v\in V\), we have
+    \begin{align*}
+        \Phi\bigl(x\cdot (\varphi\otimes w)\bigr)(v)
+         & =\Phi\bigl((x\cdot \varphi)\otimes w+\varphi\otimes (x\cdot w)\bigr)(v) \\
+         & =(x\cdot \varphi)(v)\,w+\varphi(v)\,(x\cdot w)                          \\
+         & =-\varphi(x\cdot v)\,w+\varphi(v)\,(x\cdot w).
+    \end{align*}
+    On the other hand,
+    \begin{align*}
+        \bigl(x\cdot \Phi(\varphi\otimes w)\bigr)(v)
+         & =x\cdot \bigl(\Phi(\varphi\otimes w)(v)\bigr)-\Phi(\varphi\otimes w)(x\cdot v) \\
+         & =x\cdot (\varphi(v)w)-\varphi(x\cdot v)w                                       \\
+         & =\varphi(v)(x\cdot w)-\varphi(x\cdot v)w.
+    \end{align*}
+    Thus
+    \[
+        \Phi\bigl(x\cdot (\varphi\otimes w)\bigr)=x\cdot \Phi(\varphi\otimes w),
+    \]
+    so \(\Phi\) is an \(L\)-module isomorphism.
+\end{proof}
+
+\begin{remark}
+    Under the identification
+    \[
+        \operatorname{End}_F(V)=\operatorname{Hom}_F(V,V),
+    \]
+    the \(L\)-action is
+    \[
+        (x\cdot T)(v)=x\cdot T(v)-T(x\cdot v),
+        \qquad x\in L,\ T\in \operatorname{End}_F(V),\ v\in V.
+    \]
+    Thus \(L\) acts on \(\operatorname{End}_F(V)\) by commutator.
+\end{remark}
+
+\begin{remark}
+    The natural pairing
+    \[
+        V^*\times V \to F,\qquad (\varphi,v)\mapsto \varphi(v),
+    \]
+    is \(L\)-invariant in the sense that
+    \[
+        (x\cdot \varphi)(v)+\varphi(x\cdot v)=0
+    \]
+    for all \(x\in L\), \(\varphi\in V^*\), and \(v\in V\).
+\end{remark}
+

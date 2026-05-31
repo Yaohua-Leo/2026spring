@@ -1,0 +1,297 @@
+\chapter{Rank Estimates for Quasiprimitive Actions}
+
+\providecommand{\rank}{\operatorname{rank}}
+\providecommand{\Soc}{\operatorname{Soc}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Inn}{\operatorname{Inn}}
+\providecommand{\Out}{\operatorname{Out}}
+\providecommand{\wt}{\operatorname{wt}}
+\providecommand{\Diag}{\operatorname{Diag}}
+
+
+\section{Regular Normal Subgroups and Fusion Classes}
+
+\begin{definition}[Fusion classes]
+Let $M$ be a finite group.  The \emph{fusion classes of elements of $M$} mean the
+$\Aut(M)$-orbits on $M$:
+\[
+    m^{\Aut(M)}=\{m^\alpha\mid \alpha\in \Aut(M)\},\qquad m\in M.
+\]
+\end{definition}
+
+\begin{lemma}\label{lem:regular-normal-fusion}
+Let $M\unlhd G$ be regular on $\Omega$.  Then
+\[
+    \rank(G)\geq \#\{\Aut(M)\text{-orbits on }M\}.
+\]
+In particular, if $M=T^k$ with $T$ nonabelian simple, then
+\[
+    \rank(G)\geq 4.
+\]
+Hence a rank-three quasiprimitive group cannot be of type $\mathrm{HS}$, $\mathrm{HC}$, or $\mathrm{TW}$ whenever the corresponding regular normal subgroup is of the form $T^k$ with $T$ nonabelian simple.
+\end{lemma}
+
+\begin{proof}
+Choose $\omega\in\Omega$ and identify $\Omega$ with the set of right cosets
+$[G:G_\omega]=\{G_\omega g\mid g\in G\}$.  Since $M$ is regular, every point has a unique representative of the form $G_\omega m$ with $m\in M$, and
+\[
+    G=MG_\omega,\qquad M\cap G_\omega=1.
+\]
+Let $h\in G_\omega$ and $m\in M$.  Then
+\[
+    (G_\omega m)^h=G_\omega mh
+    =G_\omega h(h^{-1}mh)
+    =G_\omega m^h.
+\]
+Thus $G_\omega$ acts on the identified copy of $M$ by conjugation.  Since $M\unlhd G$, conjugation by elements of $G_\omega$ gives automorphisms of $M$; hence
+\[
+    G_\omega \leq \Aut(M)
+\]
+after this identification.  Therefore the $G_\omega$-orbits on $M$ refine the $\Aut(M)$-orbits on $M$.  The number of $G_\omega$-orbits is $\rank(G)$, so
+\[
+    \rank(G)\geq \#\{\Aut(M)\text{-orbits on }M\}.
+\]
+
+Now suppose $M=T^k$ with $T$ nonabelian simple.  By Burnside's $p^aq^b$-theorem, $|T|$, and hence $|M|$, is divisible by at least three distinct primes.  Choose distinct primes $r,s,t$ dividing $|M|$.  By Cauchy's theorem there exist $x,y,z\in M$ with
+\[
+    |x|=r,\qquad |y|=s,\qquad |z|=t.
+\]
+Automorphisms preserve element orders, so
+\[
+    1^{\Aut(M)},\qquad x^{\Aut(M)},\qquad y^{\Aut(M)},\qquad z^{\Aut(M)}
+\]
+are four distinct fusion classes of $M$.  Hence $\rank(G)\geq 4$.
+\end{proof}
+
+\section{Simple Diagonal Type}
+
+\begin{lemma}\label{lem:sd-rank-at-least-four}
+Let $G$ be a quasiprimitive permutation group of simple diagonal type $\mathrm{SD}$.  Then
+\[
+    \rank(G)\geq 4.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    N=\Soc(G)=T_1\times \cdots\times T_k\unlhd G,
+\]
+where $T_i\cong T$ for a nonabelian simple group $T$, and $k\geq 2$.  Choose a point $\omega\in\Omega$.  In simple diagonal type we may write, after identifying each $T_i$ with $T$,
+\[
+    N_\omega=\{(t,t,\ldots,t)\mid t\in T\}\cong T.
+\]
+Put
+\[
+    R=\{(x_1,\ldots,x_{k-1},1)\mid x_i\in T\}.
+\]
+Then $N=RN_\omega$ and $R\cap N_\omega=1$, so $R$ is regular on $\Omega$.  Identifying
+\[
+    \Omega\cong [N:N_\omega]
+        =\{N_\omega(t_1,\ldots,t_k)\mid t_i\in T\},
+\]
+every coset has a unique representative in $R$, namely
+\[
+    N_\omega(t_1,\ldots,t_k)
+    =N_\omega(t_k^{-1}t_1,\ldots,t_k^{-1}t_{k-1},1).
+\]
+
+The stabilizer $G_\omega$ normalizes both $N$ and $N_\omega$.  In this diagonal action,
+\[
+    C_{\Sym(\Omega)}(N)\cong N_N(N_\omega)/N_\omega=1,
+\]
+because the full diagonal subgroup is self-normalizing in $N=T^k$.  Hence $C_G(N)=1$, so conjugation embeds $G_\omega$ into $\Aut(N)$.  Therefore
+\[
+    G_\omega\leq N_{\Aut(N)}(N_\omega).
+\]
+The normalizer of the full diagonal subgroup in $\Aut(T)\wr S_k$ is
+\[
+    \Aut(T)\times S_k,
+\]
+where $\Aut(T)$ acts diagonally on all coordinates and $S_k$ permutes the coordinates.  Thus every element of $G_\omega$ has the form $\alpha\pi$, with
+\[
+    \alpha\in\Aut(T),\qquad \pi\in S_k,
+\]
+and it sends
+\[
+    (t_1,\ldots,t_k)\quad\text{to}\quad (t_1^\alpha,\ldots,t_k^\alpha)^\pi.
+\]
+
+For $a\in T^\#$, write
+\[
+    x(a)=N_\omega(a,1,\ldots,1)\in\Omega.
+\]
+We claim that if $x(a)$ and $x(b)$ lie in the same $G_\omega$-orbit, then either
+\[
+    a=b^\alpha
+\]
+for some $\alpha\in\Aut(T)$, or $k=2$ and
+\[
+    a=(b^{-1})^\alpha
+\]
+for some $\alpha\in\Aut(T)$.
+
+Indeed, suppose $x(a)^{\alpha\pi}=x(b)$ for some $\alpha\pi\in G_\omega$.  The image of $(a,1,\ldots,1)$ has the single nontrivial entry $a^\alpha$ in coordinate $1^\pi$.
+
+\begin{itemize}[leftmargin=2em]
+    \item If $1^\pi=1$, then the representative in $R$ is $(a^\alpha,1,\ldots,1)$, so $b=a^\alpha$.
+
+    \item If $1^\pi=k$, then the representative in $R$ is
+    \[
+        \bigl((a^\alpha)^{-1},\ldots,(a^\alpha)^{-1},1\bigr).
+    \]
+    For this to equal $(b,1,\ldots,1)$, we must have $k=2$ and $b=(a^{-1})^\alpha$.
+
+    \item If $1^\pi=i\notin\{1,k\}$, then the representative in $R$ has a nontrivial entry away from the first coordinate, and so it cannot equal $(b,1,\ldots,1)$.
+\end{itemize}
+
+Consequently, the $G_\omega$-orbits on the points $x(a)$ are at least as numerous as the $\Aut(T)$-orbits on inverse-pairs
+\[
+    \{a,a^{-1}\},\qquad a\in T.
+\]
+Since $T$ is nonabelian simple, $|T|$ is divisible by at least three distinct primes.  Choose elements of three distinct prime orders in $T$.  Elements of distinct orders are neither automorphic conjugate nor inverse-automorphic conjugate.  Together with the identity, these give at least four $G_\omega$-orbits on $\Omega$.  Therefore
+\[
+    \rank(G)\geq 4.
+\]
+\end{proof}
+
+\begin{example}
+The lower bound in Lemma~\ref{lem:sd-rank-at-least-four} can be sharp.  Take $T=A_5$ and $k=2$.  Let
+\[
+    G=(A_5\times A_5)\cdot \bigl(\gen{\iota}\times S_2\bigr),
+\]
+where $\iota$ is an outer automorphism of $A_5$.  Then
+\[
+    G_\omega\cong S_5\times S_2=\Aut(A_5)\times S_2,
+\]
+and the suborbits correspond to the element orders $1,2,3,5$ in $A_5$.  Hence
+\[
+    \rank(G)=4.
+\]
+\end{example}
+
+\section{Wreath Products and Product Action}
+
+\begin{definition}[Wreath product]
+Let $T$ be a group and let $k\geq 2$.  The wreath product of $T$ by $S_k$ is
+\[
+    T\wr S_k=T^k\rtimes S_k,
+\]
+where $S_k$ permutes the $k$ direct factors of $T^k$.  For $\pi\in S_k$ and
+$\mathbf t=(t_1,\ldots,t_k)\in T^k$, we use the convention
+\[
+    \mathbf t^\pi=(t_{1\pi^{-1}},\ldots,t_{k\pi^{-1}}).
+\]
+Thus multiplication in $T\wr S_k$ is
+\[
+    (\mathbf s\pi)(\mathbf t\sigma)
+    =\bigl(\mathbf s\,\mathbf t^{\pi^{-1}}\bigr)\pi\sigma,
+\]
+that is,
+\[
+    \bigl((s_1,\ldots,s_k)\pi\bigr)
+    \bigl((t_1,\ldots,t_k)\sigma\bigr)
+    =
+    (s_1t_{1\pi},\ldots,s_kt_{k\pi})\pi\sigma.
+\]
+\end{definition}
+
+\begin{definition}[Product action]
+Let $T$ be a transitive permutation group on
+\[
+    \Delta=\{0,1,\ldots,m\},\qquad m\geq 1.
+\]
+Let $P\leq S_k$ be transitive, where $k\geq 2$, and put
+\[
+    G=T\wr P\leq T\wr S_k,
+    \qquad
+    \Omega=\Delta^k.
+\]
+The group $G$ acts naturally on $\Omega$ by
+\[
+    (\delta_1,\ldots,\delta_k)^{(t_1,\ldots,t_k)\pi}
+    = (\delta_1^{t_1},\ldots,\delta_k^{t_k})^\pi
+    = (\delta_{1\pi^{-1}}^{t_{1\pi^{-1}}},\ldots,
+       \delta_{k\pi^{-1}}^{t_{k\pi^{-1}}}).
+\]
+This is called the \emph{product action}; equivalently, $G$ is a blow-up of the action of $T$ on $\Delta$.
+\end{definition}
+
+Fix
+\[
+    \omega_0=(0,\ldots,0)\in\Omega.
+\]
+For $\omega=(\delta_1,
+\ldots,
+\delta_k)\in\Omega$, define its \emph{weight} by
+\[
+    \wt(\omega)=\bigl|\{i\mid \delta_i\neq 0\}\bigr|.
+\]
+Thus $\wt(\omega)$ is the number of nonzero coordinates of $\omega$.
+
+\begin{lemma}\label{lem:product-action-rank}
+Using the notation above, suppose $G=T\wr P$ acts on $\Omega=\Delta^k$ in product action.  Then:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item $\rank(G)\geq k+1$.
+    \item $\rank(G)=3$ if and only if $k=2$ and $T$ is $2$-transitive on $\Delta$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $T_0$ be the stabilizer of $0$ in $T$.  The stabilizer of $\omega_0$ in $G$ is
+\[
+    G_{\omega_0}=T_0^k\rtimes P.
+\]
+Every element of $T_0^k$ fixes the zero entry in each coordinate, and every element of $P$ only permutes coordinates.  Hence $G_{\omega_0}$ preserves the weight function
+\[
+    \wt:\Omega\to\{0,1,
+\ldots,k\}.
+\]
+Since each weight $0,1,\ldots,k$ occurs, $G_{\omega_0}$ has at least $k+1$ orbits on $\Omega$.  Therefore
+\[
+    \rank(G)\geq k+1.
+\]
+
+Now suppose $\rank(G)=3$.  Since $k\geq 2$, the inequality just proved gives
+\[
+    3=\rank(G)\geq k+1\geq 3,
+\]
+so $k=2$.  Thus
+\[
+    \Omega=\Delta\times\Delta,
+    \qquad
+    G=(T\times T)\rtimes S_2.
+\]
+The points of weight $1$ form a single $G_{\omega_0}$-orbit.  In particular, the set
+\[
+    \{(\delta,0)\mid \delta\in\Delta\setminus\{0\}\}
+\]
+forces $T_0$ to be transitive on $\Delta\setminus\{0\}$.  Hence $T$ is $2$-transitive on $\Delta$.
+
+Conversely, assume $k=2$ and $T$ is $2$-transitive on $\Delta$.  Then $T_0$ is transitive on $\Delta\setminus\{0\}$.  The stabilizer
+\[
+    G_{\omega_0}= (T_0\times T_0)\rtimes S_2
+\]
+has exactly the following three orbits on $\Delta\times\Delta$:
+\[
+    \{(0,0)\},
+\]
+\[
+    \{(\delta,0),(0,\delta)\mid \delta\neq 0\},
+\]
+\[
+    \{(\delta,\epsilon)
+        \mid \delta\neq 0,
+        \epsilon\neq 0\}.
+\]
+Therefore $\rank(G)=3$.
+\end{proof}
+
+\begin{remark}
+The preceding lemmas give three quick rank obstructions in the O'Nan--Scott analysis of quasiprimitive groups:
+\begin{itemize}[leftmargin=2em]
+    \item regular nonabelian characteristically simple normal subgroups force rank at least $4$;
+    \item simple diagonal type $\mathrm{SD}$ forces rank at least $4$;
+    \item product action has rank $3$ only in the case $k=2$ with the component action $2$-transitive.
+\end{itemize}
+\end{remark}

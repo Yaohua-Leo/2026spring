@@ -1,0 +1,121 @@
+\section{Jordan decomposition in a semisimple linear Lie algebra}
+
+\begin{theorem}
+    Let $L \subseteq \mathfrak{gl}(V)$ be a semisimple Lie algebra, where $V$ is finite-dimensional.
+    Then for every $a \in L$, the semisimple and nilpotent parts of $a$ in $\mathfrak{gl}(V)$ both lie in $L$.
+    Hence the abstract Jordan decomposition in $L$ coincides with the usual Jordan decomposition in $\mathfrak{gl}(V)$.
+\end{theorem}
+
+\begin{proof}
+    Take $a \in L$, and write its usual Jordan decomposition in $\mathfrak{gl}(V)$ as
+    \[
+        a=a_s+a_n,
+        \qquad [a_s,a_n]=0,
+    \]
+    where $a_s$ is semisimple and $a_n$ is nilpotent.
+
+    Then
+    \[
+        \operatorname{ad}_{\mathfrak{gl}(V)}(a)
+        =
+        \operatorname{ad}_{\mathfrak{gl}(V)}(a_s)
+        +
+        \operatorname{ad}_{\mathfrak{gl}(V)}(a_n)
+    \]
+    is the Jordan decomposition of $\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ in
+    $\mathfrak{gl}(\mathfrak{gl}(V))$. In particular,
+    $\operatorname{ad}_{\mathfrak{gl}(V)}(a_s)$ is a polynomial in
+    $\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ with no constant term. Since
+    $\operatorname{ad}_{\mathfrak{gl}(V)}(a)$ preserves $L$, it follows that
+    \[
+        [a_s,L]\subseteq L.
+    \]
+    Thus $\operatorname{ad}(a_s)\vert_L$ is a derivation of $L$.
+
+    Because $L$ is semisimple, every derivation of $L$ is inner. Hence there exists
+    $a_s' \in L$ such that
+    \[
+        [a_s,x]=[a_s',x]
+        \qquad \text{for all } x\in L.
+    \]
+    Therefore
+    \[
+        [a_s-a_s',L]=0.
+    \]
+
+    Now decompose the $L$-module $V$ as
+    \[
+        V=\bigoplus_i V_i,
+    \]
+    where each $V_i$ is irreducible. Since $a_s-a_s'$ commutes with the action of $L$,
+    Schur's lemma shows that $a_s-a_s'$ acts by a scalar on each $V_i$.
+
+    On the other hand, $L=[L,L]$, so for every $x\in L$ and every $i$,
+    \[
+        \operatorname{tr}_{V_i}(x)=0.
+    \]
+    Applying this to $x=a-a_s' \in L$, we get
+    \[
+        \operatorname{tr}_{V_i}(a-a_s')=0.
+    \]
+    Since $a_n$ is nilpotent, $\operatorname{tr}_{V_i}(a_n)=0$, hence
+    \[
+        \operatorname{tr}_{V_i}(a_s-a_s')=0.
+    \]
+    But $a_s-a_s'$ is scalar on $V_i$, so that scalar must be $0$. Thus
+    $a_s-a_s'$ acts trivially on every $V_i$, whence
+    \[
+        a_s=a_s' \in L.
+    \]
+    Finally,
+    \[
+        a_n=a-a_s\in L.
+    \]
+    So both parts lie in $L$, as required.
+\end{proof}
+
+\begin{corollary}
+    Let $L$ be a semisimple Lie algebra and $\varphi\colon L\to \mathfrak{gl}(V)$
+    a finite-dimensional representation.
+    If
+    \[
+        x=s+n
+    \]
+    is the abstract Jordan decomposition of $x\in L$, then
+    \[
+        \varphi(x)=\varphi(s)+\varphi(n)
+    \]
+    is the usual Jordan decomposition of $\varphi(x)$ in $\mathfrak{gl}(V)$.
+\end{corollary}
+
+\begin{proof}
+    It is enough to show that
+    \[
+        \operatorname{ad}_{\varphi(L)}(\varphi(x))
+        =
+        \operatorname{ad}_{\varphi(L)}(\varphi(s))
+        +
+        \operatorname{ad}_{\varphi(L)}(\varphi(n))
+    \]
+    is the abstract Jordan decomposition of
+    $\operatorname{ad}_{\varphi(L)}(\varphi(x))$.
+
+    Since $\operatorname{ad}_L(s)$ is semisimple, $L$ is spanned by its eigenvectors.
+    Applying $\varphi$, we see that $\varphi(L)$ is spanned by eigenvectors of
+    $\operatorname{ad}_{\varphi(L)}(\varphi(s))$. Hence
+    $\operatorname{ad}_{\varphi(L)}(\varphi(s))$ is semisimple.
+
+    Since $\operatorname{ad}_L(n)$ is nilpotent, its induced action on the quotient
+    $\varphi(L) \cong L / \ker(\varphi)$ is nilpotent. Hence
+    $\operatorname{ad}_{\varphi(L)}(\varphi(n))$ is nilpotent.
+
+    Also, because $[s,n]=0$,
+    \[
+        \bigl[\operatorname{ad}_{\varphi(L)}(\varphi(s)),
+            \operatorname{ad}_{\varphi(L)}(\varphi(n))\bigr]=0.
+    \]
+    Thus the displayed decomposition is the abstract Jordan decomposition in the
+    semisimple linear Lie algebra $\varphi(L)$. By the theorem above, it is also the
+    usual Jordan decomposition in $\mathfrak{gl}(V)$.
+\end{proof}
+

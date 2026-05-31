@@ -1,0 +1,869 @@
+\chapter{Week 8: Holomorphs and Primitive Actions}
+
+\section{Regular Actions}
+
+\begin{lemma}
+The subgroups \(\widehat X\) and \(\check X\) are regular subgroups of
+\(\operatorname{Sym}(X)\), and they centralize each other.
+\end{lemma}
+
+\begin{proof}
+The action of \(\widehat X\) is regular because for any \(x,y\in X\), the unique
+element sending \(x\) to \(y\) is
+\[
+    \widehat{x^{-1}y}.
+\]
+Similarly, the action of \(\check X\) is regular because the unique element sending
+\(x\) to \(y\) is
+\[
+    \check{yx^{-1}}.
+\]
+
+Finally, for all \(a,b,x\in X\),
+\[
+    x^{\widehat a\check b}
+    =
+    b^{-1}xa
+    =
+    x^{\check b\widehat a}.
+\]
+Hence every element of \(\widehat X\) commutes with every element of
+\(\check X\).
+\end{proof}
+
+\begin{definition}[Equivalent permutation actions]
+Let \(G\) act on two sets \(\Omega\) and \(\Delta\). These two actions are called
+\textbf{equivalent} if there exists a bijection
+\[
+    \varphi:\Omega\to\Delta
+\]
+such that
+\[
+    \varphi(\omega^g)=\varphi(\omega)^g
+    \qquad
+    \text{for all } \omega\in\Omega,\ g\in G.
+\]
+\end{definition}
+
+\begin{corollary}
+Every regular action of a group \(X\) is equivalent to the action of
+\(\widehat X\) on \(X\), and also to the action of \(\check X\) on \(X\).
+\end{corollary}
+
+\begin{proof}
+Let \(X\) act regularly on \(\Omega\). Fix \(\omega\in\Omega\).
+
+First define
+\[
+    \varphi:X\to\Omega,
+    \qquad
+    a\mapsto \omega^a.
+\]
+Since the action is regular, \(\varphi\) is a bijection. For \(a,b\in X\), we have
+\[
+    \varphi(a^{\widehat b})
+    =
+    \varphi(ab)
+    =
+    \omega^{ab}
+    =
+    (\omega^a)^b
+    =
+    \varphi(a)^b.
+\]
+Thus the given regular action is equivalent to the right regular action.
+
+For the left regular action, define
+\[
+    \psi:X\to\Omega,
+    \qquad
+    a\mapsto \omega^{a^{-1}}.
+\]
+Again \(\psi\) is a bijection. For \(a,b\in X\),
+\[
+    \psi(a^{\check b})
+    =
+    \psi(b^{-1}a)
+    =
+    \omega^{(b^{-1}a)^{-1}}
+    =
+    \omega^{a^{-1}b}
+    =
+    (\omega^{a^{-1}})^b
+    =
+    \psi(a)^b.
+\]
+Hence the given regular action is also equivalent to the left regular action.
+\end{proof}
+
+\begin{lemma}[Centralizer of a regular group]
+Let \(X\) act on itself by right multiplication. Then
+\[
+    C_{\operatorname{Sym}(X)}(\widehat X)=\check X.
+\]
+\end{lemma}
+
+\begin{proof}
+We already know that \(\check X\leq C_{\operatorname{Sym}(X)}(\widehat X)\).
+
+Conversely, let \(c\in C_{\operatorname{Sym}(X)}(\widehat X)\). Put
+\[
+    1^c=a.
+\]
+Then for every \(x\in X\),
+\[
+    x^c
+    =
+    (1^{\widehat x})^c
+    =
+    (1^c)^{\widehat x}
+    =
+    ax.
+\]
+But the map \(x\mapsto ax\) is \(\check{a^{-1}}\). Hence \(c\in\check X\).
+Therefore
+\[
+    C_{\operatorname{Sym}(X)}(\widehat X)=\check X.
+\]
+\end{proof}
+
+\section{The Holomorph}
+
+\begin{definition}[Holomorph]
+Let \(G\) be a group. The \textbf{holomorph} of \(G\) is
+\[
+    \operatorname{Hol}(G)
+    =
+    G:\operatorname{Aut}(G).
+\]
+Equivalently, under the right action convention, we may realize it as
+\[
+    \operatorname{Hol}(G)
+    =
+    \widehat G\operatorname{Aut}(G)
+    \leq
+    \operatorname{Sym}(G).
+\]
+
+As an abstract semidirect product,
+\[
+    \operatorname{Hol}(G)
+    =
+    \{(g,\alpha)\mid g\in G,\ \alpha\in\operatorname{Aut}(G)\},
+\]
+with multiplication
+\[
+    (g,\alpha)(h,\beta)
+    =
+    \bigl(g h^{\alpha^{-1}},\alpha\beta\bigr).
+\]
+\end{definition}
+
+\begin{lemma}[Normalizer of a regular subgroup]
+Let \(M\leq \operatorname{Sym}(\Omega)\) be regular. After identifying
+\(\Omega\) with \(M\), we have
+\[
+    N_{\operatorname{Sym}(\Omega)}(M)
+    =
+    M:\operatorname{Aut}(M)
+    =
+    \operatorname{Hol}(M).
+\]
+\end{lemma}
+
+\begin{proof}
+Identify \(\Omega\) with \(M\), so that \(M=\widehat M\) acts by right
+multiplication.
+
+Let \(G=N_{\operatorname{Sym}(M)}(\widehat M)\), and let \(1\in M\) be the
+identity element. Since \(\widehat M\) is regular, we have
+\[
+    G=\widehat M G_1,
+\]
+where \(G_1\) is the stabilizer of \(1\).
+
+We claim that
+\[
+    G_1\leq \operatorname{Aut}(M).
+\]
+Let \(b\in G_1\). Since \(b\) normalizes \(\widehat M\), for every \(m\in M\)
+there exists \(m'\in M\) such that
+\[
+    b^{-1}\widehat m b=\widehat{m'}.
+\]
+Evaluating both sides at \(1\), we get
+\[
+    m'=m^b.
+\]
+Hence
+\[
+    b^{-1}\widehat m b=\widehat{m^b}.
+\]
+Therefore, for \(m,n\in M\),
+\[
+    (mn)^b
+    =
+    \left(1^{\widehat m\widehat n}\right)^b
+    =
+    1^{b^{-1}\widehat m\widehat n b}
+    =
+    1^{(b^{-1}\widehat m b)(b^{-1}\widehat n b)}
+    =
+    1^{\widehat{m^b}\widehat{n^b}}
+    =
+    m^b n^b.
+\]
+Thus \(b\) is an automorphism of \(M\).
+
+Conversely, every automorphism of \(M\) normalizes the right regular subgroup
+\(\widehat M\). Hence
+\[
+    N_{\operatorname{Sym}(M)}(\widehat M)
+    =
+    \widehat M:\operatorname{Aut}(M).
+\]
+\end{proof}
+
+\section{Holomorph Simple Type}
+
+\begin{theorem}[Holomorph simple type]
+Let \(G\leq \operatorname{Sym}(\Omega)\). Suppose
+\[
+    M\times N\unlhd G
+\]
+and suppose that \(M\) and \(N\) are regular on \(\Omega\), with
+\[
+    M\cong N\cong T,
+\]
+where \(T\) is a nonabelian simple group.
+
+After identifying \(\Omega\) with \(M\), we have
+\[
+    M:\operatorname{Inn}(M)
+    \leq
+    G
+    \leq
+    M:\operatorname{Aut}(M).
+\]
+\end{theorem}
+
+\begin{proof}
+Since \(M\) is regular, we identify \(\Omega\) with \(M\), so that
+\[
+    M=\widehat M.
+\]
+Since \(M\unlhd G\), the group \(G\) normalizes \(M\). Hence, by the normalizer
+lemma,
+\[
+    G\leq N_{\operatorname{Sym}(M)}(\widehat M)
+    =
+    M:\operatorname{Aut}(M).
+\]
+
+It remains to identify the lower bound. Since \(M\times N\unlhd G\), the
+subgroups \(M\) and \(N\) commute. Thus
+\[
+    N\leq C_{\operatorname{Sym}(M)}(\widehat M).
+\]
+By the centralizer lemma,
+\[
+    C_{\operatorname{Sym}(M)}(\widehat M)=\check M.
+\]
+Since \(N\) and \(\check M\) are both regular and have the same order, we get
+\[
+    N=\check M.
+\]
+
+Now \(M\cong T\) is centerless. Hence
+\[
+    \widehat M\cap \check M=1.
+\]
+The point stabilizer of \(1\in M\) in \(\widehat M\check M\) consists of the
+elements
+\[
+    \widehat m\check m
+    \qquad (m\in M),
+\]
+because
+\[
+    1^{\widehat m\check m}=m^{-1}m=1.
+\]
+Moreover,
+\[
+    x^{\widehat m\check m}
+    =
+    m^{-1}xm,
+\]
+so this point stabilizer is naturally identified with
+\[
+    \operatorname{Inn}(M).
+\]
+Therefore
+\[
+    \widehat M\check M
+    =
+    M:\operatorname{Inn}(M)
+    \leq G.
+\]
+Thus
+\[
+    M:\operatorname{Inn}(M)
+    \leq
+    G
+    \leq
+    M:\operatorname{Aut}(M).
+\]
+\end{proof}
+
+\section{Holomorph Compound Type}
+
+\begin{theorem}[Holomorph compound type]
+Let \(G\leq \operatorname{Sym}(\Omega)\). Suppose
+\[
+    M\times N\unlhd G,
+\]
+where \(M\) and \(N\) are regular on \(\Omega\), and
+\[
+    M\cong N\cong T^\ell
+\]
+with \(\ell\geq 2\) and \(T\) a nonabelian simple group.
+
+After identifying \(\Omega\) with \(M\), we have
+\[
+    M:\operatorname{Inn}(M)
+    \leq
+    G
+    \leq
+    M:\operatorname{Aut}(M).
+\]
+Moreover,
+\[
+    \operatorname{Aut}(M)
+    \cong
+    \operatorname{Aut}(T)\wr S_\ell.
+\]
+Thus
+\[
+    M:\operatorname{Inn}(M)
+    \leq
+    G
+    \leq
+    M:\bigl(\operatorname{Aut}(T)\wr S_\ell\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+The proof is the same as in the holomorph simple case.
+
+Identify \(\Omega\) with \(M\), so \(M=\widehat M\). Since \(M\unlhd G\),
+\[
+    G\leq N_{\operatorname{Sym}(M)}(\widehat M)
+    =
+    M:\operatorname{Aut}(M).
+\]
+Since \(M\) and \(N\) commute and \(N\) is regular,
+\[
+    N\leq C_{\operatorname{Sym}(M)}(\widehat M)=\check M.
+\]
+Hence \(N=\check M\). Since \(T^\ell\) is centerless, we have
+\[
+    \widehat M\cap \check M=1.
+\]
+The point stabilizer of \(1\in M\) in \(\widehat M\check M\) is identified with
+\(\operatorname{Inn}(M)\). Therefore
+\[
+    \widehat M\check M
+    =
+    M:\operatorname{Inn}(M)
+    \leq G.
+\]
+
+Finally, since
+\[
+    M=T_1\times \cdots \times T_\ell
+    \qquad
+    (T_i\cong T),
+\]
+the automorphism group of \(M\) permutes the simple direct factors and acts on
+each factor by an automorphism of \(T\). Hence
+\[
+    \operatorname{Aut}(M)
+    \cong
+    \operatorname{Aut}(T)\wr S_\ell.
+\]
+\end{proof}
+
+\begin{remark}
+In the quasiprimitive holomorph compound case, the group \(G\) induces a
+transitive action on the set of simple direct factors
+\[
+    \{T_1,\dots,T_\ell\}.
+\]
+Indeed, if the induced action had more than one orbit, then the product of the
+factors in one orbit would give a nontrivial proper normal subgroup of \(G\)
+inside \(M\), contradicting the minimal normality of \(M\).
+\end{remark}
+
+\section{The Frattini Argument for Permutation Groups}
+
+\begin{lemma}[Frattini argument for permutation groups]
+Let \(H\leq G\leq \operatorname{Sym}(\Omega)\), and assume that \(G\) is
+transitive on \(\Omega\). Fix \(\omega\in\Omega\). Then \(H\) is transitive on
+\(\Omega\) if and only if
+\[
+    G=G_\omega H.
+\]
+In particular, if \(H\unlhd G\), then this is equivalent to
+\[
+    G=HG_\omega.
+\]
+\end{lemma}
+
+\begin{proof}
+Suppose first that \(H\) is transitive. Let \(g\in G\). Since \(H\) is transitive,
+there exists \(h\in H\) such that
+\[
+    \omega^h=\omega^g.
+\]
+Then
+\[
+    \omega^{gh^{-1}}
+    =
+    (\omega^g)^{h^{-1}}
+    =
+    (\omega^h)^{h^{-1}}
+    =
+    \omega.
+\]
+Hence \(gh^{-1}\in G_\omega\), and therefore
+\[
+    g\in G_\omega H.
+\]
+Thus \(G=G_\omega H\).
+
+Conversely, suppose \(G=G_\omega H\). For every \(g\in G\), write
+\[
+    g=kh
+    \qquad
+    (k\in G_\omega,\ h\in H).
+\]
+Then
+\[
+    \omega^g
+    =
+    \omega^{kh}
+    =
+    (\omega^k)^h
+    =
+    \omega^h.
+\]
+Thus every point in the \(G\)-orbit of \(\omega\) lies in the \(H\)-orbit of
+\(\omega\). Since \(G\) is transitive, \(H\) is transitive.
+\end{proof}
+
+\begin{lemma}
+Let \(M\unlhd G\leq \operatorname{Sym}(\Omega)\), and suppose that \(M\) is
+regular on \(\Omega\). Then
+\[
+    G=M:G_\omega
+\]
+for every \(\omega\in\Omega\).
+\end{lemma}
+
+\begin{proof}
+Since \(M\) is transitive on \(\Omega\), the Frattini argument gives
+\[
+    G=G_\omega M.
+\]
+Since \(M\unlhd G\), we also have
+\[
+    G=MG_\omega.
+\]
+Moreover,
+\[
+    M\cap G_\omega=1
+\]
+because \(M\) is regular. Hence
+\[
+    G=M:G_\omega.
+\]
+\end{proof}
+
+\section{Blocks and Primitive Actions}
+
+\begin{definition}[Block]
+Let \(G\) be a transitive permutation group on \(\Omega\). A subset
+\(B\subseteq \Omega\) is called a \textbf{block} for \(G\) if for every
+\(g\in G\),
+\[
+    B^g=B
+    \qquad
+    \text{or}
+    \qquad
+    B^g\cap B=\varnothing.
+\]
+\end{definition}
+
+\begin{definition}[Block system]
+Let \(B\) be a block for \(G\). The set
+\[
+    \mathcal B=\{B^g\mid g\in G\}
+\]
+is called the \textbf{block system} generated by \(B\).
+\end{definition}
+
+\begin{proposition}[Basic properties of block systems]
+Let \(G\) be transitive on \(\Omega\), and let
+\[
+    \mathcal B=\{B_1,B_2,\dots,B_m\}
+\]
+be a block system. Then:
+\begin{enumerate}[label=(\arabic*)]
+    \item each \(B_i\) is a block;
+    \item \(B_i\cap B_j=\varnothing\) whenever \(i\neq j\);
+    \item \(|B_1|=\cdots=|B_m|\);
+    \item \(G\) induces a transitive action on \(\mathcal B\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Each \(B_i\) has the form \(B^g\) for some \(g\in G\), and conjugating the block
+condition shows that \(B^g\) is again a block. Hence each \(B_i\) is a block.
+
+If \(B_i\cap B_j\neq\varnothing\), then by the block condition they must be equal.
+Thus distinct blocks in \(\mathcal B\) are disjoint.
+
+All blocks in \(\mathcal B\) are images of \(B\) under permutations, so they have the
+same cardinality.
+
+Finally, the action of \(G\) on \(\mathcal B\) is transitive by construction, since every
+block in \(\mathcal B\) is of the form \(B^g\).
+\end{proof}
+
+\begin{definition}[Primitive and imprimitive actions]
+Let \(G\) be transitive on \(\Omega\).
+
+If there exists a block \(B\subseteq \Omega\) such that
+\[
+    1<|B|<|\Omega|,
+\]
+then \(G\) is called \textbf{imprimitive} on \(\Omega\).
+
+If no such block exists, then \(G\) is called \textbf{primitive} on \(\Omega\).
+\end{definition}
+
+\begin{lemma}[Primitive action and maximal point stabilizer]
+Let \(G\leq \operatorname{Sym}(\Omega)\) be transitive, and fix
+\(\omega\in\Omega\). Then \(G\) is primitive on \(\Omega\) if and only if
+\(G_\omega\) is a maximal subgroup of \(G\).
+\end{lemma}
+
+\begin{proof}
+Suppose first that \(G\) is imprimitive. Let \(B\) be a nontrivial block with
+\[
+    \omega\in B.
+\]
+Let
+\[
+    G_B=\{g\in G\mid B^g=B\}
+\]
+be the setwise stabilizer of \(B\). Then
+\[
+    G_\omega\leq G_B.
+\]
+Since \(B\) is nontrivial, choose \(\omega'\in B\) with \(\omega'\neq \omega\).
+By transitivity, there exists \(g\in G\) such that
+\[
+    \omega^g=\omega'.
+\]
+Then \(B^g\cap B\neq\varnothing\), so \(B^g=B\). Hence
+\[
+    g\in G_B.
+\]
+But \(g\notin G_\omega\), so
+\[
+    G_\omega<G_B.
+\]
+Also \(G_B<G\), since otherwise \(B\) would be \(G\)-invariant, and transitivity
+would force \(B=\Omega\). Therefore \(G_\omega\) is not maximal.
+
+Conversely, suppose that \(G_\omega\) is not maximal. Then there exists a subgroup
+\(H\) such that
+\[
+    G_\omega<H<G.
+\]
+Define
+\[
+    B=\omega^H.
+\]
+We claim that \(B\) is a block. Let \(g\in G\), and suppose that
+\[
+    B^g\cap B\neq\varnothing.
+\]
+Then there exist \(h_1,h_2\in H\) such that
+\[
+    \omega^{h_1g}=\omega^{h_2}.
+\]
+Thus
+\[
+    \omega^{h_1gh_2^{-1}}=\omega,
+\]
+so
+\[
+    h_1gh_2^{-1}\in G_\omega\leq H.
+\]
+Hence \(g\in H\), and therefore
+\[
+    B^g=B.
+\]
+Thus \(B\) is a block.
+
+Since \(H>G_\omega\), the block \(B\) has more than one point. Since \(H<G\),
+the subgroup \(H\) is not transitive; otherwise the Frattini argument would imply
+\(G=G_\omega H=H\), a contradiction. Hence \(B\neq \Omega\). Therefore \(B\)
+is a nontrivial block, and \(G\) is imprimitive.
+\end{proof}
+
+\section{Quasiprimitive Groups}
+
+\begin{definition}[Quasiprimitive permutation group]
+Let \(G\leq \operatorname{Sym}(\Omega)\) be transitive. We say that \(G\) is
+\textbf{quasiprimitive} on \(\Omega\) if every nontrivial normal subgroup of \(G\)
+is transitive on \(\Omega\).
+\end{definition}
+
+\begin{lemma}[Blocks for groups with a regular normal subgroup]
+Let \(G=M:G_\omega\leq \operatorname{Sym}(\Omega)\), where \(M\unlhd G\) is
+regular on \(\Omega\). Identify \(\Omega\) with \(M\), and identify \(\omega\) with
+the identity element \(1\in M\).
+
+Then the blocks of \(G\) containing \(1\) are exactly the subgroups
+\(K\leq M\) that are invariant under \(G_\omega\).
+\end{lemma}
+
+\begin{proof}
+Let \(B\) be a block containing \(1\). Since \(M\) is regular, we may regard
+\(B\) as a subset of \(M\).
+
+We first show that \(B\) is a subgroup of \(M\). Let \(a,b\in B\). Since
+\(b\in B\), the translate
+\[
+    B^{\widehat{b^{-1}}}
+\]
+contains \(1\). Hence
+\[
+    B^{\widehat{b^{-1}}}\cap B\neq\varnothing.
+\]
+Because \(B\) is a block, we have
+\[
+    B^{\widehat{b^{-1}}}=B.
+\]
+Therefore
+\[
+    ab^{-1}\in B.
+\]
+By the subgroup criterion, \(B\leq M\).
+
+Next let \(x\in G_\omega\). Since \(x\) fixes \(1\), the block \(B^x\) also contains
+\(1\). Hence
+\[
+    B^x\cap B\neq\varnothing.
+\]
+Thus
+\[
+    B^x=B.
+\]
+So \(B\) is \(G_\omega\)-invariant.
+
+Conversely, suppose \(K\leq M\) is \(G_\omega\)-invariant. Let \(g\in G\). Since
+\[
+    G=M:G_\omega,
+\]
+we may write
+\[
+    g=\widehat m x
+    \qquad
+    (m\in M,\ x\in G_\omega).
+\]
+Then
+\[
+    K^g
+    =
+    K^{\widehat m x}
+    =
+    (Km)^x
+    =
+    K^x m^x
+    =
+    K m^x,
+\]
+because \(K^x=K\). Hence \(K^g\) is a right coset of \(K\) in \(M\). Two right
+cosets of \(K\) are either equal or disjoint, so
+\[
+    K^g=K
+    \qquad
+    \text{or}
+    \qquad
+    K^g\cap K=\varnothing.
+\]
+Thus \(K\) is a block.
+\end{proof}
+
+\begin{theorem}
+A quasiprimitive permutation group of type \(\mathrm{HA}\), \(\mathrm{HS}\), or
+\(\mathrm{HC}\) is primitive.
+\end{theorem}
+
+\begin{proof}
+In each of the types \(\mathrm{HA}\), \(\mathrm{HS}\), and \(\mathrm{HC}\), the group
+\(G\) has a regular minimal normal subgroup \(M\). Hence
+\[
+    G=M:G_\omega.
+\]
+By the previous lemma, if \(G\) were imprimitive, then there would exist a
+nontrivial proper subgroup
+\[
+    1<K<M
+\]
+that is invariant under \(G_\omega\).
+
+We show that this is impossible in each case.
+
+\medskip
+
+\noindent
+\textbf{Case \(\mathrm{HA}\).}
+Here \(M\) is abelian and is the unique minimal normal subgroup of \(G\). Since
+\(K\leq M\) and \(M\) is abelian, \(M\) normalizes \(K\). Since \(K\) is
+\(G_\omega\)-invariant, \(G_\omega\) also normalizes \(K\). Thus
+\[
+    K\unlhd M:G_\omega=G.
+\]
+This contradicts the minimal normality of \(M\), because
+\[
+    1<K<M.
+\]
+Therefore no such \(K\) exists, and \(G\) is primitive.
+
+\medskip
+
+\noindent
+\textbf{Case \(\mathrm{HS}\).}
+Here
+\[
+    M\cong T
+\]
+for a nonabelian simple group \(T\), and from the holomorph simple structure,
+\[
+    \operatorname{Inn}(M)\leq G_\omega.
+\]
+If \(K\leq M\) is \(G_\omega\)-invariant, then in particular \(K\) is invariant
+under \(\operatorname{Inn}(M)\). Hence
+\[
+    K\unlhd M.
+\]
+Since \(M\) is simple, we get
+\[
+    K=1
+    \qquad
+    \text{or}
+    \qquad
+    K=M.
+\]
+Thus no nontrivial proper \(K\) exists, and \(G\) is primitive.
+
+\medskip
+
+\noindent
+\textbf{Case \(\mathrm{HC}\).}
+Here
+\[
+    M=T_1\times \cdots \times T_\ell,
+    \qquad
+    T_i\cong T,
+\]
+where \(T\) is nonabelian simple and \(\ell\geq 2\). Again
+\[
+    \operatorname{Inn}(M)\leq G_\omega.
+\]
+Thus a \(G_\omega\)-invariant subgroup \(K\leq M\) is normalized by
+\(\operatorname{Inn}(M)\), hence is normal in \(M\). Therefore \(K\) is a product
+of some of the simple direct factors \(T_i\).
+
+But in the holomorph compound case, \(G_\omega\) acts transitively on the set
+\[
+    \{T_1,\dots,T_\ell\}.
+\]
+Therefore the set of direct factors appearing in \(K\) is either empty or all of
+\(\{T_1,\dots,T_\ell\}\). Hence
+\[
+    K=1
+    \qquad
+    \text{or}
+    \qquad
+    K=M.
+\]
+So no nontrivial proper \(G_\omega\)-invariant subgroup \(K\) exists. Therefore
+\(G\) is primitive.
+\end{proof}
+
+\begin{proposition}
+Every primitive permutation group is quasiprimitive.
+\end{proposition}
+
+\begin{proof}
+Let \(G\leq \operatorname{Sym}(\Omega)\) be primitive, and let
+\[
+    1\neq H\unlhd G.
+\]
+We prove that \(H\) is transitive.
+
+Fix \(\omega\in\Omega\). If
+\[
+    H\leq G_\omega,
+\]
+then for every \(g\in G\),
+\[
+    H^g=H\leq G_{\omega^g}.
+\]
+Since \(G\) is transitive, the points \(\omega^g\) run over all of \(\Omega\). Hence
+\(H\) fixes every point of \(\Omega\). Since \(G\leq \operatorname{Sym}(\Omega)\)
+is faithful, this forces
+\[
+    H=1,
+\]
+contradicting \(H\neq 1\).
+
+Therefore
+\[
+    H\nleq G_\omega.
+\]
+Thus
+\[
+    G_\omega<HG_\omega\leq G.
+\]
+Since \(G\) is primitive, \(G_\omega\) is maximal in \(G\). Hence
+\[
+    HG_\omega=G.
+\]
+By the Frattini argument, \(H\) is transitive on \(\Omega\). Therefore every
+nontrivial normal subgroup of \(G\) is transitive, so \(G\) is quasiprimitive.
+\end{proof}
+
+\begin{example}[Quasiprimitive but not primitive]
+Let \(T\) be a nonabelian simple group. Let \(\widehat T\) act regularly on the set
+\(T\).
+
+Then \(\widehat T\) is quasiprimitive on \(T\). Indeed, since \(T\) is simple, the
+only nontrivial normal subgroup of \(\widehat T\) is \(\widehat T\) itself, and
+\(\widehat T\) is transitive.
+
+However, \(\widehat T\) is not primitive. The stabilizer of the identity element
+\(1\in T\) is
+\[
+    \widehat T_1=1.
+\]
+Since \(T\) is nonabelian simple, \(T\) has a nontrivial proper subgroup. Hence
+\(1\) is not a maximal subgroup of \(\widehat T\). By the maximal stabilizer
+criterion, the regular action of \(\widehat T\) on \(T\) is not primitive.
+\end{example}

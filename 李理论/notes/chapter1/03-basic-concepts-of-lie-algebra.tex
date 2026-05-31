@@ -1,0 +1,187 @@
+\section{Basic concepts of Lie algebra}
+
+Let \(L\) be a Lie algebra over a field \(F\).
+
+\begin{definition}
+    The \emph{derived series} of \(L\) is defined inductively by
+    \[
+        L^{(0)}=L, \qquad L^{(1)}=[L,L], \qquad L^{(i)}=[L^{(i-1)},L^{(i-1)}]\quad (i\ge 1).
+    \]
+    The Lie algebra \(L\) is called \emph{solvable} if
+    \[
+        L^{(n)}=0
+    \]
+    for some integer \(n\ge 0\).
+\end{definition}
+
+\begin{definition}
+    The \emph{descending central series} of \(L\) is defined by
+    \[
+        L^1=L, \qquad L^2=[L,L], \qquad L^i=[L,L^{i-1}]\quad (i\ge 2).
+    \]
+    The Lie algebra \(L\) is called \emph{nilpotent} if
+    \[
+        L^n=0
+    \]
+    for some integer \(n\ge 1\).
+\end{definition}
+
+\begin{proposition}
+    If \(L\) is nilpotent, then \(L\) is solvable.
+\end{proposition}
+
+\begin{proof}
+    It is enough to show that
+    \[
+        L^{(i)}\subseteq L^{2^i}\qquad (i\ge 0).
+    \]
+    We argue by induction on \(i\). The case \(i=0\) is clear. If
+    \[
+        L^{(i)}\subseteq L^{2^i},
+    \]
+    then
+    \[
+        L^{(i+1)}
+        =
+        [L^{(i)},L^{(i)}]
+        \subseteq
+        [L^{2^i},L^{2^i}]
+        \subseteq
+        L^{2^{i+1}}.
+    \]
+    Hence the claim follows for all \(i\). If \(L^n=0\) for some \(n\), then for \(i\) sufficiently large one has \(2^i\ge n\), so
+    \[
+        L^{(i)}\subseteq L^{2^i}=0.
+    \]
+    Therefore \(L\) is solvable.
+\end{proof}
+
+\begin{definition}
+    A \emph{solvable ideal} of \(L\) is an ideal which is solvable as a Lie algebra in its own right. Since the sum of two solvable ideals is again solvable, there exists a unique maximal solvable ideal of \(L\), called the \emph{radical} of \(L\), denoted by
+    \[
+        \operatorname{Rad}(L).
+    \]
+    The Lie algebra \(L\) is called \emph{semisimple} if
+    \[
+        \operatorname{Rad}(L)=0.
+    \]
+\end{definition}
+
+\begin{remark}
+    Thus the three notions fit into the chain
+    \[
+        \text{nilpotent} \;\Longrightarrow\; \text{solvable},
+    \]
+    while semisimplicity means that \(L\) has no nonzero solvable ideals. In particular, a semisimple Lie algebra cannot contain any nonzero abelian ideal.
+\end{remark}
+
+\begin{example}
+    Any abelian Lie algebra is nilpotent, hence solvable. On the other hand, the Lie algebra of upper triangular matrices is solvable in general, but need not be nilpotent.
+\end{example}
+
+\begin{example}
+    Let
+    \[
+        L=
+        \left\{
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        a,b\in F
+        \right\}
+        \subseteq \mathfrak{gl}_2(F),
+    \]
+    Then \(L\) is solvable but not nilpotent.
+
+    Indeed, if
+    \[
+        x=
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix},
+        \qquad
+        y=
+        \begin{pmatrix}
+            c & d \\
+            0 & 0
+        \end{pmatrix},
+    \]
+    then
+    \[
+        [x,y]
+        =
+        \begin{pmatrix}
+            0 & ad-bc \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Hence
+    \[
+        [L,L]
+        =
+        \left\{
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        t\in F
+        \right\},
+        \qquad
+        [[L,L],[L,L]]=0.
+    \]
+    Thus the derived series terminates:
+    \[
+        L^{(1)}=[L,L],\qquad L^{(2)}=[L^{(1)},L^{(1)}]=0,
+    \]
+    so \(L\) is solvable.
+
+    On the other hand, \(L\) is not nilpotent, since its descending central series does not reach \(0\). In fact,
+    \[
+        L^2=[L,L]
+        =
+        \left\{
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}
+        \,\middle|\,
+        t\in F
+        \right\},
+    \]
+    and for any
+    \[
+        x=
+        \begin{pmatrix}
+            a & b \\
+            0 & 0
+        \end{pmatrix}\in L,\qquad
+        y=
+        \begin{pmatrix}
+            0 & t \\
+            0 & 0
+        \end{pmatrix}\in L^2,
+    \]
+    we have
+    \[
+        [x,y]
+        =
+        \begin{pmatrix}
+            0 & at \\
+            0 & 0
+        \end{pmatrix}\in L^2.
+    \]
+    Therefore
+    \[
+        L^3=[L,L^2]=L^2,
+    \]
+    and inductively
+    \[
+        L^n=L^2\neq 0\qquad (n\ge 2).
+    \]
+    So \(L\) is not nilpotent.
+\end{example}
+

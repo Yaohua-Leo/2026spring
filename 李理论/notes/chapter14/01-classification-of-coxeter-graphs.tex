@@ -1,0 +1,410 @@
+\section{Classification of Coxeter Graphs}
+
+Let \(\Gamma\) be the Coxeter graph associated with a set of simple roots.
+We normalize the corresponding vectors \(v_i\) so that
+\[
+    (v_i,v_i)=1.
+\]
+Recall that, from the previous discussion, for every vertex \(v_i\), the
+number of edges adjacent to \(v_i\), counted with multiplicity, is at most
+\(4\).
+
+We shall classify the possible connected Coxeter graphs. The following
+reductions are used.
+
+\begin{enumerate}
+    \item If a triple edge occurs, then the graph must be the whole graph:
+          \[
+              \begin{tikzpicture}[coxeter]
+                  \coordinate (a) at (0,0);
+                  \coordinate (b) at (1.2,0);
+                  \draw (a) -- (b);
+                  \draw ([yshift=2pt]a) -- ([yshift=2pt]b);
+                  \draw ([yshift=-2pt]a) -- ([yshift=-2pt]b);
+                  \node[vertex] at (a) {};
+                  \node[vertex] at (b) {};
+              \end{tikzpicture}
+          \]
+          This gives the graph of type \(G_2\).
+
+    \item If a double edge occurs, then the graph is a chain with a double
+          edge somewhere in the chain. Thus it has the form
+          \[
+              \begin{tikzpicture}[coxeter]
+                  \coordinate (v1) at (0,0);
+                  \coordinate (v2) at (0.8,0);
+                  \coordinate (vp) at (2.1,0);
+                  \coordinate (wq) at (3.2,0);
+                  \coordinate (w2) at (4.5,0);
+                  \coordinate (w1) at (5.3,0);
+
+                  \draw (v1) -- (v2);
+                  \node at (1.45,0) {\(\cdots\)};
+                  \draw (1.75,0) -- (vp);
+
+                  \draw[double, double distance=2pt] (vp) -- (wq);
+
+                  \draw (wq) -- (3.65,0);
+                  \node at (4.0,0) {\(\cdots\)};
+                  \draw (w2) -- (w1);
+
+                  \node[vertex] at (v1) {};
+                  \node[vertex] at (v2) {};
+                  \node[vertex] at (vp) {};
+                  \node[vertex] at (wq) {};
+                  \node[vertex] at (w2) {};
+                  \node[vertex] at (w1) {};
+
+                  \node at (v1) [below=4pt] {\(v_1\)};
+                  \node at (v2) [below=4pt] {\(v_2\)};
+                  \node at (vp) [below=4pt] {\(v_p\)};
+                  \node at (wq) [below=4pt] {\(w_q\)};
+                  \node at (w2) [below=4pt] {\(w_2\)};
+                  \node at (w1) [below=4pt] {\(w_1\)};
+              \end{tikzpicture}
+          \]
+
+    \item If all edges are single, then the graph is either a chain, or a
+          tree with one branching point of degree \(3\).
+\end{enumerate}
+
+\subsection{The case of a double edge}
+
+Assume that the graph contains a double edge. Let the two chains attached
+to the double edge have lengths \(p\) and \(q\), respectively. Define
+\[
+    v=v_1+2v_2+\cdots+p v_p,
+    \qquad
+    w=w_1+2w_2+\cdots+q w_q.
+\]
+Since \(v\) and \(w\) are linearly independent, by the strict Cauchy--Schwarz
+inequality,
+\[
+    (v,w)^2 < (v,v)(w,w).
+\]
+
+We compute:
+\[
+    \begin{aligned}
+        (v,v)
+         & =
+        1^2+2^2+\cdots+p^2
+        -
+        2\cdot \frac12
+        \bigl(1\cdot 2+2\cdot 3+\cdots+(p-1)p\bigr) \\
+         & =
+        p^2-\frac{p(p-1)}{2}
+        =
+        \frac{p(p+1)}{2}.
+    \end{aligned}
+\]
+Similarly,
+\[
+    (w,w)=\frac{q(q+1)}{2}.
+\]
+Since \(v_p\) and \(w_q\) are joined by a double edge,
+\[
+    (v_p,w_q)=-\frac{\sqrt{2}}{2}.
+\]
+Hence
+\[
+    (v,w)=-pq\frac{\sqrt{2}}{2},
+\]
+and therefore
+\[
+    (v,w)^2=\frac{p^2q^2}{2}.
+\]
+
+Thus
+\[
+    \frac{p^2q^2}{2}
+    <
+    \frac{p(p+1)}{2}\cdot \frac{q(q+1)}{2}.
+\]
+Cancelling \(pq>0\), we obtain
+\[
+    2pq < (p+1)(q+1).
+\]
+Equivalently,
+\[
+    pq-p-q+1<2,
+\]
+that is,
+\[
+    (p-1)(q-1)<2.
+\]
+Hence either \(p=1\), or \(q=1\), or
+\[
+    p=q=2.
+\]
+The first two possibilities give the Coxeter graph of type \(B_n\) or
+\(C_n\), while the last possibility gives the Coxeter graph of type \(F_4\).
+
+\subsection{The simply-laced branching case}
+
+Now assume that all edges are single and that the graph has a branching
+point. Let the branching vertex be \(\gamma\), and let the three arms have
+lengths \(p,q,r\). Write
+\[
+    v=v_1+2v_2+\cdots+p v_p,
+\]
+\[
+    w=w_1+2w_2+\cdots+q w_q,
+\]
+\[
+    u=u_1+2u_2+\cdots+r u_r.
+\]
+
+The vectors \(v,w,u\) are pairwise orthogonal. Extend
+\[
+    \frac{v}{\sqrt{(v,v)}},
+    \qquad
+    \frac{w}{\sqrt{(w,w)}},
+    \qquad
+    \frac{u}{\sqrt{(u,u)}}
+\]
+to an orthonormal basis. Since \((\gamma,\gamma)=1\), we have
+\[
+    \frac{(\gamma,v)^2}{(v,v)}
+    +
+    \frac{(\gamma,w)^2}{(w,w)}
+    +
+    \frac{(\gamma,u)^2}{(u,u)}
+    < 1.
+\]
+Here the inequality is strict because \(\gamma,v,w,u\) are linearly
+independent.
+
+As before,
+\[
+    (v,v)=\frac{p(p+1)}{2},
+    \qquad
+    (w,w)=\frac{q(q+1)}{2},
+    \qquad
+    (u,u)=\frac{r(r+1)}{2}.
+\]
+Since \(\gamma\) is joined to \(v_p,w_q,u_r\) by single edges,
+\[
+    (\gamma,v)=-\frac{p}{2},
+    \qquad
+    (\gamma,w)=-\frac{q}{2},
+    \qquad
+    (\gamma,u)=-\frac{r}{2}.
+\]
+Therefore
+\[
+    \frac{p}{2(p+1)}
+    +
+    \frac{q}{2(q+1)}
+    +
+    \frac{r}{2(r+1)}
+    <1.
+\]
+Equivalently,
+\[
+    \frac{1}{p+1}
+    +
+    \frac{1}{q+1}
+    +
+    \frac{1}{r+1}
+    >1.
+\]
+
+Assume, without loss of generality, that
+\[
+    p\le q\le r.
+\]
+Then
+\[
+    \frac{3}{p+1}>1,
+\]
+so \(p=1\).
+
+Now
+\[
+    \frac12+\frac{1}{q+1}+\frac{1}{r+1}>1.
+\]
+Hence
+\[
+    \frac{1}{q+1}+\frac{1}{r+1}>\frac12.
+\]
+Since \(q\le r\), this forces \(q=1\) or \(q=2\).
+
+\begin{itemize}
+    \item If \(q=1\), then \(r\) may be arbitrary. This gives the family
+          \(D_n\).
+
+    \item If \(q=2\), then
+          \[
+              \frac12+\frac13+\frac{1}{r+1}>1,
+          \]
+          so
+          \[
+              \frac{1}{r+1}>\frac16.
+          \]
+          Hence
+          \[
+              r+1<6,
+          \]
+          and therefore
+          \[
+              r=2,3,4.
+          \]
+          These give the exceptional types
+          \[
+              E_6,\qquad E_7,\qquad E_8.
+          \]
+\end{itemize}
+
+\subsection{Complete classification}
+
+Combining the preceding cases, the connected Coxeter graphs are precisely
+the following.
+
+\[
+    \begin{array}{ccl}
+        G_2
+         &
+        \begin{tikzpicture}[coxeter]
+            \coordinate (a) at (0,0);
+            \coordinate (b) at (1.2,0);
+            \draw (a) -- (b);
+            \draw ([yshift=2pt]a) -- ([yshift=2pt]b);
+            \draw ([yshift=-2pt]a) -- ([yshift=-2pt]b);
+            \node[vertex] at (a) {};
+            \node[vertex] at (b) {};
+        \end{tikzpicture}
+         &
+        \\[1.5em]
+
+        A_n
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,4,5}
+            \node[vertex] at (\x,0) {};
+            \draw (0,0)--(1,0)--(2,0);
+            \node at (3,0) {\(\cdots\)};
+            \draw (4,0)--(5,0);
+        \end{tikzpicture}
+         &
+        \\[1.5em]
+
+        B_n \text{ or } C_n
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,4,5}
+            \node[vertex] at (\x,0) {};
+            \draw (0,0)--(1,0)--(2,0);
+            \node at (3,0) {\(\cdots\)};
+            \draw[double, double distance=2pt] (4,0)--(5,0);
+        \end{tikzpicture}
+         &
+        \\[1.5em]
+
+        F_4
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,3}
+            \node[vertex] at (\x,0) {};
+            \draw (0,0)--(1,0);
+            \draw[double, double distance=2pt] (1,0)--(2,0);
+            \draw (2,0)--(3,0);
+        \end{tikzpicture}
+         &
+        \\[1.5em]
+
+        D_n
+         &
+        \begin{tikzpicture}[coxeter]
+            \node[vertex] (c) at (1,0) {};
+            \node[vertex] (a) at (0,0.7) {};
+            \node[vertex] (b) at (0,-0.7) {};
+            \node[vertex] (d) at (2,0) {};
+            \node[vertex] (e) at (3,0) {};
+            \node[vertex] (f) at (5,0) {};
+            \draw (c)--(a);
+            \draw (c)--(b);
+            \draw (c)--(d)--(e);
+            \node at (4,0) {\(\cdots\)};
+            \draw (4.35,0)--(f);
+        \end{tikzpicture}
+         &
+        \\[2em]
+
+        E_6
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,3,4}
+            \node[vertex] at (\x,0) {};
+            \node[vertex] at (2,-0.8) {};
+            \draw (0,0)--(1,0)--(2,0)--(3,0)--(4,0);
+            \draw (2,0)--(2,-0.8);
+        \end{tikzpicture}
+         &
+        \\[2em]
+
+        E_7
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,3,4,5}
+            \node[vertex] at (\x,0) {};
+            \node[vertex] at (2,-0.8) {};
+            \draw (0,0)--(1,0)--(2,0)--(3,0)--(4,0)--(5,0);
+            \draw (2,0)--(2,-0.8);
+        \end{tikzpicture}
+         &
+        \\[2em]
+
+        E_8
+         &
+        \begin{tikzpicture}[coxeter]
+            \foreach \x in {0,1,2,3,4,5,6}
+            \node[vertex] at (\x,0) {};
+            \node[vertex] at (2,-0.8) {};
+            \draw (0,0)--(1,0)--(2,0)--(3,0)--(4,0)--(5,0)--(6,0);
+            \draw (2,0)--(2,-0.8);
+        \end{tikzpicture}
+         &
+    \end{array}
+\]
+
+\begin{definition}[Dynkin diagram]
+    Let \(\Phi\) be a root system. Whenever a double or triple edge occurs in
+    the Coxeter graph of \(\Phi\), we add an arrow pointing to the shorter of the
+    two roots. The resulting oriented graph is called the \emph{Dynkin diagram}
+    of \(\Phi\).
+\end{definition}
+
+Thus the Coxeter graphs of \(B_n\) and \(C_n\) have the same underlying
+unoriented graph, but their Dynkin diagrams are distinguished by the
+direction of the arrow:
+\[
+    B_n:
+    \qquad
+    \begin{tikzpicture}[coxeter]
+        \foreach \x in {0,1,2,4,5}
+        \node[vertex] at (\x,0) {};
+        \draw (0,0)--(1,0)--(2,0);
+        \node at (3,0) {\(\cdots\)};
+        \draw[double, double distance=2pt, dynarrow] (4,0)--(5,0);
+    \end{tikzpicture}
+\]
+\[
+    C_n:
+    \qquad
+    \begin{tikzpicture}[coxeter]
+        \foreach \x in {0,1,2,4,5}
+        \node[vertex] at (\x,0) {};
+        \draw (0,0)--(1,0)--(2,0);
+        \node at (3,0) {\(\cdots\)};
+        \draw[double, double distance=2pt, dynarrow] (5,0)--(4,0);
+    \end{tikzpicture}
+\]
+
+\tikzset{
+rootdiagram/.style={baseline=-0.5ex, scale=0.9},
+vertex/.style={circle, fill=black, inner sep=1.4pt},
+dynarrow/.style={-{Latex[length=2mm,width=1.5mm]}},
+dynarrowleft/.style={{Latex[length=2mm,width=1.5mm]}-}
+}
+

@@ -1,0 +1,126 @@
+\section{Homework Week 13}
+
+\begin{exercise}
+    Let \(G\) be a finite group and \(p\) a prime. Prove that each element \(x\in G\)
+    can be uniquely written as
+    \[
+        x = st,
+    \]
+    where \(s\) is \(p\)-regular, \(t\) is \(p\)-singular, and \(st=ts\). If
+    \(x_1=s_1t_1\) is such a decomposition of an element \(x_1\) that is conjugate to
+    \(x\), prove that \(s\) is conjugate to \(s_1\) and \(t\) is conjugate to \(t_1\).
+\end{exercise}
+
+\begin{proof}
+    Fix \(x\in G\). Since \(G\) is finite, \(x\) has finite order. Write
+    \[
+        |x|=p^a m,
+    \]
+    where \(a\geq 0\) and \(p\nmid m\). Because \(\gcd(p^a,m)=1\), there exist integers
+    \(u,v\) such that
+    \[
+        up^a+vm=1.
+    \]
+    Define
+    \[
+        t:=x^{vm},
+        \qquad
+        s:=x^{up^a}.
+    \]
+    Then \(s,t\in \langle x\rangle\), so \(st=ts\), and
+    \[
+        st
+        =
+        x^{up^a+vm}
+        =
+        x.
+    \]
+
+    We check that \(t\) is \(p\)-singular and \(s\) is \(p\)-regular. Since
+    \[
+        t^{p^a}
+        =
+        x^{vmp^a}
+        =
+        x^{v|x|}
+        =
+        1,
+    \]
+    the order of \(t\) divides \(p^a\), hence \(\operatorname{ord}(t)=p^k\) for some
+    \(k\leq a\). Thus \(t\) is \(p\)-singular. Likewise,
+    \[
+        s^m
+        =
+        x^{up^a m}
+        =
+        x^{u|x|}
+        =
+        1,
+    \]
+    so \(\operatorname{ord}(s)\mid m\). Since \(p\nmid m\), we have \(p\nmid
+    \operatorname{ord}(s)\), and therefore \(s\) is \(p\)-regular. This proves existence.
+
+    For uniqueness, suppose
+    \[
+        x=s_1t_1=s_2t_2,
+    \]
+    where each \(s_i\) is \(p\)-regular, each \(t_i\) is \(p\)-singular, and
+    \(s_it_i=t_is_i\). Since \(p\nmid \operatorname{ord}(s_i)\) and
+    \(\operatorname{ord}(t_i)\) is a power of \(p\), we have
+    \[
+        \gcd\bigl(\operatorname{ord}(s_i),\operatorname{ord}(t_i)\bigr)=1.
+    \]
+    Hence
+    \[
+        |x|
+        =
+        \operatorname{ord}(s_i)\operatorname{ord}(t_i).
+    \]
+    The subgroup \(\langle s_i,t_i\rangle\) is abelian and has order
+    \(\operatorname{ord}(s_i)\operatorname{ord}(t_i)=|x|\), so it equals
+    \(\langle x\rangle\). In particular, \(s_i,t_i\in \langle x\rangle\).
+
+    The cyclic group \(\langle x\rangle\) has order \(|x|=p^a m\). In a cyclic group of
+    this order, an element is \(p\)-regular if and only if its order divides \(m\), and
+    \(p\)-singular if and only if its order divides \(p^a\). Under the identification
+    \[
+        \langle x\rangle \cong \mathbb{Z}/|x|\mathbb{Z},
+    \]
+    the Chinese remainder theorem gives a unique decomposition of each element into
+    commuting \(p\)-regular and \(p\)-singular parts. Therefore \(s_1=s_2\) and
+    \(t_1=t_2\).
+
+    Now suppose that \(x_1\) is conjugate to \(x\), say
+    \[
+        x_1=gxg^{-1},
+    \]
+    and that \(x=st\) and \(x_1=s_1t_1\) are the corresponding decompositions. Define
+    \[
+        s':=gsg^{-1},
+        \qquad
+        t':=gtg^{-1}.
+    \]
+    Conjugation preserves order, so \(s'\) is \(p\)-regular and \(t'\) is
+    \(p\)-singular. Moreover,
+    \[
+        s't'
+        =
+        g(st)g^{-1}
+        =
+        g(ts)g^{-1}
+        =
+        t's',
+    \]
+    and
+    \[
+        s't'
+        =
+        g(st)g^{-1}
+        =
+        gxg^{-1}
+        =
+        x_1.
+    \]
+    By uniqueness of the decomposition of \(x_1\), we have \(s_1=s'\) and
+    \(t_1=t'\). Hence \(s\) is conjugate to \(s_1\), and \(t\) is conjugate to \(t_1\).
+\end{proof}

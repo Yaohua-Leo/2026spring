@@ -1,0 +1,959 @@
+\chapter{Nilpotent Groups, Frattini Subgroups, and Fitting Subgroups}
+
+\providecommand{\Syl}{\operatorname{Syl}}
+\providecommand{\Max}{\operatorname{Max}}
+\providecommand{\Fit}{\operatorname{Fit}}
+\providecommand{\radn}{\operatorname{rad}}
+\providecommand{\Core}{\operatorname{Core}}
+\providecommand{\Soc}{\operatorname{Soc}}
+\providecommand{\normal}{\trianglelefteq}
+\providecommand{\nnormal}{\triangleleft}
+
+\section{The Frattini Argument}
+
+\begin{theorem}[Frattini Argument]
+Let \(G\) be a finite group, and let \(N\normal G\). If
+\[
+    P\in \Syl_p(N),
+\]
+then
+\[
+    G=N_G(P)N.
+\]
+\end{theorem}
+
+\begin{proof}
+Since \(N\normal G\), conjugation by every element of \(G\) sends Sylow
+\(p\)-subgroups of \(N\) to Sylow \(p\)-subgroups of \(N\). Hence \(G\) acts by
+conjugation on \(\Syl_p(N)\).
+
+By the Sylow theorem, \(N\) acts transitively on \(\Syl_p(N)\). Let \(g\in G\).
+Then \(gPg^{-1}\in \Syl_p(N)\), so there exists \(n\in N\) such that
+\[
+    gPg^{-1}=nPn^{-1}.
+\]
+Thus
+\[
+    n^{-1}gP g^{-1}n=P,
+\]
+so \(n^{-1}g\in N_G(P)\). Hence \(g\in nN_G(P)\subseteq NN_G(P)\). Therefore
+\[
+    G=NN_G(P)=N_G(P)N,
+\]
+because \(N\normal G\).
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\section{Nilpotent Groups}
+
+\begin{definition}[Central Series and Nilpotent Groups]
+A group \(G\) is called \textbf{nilpotent} if there exists a chain of subgroups
+\[
+    G=K_1>K_2>\cdots>K_s>K_{s+1}=1
+\]
+such that
+\[
+    K_i\normal G
+\]
+and
+\[
+    K_i/K_{i+1}\leq Z(G/K_{i+1})
+\]
+for every \(i\). Such a series is called a \textbf{central series}.
+\end{definition}
+
+Equivalently, the condition
+\[
+    K_i/K_{i+1}\leq Z(G/K_{i+1})
+\]
+means
+\[
+    [G,K_i]\leq K_{i+1}.
+\]
+
+\begin{proposition}
+Every finite \(p\)-group is nilpotent.
+\end{proposition}
+
+\begin{proof}
+Let \(G\) be a nontrivial finite \(p\)-group. Then
+\[
+    Z(G)\neq 1.
+\]
+Define the upper central series
+\[
+    1=Z_0(G)\leq Z_1(G)\leq Z_2(G)\leq \cdots
+\]
+by
+\[
+    Z_{i+1}(G)/Z_i(G)=Z(G/Z_i(G)).
+\]
+If \(Z_i(G)<G\), then \(G/Z_i(G)\) is a nontrivial \(p\)-group, so it has
+nontrivial center. Hence \(Z_{i+1}(G)>Z_i(G)\). Since \(G\) is finite, this
+process must eventually reach \(G\). Therefore \(G\) has a central series and
+is nilpotent.
+\end{proof}
+
+\begin{proposition}
+Subgroups and quotient groups of nilpotent groups are nilpotent.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    G=K_1>K_2>\cdots>K_s>K_{s+1}=1
+\]
+be a central series for \(G\).
+
+If \(H\leq G\), then
+\[
+    H=H\cap K_1\geq H\cap K_2\geq \cdots \geq H\cap K_{s+1}=1
+\]
+is a central series for \(H\), after deleting repetitions. Indeed,
+\[
+    [H,H\cap K_i]\leq [G,K_i]\leq K_{i+1},
+\]
+so
+\[
+    [H,H\cap K_i]\leq H\cap K_{i+1}.
+\]
+
+If \(N\normal G\), then
+\[
+    G/N=K_1N/N\geq K_2N/N\geq \cdots \geq K_{s+1}N/N=N/N
+\]
+is a central series for \(G/N\), again after deleting repetitions.
+\end{proof}
+
+\begin{proposition}
+A finite direct product of nilpotent groups is nilpotent.
+\end{proposition}
+
+\begin{proof}
+It is enough to consider \(G=A\times B\). If
+\[
+    A=A_1>\cdots>A_{r+1}=1
+\]
+and
+\[
+    B=B_1>\cdots>B_{t+1}=1
+\]
+are central series, then one obtains a central series for \(A\times B\) by
+first descending through the \(A_i\times B\), and then through the
+\(1\times B_j\). The centrality condition follows componentwise.
+\end{proof}
+
+\begin{example}
+Let
+\[
+    G=P\times Q,
+\]
+where \(P\) is a \(p\)-group, \(Q\) is a \(q\)-group, and \(p\neq q\). Since
+finite \(p\)-groups and finite \(q\)-groups are nilpotent, \(G\) is nilpotent.
+Moreover
+\[
+    Z(G)=Z(P)\times Z(Q),
+\]
+and
+\[
+    G/Z(G)\cong P/Z(P)\times Q/Z(Q).
+\]
+Repeating this construction gives a central series for \(G\).
+\end{example}
+
+\begin{example}[Non-nilpotent groups]
+The following groups are not nilpotent.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item \(A_4\cong C_2^2\rtimes C_3\). Its only nontrivial proper normal
+    subgroup is
+    \[
+        V_4\cong C_2^2.
+    \]
+    If \(A_4\) were nilpotent, the last nontrivial term of a central series
+    would be contained in \(Z(A_4)\). But
+    \[
+        Z(A_4)=1.
+    \]
+    Hence \(A_4\) is not nilpotent.
+
+    \item \(S_4\). Its proper nontrivial normal subgroups are
+    \[
+        V_4\quad\text{and}\quad A_4.
+    \]
+    Since
+    \[
+        Z(S_4)=1,
+    \]
+    \(S_4\) cannot have a central series. Therefore \(S_4\) is not nilpotent.
+
+    \item Let \(p>3\) be prime, and let
+    \[
+        D_{2p}=\langle a,b\mid a^p=b^2=1,\; bab^{-1}=a^{-1}\rangle.
+    \]
+    The only nontrivial proper normal subgroup is \(\langle a\rangle\), but
+    \[
+        \langle a\rangle\nleq Z(D_{2p}).
+    \]
+    Hence \(D_{2p}\) is not nilpotent.
+\end{enumerate}
+\end{example}
+
+\begin{theorem}[Equivalent Conditions for Nilpotency]
+For a finite group \(G\), the following are equivalent.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item \(G\) is nilpotent.
+
+    \item For every proper subgroup \(H<G\),
+    \[
+        H<N_G(H).
+    \]
+
+    \item Every maximal subgroup \(M\) of \(G\) is normal and has prime index.
+    Equivalently,
+    \[
+        G/M\cong C_p
+    \]
+    for some prime \(p\).
+
+    \item \(G\) is the direct product of its Sylow subgroups. Equivalently,
+    every Sylow subgroup of \(G\) is normal.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\((1)\Rightarrow (2)\).
+Let
+\[
+    G=K_1>K_2>\cdots>K_s>K_{s+1}=1
+\]
+be a central series for \(G\), and let \(H<G\). Choose \(i\) such that
+\[
+    K_{i+1}\leq H
+    \qquad\text{but}\qquad
+    K_i\nleq H.
+\]
+Since
+\[
+    K_i/K_{i+1}\leq Z(G/K_{i+1}),
+\]
+we have
+\[
+    [H,K_i]\leq K_{i+1}\leq H.
+\]
+Therefore \(K_i\leq N_G(H)\). Since \(K_i\nleq H\), it follows that
+\[
+    H<N_G(H).
+\]
+
+\((2)\Rightarrow (3)\).
+Let \(M\) be a maximal subgroup of \(G\). By (2),
+\[
+    M<N_G(M)\leq G.
+\]
+By maximality of \(M\), this forces
+\[
+    N_G(M)=G.
+\]
+Thus \(M\normal G\).
+
+Since \(M\) is maximal, \(G/M\) has no proper nontrivial subgroup. Hence
+\(G/M\) is cyclic of prime order, say
+\[
+    G/M\cong C_p.
+\]
+
+\((3)\Rightarrow (4)\).
+Let \(P\in \Syl_p(G)\). Then
+\[
+    P\leq N_G(P)\leq G.
+\]
+Suppose \(N_G(P)\neq G\). Choose a maximal subgroup \(M\) such that
+\[
+    N_G(P)\leq M<G.
+\]
+By (3), \(M\normal G\). Since \(P\leq M\) and \(P\) is a Sylow \(p\)-subgroup
+of \(G\), \(P\) is also a Sylow \(p\)-subgroup of \(M\). By the Frattini
+argument applied to \(M\normal G\),
+\[
+    G=M N_G(P).
+\]
+But \(N_G(P)\leq M\), so
+\[
+    G=M,
+\]
+a contradiction. Therefore
+\[
+    N_G(P)=G,
+\]
+so \(P\normal G\). Thus every Sylow subgroup of \(G\) is normal.
+
+If the Sylow subgroups are
+\[
+    P_1,\dots,P_t,
+\]
+then they commute pairwise because
+\[
+    [P_i,P_j]\leq P_i\cap P_j=1
+    \qquad (i\neq j).
+\]
+Hence
+\[
+    G=P_1\times \cdots \times P_t.
+\]
+
+\((4)\Rightarrow (1)\).
+Each Sylow subgroup is a finite \(p\)-group, hence nilpotent. A finite direct
+product of nilpotent groups is nilpotent. Therefore \(G\) is nilpotent.
+\end{proof}
+
+\begin{example}
+Every finite abelian group is nilpotent.
+\end{example}
+
+\begin{example}
+The group
+\[
+    A_4\cong C_2^2\rtimes C_3
+\]
+is not nilpotent. Indeed, a subgroup \(C_3\leq A_4\) is maximal, but it has
+index \(4\), which is not prime, and it is not normal in \(A_4\).
+\end{example}
+
+%----------------------------------------------------------------------------------------
+\section{The Frattini Subgroup}
+
+\begin{definition}[Frattini Subgroup]
+Let \(G\) be a finite group. Denote by
+\[
+    \Max(G)=\{M\mid M<G,\; M\text{ maximal}\}
+\]
+the set of maximal subgroups of \(G\). The \textbf{Frattini subgroup} of \(G\) is
+\[
+    \Phi(G)=\bigcap_{M\in \Max(G)}M.
+\]
+For the trivial group, we use the convention
+\[
+    \Phi(1)=1.
+\]
+\end{definition}
+
+\begin{proposition}
+The Frattini subgroup \(\Phi(G)\) is characteristic in \(G\).
+\end{proposition}
+
+\begin{proof}
+Every automorphism of \(G\) permutes the maximal subgroups of \(G\). Hence it
+fixes their intersection. Therefore
+\[
+    \Phi(G)  \operatorname{Char}(G).
+\]
+\end{proof}
+
+\begin{corollary}
+If \(N\normal G\), then
+\[
+    \Phi(N)\normal G.
+\]
+\end{corollary}
+
+\begin{proof}
+Since \(\Phi(N)  \operatorname{Char}(N)\) and \(N\normal G\), we have
+\[
+    \Phi(N)\normal G.
+\]
+\end{proof}
+
+\begin{definition}[Nongenerator]
+An element \(x\in G\) is called a \textbf{nongenerator} of \(G\) if, for every
+subset \(S\subseteq G\),
+\[
+    \langle x,S\rangle=G
+    \quad\Longrightarrow\quad
+    \langle S\rangle=G.
+\]
+\end{definition}
+
+\begin{lemma}[Characterization of the Frattini Subgroup]
+The Frattini subgroup \(\Phi(G)\) consists exactly of the nongenerators of \(G\).
+\end{lemma}
+
+\begin{proof}
+First suppose \(x\in \Phi(G)\). Assume
+\[
+    \langle x,S\rangle=G.
+\]
+If \(\langle S\rangle\neq G\), then \(\langle S\rangle\) is contained in some
+maximal subgroup \(M<G\). Since \(x\in \Phi(G)\), we have \(x\in M\). Hence
+\[
+    \langle x,S\rangle\leq M<G,
+\]
+contradicting \(\langle x,S\rangle=G\). Therefore \(\langle S\rangle=G\), so
+\(x\) is a nongenerator.
+
+Conversely, suppose \(x\) is a nongenerator. If \(x\notin \Phi(G)\), then
+there is a maximal subgroup \(M<G\) such that \(x\notin M\). By maximality,
+\[
+    \langle x,M\rangle=G.
+\]
+Since \(x\) is a nongenerator, this implies
+\[
+    \langle M\rangle=G,
+\]
+which is impossible because \(M<G\). Thus \(x\in M\) for every maximal
+subgroup \(M\), and hence
+\[
+    x\in \Phi(G).
+\]
+\end{proof}
+
+\begin{corollary}
+If \(H\leq G\) and
+\[
+    H\Phi(G)=G,
+\]
+then
+\[
+    H=G.
+\]
+\end{corollary}
+
+\begin{proof}
+If \(H<G\), then \(H\) is contained in some maximal subgroup \(M<G\). Since
+\[
+    \Phi(G)\leq M,
+\]
+we get
+\[
+    H\Phi(G)\leq M<G,
+\]
+contradicting \(H\Phi(G)=G\). Therefore \(H=G\).
+\end{proof}
+
+\begin{example}
+Let
+\[
+    G=\langle a\rangle\cong C_{p^2}.
+\]
+Then
+\[
+    \Phi(G)=\langle a^p\rangle.
+\]
+Thus every element of \(\langle a^p\rangle\) is a nongenerator.
+\end{example}
+
+\begin{example}
+For the quaternion group \(Q_8\),
+\[
+    \Phi(Q_8)=Z(Q_8)=\{\pm 1\}.
+\]
+Thus the nongenerators of \(Q_8\) have order \(1\) or \(2\).
+\end{example}
+
+\begin{example}
+Let
+\[
+    D_{2n}=\langle r,s\mid r^n=s^2=1,\; srs=r^{-1}\rangle
+\]
+be the dihedral group of order \(2n\). Then
+\[
+    \Phi(D_{2n})=\langle r^{\radn(n)}\rangle,
+\]
+where \(\radn(n)\) is the product of the distinct prime divisors of \(n\).
+\end{example}
+
+\begin{example}
+If \(G\) is a finite nonabelian simple group, then
+\[
+    \Phi(G)=1.
+\]
+Indeed, \(\Phi(G)\normal G\), and \(\Phi(G)\neq G\) because \(G\) has maximal
+subgroups. Thus \(\Phi(G)=1\). Hence no nonidentity element of \(G\) is a
+nongenerator.
+
+A stronger theorem says that for every nonidentity \(a\in G\), there exists
+\(b\in G\) such that
+\[
+    \langle a,b\rangle=G.
+\]
+\end{example}
+
+%----------------------------------------------------------------------------------------
+\section{Frattini Subgroups and Nilpotency}
+
+\begin{theorem}[Gasch\"utz]
+Let \(N\normal G\) and suppose
+\[
+    N\leq \Phi(G).
+\]
+Then
+\[
+    G\text{ is nilpotent}
+    \quad\Longleftrightarrow\quad
+    G/N\text{ is nilpotent}.
+\]
+\end{theorem}
+
+\begin{proof}
+If \(G\) is nilpotent, then every quotient of \(G\) is nilpotent, so \(G/N\) is
+nilpotent.
+
+Conversely, suppose \(G/N\) is nilpotent. Let \(P\in \Syl_p(G)\). We show that
+\(P\normal G\).
+
+Since \(N\normal G\), the subgroup
+\[
+    PN/N
+\]
+is a Sylow \(p\)-subgroup of \(G/N\). Because \(G/N\) is nilpotent, all of its
+Sylow subgroups are normal. Hence
+\[
+    PN/N\normal G/N,
+\]
+so
+\[
+    PN\normal G.
+\]
+Now \(P\in \Syl_p(PN)\). Applying the Frattini argument to \(PN\normal G\), we
+obtain
+\[
+    G=N_G(P)PN.
+\]
+Since \(P\leq N_G(P)\), this becomes
+\[
+    G=N_G(P)N.
+\]
+But \(N\leq \Phi(G)\), so
+\[
+    N_G(P)\Phi(G)=G.
+\]
+By the previous corollary,
+\[
+    N_G(P)=G.
+\]
+Thus \(P\normal G\). Since this holds for every prime \(p\), all Sylow
+subgroups of \(G\) are normal. Therefore \(G\) is nilpotent.
+\end{proof}
+
+\begin{corollary}
+For a finite group \(G\), the following statements hold.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item \(\Phi(G)\) is nilpotent.
+
+    \item \(G\) is nilpotent if and only if \(G/\Phi(G)\) is nilpotent.
+
+    \item \textup{(Wielandt)} \(G\) is nilpotent if and only if
+    \[
+        G'\leq \Phi(G).
+    \]
+
+    \item If \(G\) is a \(p\)-group, then
+    \[
+        G/\Phi(G)
+    \]
+    is elementary abelian.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\((1)\).
+Let
+\[
+    P\in \Syl_p(\Phi(G)).
+\]
+Since \(\Phi(G)\normal G\), the Frattini argument gives
+\[
+    G=\Phi(G)N_G(P).
+\]
+Because \(\Phi(G)\leq \Phi(G)\), the corollary above gives
+\[
+    N_G(P)=G.
+\]
+Hence \(P\normal G\), and in particular \(P\normal \Phi(G)\). Therefore every
+Sylow subgroup of \(\Phi(G)\) is normal, so \(\Phi(G)\) is nilpotent.
+
+\((2)\).
+Apply Gasch\"utz's theorem with
+\[
+    N=\Phi(G).
+\]
+
+\((3)\).
+Suppose \(G\) is nilpotent. Let \(M<G\) be maximal. Then \(M\normal G\), and
+\[
+    G/M\cong C_p
+\]
+for some prime \(p\). In particular, \(G/M\) is abelian, so
+\[
+    G'\leq M.
+\]
+Since this holds for every maximal subgroup \(M\), we get
+\[
+    G'\leq \Phi(G).
+\]
+
+Conversely, suppose
+\[
+    G'\leq \Phi(G).
+\]
+Then
+\[
+    (G/\Phi(G))'=1,
+\]
+so \(G/\Phi(G)\) is abelian, hence nilpotent. By (2), \(G\) is nilpotent.
+
+\((4)\).
+Let \(G\) be a \(p\)-group. By (3),
+\[
+    G'\leq \Phi(G),
+\]
+so \(G/\Phi(G)\) is abelian.
+
+It remains to show that every element has order dividing \(p\). Let \(x\in G\).
+For every maximal subgroup \(M<G\), we have
+\[
+    G/M\cong C_p.
+\]
+Hence
+\[
+    x^p\in M.
+\]
+Since this holds for every maximal subgroup \(M\),
+\[
+    x^p\in \Phi(G).
+\]
+Thus every element of \(G/\Phi(G)\) has order dividing \(p\). Therefore
+\(G/\Phi(G)\) is elementary abelian.
+\end{proof}
+
+\begin{example}
+Let
+\[
+    G=C_{p^2}\rtimes C_q=\langle a\rangle\rtimes \langle b\rangle,
+\]
+where \(p\neq q\) are primes, \(|a|=p^2\), and \(|b|=q\). Write
+\[
+    b^{-1}ab=a^u
+\]
+for some
+\[
+    u\in (\Z/p^2\Z)^\times
+\]
+satisfying
+\[
+    u^q\equiv 1\pmod{p^2}.
+\]
+Then
+\[
+    a^p b=ba^p
+\]
+if and only if
+\[
+    u\equiv 1\pmod p.
+\]
+But the kernel of
+\[
+    (\Z/p^2\Z)^\times\longrightarrow (\Z/p\Z)^\times
+\]
+has order \(p\). Since \(q\neq p\), the condition \(u^q\equiv 1\pmod{p^2}\) and
+\(u\equiv 1\pmod p\) forces
+\[
+    u\equiv 1\pmod{p^2}.
+\]
+Therefore
+\[
+    a^p b=ba^p
+    \quad\Longleftrightarrow\quad
+    ab=ba.
+\]
+Equivalently,
+\[
+    G/\langle a^p\rangle\text{ is abelian}
+    \quad\Longleftrightarrow\quad
+    G\text{ is abelian}.
+\]
+\end{example}
+
+%----------------------------------------------------------------------------------------
+\section{The Fitting Subgroup}
+
+\begin{definition}
+Let \(p\) be a prime. The subgroup \(O_p(G)\) is defined to be the largest
+normal \(p\)-subgroup of \(G\). Equivalently,
+\[
+    O_p(G)
+    =
+    \prod_{\substack{N\normal G\\ N\text{ a }p\text{-group}}}N
+    =
+    \bigcap_{P\in \Syl_p(G)}P.
+\]
+\end{definition}
+
+\begin{proposition}
+For every prime \(p\), the subgroup \(O_p(G)\) is characteristic in \(G\). Moreover,
+\[
+    O_p(G/O_p(G))=1.
+\]
+If \(p\neq q\), then
+\[
+    [O_p(G),O_q(G)]=1,
+\]
+and hence
+\[
+    O_p(G)O_q(G)=O_p(G)\times O_q(G).
+\]
+\end{proposition}
+
+\begin{proof}
+The subgroup \(O_p(G)\) is uniquely characterized as the largest normal
+\(p\)-subgroup of \(G\), so it is characteristic.
+
+Let \(\overline{G}=G/O_p(G)\). If \(O_p(\overline{G})\neq 1\), then its full
+preimage in \(G\) is a normal \(p\)-subgroup strictly larger than \(O_p(G)\),
+contradicting maximality. Hence
+\[
+    O_p(\overline{G})=1.
+\]
+
+Finally, if \(p\neq q\), then
+\[
+    [O_p(G),O_q(G)]\leq O_p(G)\cap O_q(G)=1.
+\]
+Therefore \(O_p(G)\) and \(O_q(G)\) centralize each other, and their product is
+direct.
+\end{proof}
+
+\begin{lemma}[Fitting's Lemma]
+If \(H\normal G\) and \(K\normal G\) are nilpotent normal subgroups of \(G\), then
+\[
+    HK
+\]
+is a nilpotent normal subgroup of \(G\).
+\end{lemma}
+
+\begin{proof}
+Normality of \(HK\) is clear. It remains to prove nilpotency.
+
+Replacing \(G\) by \(HK\), we may assume
+\[
+    G=HK.
+\]
+We argue by induction on the sum of the nilpotency classes of \(H\) and \(K\).
+
+Since \(H\normal G\), its center \(Z(H)\) is characteristic in \(H\), hence normal
+in \(G\). The quotient
+\[
+    G/Z(H)
+\]
+is generated by the nilpotent normal subgroups
+\[
+    H/Z(H)
+    \qquad\text{and}\qquad
+    KZ(H)/Z(H).
+\]
+The nilpotency class of \(H/Z(H)\) is smaller than that of \(H\), so by induction
+\(G/Z(H)\) is nilpotent. Similarly, \(G/Z(K)\) is nilpotent.
+
+Thus for sufficiently large \(m\),
+\[
+    \gamma_m(G)\leq Z(H)\cap Z(K),
+\]
+where \(\gamma_m(G)\) denotes the \(m\)-th term of the lower central series.
+But
+\[
+    Z(H)\cap Z(K)\leq Z(G),
+\]
+because \(G=HK\). Hence
+\[
+    \gamma_{m+1}(G)=1.
+\]
+Therefore \(G\) is nilpotent.
+\end{proof}
+
+\begin{definition}[Fitting Subgroup]
+The \textbf{Fitting subgroup} of \(G\), denoted
+\[
+    F(G),
+\]
+is the product of all normal nilpotent subgroups of \(G\). By Fitting's lemma,
+\(F(G)\) is the unique largest nilpotent normal subgroup of \(G\).
+\end{definition}
+
+Since \(\Phi(G)\) is nilpotent and normal, we always have
+\[
+    \Phi(G)\leq F(G).
+\]
+
+\begin{theorem}
+Let \(G\) be a finite solvable group, and let
+\[
+    |G|=p_1^{e_1}p_2^{e_2}\cdots p_t^{e_t}.
+\]
+Let
+\[
+    F=F(G).
+\]
+Then the following hold.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item
+    \[
+        F=O_{p_1}(G)\times O_{p_2}(G)\times \cdots \times O_{p_t}(G).
+    \]
+
+    \item
+    \[
+        C_G(F)\leq F.
+    \]
+    In other words, \(F(G)\) is self-centralizing.
+
+    \item Consequently,
+    \[
+        G/C_G(F)\hookrightarrow \Aut(F).
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\((1)\).
+Let \(N\normal G\) be nilpotent. Then \(N\) is the direct product of its Sylow
+subgroups:
+\[
+    N=Q_1\times Q_2\times \cdots \times Q_t,
+\]
+where \(Q_i\in \Syl_{p_i}(N)\). Since \(N\) is nilpotent, each \(Q_i\) is
+characteristic in \(N\). Since \(N\normal G\), it follows that
+\[
+    Q_i\normal G.
+\]
+Thus
+\[
+    Q_i\leq O_{p_i}(G).
+\]
+Therefore every nilpotent normal subgroup \(N\) of \(G\) is contained in
+\[
+    O_{p_1}(G)\times \cdots \times O_{p_t}(G).
+\]
+Conversely, the product
+\[
+    O_{p_1}(G)\times \cdots \times O_{p_t}(G)
+\]
+is a nilpotent normal subgroup of \(G\). Hence it is contained in \(F(G)\).
+This proves
+\[
+    F(G)=O_{p_1}(G)\times \cdots \times O_{p_t}(G).
+\]
+
+\((2)\).
+Let
+\[
+    C=C_G(F).
+\]
+Since \(F \operatorname{Char}(G)\), the subgroup \(C\) is normal in \(G\). Also
+\[
+    C\cap F=Z(F).
+\]
+Set
+\[
+    W=C\cap F.
+\]
+Suppose, for contradiction, that
+\[
+    C>W.
+\]
+Then \(C/W\) is a nontrivial solvable normal subgroup of \(G/W\). Hence it has
+a nontrivial abelian normal subgroup. In particular, there exists a subgroup
+\(Y\) such that
+\[
+    W<Y\leq C,\qquad Y\normal G,
+\]
+and
+\[
+    Y/W
+\]
+is a nontrivial \(p\)-group for some prime \(p\).
+
+Since \(Y\leq C=C_G(F)\), the subgroup \(Y\) centralizes \(F\), and hence
+centralizes \(W\leq F\). Thus
+\[
+    W\leq Z(Y).
+\]
+Now \(Y/W\) is a \(p\)-group, hence nilpotent, and \(W\leq Z(Y)\) is nilpotent.
+Therefore \(Y\) is nilpotent. Since \(Y\normal G\), maximality of \(F(G)\) gives
+\[
+    Y\leq F.
+\]
+But \(Y\leq C\), so
+\[
+    Y\leq C\cap F=W,
+\]
+contradicting \(W<Y\). Hence
+\[
+    C=W\leq F.
+\]
+Thus
+\[
+    C_G(F)\leq F.
+\]
+
+\((3)\).
+The conjugation action of \(G\) on \(F\) gives a homomorphism
+\[
+    G\longrightarrow \Aut(F).
+\]
+Its kernel is precisely
+\[
+    C_G(F).
+\]
+Therefore
+\[
+    G/C_G(F)\hookrightarrow \Aut(F).
+\]
+\end{proof}
+
+\begin{example}[Groups with Cyclic Sylow Subgroups]
+Assume \(G\) is a finite group whose Sylow subgroups are all cyclic. A standard
+theorem says that such a group is solvable.
+
+Let
+\[
+    F=F(G).
+\]
+Since each \(O_p(G)\) is a subgroup of a cyclic Sylow \(p\)-subgroup, each
+\(O_p(G)\) is cyclic. Therefore
+\[
+    F=\prod_{p\mid |G|}O_p(G)
+\]
+is cyclic.
+
+By the preceding theorem,
+\[
+    C_G(F)\leq F.
+\]
+Since \(F\) is abelian, we also have
+\[
+    F\leq C_G(F).
+\]
+Thus
+\[
+    C_G(F)=F.
+\]
+Hence
+\[
+    G/F\hookrightarrow \Aut(F).
+\]
+Because \(F\) is cyclic, \(\Aut(F)\) is abelian. Therefore \(G/F\) is abelian.
+
+Moreover, the Sylow subgroups of \(G/F\) are cyclic. A finite abelian group whose
+Sylow subgroups are cyclic is cyclic. Hence \(G/F\) is cyclic.
+
+Thus \(G\) is metacyclic: there exists a cyclic normal subgroup \(F\normal G\)
+such that
+\[
+    G/F
+\]
+is cyclic.
+\end{example}
+

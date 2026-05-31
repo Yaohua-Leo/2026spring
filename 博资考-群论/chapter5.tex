@@ -1,0 +1,1321 @@
+\chapter{Minimal Normal Subgroups and Transfer}
+
+\section{Minimal Normal Subgroups}
+
+Let $G$ be a finite group and let
+\[
+    1\neq N\lhd G.
+\]
+Then
+\[
+    \overline{G}=G/N
+\]
+is a group with
+\[
+    |\overline{G}|<|G|.
+\]
+Thus we have a short exact sequence
+\[
+    1\longrightarrow N\longrightarrow G\longrightarrow \overline{G}\longrightarrow 1.
+\]
+In this sense, $G$ is an extension of $N$ by $\overline{G}$.
+
+\begin{lemma}[Structure of minimal normal subgroups]
+Let $G$ be a finite group and let $N\lhd_{\mathrm{min}}G$ be a minimal normal subgroup of $G$. Then
+\[
+    N=S_1\times S_2\times\cdots\times S_r,
+\]
+where
+\[
+    S_1\cong S_2\cong\cdots\cong S_r
+\]
+are simple groups. Equivalently,
+\[
+    N\cong S^r
+\]
+for some simple group $S$.
+
+In particular, either
+\[
+    N\cong C_p^r
+\]
+for some prime $p$, or
+\[
+    N\cong T^r
+\]
+for some nonabelian simple group $T$.
+\end{lemma}
+
+\begin{proof}
+We argue by induction on $|N|$.
+
+If $N$ is simple, then there is nothing to prove. So assume that $N$ is not simple. Choose a minimal normal subgroup
+\[
+    M\lhd_{\mathrm{min}}N.
+\]
+By induction applied to the group $N$ and its minimal normal subgroup $M$, we may write
+\[
+    M=T_1\times T_2\times\cdots\times T_m,
+\]
+where
+\[
+    T_1\cong T_2\cong\cdots\cong T_m
+\]
+are simple groups.
+
+For every $g\in G$, since $N\lhd G$, the conjugate
+\[
+    M^g=g^{-1}Mg
+\]
+is again a minimal normal subgroup of $N$. Hence, by minimality,
+\[
+    M^g=M
+    \qquad\text{or}\qquad
+    M^g\cap M=1.
+\]
+More generally, any two distinct conjugates of $M$ under $G$ have trivial intersection.
+
+Let
+\[
+    M^G=\gen{M^g:g\in G}
+\]
+be the normal closure of $M$ in $G$. Choose distinct conjugates
+\[
+    M^{g_1},M^{g_2},\ldots,M^{g_s}.
+\]
+Since these subgroups are normal in $N$, if $i\neq j$, then
+\[
+    [M^{g_i},M^{g_j}]
+    \leq M^{g_i}\cap M^{g_j}
+    =1.
+\]
+Therefore the distinct conjugates commute with one another, and so
+\[
+    M^G=M^{g_1}\times M^{g_2}\times\cdots\times M^{g_s}.
+\]
+Also,
+\[
+    1\neq M^G\lhd G
+    \qquad\text{and}\qquad
+    M^G\leq N.
+\]
+Since $N\lhd_{\mathrm{min}}G$, we must have
+\[
+    M^G=N.
+\]
+Thus $N$ is a direct product of simple groups, all isomorphic to the simple factors of $M$.
+
+Finally, if the common simple factor is abelian, then it is cyclic of prime order, so
+\[
+    N\cong C_p^r.
+\]
+Otherwise the common simple factor is nonabelian simple.
+\end{proof}
+
+\begin{corollary}
+If $G$ is solvable and $N\lhd_{\mathrm{min}}G$, then
+\[
+    N\cong C_p^r
+\]
+for some prime $p$ and some $r\geq1$.
+\end{corollary}
+
+\begin{proof}
+Since $G$ is solvable, every subgroup of $G$ is solvable. Hence $N$ is solvable.
+
+By the lemma,
+\[
+    N\cong S^r
+\]
+for some simple group $S$. Since $S$ is a quotient of $N$, the group $S$ is also solvable. A solvable simple group must be cyclic of prime order. Hence
+\[
+    S\cong C_p
+\]
+for some prime $p$, and therefore
+\[
+    N\cong C_p^r.
+\]
+\end{proof}
+
+\section{Automorphisms of Nonabelian Simple Groups Products}
+
+\begin{topic}[Question]
+Let
+\[
+    M=T_1\times T_2\times\cdots\times T_r,
+\]
+where
+\[
+    T_1\cong T_2\cong\cdots\cong T_r\cong T
+\]
+and $T$ is nonabelian simple. We want to determine
+\[
+    \Aut(M).
+\]
+\end{topic}
+
+\begin{lemma}
+Let
+\[
+    M=T_1\times T_2\times\cdots\times T_r,
+\]
+where each $T_i$ is nonabelian simple. Then the minimal normal subgroups of $M$ are precisely
+\[
+    T_1,T_2,\ldots,T_r.
+\]
+\end{lemma}
+
+\begin{proof}
+Each $T_i$ is normal in $M$, and since $T_i$ is simple, it is a minimal normal subgroup of $M$.
+
+Conversely, let $L\lhd_{\mathrm{min}}M$. Since $L\neq1$, there exists some $i$ such that
+\[
+    [L,T_i]\neq1.
+\]
+Indeed, if $[L,T_i]=1$ for every $i$, then $L$ centralizes all of $M$, so
+\[
+    L\leq Z(M)=1,
+\]
+because each $T_i$ is nonabelian simple and hence has trivial center. This is impossible.
+
+Now
+\[
+    [L,T_i]\leq L\cap T_i.
+\]
+Thus
+\[
+    L\cap T_i\neq1.
+\]
+But $L\cap T_i\lhd M$ and $L$ is minimal normal in $M$, so
+\[
+    L\cap T_i=L.
+\]
+Hence $L\leq T_i$. Since $T_i$ is simple and $L\neq1$, we get
+\[
+    L=T_i.
+\]
+Therefore the minimal normal subgroups of $M$ are exactly the direct factors $T_i$.
+\end{proof}
+
+\begin{theorem}[Automorphisms of $T^r$]
+Let $T$ be a nonabelian simple group and let
+\[
+    M=T_1\times T_2\times\cdots\times T_r,
+    \qquad
+    T_i\cong T.
+\]
+Then
+\[
+    \Aut(M)\cong \Aut(T)\wr S_r
+    =
+    \Aut(T)^r\rtimes S_r,
+\]
+where $S_r$ acts on $\Aut(T)^r$ by permuting the $r$ coordinates.
+
+More explicitly, $\Aut(M)$ acts on the set
+\[
+    \{T_1,T_2,\ldots,T_r\},
+\]
+and the kernel of this action is
+\[
+    K=\Aut(T_1)\times\Aut(T_2)\times\cdots\times\Aut(T_r)
+    \cong \Aut(T)^r.
+\]
+Moreover,
+\[
+    \Aut(M)/K\cong S_r.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\alpha\in\Aut(M)$. Since automorphisms preserve minimal normal subgroups, and since the minimal normal subgroups of $M$ are precisely
+\[
+    T_1,T_2,\ldots,T_r,
+\]
+the automorphism $\alpha$ permutes the direct factors. Thus we get a homomorphism
+\[
+    \Aut(M)\longrightarrow S_r.
+\]
+
+The kernel consists of those automorphisms that stabilize every factor $T_i$. If $\alpha$ lies in the kernel, then
+\[
+    \alpha|_{T_i}\in\Aut(T_i)
+\]
+for each $i$, and for
+\[
+    m=t_1t_2\cdots t_r
+    \qquad(t_i\in T_i),
+\]
+we have
+\[
+    \alpha(m)
+    =
+    \alpha(t_1)\alpha(t_2)\cdots\alpha(t_r).
+\]
+Therefore
+\[
+    \Ker\left(\Aut(M)\to S_r\right)
+    =
+    \Aut(T_1)\times\cdots\times\Aut(T_r)
+    =
+    K.
+\]
+
+Conversely, every permutation of the factors gives an automorphism of $M$, since all the factors are isomorphic. Hence the map
+\[
+    \Aut(M)\longrightarrow S_r
+\]
+is surjective, and so
+\[
+    \Aut(M)/K\cong S_r.
+\]
+
+Thus
+\[
+    \Aut(M)\cong K\rtimes S_r
+    \cong \Aut(T)^r\rtimes S_r
+    =
+    \Aut(T)\wr S_r.
+\]
+\end{proof}
+
+\begin{example}[Minimal normal subgroups in groups of order $72$]
+Let
+\[
+    |G|=72=2^3\cdot 3^2.
+\]
+Suppose that $G$ is solvable, and let
+\[
+    N\lhd_{\mathrm{min}}G.
+\]
+Then
+\[
+    N\cong C_p^r
+\]
+for some prime $p$.
+
+Since $|N|\mid |G|=72$, the possibilities are
+\[
+    N\cong C_2,\ C_2^2,\ C_2^3,
+    \qquad\text{or}\qquad
+    N\cong C_3,\ C_3^2.
+\]
+Equivalently, after viewing $N$ as a vector space over $\mathbb F_p$, we have
+\[
+    N\leq C_2^3
+    \qquad\text{or}\qquad
+    N\leq C_3^2.
+\]
+\end{example}
+
+\section{Burnside's Theorem and Transfer}
+
+\begin{theorem}[Burnside]
+Let $G$ be a finite group. If all Sylow subgroups of $G$ are cyclic, then $G$ is solvable.
+\end{theorem}
+
+\begin{remark}
+A standard proof of this theorem uses the \textbf{transfer map}. We now define transfer and record its basic properties.
+\end{remark}
+
+\begin{definition}[Transfer]
+Let $G$ be a finite group and let $H\leq G$. Put
+\[
+    \Omega=H\backslash G=\{Hx:x\in G\}.
+\]
+Choose a right transversal
+\[
+    \Omega=\{Hx_1,Hx_2,\ldots,Hx_n\},
+    \qquad
+    n=[G:H].
+\]
+For $g\in G$, right multiplication by $g$ gives a permutation of $\Omega$:
+\[
+    Hx_i\longmapsto Hx_i g.
+\]
+Thus there exists a permutation $\tau_g\in S_n$ such that
+\[
+    Hx_i g=Hx_{i^{\tau_g}}.
+\]
+Hence
+\[
+    x_i g x_{i^{\tau_g}}^{-1}\in H.
+\]
+Define
+\[
+    h_i(g)=x_i g x_{i^{\tau_g}}^{-1}\in H.
+\]
+The \textbf{transfer map} from $G$ to $H/H'$ is
+\[
+    V_{G\to H}:G\longrightarrow H/H',
+\]
+defined by
+\[
+    V_{G\to H}(g)
+    =
+    \prod_{i=1}^n h_i(g)H'
+    =
+    \prod_{i=1}^n
+    \left(x_i g x_{i^{\tau_g}}^{-1}\right)H'.
+\]
+Here $H'=[H,H]$ is the commutator subgroup of $H$.
+\end{definition}
+
+\begin{lemma}[Basic properties of transfer]
+Let $G$ be finite and let $H\leq G$.
+\begin{enumerate}[label=(\arabic*)]
+    \item The map
+    \[
+        V_{G\to H}:G\longrightarrow H/H'
+    \]
+    is a group homomorphism.
+
+    \item The map $V_{G\to H}$ does not depend on the choice of right coset representatives
+    \[
+        x_1,x_2,\ldots,x_n.
+    \]
+
+    \item Let $g\in G$. Suppose the action of $\gen{g}$ on
+    \[
+        \Omega=H\backslash G
+    \]
+    has orbits
+    \[
+        (Hx_1,Hx_1g,\ldots,Hx_1g^{e_1-1}),
+    \]
+    \[
+        (Hx_2,Hx_2g,\ldots,Hx_2g^{e_2-1}),
+    \]
+    \[
+        \ldots,
+    \]
+    \[
+        (Hx_t,Hx_tg,\ldots,Hx_tg^{e_t-1}).
+    \]
+    Then
+    \[
+        x_i g^{e_i}x_i^{-1}\in H
+    \]
+    for each $i$, and
+    \[
+        V_{G\to H}(g)
+        =
+        \prod_{i=1}^t
+        \left(x_i g^{e_i}x_i^{-1}\right)H'.
+    \]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For each $g\in G$, write
+\[
+    Hx_i g=Hx_{i^{\tau_g}},
+\]
+and put
+\[
+    h_i(g)=x_i g x_{i^{\tau_g}}^{-1}\in H.
+\]
+
+\textbf{(1)} Let $g_1,g_2\in G$. Since right multiplication gives an action on $\Omega$, we have
+\[
+    i^{\tau_{g_1g_2}}
+    =
+    \left(i^{\tau_{g_1}}\right)^{\tau_{g_2}}.
+\]
+Hence
+\[
+\begin{aligned}
+    h_i(g_1g_2)
+    &=
+    x_i g_1g_2 x_{i^{\tau_{g_1g_2}}}^{-1} \\[2mm]
+    &=
+    x_i g_1 x_{i^{\tau_{g_1}}}^{-1}
+    \cdot
+    x_{i^{\tau_{g_1}}}g_2x_{\left(i^{\tau_{g_1}}\right)^{\tau_{g_2}}}^{-1} \\[2mm]
+    &=
+    h_i(g_1)\,h_{i^{\tau_{g_1}}}(g_2).
+\end{aligned}
+\]
+Therefore, in the abelian group $H/H'$,
+\[
+\begin{aligned}
+    V_{G\to H}(g_1g_2)
+    &=
+    \prod_{i=1}^n h_i(g_1g_2)H' \\[2mm]
+    &=
+    \prod_{i=1}^n
+    h_i(g_1)h_{i^{\tau_{g_1}}}(g_2)H' \\[2mm]
+    &=
+    \left(\prod_{i=1}^n h_i(g_1)H'\right)
+    \left(\prod_{i=1}^n h_{i^{\tau_{g_1}}}(g_2)H'\right).
+\end{aligned}
+\]
+Since $\tau_{g_1}$ is a permutation of $\{1,\ldots,n\}$,
+\[
+    \prod_{i=1}^n h_{i^{\tau_{g_1}}}(g_2)H'
+    =
+    \prod_{i=1}^n h_i(g_2)H'.
+\]
+Thus
+\[
+    V_{G\to H}(g_1g_2)
+    =
+    V_{G\to H}(g_1)V_{G\to H}(g_2).
+\]
+So $V_{G\to H}$ is a homomorphism.
+
+\textbf{(2)} Let
+\[
+    y_1,y_2,\ldots,y_n
+\]
+be another choice of right coset representatives, with
+\[
+    Hy_i=Hx_i.
+\]
+Then there exist $t_i\in H$ such that
+\[
+    y_i=t_i x_i.
+\]
+For the new representatives, the corresponding element of $H$ is
+\[
+\begin{aligned}
+    \widetilde{h}_i(g)
+    &=
+    y_i g y_{i^{\tau_g}}^{-1} \\[2mm]
+    &=
+    t_i x_i g x_{i^{\tau_g}}^{-1}t_{i^{\tau_g}}^{-1} \\[2mm]
+    &=
+    t_i h_i(g)t_{i^{\tau_g}}^{-1}.
+\end{aligned}
+\]
+Hence in $H/H'$,
+\[
+\begin{aligned}
+    \prod_{i=1}^n \widetilde{h}_i(g)H'
+    &=
+    \prod_{i=1}^n t_i h_i(g)t_{i^{\tau_g}}^{-1}H' \\[2mm]
+    &=
+    \left(\prod_{i=1}^n h_i(g)H'\right)
+    \left(\prod_{i=1}^n t_iH'\right)
+    \left(\prod_{i=1}^n t_{i^{\tau_g}}^{-1}H'\right).
+\end{aligned}
+\]
+Since $\tau_g$ is a permutation,
+\[
+    \prod_{i=1}^n t_iH'
+    =
+    \prod_{i=1}^n t_{i^{\tau_g}}H'.
+\]
+Therefore
+\[
+    \prod_{i=1}^n \widetilde{h}_i(g)H'
+    =
+    \prod_{i=1}^n h_i(g)H',
+\]
+so the transfer does not depend on the chosen transversal.
+
+\textbf{(3)} By part (2), we may choose a convenient transversal adapted to the $\gen{g}$-orbits. For an orbit
+\[
+    (Hx_i,Hx_ig,\ldots,Hx_ig^{e_i-1}),
+\]
+choose representatives
+\[
+    x_i,\ x_ig,\ \ldots,\ x_ig^{e_i-1}.
+\]
+For the first $e_i-1$ representatives in this orbit, the corresponding transfer terms are
+\[
+    (x_ig^k)g(x_ig^{k+1})^{-1}=1
+    \qquad
+    (0\leq k\leq e_i-2).
+\]
+For the last representative, the term is
+\[
+    (x_ig^{e_i-1})g x_i^{-1}
+    =
+    x_ig^{e_i}x_i^{-1}.
+\]
+Since
+\[
+    Hx_ig^{e_i}=Hx_i,
+\]
+we indeed have
+\[
+    x_ig^{e_i}x_i^{-1}\in H.
+\]
+Multiplying over all orbits gives
+\[
+    V_{G\to H}(g)
+    =
+    \prod_{i=1}^t
+    \left(x_i g^{e_i}x_i^{-1}\right)H'.
+\]
+\end{proof}
+
+\section{\texorpdfstring{$p$}{p}-Nilpotence and Burnside's Transfer Theorem}
+
+\begin{definition}[$p$-nilpotent group]
+Let $G$ be a finite group and let $p$ be a prime divisor of $|G|$. We say that $G$ is
+\textbf{$p$-nilpotent} if
+\[
+    G=NP,
+\]
+where
+\[
+    N\lhd G,\qquad P\in \operatorname{Syl}_p(G),
+    \qquad N\cap P=1.
+\]
+Equivalently, $G$ is $p$-nilpotent if and only if $G$ has a normal subgroup $N$ such that
+\[
+    |G/N|=|G|_p=|P|,
+\]
+where $P$ is a Sylow $p$-subgroup of $G$.
+\end{definition}
+
+\begin{theorem}[Burnside normal $p$-complement theorem]
+Let $G$ be a finite group and let $P\in \operatorname{Syl}_p(G)$. If
+\[
+    N_G(P)=C_G(P),
+\]
+then $G$ is $p$-nilpotent.
+\end{theorem}
+
+\begin{proof}
+We use transfer. Since
+\[
+    N_G(P)=C_G(P),
+\]
+and $P\leq N_G(P)$, we get
+\[
+    P\leq C_G(P).
+\]
+Hence $P$ is abelian, so
+\[
+    P'=1.
+\]
+Thus the transfer map gives a homomorphism
+\[
+    V_{G\to P}:G\longrightarrow P.
+\]
+
+Let $g\in P\setminus\{1\}$. Consider the action of $\gen{g}$ on
+\[
+    P\backslash G.
+\]
+Let the $\gen{g}$-orbits be represented by
+\[
+    Px_1,\ldots,Px_t,
+\]
+with orbit lengths
+\[
+    \ell_1,\ldots,\ell_t.
+\]
+By the orbit formula for transfer,
+\[
+    V_{G\to P}(g)
+    =
+    \prod_{i=1}^t x_i g^{\ell_i}x_i^{-1}.
+\]
+Here each factor lies in $P$:
+\[
+    x_i g^{\ell_i}x_i^{-1}\in P.
+\]
+
+We claim that
+\[
+    x_i g^{\ell_i}x_i^{-1}=g^{\ell_i}
+\]
+for every $i$.
+
+Indeed, since $g^{\ell_i}\in P$ and $P$ is abelian, we have
+\[
+    P\leq C_G(g^{\ell_i}).
+\]
+Also, since
+\[
+    x_i g^{\ell_i}x_i^{-1}\in P
+\]
+and $P$ is abelian, we have
+\[
+    P\leq C_G(x_i g^{\ell_i}x_i^{-1}).
+\]
+But
+\[
+    C_G(x_i g^{\ell_i}x_i^{-1})
+    =
+    x_i C_G(g^{\ell_i})x_i^{-1}.
+\]
+Hence
+\[
+    x_i^{-1}Px_i\leq C_G(g^{\ell_i}).
+\]
+Therefore both
+\[
+    P
+    \qquad\text{and}\qquad
+    x_i^{-1}Px_i
+\]
+are Sylow $p$-subgroups of $C_G(g^{\ell_i})$. By Sylow's theorem, there exists
+\[
+    u_i\in C_G(g^{\ell_i})
+\]
+such that
+\[
+    u_i^{-1}x_i^{-1}Px_i u_i=P.
+\]
+Equivalently,
+\[
+    (x_i u_i)^{-1}P(x_i u_i)=P,
+\]
+so
+\[
+    x_i u_i\in N_G(P)=C_G(P).
+\]
+In particular, $x_i u_i$ centralizes $g^{\ell_i}$. Since $u_i\in C_G(g^{\ell_i})$, it follows that $x_i$ also centralizes $g^{\ell_i}$. Thus
+\[
+    x_i g^{\ell_i}x_i^{-1}=g^{\ell_i}.
+\]
+
+Therefore
+\[
+\begin{aligned}
+    V_{G\to P}(g)
+    &=
+    \prod_{i=1}^t g^{\ell_i}  \\
+    &=
+    g^{\ell_1+\cdots+\ell_t}.
+\end{aligned}
+\]
+Since the $\gen{g}$-orbits partition $P\backslash G$,
+\[
+    \ell_1+\cdots+\ell_t=[G:P].
+\]
+Hence
+\[
+    V_{G\to P}(g)=g^{[G:P]}.
+\]
+Because $g$ has $p$-power order and $p\nmid [G:P]$, we have
+\[
+    g^{[G:P]}\neq 1.
+\]
+Thus
+\[
+    V_{G\to P}|_P:P\longrightarrow P
+\]
+is injective. Since $P$ is finite, it is also surjective. Hence
+\[
+    V_{G\to P}(P)=P.
+\]
+Therefore
+\[
+    V_{G\to P}(G)=P.
+\]
+
+Let
+\[
+    K=\Ker V_{G\to P}.
+\]
+Then
+\[
+    K\lhd G,
+\]
+and by the first isomorphism theorem,
+\[
+    G/K\cong P.
+\]
+Hence
+\[
+    |K|=\frac{|G|}{|P|}.
+\]
+Moreover, since $V_{G\to P}|_P$ is injective,
+\[
+    K\cap P=1.
+\]
+Thus
+\[
+    |KP|=\frac{|K||P|}{|K\cap P|}
+    =
+    |G|,
+\]
+so
+\[
+    G=KP.
+\]
+Therefore $G$ is $p$-nilpotent.
+\end{proof}
+
+\begin{theorem}[Burnside]
+Let $G$ be a finite group whose Sylow subgroups are all cyclic. Let $p$ be the smallest prime divisor of $|G|$, and let
+\[
+    P\in \operatorname{Syl}_p(G).
+\]
+Then:
+\begin{enumerate}[label=(\arabic*)]
+    \item $G$ is $p$-nilpotent.
+    \item $G$ is solvable.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $P$ is cyclic, write
+\[
+    |P|=p^e.
+\]
+Then
+\[
+    |\Aut(P)|=p^{e-1}(p-1).
+\]
+Hence every prime divisor of $|\Aut(P)|$ is at most $p$.
+
+Conjugation induces an embedding
+\[
+    N_G(P)/C_G(P)\hookrightarrow \Aut(P).
+\]
+Thus every prime divisor of
+\[
+    |N_G(P)/C_G(P)|
+\]
+is at most $p$.
+
+On the other hand, since $P$ is cyclic, it is abelian. Hence
+\[
+    P\leq C_G(P).
+\]
+Therefore
+\[
+    |N_G(P)/C_G(P)|
+    \mid
+    |N_G(P)/P|.
+\]
+Also
+\[
+    |N_G(P)/P|\mid [G:P].
+\]
+Since $p$ is the smallest prime divisor of $|G|$ and $p\nmid [G:P]$, every prime divisor of $[G:P]$ is strictly larger than $p$.
+
+Thus every prime divisor of $|N_G(P)/C_G(P)|$ is both at most $p$ and strictly larger than $p$, which is impossible unless
+\[
+    |N_G(P)/C_G(P)|=1.
+\]
+Hence
+\[
+    N_G(P)=C_G(P).
+\]
+By Burnside's normal $p$-complement theorem, $G$ is $p$-nilpotent.
+
+So there exists a normal subgroup
+\[
+    K\lhd G
+\]
+such that
+\[
+    |K|=\frac{|G|}{|P|}.
+\]
+Every Sylow subgroup of $K$ is also a Sylow subgroup of $G$ for the corresponding prime, and hence is cyclic.
+
+Now let $p_1$ be the smallest prime divisor of $|K|$. By the same argument, $K$ is $p_1$-nilpotent. Hence $K$ has a normal subgroup
+\[
+    K_1\lhd K
+\]
+such that
+\[
+    |K_1|=\frac{|K|}{|P_1|},
+\]
+where
+\[
+    P_1\in \operatorname{Syl}_{p_1}(K).
+\]
+Repeating this process, we obtain a normal series
+\[
+    G=K_0\triangleright K_1\triangleright K_2\triangleright\cdots\triangleright K_m=Q\triangleright 1,
+\]
+where $Q$ is a Sylow $q$-subgroup of $G$ and $q$ is the largest prime divisor of $|G|$.
+
+Each factor
+\[
+    K_i/K_{i+1}
+\]
+is cyclic, and $Q$ is cyclic. Hence this is a normal series with abelian factors. Therefore $G$ is solvable.
+\end{proof}
+
+\begin{remark}
+In the above process, the final Sylow subgroup
+\[
+    Q\in \operatorname{Syl}_q(G)
+\]
+is actually normal in $G$.
+\end{remark}
+
+\begin{proof}
+Suppose that
+\[
+    Q\lhd K_n\lhd K_{n-1}.
+\]
+For every $g\in K_{n-1}$, since $K_n\lhd K_{n-1}$, we have
+\[
+    g^{-1}Qg\leq g^{-1}K_n g=K_n.
+\]
+Thus $g^{-1}Qg$ is a Sylow $q$-subgroup of $K_n$. Since
+\[
+    Q\lhd K_n,
+\]
+the group $K_n$ has a unique Sylow $q$-subgroup. Hence
+\[
+    g^{-1}Qg=Q.
+\]
+Therefore
+\[
+    Q\lhd K_{n-1}.
+\]
+Repeating this argument upward along the series gives
+\[
+    Q\lhd G.
+\]
+\end{proof}
+
+\begin{corollary}
+If a Sylow $2$-subgroup of $G$ is cyclic, then $G$ is $2$-nilpotent. In particular, $G$ is solvable.
+\end{corollary}
+
+\begin{proof}
+Let
+\[
+    P\in \operatorname{Syl}_2(G)
+\]
+be cyclic.
+
+If $|G|$ is odd, then $G$ is solvable by the Feit--Thompson theorem. So assume that $2\mid |G|$.
+
+Since $P$ is cyclic, it is abelian, so
+\[
+    P\leq C_G(P).
+\]
+Again conjugation induces
+\[
+    N_G(P)/C_G(P)\hookrightarrow \Aut(P).
+\]
+But $\Aut(P)$ is a $2$-group. Hence
+\[
+    N_G(P)/C_G(P)
+\]
+is a $2$-group.
+
+On the other hand,
+\[
+    |N_G(P)/C_G(P)|
+    \mid
+    |N_G(P)/P|
+    \mid
+    [G:P],
+\]
+and $[G:P]$ is odd. Thus
+\[
+    N_G(P)/C_G(P)=1.
+\]
+Therefore
+\[
+    N_G(P)=C_G(P).
+\]
+By Burnside's normal $p$-complement theorem, $G$ is $2$-nilpotent. Hence there exists
+\[
+    N\lhd G
+\]
+such that
+\[
+    G=NP,
+    \qquad
+    N\cap P=1.
+\]
+Then $|N|$ is odd, so $N$ is solvable by the Feit--Thompson theorem. Also
+\[
+    G/N\cong P
+\]
+is cyclic, hence solvable. Since both $N$ and $G/N$ are solvable, $G$ is solvable.
+\end{proof}
+
+\section{Consequences of Burnside's Normal Complement Theorem}
+
+\begin{proposition}
+Let $G$ be a finite nonabelian simple group, and let $p$ be a prime divisor of $|G|$.
+\begin{enumerate}[label=(\arabic*)]
+    \item If $p$ is the smallest prime divisor of $|G|$, then
+    \[
+        p^3\mid |G|
+        \qquad\text{or}\qquad
+        12\mid |G|.
+    \]
+    \item If
+    \[
+        |G|=pm,
+        \qquad
+        (p,m)=1,
+    \]
+    and $P\in \operatorname{Syl}_p(G)$, then
+    \[
+        C_G(P)\neq N_G(P)\neq G,
+    \]
+    and
+    \[
+        \left|N_G(P)/C_G(P)\right|\mid (p-1).
+    \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We first prove (2). Since $|G|=pm$ with $(p,m)=1$, a Sylow $p$-subgroup has order $p$. Hence
+\[
+    P\cong C_p.
+\]
+Conjugation gives a homomorphism
+\[
+    N_G(P)\longrightarrow \Aut(P),
+\]
+whose kernel is $C_G(P)$. Therefore
+\[
+    N_G(P)/C_G(P)\hookrightarrow \Aut(P).
+\]
+Since
+\[
+    \Aut(C_p)\cong C_{p-1},
+\]
+we get
+\[
+    \left|N_G(P)/C_G(P)\right|\mid (p-1).
+\]
+
+Also $N_G(P)\neq G$, because otherwise $P\lhd G$, contradicting the simplicity of $G$.
+
+If $N_G(P)=C_G(P)$, then by Burnside's normal $p$-complement theorem, $G$ is $p$-nilpotent. Thus $G$ has a normal $p$-complement, say $K\lhd G$, with
+\[
+    |K|=\frac{|G|}{|P|}=m.
+\]
+Since $G$ is nonabelian simple, this is impossible. Hence
+\[
+    C_G(P)\neq N_G(P).
+\]
+This proves (2).
+
+Now prove (1). Assume that $p$ is the smallest prime divisor of $|G|$, and suppose that
+\[
+    p^3\nmid |G|.
+\]
+We shall prove that $12\mid |G|$.
+
+First, $p^2$ must divide $|G|$. Indeed, if $p^2\nmid |G|$, then $|G|=pm$ with $(p,m)=1$. By part (2),
+\[
+    C_G(P)\neq N_G(P),
+\]
+and
+\[
+    \left|N_G(P)/C_G(P)\right|\mid (p-1).
+\]
+But $P\leq C_G(P)$, so
+\[
+    \left|N_G(P)/C_G(P)\right|
+    \mid
+    \left|N_G(P)/P\right|
+    \mid
+    \frac{|G|}{p}.
+\]
+Since $p$ is the smallest prime divisor of $|G|$ and $p\nmid |G|/p$, every prime divisor of $|G|/p$ is strictly larger than $p$. This contradicts the fact that
+\[
+    \left|N_G(P)/C_G(P)\right|
+\]
+is a nontrivial divisor of $p-1$. Therefore
+\[
+    p^2\mid |G|.
+\]
+
+Since we assumed $p^3\nmid |G|$, we have
+\[
+    p^2\parallel |G|.
+\]
+Let
+\[
+    P\in \operatorname{Syl}_p(G).
+\]
+Then
+\[
+    |P|=p^2.
+\]
+Hence either
+\[
+    P\cong C_{p^2}
+    \qquad\text{or}\qquad
+    P\cong C_p\times C_p.
+\]
+
+Suppose first that
+\[
+    P\cong C_{p^2}.
+\]
+Then
+\[
+    |\Aut(P)|=\varphi(p^2)=p(p-1).
+\]
+Again,
+\[
+    N_G(P)/C_G(P)\hookrightarrow \Aut(P).
+\]
+Since $P$ is cyclic, it is abelian, so
+\[
+    P\leq C_G(P).
+\]
+Thus
+\[
+    \left|N_G(P)/C_G(P)\right|
+    \mid
+    \frac{|G|}{p^2}.
+\]
+Every prime divisor of $|G|/p^2$ is strictly larger than $p$, whereas every prime divisor of $p(p-1)$ is at most $p$. Hence
+\[
+    N_G(P)=C_G(P).
+\]
+By Burnside's normal $p$-complement theorem, $G$ is $p$-nilpotent, contradicting the simplicity of $G$. Therefore
+\[
+    P\not\cong C_{p^2}.
+\]
+So
+\[
+    P\cong C_p\times C_p.
+\]
+
+Now $P$ is abelian, hence
+\[
+    P\leq C_G(P).
+\]
+If
+\[
+    N_G(P)=C_G(P),
+\]
+then again Burnside's normal $p$-complement theorem implies that $G$ is $p$-nilpotent, impossible. Thus
+\[
+    N_G(P)\neq C_G(P).
+\]
+Hence the quotient
+\[
+    N_G(P)/C_G(P)
+\]
+is nontrivial.
+
+Since
+\[
+    P\cong C_p\times C_p,
+\]
+we have
+\[
+    \Aut(P)\cong \operatorname{GL}(2,p).
+\]
+Thus
+\[
+    N_G(P)/C_G(P)\hookrightarrow \operatorname{GL}(2,p).
+\]
+Moreover,
+\[
+    |\operatorname{GL}(2,p)|
+    =
+    (p^2-1)(p^2-p)
+    =
+    p(p-1)^2(p+1).
+\]
+Let $r$ be a prime divisor of
+\[
+    \left|N_G(P)/C_G(P)\right|.
+\]
+Since $P\leq C_G(P)$, we have
+\[
+    \left|N_G(P)/C_G(P)\right|
+    \mid
+    \frac{|G|}{p^2}.
+\]
+Thus $r$ is a prime divisor of $|G|/p^2$. Since $p$ is the smallest prime divisor of $|G|$ and $p^3\nmid |G|$, we get
+\[
+    r>p.
+\]
+On the other hand, $r$ divides
+\[
+    |\operatorname{GL}(2,p)|=p(p-1)^2(p+1).
+\]
+Since $r>p$, it cannot divide $p$ or $p-1$. Therefore
+\[
+    r\mid p+1.
+\]
+Thus
+\[
+    p<r\leq p+1.
+\]
+Hence
+\[
+    r=p+1.
+\]
+Since $r$ is prime, this forces
+\[
+    p=2,
+    \qquad
+    r=3.
+\]
+Therefore
+\[
+    |P|=p^2=4
+\]
+and $3\mid |G|/4$. Hence
+\[
+    12\mid |G|.
+\]
+This proves (1).
+\end{proof}
+
+\begin{example}
+If
+\[
+    |G|=5\cdot 7\cdot 13,
+\]
+then $G$ is cyclic.
+
+Let $G_p$ denote a Sylow $p$-subgroup of $G$.
+
+First consider $p=13$. Let
+\[
+    G_{13}\in \operatorname{Syl}_{13}(G).
+\]
+The number $n_{13}$ of Sylow $13$-subgroups satisfies
+\[
+    n_{13}\equiv 1\pmod{13},
+    \qquad
+    n_{13}\mid 35.
+\]
+The divisors of $35$ are $1,5,7,35$, and only $1$ is congruent to $1$ modulo $13$. Hence
+\[
+    n_{13}=1.
+\]
+Thus
+\[
+    G_{13}\lhd G.
+\]
+
+Now conjugation gives
+\[
+    G/C_G(G_{13})
+    =
+    N_G(G_{13})/C_G(G_{13})
+    \hookrightarrow
+    \Aut(G_{13}).
+\]
+Since
+\[
+    G_{13}\cong C_{13},
+\]
+we have
+\[
+    \Aut(G_{13})\cong C_{12}.
+\]
+Also $G_{13}\leq C_G(G_{13})$, so
+\[
+    |G/C_G(G_{13})|
+    \mid
+    \frac{|G|}{13}
+    =
+    35.
+\]
+Therefore
+\[
+    |G/C_G(G_{13})|
+    \mid \gcd(35,12)=1.
+\]
+Hence
+\[
+    C_G(G_{13})=G.
+\]
+So
+\[
+    G_{13}\leq Z(G).
+\]
+
+By Burnside's normal $p$-complement theorem applied to $p=13$, the group $G$ is $13$-nilpotent. Hence there exists a normal subgroup
+\[
+    K\lhd G
+\]
+such that
+\[
+    |K|=5\cdot 7=35
+\]
+and
+\[
+    G=K G_{13},
+    \qquad
+    K\cap G_{13}=1.
+\]
+Since $G_{13}\leq Z(G)$, this product is direct:
+\[
+    G=K\times G_{13}.
+\]
+
+It remains to show that $K$ is cyclic. Since
+\[
+    |K|=35=5\cdot 7,
+\]
+let
+\[
+    Q\in \operatorname{Syl}_7(K).
+\]
+The number $n_7(K)$ of Sylow $7$-subgroups of $K$ satisfies
+\[
+    n_7(K)\equiv 1\pmod 7,
+    \qquad
+    n_7(K)\mid 5.
+\]
+Hence
+\[
+    n_7(K)=1.
+\]
+Thus
+\[
+    Q\lhd K.
+\]
+Conjugation gives
+\[
+    K/C_K(Q)
+    =
+    N_K(Q)/C_K(Q)
+    \hookrightarrow
+    \Aut(Q)
+    \cong C_6.
+\]
+Since $Q\leq C_K(Q)$, the order of $K/C_K(Q)$ divides
+\[
+    |K/Q|=5.
+\]
+Thus
+\[
+    |K/C_K(Q)|\mid \gcd(5,6)=1,
+\]
+so
+\[
+    C_K(Q)=K.
+\]
+Therefore
+\[
+    Q\leq Z(K).
+\]
+
+Let
+\[
+    R\in \operatorname{Syl}_5(K).
+\]
+Then $R$ centralizes $Q$, and
+\[
+    K=QR,
+    \qquad
+    Q\cap R=1.
+\]
+Thus
+\[
+    K\cong Q\times R\cong C_7\times C_5\cong C_{35}.
+\]
+Consequently
+\[
+    G\cong K\times G_{13}
+    \cong C_{35}\times C_{13}
+    \cong C_{455}.
+\]
+Hence $G$ is cyclic.
+\end{example}

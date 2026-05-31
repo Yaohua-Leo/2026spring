@@ -1,0 +1,88 @@
+\section{Inner Derivation of Lie algebra}
+
+For any algebra $A$, $\mathrm{d}: A \to A$ is a derivation if $\mathrm{d}(ab)=\mathrm{d}(a)b+a\mathrm{d}(b)$ for all $a,b \in A$. Hence $\mathrm{Der}(A)$ is a Lie subalgebra of $\operatorname{End}_F(A)^{(-)}=\mathfrak{gl}(A)$.
+
+Now let $L$ be a Lie algebra (not necessarily semisimple or finite dimensional). Let $a \in L$, $\mathrm{ad}(a): L \to L : b \mapsto [a,b]$ is a derivation. Such derivation is called inner derivation.
+
+\begin{theorem}
+    If $L$ is a finite dimensional semisimple Lie algebra, then $\operatorname{Der}(L) = \operatorname{ad}(L)$.
+\end{theorem}
+
+\begin{remark}
+    An example of not inner derivation: Let $A=\begin{pmatrix} f(t) & g(t) \\ h(t) & k(t) \end{pmatrix}$. Then $\mathrm{d}: A \to A : \begin{pmatrix} f(t) & g(t) \\ h(t) & k(t) \end{pmatrix} \mapsto \begin{pmatrix} f'(t) & g'(t) \\ h'(t) & k'(t) \end{pmatrix}$ is a derivation. But it is not inner derivation.
+
+    Another example for Lie algebra: Let $A$ be an abelian Lie algebra. Then any linear transformation is a derivation. But it is not inner derivation.
+\end{remark}
+
+\begin{proof}
+    Let $d \in \operatorname{Der}(L)$. We must show that $d$ is inner.
+
+    Consider the vector space
+    \[
+        \widetilde L := L \oplus Fd,
+    \]
+    and define a Lie bracket on $\widetilde L$ by requiring that:
+    \begin{itemize}
+        \item the bracket on $L$ is the original one;
+        \item for $x \in L$,
+              \[
+                  [d,x]:=d(x), \qquad [x,d]:=-d(x);
+              \]
+        \item $[d,d]=0$.
+    \end{itemize}
+    Since $d$ is a derivation of $L$, the Jacobi identity holds, so $\widetilde L$
+    is a Lie algebra and $L \triangleleft \widetilde L$ is an ideal of codimension $1$.
+
+    Let $\operatorname{Rad}(\widetilde L)$ be the solvable radical of $\widetilde L$.
+    Since $L$ is semisimple, it contains no nonzero solvable ideals. Hence
+    \[
+        \operatorname{Rad}(\widetilde L)\cap L=0.
+    \]
+    On the other hand, $\operatorname{Rad}(\widetilde L)+L$ is a subspace of
+    $\widetilde L$ containing $L$, and since $\dim(\widetilde L/L)=1$, either
+    $\operatorname{Rad}(\widetilde L)\subseteq L$ or
+    \[
+        \widetilde L=L+\operatorname{Rad}(\widetilde L).
+    \]
+    The first possibility would imply $\operatorname{Rad}(\widetilde L)=0$, hence in any case
+    we may write
+    \[
+        \widetilde L=L+\operatorname{Rad}(\widetilde L).
+    \]
+    Therefore there exist $a\in L$ and $r\in \operatorname{Rad}(\widetilde L)$ such that
+    \[
+        d=a+r.
+    \]
+    Equivalently,
+    \[
+        r=d-a.
+    \]
+
+    Now let $b\in L$. Since $L\triangleleft \widetilde L$, we have $[r,b]\in L$.
+    Also $r\in \operatorname{Rad}(\widetilde L)$ and $\operatorname{Rad}(\widetilde L)$ is an ideal,
+    so $[r,b]\in \operatorname{Rad}(\widetilde L)$. Thus
+    \[
+        [r,b]\in L\cap \operatorname{Rad}(\widetilde L)=0,
+    \]
+    hence $[r,b]=0$ for all $b\in L$.
+
+    But
+    \[
+        [r,b]=[d-a,b]=[d,b]-[a,b]=d(b)-[a,b].
+    \]
+    Therefore
+    \[
+        d(b)=[a,b]=-\,[b,a]=\operatorname{ad}(-a)(b)
+        \qquad \text{for all } b\in L.
+    \]
+    So
+    \[
+        d=\operatorname{ad}(-a)\in \operatorname{ad}(L).
+    \]
+
+    Since every derivation of $L$ is inner, we conclude that
+    \[
+        \operatorname{Der}(L)=\operatorname{ad}(L).
+    \]
+\end{proof}
+

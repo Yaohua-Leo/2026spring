@@ -1,0 +1,711 @@
+\chapter{Hall Subgroups}
+
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\PSL}{\operatorname{PSL}}
+\providecommand{\Syl}{\operatorname{Syl}}
+\providecommand{\Hall}{\operatorname{Hall}}
+\providecommand{\Dih}{\operatorname{Dih}}
+\providecommand{\Op}[2]{\mathrm{O}_{#1}(#2)}
+\providecommand{\CG}[2]{\mathrm{C}_{#1}(#2)}
+\renewcommand{\NG}[2]{\mathrm{N}_{#1}(#2)}
+
+\section{Definition and Basic Examples}
+
+\begin{definition}[Hall subgroup]
+Let \(G\) be a finite group, and write
+\[
+    |G|=p_1^{a_1}p_2^{a_2}\cdots p_t^{a_t},
+\]
+where \(p_1,\ldots,p_t\) are the distinct prime divisors of \(|G|\). Define
+\[
+    \pi(G)=\pi(|G|)=\{p_1,\ldots,p_t\}.
+\]
+For a subset \(\pi\subseteq \pi(G)\), a subgroup \(H\leq G\) is called a
+\emph{Hall \(\pi\)-subgroup} of \(G\) if
+\[
+    \pi(H)=\pi
+    \qquad\text{and}\qquad
+    \gcd(|H|,[G:H])=1.
+\]
+Equivalently, \(H\) is a Hall \(\pi\)-subgroup if \(|H|\) is a \(\pi\)-number and
+\([G:H]\) is a \(\pi'\)-number, where
+\[
+    \pi'=\pi(G)\setminus \pi.
+\]
+\end{definition}
+
+\begin{remark}
+If \(\pi=\{p\}\), then a Hall \(\pi\)-subgroup is precisely a Sylow
+\(p\)-subgroup. Thus Hall subgroups generalize Sylow subgroups by allowing
+several primes at once.
+\end{remark}
+
+\begin{topic}[Notation]
+When a Hall \(\pi\)-subgroup has been chosen, we may denote it by
+\[
+    G_{\pi}.
+\]
+If \(\pi=\{p\}\), we often write \(G_p\) instead of \(G_{\{p\}}\). Also,
+\[
+    \pi'=\pi(G)\setminus \pi.
+\]
+This notation does not imply uniqueness: Hall subgroups need not exist, and even
+when they exist, they need not be conjugate in arbitrary finite groups.
+\end{topic}
+
+\begin{example}[Hall subgroups in \(A_5\)]
+Let
+\[
+    G=A_5,\qquad |G|=60=2^2\cdot 3\cdot 5.
+\]
+Then
+\[
+    \pi(G)=\{2,3,5\}.
+\]
+
+The point stabilizer of the natural action of \(A_5\) on five letters is isomorphic
+to \(A_4\), and has order \(12=2^2\cdot 3\). Hence
+\[
+    A_4\leq A_5
+\]
+is a Hall \(\{2,3\}\)-subgroup.
+
+A Sylow \(5\)-subgroup is cyclic of order \(5\), so
+\[
+    C_5
+\]
+is a Hall \(\{5\}\)-subgroup, equivalently a Hall \(\{2,3\}'\)-subgroup.
+
+However, \(A_5\) has no Hall \(\{2,5\}\)-subgroup and no Hall
+\(\{3,5\}\)-subgroup.
+
+Indeed, suppose first that \(H\) is a Hall \(\{2,5\}\)-subgroup. Then
+\[
+    |H|=2^2\cdot 5=20,
+    \qquad
+    [A_5:H]=3.
+\]
+The left action of \(A_5\) on the set of left cosets \(A_5/H\) gives a
+homomorphism
+\[
+    A_5\longrightarrow \Sym(A_5/H)\cong S_3.
+\]
+Since \(A_5\) is simple, the kernel is either \(1\) or \(A_5\). The action is
+nontrivial, so the kernel is not \(A_5\). Hence the map would be injective,
+which is impossible because
+\[
+    |A_5|=60>|S_3|=6.
+\]
+Therefore no Hall \(\{2,5\}\)-subgroup exists.
+
+Similarly, if \(K\) were a Hall \(\{3,5\}\)-subgroup, then
+\[
+    |K|=3\cdot 5=15,
+    \qquad
+    [A_5:K]=4.
+\]
+The coset action would give a nontrivial homomorphism
+\[
+    A_5\longrightarrow S_4.
+\]
+Again simplicity forces this map to be injective, which is impossible since
+\[
+    |A_5|=60>|S_4|=24.
+\]
+Thus no Hall \(\{3,5\}\)-subgroup exists.
+\end{example}
+
+\begin{example}[Hall subgroups need not be conjugate]
+Let
+\[
+    G=\PSL_2(11).
+\]
+Then \(G\) is simple and
+\[
+    |G|=660=2^2\cdot 3\cdot 5\cdot 11.
+\]
+This group has subgroups \(H\) and \(K\) such that
+\[
+    H\cong A_4,
+    \qquad
+    K\cong \Dih_{12},
+\]
+where \(D_{12}\) denotes the dihedral group of order \(12\). Both \(H\) and
+\(K\) have order \(12=2^2\cdot 3\), so both are Hall \(\{2,3\}\)-subgroups of
+\(G\).
+
+However,
+\[
+    A_4\not\cong D_{12}.
+\]
+Therefore \(H\) and \(K\) cannot be conjugate in \(G\). This shows that Hall
+subgroups are not necessarily conjugate in arbitrary finite groups.
+\end{example}
+
+\section{Hall's Theorem}
+
+\begin{lemma}[The subgroup \(\Op{p}{X}\)]
+Let \(X\) be a finite group and let \(p\) be a prime. Define
+\[
+    \Op{p}{X}
+\]
+to be the largest normal \(p\)-subgroup of \(X\). Equivalently,
+\[
+    \Op{p}{X}
+\]
+is the product of all normal \(p\)-subgroups of \(X\). It has the following
+properties:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item \(\Op{p}{X}\trianglelefteq X\);
+    \item \(\Op{p}{X}\) is a \(p\)-group;
+    \item \(X/\Op{p}{X}\) has no nontrivial normal \(p\)-subgroups.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The product of normal \(p\)-subgroups is again a normal \(p\)-subgroup, so the
+product of all normal \(p\)-subgroups of \(X\) is the unique largest normal
+\(p\)-subgroup of \(X\). This proves (1) and (2).
+
+For (3), suppose that \(X/\Op{p}{X}\) has a nontrivial normal \(p\)-subgroup
+\(N/\Op{p}{X}\). Then \(N\trianglelefteq X\), and \(N\) is a normal
+\(p\)-subgroup of \(X\), strictly containing \(\Op{p}{X}\). This contradicts
+the maximality of \(\Op{p}{X}\).
+\end{proof}
+
+\begin{lemma}[Minimal normal subgroups of solvable groups]
+Let \(X\) be a finite solvable group. If \(1\neq N\trianglelefteq X\) is a
+minimal normal subgroup of \(X\), then
+\[
+    N\cong (C_p)^d
+\]
+for some prime \(p\) and some integer \(d\geq 1\). In particular, \(N\) is an
+elementary abelian \(p\)-group.
+\end{lemma}
+
+\begin{proof}
+Since \(X\) is solvable, every subgroup and quotient involved in the derived
+series is solvable. In particular, \(N\) is solvable. Since \(N\) is nontrivial
+and normal in \(X\), the commutator subgroup \(N'\) is characteristic in \(N\)
+and hence normal in \(X\). By minimality of \(N\), either
+\[
+    N'=1
+    \qquad\text{or}\qquad
+    N'=N.
+\]
+The second possibility is impossible because \(N\) is solvable. Therefore
+\(N'=1\), so \(N\) is abelian.
+
+Let \(p\) be a prime divisor of \(|N|\). The subgroup
+\[
+    N[p]=\{x\in N:x^p=1\}
+\]
+is nontrivial and characteristic in the abelian group \(N\), hence normal in
+\(X\). By minimality, \(N[p]=N\). Therefore every nonidentity element of \(N\)
+has order \(p\), and hence
+\[
+    N\cong (C_p)^d
+\]
+for some \(d\geq 1\).
+\end{proof}
+
+\begin{lemma}[Hall subgroups pass to normal subgroups and quotients]
+Let \(N\trianglelefteq G\), and let \(H\) be a Hall \(\pi\)-subgroup of \(G\).
+Then:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item \(H\cap N\) is a Hall \(\pi\)-subgroup of \(N\), after replacing
+    \(\pi\) by \(\pi\cap \pi(N)\);
+    \item \(HN/N\cong H/(H\cap N)\) is a Hall \(\pi\)-subgroup of \(G/N\),
+    after replacing \(\pi\) by \(\pi\cap \pi(G/N)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Since \(H\) is a \(\pi\)-group, \(H\cap N\) is also a \(\pi\)-group. Moreover,
+\[
+    [N:H\cap N]\mid [G:H],
+\]
+and \([G:H]\) is a \(\pi'\)-number. Hence \([N:H\cap N]\) is a \(\pi'\)-number,
+so \(H\cap N\) is a Hall subgroup of \(N\) for the relevant set of primes.
+
+Similarly,
+\[
+    HN/N\cong H/(H\cap N)
+\]
+is a \(\pi\)-group, and
+\[
+    [G/N:HN/N]=[G:HN]\mid [G:H],
+\]
+so this index is a \(\pi'\)-number. Therefore \(HN/N\) is a Hall subgroup of
+\(G/N\).
+\end{proof}
+
+\begin{lemma}[A complement step]
+Let \(G\) be a finite solvable group, and let
+\[
+    M\trianglelefteq G
+\]
+be a minimal normal subgroup. Suppose
+\[
+    M\cong (C_p)^d
+\]
+and
+\[
+    p\nmid |G/M|.
+\]
+Then \(M\) has a complement in \(G\). That is, there exists a subgroup
+\(L\leq G\) such that
+\[
+    G=ML
+    \qquad\text{and}\qquad
+    M\cap L=1.
+\]
+Equivalently,
+\[
+    L\cong G/M.
+\]
+\end{lemma}
+
+\begin{proof}
+We argue by induction on \(|G|\). The statement is clear if \(G=M\).
+
+Put
+\[
+    \overline{G}=G/M.
+\]
+Since \(\overline{G}\) is nontrivial and solvable, there exists a prime
+\(q\in \pi(\overline{G})\) such that
+\[
+    \Op{q}{\overline{G}}\neq 1.
+\]
+Let
+\[
+    \overline{Q}=\Op{q}{\overline{G}},
+\]
+and let \(Y\) be the full preimage of \(\overline{Q}\) under the quotient map
+\(G\to \overline{G}\). Then
+\[
+    M\trianglelefteq Y\trianglelefteq G,
+    \qquad
+    Y/M=\overline{Q}.
+\]
+Choose \(Q\in \Syl_q(Y)\). Since \(M\) is a \(p\)-group and \(p\neq q\), we have
+\[
+    Y=MQ
+    \qquad\text{and}\qquad
+    M\cap Q=1.
+\]
+
+We split into two cases.
+
+\medskip
+
+\noindent
+\textbf{Case 1: \(\CG{M}{Q}\neq 1\).}
+
+Since \(M\) is abelian,
+\[
+    \CG{M}{Q}=Z(Y)\cap M.
+\]
+Thus \(\CG{M}{Q}\) is the Sylow \(p\)-subgroup of \(Z(Y)\). Hence it is
+characteristic in \(Z(Y)\), and \(Z(Y)\) is characteristic in \(Y\). Since
+\(Y\trianglelefteq G\), it follows that
+\[
+    \CG{M}{Q}\trianglelefteq G.
+\]
+By minimality of \(M\),
+\[
+    \CG{M}{Q}=M.
+\]
+Hence \(Q\) centralizes all of \(M\), so
+\[
+    Y=M\times Q.
+\]
+In particular, \(Q\) is characteristic in \(Y\), and therefore
+\[
+    Q\trianglelefteq G.
+\]
+Now apply induction to \(G/Q\). The image \(MQ/Q\) is a minimal normal
+\(p\)-subgroup of \(G/Q\), and
+\[
+    (G/Q)/(MQ/Q)\cong G/MQ
+\]
+has order not divisible by \(p\). Hence \(MQ/Q\) has a complement in \(G/Q\).
+Taking the full preimage of this complement gives a complement to \(M\) in \(G\).
+
+\medskip
+
+\noindent
+\textbf{Case 2: \(\CG{M}{Q}=1\).}
+
+We first observe that
+\[
+    \NG{M}{Q}=\CG{M}{Q}=1.
+\]
+Indeed, if \(x\in M\) normalizes \(Q\), then for every \(q\in Q\),
+\[
+    xqx^{-1}q^{-1}\in M\cap Q=1,
+\]
+so \(x\) centralizes \(Q\).
+
+Since \(Y\trianglelefteq G\) and \(Q\in \Syl_q(Y)\), the Frattini argument gives
+\[
+    G=Y\NG{G}{Q}.
+\]
+Because \(Y=MQ\) and \(Q\leq \NG{G}{Q}\), this becomes
+\[
+    G=M\NG{G}{Q}.
+\]
+Moreover,
+\[
+    M\cap \NG{G}{Q}=\NG{M}{Q}=1.
+\]
+Therefore \(\NG{G}{Q}\) is a complement to \(M\) in \(G\).
+\end{proof}
+
+\begin{theorem}[Hall's theorem: existence criterion]
+Let \(G\) be a finite group, and write
+\[
+    |G|=p_1^{a_1}p_2^{a_2}\cdots p_t^{a_t},
+\]
+where \(p_1,\ldots,p_t\) are distinct primes. Then \(G\) is solvable if and only if
+\(G\) has a Hall \(\pi\)-subgroup for every subset
+\[
+    \pi\subseteq \pi(G).
+\]
+\end{theorem}
+
+\begin{proof}
+We prove both directions.
+
+\medskip
+
+\noindent
+\textbf{First direction: assume \(G\) has Hall \(\pi\)-subgroups for every
+\(\pi\subseteq \pi(G)\). We prove that \(G\) is solvable.}
+
+We use induction on \(|G|\). If \(|\pi(G)|=1\), then \(G\) is a \(p\)-group, hence
+solvable. If \(|\pi(G)|=2\), then
+\[
+    |G|=p^a q^b
+\]
+for two primes \(p,q\), so \(G\) is solvable by Burnside's \(p^a q^b\)-theorem.
+
+Now assume \(|\pi(G)|=t\geq 3\). For \(1\leq i\leq t\), let
+\[
+    H_i
+\]
+be a Hall \(p_i'\)-subgroup of \(G\), where
+\[
+    p_i'=\pi(G)\setminus \{p_i\}.
+\]
+
+We first note that each \(H_i\) is solvable. Indeed, \(H_i\) inherits Hall
+subgroups as follows. If \(\sigma\subseteq \pi(H_i)\), take a Hall
+\(\sigma\cup\{p_i\}\)-subgroup \(L\) of \(G\). Since
+\[
+    [G:H_i]
+\]
+is a power of \(p_i\), while
+\[
+    [G:L]
+\]
+is a \((\sigma\cup\{p_i\})'\)-number, these two indices are coprime. Hence
+\[
+    G=H_iL.
+\]
+Therefore
+\[
+    |H_i\cap L|
+    =
+    \frac{|H_i||L|}{|G|},
+\]
+and this is precisely the \(\sigma\)-part of \(|H_i|\). Thus \(H_i\cap L\) is a
+Hall \(\sigma\)-subgroup of \(H_i\). By induction, \(H_i\) is solvable.
+
+In particular, \(H_1\) is solvable. Hence \(H_1\) contains a nontrivial minimal
+normal subgroup, so there exists a prime \(p\in \pi(H_1)\) such that
+\[
+    \Op{p}{H_1}\neq 1.
+\]
+After relabelling the primes if necessary, we may assume
+\[
+    p\in \{p_3,\ldots,p_t\}.
+\]
+Thus \(p\mid |H_2|\). Let \(P\in \Syl_p(H_2)\). Then \(P\) is also a Sylow
+\(p\)-subgroup of \(G\). By Sylow's theorem, there exists \(g\in G\) such that
+\[
+    \Op{p}{H_1}\leq P^g\leq H_2^g.
+\]
+
+Now
+\[
+    |H_1|
+    =
+    p_2^{a_2}p_3^{a_3}\cdots p_t^{a_t},
+\]
+and
+\[
+    |H_2^g|
+    =
+    p_1^{a_1}p_3^{a_3}\cdots p_t^{a_t}.
+\]
+Moreover,
+\[
+    |H_1\cap H_2^g|
+    \leq
+    p_3^{a_3}\cdots p_t^{a_t}.
+\]
+Therefore
+\[
+\begin{aligned}
+    |H_1H_2^g|
+    &=
+    \frac{|H_1||H_2^g|}{|H_1\cap H_2^g|}  \\
+    &\geq
+    \frac{
+        (p_2^{a_2}p_3^{a_3}\cdots p_t^{a_t})
+        (p_1^{a_1}p_3^{a_3}\cdots p_t^{a_t})
+    }{
+        p_3^{a_3}\cdots p_t^{a_t}
+    }  \\
+    &=
+    |G|.
+\end{aligned}
+\]
+Since \(H_1H_2^g\subseteq G\), we must have
+\[
+    G=H_1H_2^g.
+\]
+
+Let
+\[
+    N=\left\langle \Op{p}{H_1}^{\,x}\mid x\in G\right\rangle
+\]
+be the normal closure of \(\Op{p}{H_1}\) in \(G\). Then
+\[
+    1\neq N\trianglelefteq G.
+\]
+We claim that \(N<G\). Since \(G=H_1H_2^g\), every \(x\in G\) may be written as
+\[
+    x=ab,
+    \qquad
+    a\in H_1,\ b\in H_2^g.
+\]
+Because \(\Op{p}{H_1}\trianglelefteq H_1\),
+\[
+    \Op{p}{H_1}^{\,x}
+    =
+    \Op{p}{H_1}^{\,ab}
+    =
+    \Op{p}{H_1}^{\,b}
+    \leq H_2^g.
+\]
+Hence all conjugates of \(\Op{p}{H_1}\) lie inside \(H_2^g\), and therefore
+\[
+    N\leq H_2^g<G.
+\]
+Thus \(N\) is a proper nontrivial normal subgroup of \(G\).
+
+By the previous lemma, normal subgroups and quotient groups inherit the Hall
+existence property from \(G\). Hence both \(N\) and \(G/N\) have Hall
+\(\pi\)-subgroups for every relevant set of primes. By induction, \(N\) and
+\(G/N\) are solvable. Therefore \(G\) is solvable.
+
+\medskip
+
+\noindent
+\textbf{Second direction: assume \(G\) is solvable. We prove that all Hall
+\(\pi\)-subgroups exist.}
+
+Again we use induction on \(|G|\). Let
+\[
+    M\trianglelefteq G
+\]
+be a minimal normal subgroup. Since \(G\) is solvable,
+\[
+    M\cong (C_p)^d
+\]
+for some prime \(p\) and some \(d\geq 1\). Put
+\[
+    \overline{G}=G/M.
+\]
+By induction, \(\overline{G}\) has Hall subgroups for every subset of
+\(\pi(\overline{G})\).
+
+Fix \(\pi\subseteq \pi(G)\).
+
+\medskip
+
+\noindent
+\textbf{Case 1: \(p\in \pi\).}
+
+Let \(\overline{H}\) be a Hall
+\[
+    \pi\cap \pi(\overline{G})
+\]
+subgroup of \(\overline{G}\). Let \(X\) be the full preimage of
+\(\overline{H}\) under the quotient map \(G\to \overline{G}\). Then
+\[
+    M\leq X\leq G
+\]
+and
+\[
+    X/M=\overline{H}.
+\]
+Since \(M\) is a \(p\)-group and \(p\in \pi\), the subgroup \(X\) contains the full
+\(p\)-part of \(G\), and \(\overline{H}\) contains the full \(\pi\)-part of
+\(\overline{G}\). Hence \(X\) is a Hall \(\pi\)-subgroup of \(G\).
+
+\medskip
+
+\noindent
+\textbf{Case 2: \(p\notin \pi\).}
+
+Let \(\overline{H}\) be a Hall \(\pi\)-subgroup of \(\overline{G}\), and let \(X\)
+be its full preimage in \(G\). Then
+\[
+    X/M=\overline{H},
+\]
+and \(M\) is a normal \(p\)-subgroup of \(X\), with \(p\nmid |\overline{H}|\).
+
+If \(X<G\), then \(X\) is solvable and has smaller order than \(G\). By induction,
+\(X\) has a Hall \(\pi\)-subgroup \(H\). Since \(X/M=\overline{H}\) contains the
+full \(\pi\)-part of \(G/M\), this \(H\) is also a Hall \(\pi\)-subgroup of \(G\).
+
+If \(X=G\), then
+\[
+    G/M=\overline{H}
+\]
+is a \(\pi\)-group and \(p\nmid |G/M|\). By the complement step, \(M\) has a
+complement \(H\) in \(G\). Thus
+\[
+    G=MH,
+    \qquad
+    M\cap H=1,
+    \qquad
+    H\cong G/M.
+\]
+Since \(G/M\) is a \(\pi\)-group and \(M\) is a \(p\)-group with \(p\notin \pi\),
+this complement \(H\) is a Hall \(\pi\)-subgroup of \(G\).
+
+Thus, in every case, \(G\) has a Hall \(\pi\)-subgroup.
+\end{proof}
+
+\section{Conjugacy of Hall Subgroups in Solvable Groups}
+
+\begin{proposition}[Conjugacy of Hall subgroups]
+Let \(G\) be a finite solvable group, and let \(\pi\subseteq \pi(G)\). Then all
+Hall \(\pi\)-subgroups of \(G\) are conjugate in \(G\).
+\end{proposition}
+
+\begin{proof}
+We use induction on \(|G|\). Let \(H\) and \(K\) be Hall \(\pi\)-subgroups of
+\(G\).
+
+Since \(G\) is solvable, there exists a maximal normal subgroup
+\[
+    M\trianglelefteq G
+\]
+such that
+\[
+    |G/M|=p
+\]
+for some prime \(p\). Equivalently,
+\[
+    G/M\cong C_p.
+\]
+
+\medskip
+
+\noindent
+\textbf{Case 1: \(p\notin \pi\).}
+
+Then \(H\leq M\) and \(K\leq M\). Indeed, if \(H\not\leq M\), then
+\[
+    HM=G,
+\]
+so
+\[
+    H/(H\cap M)\cong G/M,
+\]
+and hence \(p\mid |H|\), contradicting \(p\notin \pi\).
+
+Thus \(H\) and \(K\) are Hall \(\pi\)-subgroups of the solvable group \(M\).
+By induction, they are conjugate in \(M\), hence also conjugate in \(G\).
+
+\medskip
+
+\noindent
+\textbf{Case 2: \(p\in \pi\).}
+
+Then
+\[
+    HM=G
+    \qquad\text{and}\qquad
+    KM=G.
+\]
+Moreover,
+\[
+    H\cap M
+    \qquad\text{and}\qquad
+    K\cap M
+\]
+are Hall \(\pi\)-subgroups of \(M\). By induction, there exists \(x\in M\) such
+that
+\[
+    (H\cap M)^x=K\cap M.
+\]
+Replacing \(H\) by \(H^x\), we may assume
+\[
+    H\cap M=K\cap M.
+\]
+Set
+\[
+    L=H\cap M=K\cap M.
+\]
+Then \(L\trianglelefteq H\) and \(L\trianglelefteq K\), because \(M\trianglelefteq G\).
+Hence
+\[
+    H,K\leq \NG{G}{L}.
+\]
+
+If
+\[
+    \NG{G}{L}<G,
+\]
+then \(H\) and \(K\) are Hall \(\pi\)-subgroups of the solvable group
+\(\NG{G}{L}\). By induction, \(H\) and \(K\) are conjugate in \(\NG{G}{L}\), hence
+in \(G\).
+
+It remains to consider the case
+\[
+    \NG{G}{L}=G.
+\]
+Then \(L\trianglelefteq G\). Passing to the quotient \(G/L\), we have
+\[
+    H/L\cong G/M\cong C_p
+    \qquad\text{and}\qquad
+    K/L\cong G/M\cong C_p.
+\]
+Thus \(H/L\) and \(K/L\) are Sylow \(p\)-subgroups of \(G/L\). By Sylow's
+conjugacy theorem, there exists \(g\in G\) such that
+\[
+    (H/L)^g=K/L.
+\]
+Since \(L\leq H,K\), this gives
+\[
+    H^g=K.
+\]
+Therefore \(H\) and \(K\) are conjugate in \(G\).
+\end{proof}
+
+\begin{remark}
+For finite solvable groups, Hall subgroups behave like Sylow subgroups in two
+essential ways:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item Hall \(\pi\)-subgroups exist for every \(\pi\subseteq \pi(G)\);
+    \item any two Hall \(\pi\)-subgroups are conjugate.
+\end{enumerate}
+Both statements can fail for nonsolvable groups.
+\end{remark}

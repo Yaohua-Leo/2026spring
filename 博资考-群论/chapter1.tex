@@ -1,0 +1,754 @@
+\chapter{Cyclic Groups and Their Automorphism Groups}
+
+\section{Basic Facts about Cyclic Groups}
+
+\begin{definition}[Cyclic group]
+Let $G$ be a group. We say that $G$ is \textbf{cyclic} if there exists an element
+$g\in G$ such that
+\[
+    G=\gen{g}=\{g^k:k\in\Z\}.
+\]
+If $G$ has order $n$, then it is usually denoted by $C_n$.
+
+A finite cyclic group is often written additively:
+\[
+    C_n\cong \Z/n\Z=\{\overline{0},\overline{1},\ldots,\overline{n-1}\}.
+\]
+Since cyclic groups are abelian, both multiplicative and additive notation are commonly used.
+\end{definition}
+
+\begin{proposition}[Basic properties of cyclic groups]
+Let $G$ be a cyclic group.
+\begin{enumerate}[label=(\arabic*)]
+    \item A finite cyclic group is uniquely determined up to isomorphism by its order.
+    \item Every subgroup of a cyclic group is cyclic.
+    \item Every quotient group of a cyclic group is cyclic.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose $G=\gen{g}$ and $|G|=n$. Then the map
+\[
+    \gen{g}\longrightarrow \Z/n\Z,\qquad g^i\longmapsto \overline{i}
+\]
+is an isomorphism. Hence every cyclic group of order $n$ is isomorphic to $\Z/n\Z$.
+
+Now let $H\leq \gen{g}$. If $H=\{1\}$, then $H$ is cyclic. Otherwise, choose the smallest positive integer $d$ such that $g^d\in H$. We claim that
+\[
+    H=\gen{g^d}.
+\]
+Indeed, if $g^m\in H$, write $m=qd+r$ with $0\leq r<d$. Then
+\[
+    g^r=g^m(g^d)^{-q}\in H.
+\]
+By the minimality of $d$, we must have $r=0$. Hence $g^m\in\gen{g^d}$, and so $H=\gen{g^d}$.
+
+Finally, if $N\lhd G=\gen{g}$, then
+\[
+    G/N=\gen{gN},
+\]
+so $G/N$ is cyclic.
+\end{proof}
+
+\section{Automorphisms of Finite Cyclic Groups}
+
+\begin{definition}[The unit group modulo $n$]
+The group of units modulo $n$ is
+\[
+    \Unit(n)=(\Z/n\Z)^\times
+    =\{\overline{a}\in \Z/n\Z:\gcd(a,n)=1\}.
+\]
+Its group operation is multiplication modulo $n$, and
+\[
+    |\Unit(n)|=\varphi(n),
+\]
+where $\varphi$ is Euler's phi function.
+\end{definition}
+
+\begin{theorem}[Automorphisms of a finite cyclic group]\label{thm:aut-cyclic}
+Let $C_n=\gen{g}$. Then
+\[
+    \Aut(C_n)\cong (\Z/n\Z)^\times=\Unit(n).
+\]
+In particular,
+\[
+    |\Aut(C_n)|=\varphi(n).
+\]
+\end{theorem}
+
+\begin{proof}
+Every automorphism of $C_n$ is completely determined by the image of the generator $g$.
+
+Let $\sigma\in\Aut(C_n)$. Since $C_n=\gen{g}$, there exists an integer $i$ such that
+\[
+    \sigma(g)=g^i.
+\]
+Because automorphisms preserve orders, $\sigma(g)=g^i$ must also have order $n$. This happens exactly when
+\[
+    \gcd(i,n)=1.
+\]
+Thus each automorphism determines a unit $\overline{i}\in(\Z/n\Z)^\times$.
+
+Conversely, if $\gcd(a,n)=1$, then $g^a$ is also a generator of $C_n$. Hence the assignment
+\[
+    g\longmapsto g^a
+\]
+extends uniquely to an automorphism of $C_n$. Denote this automorphism by $\sigma_a$.
+
+Now define
+\[
+    \Psi:\Aut(C_n)\longrightarrow (\Z/n\Z)^\times,
+    \qquad
+    \sigma_a\longmapsto \overline{a}.
+\]
+This map is bijective by the previous discussion. Moreover,
+\[
+    (\sigma_a\circ\sigma_b)(g)
+    =\sigma_a(g^b)
+    =(g^a)^b
+    =g^{ab},
+\]
+so
+\[
+    \sigma_a\circ\sigma_b=\sigma_{ab}.
+\]
+Therefore $\Psi$ is a group isomorphism.
+\end{proof}
+
+\begin{remark}
+Theorem \ref{thm:aut-cyclic} reduces the computation of $\Aut(C_n)$ to the computation of the unit group $\Unit(n)$.
+\end{remark}
+
+\section{Odd Prime Powers}
+
+\subsection{The prime case}
+
+\begin{remark}[Finite fields]
+Let $\F_{p^e}$ be the finite field with $p^e$ elements. Then
+\[
+    \F_{p^e}^{+}\cong \underbrace{C_p\oplus\cdots\oplus C_p}_{e\text{ copies}},
+\]
+and
+\[
+    \F_{p^e}^{\times}\cong C_{p^e-1}.
+\]
+In particular,
+\[
+    \F_p^\times\cong C_{p-1}.
+\]
+\end{remark}
+
+\begin{remark}
+        Let \(p\) be a prime and let \(e\geq 1\). Then
+        \[
+            \F_{p^e}^{\times}\cong C_{p^e-1}.
+        \]
+    \end{remark}
+        
+        \begin{proof}
+        Put \(q=p^e\) and \(F=\F_q\). Let
+        \[
+            G=F^\times.
+        \]
+        Then \(G\) is a finite abelian group under multiplication, and
+        \[
+            |G|=q-1=p^e-1.
+        \]
+        
+        Let \(m\) be the exponent of \(G\), namely
+        \[
+            m=\operatorname{lcm}\{\operatorname{ord}(a):a\in G\}.
+        \]
+        By Lagrange's theorem, \(\operatorname{ord}(a)\mid |G|=q-1\) for every \(a\in G\). Hence
+        \[
+            m\mid q-1.
+        \]
+        In particular,
+        \[
+            m\leq q-1.
+        \]
+        
+        We first show that there exists an element of \(G\) whose order is exactly \(m\).
+        Write
+        \[
+            m=\prod_{\ell\mid m}\ell^{a_\ell}
+        \]
+        as a product of prime powers. For each prime \(\ell\mid m\), by the definition of \(m\), there exists \(g_\ell\in G\) such that the \(\ell\)-part of \(\operatorname{ord}(g_\ell)\) is \(\ell^{a_\ell}\). Define
+        \[
+            h_\ell
+            =
+            g_\ell^{\operatorname{ord}(g_\ell)/\ell^{a_\ell}}.
+        \]
+        Then
+        \[
+            \operatorname{ord}(h_\ell)=\ell^{a_\ell}.
+        \]
+        Since \(G\) is abelian, the elements \(h_\ell\) commute. Therefore the product
+        \[
+            g=\prod_{\ell\mid m}h_\ell
+        \]
+        has order
+        \[
+            \operatorname{ord}(g)
+            =
+            \prod_{\ell\mid m}\ell^{a_\ell}
+            =
+            m,
+        \]
+        because the orders of the \(h_\ell\)'s are pairwise coprime.
+        
+        Now, by the definition of \(m\), every element \(a\in G\) satisfies
+        \[
+            a^m=1.
+        \]
+        Thus every element of \(G=F^\times\) is a root of the polynomial
+        \[
+            X^m-1\in F[X].
+        \]
+        But a nonzero polynomial of degree \(m\) over a field has at most \(m\) roots. Hence
+        \[
+            q-1=|F^\times|\leq m.
+        \]
+        Together with \(m\leq q-1\), we get
+        \[
+            m=q-1.
+        \]
+        
+        Therefore \(G\) contains an element \(g\) of order \(q-1=|G|\). Hence
+        \[
+            G=\langle g\rangle
+        \]
+        is cyclic. Consequently,
+        \[
+            \F_{p^e}^{\times}
+            =
+            F^\times
+            \cong C_{q-1}
+            =
+            C_{p^e-1}.
+        \]
+        \end{proof}
+
+
+\begin{corollary}
+If $p$ is prime, then
+\[
+    \Aut(C_p)\cong \Unit(p)\cong \F_p^\times\cong C_{p-1}.
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem \ref{thm:aut-cyclic},
+\[
+    \Aut(C_p)\cong(\Z/p\Z)^\times.
+\]
+But $(\Z/p\Z)^\times=\F_p^\times$, and the multiplicative group of a finite field is cyclic. Hence
+\[
+    \Aut(C_p)\cong C_{p-1}.
+\]
+\end{proof}
+
+\subsection{Odd prime powers}
+
+\begin{theorem}[Units modulo odd prime powers]\label{thm:odd-prime-power}
+Let $p$ be an odd prime and let $e\geq 2$. Then
+\[
+    \Unit(p^e)\cong C_{p^{e-1}(p-1)}.
+\]
+Equivalently,
+\[
+    \Aut(C_{p^e})\cong C_{p^{e-1}(p-1)}.
+\]
+\end{theorem}
+
+\begin{proof}
+We show that $\Unit(p^e)$ contains an element of order
+\[
+    \varphi(p^e)=p^{e-1}(p-1).
+\]
+
+First choose an integer $\lambda$ whose image modulo $p$ is a primitive root in $\F_p^\times$. Thus $\lambda$ has order $p-1$ modulo $p$.
+
+Consider $\lambda$ modulo $p^2$. Since its image modulo $p$ has order $p-1$, its order modulo $p^2$ is either $p-1$ or $p(p-1)$.
+
+If
+\[
+    \lambda^{p-1}\not\equiv 1\pmod{p^2},
+\]
+then $\lambda$ has order $p(p-1)$ modulo $p^2$.
+
+If instead
+\[
+    \lambda^{p-1}\equiv 1\pmod{p^2},
+\]
+then consider $\lambda+p$. By the binomial theorem,
+\[
+    (\lambda+p)^{p-1}
+    \equiv
+    \lambda^{p-1}+p(p-1)\lambda^{p-2}
+    \pmod{p^2}.
+\]
+Using $\lambda^{p-1}\equiv1\pmod{p^2}$, we get
+\[
+    (\lambda+p)^{p-1}
+    \equiv
+    1+p(p-1)\lambda^{p-2}
+    \not\equiv 1\pmod{p^2},
+\]
+because $p\nmid \lambda$. Hence $\lambda+p$ has order $p(p-1)$ modulo $p^2$.
+
+Therefore there exists an integer $r$ that is a primitive root modulo $p^2$.
+
+Now we show that the same $r$ is a primitive root modulo $p^e$ for every $e\geq2$.
+
+Since $r$ has order $p(p-1)$ modulo $p^2$, we have
+\[
+    r^{p-1}\equiv 1+cp\pmod{p^2}
+\]
+for some integer $c$ with $p\nmid c$.
+
+We claim that for every $k\geq2$,
+\[
+    r^{p^{k-2}(p-1)}
+    \equiv 1+c_kp^{k-1}\pmod{p^k},
+    \qquad p\nmid c_k.
+\]
+The case $k=2$ is exactly the congruence above.
+
+Assume the congruence holds for some $k\geq2$. Then
+\[
+    r^{p^{k-1}(p-1)}
+    =
+    \left(r^{p^{k-2}(p-1)}\right)^p
+    \equiv
+    (1+c_kp^{k-1})^p
+    \pmod{p^{k+1}}.
+\]
+By the binomial theorem,
+\[
+    (1+c_kp^{k-1})^p
+    \equiv
+    1+c_kp^k
+    \pmod{p^{k+1}},
+\]
+because the higher-order terms are divisible by $p^{k+1}$. Since $p\nmid c_k$, the induction continues.
+
+Thus, modulo $p^e$,
+\[
+    r^{p^{e-2}(p-1)}\not\equiv 1\pmod{p^e},
+\]
+while Euler's theorem gives
+\[
+    r^{p^{e-1}(p-1)}\equiv1\pmod{p^e}.
+\]
+Therefore
+\[
+    \ord_{p^e}(r)=p^{e-1}(p-1).
+\]
+Hence $\Unit(p^e)$ is cyclic of order $p^{e-1}(p-1)$.
+\end{proof}
+
+\begin{proposition}[Alternative proof using Sylow subgroups]\label{prop:odd-prime-power-sylow}
+Let $p$ be an odd prime and let $d\geq1$. Then $\Unit(p^d)$ is cyclic.
+\end{proposition}
+
+\begin{proof}
+We use the structure theorem for finite abelian groups.
+
+First, the Sylow $p$-subgroup of $\Unit(p^d)$ is cyclic. Indeed, one checks that $1+p$ has order $p^{d-1}$ modulo $p^d$. More precisely,
+\[
+    (1+p)^{p^{d-1}}\equiv1\pmod{p^d},
+\]
+but
+\[
+    (1+p)^{p^{d-2}}\not\equiv1\pmod{p^d}
+\]
+when $d\geq2$. Hence the Sylow $p$-subgroup is cyclic.
+
+Now let $q\neq p$ be a prime. Consider the natural reduction map
+\[
+    \Z/p^d\Z\longrightarrow \Z/p\Z,
+    \qquad
+    a+(p^d)\longmapsto a+(p).
+\]
+It induces a surjective group homomorphism
+\[
+    \Unit(p^d)\longrightarrow \Unit(p).
+\]
+The kernel has order $p^{d-1}$. Therefore, for $q\neq p$, every Sylow $q$-subgroup of $\Unit(p^d)$ injects into $\Unit(p)$.
+
+But
+\[
+    \Unit(p)\cong C_{p-1}
+\]
+is cyclic. Hence every Sylow $q$-subgroup of $\Unit(p^d)$ is cyclic.
+
+Thus all Sylow subgroups of the finite abelian group $\Unit(p^d)$ are cyclic. Since a finite abelian group is the direct product of its Sylow subgroups, and cyclic groups of pairwise coprime orders have cyclic direct product, $\Unit(p^d)$ is cyclic.
+\end{proof}
+
+\section{Powers of Two}
+
+\begin{theorem}[Units modulo powers of two]\label{thm:two-power}
+For powers of $2$, the unit groups are:
+\[
+    \Unit(2)=\{1\},
+    \qquad
+    \Unit(4)\cong C_2,
+\]
+and for $e\geq3$,
+\[
+    \Unit(2^e)\cong C_{2^{e-2}}\times C_2.
+\]
+Consequently,
+\[
+    \Aut(C_{2^e})\cong C_{2^{e-2}}\times C_2
+    \qquad(e\geq3).
+\]
+\end{theorem}
+
+\begin{proof}
+The cases $e=1$ and $e=2$ are immediate:
+\[
+    \Unit(2)=\{1\},
+    \qquad
+    \Unit(4)=\{\overline{1},\overline{3}\}\cong C_2.
+\]
+
+Now assume $e\geq3$.
+
+We first prove that $5$ has order $2^{e-2}$ in $\Unit(2^e)$. Since $5=1+4$, we claim that for every $m\geq0$,
+\[
+    5^{2^m}\equiv 1+2^{m+2}\pmod{2^{m+3}}.
+\]
+For $m=0$, this says
+\[
+    5\equiv1+4\pmod8,
+\]
+which is true. If the congruence holds for $m$, then
+\[
+    5^{2^{m+1}}
+    =
+    \left(5^{2^m}\right)^2
+    \equiv
+    (1+2^{m+2})^2
+    \pmod{2^{m+4}}.
+\]
+Expanding gives
+\[
+    (1+2^{m+2})^2
+    =
+    1+2^{m+3}+2^{2m+4}
+    \equiv
+    1+2^{m+3}
+    \pmod{2^{m+4}}.
+\]
+So the claim follows by induction.
+
+Taking $m=e-2$ gives
+\[
+    5^{2^{e-2}}\equiv1\pmod{2^e},
+\]
+while taking $m=e-3$ gives
+\[
+    5^{2^{e-3}}\equiv1+2^{e-1}\not\equiv1\pmod{2^e}.
+\]
+Therefore
+\[
+    \ord_{2^e}(5)=2^{e-2}.
+\]
+
+Now define
+\[
+    K=\{\overline{a}\in\Unit(2^e):a\equiv1\pmod4\}.
+\]
+Exactly half of the odd residues modulo $2^e$ are congruent to $1$ modulo $4$, so
+\[
+    |K|=2^{e-2}.
+\]
+Since $5\equiv1\pmod4$, all powers of $5$ lie in $K$. But $\gen{5}$ has order $2^{e-2}$, so
+\[
+    K=\gen{5}.
+\]
+
+Every odd residue is congruent either to $1$ or to $3$ modulo $4$. Thus every unit modulo $2^e$ lies either in $K$ or in $-K$. Hence
+\[
+    \Unit(2^e)=K\gen{-1}.
+\]
+Also,
+\[
+    K\cap\gen{-1}=\{1\},
+\]
+because $-1\equiv3\pmod4$ and hence $-1\notin K$. Therefore
+\[
+    \Unit(2^e)=\gen{5}\times\gen{-1}
+    \cong C_{2^{e-2}}\times C_2.
+\]
+\end{proof}
+
+\begin{remark}[Three involutions in $\Aut(C_{2^e})$]
+For $e\geq3$, the group
+\[
+    \Aut(C_{2^e})\cong \Unit(2^e)
+\]
+has exactly three elements of order $2$. If $C_{2^e}=\gen{g}$, these correspond to the following three units modulo $2^e$:
+\[
+    -1,\qquad
+    1+2^{e-1},\qquad
+    2^{e-1}-1.
+\]
+Thus the three automorphisms of order $2$ are
+\[
+    g\longmapsto g^{-1},
+    \qquad
+    g\longmapsto g^{1+2^{e-1}},
+    \qquad
+    g\longmapsto g^{2^{e-1}-1}.
+\]
+\end{remark}
+
+\section{Chinese Remainder Theorem}
+
+\subsection{Ring version}
+
+\begin{theorem}[Chinese Remainder Theorem]\label{thm:crt-ring}
+Let $R$ be a commutative ring with identity, and let
+\[
+    A_1,A_2,\ldots,A_k
+\]
+be ideals of $R$. Define
+\[
+    \Phi:R\longrightarrow R/A_1\times R/A_2\times\cdots\times R/A_k
+\]
+by
+\[
+    \Phi(r)=(r+A_1,r+A_2,\ldots,r+A_k).
+\]
+Then $\Phi$ is a ring homomorphism and
+\[
+    \Ker\Phi=A_1\cap A_2\cap\cdots\cap A_k.
+\]
+
+If the ideals are pairwise comaximal, meaning
+\[
+    A_i+A_j=R
+    \qquad(i\neq j),
+\]
+then $\Phi$ is surjective and
+\[
+    A_1\cap A_2\cap\cdots\cap A_k=A_1A_2\cdots A_k.
+\]
+Consequently,
+\[
+    R/(A_1A_2\cdots A_k)
+    \cong
+    \prod_{i=1}^k R/A_i.
+\]
+\end{theorem}
+
+\begin{proof}
+It is clear that $\Phi$ is a ring homomorphism. Also,
+\[
+    r\in\Ker\Phi
+    \iff
+    r\in A_i\text{ for every }i
+    \iff
+    r\in A_1\cap\cdots\cap A_k.
+\]
+
+Now assume that the ideals are pairwise comaximal.
+
+We first prove surjectivity. Fix $i$. Since $A_i$ is comaximal with every $A_j$ for $j\neq i$, repeated use of the identity
+\[
+    (I+J=R,\ I+K=R)\Longrightarrow I+JK=R
+\]
+shows that
+\[
+    A_i+\prod_{j\neq i}A_j=R.
+\]
+Thus we may choose
+\[
+    u_i\in A_i,
+    \qquad
+    e_i\in\prod_{j\neq i}A_j
+\]
+such that
+\[
+    u_i+e_i=1.
+\]
+Then
+\[
+    e_i\equiv1\pmod{A_i},
+    \qquad
+    e_i\equiv0\pmod{A_j}\quad(j\neq i).
+\]
+
+Given an arbitrary element
+\[
+    (r_1+A_1,\ldots,r_k+A_k)
+    \in
+    \prod_{i=1}^k R/A_i,
+\]
+set
+\[
+    r=r_1e_1+r_2e_2+\cdots+r_ke_k.
+\]
+Then
+\[
+    \Phi(r)=(r_1+A_1,\ldots,r_k+A_k),
+\]
+so $\Phi$ is surjective.
+
+It remains to prove
+\[
+    A_1\cap\cdots\cap A_k=A_1\cdots A_k.
+\]
+The inclusion
+\[
+    A_1A_2\cdots A_k\subseteq A_1\cap\cdots\cap A_k
+\]
+is immediate.
+
+For the reverse inclusion, it suffices by induction to prove the case of two comaximal ideals. Suppose $A+B=R$. Choose $a\in A$ and $b\in B$ such that
+\[
+    a+b=1.
+\]
+If $x\in A\cap B$, then
+\[
+    x=x(a+b)=xa+xb.
+\]
+Since $x\in B$ and $a\in A$, we have $xa\in AB$. Since $x\in A$ and $b\in B$, we have $xb\in AB$. Therefore $x\in AB$, so
+\[
+    A\cap B=AB.
+\]
+The general case follows by induction.
+\end{proof}
+
+\subsection{Integer version}
+
+\begin{corollary}[Chinese Remainder Theorem for integers]\label{cor:crt-int}
+If $m_1,m_2,\ldots,m_k$ are pairwise coprime positive integers, then
+\[
+    \Z/(m_1m_2\cdots m_k)\Z
+    \cong
+    \Z/m_1\Z\times\Z/m_2\Z\times\cdots\times\Z/m_k\Z.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem \ref{thm:crt-ring} to $R=\Z$ and
+\[
+    A_i=m_i\Z.
+\]
+Pairwise coprimality of the $m_i$ is exactly the condition
+\[
+    m_i\Z+m_j\Z=\Z
+    \qquad(i\neq j).
+\]
+\end{proof}
+
+\begin{corollary}[Unit group version]\label{cor:crt-units}
+If $\gcd(m,n)=1$, then
+\[
+    (\Z/mn\Z)^\times
+    \cong
+    (\Z/m\Z)^\times\times(\Z/n\Z)^\times.
+\]
+More generally, if $m_1,\ldots,m_k$ are pairwise coprime, then
+\[
+    \Unit(m_1m_2\cdots m_k)
+    \cong
+    \prod_{i=1}^k \Unit(m_i).
+\]
+\end{corollary}
+
+\begin{proof}
+The Chinese Remainder Theorem gives a ring isomorphism
+\[
+    \Z/(m_1m_2\cdots m_k)\Z
+    \cong
+    \prod_{i=1}^k \Z/m_i\Z.
+\]
+A ring isomorphism sends units to units and induces an isomorphism between the corresponding unit groups. Therefore
+\[
+    \Unit(m_1m_2\cdots m_k)
+    \cong
+    \prod_{i=1}^k \Unit(m_i).
+\]
+\end{proof}
+
+\section{The General Case}
+
+\begin{theorem}[General structure of $\Aut(C_n)$]\label{thm:general-aut-cn}
+Let
+\[
+    n=p_1^{e_1}p_2^{e_2}\cdots p_t^{e_t}
+\]
+be the prime factorization of $n$. Then
+\[
+    \Aut(C_n)
+    \cong
+    \Unit(n)
+    \cong
+    \Unit(p_1^{e_1})\times\Unit(p_2^{e_2})\times\cdots\times\Unit(p_t^{e_t}).
+\]
+Moreover,
+\[
+    \Unit(p^e)\cong
+    \begin{cases}
+        C_{p^{e-1}(p-1)}, & p\text{ odd},\\[4pt]
+        \{1\}, & p=2,\ e=1,\\[4pt]
+        C_2, & p=2,\ e=2,\\[4pt]
+        C_{2^{e-2}}\times C_2, & p=2,\ e\geq3.
+    \end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem \ref{thm:aut-cyclic},
+\[
+    \Aut(C_n)\cong\Unit(n).
+\]
+By the Chinese Remainder Theorem for unit groups,
+\[
+    \Unit(n)
+    \cong
+    \prod_{i=1}^t \Unit(p_i^{e_i}).
+\]
+The structure of each odd prime-power factor is given by Theorem \ref{thm:odd-prime-power}, and the structure of each power-of-two factor is given by Theorem \ref{thm:two-power}.
+\end{proof}
+
+\begin{remark}[Summary table]
+\[
+\begin{array}{c|c|c}
+\toprule
+\text{Cyclic group} & \text{Automorphism group} & \text{Order}\\
+\midrule
+C_n
+&
+\Unit(n)
+&
+\varphi(n)
+\\[3pt]
+C_p
+&
+C_{p-1}
+&
+p-1
+\\[3pt]
+C_{p^e},\ p\text{ odd}
+&
+C_{p^{e-1}(p-1)}
+&
+p^{e-1}(p-1)
+\\[3pt]
+C_{2^e},\ e\geq3
+&
+C_{2^{e-2}}\times C_2
+&
+2^{e-1}
+\\
+\bottomrule
+\end{array}
+\]
+\end{remark}
+

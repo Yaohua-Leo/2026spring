@@ -1,0 +1,367 @@
+
+\begin{proposition}
+    Let \(L\) be a finite-dimensional semisimple Lie algebra over an algebraically
+    closed field \(F\) of characteristic \(0\). Let
+    \[
+        L=H\oplus \bigoplus_{\alpha\in\Delta} L_\alpha
+    \]
+    be the root space decomposition relative to a Cartan subalgebra \(H\).
+    For each \(\alpha\in\Delta\), choose root vectors
+    \[
+        0\neq x_\alpha\in L_\alpha,\qquad
+        0\neq y_\alpha\in L_{-\alpha},
+    \]
+    and set
+    \[
+        h_\alpha=[x_\alpha,y_\alpha],
+        \qquad
+        \alpha(h_\alpha)=2.
+    \]
+    Then
+    \[
+        \mathfrak{s}_\alpha
+        :=
+        F x_\alpha\oplus F h_\alpha\oplus F y_\alpha
+        \cong \mathfrak{sl}_2(F).
+    \]
+    Moreover:
+    \begin{enumerate}
+        \item
+              \[
+                  F\alpha\cap\Delta=\{-\alpha,\alpha\},
+                  \qquad
+                  \dim L_\alpha=1.
+              \]
+
+        \item
+              If \(\alpha,\beta\in\Delta\) and \(\beta\neq \pm\alpha\), then
+              \[
+                  \frac{2(\alpha,\beta)}{(\alpha,\alpha)}\in\mathbb{Z}.
+              \]
+              Furthermore, there exist \(p,q\in\mathbb{Z}_{\geq 0}\) such that the
+              roots of the form \(\beta+i\alpha\) are precisely
+              \[
+                  \beta-q\alpha,\,
+                  \beta-(q-1)\alpha,\,
+                  \ldots,\,
+                  \beta-\alpha,\,
+                  \beta,\,
+                  \beta+\alpha,\,
+                  \ldots,\,
+                  \beta+p\alpha,
+              \]
+              and
+              \[
+                  q-p
+                  =
+                  \frac{2(\alpha,\beta)}{(\alpha,\alpha)}.
+              \]
+              In particular, if \(\alpha+\beta\in\Delta\), then
+              \[
+                  [L_\alpha,L_\beta]=L_{\alpha+\beta}.
+              \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We regard \(L\) as an \(\mathfrak{s}_\alpha\)-module via the adjoint
+    representation.
+
+    First consider
+    \[
+        M_\alpha
+        :=
+        \bigoplus_{c\in F} L_{c\alpha},
+    \]
+    where \(L_0=H\), and where \(L_{c\alpha}=0\) if \(c\alpha\notin\Delta\cup\{0\}\).
+    This is an \(\mathfrak{s}_\alpha\)-submodule of \(L\). If
+    \(x\in L_{c\alpha}\), then
+    \[
+        [h_\alpha,x]
+        =
+        c\alpha(h_\alpha)x
+        =
+        2c\,x.
+    \]
+    Hence \(L_{c\alpha}\) is the \(h_\alpha\)-weight space of weight \(2c\).
+    By the finite-dimensional representation theory of \(\mathfrak{sl}_2\), all
+    weights are integers. Therefore, whenever \(L_{c\alpha}\neq 0\), we have
+    \[
+        2c\in\mathbb{Z}.
+    \]
+
+    Now consider the submodule
+    \[
+        M_{\mathrm{even}}
+        :=
+        \bigoplus_{i\in\mathbb{Z}} L_{i\alpha}.
+    \]
+    All its \(h_\alpha\)-weights are even. Since every irreducible
+    \(\mathfrak{sl}_2\)-module with even weights contains weight \(0\), each
+    irreducible submodule \(S\) of \(M_{\mathrm{even}}\) satisfies
+    \[
+        S\cap H\neq 0.
+    \]
+    Choose \(0\neq h\in S\cap H\).
+
+    If \(h\in\operatorname{Ker}\alpha\), then
+    \[
+        [x_\alpha,h]=[y_\alpha,h]=[h_\alpha,h]=0,
+    \]
+    so \(Fh\) is a trivial \(\mathfrak{s}_\alpha\)-submodule. Since \(S\) is
+    irreducible, it follows that
+    \[
+        S=Fh.
+    \]
+
+    If \(h\notin\operatorname{Ker}\alpha\), then
+    \[
+        [x_\alpha,h]
+        =
+        -\alpha(h)x_\alpha\neq 0,
+        \qquad
+        [y_\alpha,h]
+        =
+        \alpha(h)y_\alpha\neq 0.
+    \]
+    Thus
+    \[
+        x_\alpha,y_\alpha\in S.
+    \]
+    Consequently
+    \[
+        h_\alpha=[x_\alpha,y_\alpha]\in S,
+    \]
+    and hence
+    \[
+        \mathfrak{s}_\alpha\subseteq S.
+    \]
+    Since \(\mathfrak{s}_\alpha\) is the irreducible adjoint module for itself,
+    we get
+    \[
+        S=\mathfrak{s}_\alpha.
+    \]
+    Therefore
+    \[
+        M_{\mathrm{even}}
+        =
+        H+\mathfrak{s}_\alpha.
+    \]
+    It follows in particular that
+    \[
+        2\alpha\notin\Delta
+        \qquad\text{and}\qquad
+        \dim L_\alpha=1.
+    \]
+    Applying this to the root \(\frac{1}{2}\alpha\), if it existed, would imply
+    \(\alpha\notin\Delta\), a contradiction. Hence
+    \[
+        \frac{1}{2}\alpha\notin\Delta.
+    \]
+
+    Next consider the submodule
+    \[
+        M_{\mathrm{odd}}
+        :=
+        \bigoplus_{i\in\mathbb{Z}} L_{\left(i+\frac12\right)\alpha}.
+    \]
+    All its \(h_\alpha\)-weights are odd. If this module were nonzero, then some
+    irreducible summand would have odd weights, hence would contain weight \(1\).
+    This would force
+    \[
+        L_{\frac12\alpha}\neq 0,
+    \]
+    contradicting the previous paragraph. Therefore
+    \[
+        M_{\mathrm{odd}}=0.
+    \]
+    Combining this with \(2c\in\mathbb{Z}\), we obtain
+    \[
+        F\alpha\cap\Delta=\{-\alpha,\alpha\},
+        \qquad
+        \dim L_\alpha=1.
+    \]
+
+    Now let \(\alpha,\beta\in\Delta\) with \(\beta\neq \pm\alpha\). Consider
+    \[
+        M_{\alpha,\beta}
+        :=
+        \bigoplus_{i\in\mathbb{Z}} L_{\beta+i\alpha}.
+    \]
+    This is again an \(\mathfrak{s}_\alpha\)-submodule of \(L\). If
+    \(x\in L_{\beta+i\alpha}\), then
+    \[
+        [h_\alpha,x]
+        =
+        (\beta+i\alpha)(h_\alpha)x.
+    \]
+    Using
+    \[
+        \alpha(h_\alpha)=2
+        \qquad\text{and}\qquad
+        \beta(h_\alpha)=\frac{2(\alpha,\beta)}{(\alpha,\alpha)},
+    \]
+    we get
+    \[
+        (\beta+i\alpha)(h_\alpha)
+        =
+        \frac{2(\alpha,\beta)}{(\alpha,\alpha)}+2i.
+    \]
+    Since the weights of a finite-dimensional \(\mathfrak{sl}_2\)-module are
+    integers, it follows that
+    \[
+        \frac{2(\alpha,\beta)}{(\alpha,\alpha)}\in\mathbb{Z}.
+    \]
+
+    Moreover, all these weights have the same parity. By the first part, each
+    nonzero root space \(L_{\beta+i\alpha}\) is one-dimensional. Hence
+    \(M_{\alpha,\beta}\) is irreducible as an \(\mathfrak{s}_\alpha\)-module.
+    Therefore the weights occurring in \(M_{\alpha,\beta}\) form one complete
+    \(\mathfrak{sl}_2\)-string. Thus there exist \(p,q\in\mathbb{Z}_{\geq 0}\)
+    such that the roots of the form \(\beta+i\alpha\) are exactly
+    \[
+        \beta-q\alpha,\,
+        \beta-(q-1)\alpha,\,
+        \ldots,\,
+        \beta-\alpha,\,
+        \beta,\,
+        \beta+\alpha,\,
+        \ldots,\,
+        \beta+p\alpha.
+    \]
+    The highest weight is
+    \[
+        \beta(h_\alpha)+2p,
+    \]
+    and the lowest weight is
+    \[
+        \beta(h_\alpha)-2q.
+    \]
+    Since the weights of an irreducible \(\mathfrak{sl}_2\)-module are symmetric
+    about \(0\), we have
+    \[
+        \beta(h_\alpha)-2q
+        =
+        -\bigl(\beta(h_\alpha)+2p\bigr).
+    \]
+    Hence
+    \[
+        q-p
+        =
+        \beta(h_\alpha)
+        =
+        \frac{2(\alpha,\beta)}{(\alpha,\alpha)}.
+    \]
+
+    Finally, if \(\alpha+\beta\in\Delta\), then \(L_{\alpha+\beta}\neq 0\).
+    In the irreducible \(\mathfrak{s}_\alpha\)-module \(M_{\alpha,\beta}\), the
+    raising operator \(x_\alpha\) maps
+    \[
+        L_\beta
+        \longrightarrow
+        L_{\beta+\alpha}.
+    \]
+    Since \(\beta+\alpha\) is a weight, this map is nonzero. As
+    \(L_{\beta+\alpha}\) is one-dimensional, we obtain
+    \[
+        [L_\alpha,L_\beta]
+        =
+        L_{\alpha+\beta}.
+    \]
+    This proves the proposition.
+\end{proof}
+
+Let \(\Delta\) be a root system in a Euclidean space \(E\). For
+\(\alpha\in\Delta\), define the reflection
+\[
+    s_\alpha:E\longrightarrow E
+\]
+by
+\[
+    s_\alpha(x)
+    =
+    x-\frac{2(x,\alpha)}{(\alpha,\alpha)}\alpha.
+\]
+Then
+\[
+    s_\alpha(\alpha)
+    =
+    \alpha-\frac{2(\alpha,\alpha)}{(\alpha,\alpha)}\alpha
+    =
+    -\alpha.
+\]
+Moreover, if
+\[
+    H_\alpha
+    :=
+    \{\,x\in E\mid (x,\alpha)=0\,\},
+\]
+then
+\[
+    s_\alpha(x)=x
+    \qquad
+    \text{for all }x\in H_\alpha.
+\]
+Thus \(s_\alpha\) is the reflection with respect to the hyperplane
+\(H_\alpha\), which has codimension \(1\) in \(E\).
+
+\begin{lemma}
+    For every \(\alpha\in\Delta\), one has
+    \[
+        s_\alpha(\Delta)=\Delta.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since \(s_\alpha^2=\operatorname{id}_E\), the map \(s_\alpha\) is a bijection.
+    Hence it suffices to prove that
+    \[
+        s_\alpha(\Delta)\subseteq \Delta.
+    \]
+
+    Let \(\beta\in\Delta\). By the root-string property, there exist
+    \(p,q\in\mathbb{Z}_{\geq 0}\) such that the roots of the form
+    \(\beta+i\alpha\) are precisely
+    \[
+        \beta-q\alpha,\,
+        \beta-(q-1)\alpha,\,
+        \ldots,\,
+        \beta,\,
+        \ldots,\,
+        \beta+p\alpha,
+    \]
+    and
+    \[
+        q-p
+        =
+        \frac{2(\beta,\alpha)}{(\alpha,\alpha)}.
+    \]
+    Therefore
+    \[
+        s_\alpha(\beta)
+        =
+        \beta-\frac{2(\beta,\alpha)}{(\alpha,\alpha)}\alpha
+        =
+        \beta-(q-p)\alpha
+        =
+        \beta+(p-q)\alpha.
+    \]
+    Since
+    \[
+        -q\leq p-q\leq p,
+    \]
+    the root-string property implies that
+    \[
+        \beta+(p-q)\alpha\in\Delta.
+    \]
+    Hence \(s_\alpha(\beta)\in\Delta\). Since \(\beta\in\Delta\) was arbitrary,
+    we have
+    \[
+        s_\alpha(\Delta)\subseteq\Delta.
+    \]
+    As \(s_\alpha\) is bijective, it follows that
+    \[
+        s_\alpha(\Delta)=\Delta.
+    \]
+\end{proof}
+

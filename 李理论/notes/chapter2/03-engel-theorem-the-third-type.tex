@@ -1,0 +1,306 @@
+\section{Engel Theorem the third type}
+
+\begin{definition}
+    Let $L$ be a Lie algebra over a field $F$. An $L$-module is a vector space $V$ over $F$ together with a bilinear map
+    \[
+        L\times V \to V,\qquad (x,v)\mapsto x\cdot v,
+    \]
+    such that
+    \[
+        [x,y]\cdot v = x\cdot (y\cdot v)-y\cdot (x\cdot v)
+    \]
+    for all $x,y\in L$ and $v\in V$. In other words, $V$ is an $L$-module if and only if there exists a Lie algebra homomorphism
+    \[
+        \phi:L\to \mathfrak{gl}(V).
+    \]
+    such that
+    \[
+        \phi(x)(v) = x\cdot v
+    \]
+    for all $x\in L$ and $v\in V$.
+\end{definition}
+
+\begin{proposition}
+    Let $L$ be a Lie algebra over a field $F$, and let $M$ be a vector space over $F$. Suppose a bilinear operation
+    \[
+        L\times M\to M,\qquad (a,m)\mapsto a\cdot m
+    \]
+    is given. Then the following conditions are equivalent:
+
+    \begin{enumerate}
+        \item The vector space $L\oplus M$ becomes a Lie algebra under the bracket defined by
+              \[
+                  [a+m,\ b+n]=[a,b]+a\cdot n-b\cdot m
+                  \qquad (a,b\in L,\ m,n\in M),
+              \]
+              equivalently,
+              \[
+                  [a,m]=a\cdot m,\qquad [m,a]=-\,a\cdot m
+              \]
+              for all $a\in L$, $m\in M$, and
+              \[
+                  [m,n]=0
+              \]
+              for all $m,n\in M$.
+
+        \item For all $a,b\in L$ and $m\in M$,
+              \[
+                  [a,b]\cdot m=a\cdot (b\cdot m)-b\cdot (a\cdot m).
+              \]
+
+        \item The map
+              \[
+                  \rho:L\to \mathfrak{gl}_F(M),\qquad \rho(a)(m)=a\cdot m,
+              \]
+              is a Lie algebra homomorphism.
+    \end{enumerate}
+
+    When these equivalent conditions hold, we say that $M$ is an $L$-module.
+\end{proposition}
+
+\begin{proof}
+    We prove $(1)\Rightarrow(2)\Rightarrow(3)\Rightarrow(1)$.
+
+    \medskip
+
+    $(1)\Rightarrow(2)$. Assume that $L\oplus M$ is a Lie algebra with the stated bracket. Since every Lie algebra satisfies the Jacobi identity, for any $a,b\in L$ and $m\in M$ we have
+    \[
+        [a,[b,m]]+[b,[m,a]]+[m,[a,b]]=0.
+    \]
+    Now
+    \[
+        [b,m]=b\cdot m,\qquad [m,a]=-\,a\cdot m,\qquad [a,b]\in L.
+    \]
+    Because $M$ is abelian, this gives
+    \[
+        [a,b\cdot m]+[b,-\,a\cdot m]+[m,[a,b]]=0.
+    \]
+    Using again the definition of the bracket,
+    \[
+        a\cdot (b\cdot m)-b\cdot (a\cdot m)-[a,b]\cdot m=0.
+    \]
+    Hence
+    \[
+        [a,b]\cdot m=a\cdot (b\cdot m)-b\cdot (a\cdot m).
+    \]
+
+    \medskip
+
+    $(2)\Rightarrow(3)$. Define
+    \[
+        \rho:L\to \mathfrak{gl}_F(M),\qquad \rho(a)(m)=a\cdot m.
+    \]
+    Since the action is bilinear, $\rho$ is linear. For any $a,b\in L$ and $m\in M$, condition (2) gives
+    \[
+        \rho([a,b])(m)=[a,b]\cdot m
+        =a\cdot (b\cdot m)-b\cdot (a\cdot m)
+        =\rho(a)\rho(b)(m)-\rho(b)\rho(a)(m).
+    \]
+    Therefore
+    \[
+        \rho([a,b])=[\rho(a),\rho(b)],
+    \]
+    so $\rho$ is a Lie algebra homomorphism.
+
+    \medskip
+
+    $(3)\Rightarrow(1)$. Assume that $\rho:L\to \mathfrak{gl}_F(M)$ is a Lie algebra homomorphism, and define a bracket on $L\oplus M$ by
+    \[
+        [a+m,\ b+n]=[a,b]+\rho(a)(n)-\rho(b)(m).
+    \]
+    This bracket is bilinear and skew-symmetric. It remains to verify the Jacobi identity.
+
+    Take $a,b,c\in L$ and $m,n,p\in M$. Write
+    \[
+        x=a+m,\qquad y=b+n,\qquad z=c+p.
+    \]
+    A direct calculation shows that the $L$-component of
+    \[
+        [x,[y,z]]+[y,[z,x]]+[z,[x,y]]
+    \]
+    is
+    \[
+        [a,[b,c]]+[b,[c,a]]+[c,[a,b]],
+    \]
+    which is zero because $L$ is a Lie algebra.
+
+    For the $M$-component, expanding the definition of the bracket yields
+    \[
+        \rho(a)\rho(b)(p)-\rho(a)\rho(c)(n)-\rho([b,c])(m)
+        +\rho(b)\rho(c)(m)-\rho(b)\rho(a)(p)-\rho([c,a])(n)
+    \]
+    \[
+        +\rho(c)\rho(a)(n)-\rho(c)\rho(b)(m)-\rho([a,b])(p).
+    \]
+    Grouping the terms by $m,n,p$, we obtain
+    \[
+        \bigl(\rho(b)\rho(c)-\rho(c)\rho(b)-\rho([b,c])\bigr)(m)
+    \]
+    \[
+        +\bigl(\rho(c)\rho(a)-\rho(a)\rho(c)-\rho([c,a])\bigr)(n)
+    \]
+    \[
+        +\bigl(\rho(a)\rho(b)-\rho(b)\rho(a)-\rho([a,b])\bigr)(p).
+    \]
+    Since $\rho$ is a Lie algebra homomorphism, each bracketed expression is zero. Hence the $M$-component also vanishes, so the Jacobi identity holds.
+
+    Therefore $L\oplus M$ is a Lie algebra with the stated bracket.
+
+    This proves that the three conditions are equivalent.
+\end{proof}
+
+\begin{theorem}
+    Let $L$ be a finite dimensional Lie algebra over a field $F$. If $\forall a \in L$, $\operatorname{ad}(a) $ is nilpotent, then $L$ is nilpotent.
+\end{theorem}
+
+\begin{proof}
+    Note that since $L$ is finite-dimensional, say $\dim L=n<\infty$, and for every $a\in L$ we have
+    \[
+        (\operatorname{ad} a)^n=0.
+    \]
+    Hence we may apply the previous theorem: if for all $a\in L$,
+    \[
+        (\operatorname{ad} a)^n=0,
+    \]
+    then
+    \[
+        (\operatorname{ad} L)^{\,n}=0,
+    \]
+    and therefore
+    \[
+        L^{n+1}=0.
+    \]
+    So $L$ is nilpotent.
+\end{proof}
+
+\begin{remark}
+    If $L$ is infinite-dimensional, one should distinguish two cases:
+    \[
+        \left\{
+        \begin{array}{l}
+            \operatorname{ad} a \text{ nilpotent with a uniform bound } n
+            \ \Longrightarrow\
+            L \text{ nilpotent}, \\[4pt]
+            \text{no uniform bound on the nilpotency indices}
+            \ \nRightarrow\
+            L \text{ nilpotent}.
+        \end{array}
+        \right.
+    \]
+\end{remark}
+
+\begin{remark}
+    There are three related versions, with
+    \[
+        \text{type }(2)\Longrightarrow \text{type }(1)\Longrightarrow \text{type }(3).
+    \]
+
+    Type (2): Let $S\subseteq L$ be a Lie subset. And $S$ generates $L$ as a Lie algebra. Assume there exists $n$ such that for every $a\in S$
+    \[
+        a^n =0.
+    \]
+    Then $A=<L>$ is a nilpotent algebra. (When $A$ is a finite-dimensional associative algebra).
+
+    In particular, if we choose $S$ to be $L$, then we get type (1).
+
+    Type (1): Let $ A $ be a finite dimensional enveloping algebra of $L$, i.e. $ L\subseteq A^{(-)} $, $ A = <L> $.If $ \exists n \ge 1 $ such that $ \forall a \in L $, $ a^n=0 $. Then $ A $ is nilpotent.
+
+    And consider $A$ as $\operatorname{ad}(L)$, we get type (3).
+
+    Type (3):    Let $L$ be a finite dimensional Lie algebra over a field $F$. If $\forall a \in L$, $\operatorname{ad}(a) $ is nilpotent, then $L$ is nilpotent.
+\end{remark}
+
+We also have the following truth:
+
+\begin{corollary}
+    \ Let $M$ be an $L$-module with $\dim M<\infty$, that is, let
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    be a representation. Assume that for every $a\in L$, the operator $\varphi(a)$ is nilpotent. Equivalently, for every $a\in L$ there exists $n$ such that
+    \[
+        \underbrace{a\bigl(a(\cdots(a}_{n\text{ times}}\,M)\cdots)\bigr)=0.
+    \]
+    Then there exists $N$ such that
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0.
+    \]
+    In other words, if every $\varphi(a)$ is nilpotent, then the Lie algebra $\varphi(L)$ is nilpotent. Hence there exists a basis of $M$ in which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix:
+    \[
+        \varphi(L)\subseteq
+        \left\{
+        \begin{pmatrix}
+            0      & *      & \cdots & *      \\
+            0      & 0      & \cdots & *      \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0      & 0      & \cdots & 0
+        \end{pmatrix}
+        \right\}.
+    \]
+\end{corollary}
+
+\begin{remark}
+    This corollary is the module-theoretic form of Engel's theorem. Indeed, the representation
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    has image $\varphi(L)$, which is a Lie subalgebra of $\mathfrak{gl}_F(M)$. By assumption, every element of $\varphi(L)$ is a nilpotent endomorphism of the finite-dimensional vector space $M$. Hence, by Engel's theorem, the Lie algebra $\varphi(L)$ is nilpotent.
+
+    The conclusion
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0
+    \]
+    means that there exists a uniform integer $N$ such that for all $a_1,\dots,a_N\in L$ and all $m\in M$,
+    \[
+        a_1\bigl(a_2(\cdots(a_Nm)\cdots)\bigr)=0.
+    \]
+    Thus the action is nilpotent not only for each fixed $a\in L$, but uniformly for all sufficiently long iterated actions.
+
+    A further consequence of Engel's theorem is that there exists a basis of $M$ with respect to which every operator $\varphi(a)$ is represented by a strictly upper triangular matrix. Equivalently, $M$ admits a chain of subspaces
+    \[
+        0=M_0\subset M_1\subset \cdots \subset M_r=M,
+        \qquad \dim M_i=i,
+    \]
+    such that
+    \[
+        L\cdot M_i\subseteq M_{i-1}
+        \qquad (1\le i\le r).
+    \]
+
+    Explanation: By Engel's theorem, $\varphi(L)$ is nilpotent. Hence
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0
+    \]
+    Take the minimal $N$ such that $L^N M=0$ and $L^{N-1}M \neq 0$. Then we have a non-zero vector $v_1$ in $L^{N-1}M$ which is killed by $\varphi(L)$. Denote $M_1 = \operatorname{span}(v_1)$. Then $L\cdot M_1 \subseteq M_0$. Now consider $M/M_1$. By Engel's theorem and by induction hypothesis, $\varphi(L)$ is nilpotent on $M/M_1$. Hence there exists a basis of $M/M_1$ with respect to which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix. Equivalently, $M/M_1$ admits a chain of subspaces
+    \[
+        0=M_1/M_1\subset M_2/M_1\subset \cdots \subset M_r/M_1=M/M_1,
+        \qquad \dim M_i/M_1=i,
+    \]
+    such that
+    \[
+        L\cdot (M_i/M_1)\subseteq M_{i-1}/M_1
+        \qquad (1\le i\le r).
+    \]
+    Now we can take a basis of $M_1$ and $M/M_1$ to get a basis of $M$ with respect to which every element of $\varphi(L)$ is represented by a strictly upper triangular matrix.
+
+    In particular, this corollary reduces to the usual form of Engel's theorem when one takes $M=L$ and $\varphi=\operatorname{ad}$.
+\end{remark}
+
+\begin{remark}
+    According to this corollary and type (2), we can rewrite it as:
+
+    Let $M$ be an $L$-module with $\dim M<\infty$, that is, let
+    \[
+        \varphi:L\to \mathfrak{gl}_F(M)
+    \]
+    be a representation. Assume that for every $a\in S$, where $S$ is a Lie subset of $L$ and $<S>=L$, the operator $\varphi(a)$ is nilpotent. Equivalently, for every $a\in S$ there exists $n$ such that
+    \[
+        \underbrace{a\bigl(a(\cdots(a}_{n\text{ times}}\,M)\cdots)\bigr)=0.
+    \]
+    Then there exists $N$ such that
+    \[
+        \underbrace{L\cdots L}_{N\text{ times}}M=0.
+    \]
+    For this result, we do not need $L$ or the enveloping algebra $A=<L>$ to be finite-dimensional now, we only need such $n$ is a universal bound.
+\end{remark}
+

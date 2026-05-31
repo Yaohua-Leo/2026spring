@@ -1,0 +1,244 @@
+\section{Killing form}
+
+$\forall a,b \in L$, denote $\kappa(a|b)=\operatorname{Tr}(\operatorname{ad}a \operatorname{ad}b)$. Obviously, $\kappa$ is a symmetric bilinear form on $L$.
+
+\begin{definition}
+    Let $V$ be a vector space over a field $F$, and let
+    \[
+        B: V \times V \to F
+    \]
+    be a bilinear form. We say that $B$ is \emph{nondegenerate} if either of the following equivalent conditions holds:
+    \begin{enumerate}
+        \item If $v \in V$ satisfies
+              \[
+                  B(v,w)=0 \qquad \forall\, w\in V,
+              \]
+              then $v=0$.
+        \item If $w \in V$ satisfies
+              \[
+                  B(v,w)=0 \qquad \forall\, v\in V,
+              \]
+              then $w=0$.
+    \end{enumerate}
+    Equivalently, the induced linear map
+    \[
+        V \to V^*, \qquad v \mapsto B(v,-)
+    \]
+    is injective; if $\dim V<\infty$, this is equivalent to this map being an isomorphism.
+\end{definition}
+
+\begin{proposition}
+    Killing form is associative.
+\end{proposition}
+
+\begin{proof}
+    Let $L$ be a finite-dimensional Lie algebra, and let
+    \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y)
+        \qquad (x,y\in L)
+    \]
+    be its Killing form. We claim that for all $x,y,z\in L$,
+    \[
+        \kappa([x,y],z)=\kappa(x,[y,z]).
+    \]
+
+    Indeed, using
+    \[
+        \operatorname{ad}([x,y])=[\operatorname{ad}x,\operatorname{ad}y]
+        =\operatorname{ad}x\,\operatorname{ad}y-\operatorname{ad}y\,\operatorname{ad}x,
+    \]
+    we compute
+    \begin{align*}
+        \kappa([x,y],z)
+         & =\operatorname{Tr}\bigl(\operatorname{ad}([x,y])\,\operatorname{ad}z\bigr)                                                      \\
+         & =\operatorname{Tr}\bigl((\operatorname{ad}x\,\operatorname{ad}y-\operatorname{ad}y\,\operatorname{ad}x)\operatorname{ad}z\bigr) \\
+         & =\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y\,\operatorname{ad}z)
+        -\operatorname{Tr}(\operatorname{ad}y\,\operatorname{ad}x\,\operatorname{ad}z).
+    \end{align*}
+    By cyclicity of trace,
+    \[
+        \operatorname{Tr}(\operatorname{ad}y\,\operatorname{ad}x\,\operatorname{ad}z)
+        =\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}z\,\operatorname{ad}y),
+    \]
+    hence
+    \begin{align*}
+        \kappa([x,y],z)
+         & =\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y\,\operatorname{ad}z)
+        -\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}z\,\operatorname{ad}y)                                                     \\
+         & =\operatorname{Tr}\bigl(\operatorname{ad}x(\operatorname{ad}y\,\operatorname{ad}z-\operatorname{ad}z\,\operatorname{ad}y)\bigr) \\
+         & =\operatorname{Tr}\bigl(\operatorname{ad}x\,[\operatorname{ad}y,\operatorname{ad}z]\bigr)                                       \\
+         & =\operatorname{Tr}\bigl(\operatorname{ad}x\,\operatorname{ad}([y,z])\bigr)                                                      \\
+         & =\kappa(x,[y,z]).
+    \end{align*}
+    Therefore the Killing form is associative.
+\end{proof}
+
+Now we prove the theorem.
+
+($\Rightarrow$): Let $I=\{ a \in L | (a|L)=(0) \}  \triangleleft L $. Since $([a,b]|L)=(a|[b,L])=(0)$. We consider $\mathrm{ad}(L) \subseteq \mathfrak{gl}(L)$. Then we have $\operatorname{Tr}(\mathrm{ad}(I)\mathrm{ad}(I))=0$. Hence $\mathrm{ad}(I) \subseteq \mathfrak{gl}(L)$ is solvable. And $ \mathrm{ad}: I \to \mathrm{ad}(I)$ the image is solvable. $\ker \mathrm{ad}=I \cap Z(L) $ is abelian, hence solvable. If $L$ is semisimple, then we have $I=0$. Which shows that $\kappa$ is nondegenerate.
+
+($\Leftarrow$): Suppose $L$ is not semisimple. Then $\operatorname{Rad}(L) \neq 0$. Let $I \triangleleft L$ be a non-zero solvable ideal, then $L$ mast have a non-zero abelian ideal $J$. Then $\kappa(J|L)=0$. Contradiction.
+
+\begin{proposition}
+    Let $V$ be a vector space over $F$, not necessarily finite-dimensional, and let
+    \[
+        \kappa:V\times V\to F
+    \]
+    be a symmetric bilinear form. Let $W\subseteq V$ be a finite-dimensional subspace.
+    Assume that the restriction
+    \[
+        \kappa|_{W\times W}
+    \]
+    is nondegenerate. Define
+    \[
+        W^\perp:=\{\,v\in V\mid \kappa(v,w)=0\ \text{for all } w\in W\,\}.
+    \]
+    Then
+    \[
+        V=W\oplus W^\perp.
+    \]
+\end{proposition}
+
+\begin{proof}
+    It is enough to prove that
+    \[
+        V=W+W^\perp,
+    \]
+    since $W\cap W^\perp=0$ follows immediately from the nondegeneracy of $\kappa|_{W\times W}$.
+
+    Let $w_1,\dots,w_n$ be a basis of $W$. Consider the Gram matrix
+    \[
+        G=(\kappa(w_i,w_j))_{1\le i,j\le n}.
+    \]
+    Since $\kappa|_{W\times W}$ is nondegenerate, the matrix $G$ is invertible.
+
+    Take any $v\in V$. We seek $u=\sum_{i=1}^n c_i w_i\in W$ such that
+    \[
+        v-u\in W^\perp.
+    \]
+    This is equivalent to requiring
+    \[
+        \kappa(v-u,w_j)=0
+        \qquad (j=1,\dots,n),
+    \]
+    that is,
+    \[
+        \kappa(v,w_j)=\sum_{i=1}^n c_i\,\kappa(w_i,w_j)
+        \qquad (j=1,\dots,n).
+    \]
+    This is a linear system for the coefficients $c_i$, whose coefficient matrix is $G$.
+    Since $G$ is invertible, the system has a unique solution. Hence there exists $u\in W$
+    such that $v-u\in W^\perp$.
+
+    Therefore every $v\in V$ can be written as
+    \[
+        v=u+(v-u)\in W+W^\perp,
+    \]
+    so $V=W+W^\perp$. As noted above, $W\cap W^\perp=0$, hence
+    \[
+        V=W\oplus W^\perp.
+    \]
+\end{proof}
+
+\begin{proposition}
+    Let $L$ be a semisimple Lie algebra, and let
+    \[
+        I\triangleleft L,\qquad I\ne 0.
+    \]
+    Then the restriction of the Killing form $\kappa$ of $L$ to $I\times I$ is nondegenerate.
+\end{proposition}
+
+\begin{proof}
+    Suppose, to the contrary, that $\kappa|_{I\times I}$ is degenerate. Then there exists
+    $0\ne a\in I$ such that
+    \[
+        \kappa(a,I)=0.
+    \]
+    We claim that in fact
+    \[
+        \kappa([a,I],L)=0.
+    \]
+    Indeed, let $x\in I$ and $y\in L$. By associativity of the Killing form,
+    \[
+        \kappa([a,x],y)=\kappa(a,[x,y]).
+    \]
+    Since $I\triangleleft L$, we have $[x,y]\in I$, and since $\kappa(a,I)=0$, it follows that
+    \[
+        \kappa([a,x],y)=0
+        \qquad\text{for all }x\in I,\ y\in L.
+    \]
+    Thus
+    \[
+        [a,I]\subseteq L^\perp,
+    \]
+    where
+    \[
+        L^\perp=\{\,z\in L\mid \kappa(z,L)=0\,\}.
+    \]
+    But $L$ is semisimple, so its Killing form is nondegenerate. Hence $L^\perp=0$, and therefore
+    \[
+        [a,I]=0.
+    \]
+    So $a\in C_L(I)$, the centralizer of $I$ in $L$.
+
+    Now $I\cap C_L(I)$ is a nonzero ideal of $L$: it is nonzero because $a\in I\cap C_L(I)$,
+    and it is an ideal since both $I$ and $C_L(I)$ are ideals of $L$. Moreover, it is abelian,
+    because for $x,y\in I\cap C_L(I)$ we have $y\in I$ and $x$ centralizes $I$, hence
+    \[
+        [x,y]=0.
+    \]
+    Thus $L$ contains a nonzero abelian ideal, contradicting the semisimplicity of $L$.
+
+    Therefore $\kappa|_{I\times I}$ must be nondegenerate.
+\end{proof}
+
+\begin{theorem}
+    Every semisimple Lie algebra is a direct sum of simple ideals.
+\end{theorem}
+
+\begin{proof}
+    We argue by induction on $\dim L$. If $L$ is simple, there is nothing to prove.
+
+    Assume that $L$ is semisimple but not simple. Then there exists a nonzero proper ideal
+    \[
+        0\ne I\triangleleft L,\qquad I\ne L.
+    \]
+    By the previous proposition, the restriction of the Killing form to $I$ is nondegenerate.
+    Since $I$ is finite-dimensional, the preceding orthogonal decomposition proposition gives
+    \[
+        L=I\oplus I^\perp,
+    \]
+    where
+    \[
+        I^\perp=\{\,x\in L\mid \kappa(x,I)=0\,\}.
+    \]
+
+    We claim that $I^\perp$ is also an ideal of $L$. Let $x\in I^\perp$, $y\in L$, and $z\in I$.
+    Then, by associativity of the Killing form,
+    \[
+        \kappa([y,x],z)=\kappa(y,[x,z]).
+    \]
+    Since $I\triangleleft L$, we have $[x,z]\in I$. Because $x\in I^\perp$, it follows that
+    \[
+        \kappa(x,[z,y])=0,
+    \]
+    and hence
+    \[
+        \kappa([y,x],z)=0
+        \qquad\text{for all } z\in I.
+    \]
+    Therefore $[y,x]\in I^\perp$, proving that $I^\perp\triangleleft L$.
+
+    Both $I$ and $I^\perp$ are semisimple, being ideals of the semisimple Lie algebra $L$.
+    Moreover,
+    \[
+        \dim I<\dim L,\qquad \dim I^\perp<\dim L.
+    \]
+    By the induction hypothesis, each of $I$ and $I^\perp$ is a direct sum of simple ideals.
+    Hence so is
+    \[
+        L=I\oplus I^\perp.
+    \]
+    This completes the proof.
+\end{proof}
+

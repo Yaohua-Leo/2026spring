@@ -1,0 +1,1142 @@
+
+\chapter{Quasiprimitive Permutation Groups and Small Rank}
+
+\section{The Exercise}
+
+\begin{definition}[\texorpdfstring{$n$}{n}-transitive permutation group]
+    Let \(G \leq \operatorname{Sym}(\Omega)\), and let \(n\) be a positive integer with
+    \(n \leq |\Omega|\). We say that \(G\) is \textbf{\(n\)-transitive} on \(\Omega\) if
+    \(G\) acts transitively on the set of ordered \(n\)-tuples of pairwise distinct points:
+    \[
+        \Omega^{(n)}
+        =
+        \{(\omega_1,\ldots,\omega_n)\in \Omega^n
+          \mid \omega_i\neq \omega_j \text{ whenever } i\neq j\}.
+    \]
+    Equivalently, for any two ordered \(n\)-tuples of pairwise distinct points
+    \[
+        (\omega_1,\ldots,\omega_n),
+        \qquad
+        (\omega_1',\ldots,\omega_n')
+        \in \Omega^{(n)},
+    \]
+    there exists \(g\in G\) such that
+    \[
+        \omega_i^g=\omega_i'
+        \qquad
+        \text{for all } 1\leq i\leq n.
+    \]
+    \end{definition}
+
+\begin{exercise}
+Let \(G \leq \operatorname{Sym}(\Omega)\) be a quasiprimitive permutation group.
+Characterize the cases where the point stabilizer \(G_\omega\) has exactly
+\[
+r=2,3,4,5
+\]
+orbits on \(\Omega\). Equivalently, characterize quasiprimitive permutation groups
+of rank \(r\), for \(r=2,3,4,5\).
+
+In particular, determine the best possible lower bound for \(r\) when \(G\) is of
+holomorph simple type.
+\end{exercise}
+
+\begin{proof}
+    Assume throughout that \(G\) is finite and transitive on \(\Omega\), and write
+    \[
+    r=\operatorname{rank}(G)
+    =
+    \#\{\text{\(G_\omega\)-orbits on }\Omega\}.
+    \]
+    We use the quasiprimitive O'Nan--Scott types
+    \[
+    \mathrm{HA},\ \mathrm{AS},\ \mathrm{HS},\ \mathrm{HC},\ \mathrm{SD},\ \mathrm{CD},\ \mathrm{TW},\ \mathrm{PA}.
+    \]
+    
+    The answer, at the level of O'Nan--Scott type, is as follows:
+    \medskip
+    \begin{center}
+    \begin{tabular}{c|p{0.8\textwidth}}
+    \toprule
+    $r$ & Possibilities \\ \midrule
+    $2$ & $\mathrm{HA}$ or $\mathrm{AS}$; equivalently, $G$ is $2$-transitive. \\[2mm]
+    $3$ & $\mathrm{HA}$ or $\mathrm{AS}$ of rank $3$, or $\mathrm{PA}$ on $\Delta^2$ with $2$-transitive component. \\[2mm]
+    $4$ & $\mathrm{HA}$ or $\mathrm{AS}$ of rank $4$, or $\mathrm{HS}$ of rank $4$, or $\mathrm{PA}$ on $\Delta^3$ with $2$-transitive component. \\[2mm]
+    $5$ & $\mathrm{HA}$ or $\mathrm{AS}$ of rank $5$, or $\mathrm{HS}$ of rank $5$, or $\mathrm{PA}$ on $\Delta^4$ with $2$-transitive component and set-transitive top group. \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \medskip
+    More explicitly, in the product action case
+    \[
+    \Omega=\Delta^k,
+    \]
+    the rank is \(k+1\) precisely when the component group is \(2\)-transitive on
+    \(\Delta\) and the top group is transitive on \(j\)-subsets of
+    \(\{1,\ldots,k\}\) for each \(0\leq j\leq k\). In that case the \(G_\omega\)-orbits
+    are exactly the weight classes
+    \[
+    \Omega_j=\{(\delta_1,\ldots,\delta_k)\in \Delta^k
+    \mid |\{i:\delta_i\neq \delta\}|=j\},
+    \qquad 0\leq j\leq k,
+    \]
+    where \(\omega=(\delta,\ldots,\delta)\).
+    
+    We now justify the table.
+    
+    First suppose \(r=2\). Then \(G_\omega\) has exactly two orbits on \(\Omega\),
+    namely
+    \[
+    \{\omega\}
+    \quad\text{and}\quad
+    \Omega\setminus\{\omega\}.
+    \]
+    Thus \(G_\omega\) is transitive on \(\Omega\setminus\{\omega\}\), so \(G\) is
+    \(2\)-transitive. Conversely, every \(2\)-transitive group has rank \(2\).
+    By Burnside's theorem, a finite \(2\)-transitive permutation group is either of
+    affine type or almost simple type. Hence the rank \(2\) quasiprimitive groups are
+    precisely the \(2\)-transitive groups of type \(\mathrm{HA}\) or \(\mathrm{AS}\).
+    
+    Now let \(N\) be a minimal normal subgroup of \(G\). Since \(G\) is
+    quasiprimitive, every nontrivial normal subgroup is transitive; in particular, \(N\)
+    is transitive. By the quasiprimitive O'Nan--Scott theorem, \(G\) is one of the
+    types listed above. We show which types can occur when \(r\leq 5\).
+    
+    Consider first a regular nonabelian normal subgroup
+    \[
+    N\cong T^m,
+    \]
+    where \(T\) is nonabelian simple. Identifying \(\Omega\) with \(N\), and taking
+    \(\omega=1\), we have
+    \[
+    G_\omega\leq \operatorname{Aut}(N).
+    \]
+    Hence \(G_\omega\)-orbits preserve element orders.
+    
+    Since \(T\) is nonabelian simple, \(|T|\) has at least three distinct prime divisors.
+    Indeed, if \(|T|\) involved at most two primes, then \(T\) would be solvable by
+    Burnside's \(p^aq^b\)-theorem, impossible. Choose elements
+    \[
+    x,y,z\in T
+    \]
+    of distinct prime orders \(p,q,s\), respectively.
+    
+    If \(m=1\), then the elements
+    \[
+    1,\quad x,\quad y,\quad z
+    \]
+    lie in four distinct \(G_\omega\)-orbits. Therefore
+    \[
+    r\geq 4.
+    \]
+    This is the holomorph simple case. Thus a group of holomorph simple type cannot
+    have rank \(2\) or \(3\).
+    
+    If \(m\geq 2\), then in \(T^m\) the elements
+    \[
+    1,\quad
+    (x,1,\ldots,1),\quad
+    (y,1,\ldots,1),\quad
+    (z,1,\ldots,1),\quad
+    (x,y,1,\ldots,1),\quad
+    (x,z,1,\ldots,1)
+    \]
+    have pairwise distinct orders
+    \[
+    1,\quad p,\quad q,\quad s,\quad pq,\quad ps.
+    \]
+    Hence \(r\geq 6\). Thus regular compound nonabelian types, such as
+    \(\mathrm{HC}\) and \(\mathrm{TW}\), do not occur for \(r=2,3,4,5\).
+    
+    Next consider diagonal type. In simple diagonal type with
+    \[
+    N=T^k,\qquad k\geq 3,
+    \]
+    points may be represented by tuples
+    \[
+    (a_1,\ldots,a_k)\in T^k
+    \]
+    modulo diagonal multiplication. The point stabilizer preserves the multiset of
+    orders
+    \[
+    \left\{
+    |a_i a_j^{-1}| \mid 1\leq i<j\leq k
+    \right\}.
+    \]
+    Choose elements of two distinct odd prime orders \(q\) and \(s\) in \(T\). Then the
+    following six points give six distinct \(G_\omega\)-orbits:
+    \[
+    (1,\ldots,1),
+    \]
+    \[
+    (1,x,1,\ldots,1),\qquad
+    (1,y,1,\ldots,1),\qquad
+    (1,z,1,\ldots,1),
+    \]
+    where \(x,y,z\) have distinct prime orders, and
+    \[
+    (1,y,y^{-1},1,\ldots,1),
+    \qquad
+    (1,z,z^{-1},1,\ldots,1).
+    \]
+    Indeed, the corresponding multisets of pairwise quotient orders are distinct.
+    Thus diagonal type with \(k\geq 3\) has rank at least \(6\). The same argument
+    excludes compound diagonal type for \(r\leq 5\). The remaining diagonal case
+    \(k=2\) is the holomorph simple situation already considered.
+    
+    It remains to discuss product action type. Suppose
+    \[
+    \Omega=\Delta^k,
+    \qquad
+    \omega=(\delta,\ldots,\delta),
+    \]
+    and \(G\) is contained in a product action wreath product
+    \[
+    L\wr P
+    =
+    L^k\rtimes P,
+    \]
+    where \(L\) acts transitively on \(\Delta\) and \(P\leq S_k\) is transitive on the
+    set of coordinates.
+    
+    Define the weight of a point \(\alpha=(\alpha_1,\ldots,\alpha_k)\) by
+    \[
+    \operatorname{wt}(\alpha)
+    =
+    |\{i:\alpha_i\neq \delta\}|.
+    \]
+    The point stabilizer \(G_\omega\) preserves weight. Hence
+    \[
+    r\geq k+1.
+    \]
+    If \(L\) is \(2\)-transitive on \(\Delta\), then \(L_\delta\) is transitive on
+    \(\Delta\setminus\{\delta\}\). If, in addition, the top group \(P\) is transitive on
+    \(j\)-subsets of \(\{1,\ldots,k\}\) for every \(j\), then \(G_\omega\) is transitive
+    on every weight class. Therefore
+    \[
+    r=k+1.
+    \]
+    
+    Conversely, suppose \(r\leq 5\). If \(L\) is not \(2\)-transitive, then
+    \(L_\delta\) has at least two nontrivial orbits, say \(A\) and \(B\), on
+    \(\Delta\setminus\{\delta\}\). Then, already for \(k\geq 2\), the following six
+    types give distinct \(G_\omega\)-invariant subsets:
+    \[
+    0,\qquad
+    1A,\qquad
+    1B,\qquad
+    2AA,\qquad
+    2AB,\qquad
+    2BB.
+    \]
+    Thus \(r\geq 6\), contradiction. Hence the component action must be
+    \(2\)-transitive.
+    
+    Similarly, if the top group is not transitive on \(j\)-subsets for some \(j\), then
+    the weight \(j\) class splits into at least two \(G_\omega\)-orbits. For \(r\leq 5\)
+    this forces the top group to be set-transitive on the relevant coordinate subsets.
+    Consequently, in product action type and rank at most \(5\), we must have
+    \[
+    r=k+1.
+    \]
+    Thus the product action cases are exactly:
+    \[
+    k=2 \quad (r=3),\qquad
+    k=3 \quad (r=4),\qquad
+    k=4 \quad (r=5),
+    \]
+    with \(2\)-transitive component action, and with set-transitive top group.
+    
+    Combining these exclusions with the unrestricted affine and almost simple cases gives
+    the table above.
+    
+    Finally, consider the special question about holomorph simple type. In this case
+    \[
+    T\leq G\leq T\rtimes \operatorname{Aut}(T),
+    \]
+    where \(T\) is nonabelian simple and acts regularly on \(\Omega\cong T\). Taking
+    \(\omega=1\), we have
+    \[
+    G_\omega\leq \operatorname{Aut}(T).
+    \]
+    Since automorphisms preserve element orders and \(T\) has elements of at least three
+    distinct prime orders, the four elements
+    \[
+    1,\quad x,\quad y,\quad z
+    \]
+    lie in four distinct \(G_\omega\)-orbits. Hence
+    \[
+    r\geq 4.
+    \]
+    Therefore, if \(G\) is of holomorph simple type, then
+    \[
+    \boxed{r>3.}
+    \]
+    
+    This bound is sharp. Take \(T=A_5\) and
+    \[
+    G=A_5\rtimes \operatorname{Aut}(A_5).
+    \]
+    Since
+    \[
+    \operatorname{Aut}(A_5)\cong S_5,
+    \]
+    the point stabilizer acts on \(A_5\) by conjugation. The nonidentity elements of
+    \(A_5\) have orders \(2,3,5\), and \(S_5\) is transitive on the elements of each of
+    these orders. Thus the \(G_\omega\)-orbits on \(\Omega\cong A_5\) are exactly
+    \[
+    \{1\},
+    \qquad
+    \{x\in A_5: |x|=2\},
+    \qquad
+    \{x\in A_5: |x|=3\},
+    \qquad
+    \{x\in A_5: |x|=5\}.
+    \]
+    Hence
+    \[
+    \operatorname{rank}(G)=4.
+    \]
+    So the lower bound \(r\geq 4\) is best possible.
+    \end{proof}
+
+\section{Rank of a Transitive Permutation Group}
+
+\begin{definition}[Rank]
+Let \(G \leq \operatorname{Sym}(\Omega)\) be transitive. Then \(G\) acts on
+\[
+\Omega \times \Omega
+=
+\{(\omega_1,\omega_2) \mid \omega_1,\omega_2 \in \Omega\}
+\]
+by
+\[
+(\omega_1,\omega_2)^g=(\omega_1^g,\omega_2^g).
+\]
+The number of \(G\)-orbits on \(\Omega \times \Omega\) is called the
+\textbf{rank} of \(G\) on \(\Omega\), and is denoted by
+\[
+\operatorname{rank}(G).
+\]
+\end{definition}
+
+\begin{proposition}
+Let \(G \leq \operatorname{Sym}(\Omega)\) be transitive, and fix
+\(\omega \in \Omega\). Then
+\[
+\operatorname{rank}(G)
+=
+\#\{G_\omega\text{-orbits on }\Omega\}.
+\]
+In particular,
+\[
+\operatorname{rank}(G)\geq 2
+\]
+whenever \(|\Omega|>1\), and
+\[
+\operatorname{rank}(G)=2
+\]
+if and only if \(G\) is \(2\)-transitive on \(\Omega\).
+\end{proposition}
+
+\begin{proof}
+Every \(G\)-orbit on \(\Omega \times \Omega\) meets the subset
+\[
+\{\omega\}\times \Omega.
+\]
+Indeed, for any pair \((\alpha,\beta)\), choose \(g \in G\) with
+\(\alpha^g=\omega\). Then
+\[
+(\alpha,\beta)^g=(\omega,\beta^g).
+\]
+Two pairs \((\omega,\beta_1)\) and \((\omega,\beta_2)\) lie in the same
+\(G\)-orbit if and only if \(\beta_1\) and \(\beta_2\) lie in the same
+\(G_\omega\)-orbit. Hence the rank of \(G\) is the number of
+\(G_\omega\)-orbits on \(\Omega\).
+
+The singleton \(\{\omega\}\) is always a \(G_\omega\)-orbit. Thus, if
+\(|\Omega|>1\), there is at least one further orbit, so
+\(\operatorname{rank}(G)\geq 2\).
+
+Finally, \(\operatorname{rank}(G)=2\) precisely when \(G_\omega\) is transitive on
+\(\Omega \setminus \{\omega\}\), which is equivalent to \(G\) being
+\(2\)-transitive.
+\end{proof}
+
+\begin{remark}
+The \(G_\omega\)-orbits on \(\Omega\) are often called the \textbf{suborbits} of
+\(G\). Thus the rank of a transitive permutation group is the number of suborbits.
+\end{remark}
+
+\section{Two-Transitive Groups}
+
+\begin{theorem}[Burnside]
+Let \(G \leq \operatorname{Sym}(\Omega)\) be a finite \(2\)-transitive permutation
+group. Then \(G\) is either of affine type or almost simple type.
+\end{theorem}
+
+\begin{remark}
+In O'Nan--Scott language, the conclusion says that a finite \(2\)-transitive group
+is either of holomorph affine type, usually denoted HA, or of almost simple type,
+usually denoted AS.
+\end{remark}
+
+\begin{proposition}
+Let \(G \leq \operatorname{Sym}(\Omega)\) be \(2\)-transitive, and fix
+\(\omega \in \Omega\). Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+    \item \(G_\omega\) is faithful and transitive on
+    \(\Omega \setminus \{\omega\}\);
+    \item \(|\Omega|-1\) divides \(|G_\omega|\);
+    \item if \(N \lhd G\), then \(N_\omega=N\cap G_\omega\) is half-transitive on
+    \(\Omega \setminus \{\omega\}\), i.e. all \(N_\omega\)-orbits on
+    \(\Omega \setminus \{\omega\}\) have the same size.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since \(G\) is \(2\)-transitive, \(G_\omega\) is transitive on
+\(\Omega \setminus \{\omega\}\). If an element of \(G_\omega\) fixes every point
+of \(\Omega \setminus \{\omega\}\), then it fixes every point of \(\Omega\), and
+hence is the identity. Thus the induced action is faithful.
+
+By orbit-stabilizer,
+\[
+|\Omega|-1
+=
+|\omega^{G_\omega}|
+\mid |G_\omega|.
+\]
+
+Finally, if \(N \lhd G\), then
+\[
+N_\omega=N\cap G_\omega \lhd G_\omega.
+\]
+Since \(G_\omega\) is transitive on \(\Omega \setminus \{\omega\}\), the orbits of
+the normal subgroup \(N_\omega\) on this set all have the same size.
+\end{proof}
+
+\section{Normal Subgroups and Quasiprimitivity}
+
+\begin{definition}[Half-transitive subgroup]
+Let a group \(H\) act on a finite set \(\Lambda\). We say that \(H\) is
+\textbf{half-transitive} on \(\Lambda\) if all \(H\)-orbits on \(\Lambda\) have the
+same size.
+\end{definition}
+
+\begin{lemma}
+Let \(G \leq \operatorname{Sym}(\Omega)\) be transitive, and let \(N \lhd G\).
+Then the \(N\)-orbits on \(\Omega\) form a \(G\)-invariant block system. In
+particular, all \(N\)-orbits have the same size.
+\end{lemma}
+
+\begin{proof}
+Let \(\Delta_1,\Delta_2\) be two \(N\)-orbits. Choose
+\(\delta_i \in \Delta_i\), for \(i=1,2\). Since \(G\) is transitive, there exists
+\(g \in G\) such that
+\[
+\delta_1^g=\delta_2.
+\]
+Write
+\[
+\Delta_1=\{\delta_1^{x_1},\delta_1^{x_2},\ldots,\delta_1^{x_m}\},
+\qquad x_i \in N.
+\]
+Then
+\[
+(\delta_1^{x_i})^g
+=
+\delta_1^{x_i g}
+=
+\delta_1^{g(g^{-1}x_i g)}
+=
+\delta_2^{g^{-1}x_i g}.
+\]
+Since \(N \lhd G\), we have \(g^{-1}x_i g \in N\), and therefore
+\[
+(\delta_1^{x_i})^g \in \Delta_2.
+\]
+Thus
+\[
+\Delta_1^g \subseteq \Delta_2.
+\]
+Applying the same argument to \(g^{-1}\), we get equality:
+\[
+\Delta_1^g=\Delta_2.
+\]
+Hence \(G\) permutes the \(N\)-orbits transitively, so all \(N\)-orbits have the
+same size.
+\end{proof}
+
+
+\begin{corollary}
+Every primitive permutation group is quasiprimitive.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) be primitive, and let \(1\neq N\lhd G\). By the previous lemma, the
+\(N\)-orbits form a \(G\)-invariant block system. Since \(G\) is primitive, this block
+system is either trivial or consists of singleton blocks.
+
+If the \(N\)-orbits are singleton blocks, then every element of \(N\) fixes every
+point of \(\Omega\), so \(N=1\), a contradiction. Hence \(N\) is transitive.
+\end{proof}
+
+\section{Regular Nonabelian Minimal Normal Subgroups}
+
+\begin{definition}[Holomorph simple type]
+    Let \(T\) be a nonabelian simple group. A quasiprimitive permutation group
+    \(G \leq \operatorname{Sym}(\Omega)\) is said to be of \textbf{holomorph simple
+    type}, or of type \(\mathrm{HS}\), if \(G\) has exactly two minimal normal
+    subgroups
+    \[
+        M
+        \quad\text{and}\quad
+        N,
+    \]
+    such that
+    \[
+        M\cong N\cong T,
+    \]
+    and both \(M\) and \(N\) act regularly on \(\Omega\).
+    
+    Equivalently, after identifying \(\Omega\) with the underlying set of \(M\) via
+    the regular action of \(M\), we have
+    \[
+        M:\operatorname{Inn}(M)
+        \leq
+        G
+        \leq
+        M:\operatorname{Aut}(M).
+    \]
+    Here \(M:\operatorname{Aut}(M)\) is the holomorph of \(M\), acting on \(M\)
+    by right multiplication and automorphisms.
+    \end{definition}
+
+\begin{theorem}[Rank bound for holomorph simple type]
+Let \(G\) be of holomorph simple type. Then
+\[
+\operatorname{rank}(G)\geq 4.
+\]
+\end{theorem}
+
+\begin{proof}
+Identify \(\Omega\) with \(T\), and take the base point to be \(1\in T\). Then
+\[
+G_1 \leq \operatorname{Aut}(T).
+\]
+The \(G_1\)-orbits on \(T\) are contained in automorphism orbits, and automorphisms
+preserve element orders.
+
+Since \(T\) is nonabelian simple, \(|T|\) has at least three distinct prime divisors.
+Indeed, \(T\) is not solvable; groups of odd order are solvable, and groups of order
+\(p^a q^b\) are solvable by Burnside's \(p^a q^b\)-theorem. Hence there exist
+elements
+\[
+x,y,z \in T
+\]
+of three distinct prime orders.
+
+The four elements
+\[
+1,\quad x,\quad y,\quad z
+\]
+lie in four distinct \(G_1\)-orbits, because their orders are distinct. Therefore
+\[
+\operatorname{rank}(G)\geq 4.
+\]
+\end{proof}
+
+\begin{example}[Sharpness of the bound]
+Let \(T=A_5\), and let
+\[
+G=T\rtimes \operatorname{Aut}(T) \cong A_5 \rtimes S_5.
+\]
+In the holomorph action of \(G\) on \(T\), the point stabilizer is
+\[
+G_1=\operatorname{Aut}(A_5)\cong S_5.
+\]
+The conjugation action of \(S_5\) on \(A_5\) has exactly four orbits:
+\[
+\{1\},
+\]
+the elements of order \(2\), the elements of order \(3\), and the elements of order
+\(5\). Therefore
+\[
+\operatorname{rank}(G)=4.
+\]
+Thus the bound \(\operatorname{rank}(G)\geq 4\) is best possible.
+\end{example}
+
+\begin{proposition}[Compound regular case]
+    Let \(N=T^k\), where \(k\geq 2\) and \(T\) is a finite nonabelian simple group.
+    Suppose that \(N\) is a regular normal subgroup of a transitive permutation group
+    \(G\). Then
+    \[
+        \operatorname{rank}(G)\geq 10.
+    \]
+    \end{proposition}
+
+    \begin{proof}
+        Fix \(\omega\in \Omega\). Since \(N\) is regular on \(\Omega\), we may identify
+        \(\Omega\) with \(N\) by
+        \[
+            n \longleftrightarrow \omega^n.
+        \]
+        Under this identification, \(\omega\) corresponds to the identity element
+        \[
+            \mathbf{1}=(1,\ldots,1)\in N.
+        \]
+        
+        Because \(N\lhd G\), the point stabilizer \(G_\omega\) normalizes \(N\). Hence
+        conjugation gives a homomorphism
+        \[
+            G_\omega \longrightarrow \operatorname{Aut}(N),
+            \qquad
+            g\longmapsto (n\mapsto g^{-1}ng).
+        \]
+        This homomorphism is injective. Indeed, if \(g\in G_\omega\) centralizes \(N\),
+        then for every \(n\in N\),
+        \[
+            (\omega^n)^g
+            =
+            \omega^{ng}
+            =
+            \omega^{g(g^{-1}ng)}
+            =
+            (\omega^g)^{g^{-1}ng}
+            =
+            \omega^n.
+        \]
+        Thus \(g\) fixes every point of \(\Omega\), so \(g=1\). Therefore we may regard
+        \[
+            G_\omega \leq \operatorname{Aut}(N).
+        \]
+        
+        Write
+        \[
+            N=T_1\times T_2\times \cdots \times T_k,
+        \]
+        where each \(T_i\cong T\). The subgroups \(T_1,\ldots,T_k\) are precisely the
+        minimal normal subgroups of \(N\). Hence every automorphism of \(N\) permutes
+        the direct factors \(T_i\). Consequently, if
+        \[
+            x=(x_1,\ldots,x_k)\in N,
+        \]
+        then the number
+        \[
+            \operatorname{supp}(x)
+            =
+            |\{i\mid x_i\neq 1\}|
+        \]
+        is invariant under \(\operatorname{Aut}(N)\), and hence is invariant under
+        \(G_\omega\). Also, since elements of \(G_\omega\) act as automorphisms of \(N\),
+        they preserve element orders. Therefore the pair
+        \[
+            \bigl(\operatorname{supp}(x), |x|\bigr)
+        \]
+        is constant on each \(G_\omega\)-orbit on \(N\).
+        
+        Since \(T\) is finite nonabelian simple, \(|T|\) has at least three distinct prime
+        divisors. Indeed, otherwise \(|T|\) would have the form \(p^a\) or \(p^aq^b\), and
+        \(T\) would be solvable, contradicting the nonabelian simplicity of \(T\). Choose
+        three distinct primes
+        \[
+            p,\ q,\ r \mid |T|,
+        \]
+        and choose elements
+        \[
+            a,b,c\in T
+        \]
+        such that
+        \[
+            |a|=p,\qquad |b|=q,\qquad |c|=r.
+        \]
+        
+        Now consider the following elements of \(N=T_1\times\cdots\times T_k\):
+        \[
+            \mathbf{1}=(1,\ldots,1),
+        \]
+        \[
+            (a,1,\ldots,1),\qquad
+            (b,1,\ldots,1),\qquad
+            (c,1,\ldots,1),
+        \]
+        \[
+            (a,a,1,\ldots,1),\qquad
+            (b,b,1,\ldots,1),\qquad
+            (c,c,1,\ldots,1),
+        \]
+        and
+        \[
+            (a,b,1,\ldots,1),\qquad
+            (a,c,1,\ldots,1),\qquad
+            (b,c,1,\ldots,1).
+        \]
+        These elements have pairwise distinct values of the invariant
+        \[
+            \bigl(\operatorname{supp}(x), |x|\bigr).
+        \]
+        Indeed, the corresponding pairs are
+        \[
+            (0,1),
+        \]
+        \[
+            (1,p),\qquad (1,q),\qquad (1,r),
+        \]
+        \[
+            (2,p),\qquad (2,q),\qquad (2,r),
+        \]
+        and
+        \[
+            (2,pq),\qquad (2,pr),\qquad (2,qr).
+        \]
+        These ten pairs are pairwise distinct. Hence the ten elements listed above lie in ten
+        distinct \(G_\omega\)-orbits on \(N\).
+        
+        Therefore \(G_\omega\) has at least ten orbits on \(\Omega\). Since the rank of a
+        transitive permutation group is the number of point-stabilizer orbits, we obtain
+        \[
+            \operatorname{rank}(G)\geq 10.
+        \]
+        \end{proof} 
+
+
+
+\begin{corollary}
+A quasiprimitive group of rank at most \(4\) cannot have a regular minimal normal
+subgroup \(T^k\) with \(k\geq 2\) and \(T\) nonabelian simple.
+\end{corollary}
+
+\section{A Useful Obstruction in the Two-Transitive Case}
+
+\begin{lemma}
+Let \(G\leq \operatorname{Sym}(\Omega)\) be \(2\)-transitive. Let
+\[
+N=T^k \lhd G,
+\]
+where \(k\geq 2\) and \(T\) is nonabelian simple. Then \(N\) has no proper normal
+subgroup that is regular on \(\Omega\).
+\end{lemma}
+
+\begin{proof}
+Suppose, for a contradiction, that \(M\lhd N\) is regular on \(\Omega\), with
+\(M<N\). Since \(M\) is regular,
+\[
+|\Omega|=|M|.
+\]
+Because \(N=T^k\) is a direct product of simple groups, every normal subgroup of
+\(N\) is a product of some of the direct factors. Hence
+\[
+|M|=|T|^\ell
+\]
+for some integer \(0<\ell<k\).
+
+Fix \(\omega\in \Omega\). Since \(M\) is regular, \(M_\omega=1\). Also
+\[
+N=MN_\omega,
+\]
+so
+\[
+|N_\omega|=\frac{|N|}{|M|}
+=
+|T|^{k-\ell}.
+\]
+
+Because \(G\) is \(2\)-transitive, \(N_\omega\) is half-transitive on
+\(\Omega\setminus\{\omega\}\). Let \(m\) be the common size of its orbits on
+\(\Omega\setminus\{\omega\}\). Then
+\[
+m \mid |\Omega|-1
+\]
+and
+\[
+m\mid |N_\omega|.
+\]
+Hence
+\[
+m \mid \gcd(|\Omega|-1,|N_\omega|)
+=
+\gcd(|T|^\ell-1,|T|^{k-\ell})
+=
+1.
+\]
+Therefore \(m=1\).
+
+Thus \(N_\omega\) fixes every point of \(\Omega\setminus\{\omega\}\), and it also
+fixes \(\omega\). Hence \(N_\omega=1\), contradicting \(N_\omega\neq 1\), since
+\(M<N\) and \(N=MN_\omega\). Therefore no such proper regular normal subgroup
+\(M\) exists.
+\end{proof}
+
+\section{Product Action Type}
+
+\begin{definition}[Product action]
+Let \(T\leq \operatorname{Sym}(\Delta)\) be transitive, and let \(k\geq 2\). The
+wreath product
+\[
+T \wr S_k = T^k \rtimes S_k
+\]
+acts on
+\[
+\Omega=\Delta^k
+\]
+by product action. Explicitly, for
+\[
+g=(t_1,\ldots,t_k)\pi \in T^k\rtimes S_k
+\]
+and
+\[
+\delta=(\delta_1,\ldots,\delta_k)\in \Delta^k,
+\]
+we define
+\[
+\delta^g
+=
+(\delta_{1\pi^{-1}}^{t_{1\pi^{-1}}},
+ \ldots,
+ \delta_{k\pi^{-1}}^{t_{k\pi^{-1}}}).
+\]
+\end{definition}
+
+\begin{proposition}[Product action reduction]
+Let \(G\leq \operatorname{Sym}(\Omega)\) be primitive, and suppose
+\[
+N=T_1\times \cdots \times T_k \lhd G
+\]
+is a transitive nonregular minimal normal subgroup, where
+\[
+T_1\cong \cdots \cong T_k\cong T
+\]
+and \(T\) is nonabelian simple.
+
+Fix \(\omega\in \Omega\), and assume that the projection of \(N_\omega\) to each
+factor \(T_i\) is a proper subgroup \(H_i<T_i\). Then
+\[
+N_\omega=H_1\times \cdots \times H_k,
+\]
+and
+\[
+\Omega
+\cong
+[T_1:H_1]\times \cdots \times [T_k:H_k].
+\]
+Under this identification, \(N\) acts coordinatewise by right multiplication, and
+\(G\) embeds into a wreath product in product action.
+\end{proposition}
+
+\begin{proof}
+Since \(N\) is transitive,
+\[
+\Omega \cong [N:N_\omega].
+\]
+Write
+\[
+N=T_1\times \cdots \times T_k.
+\]
+Let \(H_i\) be the image of \(N_\omega\) under projection onto \(T_i\). Then
+\[
+N_\omega \leq H_1\times \cdots \times H_k.
+\]
+Set
+\[
+K=H_1\times \cdots \times H_k.
+\]
+Since the factors \(T_i\) are permuted transitively by \(G_\omega\), the subgroup
+\(K\) is normalized by \(G_\omega\). Moreover, by hypothesis \(H_i<T_i\), so
+\[
+K<N.
+\]
+
+Because \(G\) is primitive, \(G_\omega\) is a maximal subgroup of \(G\). Hence
+\[
+G_\omega \leq KG_\omega \leq G
+\]
+implies either
+\[
+KG_\omega=G_\omega
+\]
+or
+\[
+KG_\omega=G.
+\]
+The second possibility is impossible. Indeed, if \(KG_\omega=G\), then
+\[
+N=(KG_\omega)\cap N
+=
+K(G_\omega\cap N)
+=
+KN_\omega
+=
+K,
+\]
+contradicting \(K<N\). Hence
+\[
+KG_\omega=G_\omega,
+\]
+so \(K\leq G_\omega\). Since also \(K\leq N\), we get
+\[
+K\leq N\cap G_\omega=N_\omega.
+\]
+Thus
+\[
+N_\omega=K=H_1\times \cdots \times H_k.
+\]
+
+Therefore
+\[
+\Omega
+\cong
+[N:N_\omega]
+=
+[T_1\times \cdots \times T_k : H_1\times \cdots \times H_k]
+\]
+and hence
+\[
+\Omega
+\cong
+[T_1:H_1]\times \cdots \times [T_k:H_k].
+\]
+This is precisely the product action model.
+\end{proof}
+
+\section{Ranks in Product Action}
+
+\begin{definition}[Weight]
+Let
+\[
+\Delta=\{0,1,\ldots,n-1\}
+\]
+and let
+\[
+\Omega=\Delta^k.
+\]
+For
+\[
+u=(\delta_1,\ldots,\delta_k)\in \Omega,
+\]
+define the \textbf{weight} of \(u\) by
+\[
+\operatorname{wt}(u)
+=
+|\{i\mid \delta_i\neq 0\}|.
+\]
+Thus \(\operatorname{wt}(u)\) is the number of nonzero coordinates of \(u\).
+\end{definition}
+
+\begin{lemma}[Rank in full product action]
+Let \(T\leq \operatorname{Sym}(\Delta)\) be transitive, and let
+\[
+G=T^k\rtimes S_k
+\]
+act on
+\[
+\Omega=\Delta^k
+\]
+in product action. Fix \(0\in \Delta\), and set
+\[
+\omega=(0,\ldots,0).
+\]
+Then
+\[
+\operatorname{rank}(G)\geq k+1.
+\]
+Moreover,
+\[
+\operatorname{rank}(G)=k+1
+\]
+if and only if \(T\) is \(2\)-transitive on \(\Delta\).
+\end{lemma}
+
+\begin{proof}
+Let \(H=T_0\). Then
+\[
+G_\omega=H^k\rtimes S_k.
+\]
+The group \(G_\omega\) preserves the weight of a point in \(\Omega\). Therefore the
+sets
+\[
+\Omega_j=\{u\in \Omega\mid \operatorname{wt}(u)=j\},
+\qquad 0\leq j\leq k,
+\]
+are unions of \(G_\omega\)-orbits. Hence
+\[
+\operatorname{rank}(G)\geq k+1.
+\]
+
+Suppose first that \(T\) is \(2\)-transitive. Then \(H=T_0\) is transitive on
+\[
+\Delta\setminus\{0\}.
+\]
+Thus, if two points of \(\Omega\) have the same weight, then a permutation in
+\(S_k\) moves the nonzero coordinates of one point to the nonzero coordinates of
+the other, and elements of \(H\) adjust the values in those coordinates. Hence points
+of the same weight lie in the same \(G_\omega\)-orbit. Therefore the \(G_\omega\)-orbits
+are exactly the \(k+1\) weight classes, and
+\[
+\operatorname{rank}(G)=k+1.
+\]
+
+Conversely, suppose \(T\) is not \(2\)-transitive. Then \(H=T_0\) has at least two
+orbits on \(\Delta\setminus\{0\}\). Choose representatives
+\[
+a,b\in \Delta\setminus\{0\}
+\]
+from two distinct \(H\)-orbits. Then
+\[
+(a,0,\ldots,0)
+\quad\text{and}\quad
+(b,0,\ldots,0)
+\]
+have the same weight, but they are not \(G_\omega\)-conjugate. Hence the weight-one
+class splits into at least two \(G_\omega\)-orbits, so
+\[
+\operatorname{rank}(G)>k+1.
+\]
+Thus equality holds if and only if \(T\) is \(2\)-transitive.
+\end{proof}
+
+\begin{example}[The case \(k=2\)]
+Let
+\[
+G=(T\times T)\rtimes S_2
+\]
+act on
+\[
+\Omega=\Delta^2.
+\]
+Then
+\[
+\operatorname{rank}(G)\geq 3,
+\]
+and
+\[
+\operatorname{rank}(G)=3
+\]
+if and only if \(T\) is \(2\)-transitive on \(\Delta\).
+
+For example, take \(T=A_5\) acting naturally on
+\[
+\Delta=\{0,1,2,3,4\}.
+\]
+Then \(T\) is \(2\)-transitive, and
+\[
+G=(A_5\times A_5)\rtimes S_2
+\]
+has rank \(3\) on \(\Delta^2\).
+
+Fix
+\[
+\omega=(0,0).
+\]
+Then
+\[
+G_\omega=(A_4\times A_4)\rtimes S_2.
+\]
+The nontrivial \(G_\omega\)-orbits on \(\Omega\setminus\{\omega\}\) are
+\[
+\{(0,i),(i,0)\mid 1\leq i\leq 4\}
+\]
+and
+\[
+\{(i,j)\mid 1\leq i,j\leq 4\}.
+\]
+Together with \(\{\omega\}\), these give exactly three suborbits.
+\end{example}
+
+\begin{exercise}
+Let
+\[
+G=(T\times T\times T)\rtimes S_3
+\]
+act on
+\[
+\Omega=\Delta^3
+\]
+in product action. Prove that
+\[
+\operatorname{rank}(G)\geq 4,
+\]
+and that
+\[
+\operatorname{rank}(G)=4
+\]
+if and only if \(T\) is \(2\)-transitive on \(\Delta\).
+\end{exercise}
+
+\begin{proof}
+This is the case \(k=3\) of the previous lemma.
+
+Explicitly, fix
+\[
+\omega=(0,0,0).
+\]
+The point stabilizer preserves the weight
+\[
+\operatorname{wt}(\delta_1,\delta_2,\delta_3)
+=
+|\{i\mid \delta_i\neq 0\}|.
+\]
+Therefore there are at least four suborbits, corresponding to weights
+\[
+0,1,2,3.
+\]
+Hence
+\[
+\operatorname{rank}(G)\geq 4.
+\]
+
+If \(T\) is \(2\)-transitive, then \(T_0\) is transitive on
+\(\Delta\setminus\{0\}\), so points of the same weight are \(G_\omega\)-conjugate.
+Thus the four weight classes are exactly the four suborbits, and
+\[
+\operatorname{rank}(G)=4.
+\]
+
+Conversely, if \(T\) is not \(2\)-transitive, then \(T_0\) has at least two orbits on
+\(\Delta\setminus\{0\}\). Hence the weight-one class splits into at least two
+\(G_\omega\)-orbits. Therefore
+\[
+\operatorname{rank}(G)>4.
+\]
+So equality holds if and only if \(T\) is \(2\)-transitive.
+\end{proof}
+
+\section{Summary for Small Rank}
+
+\begin{topic}
+For the small-rank problem, the following constraints are especially useful.
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item \(\operatorname{rank}(G)=2\) if and only if \(G\) is \(2\)-transitive.
+    By Burnside's theorem, a finite \(2\)-transitive group is either affine type
+    or almost simple type.
+
+    \item If \(G\) is primitive, then \(G\) is quasiprimitive.
+
+    \item If \(G\) is of holomorph simple type, then
+    \[
+    \operatorname{rank}(G)\geq 4.
+    \]
+    This bound is sharp, as shown by the holomorph action of
+    \(A_5\rtimes S_5\) on \(A_5\).
+
+    \item If \(G\) has a regular normal subgroup \(T^k\), where
+    \(k\geq 2\) and \(T\) is nonabelian simple, then
+    \[
+    \operatorname{rank}(G)\geq 10.
+    \]
+
+    \item In product action
+    \[
+    G=T^k\rtimes S_k
+    \quad\text{on}\quad
+    \Omega=\Delta^k,
+    \]
+    one always has
+    \[
+    \operatorname{rank}(G)\geq k+1.
+    \]
+    Equality holds precisely when \(T\) is \(2\)-transitive on \(\Delta\).
+\end{enumerate}
+\end{topic}

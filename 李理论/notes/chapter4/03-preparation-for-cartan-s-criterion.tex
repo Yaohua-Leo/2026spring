@@ -1,0 +1,143 @@
+\section{Preparation for Cartan's criterion}
+
+Consider the base field $F$. If $\operatorname{char}F=0$ then $\mathbb{Q}\subseteq F$. Let $\pi: \sum\limits_{i=1}^n \mathbb{Q}\alpha_i \to \mathbb{Q}$ be a $\mathbb{Q}$-linear map.
+
+Consider
+\[
+    \psi=
+    \begin{pmatrix}
+        \pi(\alpha_1) & 0             & \cdots & 0             \\
+        0             & \pi(\alpha_2) & \cdots & 0             \\
+        \vdots        & \vdots        & \ddots & \vdots        \\
+        0             & 0             & \cdots & \pi(\alpha_n)
+    \end{pmatrix}.
+\]
+This $\psi$ is a replica of $\varphi_s$. Immediately we know that $\mathrm{ad}(\psi)$ is a replica of $\mathrm{ad}(\varphi_s)$.
+
+\begin{lemma}
+    Let $A$ and $B$ be subspaces of $\mathfrak{gl}(V)$ ($\operatorname{dim}_F(V)<\infty$). let
+    \[
+        M=\{ \varphi \in \mathfrak{gl}(V) \mid [\varphi,B] \subseteq A \}
+    \]
+    Then $M$ is a Lie subalgebra of $\mathfrak{gl}(V)$. If $\varphi \in M$, forall $m \in M$, $\operatorname{Tr}(\varphi m)=(0)$, then $\varphi$ is nilpotent.
+\end{lemma}
+
+\begin{proof}
+    We shall prove that $\varphi_s=0$, hence $\varphi=\varphi_n$ is nilpotent.
+
+    Choose a basis of $V$ such that
+    \[
+        \varphi_s=
+        \begin{pmatrix}
+            \alpha_1 & 0        & \cdots & 0        \\
+            0        & \alpha_2 & \cdots & 0        \\
+            \vdots   & \vdots   & \ddots & \vdots   \\
+            0        & 0        & \cdots & \alpha_n
+        \end{pmatrix},
+        \qquad \alpha_i\in F.
+    \]
+    Since $\operatorname{char}F=0$, we have $\mathbb{Q}\subseteq F$. Set
+    \[
+        W:=\sum_{i=1}^n \mathbb{Q}\alpha_i\subseteq F.
+    \]
+    Let
+    \[
+        \pi:W\to \mathbb{Q}
+    \]
+    be any $\mathbb{Q}$-linear map, and define
+    \[
+        \psi=
+        \begin{pmatrix}
+            \pi(\alpha_1) & 0             & \cdots & 0             \\
+            0             & \pi(\alpha_2) & \cdots & 0             \\
+            \vdots        & \vdots        & \ddots & \vdots        \\
+            0             & 0             & \cdots & \pi(\alpha_n)
+        \end{pmatrix}.
+    \]
+    Then $\psi$ is a replica of $\varphi_s$.
+
+    We claim that $\psi\in M$. Indeed, since $\varphi\in M$, we have
+    \[
+        [\varphi,B]\subseteq A.
+    \]
+    Passing to the quotient $\mathfrak{gl}(V)/A$, this means that the induced map
+    \[
+        \operatorname{ad}(\varphi):B+A/A\to \mathfrak{gl}(V)/A
+    \]
+    is zero. Hence its semisimple part
+    \[
+        \operatorname{ad}(\varphi_s)
+    \]
+    also acts as zero on $B+A/A$. Since $\operatorname{ad}(\psi)$ is a replica of $\operatorname{ad}(\varphi_s)$, it follows that $\operatorname{ad}(\psi)$ also vanishes on $B+A/A$. Therefore
+    \[
+        [\psi,B]\subseteq A,
+    \]
+    so $\psi\in M$.
+
+    By the hypothesis of the lemma, for every $m\in M$ one has
+    \[
+        \operatorname{Tr}(\varphi m)=0.
+    \]
+    Applying this to $m=\psi$, we get
+    \[
+        \operatorname{Tr}(\varphi\psi)=0.
+    \]
+    Now
+    \[
+        \operatorname{Tr}(\varphi\psi)
+        =
+        \operatorname{Tr}(\varphi_s\psi)+\operatorname{Tr}(\varphi_n\psi).
+    \]
+    Since $\psi$ is a polynomial in $\varphi_s$, it commutes with $\varphi_s$, and hence also with $\varphi_n$. Therefore $\varphi_n\psi$ is nilpotent, so
+    \[
+        \operatorname{Tr}(\varphi_n\psi)=0.
+    \]
+    Consequently,
+    \[
+        0=\operatorname{Tr}(\varphi_s\psi)=\sum_{i=1}^n \alpha_i\,\pi(\alpha_i).
+    \]
+    This holds for every $\mathbb{Q}$-linear map $\pi:W\to\mathbb{Q}$.
+
+    Now choose a $\mathbb{Q}$-basis $\beta_1,\dots,\beta_r$ of $W$, and write
+    \[
+        \alpha_i=\sum_{j=1}^r a_{ij}\beta_j,
+        \qquad a_{ij}\in\mathbb{Q}.
+    \]
+    Let $\pi_k:W\to\mathbb{Q}$ be the coordinate functional defined by
+    \[
+        \pi_k(\beta_j)=\delta_{jk}.
+    \]
+    Then
+    \[
+        0=\sum_{i=1}^n \alpha_i\,\pi_k(\alpha_i)
+        =\sum_{i=1}^n \alpha_i a_{ik}
+        =\sum_{i=1}^n \left(\sum_{j=1}^r a_{ij}\beta_j\right)a_{ik}
+        =\sum_{j=1}^r \left(\sum_{i=1}^n a_{ij}a_{ik}\right)\beta_j.
+    \]
+    Since $\beta_1,\dots,\beta_r$ are linearly independent over $\mathbb{Q}$, we obtain
+    \[
+        \sum_{i=1}^n a_{ij}a_{ik}=0
+        \qquad
+        \text{for all }1\le j,k\le r.
+    \]
+    In particular, taking $j=k$, we get
+    \[
+        \sum_{i=1}^n a_{ik}^2=0
+        \qquad
+        \text{for each }k.
+    \]
+    As each $a_{ik}\in\mathbb{Q}$, this implies
+    \[
+        a_{ik}=0
+        \qquad
+        \text{for all }i,k.
+    \]
+    Hence $\alpha_i=0$ for every $i$, so $\varphi_s=0$.
+
+    Therefore
+    \[
+        \varphi=\varphi_n
+    \]
+    is nilpotent. This proves the lemma.
+\end{proof}
+

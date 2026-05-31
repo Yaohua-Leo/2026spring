@@ -1,0 +1,1135 @@
+\chapter{Constructing Groups and Group Actions}
+
+\section{Constructing Groups from Automorphisms}
+
+\begin{proposition}[The construction $G:H$]
+Let $G$ be a group and let
+\[
+    H\leq \Aut(G).
+\]
+For $h\in H$ and $g\in G$, write $g^h$ for the image of $g$ under the automorphism $h$.
+
+Define
+\[
+    X=G:H=\{gh:g\in G,\ h\in H\}
+\]
+with multiplication
+\[
+    (g_1h_1)(g_2h_2)
+    =
+    \bigl(g_1g_2^{h_1^{-1}}\bigr)(h_1h_2).
+\]
+Then $X$ is a group. Moreover,
+\[
+    G\lhd X,
+    \qquad
+    X/G\cong H.
+\]
+\end{proposition}
+
+\begin{proof}
+Equivalently, as a set $X=G\times H$, and the multiplication is
+\[
+    (g_1,h_1)(g_2,h_2)
+    =
+    \bigl(g_1g_2^{h_1^{-1}},h_1h_2\bigr).
+\]
+The identity element is $(1,1)$, and
+\[
+    (g,h)^{-1}
+    =
+    \bigl((g^{-1})^h,h^{-1}\bigr).
+\]
+Associativity follows from the fact that $H$ acts on $G$ by automorphisms.
+
+Identifying $G$ with $G\times 1$ and $H$ with $1\times H$, we get
+\[
+    X=GH,
+    \qquad
+    G\cap H=1.
+\]
+Also,
+\[
+    h^{-1}gh=g^h\in G
+    \qquad(g\in G,\ h\in H),
+\]
+so $G\lhd X$. Finally, the quotient map $X\to X/G$ kills $G$ and identifies the quotient with $H$.
+\end{proof}
+
+\begin{remark}
+The group $G:\Aut(G)$ is called the \textbf{holomorph} of $G$:
+\[
+    \operatorname{Hol}(G)=G:\Aut(G).
+\]
+\end{remark}
+
+\section{Examples from Cyclic Groups}
+
+\begin{example}[The group $\Z_7:\Z_2$]
+Let
+\[
+    G=\Z_7=\gen{g}.
+\]
+Then
+\[
+    \Aut(G)\cong \Z_6.
+\]
+
+Let $b\in\Aut(G)$ have order $2$. Then $b$ acts by inversion:
+\[
+    g^b=g^{-1}.
+\]
+Hence
+\[
+    X=G:\gen{b}
+    =
+    \gen{g}:\gen{b}
+\]
+has presentation
+\[
+    X=
+    \gen{g,b\mid |g|=7,\ |b|=2,\ g^b=g^{-1}}.
+\]
+Since
+\[
+    (gb)^2=gg^b=g g^{-1}=1,
+\]
+we get
+\[
+    X\cong \Z_7:\Z_2\cong D_{14}.
+\]
+\end{example}
+
+\begin{example}[The group $\Z_7:\Z_3$]
+Let
+\[
+    G=\Z_7=\gen{g}.
+\]
+Choose $z\in\Aut(G)$ of order $3$. For example, we may take
+\[
+    g^z=g^2,
+\]
+because $2$ has order $3$ in $(\Z/7\Z)^\times$.
+
+Then
+\[
+    X=G:\gen{z}
+    =
+    \gen{g,z\mid |g|=7,\ |z|=3,\ g^z=g^2}.
+\]
+Thus
+\[
+    X\cong \Z_7:\Z_3.
+\]
+This group is nonabelian.
+\end{example}
+
+\begin{example}[General cyclic group of prime order]
+Let
+\[
+    G=\gen{g}\cong \Z_p,
+\]
+where $p$ is prime. Then
+\[
+    \Aut(G)\cong \Z_{p-1}.
+\]
+
+Let $b\in\Aut(G)$ satisfy
+\[
+    |b|=\ell.
+\]
+Then
+\[
+    \ell\mid (p-1),
+    \qquad
+    \gen{b}\cong \Z_\ell.
+\]
+The corresponding semidirect product is
+\[
+    X=G:\gen{b}
+    \cong
+    \Z_p:\Z_\ell.
+\]
+More explicitly, if
+\[
+    g^b=g^\lambda,
+\]
+where $\lambda\in(\Z/p\Z)^\times$ has order $\ell$, then
+\[
+    X
+    =
+    \gen{
+        g,b
+        \mid
+        |g|=p,\ |b|=\ell,\ g^b=g^\lambda
+    }.
+\]
+
+If $\ell=2$, then $\lambda=-1$, and
+\[
+    X\cong D_{2p}.
+\]
+
+If $\ell=p-1$, then
+\[
+    X\cong \Z_p:\Z_{p-1}
+    =
+    \operatorname{AGL}(1,p),
+\]
+the affine general linear group of degree $1$ over $\F_p$.
+\end{example}
+
+\begin{remark}[The case $p=7$]
+Since
+\[
+    \Aut(\Z_7)\cong \Z_6,
+\]
+the possible images of a cyclic complement $\Z_6$ in $\Aut(\Z_7)$ have order
+\[
+    1,\ 2,\ 3,\ 6.
+\]
+Thus one obtains the following groups:
+\[
+    \Z_7\times \Z_6,
+    \qquad
+    (\Z_7:\Z_3)\times \Z_2,
+    \qquad
+    (\Z_7:\Z_2)\times \Z_3,
+    \qquad
+    \Z_7:\Z_6.
+\]
+\end{remark}
+
+\begin{remark}[General cyclic case]
+In general, for
+\[
+    G=\Z_n,
+\]
+we have
+\[
+    \Aut(G)\cong \Unit(n).
+\]
+Thus every subgroup
+\[
+    H\leq \Unit(n)
+\]
+gives a group
+\[
+    X=\Z_n:H.
+\]
+\end{remark}
+
+\section{The Case \texorpdfstring{$\Z_{35}$}{Z35}}
+
+\begin{example}
+Let
+\[
+    G=\Z_{35}\cong \Z_5\times \Z_7.
+\]
+Then
+\[
+    \Aut(G)
+    \cong
+    \Aut(\Z_5)\times \Aut(\Z_7)
+    \cong
+    \Z_4\times \Z_6.
+\]
+Write
+\[
+    \Aut(G)=\gen{b_1}\times\gen{b_2},
+\]
+where
+\[
+    |b_1|=4,
+    \qquad
+    |b_2|=6.
+\]
+
+For any subgroup $H\leq \Aut(G)$, we can form
+\[
+    X=\Z_{35}:H.
+\]
+Moreover,
+\[
+    X
+    <
+    (\Z_5:\Z_4)\times(\Z_7:\Z_6).
+\]
+
+Take
+\[
+    h=b_1^2b_2^3.
+\]
+Then $h$ has order $2$ and acts by inversion on both factors $\Z_5$ and $\Z_7$. Hence $h$ acts by inversion on $\Z_{35}$, and therefore
+\[
+    X_0=\Z_{35}:\gen{h}
+    \cong
+    D_{70}.
+\]
+\end{example}
+
+\begin{remark}
+If
+\[
+    G=D_{2n}\cong \Z_n:\Z_2,
+\]
+then
+\[
+    \Aut(G)
+    \cong
+    \Z_n:\Unit(n)
+    =
+    \Z_n:\Aut(\Z_n).
+\]
+\end{remark}
+
+\section{Finite Field Example}
+
+\begin{example}[Affine groups over finite fields]
+Let
+\[
+    F=\operatorname{GF}(p^f)=\F_{p^f},
+    \qquad
+    q=p^f.
+\]
+Let
+\[
+    G=F^+.
+\]
+Then
+\[
+    G\cong \Z_p^f.
+\]
+
+Also,
+\[
+    F^\times\cong \Z_{q-1}.
+\]
+For each $h\in F^\times$, multiplication by $h$ induces an automorphism of the additive group $F^+$:
+\[
+    a\longmapsto a^h=ah.
+\]
+Indeed,
+\[
+    (a+b)^h
+    =
+    (a+b)h
+    =
+    ah+bh
+    =
+    a^h+b^h.
+\]
+Thus
+\[
+    F^\times\leq \Aut(F^+).
+\]
+
+Define
+\[
+    X=F^+:F^\times.
+\]
+Then
+\[
+    X\cong \Z_p^f:\Z_{p^f-1}.
+\]
+The subgroup $F^\times\leq \operatorname{GL}(f,p)$ is a \textbf{Singer cycle}.
+\end{example}
+
+\begin{proposition}[Automorphisms of the affine group]
+Let
+\[
+    X=F^+:F^\times,
+    \qquad
+    F=\F_{p^f}.
+\]
+Then
+\[
+    \Aut(X)
+    \cong
+    X:\operatorname{Gal}(F/\F_p).
+\]
+Since
+\[
+    \operatorname{Gal}(F/\F_p)\cong \Z_f,
+\]
+we have
+\[
+    \Aut(X)
+    \cong
+    \bigl(\Z_p^f:\Z_{p^f-1}\bigr):\Z_f.
+\]
+Equivalently,
+\[
+    \Aut(X)
+    \cong
+    \bigl(\Z_p^f:\gen{g}\bigr):\gen{z},
+\]
+where
+\[
+    |g|=p^f-1,
+    \qquad
+    |z|=f,
+    \qquad
+    g^z=g^p.
+\]
+Here $z$ is the Frobenius automorphism
+\[
+    z:x\longmapsto x^p.
+\]
+\end{proposition}
+
+\begin{proof}
+    Put
+    \[
+        q=p^f,\qquad V=F^+,\qquad H=F^\times.
+    \]
+    Then
+    \[
+        X=V:H.
+    \]
+    We write elements of \(X\) as pairs
+    \[
+        (u,a),
+        \qquad
+        u\in F,\ a\in F^\times,
+    \]
+    with multiplication
+    \[
+        (u,a)(v,b)=(u+av,ab).
+    \]
+    Thus \(V\) is identified with \(\{(u,1):u\in F\}\), and \(H\) is identified with
+    \[
+        \{(0,a):a\in F^\times\}.
+    \]
+    
+    We assume \(q>2\). The case \(q=2\) is exceptional, since then
+    \[
+        X\cong \Z_2,
+        \qquad
+        \Aut(X)=1.
+    \]
+    
+    First observe that \(V\) is the unique Sylow \(p\)-subgroup of \(X\). Indeed,
+    \[
+        |V|=q=p^f,
+        \qquad
+        |H|=q-1,
+    \]
+    and \(p\nmid(q-1)\). Since \(V\lhd X\), it is the unique Sylow \(p\)-subgroup. Hence \(V\) is characteristic in \(X\).
+    
+    We first compute the normalizer of \(H=F^\times\) in
+    \[
+        \operatorname{GL}_{\F_p}(V).
+    \]
+    Here \(H\) acts on \(V=F^+\) by scalar multiplication:
+    \[
+        a:v\longmapsto av.
+    \]
+    We claim that
+    \[
+        N_{\operatorname{GL}_{\F_p}(V)}(H)
+        =
+        H:\operatorname{Gal}(F/\F_p).
+    \]
+    
+    It is clear that \(H\) normalizes itself. Also, every
+    \[
+        \sigma\in \operatorname{Gal}(F/\F_p)
+    \]
+    normalizes \(H\), because
+    \[
+        \sigma(av)=\sigma(a)\sigma(v).
+    \]
+    Thus
+    \[
+        H:\operatorname{Gal}(F/\F_p)
+        \leq
+        N_{\operatorname{GL}_{\F_p}(V)}(H).
+    \]
+    
+    Conversely, let
+    \[
+        A\in N_{\operatorname{GL}_{\F_p}(V)}(H).
+    \]
+    Let
+    \[
+        c=A(1)\in F^\times.
+    \]
+    Put
+    \[
+        B=c^{-1}A,
+    \]
+    where \(c^{-1}\) denotes scalar multiplication by \(c^{-1}\). Then \(B\) still normalizes \(H\), and
+    \[
+        B(1)=1.
+    \]
+    Since \(B\) normalizes \(H\), for each \(a\in F^\times\), there exists \(a^*\in F^\times\) such that
+    \[
+        B(ax)=a^*B(x)
+        \qquad
+        \text{for all }x\in F.
+    \]
+    Putting \(x=1\), we obtain
+    \[
+        B(a)=a^*.
+    \]
+    Therefore
+    \[
+        B(ax)=B(a)B(x)
+        \qquad
+        \text{for all }a\in F^\times,\ x\in F.
+    \]
+    This also holds for \(a=0\). Since \(B\) is \(\F_p\)-linear, it preserves addition:
+    \[
+        B(x+y)=B(x)+B(y).
+    \]
+    Thus \(B\) is a field automorphism of \(F\) fixing \(\F_p\). Hence
+    \[
+        B\in \operatorname{Gal}(F/\F_p).
+    \]
+    So
+    \[
+        A=cB\in H:\operatorname{Gal}(F/\F_p).
+    \]
+    This proves
+    \[
+        N_{\operatorname{GL}_{\F_p}(V)}(H)
+        =
+        H:\operatorname{Gal}(F/\F_p).
+    \]
+    
+    Now let
+    \[
+        \alpha\in \Aut(X).
+    \]
+    Since \(V\) is characteristic in \(X\), we have
+    \[
+        \alpha(V)=V.
+    \]
+    The subgroup \(\alpha(H)\) is a complement to \(V\) in \(X\). We show that every complement to \(V\) is conjugate to \(H\) by an element of \(V\).
+    
+    Let \(K\) be a complement to \(V\). Then the projection
+    \[
+        X\to X/V\cong H
+    \]
+    restricts to an isomorphism
+    \[
+        K\cong H.
+    \]
+    Hence each element of \(K\) has the form
+    \[
+        (c(a),a),
+        \qquad
+        a\in H,
+    \]
+    for some map
+    \[
+        c:H\to V.
+    \]
+    Since \(K\) is a subgroup, we have
+    \[
+        (c(a),a)(c(b),b)=(c(ab),ab),
+    \]
+    and therefore
+    \[
+        c(ab)=c(a)+a c(b).
+    \]
+    Let \(r\) be a generator of \(H=F^\times\). Since \(q>2\), we have \(r\neq 1\). Define
+    \[
+        t=(1-r)^{-1}c(r)\in F.
+    \]
+    Then
+    \[
+        c(r)=t-rt.
+    \]
+    Using
+    \[
+        c(r^{n+1})=c(r^n)+r^n c(r),
+    \]
+    we get by induction
+    \[
+        c(r^n)=t-r^n t
+        \qquad
+        \text{for all }n.
+    \]
+    Thus
+    \[
+        K=(t,1)H(t,1)^{-1}.
+    \]
+    Therefore every complement to \(V\) is conjugate to \(H\) by an element of \(V\).
+    
+    Applying this to \(K=\alpha(H)\), there exists \(t\in V\) such that after composing \(\alpha\) with conjugation by \((t,1)^{-1}\), we may assume
+    \[
+        \alpha(H)=H.
+    \]
+    So it remains to describe the automorphisms of \(X\) that stabilize both \(V\) and \(H\).
+    
+    Assume now that
+    \[
+        \alpha(V)=V,
+        \qquad
+        \alpha(H)=H.
+    \]
+    Then
+    \[
+        \alpha|_V=A\in \operatorname{GL}_{\F_p}(V),
+    \]
+    and
+    \[
+        \alpha|_H=\theta\in \Aut(H).
+    \]
+    For \(a\in H\) and \(u\in V\), we have in \(X\)
+    \[
+        (0,a)(u,1)(0,a)^{-1}=(au,1).
+    \]
+    Applying \(\alpha\), we get
+    \[
+        (0,\theta(a))(A(u),1)(0,\theta(a))^{-1}
+        =
+        (A(au),1).
+    \]
+    Hence
+    \[
+        A(au)=\theta(a)A(u).
+    \]
+    Equivalently,
+    \[
+        A H A^{-1}=H.
+    \]
+    Thus
+    \[
+        A\in N_{\operatorname{GL}_{\F_p}(V)}(H).
+    \]
+    
+    Conversely, if
+    \[
+        A\in N_{\operatorname{GL}_{\F_p}(V)}(H),
+    \]
+    then \(A\) induces an automorphism \(\theta_A\) of \(H\) by
+    \[
+        A\circ a\circ A^{-1}=\theta_A(a).
+    \]
+    Define
+    \[
+        \alpha_A:X\to X
+    \]
+    by
+    \[
+        \alpha_A(u,a)=(A(u),\theta_A(a)).
+    \]
+    Then
+    \[
+    \begin{aligned}
+        \alpha_A\bigl((u,a)(v,b)\bigr)
+        &=\alpha_A(u+av,ab)  \\
+        &=(A(u+av),\theta_A(ab)) \\
+        &=(A(u)+A(av),\theta_A(a)\theta_A(b)) \\
+        &=(A(u)+\theta_A(a)A(v),\theta_A(a)\theta_A(b)) \\
+        &=(A(u),\theta_A(a))(A(v),\theta_A(b)) \\
+        &=\alpha_A(u,a)\alpha_A(v,b).
+    \end{aligned}
+    \]
+    So \(\alpha_A\in\Aut(X)\).
+    
+    Therefore the subgroup of \(\Aut(X)\) stabilizing \(H\) is
+    \[
+        N_{\operatorname{GL}_{\F_p}(V)}(H)
+        =
+        H:\operatorname{Gal}(F/\F_p).
+    \]
+    
+    The automorphisms induced by conjugation with elements of \(V\) form a subgroup isomorphic to \(V\). Indeed, if \((t,1)\in V\) centralizes \(H\), then
+    \[
+        t-at=0
+        \qquad
+        \text{for all }a\in F^\times.
+    \]
+    Since \(q>2\), we can choose \(a\neq 1\), and hence \(t=0\). Thus this copy of \(V\) intersects the stabilizer of \(H\) trivially.
+    
+    It follows that
+    \[
+        \Aut(X)
+        \cong
+        V:\bigl(H:\operatorname{Gal}(F/\F_p)\bigr).
+    \]
+    Since
+    \[
+        X=V:H=F^+:F^\times,
+    \]
+    we obtain
+    \[
+        \Aut(X)
+        \cong
+        X:\operatorname{Gal}(F/\F_p).
+    \]
+    
+    Finally, for a finite field
+    \[
+        F=\F_{p^f},
+    \]
+    the Galois group is cyclic:
+    \[
+        \operatorname{Gal}(F/\F_p)
+        =
+        \langle z\rangle
+        \cong
+        \Z_f,
+    \]
+    where \(z\) is the Frobenius automorphism
+    \[
+        z:x\longmapsto x^p.
+    \]
+    Also,
+    \[
+        F^+\cong \Z_p^f,
+        \qquad
+        F^\times\cong \Z_{p^f-1}.
+    \]
+    Hence
+    \[
+        \Aut(X)
+        \cong
+        \bigl(\Z_p^f:\Z_{p^f-1}\bigr):\Z_f.
+    \]
+    
+    If
+    \[
+        F^\times=\langle g\rangle,
+    \]
+    then
+    \[
+        |g|=p^f-1,
+        \qquad
+        |z|=f.
+    \]
+    The Frobenius automorphism acts on \(F^\times\) by
+    \[
+        a\longmapsto a^p.
+    \]
+    Therefore
+    \[
+        g^z=g^p.
+    \]
+    Thus equivalently
+    \[
+        \Aut(X)
+        \cong
+        \bigl(\Z_p^f:\langle g\rangle\bigr):\langle z\rangle,
+    \]
+    where
+    \[
+        |g|=p^f-1,
+        \qquad
+        |z|=f,
+        \qquad
+        g^z=g^p.
+    \]
+    \end{proof}
+
+\begin{corollary}
+For $p$ odd,
+\[
+    \Aut(\Z_p:\Z_{p-1})
+    \cong
+    \Z_p:\Z_{p-1}.
+\]
+\end{corollary}
+
+
+    
+    \begin{proof}
+    Take
+    \[
+        F=\F_p.
+    \]
+    Then
+    \[
+        f=1,
+        \qquad
+        F^+\cong \Z_p,
+        \qquad
+        F^\times\cong \Z_{p-1}.
+    \]
+    Therefore
+    \[
+        X=F^+:F^\times
+        \cong
+        \Z_p:\Z_{p-1}.
+    \]
+    Since \(p\) is odd, we have \(p>2\), so the proposition applies.
+    
+    Moreover,
+    \[
+        \operatorname{Gal}(\F_p/\F_p)=1.
+    \]
+    Hence
+    \[
+        \Aut(X)
+        \cong
+        X:\operatorname{Gal}(\F_p/\F_p)
+        \cong
+        X.
+    \]
+    Therefore
+    \[
+        \Aut(\Z_p:\Z_{p-1})
+        \cong
+        \Z_p:\Z_{p-1}.
+    \]
+    \end{proof}
+
+\section{The Case \texorpdfstring{$p=3$}{p=3} and \texorpdfstring{$f=2$}{f=2}}
+
+\begin{example}
+Assume
+\[
+    p=3,
+    \qquad
+    f=2.
+\]
+Then
+\[
+    q=9,
+    \qquad
+    F=\F_9.
+\]
+Let
+\[
+    X=\F_9^+:\F_9^\times.
+\]
+Since
+\[
+    \F_9^+\cong \Z_3^2,
+    \qquad
+    \F_9^\times\cong \Z_8,
+\]
+we have
+\[
+    X\cong \Z_3^2:\Z_8.
+\]
+
+By the previous proposition,
+\[
+    \Aut(X)
+    \cong
+    (\Z_3^2:\Z_8):\Z_2.
+\]
+Equivalently,
+\[
+    \Aut(X)
+    \cong
+    \Z_3^2:(\Z_8:\Z_2).
+\]
+
+Let
+\[
+    \Z_8=\gen{g},
+\]
+and let $z$ be the Frobenius automorphism. Since $p=3$, we have
+\[
+    g^z=g^3.
+\]
+Now define
+\[
+    a=g^2,
+    \qquad
+    b=gz.
+\]
+Then
+\[
+    |a|=4.
+\]
+Also,
+\[
+    b^2
+    =
+    (gz)(gz)
+    =
+    gzgz
+    =
+    gg^z z^2
+    =
+    gg^3
+    =
+    g^4.
+\]
+Hence
+\[
+    |b|=4,
+    \qquad
+    b^2=g^4.
+\]
+But
+\[
+    a^2=(g^2)^2=g^4,
+\]
+so
+\[
+    a^2=b^2.
+\]
+
+Moreover,
+\[
+    a^b
+    =
+    (g^2)^{gz}
+    =
+    (g^2)^z
+    =
+    g^6
+    =
+    (g^2)^{-1}
+    =
+    a^{-1}.
+\]
+Therefore
+\[
+    \gen{a,b}\cong Q_8,
+\]
+where
+\[
+    Q_8=\{1,-1,i,-i,j,-j,k,-k\}.
+\]
+
+Thus
+\[
+    \Aut(X)
+    \cong
+    (\Z_3^2:\Z_8):\Z_2
+    =
+    \Z_3^2:(\Z_8:\Z_2)
+    >
+    \Z_3^2:Q_8.
+\]
+\end{example}
+
+\begin{exercise}
+Show that all elements of order $3$ in
+\[
+    \Z_3^2:Q_8
+\]
+are conjugate.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        G=\Z_3^2:Q_8,
+        \qquad
+        V=\Z_3^2.
+    \]
+    Then
+    \[
+        V\lhd G,
+        \qquad
+        G/V\cong Q_8.
+    \]
+    
+    First we show that every element of order \(3\) in \(G\) lies in \(V\). Let \(x\in G\) have order \(3\). Then the image \(xV\in G/V\cong Q_8\) has order dividing \(3\). But
+    \[
+        |Q_8|=8,
+    \]
+    so \(Q_8\) has no nontrivial element of order \(3\). Hence
+    \[
+        xV=V,
+    \]
+    and therefore
+    \[
+        x\in V.
+    \]
+    Since \(V\cong \Z_3^2\), every nonidentity element of \(V\) has order \(3\). Thus the elements of order \(3\) in \(G\) are exactly
+    \[
+        V^\#=V\setminus\{0\}.
+    \]
+    
+    It remains to show that all elements of \(V^\#\) are conjugate in \(G\). Since \(Q_8\leq G\), it suffices to show that \(Q_8\) acts transitively on \(V^\#\).
+    
+    Recall that in this construction
+    \[
+        V=\F_9^+
+    \]
+    and
+    \[
+        Q_8=\langle a,b\rangle\leq \mathbb{F}_9^\times:\operatorname{Gal}(\mathbb{F}_9/\mathbb{F}_3),
+    \]
+    where
+    \[
+        a^2=b^2
+    \]
+    is the central element of order \(2\) in \(Q_8\). On \(V=\F_9^+\), this central element acts as multiplication by \(-1\). Hence it has no nonzero fixed point, because if
+    \[
+        -v=v,
+    \]
+    then
+    \[
+        2v=0,
+    \]
+    and over \(\F_3\) this implies
+    \[
+        v=0.
+    \]
+    
+    Now let \(1\neq q\in Q_8\). If \(q\) has order \(2\), then \(q\) is the central element and we have just shown that it fixes no nonzero vector. If \(q\) has order \(4\), then
+    \[
+        q^2
+    \]
+    is the central element of order \(2\). If \(q\) fixed some \(0\neq v\in V\), then \(q^2\) would also fix \(v\), contradicting the previous paragraph. Therefore no nonidentity element of \(Q_8\) fixes a nonzero element of \(V\).
+    
+    Thus the stabilizer in \(Q_8\) of any \(0\neq v\in V\) is trivial. By the orbit-stabilizer theorem,
+    \[
+        |v^{Q_8}|
+        =
+        |Q_8:C_{Q_8}(v)|
+        =
+        |Q_8|
+        =
+        8.
+    \]
+    But
+    \[
+        |V^\#|=|\Z_3^2|-1=9-1=8.
+    \]
+    Therefore
+    \[
+        v^{Q_8}=V^\#.
+    \]
+    So \(Q_8\) is transitive on \(V^\#\).
+    
+    Consequently all nonidentity elements of \(V\), equivalently all elements of order \(3\) in \(G\), are conjugate in \(G\).
+    \end{proof}
+
+\section{Group Actions}
+
+\begin{definition}[Group action]
+Let $G$ be a group and let $\Omega$ be a set. We say that $G$ \textbf{acts} on $\Omega$ if the following conditions hold.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item Each element $g\in G$ gives a one-to-one map
+    \[
+        \Omega\longrightarrow \Omega.
+    \]
+    The image of $\omega\in\Omega$ under $g$ is denoted by
+    \[
+        \omega^g.
+    \]
+
+    \item The identity element acts trivially:
+    \[
+        \omega^1=\omega
+        \qquad
+        \text{for all }\omega\in\Omega.
+    \]
+
+    \item The action is compatible with multiplication:
+    \[
+        (\omega^{g_1})^{g_2}
+        =
+        \omega^{g_1g_2}
+        \qquad
+        \text{for all }\omega\in\Omega,\ g_1,g_2\in G.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{example}[Linear action]
+The group $\operatorname{GL}(n,F)$ acts on
+\[
+    \Omega=F^n.
+\]
+Viewing vectors as row vectors, the action is
+\[
+    v^A=vA
+    \qquad
+    (v\in F^n,\ A\in\operatorname{GL}(n,F)).
+\]
+\end{example}
+
+\begin{example}[Conjugation action]
+A group $G$ acts on itself by conjugation:
+\[
+    \Omega=G,
+    \qquad
+    \omega^g=g^{-1}\omega g.
+\]
+The conjugacy class of an element $x\in G$ is
+\[
+    x^G
+    =
+    \{x^g:g\in G\}
+    =
+    \{g^{-1}xg:g\in G\}.
+\]
+\end{example}
+
+\begin{example}[Right multiplication action]
+A group $G$ acts on itself by right multiplication:
+\[
+    \Omega=G,
+    \qquad
+    \omega^g=\omega g.
+\]
+\end{example}
+
+\section{The \texorpdfstring{$N/C$}{N/C} Lemma}
+
+\begin{lemma}[$N/C$-lemma]
+Let $H\leq G$. Then
+\[
+    C_G(H)\lhd N_G(H),
+\]
+and
+\[
+    N_G(H)/C_G(H)\leq \Aut(H).
+\]
+In particular, if $H\lhd G$, then
+\[
+    G/C_G(H)\leq \Aut(H).
+\]
+\end{lemma}
+
+\begin{proof}
+The normalizer $N_G(H)$ acts on $H$ by conjugation:
+\[
+    h^x=x^{-1}hx
+    \qquad
+    (h\in H,\ x\in N_G(H)).
+\]
+Since $x\in N_G(H)$, we have $x^{-1}Hx=H$, so this conjugation map is an automorphism of $H$.
+
+Thus we get a homomorphism
+\[
+    \theta:N_G(H)\longrightarrow \Aut(H),
+    \qquad
+    x\longmapsto (h\mapsto h^x).
+\]
+Its kernel is
+\[
+    \Ker\theta
+    =
+    \{x\in N_G(H):h^x=h\text{ for all }h\in H\}
+    =
+    C_G(H).
+\]
+Therefore
+\[
+    C_G(H)\lhd N_G(H),
+\]
+and by the First Isomorphism Theorem,
+\[
+    N_G(H)/C_G(H)
+    \cong
+    \operatorname{Im}\theta
+    \leq
+    \Aut(H).
+\]
+
+If $H\lhd G$, then
+\[
+    N_G(H)=G,
+\]
+so
+\[
+    G/C_G(H)\leq \Aut(H).
+\]
+\end{proof}
+

@@ -1,0 +1,697 @@
+
+\providecommand{\GL}{\operatorname{GL}}
+\providecommand{\PGL}{\operatorname{PGL}}
+\providecommand{\AGL}{\operatorname{AGL}}
+\providecommand{\Hol}{\operatorname{Hol}}
+\providecommand{\Sym}{\operatorname{Sym}}
+
+\chapter{Linear and Affine Permutation Groups}
+
+\section{Multiple Transitivity}
+
+\begin{definition}[\(k\)-transitive action]
+Let \(G\leq \Sym(\Omega)\), and let \(k\geq 1\). We say that \(G\) is
+\emph{\(k\)-transitive} on \(\Omega\) if for any two ordered \(k\)-tuples
+\[
+    (\omega_1,\ldots,\omega_k),\qquad (\omega_1',\ldots,\omega_k')
+\]
+of pairwise distinct points of \(\Omega\), there exists \(g\in G\) such that
+\[
+    \omega_i^g=\omega_i'
+    \qquad\text{for all }1\leq i\leq k.
+\]
+Equivalently,
+\[
+    (\omega_1,\ldots,\omega_k)^g
+    =
+    (\omega_1',\ldots,\omega_k').
+\]
+\end{definition}
+
+\begin{definition}[Sharply \(k\)-transitive action]
+Let \(G\leq \Sym(\Omega)\). We say that \(G\) is
+\emph{sharply \(k\)-transitive} on \(\Omega\) if for any two ordered \(k\)-tuples
+of pairwise distinct points
+\[
+    (\omega_1,\ldots,\omega_k),\qquad
+    (\omega_1',\ldots,\omega_k'),
+\]
+there exists \emph{exactly one} element \(g\in G\) such that
+\[
+    \omega_i^g=\omega_i'
+    \qquad\text{for all }1\leq i\leq k.
+\]
+\end{definition}
+
+\begin{proposition}[Stabilizer criterion for \(k\)-transitivity]
+Let \(G\leq \Sym(\Omega)\), let \(\omega\in \Omega\), and let \(k\geq 2\).
+Then \(G\) is \(k\)-transitive on \(\Omega\) if and only if
+\[
+    G \text{ is transitive on } \Omega
+    \quad\text{and}\quad
+    G_\omega \text{ is }(k-1)\text{-transitive on }\Omega\setminus\{\omega\}.
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose first that \(G\) is \(k\)-transitive. Then \(G\) is certainly transitive.
+Moreover, if
+\[
+    (\alpha_2,\ldots,\alpha_k),\qquad
+    (\beta_2,\ldots,\beta_k)
+\]
+are two ordered \((k-1)\)-tuples of pairwise distinct points in
+\(\Omega\setminus\{\omega\}\), then \(k\)-transitivity gives some \(g\in G\) such that
+\[
+    (\omega,\alpha_2,\ldots,\alpha_k)^g
+    =
+    (\omega,\beta_2,\ldots,\beta_k).
+\]
+In particular, \(\omega^g=\omega\), so \(g\in G_\omega\). Hence \(G_\omega\)
+is \((k-1)\)-transitive on \(\Omega\setminus\{\omega\}\).
+
+Conversely, suppose that \(G\) is transitive on \(\Omega\) and \(G_\omega\) is
+\((k-1)\)-transitive on \(\Omega\setminus\{\omega\}\). Let
+\[
+    (\omega_1,\ldots,\omega_k),\qquad
+    (\omega_1',\ldots,\omega_k')
+\]
+be ordered \(k\)-tuples of pairwise distinct points. Since \(G\) is transitive, choose
+\(g_1,g_2\in G\) such that
+\[
+    \omega_1^{g_1}=\omega,\qquad
+    (\omega_1')^{g_2}=\omega.
+\]
+Then
+\[
+    \omega_2^{g_1},\ldots,\omega_k^{g_1},
+    \qquad
+    (\omega_2')^{g_2},\ldots,(\omega_k')^{g_2}
+\]
+are two ordered \((k-1)\)-tuples of pairwise distinct points in
+\(\Omega\setminus\{\omega\}\). By the hypothesis on \(G_\omega\), there exists
+\(h\in G_\omega\) such that
+\[
+    \bigl(\omega_i^{g_1}\bigr)^h=(\omega_i')^{g_2}
+    \qquad\text{for }2\leq i\leq k.
+\]
+Since \(h\) fixes \(\omega\), we also have
+\[
+    \bigl(\omega_1^{g_1}\bigr)^h=\omega=(\omega_1')^{g_2}.
+\]
+Therefore
+\[
+    (\omega_1,\ldots,\omega_k)^{g_1 h g_2^{-1}}
+    =
+    (\omega_1',\ldots,\omega_k'),
+\]
+so \(G\) is \(k\)-transitive.
+\end{proof}
+
+\begin{definition}[Rank of a transitive permutation group]
+Let \(G\leq \Sym(\Omega)\) be transitive. The \emph{rank} of \(G\) on \(\Omega\)
+is the number of \(G_\omega\)-orbits on \(\Omega\), where \(\omega\in \Omega\).
+Equivalently, it is the number of \(G\)-orbits on \(\Omega\times\Omega\).
+\end{definition}
+
+\begin{remark}
+A transitive group \(G\leq \Sym(\Omega)\) is \(2\)-transitive if and only if it has
+rank \(2\). Indeed, one orbit on \(\Omega\times\Omega\) is the diagonal
+\[
+    \{(\omega,\omega)\mid \omega\in \Omega\},
+\]
+and \(2\)-transitivity is precisely the assertion that all off-diagonal pairs lie in
+one orbit.
+\end{remark}
+
+\begin{lemma}[Counting criterion for sharp transitivity]
+Assume \(\Omega\) is finite. If \(G\) is \(k\)-transitive on \(\Omega\), then \(G\) is
+sharply \(k\)-transitive if and only if
+\[
+    |G|=|\Omega|(|\Omega|-1)\cdots(|\Omega|-k+1).
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(\Omega^{(k)}\) denote the set of ordered \(k\)-tuples of pairwise distinct
+points of \(\Omega\). Then
+\[
+    |\Omega^{(k)}|
+    =
+    |\Omega|(|\Omega|-1)\cdots(|\Omega|-k+1).
+\]
+If \(G\) is \(k\)-transitive, then \(G\) acts transitively on \(\Omega^{(k)}\).
+Thus, for a fixed tuple \(\mathbf{\omega}\in \Omega^{(k)}\),
+\[
+    |\Omega^{(k)}|=[G:G_{\mathbf{\omega}}].
+\]
+The action is sharply \(k\)-transitive exactly when
+\(G_{\mathbf{\omega}}=1\), which is equivalent to
+\[
+    |G|=|\Omega^{(k)}|.
+\]
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\section{The Natural Action of \texorpdfstring{$\GL(V)$}{GL(V)}}
+
+Let \(\F=\F_q\) be a finite field, let \(V=\F^d\) with \(d>1\), and let
+\[
+    G=\GL(V).
+\]
+The group \(G\) acts naturally on \(V\). There are two orbits:
+\[
+    \{0\}
+    \qquad\text{and}\qquad
+    \Omega:=V^\#:=V\setminus\{0\}.
+\]
+
+\begin{proposition}
+The action of \(\GL(V)\) on \(\Omega=V^\#\) is transitive.
+\end{proposition}
+
+\begin{proof}
+Let \(u,v\in V^\#\). Extend \(u\) to a basis
+\[
+    u,u_2,\ldots,u_d
+\]
+of \(V\), and extend \(v\) to a basis
+\[
+    v,v_2,\ldots,v_d
+\]
+of \(V\). There is a unique linear isomorphism \(g\in \GL(V)\) such that
+\[
+    u^g=v,\qquad u_i^g=v_i\quad(2\leq i\leq d).
+\]
+Hence \(u\) and \(v\) lie in the same \(G\)-orbit.
+\end{proof}
+
+\begin{proposition}
+If \(q>2\), then the action of \(\GL(V)\) on \(\Omega=V^\#\) is imprimitive.
+\end{proposition}
+
+\begin{proof}
+For \(v\in V^\#\), define
+\[
+    B_v:=\F^\times v=\{\lambda v\mid \lambda\in \F^\times\}.
+\]
+Let
+\[
+    \mathcal B=\{B_v\mid v\in V^\#\}.
+\]
+Then \(\mathcal B\) is the set of nonzero points on the one-dimensional subspaces
+of \(V\). Since \(q>2\),
+\[
+    |B_v|=q-1>1.
+\]
+Also, since \(d>1\),
+\[
+    |B_v|=q-1<q^d-1=|\Omega|.
+\]
+Thus the blocks are nontrivial and proper.
+
+For any \(g\in \GL(V)\),
+\[
+    B_v^g
+    =
+    \{\lambda v^g\mid \lambda\in \F^\times\}
+    =
+    B_{v^g}.
+\]
+Hence \(g\) permutes the members of \(\mathcal B\). Therefore \(\mathcal B\) is a
+nontrivial block system for the action of \(\GL(V)\) on \(\Omega\), and the action is
+imprimitive.
+\end{proof}
+
+\begin{proposition}
+If \(q=2\), then the action of \(\GL(V)\) on \(\Omega=V^\#\) is \(2\)-transitive.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    (u_1,u_2),\qquad (v_1,v_2)
+\]
+be ordered pairs of distinct points in \(\Omega\). Since \(q=2\), the only nonzero
+scalar is \(1\). Hence \(u_1\neq u_2\) implies that \(u_1,u_2\) are linearly
+independent. Similarly, \(v_1,v_2\) are linearly independent.
+
+Extend
+\[
+    u_1,u_2
+\]
+to a basis
+\[
+    u_1,u_2,\ldots,u_d
+\]
+of \(V\), and extend
+\[
+    v_1,v_2
+\]
+to a basis
+\[
+    v_1,v_2,\ldots,v_d
+\]
+of \(V\). There exists \(g\in \GL(V)\) such that
+\[
+    u_i^g=v_i
+    \qquad\text{for all }1\leq i\leq d.
+\]
+In particular,
+\[
+    (u_1,u_2)^g=(v_1,v_2).
+\]
+Thus \(\GL(V)\) is \(2\)-transitive on \(V^\#\).
+\end{proof}
+
+\begin{proposition}[Rank of \(\GL(V)\) on \(V^\#\)]
+Assume \(q>2\). Then the rank of \(\GL(V)\) on \(\Omega=V^\#\) is \(q\).
+More precisely, the \(G\)-orbits on \(\Omega\times\Omega\) are:
+\[
+    \Delta=\{(v,v)\mid v\in \Omega\},
+\]
+\[
+    \mathcal O_\lambda
+    =
+    \{(v,\lambda v)\mid v\in \Omega\},
+    \qquad \lambda\in \F^\times\setminus\{1\},
+\]
+and
+\[
+    \mathcal O_{\mathrm{ind}}
+    =
+    \{(u,v)\in \Omega\times\Omega\mid \langle u\rangle\neq \langle v\rangle\}.
+\]
+Therefore
+\[
+    \operatorname{rank}(G,\Omega)
+    =
+    1+(q-2)+1
+    =
+    q.
+\]
+\end{proposition}
+
+\begin{proof}
+The diagonal \(\Delta\) is clearly one orbit.
+
+Now fix \(\lambda\in \F^\times\setminus\{1\}\). If \(u,v\in \Omega\), choose
+\(g\in \GL(V)\) such that \(u^g=v\). Then
+\[
+    (u,\lambda u)^g=(v,\lambda v).
+\]
+Thus \(\mathcal O_\lambda\) is an orbit. Moreover, if
+\[
+    (u,\lambda u)^g=(v,\mu v),
+\]
+then
+\[
+    \lambda u^g=\mu v.
+\]
+Since \(u^g=v\), we get \(\lambda=\mu\). Hence the orbits
+\(\mathcal O_\lambda\) are distinct as \(\lambda\) varies.
+
+Finally, suppose \(\langle u\rangle\neq \langle v\rangle\) and
+\(\langle u'\rangle\neq \langle v'\rangle\). Then \(u,v\) are linearly independent,
+and \(u',v'\) are linearly independent. Extend both pairs to bases of \(V\), and
+choose \(g\in \GL(V)\) mapping the first basis to the second. Then
+\[
+    (u,v)^g=(u',v').
+\]
+Thus all pairs with distinct one-dimensional spans form one orbit.
+
+Hence the rank is
+\[
+    1+(q-2)+1=q.
+\]
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\section{The Projective Action}
+
+Continue to let \(V=\F_q^d\) with \(d>1\), and let
+\[
+    G=\GL(V).
+\]
+Let
+\[
+    \mathcal B
+    =
+    \{B_v=\F^\times v\mid v\in V^\#\}.
+\]
+We identify \(\mathcal B\) with the set of one-dimensional subspaces of \(V\), i.e.
+the points of the projective space associated with \(V\).
+
+\begin{proposition}
+The action of \(\GL(V)\) on \(\mathcal B\) is transitive, and the kernel of this
+action is
+\[
+    Z(\GL(V))=\{\lambda I_V\mid \lambda\in \F^\times\}.
+\]
+Consequently the induced faithful permutation group is
+\[
+    \GL(V)/Z(\GL(V))=\PGL(V).
+\]
+\end{proposition}
+
+\begin{proof}
+Transitivity follows from the transitivity of \(\GL(V)\) on nonzero vectors:
+if \(B_u,B_v\in \mathcal B\), choose \(g\in \GL(V)\) with \(u^g=v\). Then
+\[
+    B_u^g=B_v.
+\]
+
+Every scalar map \(\lambda I_V\) fixes every one-dimensional subspace, so
+\[
+    Z(\GL(V))\leq \Ker\bigl(\GL(V)\curvearrowright \mathcal B\bigr).
+\]
+
+Conversely, suppose \(g\in \GL(V)\) fixes every one-dimensional subspace.
+Then for each \(0\neq v\in V\), there exists \(\lambda_v\in \F^\times\) such that
+\[
+    v^g=\lambda_v v.
+\]
+If \(u,v\) are linearly independent, then \(u+v\neq 0\), and \(g\) also fixes the
+line \(\F(u+v)\). Hence
+\[
+    (u+v)^g=\lambda_{u+v}(u+v).
+\]
+But
+\[
+    (u+v)^g=u^g+v^g=\lambda_u u+\lambda_v v.
+\]
+Since \(u,v\) are linearly independent, we get
+\[
+    \lambda_u=\lambda_v=\lambda_{u+v}.
+\]
+It follows that the scalar \(\lambda_v\) is independent of \(v\), so \(g=\lambda I_V\).
+Thus the kernel is exactly the scalar subgroup \(Z(\GL(V))\).
+\end{proof}
+
+\begin{proposition}
+The group \(\PGL(V)\) is \(2\)-transitive on \(\mathcal B\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    (B_{u_1},B_{u_2}),\qquad (B_{v_1},B_{v_2})
+\]
+be ordered pairs of distinct points of \(\mathcal B\). Since the projective points are
+distinct, \(u_1,u_2\) are linearly independent, and \(v_1,v_2\) are linearly
+independent.
+
+Extend \(u_1,u_2\) to a basis of \(V\), and extend \(v_1,v_2\) to a basis of
+\(V\). Then there exists \(g\in \GL(V)\) such that
+\[
+    u_1^g=v_1,\qquad u_2^g=v_2.
+\]
+Therefore
+\[
+    (B_{u_1},B_{u_2})^g=(B_{v_1},B_{v_2}).
+\]
+Passing to the quotient by the kernel, \(\PGL(V)\) is \(2\)-transitive on
+\(\mathcal B\).
+\end{proof}
+
+\begin{theorem}
+The group \(\PGL(V)\) is not \(3\)-transitive on \(\mathcal B\) if and only if
+\[
+    d>2.
+\]
+Equivalently, \(\PGL(V)\) is \(3\)-transitive on \(\mathcal B\) exactly when
+\(d=2\).
+\end{theorem}
+
+\begin{proof}
+First suppose \(d>2\). Choose linearly independent vectors
+\[
+    e_1,e_2,e_3\in V.
+\]
+Then the ordered triple
+\[
+    (\F e_1,\F e_2,\F e_3)
+\]
+has representatives that are linearly independent. On the other hand,
+\[
+    (\F e_1,\F e_2,\F(e_1+e_2))
+\]
+is an ordered triple of distinct projective points whose representatives are linearly
+dependent. Linear maps preserve linear dependence and linear independence.
+Therefore these two triples cannot lie in the same \(\PGL(V)\)-orbit. Thus
+\(\PGL(V)\) is not \(3\)-transitive.
+
+Conversely, suppose \(d=2\). Let
+\[
+    (\F u_1,\F u_2,\F u_3),\qquad
+    (\F v_1,\F v_2,\F v_3)
+\]
+be ordered triples of distinct projective points. Since \(\F u_1\neq \F u_2\),
+the vectors \(u_1,u_2\) form a basis of \(V\). Similarly, \(v_1,v_2\) form a
+basis of \(V\).
+
+Since \(\F u_3\) is distinct from both \(\F u_1\) and \(\F u_2\), we can write
+\[
+    u_3=a u_1+b u_2
+\]
+with \(a,b\in \F^\times\). Similarly,
+\[
+    v_3=c v_1+d v_2
+\]
+with \(c,d\in \F^\times\).
+
+Define \(g\in \GL(V)\) by
+\[
+    u_1^g=\frac{c}{a}v_1,
+    \qquad
+    u_2^g=\frac{d}{b}v_2.
+\]
+Then
+\[
+    u_3^g
+    =
+    (a u_1+b u_2)^g
+    =
+    c v_1+d v_2
+    =
+    v_3.
+\]
+Hence
+\[
+    (\F u_1,\F u_2,\F u_3)^g
+    =
+    (\F v_1,\F v_2,\F v_3).
+\]
+Thus \(\PGL(V)\) is \(3\)-transitive when \(d=2\).
+\end{proof}
+
+\begin{remark}
+When \(d=2\), the action of \(\PGL_2(q)\) on the projective line
+\[
+    \mathbb P^1(\F_q)
+\]
+is in fact sharply \(3\)-transitive. Indeed,
+\[
+    |\PGL_2(q)|=q(q^2-1),
+\]
+and the number of ordered triples of distinct points of \(\mathbb P^1(\F_q)\) is
+\[
+    (q+1)q(q-1)=q(q^2-1).
+\]
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+\section{Affine Permutation Groups}
+
+Let
+\[
+    N=(\Z/p\Z)^d
+\]
+where \(p\) is prime and \(d>1\). We regard \(N\) as the additive group of the
+vector space \(\F_p^d\). Then
+\[
+    \Aut(N)=\GL_d(p).
+\]
+Set
+\[
+    H=\Aut(N)=\GL_d(p),
+    \qquad
+    G=N:H=\Hol(N).
+\]
+Thus
+\[
+    G=\F_p^d:\GL_d(p),
+\]
+the affine general linear group.
+
+Let \(\Omega=N\). We define an action of \(G\) on \(\Omega\) as follows. If
+\(x\in N\), \(y\in H\), and \(w\in N\), then
+\[
+    w^{xy}:=(w+x)^y=w^y+x^y.
+\]
+Here \(x\) acts as a translation and \(y\) acts as a linear transformation.
+
+\begin{theorem}
+The affine group
+\[
+    G=\F_p^d:\GL_d(p)
+\]
+is \(2\)-transitive on \(\Omega=\F_p^d\).
+Furthermore, if \(p=2\), then \(G\) is \(3\)-transitive.
+\end{theorem}
+
+\begin{proof}
+We first prove \(2\)-transitivity. Let
+\[
+    (u_1,u_2),\qquad (v_1,v_2)
+\]
+be ordered pairs of distinct points of \(N\). Then
+\[
+    u_2-u_1\neq 0,
+    \qquad
+    v_2-v_1\neq 0.
+\]
+Since \(\GL_d(p)\) is transitive on nonzero vectors, choose \(y\in \GL_d(p)\)
+such that
+\[
+    (u_2-u_1)^y=v_2-v_1.
+\]
+Now choose
+\[
+    x=v_1^{y^{-1}}-u_1.
+\]
+Then
+\[
+    (u_1+x)^y
+    =
+    \bigl(u_1+v_1^{y^{-1}}-u_1\bigr)^y
+    =
+    v_1,
+\]
+and
+\[
+    (u_2+x)^y
+    =
+    \bigl(u_2-u_1+v_1^{y^{-1}}\bigr)^y
+    =
+    (u_2-u_1)^y+v_1
+    =
+    v_2.
+\]
+Thus
+\[
+    (u_1,u_2)^{xy}=(v_1,v_2),
+\]
+so \(G\) is \(2\)-transitive.
+
+Now assume \(p=2\). The stabilizer of \(0\in N\) in \(G\) is
+\[
+    G_0=\GL_d(2).
+\]
+By the earlier result, \(\GL_d(2)\) is \(2\)-transitive on
+\[
+    N\setminus\{0\}.
+\]
+Since \(G\) is transitive on \(N\), the stabilizer criterion for multiple transitivity
+implies that \(G\) is \(3\)-transitive on \(N\).
+\end{proof}
+
+\begin{remark}
+The translation subgroup \(N\) is regular on \(\Omega=N\). It is also a minimal
+normal subgroup of \(G\). Indeed, the normal subgroups of \(N\) that are normalized
+by \(H=\GL_d(p)\) are precisely the \(H\)-invariant subspaces of \(\F_p^d\), and
+\(\GL_d(p)\) acts irreducibly on the natural module. Hence the only such subgroups
+are \(0\) and \(N\).
+
+Moreover, every nontrivial normal subgroup of \(G\) contains \(N\). Therefore every
+nontrivial normal subgroup of \(G\) is transitive on \(\Omega\). Thus \(G\) is a
+quasiprimitive affine permutation group.
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+\section{A Sharply \texorpdfstring{$2$}{2}-Transitive Affine Example}
+
+The full affine group \(\AGL_d(p)=\F_p^d:\GL_d(p)\) is often much larger than is
+needed for \(2\)-transitivity. The following construction gives a smaller sharply
+\(2\)-transitive group.
+
+\begin{example}[The group \(\AGL_1(q)\)]
+Let
+\[
+    F=\F_q,
+    \qquad q=p^f.
+\]
+Then the additive group of \(F\) satisfies
+\[
+    F^+\cong (\Z/p\Z)^f,
+\]
+and the multiplicative group satisfies
+\[
+    F^\times\cong C_{q-1}.
+\]
+Choose a generator \(\varphi\) of \(F^\times\). Then
+\[
+    F^\times=\langle \varphi\rangle.
+\]
+
+The group \(F^\times\) acts on \(F^+\) by field multiplication:
+\[
+    x^\varphi=x\varphi
+    \qquad (x\in F).
+\]
+This is an automorphism of the additive group \(F^+\). Hence
+\[
+    \langle \varphi\rangle\leq \GL_f(p),
+\]
+and we can form
+\[
+    G=F^+:\langle \varphi\rangle
+    \leq
+    \Hol(F^+)
+    =
+    F^+:\GL_f(p).
+\]
+Equivalently, \(G\) is the group of affine transformations
+\[
+    x\mapsto ax+b,
+    \qquad
+    a\in F^\times,\ b\in F.
+\]
+This group is usually denoted
+\[
+    \AGL_1(q).
+\]
+
+We claim that \(G\) is sharply \(2\)-transitive on \(F\).
+
+First, \(F^\times\) is transitive on \(F^\times=F\setminus\{0\}\). Indeed, if
+\(u,v\in F^\times\), then there exists \(a\in F^\times\) such that
+\[
+    ua=v.
+\]
+Therefore the stabilizer of \(0\) in \(G\) is transitive on \(F\setminus\{0\}\).
+Since the translation subgroup \(F^+\) is transitive on \(F\), it follows that
+\(G\) is \(2\)-transitive on \(F\).
+
+Finally,
+\[
+    |G|=|F^+|\,|F^\times|=q(q-1).
+\]
+The number of ordered pairs \((x,y)\in F\times F\) with \(x\neq y\) is also
+\[
+    q(q-1).
+\]
+By the counting criterion, \(G\) is sharply \(2\)-transitive.
+
+Equivalently, this uniqueness can be checked directly: given \(u_1\neq u_2\) and
+\(v_1\neq v_2\) in \(F\), the affine map
+\[
+    x\mapsto ax+b
+\]
+sending \(u_1\mapsto v_1\) and \(u_2\mapsto v_2\) is uniquely determined by
+\[
+    a=\frac{v_2-v_1}{u_2-u_1},
+    \qquad
+    b=v_1-a u_1.
+\]
+\end{example}

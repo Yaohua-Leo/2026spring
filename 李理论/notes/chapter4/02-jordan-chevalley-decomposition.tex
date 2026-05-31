@@ -1,0 +1,335 @@
+\section{Jordan-Chevalley decomposition}
+
+From now on we need over base field $F$ to be algebraically closed. (At least we say the base field $F$ contains all the roots of the characteristic polynomial of the linear transformation we need.)
+
+\begin{definition}
+    A finite-dimensional linear transformation $\varphi: V \to V$ is called \emph{semisimple} if
+    \begin{itemize}
+        \item $\exists$ a basis of $V$ such that $\varphi$ is represented by a diagonal matrix.
+        \item Or $(\varphi-\alpha I)^2 v=0$ if and only if $(\varphi-\alpha I)v=0$ for all $\alpha \in F, v \in V$.
+    \end{itemize}
+    For any $V' \subseteq V$, $V'$ is $\varphi$-invariant.
+\end{definition}
+
+\begin{lemma}[Chinese Remainder Theorem for commutative rings]
+    Let $R$ be a commutative ring with $1$, and let $I_1,\dots,I_n$ be ideals of $R$ such that
+    \[
+        I_i+I_j=R \qquad \text{for all } i\ne j.
+    \]
+    Then the natural map
+    \[
+        \varphi:R\to \prod_{i=1}^n R/I_i,\qquad
+        r\mapsto (r+I_1,\dots,r+I_n)
+    \]
+    is surjective, and
+    \[
+        \ker(\varphi)=\bigcap_{i=1}^n I_i.
+    \]
+    Hence it induces an isomorphism
+    \[
+        R\Big/\bigcap_{i=1}^n I_i \;\cong\; \prod_{i=1}^n R/I_i.
+    \]
+\end{lemma}
+
+\begin{proof}
+    We first determine the kernel of $\varphi$. For $r\in R$,
+    \[
+        \varphi(r)=0
+    \]
+    if and only if
+    \[
+        r+I_i=0+I_i
+        \qquad\text{for all } i=1,\dots,n,
+    \]
+    which is equivalent to $r\in I_i$ for all $i$. Thus
+    \[
+        \ker(\varphi)=\bigcap_{i=1}^n I_i.
+    \]
+
+    It remains to prove that $\varphi$ is surjective. Let
+    \[
+        (a_1+I_1,\dots,a_n+I_n)\in \prod_{i=1}^n R/I_i
+    \]
+    be arbitrary. We shall construct $r\in R$ such that
+    \[
+        r\equiv a_i \pmod{I_i}\qquad (i=1,\dots,n).
+    \]
+
+    Fix $i$. Since the ideals are pairwise comaximal, for every $j\ne i$ we have
+    \[
+        I_i+I_j=R.
+    \]
+    We claim that
+    \[
+        I_i+\prod_{j\ne i} I_j = R.
+    \]
+    Indeed, for each $j\ne i$, choose $u_j\in I_i$ and $v_j\in I_j$ such that
+    \[
+        u_j+v_j=1.
+    \]
+    Then
+    \[
+        \prod_{j\ne i}(u_j+v_j)=1.
+    \]
+    After expanding this product, every term except $\prod_{j\ne i} v_j$ contains at least
+    one factor $u_j\in I_i$, hence lies in $I_i$. On the other hand,
+    \[
+        \prod_{j\ne i} v_j \in \prod_{j\ne i} I_j.
+    \]
+    Therefore
+    \[
+        1=x_i+y_i
+    \]
+    for some
+    \[
+        x_i\in I_i,\qquad y_i\in \prod_{j\ne i} I_j.
+    \]
+    In particular,
+    \[
+        y_i\equiv 1 \pmod{I_i},
+        \qquad
+        y_i\equiv 0 \pmod{I_j}\quad (j\ne i).
+    \]
+
+    Now set
+    \[
+        r:=\sum_{i=1}^n a_i y_i.
+    \]
+    Fix $k\in\{1,\dots,n\}$. Modulo $I_k$, we have
+    \[
+        r \equiv a_k y_k + \sum_{i\ne k} a_i y_i.
+    \]
+    Since $y_k\equiv 1 \pmod{I_k}$ and $y_i\equiv 0 \pmod{I_k}$ for $i\ne k$, it follows that
+    \[
+        r\equiv a_k \pmod{I_k}.
+    \]
+    Thus
+    \[
+        \varphi(r)=(a_1+I_1,\dots,a_n+I_n).
+    \]
+    So $\varphi$ is surjective.
+
+    By the First Isomorphism Theorem,
+    \[
+        R/\ker(\varphi)\cong \operatorname{im}(\varphi)=\prod_{i=1}^n R/I_i.
+    \]
+    Since $\ker(\varphi)=\bigcap_{i=1}^n I_i$, we obtain
+    \[
+        R\Big/\bigcap_{i=1}^n I_i \cong \prod_{i=1}^n R/I_i.
+    \]
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Under the assumptions of the theorem,
+    \[
+        I_1\cap\cdots\cap I_n = I_1\cdots I_n.
+    \]
+    Hence
+    \[
+        R/(I_1\cdots I_n)\cong \prod_{i=1}^n R/I_i.
+    \]
+\end{corollary}
+
+\begin{proof}
+    For any ideals $J_1,\dots,J_n$ of a commutative ring, one always has
+    \[
+        J_1\cdots J_n \subseteq J_1\cap\cdots\cap J_n.
+    \]
+    So it remains to prove the reverse inclusion.
+
+    We first prove the case of two ideals. Suppose $I+J=R$. Let $x\in I\cap J$. Since
+    $I+J=R$, there exist $a\in I$ and $b\in J$ such that
+    \[
+        a+b=1.
+    \]
+    Then
+    \[
+        x=x(a+b)=xa+xb.
+    \]
+    Now $xa\in IJ$ because $x\in J$ and $a\in I$, and similarly $xb\in IJ$ because
+    $x\in I$ and $b\in J$. Hence $x\in IJ$. Therefore
+    \[
+        I\cap J=IJ.
+    \]
+
+    Now proceed by induction on $n$. Let
+    \[
+        J:=I_1\cdots I_{n-1}.
+    \]
+    Since the ideals $I_1,\dots,I_n$ are pairwise comaximal, one has
+    \[
+        I_n+I_k=R \qquad (k=1,\dots,n-1),
+    \]
+    and this implies
+    \[
+        I_n+J=R.
+    \]
+    Hence, by the two-ideal case,
+    \[
+        J\cap I_n = JI_n.
+    \]
+    By the induction hypothesis,
+    \[
+        I_1\cap\cdots\cap I_{n-1}=I_1\cdots I_{n-1}=J.
+    \]
+    Therefore
+    \[
+        I_1\cap\cdots\cap I_n
+        =
+        (I_1\cap\cdots\cap I_{n-1})\cap I_n
+        =
+        J\cap I_n
+        =
+        JI_n
+        =
+        I_1\cdots I_n.
+    \]
+    The desired isomorphism now follows from the theorem.
+\end{proof}
+
+\begin{theorem}
+    An arbitrary linear transformation $\varphi$ can be decomposed as $\varphi = \varphi_s + \varphi_n$, where $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent.
+
+    Furthermore, there exists a polynomial $p(t) \in F[t]$ with zero constant term such that $\varphi_s=p(\varphi)$ and $\varphi_n=\varphi-p(\varphi)$. In other words, $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$.
+\end{theorem}
+
+\begin{proof}
+    Decompose $V$ into a direct sum of generalized eigenspaces $V = V_{\lambda_1} \oplus \cdots \oplus V_{\lambda_k}$. For each $\lambda_i$, let $V_{\lambda_i}$ be the generalized eigenspace of $\varphi$ corresponding to $\lambda_i$.
+
+    Define $\varphi_s$ as $\varphi_s |_{V_{\lambda_i}} = \lambda_i I$. Then $\varphi_s$ is semisimple and $\varphi_n = \varphi - \varphi_s$ is nilpotent. We only need to show that $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$.
+
+    Suppose the characteristic polynomial of $\varphi$ is $P(t) = (t-\lambda_1)^{a_1} \cdots (t-\lambda_k)^{a_k}$. By Chinese Remainder Theorem, there exists a polynomial $p(t) \in F[t]$  such that $p(t) \equiv \lambda_i \pmod{(t-\lambda_i)^{a_i}}$ for all $i$.
+
+    If $0 \in \{\lambda_1, \dots, \lambda_k\}$, then $p(0) = 0$. If $0 \notin \{\lambda_1, \dots, \lambda_k\}$, then there exists $p(t)$ such that $p(t) \equiv \lambda_i \pmod{(t-\lambda_i)^{a_i}}$ and $p(t) \equiv 0 \pmod t$. Hence we can always confirm that $p(t)$ is a polynomial with zero constant term.
+
+    Now we have $p(\varphi) = \varphi_s$ and $\varphi - p(\varphi) = \varphi_n$.
+\end{proof}
+
+\begin{theorem}
+    For all linear transformation $\varphi$ there exists a unique decomposition $\varphi=\varphi_s+\varphi_n$ such that $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent. And $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$, in particular, $\varphi_s$ and $\varphi_n$ commute.
+\end{theorem}
+
+\begin{proof}
+    We only need to show the uniqueness of the decomposition. Suppose
+    \[
+        \varphi=\varphi_s'+\varphi_n'=\varphi_s''+\varphi_n'',
+    \]
+    And $[\varphi_s',\varphi_n']=[\varphi_s'',\varphi_n'']=0$. By former theorem we already have a decomposition $\varphi=\varphi_s+\varphi_n$ such that $\varphi_s$ is semisimple and $\varphi_n$ is nilpotent. And $\varphi_s$ and $\varphi_n$ are polynomials in $\varphi$, in particular, $\varphi_s$ and $\varphi_n$ commute.
+
+    First, we prove $\varphi_s'=\varphi_s$ and $\varphi_n'=\varphi_n$.
+
+    Since $[\varphi_s',\varphi_n']=0$, we have $[\varphi_s',\varphi_n'+\varphi_s']=0$ which means that $[\varphi_s', \varphi]=0$. Hence $[\varphi_s', f(\varphi)]=0$ for all polynomial $f(t) \in F[t]$. In particular, $[\varphi_s', \varphi_s]=0$. Similarly, $[\varphi_n', \varphi_n]=0$.
+
+    And $\varphi_s'+ \varphi_n'= \varphi_s+ \varphi_n$ which means that $\varphi_s'- \varphi_s= \varphi_n'- \varphi_n$. Since the difference of two commutative semisimple linear transformations is still semisimple, we have $\varphi_s'- \varphi_s$ is semisimple and for the same reason $\varphi_n'- \varphi_n$ is nilpotent. Hence $\varphi_s'- \varphi_s$ and $\varphi_n'- \varphi_n$ are both zero.
+
+    By the same reason, we have $\varphi_s''=\varphi_s$ and $\varphi_n''=\varphi_n$. Thus
+    \[
+        \varphi_s'=\varphi_s=\varphi_s'',\varphi_n'=\varphi_n=\varphi_n''.
+    \]
+    Therefore the decomposition is unique.
+\end{proof}
+
+\begin{definition}
+    Consider
+    \[
+        \varphi_s=
+        \begin{pmatrix}
+            \alpha_1 & 0        & \cdots & 0        \\
+            0        & \alpha_2 & \cdots & 0        \\
+            \vdots   & \vdots   & \ddots & \vdots   \\
+            0        & 0        & \cdots & \alpha_n
+        \end{pmatrix}.
+    \]
+    We call a linear transformation $\psi$ is a replica of $\varphi$ if
+    \[
+        \psi=
+        \begin{pmatrix}
+            \beta_1 & 0       & \cdots & 0       \\
+            0       & \beta_2 & \cdots & 0       \\
+            \vdots  & \vdots  & \ddots & \vdots  \\
+            0       & 0       & \cdots & \beta_n
+        \end{pmatrix}.
+    \]
+    Where $\alpha_i=\alpha_j$ implies $\beta_i=\beta_j$. Then if $\varphi_s=p(\varphi)$, notice that $\psi=f(\varphi_s)=f(p(\varphi))$ for some polynomial $f(t) \in F[t]$.
+\end{definition}
+
+\begin{proposition}
+    Let $\varphi$ be a linear transformation, $\varphi \in \operatorname{End}_F(V)=\mathfrak{gl}(V)$, consider $\mathrm{ad}(\varphi): \mathfrak{gl}(V) \to \mathfrak{gl}(V)$, $x \mapsto [\varphi, x]$.
+
+    If $\varphi$ is semisimple then $\mathrm{ad}(\varphi)$ is a semisimple linear transformation.
+\end{proposition}
+
+\begin{proof}
+    Since $\varphi$ is semisimple, there exists a basis of $V$ in which $\varphi$ is diagonal. Thus we may write
+    \[
+        V=\bigoplus_{i=1}^r V_{\lambda_i},
+    \]
+    where $\lambda_1,\dots,\lambda_r \in F$ are the distinct eigenvalues of $\varphi$, and
+    \[
+        \varphi|_{V_{\lambda_i}}=\lambda_i \operatorname{id}_{V_{\lambda_i}}.
+    \]
+
+    Now consider $\mathfrak{gl}(V)=\operatorname{End}_F(V)$. For $1\le i,j\le r$, define
+    \[
+        E_{ij}:=\operatorname{Hom}_F(V_{\lambda_j},V_{\lambda_i}) \subseteq \operatorname{End}_F(V).
+    \]
+    Using the decomposition of $V$, we have
+    \[
+        \operatorname{End}_F(V)
+        =
+        \bigoplus_{i,j=1}^r E_{ij}.
+    \]
+
+    We claim that each $E_{ij}$ is an eigenspace of $\operatorname{ad}(\varphi)$. Indeed, let
+    \[
+        x\in E_{ij}=\operatorname{Hom}_F(V_{\lambda_j},V_{\lambda_i}).
+    \]
+    Then for any $v\in V_{\lambda_j}$,
+    \[
+        (\operatorname{ad}(\varphi)(x))(v)
+        =
+        (\varphi x-x\varphi)(v)
+        =
+        \varphi(x(v))-x(\varphi(v)).
+    \]
+    Since $x(v)\in V_{\lambda_i}$, we have
+    \[
+        \varphi(x(v))=\lambda_i x(v),
+    \]
+    and since $v\in V_{\lambda_j}$,
+    \[
+        x(\varphi(v))=x(\lambda_j v)=\lambda_j x(v).
+    \]
+    Therefore
+    \[
+        (\operatorname{ad}(\varphi)(x))(v)
+        =
+        (\lambda_i-\lambda_j)x(v).
+    \]
+    Hence
+    \[
+        \operatorname{ad}(\varphi)(x)=(\lambda_i-\lambda_j)x,
+    \]
+    so every $x\in E_{ij}$ is an eigenvector of $\operatorname{ad}(\varphi)$ with eigenvalue
+    \[
+        \lambda_i-\lambda_j.
+    \]
+
+    Thus $\operatorname{End}_F(V)$ is a direct sum of eigenspaces of $\operatorname{ad}(\varphi)$:
+    \[
+        \operatorname{End}_F(V)
+        =
+        \bigoplus_{i,j=1}^r E_{ij}.
+    \]
+    It follows that $\operatorname{ad}(\varphi)$ is diagonalizable, hence semisimple.
+\end{proof}
+
+\begin{theorem}
+    Suppose $\varphi=\varphi_s+\varphi_n$ is a Jordan-Chevalley decomposition of $\varphi$. Then $\mathrm{ad}(\varphi)=\mathrm{ad}(\varphi_s)+\mathrm{ad}(\varphi_n)$ is a Jordan-Chevalley decomposition of $\mathrm{ad}(\varphi)$.
+\end{theorem}
+
+\begin{proof}
+    We already know $\mathrm{ad}(\varphi_s)$ is semisimple. And by easy discussion, we know $\mathrm{ad}(\varphi_n)$ is nilpotent. According to Jordan-Chevalley decomposition theorem, we only need to show that $[\mathrm{ad}(\varphi_s),\mathrm{ad}(\varphi_n)]=0$. Then $\mathrm{ad}(\varphi)=\mathrm{ad}(\varphi_s)+\mathrm{ad}(\varphi_n)$ is a Jordan-Chevalley decomposition. The commutativity comes from $[\mathrm{ad}(\varphi_s),\mathrm{ad}(\varphi_n)]=\mathrm{ad}([\varphi_s,\varphi_n])=0$
+\end{proof}
+

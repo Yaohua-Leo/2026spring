@@ -1,0 +1,504 @@
+\section{Homework 3}
+
+\begin{exercise}
+    Let $x,y \in \operatorname{End} V$ commute. Prove that
+    \[
+        (x+y)_s=x_s+y_s,
+        \qquad
+        (x+y)_n=x_n+y_n.
+    \]
+    Show by example that this can fail if $x,y$ fail to commute.
+        [Show first that $x,y$ semisimple (resp.\ nilpotent) implies $x+y$ semisimple (resp.\ nilpotent).]
+\end{exercise}
+
+\begin{lemma}
+    Let $a,b \in \operatorname{End}(V)$ commute. If both $a$ and $b$ are semisimple, then $a+b$ is semisimple.
+\end{lemma}
+
+\begin{proof}
+    Since $a$ is semisimple,
+    \[
+        V=\bigoplus_{\lambda} V_\lambda(a).
+    \]
+    Because $ab=ba$, each eigenspace $V_\lambda(a)$ is stable under $b$. Since $b$ is semisimple, its restriction to each $V_\lambda(a)$ is again semisimple; hence each $V_\lambda(a)$ decomposes into eigenspaces of $b$. Thus there is a basis of $V$ consisting of common eigenvectors of $a$ and $b$. Relative to this basis, both $a$ and $b$ are diagonal, hence so is $a+b$. Therefore $a+b$ is semisimple.
+\end{proof}
+
+\begin{lemma}
+    Let $a,b \in \operatorname{End}(V)$ commute. If both $a$ and $b$ are nilpotent, then $a+b$ is nilpotent.
+\end{lemma}
+
+\begin{proof}
+    Choose $r,s \ge 1$ such that
+    \[
+        a^r=0,\qquad b^s=0.
+    \]
+    Since $ab=ba$, for any $N$ we have
+    \[
+        (a+b)^N=\sum_{k=0}^N \binom{N}{k} a^k b^{\,N-k}.
+    \]
+    Take $N=r+s-1$. Then for each $k$, either $k \ge r$ or $N-k \ge s$, so every term in the above sum is zero. Hence
+    \[
+        (a+b)^{r+s-1}=0,
+    \]
+    and therefore $a+b$ is nilpotent.
+\end{proof}
+
+\begin{proof}
+    Write
+    \[
+        x=x_s+x_n,\qquad y=y_s+y_n
+    \]
+    for the Jordan decompositions of $x$ and $y$. Since $x$ and $y$ commute, and since each semisimple part and nilpotent part is given by a polynomial in the operator, it follows that
+    \[
+        x_s,\ x_n,\ y_s,\ y_n
+    \]
+    all commute with one another.
+
+    Now $x_s$ and $y_s$ are commuting semisimple operators, hence $x_s+y_s$ is semisimple. Also $x_n$ and $y_n$ are commuting nilpotent operators, hence $x_n+y_n$ is nilpotent. Therefore
+    \[
+        x+y=(x_s+y_s)+(x_n+y_n)
+    \]
+    is a decomposition of $x+y$ into commuting semisimple and nilpotent parts. By uniqueness of Jordan decomposition,
+    \[
+        (x+y)_s=x_s+y_s,
+        \qquad
+        (x+y)_n=x_n+y_n.
+    \]
+
+    To see that this may fail without the hypothesis $xy=yx$, take
+    \[
+        x=
+        \begin{pmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{pmatrix},
+        \qquad
+        y=
+        \begin{pmatrix}
+            0 & 0 \\
+            1 & 1
+        \end{pmatrix}.
+    \]
+    Then $x$ and $y$ are semisimple, but
+    \[
+        xy\neq yx,
+    \]
+    and
+    \[
+        x+y=
+        \begin{pmatrix}
+            1 & 0 \\
+            1 & 1
+        \end{pmatrix}
+    \]
+    is not semisimple. Thus
+    \[
+        (x+y)_s\neq x_s+y_s.
+    \]
+    Since $x_n=y_n=0$ while $(x+y)_n\neq 0$, we also have
+    \[
+        (x+y)_n\neq x_n+y_n.
+    \]
+\end{proof}
+
+\begin{exercise}
+    Let $L=\mathfrak{sl}(2,F)$. Compute the basis of $L$ dual to the standard basis, relative to the Killing form.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+        f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+        h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+    \]
+    the standard basis of \(L=\mathfrak{sl}(2,F)\). We compute the Killing form
+    \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y))
+    \]
+    relative to the ordered basis \((h,e,f)\).
+
+    Using
+    \[
+        [h,e]=2e,\qquad [h,f]=-2f,\qquad [e,f]=h,
+    \]
+    we get
+    \[
+        \operatorname{ad}(h)=
+        \begin{pmatrix}
+            0 & 0 & 0  \\
+            0 & 2 & 0  \\
+            0 & 0 & -2
+        \end{pmatrix},
+        \qquad
+        \operatorname{ad}(e)=
+        \begin{pmatrix}
+            0  & 0 & 1 \\
+            -2 & 0 & 0 \\
+            0  & 0 & 0
+        \end{pmatrix},
+        \qquad
+        \operatorname{ad}(f)=
+        \begin{pmatrix}
+            0 & -1 & 0 \\
+            0 & 0  & 0 \\
+            2 & 0  & 0
+        \end{pmatrix}.
+    \]
+
+    Hence
+    \[
+        \kappa(h,h)=\operatorname{Tr}(\operatorname{ad}(h)^2)=8,
+    \]
+    \[
+        \kappa(e,f)=\operatorname{Tr}(\operatorname{ad}(e)\operatorname{ad}(f))=4,
+        \qquad
+        \kappa(f,e)=4,
+    \]
+    and
+    \[
+        \kappa(e,e)=\kappa(f,f)=\kappa(h,e)=\kappa(h,f)=0.
+    \]
+
+    Thus the Gram matrix of \(\kappa\) relative to \((h,e,f)\) is
+    \[
+        \begin{pmatrix}
+            8 & 0 & 0 \\
+            0 & 0 & 4 \\
+            0 & 4 & 0
+        \end{pmatrix}.
+    \]
+    It follows at once that the dual basis \((h^\vee,e^\vee,f^\vee)\) is given by
+    \[
+        h^\vee=\frac18 h,\qquad e^\vee=\frac14 f,\qquad f^\vee=\frac14 e.
+    \]
+
+    Therefore the basis of \(L\) dual to the standard basis with respect to the Killing form is
+    \[
+        \boxed{\frac18 h,\ \frac14 f,\ \frac14 e.}
+    \]
+\end{proof}
+
+\begin{exercise}
+    Relative to the standard basis of $\mathfrak{sl}(3,F)$, compute the determinant of $\kappa$. Which primes divide it?
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        e_{ij}\qquad (i\neq j)
+    \]
+    be the usual matrix units, and let
+    \[
+        h_1=e_{11}-e_{22},\qquad h_2=e_{22}-e_{33}.
+    \]
+    Take the standard basis of $\mathfrak{sl}(3,F)$ in the order
+    \[
+        e_{12},\,e_{13},\,e_{21},\,e_{23},\,e_{31},\,e_{32},\,h_1,\,h_2.
+    \]
+    We compute the Gram matrix of the Killing form
+    \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y))
+    \]
+    relative to this basis.
+
+    First consider the six root vectors. For $i\neq j$, one has
+    \[
+        [e_{ij},e_{ji}]=e_{ii}-e_{jj},
+    \]
+    and $\operatorname{ad}(e_{ij})\operatorname{ad}(e_{ji})$ preserves each of the root spaces. A direct check shows
+    \[
+        \kappa(e_{12},e_{21})=\kappa(e_{13},e_{31})=\kappa(e_{23},e_{32})=6,
+    \]
+    while all other pairings among the $e_{ij}$ vanish except for the symmetric ones. Hence the root-vector part of the Gram matrix is block diagonal with three blocks
+    \[
+        \begin{pmatrix}
+            0 & 6 \\
+            6 & 0
+        \end{pmatrix},
+    \]
+    so its determinant is
+    \[
+        (-36)^3.
+    \]
+
+    Next compute the Cartan part. Since
+    \[
+        [h,e_{ij}]=(\varepsilon_i-\varepsilon_j)(h)e_{ij},
+    \]
+    the operator $\operatorname{ad}(h)$ acts diagonally on the six root spaces and trivially on the Cartan subalgebra. Thus
+    \[
+        \kappa(h,h')=\sum_{\alpha}\alpha(h)\alpha(h'),
+    \]
+    the sum extending over the six roots. For
+    \[
+        h_1=e_{11}-e_{22},\qquad h_2=e_{22}-e_{33},
+    \]
+    this gives
+    \[
+        \kappa(h_1,h_1)=12,\qquad
+        \kappa(h_2,h_2)=12,\qquad
+        \kappa(h_1,h_2)=-6.
+    \]
+    Therefore the Cartan block is
+    \[
+        \begin{pmatrix}
+            12 & -6 \\
+            -6 & 12
+        \end{pmatrix},
+    \]
+    whose determinant is
+    \[
+        108.
+    \]
+
+    Finally, each $h_r$ is orthogonal to each $e_{ij}$, since $\operatorname{ad}(h_r)$ preserves root spaces while $\operatorname{ad}(e_{ij})$ shifts weights, hence
+    \[
+        \operatorname{Tr}(\operatorname{ad}(h_r)\operatorname{ad}(e_{ij}))=0.
+    \]
+    So the full Gram matrix is block diagonal, and
+    \[
+        \det(\kappa)=(-36)^3\cdot 108=-2^8\,3^9.
+    \]
+
+    Hence the primes dividing $\det(\kappa)$ are exactly
+    \[
+        2\quad\text{and}\quad 3.
+    \]
+\end{proof}
+
+\begin{exercise}
+    Using the standard basis for $L=\mathfrak{sl}(2,F)$, write down the Casimir element of the adjoint representation of $L$. Do the same thing for the usual (3-dimensional) representation of $\mathfrak{sl}(3,F)$, first computing dual bases relative to the trace form.
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+        f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+        h=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+    \]
+    be the standard basis of $L=\mathfrak{sl}(2,F)$.
+
+    For the adjoint representation, use the Killing form
+    \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}(x)\operatorname{ad}(y)).
+    \]
+    A routine calculation gives
+    \[
+        \kappa(e,f)=4,\qquad \kappa(h,h)=8,
+    \]
+    and all other pairings among $e,f,h$ are $0$. Hence the basis dual to
+    $(e,h,f)$ relative to $\kappa$ is
+    \[
+        \frac14 f,\qquad \frac18 h,\qquad \frac14 e.
+    \]
+    Therefore the Casimir element is
+    \[
+        \Omega_{\mathrm{ad}}
+        =\frac14\,ef+\frac18\,h^2+\frac14\,fe
+        =\frac18\,h^2+\frac14(ef+fe).
+    \]
+    If one lets this act in the adjoint representation, then it acts as the scalar
+    $1$ on $L$.
+
+    Now consider the usual $3$-dimensional representation of $\mathfrak{sl}(3,F)$.
+    Take the standard basis
+    \[
+        e_{ij}\quad (i\neq j),\qquad
+        h_1=e_{11}-e_{22},\qquad
+        h_2=e_{22}-e_{33},
+    \]
+    and use the trace form
+    \[
+        (x,y)=\operatorname{Tr}(xy).
+    \]
+    Since
+    \[
+        \operatorname{Tr}(e_{ij}e_{kl})=\delta_{jk}\delta_{il},
+    \]
+    the elements dual to $e_{ij}$ are $e_{ji}$.
+
+    For $h_1,h_2$ we have
+    \[
+        \operatorname{Tr}(h_1^2)=2,\qquad
+        \operatorname{Tr}(h_2^2)=2,\qquad
+        \operatorname{Tr}(h_1h_2)=-1.
+    \]
+    Thus the Gram matrix is
+    \[
+        \begin{pmatrix}
+            2  & -1 \\
+            -1 & 2
+        \end{pmatrix},
+    \]
+    whose inverse is
+    \[
+        \frac13
+        \begin{pmatrix}
+            2 & 1 \\
+            1 & 2
+        \end{pmatrix}.
+    \]
+    Hence the dual basis elements are
+    \[
+        h_1^*=\frac23h_1+\frac13h_2,\qquad
+        h_2^*=\frac13h_1+\frac23h_2.
+    \]
+
+    Therefore the Casimir element for the natural representation is
+    \[
+        \Omega_{\mathrm{nat}}
+        =\sum_{i\neq j} e_{ij}e_{ji}
+        +h_1h_1^*+h_2h_2^*,
+    \]
+    that is,
+    \[
+        \Omega_{\mathrm{nat}}
+        =\sum_{i\neq j} e_{ij}e_{ji}
+        +\frac23h_1^2+\frac13h_1h_2+\frac13h_2h_1+\frac23h_2^2.
+    \]
+    Since $h_1$ and $h_2$ commute, this may be written as
+    \[
+        \Omega_{\mathrm{nat}}
+        =\sum_{i\neq j} e_{ij}e_{ji}
+        +\frac23h_1^2+\frac23h_2^2+\frac23h_1h_2.
+    \]
+
+    In the usual $3$-dimensional representation one computes
+    \[
+        \sum_{i\neq j} e_{ij}e_{ji}=2I_3,
+    \]
+    while
+    \[
+        \frac23h_1^2+\frac13h_1h_2+\frac13h_2h_1+\frac23h_2^2=\frac23 I_3.
+    \]
+    Hence
+    \[
+        \Omega_{\mathrm{nat}}=\frac83 I_3.
+    \]
+    So the Casimir operator for the natural module is the scalar
+    $\frac83$.
+\end{proof}
+
+\begin{exercise}\label{ex:w3.5}
+    Let $L$ be a simple Lie algebra. Let $\beta(x,y)$ and $\gamma(x,y)$ be two symmetric associative bilinear forms on $L$. If $\beta$ and $\gamma$ are nondegenerate, prove that $\beta$ and $\gamma$ are proportional. (Use Schur's Lemma.)
+\end{exercise}
+
+\begin{proof}
+    Since $\beta$ is nondegenerate, for each $x\in L$ there exists a unique linear map
+    \[
+        T:L\to L
+    \]
+    such that
+    \[
+        \gamma(x,y)=\beta(Tx,y)
+        \qquad\text{for all }x,y\in L.
+    \]
+    We show that $T$ commutes with all $\operatorname{ad} a$.
+
+    For $a,x,y\in L$, using associativity of $\gamma$ and then of $\beta$, we get
+    \[
+        \beta\bigl(T([a,x]),y\bigr)
+        =\gamma([a,x],y)
+        =\gamma(a,[x,y])
+        =\gamma(x,[y,a])
+        =\beta\bigl(Tx,[y,a]\bigr)
+        =\beta([a,Tx],y).
+    \]
+    Hence
+    \[
+        \beta\bigl(T([a,x])-[a,Tx],y\bigr)=0
+        \qquad\text{for all }y\in L.
+    \]
+    Since $\beta$ is nondegenerate,
+    \[
+        T([a,x])=[a,Tx]
+        \qquad\text{for all }a,x\in L.
+    \]
+    Thus $T$ is an $L$-module endomorphism of the adjoint module $L$.
+
+    Now $L$ is simple, so its adjoint module is irreducible: indeed, any submodule is an ideal of $L$. By Schur's Lemma, $T=c\,\mathrm{id}_L$ for some $c\in F$. Therefore
+    \[
+        \gamma(x,y)=\beta(Tx,y)=\beta(cx,y)=c\,\beta(x,y)
+        \qquad\text{for all }x,y\in L.
+    \]
+    So $\beta$ and $\gamma$ are proportional.
+\end{proof}
+
+\begin{exercise}
+    It will be seen later on that $\mathfrak{sl}(n,F)$ is actually simple. Assuming this, and using \ref{ex:w3.5}, prove that the Killing form $\kappa$ on $\mathfrak{sl}(n,F)$ is related to the ordinary trace form by
+    \[
+        \kappa(x,y)=2n\,\operatorname{Tr}(xy).
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+        \beta(x,y)=\operatorname{Tr}(xy)
+        \qquad (x,y\in \mathfrak{sl}(n,F)).
+    \]
+    Since
+    \[
+        \operatorname{Tr}([a,x]y)=\operatorname{Tr}(a x y-x a y)
+        =\operatorname{Tr}(a x y-a y x)
+        =\operatorname{Tr}(a[x,y]),
+    \]
+    the form $\beta$ is associative. It is also symmetric. Moreover, $\beta$ is nondegenerate on $\mathfrak{sl}(n,F)$: if $x\in \mathfrak{sl}(n,F)$ satisfies $\operatorname{Tr}(xy)=0$ for all $y\in \mathfrak{sl}(n,F)$, then $x=0$.
+
+    Assuming $\mathfrak{sl}(n,F)$ is simple, Exercise~\ref{ex:w3.5} shows that $\kappa$ and $\beta$ are proportional. Thus there exists $c\in F$ such that
+    \[
+        \kappa(x,y)=c\,\operatorname{Tr}(xy)
+        \qquad\text{for all }x,y\in \mathfrak{sl}(n,F).
+    \]
+    It remains to determine $c$.
+
+    Take
+    \[
+        h=e_{11}-e_{22}.
+    \]
+    Then
+    \[
+        \operatorname{Tr}(h^2)=2.
+    \]
+    Also, $\operatorname{ad} h$ acts on the standard matrix units by
+    \[
+        [h,e_{ij}]=(\delta_{1i}-\delta_{2i}-\delta_{1j}+\delta_{2j})e_{ij}.
+    \]
+    Hence the eigenvalues of $\operatorname{ad} h$ are:
+    \[
+        2 \text{ on } e_{12}, \qquad -2 \text{ on } e_{21},
+    \]
+    \[
+        1 \text{ on } e_{1j},e_{j2}\ (j\ge 3), \qquad -1 \text{ on } e_{2j},e_{j1}\ (j\ge 3),
+    \]
+    and \(0\) on all remaining basis elements of \(\mathfrak{sl}(n,F)\). Therefore
+    \[
+        \kappa(h,h)=\operatorname{Tr}\bigl((\operatorname{ad} h)^2\bigr)
+        =2^2+(-2)^2+4(n-2)\cdot 1^2=4n.
+    \]
+    Comparing with
+    \[
+        \kappa(h,h)=c\,\operatorname{Tr}(h^2)=2c,
+    \]
+    we get \(2c=4n\), so \(c=2n\). Thus
+    \[
+        \kappa(x,y)=2n\,\operatorname{Tr}(xy)
+        \qquad\text{for all }x,y\in \mathfrak{sl}(n,F).
+    \]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

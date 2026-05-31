@@ -1,0 +1,97 @@
+\section{Cartan Criterion for Semisimplicity}
+
+\begin{theorem}[Cartan criterion for semisimplicity]
+    Let $L$ be a finite-dimensional Lie algebra over a field $F$ of characteristic $0$.
+    Then $L$ is semisimple if and only if its Killing form
+    \[
+        \kappa(x,y)=\operatorname{Tr}(\operatorname{ad}x\,\operatorname{ad}y)
+        \qquad (x,y\in L)
+    \]
+    is nondegenerate.
+\end{theorem}
+
+\begin{proof}
+    We prove the two implications separately.
+
+    \smallskip
+
+    \noindent
+    ($\Rightarrow$) Assume that $L$ is semisimple. Let
+    \[
+        L^\perp:=\{x\in L\mid \kappa(x,y)=0 \text{ for all } y\in L\}
+    \]
+    be the radical of $\kappa$. We first show that $L^\perp$ is an ideal of $L$.
+    Indeed, if $x\in L^\perp$ and $z\in L$, then for every $y\in L$,
+    \[
+        \kappa([z,x],y)=\kappa(z,[x,y])=-\kappa(x,[z,y])=0,
+    \]
+    where we used the associativity of the Killing form. Hence
+    \[
+        [z,x]\in L^\perp,
+    \]
+    so $L^\perp\triangleleft L$.
+
+    Now let $a\in [L^\perp,L^\perp]$. Then $a\in L^\perp$, so
+    \[
+        \kappa(a,L)=0.
+    \]
+    Thus
+    \[
+        \kappa([L^\perp,L^\perp],L^\perp)=0.
+    \]
+    By Cartan's criterion for solvability, $L^\perp$ is solvable. Since $L$ is semisimple, it has no nonzero solvable ideals. Therefore
+    \[
+        L^\perp=0.
+    \]
+    Hence $\kappa$ is nondegenerate.
+
+    \smallskip
+
+    \noindent
+    ($\Leftarrow$) Assume that $\kappa$ is nondegenerate. Let $R=\operatorname{Rad}(L)$ be the solvable radical of $L$. We shall show that $R=0$.
+
+    Since $R$ is solvable, its derived algebra $[R,R]$ is nilpotent, hence solvable. For every
+    \[
+        x\in [R,R], \qquad y\in L,
+    \]
+    the operator $\operatorname{ad}x\,\operatorname{ad}y$ has trace $0$. Therefore
+    \[
+        \kappa([R,R],L)=0.
+    \]
+    By the nondegeneracy of $\kappa$, this implies
+    \[
+        [R,R]=0.
+    \]
+    So $R$ is abelian.
+
+    Now let $x\in R$ and $y\in L$. Since $R$ is an abelian ideal, we have
+    \[
+        [R,R]=0
+        \qquad\text{and}\qquad
+        [L,R]\subseteq R.
+    \]
+    Choose a basis of $L$ adapted to $R$, say
+    \[
+        L=R\oplus U.
+    \]
+    Relative to this decomposition, $\operatorname{ad}x$ has the block form
+    \[
+        \operatorname{ad}x=
+        \begin{pmatrix}
+            0 & * \\
+            0 & 0
+        \end{pmatrix},
+    \]
+    because $\operatorname{ad}x(L)\subseteq R$ and $\operatorname{ad}x(R)=[x,R]=0$.
+    Hence for every $y\in L$, the product $\operatorname{ad}x\,\operatorname{ad}y$ also has trace $0$. Thus
+    \[
+        \kappa(x,y)=0
+        \qquad\text{for all }y\in L.
+    \]
+    So $x\in L^\perp$. Since $\kappa$ is nondegenerate, $L^\perp=0$, hence $x=0$. Therefore
+    \[
+        R=0.
+    \]
+    Thus $L$ is semisimple.
+\end{proof}
+

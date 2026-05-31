@@ -1,0 +1,108 @@
+\section{Review}
+
+Let $L$ be a finite-dimensional solvable Lie algebra over an algebraically closed field $F$ of characteristic 0. Let $V$ be a finite-dimensional $L$-module.
+
+\begin{itemize}
+    \item $\forall$ representation $\rho: L \to \mathfrak{gl}(V)$, there exists a basis of $V$ such that
+          \[
+              \rho(L) \subseteq \left\{
+              \begin{pmatrix}
+                  *      & *      & \cdots & *      \\
+                  0      & *      & \cdots & *      \\
+                  \vdots & \vdots & \ddots & \vdots \\
+                  0      & \cdots & 0      & *
+              \end{pmatrix}
+              \right\} (\operatorname{dim}V < \infty)
+          \]
+    \item All irreducible finite-dimensional $L$-modules are one-dimensional.
+\end{itemize}
+
+\begin{lemma}
+    Let $I \triangleleft L$ be an ideal of $L$. If both $I$ and $L/I$ are solvable, then $L$ is solvable. (In this lemma we do not need $L$ to be finite-dimensional, also $F$ can be any field.)
+\end{lemma}
+
+\begin{proof}
+    Since $L/I$ is solvable, there exists an integer $m \ge 0$ such that
+    \[
+        (L/I)^{(m)}=0.
+    \]
+    Using the compatibility of the derived series with quotients, we have
+    \[
+        (L/I)^{(m)} = \bigl(L^{(m)}+I\bigr)/I,
+    \]
+    hence
+    \[
+        L^{(m)} \subseteq I.
+    \]
+
+    Since $I$ is solvable, there exists an integer $n \ge 0$ such that
+    \[
+        I^{(n)}=0.
+    \]
+    We obtain
+    \[
+        L^{(m+n)} \subseteq I^{(n)}=0.
+    \]
+    Therefore $L^{(m+n)}=0$, so $L$ is solvable.
+\end{proof}
+
+\begin{example}
+    No similar result for nilpotent Lie algebras. Indeed,
+    Let $L$ be the $2$-dimensional Lie algebra over a field $F$ with basis $\{x,y\}$ and bracket
+    \[
+        [x,y]=y.
+    \]
+    Let
+    \[
+        I:=Fy.
+    \]
+    Then $I\triangleleft L$, since
+    \[
+        [x,y]=y\in I,\qquad [y,y]=0.
+    \]
+
+    Now $I$ is $1$-dimensional abelian, hence nilpotent. Also
+    \[
+        L/I
+    \]
+    is $1$-dimensional abelian, hence nilpotent.
+
+    However, $L$ itself is not nilpotent. Indeed, its lower central series is
+    \[
+        \gamma_1(L)=L,\qquad \gamma_2(L)=[L,L]=Fy,
+    \]
+    and for every $n\ge 2$,
+    \[
+        \gamma_{n+1}(L)=[L,\gamma_n(L)]=[L,Fy]=Fy.
+    \]
+    Thus the lower central series never reaches $0$, so $L$ is not nilpotent.
+
+    Therefore, even if $I$ and $L/I$ are both nilpotent, $L$ need not be nilpotent.
+\end{example}
+
+\begin{lemma}
+    Let $I,J \triangleleft L$ both $I,J$ are solvable. Then $I+J$ is solvable.
+\end{lemma}
+
+\begin{proof}
+    Since $J \triangleleft I+J$, the quotient
+    \[
+        (I+J)/J
+    \]
+    is naturally isomorphic to
+    \[
+        I/(I\cap J).
+    \]
+    Because $I$ is solvable, every quotient of $I$ is solvable; hence
+    \[
+        (I+J)/J
+    \]
+    is solvable. By assumption, $J$ is solvable. Therefore, applying the previous lemma to the Lie algebra $I+J$ and its ideal $J$, we conclude that $I+J$ is solvable.
+\end{proof}
+
+Let $\operatorname{Rad}(L)$ be the largest solvable ideal of $L$ ($\operatorname{dim}_FL< \infty$). $\operatorname{Rad}(L)$ is called the \emph{radical} of $L$. $\operatorname{Rad}(L)$ contains all other solvable ideals and $L/\operatorname{Rad}(L)$ does not contain any non-zero solvable ideals.
+
+\begin{definition}
+    A finite-dimensional Lie algebra $L$ is called \emph{semisimple} if $\operatorname{Rad}(L)=0$.
+\end{definition}
+

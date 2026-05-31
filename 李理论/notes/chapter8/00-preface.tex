@@ -1,0 +1,40 @@
+
+\begin{remark}[Maschke's theorem]
+    Let \(G\) be a finite group, and let \(K\) be a field such that
+    \[
+        \operatorname{char}(K)\nmid |G|.
+    \]
+    Then every \(K[G]\)-module is completely reducible.
+\end{remark}
+
+\begin{proof}[Idea of the proof]
+    It suffices to show that every submodule \(W\) of a \(K[G]\)-module \(V\)
+    is a direct summand.
+
+    Choose a \(K\)-linear projection
+    \[
+        P\colon V\to W
+    \]
+    (which need not commute with the action of \(G\)). Averaging over the group,
+    define
+    \[
+        P'=\frac{1}{|G|}\sum_{g\in G} gPg^{-1}.
+    \]
+    Then \(P'\) commutes with the action of \(G\). Moreover, \(P'\) still maps
+    \(V\) into \(W\), and for every \(w\in W\) one has \(P'(w)=w\). Hence
+    \[
+        \operatorname{Im}(P')=W.
+    \]
+    Therefore \(\ker P'\) is a \(G\)-submodule and
+    \[
+        V=W\oplus \ker P'.
+    \]
+    So \(W\) is a direct summand. It follows that \(V\) is completely reducible.
+\end{proof}
+
+\begin{remark}[Relation with Weyl's theorem]
+    Weyl's original proof of complete reducibility uses the same averaging idea
+    for representations of compact Lie groups, replacing the finite sum by an
+    integral over the group (with respect to Haar measure).
+\end{remark}
+

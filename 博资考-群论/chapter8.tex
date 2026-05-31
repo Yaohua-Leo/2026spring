@@ -1,0 +1,1147 @@
+
+\chapter{Quasiprimitive Groups and the O'Nan--Scott--Praeger Types}
+\label{chap:quasiprimitive-ons-praeger}
+
+\begin{topic}
+For a finite quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\), the structure of
+the minimal normal subgroups strongly restricts the whole permutation group.
+
+The O'Nan--Scott--Praeger theorem divides such groups into eight types. The first
+division is:
+
+\begin{itemize}
+    \item \(G\) has a unique minimal normal subgroup;
+    \item \(G\) has exactly two minimal normal subgroups.
+\end{itemize}
+
+The second case leads to the holomorph simple and holomorph compound types.
+The first case leads to affine, almost simple, twisted wreath, diagonal, and product
+action types.
+\end{topic}
+
+\section{Case I: A Unique Minimal Normal Subgroup}
+
+Assume first that \(G\leq \operatorname{Sym}(\Omega)\) is quasiprimitive and has a unique
+minimal normal subgroup \(N\).
+
+\subsection{The Centralizer of a Nonabelian Minimal Normal Subgroup}
+
+\begin{lemma}
+Let \(G\) have a unique minimal normal subgroup \(N\). If \(N\) is nonabelian, then
+\[
+    C_G(N)=1.
+\]
+Consequently, conjugation gives an embedding
+\[
+    G\hookrightarrow \operatorname{Aut}(N).
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(N\unlhd G\), its centralizer \(C_G(N)\) is normal in \(G\).
+
+Suppose \(C_G(N)\neq 1\). Since \(G\) is finite, \(C_G(N)\) contains a minimal normal
+subgroup of \(G\). But \(N\) is the unique minimal normal subgroup of \(G\), so
+\[
+    N\leq C_G(N).
+\]
+Thus every element of \(N\) centralizes \(N\), meaning
+\[
+    N\leq Z(N).
+\]
+Hence \(N\) is abelian, contradicting the assumption that \(N\) is nonabelian.
+
+Therefore
+\[
+    C_G(N)=1.
+\]
+
+Now \(G\) acts on \(N\) by conjugation. The kernel of this action is exactly \(C_G(N)\).
+Hence
+\[
+    G/C_G(N)\hookrightarrow \operatorname{Aut}(N).
+\]
+Since \(C_G(N)=1\), we get
+\[
+    G\hookrightarrow \operatorname{Aut}(N).
+\]
+\end{proof}
+
+\subsection{The Abelian Case: HA Type}
+
+\begin{proposition}
+Let \(G\leq \operatorname{Sym}(\Omega)\) be quasiprimitive, and suppose that \(G\) has a
+unique minimal normal subgroup
+\[
+    N\cong C_p^d
+\]
+for some prime \(p\) and integer \(d\geq 1\). Then \(N\) is regular on \(\Omega\).
+\end{proposition}
+
+\begin{proof}
+Since \(N\unlhd G\) and \(G\) is quasiprimitive, \(N\) is transitive on \(\Omega\).
+
+Fix \(\omega\in\Omega\). Let \(n\in N_\omega\). For any \(\alpha\in\Omega\), since \(N\)
+is transitive, there exists \(m\in N\) such that
+\[
+    \alpha=\omega^m.
+\]
+Because \(N\) is abelian, we have
+\[
+    \alpha^n
+    =
+    (\omega^m)^n
+    =
+    (\omega^n)^m
+    =
+    \omega^m
+    =
+    \alpha.
+\]
+Thus \(n\) fixes every point of \(\Omega\). Since the action is faithful, \(n=1\). Therefore
+\[
+    N_\omega=1.
+\]
+Hence \(N\) is regular.
+\end{proof}
+
+\begin{definition}[HA type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{holomorph affine type}, or \(\mathrm{HA}\) type, if \(G\) has a unique minimal
+normal subgroup
+\[
+    N\cong C_p^d
+\]
+and \(N\) is regular on \(\Omega\).
+
+Equivalently, after identifying \(\Omega\) with the vector space \(N\cong \F_p^d\), the group
+\(G\) embeds into the affine general linear group
+\[
+    \operatorname{AGL}(d,p)=\F_p^d\rtimes \operatorname{GL}(d,p).
+\]
+\end{definition}
+
+\begin{example}[An HA-type quasiprimitive group]
+    Let
+    \[
+        \Omega=\mathbb F_3
+    \]
+    and let
+    \[
+        G=\operatorname{AGL}(1,3)
+        =
+        \mathbb F_3^+ \rtimes \mathbb F_3^\times
+    \]
+    act on \(\Omega\) by affine transformations
+    \[
+        x\longmapsto ax+b,
+        \qquad
+        a\in \mathbb F_3^\times,\ b\in \mathbb F_3.
+    \]
+    Thus
+    \[
+        |G|=3\cdot 2=6,
+    \]
+    and in fact
+    \[
+        G\cong S_3.
+    \]
+    
+    Let
+    \[
+        N=\{x\mapsto x+b\mid b\in\mathbb F_3\}.
+    \]
+    Then
+    \[
+        N\cong \mathbb F_3^+\cong C_3.
+    \]
+    The subgroup \(N\) is normal in \(G\), since translations are normalized by affine
+    transformations. Moreover, \(N\) acts regularly on \(\Omega\): for any
+    \(\alpha,\beta\in\mathbb F_3\), there is a unique translation
+    \[
+        x\mapsto x+(\beta-\alpha)
+    \]
+    sending \(\alpha\) to \(\beta\).
+    
+    Since \(G\cong S_3\), the subgroup corresponding to \(N\) is \(A_3\). Hence \(N\) is the
+    unique minimal normal subgroup of \(G\). Therefore every nontrivial normal subgroup of
+    \(G\) contains \(N\), and is transitive on \(\Omega\). Thus \(G\) is quasiprimitive.
+    
+    Consequently, \(G=\operatorname{AGL}(1,3)\) is of \(\mathrm{HA}\) type, with regular
+    abelian minimal normal subgroup
+    \[
+        N\cong C_3.
+    \]
+    \end{example}
+
+\subsection{The Nonabelian Simple Case: AS Type}
+
+\begin{proposition}
+Let \(G\leq \operatorname{Sym}(\Omega)\) be quasiprimitive, and suppose that \(G\) has a
+unique minimal normal subgroup \(N\), where \(N\) is nonabelian simple. Then
+\[
+    N\unlhd G\leq \operatorname{Aut}(N).
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(N\) is nonabelian and is the unique minimal normal subgroup of \(G\), the previous
+lemma gives
+\[
+    C_G(N)=1.
+\]
+Therefore the conjugation action of \(G\) on \(N\) embeds \(G\) into \(\operatorname{Aut}(N)\).
+Under this embedding, \(N\) is identified with the inner automorphism group
+\[
+    \operatorname{Inn}(N)\cong N.
+\]
+Thus
+\[
+    N\unlhd G\leq \operatorname{Aut}(N).
+\]
+\end{proof}
+
+\begin{definition}[AS type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{almost simple type}, or \(\mathrm{AS}\) type, if \(G\) has a unique minimal normal
+subgroup \(N\), where \(N\) is nonabelian simple, and
+\[
+    N\unlhd G\leq \operatorname{Aut}(N).
+\]
+\end{definition}
+
+\subsection{The Nonabelian Characteristically Simple Case}
+
+Now suppose
+\[
+    N=T^k,\qquad k\geq 2,
+\]
+where \(T\) is nonabelian simple. Let \(\omega\in\Omega\). Since \(N\unlhd G\) and
+\(G\) is quasiprimitive, \(N\) is transitive. Thus \(\Omega\) may be identified with the set of
+right cosets of \(N_\omega\) in \(N\).
+
+The possible structure of \(N_\omega\) leads to four types.
+
+\begin{definition}[Full diagonal subgroup]
+Let
+\[
+    N=T_1\times T_2\times \cdots \times T_k,
+\]
+where each \(T_i\cong T\). A subgroup \(D\leq N\) is called a \emph{full diagonal subgroup}
+over a subset \(I\subseteq \{1,\dots,k\}\) if, after choosing isomorphisms
+\[
+    \alpha_i:T\to T_i\qquad (i\in I),
+\]
+we have
+\[
+    D=
+    \{(t^{\alpha_i})_{i\in I}\mid t\in T\}
+    \leq \prod_{i\in I}T_i.
+\]
+Thus \(D\cong T\) and projects onto each direct factor \(T_i\) for \(i\in I\).
+\end{definition}
+
+\begin{topic}
+Let \(N=T^k\), \(k\geq 2\), be the unique minimal normal subgroup of a quasiprimitive
+group \(G\leq \operatorname{Sym}(\Omega)\). For \(\omega\in\Omega\), the point stabilizer
+\(N_\omega\) determines the following four types:
+
+\begin{enumerate}[label=(\roman*)]
+    \item If
+    \[
+        N_\omega=1,
+    \]
+    then \(N\) is regular. This is the \(\mathrm{TW}\) type.
+
+    \item If
+    \[
+        N_\omega\cong T
+    \]
+    is a full diagonal subgroup of \(T^k\), then this is the \(\mathrm{SD}\) type.
+
+    \item If
+    \[
+        N_\omega\cong T^m,\qquad 2\leq m\leq \frac{k}{2},
+    \]
+    and \(N_\omega\) is a product of full diagonal subgroups corresponding to a partition
+    of the \(k\) simple direct factors, then this is the \(\mathrm{CD}\) type.
+
+    \item If
+    \[
+        1\neq N_\omega
+    \]
+    and \(N_\omega\) is not of the diagonal forms above, then this is the \(\mathrm{PA}\) type.
+\end{enumerate}
+\end{topic}
+
+\begin{definition}[TW type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{twisted wreath type}, or \(\mathrm{TW}\) type, if its unique minimal normal subgroup is
+\[
+    N=T^k,\qquad k\geq 2,
+\]
+where \(T\) is nonabelian simple, and \(N\) is regular on \(\Omega\).
+\end{definition}
+
+\begin{definition}[SD type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{simple diagonal type}, or \(\mathrm{SD}\) type, if its unique minimal normal subgroup is
+\[
+    N=T^k,\qquad k\geq 2,
+\]
+where \(T\) is nonabelian simple, and for \(\omega\in\Omega\),
+\[
+    N_\omega\cong T
+\]
+is a full diagonal subgroup of \(N\).
+\end{definition}
+
+\begin{definition}[CD type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{compound diagonal type}, or \(\mathrm{CD}\) type, if its unique minimal normal subgroup is
+\[
+    N=T^k,\qquad k\geq 2,
+\]
+where \(T\) is nonabelian simple, and for \(\omega\in\Omega\),
+\[
+    N_\omega\cong T^m,\qquad 2\leq m\leq \frac{k}{2},
+\]
+where \(N_\omega\) is a product of full diagonal subgroups.
+\end{definition}
+
+\begin{definition}[PA type]
+A quasiprimitive group \(G\leq \operatorname{Sym}(\Omega)\) is said to be of
+\emph{product action type}, or \(\mathrm{PA}\) type, if its unique minimal normal subgroup is
+\[
+    N=T^k,\qquad k\geq 2,
+\]
+where \(T\) is nonabelian simple, and \(N_\omega\neq 1\) is not a diagonal stabilizer of
+the \(\mathrm{SD}\) or \(\mathrm{CD}\) form.
+\end{definition}
+
+\section{Regular Representations and Central Products}
+
+This section collects the regular-action machinery used in the two-minimal-normal-subgroup
+case.
+
+\subsection{Right Regular, Left Regular, and Conjugation Actions}
+
+Let \(G\) be a finite group. Define three families of permutations of the set \(G\).
+
+For \(g\in G\), define
+\[
+    x^{\widehat g}=xg,
+\]
+\[
+    x^{\check g}=g^{-1}x,
+\]
+and
+\[
+    x^{\overline g}=g^{-1}xg.
+\]
+Set
+\[
+    \widehat G=\{\widehat g\mid g\in G\},
+\]
+\[
+    \check G=\{\check g\mid g\in G\},
+\]
+and
+\[
+    \overline G=\{\overline g\mid g\in G\}.
+\]
+
+\begin{lemma}[Right and left regular representations]
+Let \(G\) be a finite group. Then the following hold.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item \(\widehat G,\check G\leq \operatorname{Sym}(G)\), and both are regular.
+
+    \item \(\widehat G\) and \(\check G\) centralize each other:
+    \[
+        \widehat g\check h=\check h\widehat g
+        \qquad (g,h\in G).
+    \]
+
+    \item
+    \[
+        \widehat G\cap \check G
+        =
+        Z(\widehat G)
+        =
+        Z(\check G)
+        =
+        \widehat{Z(G)}
+        =
+        \check{Z(G)}.
+    \]
+
+    \item If
+    \[
+        X=\langle \widehat G,\check G\rangle,
+    \]
+    then
+    \[
+        X=\widehat G\check G
+    \]
+    and
+    \[
+        X\cong
+        (\widehat G\times \check G)/
+        \{(\widehat z,\check z)\mid z\in Z(G)\}.
+    \]
+
+    \item If \(1\in G\) is used as base point, then
+    \[
+        X_1=\overline G.
+    \]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For \(g,h\in G\),
+\[
+    x^{\widehat g\widehat h}=(xg)h=x(gh)=x^{\widehat{gh}},
+\]
+so
+\[
+    \widehat g\widehat h=\widehat{gh}.
+\]
+Hence \(\widehat G\leq \operatorname{Sym}(G)\). Similarly,
+\[
+    x^{\check g\check h}
+    =
+    h^{-1}(g^{-1}x)
+    =
+    (gh)^{-1}x
+    =
+    x^{\check{gh}},
+\]
+so
+\[
+    \check g\check h=\check{gh}.
+\]
+Thus \(\check G\leq \operatorname{Sym}(G)\).
+
+The group \(\widehat G\) is regular because for any \(x,y\in G\), there is a unique \(g\in G\)
+such that
+\[
+    xg=y,
+\]
+namely \(g=x^{-1}y\). Similarly, \(\check G\) is regular.
+
+Next,
+\[
+    x^{\widehat g\check h}
+    =
+    h^{-1}xg
+    =
+    x^{\check h\widehat g}.
+\]
+Therefore
+\[
+    \widehat g\check h=\check h\widehat g.
+\]
+
+Now suppose
+\[
+    \widehat g=\check h.
+\]
+Evaluating at \(1\in G\), we get
+\[
+    g=h^{-1}.
+\]
+Thus for all \(x\in G\),
+\[
+    xg=h^{-1}x=gx.
+\]
+Hence \(g\in Z(G)\). Conversely, if \(z\in Z(G)\), then
+\[
+    x^{\widehat z}=xz=zx=x^{\check{z^{-1}}},
+\]
+so \(\widehat z=\check{z^{-1}}\). Therefore
+\[
+    \widehat G\cap \check G=\widehat{Z(G)}=\check{Z(G)}.
+\]
+Also
+\[
+    Z(\widehat G)=\widehat{Z(G)},\qquad
+    Z(\check G)=\check{Z(G)}.
+\]
+
+Since \(\widehat G\) and \(\check G\) centralize each other,
+\[
+    X=\langle \widehat G,\check G\rangle=\widehat G\check G.
+\]
+Consider the epimorphism
+\[
+    \theta:\widehat G\times \check G\to X,
+    \qquad
+    (\widehat g,\check h)\mapsto \widehat g\check h.
+\]
+Its kernel consists of those pairs satisfying
+\[
+    \widehat g\check h=1.
+\]
+For all \(x\in G\),
+\[
+    x^{\widehat g\check h}=h^{-1}xg.
+\]
+Thus \(\widehat g\check h=1\) if and only if
+\[
+    h^{-1}xg=x
+    \qquad \forall x\in G.
+\]
+Taking \(x=1\), we get \(g=h\). Then
+\[
+    g^{-1}xg=x
+    \qquad \forall x\in G,
+\]
+so \(g\in Z(G)\). Hence
+\[
+    \ker\theta=
+    \{(\widehat z,\check z)\mid z\in Z(G)\}.
+\]
+The isomorphism theorem gives
+\[
+    X\cong
+    (\widehat G\times \check G)/
+    \{(\widehat z,\check z)\mid z\in Z(G)\}.
+\]
+
+Finally, an element of \(X\) has the form \(\widehat g\check h\). It fixes \(1\in G\) if and
+only if
+\[
+    1^{\widehat g\check h}=h^{-1}g=1,
+\]
+that is, if and only if \(g=h\). Therefore
+\[
+    X_1=\{\widehat g\check g\mid g\in G\}.
+\]
+But
+\[
+    x^{\widehat g\check g}
+    =
+    g^{-1}xg
+    =
+    x^{\overline g}.
+\]
+Hence
+\[
+    X_1=\overline G.
+\]
+\end{proof}
+
+\begin{corollary}
+If \(Z(G)=1\), then
+\[
+    \widehat G\cap \check G=1
+\]
+and hence
+\[
+    \langle \widehat G,\check G\rangle
+    =
+    \widehat G\times \check G.
+\]
+Moreover,
+\[
+    \overline G\cong G.
+\]
+\end{corollary}
+
+\subsection{Central Products}
+
+\begin{definition}[Central product]
+Let \(M\) and \(N\) be groups, and let
+\[
+    C_1\leq Z(M),\qquad C_2\leq Z(N).
+\]
+Suppose that
+\[
+    \varphi:C_1\to C_2
+\]
+is an isomorphism. Define
+\[
+    D_\varphi=
+    \{(c,\varphi(c)^{-1})\mid c\in C_1\}
+    \leq M\times N.
+\]
+The quotient
+\[
+    (M\times N)/D_\varphi
+\]
+is called the \emph{central product} of \(M\) and \(N\) amalgamating \(C_1\) and \(C_2\).
+
+When \(C_1\cong C_2\cong C\), we often write this central product as
+\[
+    M\circ_C N
+\]
+or simply
+\[
+    M\circ N
+\]
+when the amalgamated central subgroups are clear.
+\end{definition}
+
+\begin{remark}
+A central product is obtained from the direct product \(M\times N\) by identifying selected
+central subgroups of \(M\) and \(N\). Thus it is generally not a direct product, but it is still
+built from two commuting subgroups.
+\end{remark}
+
+\begin{example}
+Let \(Q_8=\{\pm1,\pm i,\pm j,\pm k\}\). Then
+\[
+    Z(Q_8)=\{1,-1\}\cong C_2.
+\]
+Taking two copies of \(Q_8\), identify the two central involutions. Then
+\[
+    Q_8\circ Q_8
+    =
+    (Q_8\times Q_8)/\langle(-1,-1)\rangle.
+\]
+Hence
+\[
+    |Q_8\circ Q_8|
+    =
+    \frac{|Q_8|^2}{2}
+    =
+    \frac{8\cdot 8}{2}
+    =
+    32.
+\]
+\end{example}
+
+\begin{example}
+Let
+\[
+    C_4=\gen{c}.
+\]
+Since
+\[
+    \gen{c^2}\leq Z(C_4),
+\]
+we may identify
+\[
+    \gen{-1}\leq Z(Q_8)
+\]
+with
+\[
+    \gen{c^2}\leq Z(C_4).
+\]
+Then
+\[
+    Q_8\circ C_4
+    =
+    (Q_8\times C_4)/\langle(-1,c^2)\rangle.
+\]
+\end{example}
+
+\begin{example}
+Let
+\[
+    M=\gen{a,z\mid a^8=z^2=1,\ a^z=a^5},
+\]
+where
+\[
+    a^z=z^{-1}az.
+\]
+Then
+\[
+    (a^2)^z=(a^z)^2=(a^5)^2=a^{10}=a^2,
+\]
+so
+\[
+    \gen{a^2}\leq Z(M).
+\]
+In fact,
+\[
+    Z(M)=\gen{a^2}\cong C_4.
+\]
+
+Similarly, let
+\[
+    N=\gen{b,y\mid b^8=y^2=1,\ b^y=b^5}.
+\]
+Then
+\[
+    Z(N)=\gen{b^2}\cong C_4.
+\]
+
+If we identify
+\[
+    \gen{a^2}\leq Z(M)
+\]
+with
+\[
+    \gen{b^2}\leq Z(N),
+\]
+then we obtain the central product
+\[
+    M\circ N
+    =
+    (M\times N)/\langle(a^2,b^{-2})\rangle.
+\]
+
+If instead we identify only the central subgroups of order \(2\),
+\[
+    \gen{a^4}\leq Z(M),
+    \qquad
+    \gen{b^4}\leq Z(N),
+\]
+then
+\[
+    M\circ_{C_2}N
+    =
+    (M\times N)/\langle(a^4,b^4)\rangle.
+\]
+\end{example}
+
+\section{Centralizers of Regular Subgroups}
+
+\begin{lemma}
+Let
+\[
+    M\leq \operatorname{Sym}(\Omega)
+\]
+be regular, and fix \(\omega_0\in\Omega\). Identify \(\Omega\) with \(M\) by
+\[
+    \omega_0^m\longmapsto m.
+\]
+Under this identification, the action of \(M\) on \(\Omega\) becomes the right regular action
+\[
+    \widehat M=\{\widehat m\mid m\in M\}
+\]
+on the set \(M\).
+
+Moreover,
+\[
+    C_{\operatorname{Sym}(\Omega)}(M)
+    \cong
+    C_{\operatorname{Sym}(M)}(\widehat M)
+    =
+    \check M.
+\]
+In particular, \(C_{\operatorname{Sym}(\Omega)}(M)\) is regular.
+\end{lemma}
+
+\begin{proof}
+Since \(M\) is regular, for each \(\omega\in\Omega\) there exists a unique \(m\in M\) such that
+\[
+    \omega=\omega_0^m.
+\]
+Thus
+\[
+    \omega_0^m\longmapsto m
+\]
+is a bijection \(\Omega\to M\).
+
+For \(g\in M\),
+\[
+    (\omega_0^m)^g=\omega_0^{mg}.
+\]
+Under the identification \(\Omega\cong M\), this is
+\[
+    m\longmapsto mg,
+\]
+which is the right regular action \(\widehat g\).
+
+Now let
+\[
+    \alpha\in C_{\operatorname{Sym}(M)}(\widehat M).
+\]
+Set
+\[
+    1^\alpha=t.
+\]
+Then for every \(m\in M\),
+\[
+    m^\alpha
+    =
+    (1^{\widehat m})^\alpha
+    =
+    (1^\alpha)^{\widehat m}
+    =
+    tm.
+\]
+Thus \(\alpha\) is left multiplication by \(t\), which is \(\check{t^{-1}}\). Hence
+\[
+    \alpha\in \check M.
+\]
+Conversely, every left multiplication map commutes with every right multiplication map.
+Therefore
+\[
+    C_{\operatorname{Sym}(M)}(\widehat M)=\check M.
+\]
+\end{proof}
+
+\section{Case II: Two Minimal Normal Subgroups}
+
+Now suppose \(G\leq \operatorname{Sym}(\Omega)\) is quasiprimitive and has two distinct
+minimal normal subgroups \(M\) and \(N\).
+
+\begin{proposition}
+Let \(G\leq \operatorname{Sym}(\Omega)\) be quasiprimitive. If \(M\) and \(N\) are two distinct
+minimal normal subgroups of \(G\), then:
+
+\begin{enumerate}[label=(\arabic*)]
+    \item
+    \[
+        M\cap N=1;
+    \]
+
+    \item
+    \[
+        [M,N]=1;
+    \]
+
+    \item \(M\) and \(N\) are regular on \(\Omega\);
+
+    \item
+    \[
+        M\cong N;
+    \]
+
+    \item There exists a nonabelian simple group \(T\) and an integer \(k\geq 1\) such that
+    \[
+        M\cong N\cong T^k.
+    \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since \(M,N\unlhd G\), their intersection is normal in \(G\):
+\[
+    M\cap N\unlhd G.
+\]
+Moreover,
+\[
+    M\cap N\leq M
+    \qquad\text{and}\qquad
+    M\cap N\leq N.
+\]
+By minimal normality and the assumption \(M\neq N\), we get
+\[
+    M\cap N=1.
+\]
+
+Now
+\[
+    [M,N]\leq M\cap N,
+\]
+so
+\[
+    [M,N]=1.
+\]
+Thus \(M\) and \(N\) centralize each other.
+
+Since \(G\) is quasiprimitive and \(M,N\) are nontrivial normal subgroups, both \(M\) and
+\(N\) are transitive on \(\Omega\).
+
+Fix \(\omega\in\Omega\). Let \(n\in N_\omega\). For any \(\alpha\in\Omega\), because \(M\)
+is transitive, there exists \(m\in M\) such that
+\[
+    \alpha=\omega^m.
+\]
+Since \(M\) and \(N\) centralize each other,
+\[
+    \alpha^n
+    =
+    (\omega^m)^n
+    =
+    (\omega^n)^m
+    =
+    \omega^m
+    =
+    \alpha.
+\]
+Thus \(n\) fixes every point of \(\Omega\). Since the action is faithful, \(n=1\). Therefore
+\[
+    N_\omega=1.
+\]
+Hence \(N\) is regular. The same argument shows that \(M\) is regular.
+
+Since both are regular,
+\[
+    |M|=|\Omega|=|N|.
+\]
+
+Because \(M\) is regular,
+\[
+    C_{\operatorname{Sym}(\Omega)}(M)
+\]
+is also regular and is isomorphic to \(M\). Since \(N\) centralizes \(M\), we have
+\[
+    N\leq C_{\operatorname{Sym}(\Omega)}(M).
+\]
+Both groups have order \(|\Omega|\), so
+\[
+    N=C_{\operatorname{Sym}(\Omega)}(M).
+\]
+Therefore
+\[
+    N\cong M.
+\]
+
+Finally, minimal normal subgroups are characteristically simple, so
+\[
+    M\cong T^k
+\]
+for some finite simple group \(T\). If \(T\) were abelian, then \(M\) would be abelian.
+Since \(M\) is regular and abelian, its centralizer in \(\operatorname{Sym}(\Omega)\) would be
+itself. Hence
+\[
+    C_{\operatorname{Sym}(\Omega)}(M)=M.
+\]
+But we have already shown that
+\[
+    C_{\operatorname{Sym}(\Omega)}(M)=N,
+\]
+so \(M=N\), contradicting the assumption that \(M\) and \(N\) are distinct.
+
+Thus \(T\) is nonabelian.
+\end{proof}
+
+\subsection{Relabelling \texorpdfstring{$\Omega$}{Omega} by a Regular Normal Subgroup}
+
+Let \(M\leq \operatorname{Sym}(\Omega)\) be regular and fix
+\[
+    \Omega=\{\omega_1,\omega_2,\dots,\omega_n\}.
+\]
+Choose \(\omega_1\) as base point. Since \(M\) is regular, for each \(i\) there exists a unique
+\(x_i\in M\) such that
+\[
+    \omega_i=\omega_1^{x_i}.
+\]
+Thus
+\[
+    M=\{1=x_1,x_2,\dots,x_n\}.
+\]
+The map
+\[
+    \omega_i\longmapsto x_i
+\]
+identifies \(\Omega\) with \(M\).
+
+Under this identification, \(M\) acts on itself by right multiplication:
+\[
+    x\mapsto xg.
+\]
+Hence
+\[
+    M=\widehat M.
+\]
+
+If \(N\) is the second minimal normal subgroup, then
+\[
+    N=C_{\operatorname{Sym}(\Omega)}(M)=\check M.
+\]
+Thus
+\[
+    MN=\widehat M\check M.
+\]
+
+\begin{proposition}
+With the above identification, let
+\[
+    X=MN=\widehat M\check M.
+\]
+Taking \(1\in M\) as base point, we have
+\[
+    X_1=\overline M
+    =
+    \{\widehat m\check m\mid m\in M\}.
+\]
+If \(M\cong T^k\) for a nonabelian simple group \(T\), then \(Z(M)=1\) and
+\[
+    X_1\cong M.
+\]
+\end{proposition}
+
+\begin{proof}
+Every element of \(X\) has the form
+\[
+    \widehat a\check b.
+\]
+Now
+\[
+    1^{\widehat a\check b}=b^{-1}a.
+\]
+Therefore
+\[
+    \widehat a\check b\in X_1
+    \Longleftrightarrow
+    b^{-1}a=1
+    \Longleftrightarrow
+    a=b.
+\]
+Hence
+\[
+    X_1=\{\widehat m\check m\mid m\in M\}.
+\]
+But
+\[
+    x^{\widehat m\check m}
+    =
+    m^{-1}xm
+    =
+    x^{\overline m}.
+\]
+Thus
+\[
+    X_1=\overline M.
+\]
+
+If \(M\cong T^k\) with \(T\) nonabelian simple, then \(Z(T)=1\), so
+\[
+    Z(M)=1.
+\]
+The conjugation action of \(M\) on itself has kernel \(Z(M)\), hence is faithful. Therefore
+\[
+    \overline M\cong M.
+\]
+\end{proof}
+
+\section{The O'Nan--Scott--Praeger Theorem}
+
+\begin{theorem}[O'Nan--Scott--Praeger theorem]
+Let \(G\leq \operatorname{Sym}(\Omega)\) be a finite quasiprimitive permutation group.
+Then \(G\) belongs to one of the following eight types.
+
+\begin{description}[leftmargin=2.8cm, style=nextline]
+    \item[\(\mathrm{HS}\)]
+    \textbf{Holomorph Simple type.}
+
+    The group \(G\) has exactly two minimal normal subgroups \(M\) and \(N\), and
+    \[
+        M\cong N\cong T,
+    \]
+    where \(T\) is a nonabelian simple group. Both \(M\) and \(N\) are regular.
+
+    \item[\(\mathrm{HC}\)]
+    \textbf{Holomorph Compound type.}
+
+    The group \(G\) has exactly two minimal normal subgroups \(M\) and \(N\), and
+    \[
+        M\cong N\cong T^k,
+        \qquad k\geq 2,
+    \]
+    where \(T\) is a nonabelian simple group. Both \(M\) and \(N\) are regular.
+
+    \item[\(\mathrm{HA}\)]
+    \textbf{Holomorph Affine type.}
+
+    The group \(G\) has a unique minimal normal subgroup
+    \[
+        N\cong C_p^d
+    \]
+    for some prime \(p\), and \(N\) is regular.
+
+    \item[\(\mathrm{AS}\)]
+    \textbf{Almost Simple type.}
+
+    The group \(G\) has a unique minimal normal subgroup \(N\), where \(N\) is nonabelian
+    simple, and
+    \[
+        N\unlhd G\leq \operatorname{Aut}(N).
+    \]
+
+    \item[\(\mathrm{TW}\)]
+    \textbf{Twisted Wreath type.}
+
+    The group \(G\) has a unique minimal normal subgroup
+    \[
+        N=T^k,\qquad k\geq 2,
+    \]
+    where \(T\) is nonabelian simple, and \(N\) is regular.
+
+    \item[\(\mathrm{SD}\)]
+    \textbf{Simple Diagonal type.}
+
+    The group \(G\) has a unique minimal normal subgroup
+    \[
+        N=T^k,\qquad k\geq 2,
+    \]
+    where \(T\) is nonabelian simple, and for \(\omega\in\Omega\),
+    \[
+        N_\omega\cong T
+    \]
+    is a full diagonal subgroup of \(N\).
+
+    \item[\(\mathrm{CD}\)]
+    \textbf{Compound Diagonal type.}
+
+    The group \(G\) has a unique minimal normal subgroup
+    \[
+        N=T^k,\qquad k\geq 2,
+    \]
+    where \(T\) is nonabelian simple, and for \(\omega\in\Omega\),
+    \[
+        N_\omega\cong T^m,
+        \qquad
+        2\leq m\leq \frac{k}{2},
+    \]
+    where \(N_\omega\) is a product of full diagonal subgroups.
+
+    \item[\(\mathrm{PA}\)]
+    \textbf{Product Action type.}
+
+    The group \(G\) has a unique minimal normal subgroup
+    \[
+        N=T^k,\qquad k\geq 2,
+    \]
+    where \(T\) is nonabelian simple, and \(N_\omega\neq 1\) is not of the diagonal forms
+    appearing in \(\mathrm{SD}\) or \(\mathrm{CD}\).
+\end{description}
+\end{theorem}
+
+\section{Summary of the Two-Minimal-Normal-Subgroup Case}
+
+\begin{topic}
+Suppose \(G\leq \operatorname{Sym}(\Omega)\) is quasiprimitive and has two distinct minimal
+normal subgroups \(M\) and \(N\). Then:
+
+\begin{enumerate}[label=(\arabic*)]
+    \item
+    \[
+        M\cap N=1;
+    \]
+
+    \item
+    \[
+        [M,N]=1;
+    \]
+
+    \item \(M\) and \(N\) are regular;
+
+    \item
+    \[
+        M\cong N\cong T^k
+    \]
+    for some nonabelian simple group \(T\);
+
+    \item after identifying \(\Omega\) with \(M\),
+    \[
+        M=\widehat M,
+        \qquad
+        N=\check M;
+    \]
+
+    \item
+    \[
+        MN=\widehat M\check M;
+    \]
+
+    \item since \(Z(M)=1\),
+    \[
+        MN=\widehat M\times \check M;
+    \]
+
+    \item the stabilizer of \(1\in M\) in \(MN\) is
+    \[
+        (MN)_1=\overline M\cong M.
+    \]
+\end{enumerate}
+
+If \(k=1\), this is the \(\mathrm{HS}\) type. If \(k\geq 2\), this is the \(\mathrm{HC}\) type.
+\end{topic}

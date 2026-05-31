@@ -1,0 +1,415 @@
+\section{Homework 4}
+
+\begin{exercise}
+    [P34, Ex2] \(M=\mathfrak{sl}(3,F)\) contains a copy of \(L\) in its upper left-hand \(2\times 2\) position. Write \(M\) as a direct sum of irreducible \(L\)-submodules, where \(M\) is viewed as an \(L\)-module via the adjoint representation:
+    \[
+        V(0)\oplus V(1)\oplus V(1)\oplus V(2).
+    \]
+\end{exercise}
+
+\begin{proof}
+    Let
+    \[
+    L=\mathfrak{sl}_2(F)
+     =
+    F e\oplus Fh\oplus Ff
+    \]
+    be embedded in the upper left-hand \(2\times 2\) corner of
+    \[
+    M=\mathfrak{sl}_3(F),
+    \]
+    where
+    \[
+    e=E_{12},\qquad f=E_{21},\qquad h=E_{11}-E_{22}.
+    \]
+    We view \(M\) as an \(L\)-module by the adjoint action:
+    \[
+    x\cdot m=[x,m]\qquad (x\in L,\;m\in M).
+    \]
+    
+    Set
+    \[
+    z=E_{11}+E_{22}-2E_{33}.
+    \]
+    Then \(z\in \mathfrak{sl}_3(F)\), and \(z\) commutes with \(e,f,h\), because
+    it is scalar on the upper left-hand \(2\times 2\) block. Hence
+    \[
+    M_0:=Fz
+    \]
+    is a trivial \(L\)-submodule, so
+    \[
+    M_0\cong V(0).
+    \]
+    
+    Next, the embedded copy of \(L\),
+    \[
+    M_2:=F E_{12}\oplus F(E_{11}-E_{22})\oplus F E_{21},
+    \]
+    is stable under the adjoint action of \(L\). It is just the adjoint module of
+    \(\mathfrak{sl}_2(F)\). Since \(E_{12}=e\) is a highest-weight vector of weight
+    \(2\), this submodule is irreducible and
+    \[
+    M_2\cong V(2).
+    \]
+    
+    Now consider
+    \[
+    M_1^+:=F E_{13}\oplus F E_{23}.
+    \]
+    Using
+    \[
+    [E_{ij},E_{kl}]=\delta_{jk}E_{il}-\delta_{li}E_{kj},
+    \]
+    we get
+    \[
+    [h,E_{13}]=E_{13},\qquad [h,E_{23}]=-E_{23},
+    \]
+    \[
+    [e,E_{13}]=0,\qquad [e,E_{23}]=E_{13},
+    \]
+    and
+    \[
+    [f,E_{13}]=E_{23},\qquad [f,E_{23}]=0.
+    \]
+    Thus \(E_{13}\) is a highest-weight vector of weight \(1\), and
+    \[
+    M_1^+\cong V(1).
+    \]
+    
+    Similarly define
+    \[
+    M_1^-:=F E_{32}\oplus F E_{31}.
+    \]
+    We have
+    \[
+    [h,E_{32}]=E_{32},\qquad [h,E_{31}]=-E_{31},
+    \]
+    \[
+    [e,E_{32}]=0,\qquad [e,E_{31}]=-E_{32},
+    \]
+    and
+    \[
+    [f,E_{32}]=-E_{31},\qquad [f,E_{31}]=0.
+    \]
+    Hence \(E_{32}\) is again a highest-weight vector of weight \(1\), and,
+    after changing the sign of one basis vector if desired, this submodule is
+    isomorphic to \(V(1)\):
+    \[
+    M_1^-\cong V(1).
+    \]
+    
+    Finally,
+    \[
+    \dim M_0+\dim M_1^++\dim M_1^-+\dim M_2
+    =
+    1+2+2+3=8=\dim \mathfrak{sl}_3(F),
+    \]
+    and the displayed subspaces are spanned by disjoint subsets of the standard
+    matrix-unit basis together with the diagonal trace-zero elements. Therefore their
+    sum is direct and equals \(M\). Hence
+    \[
+    M
+    =
+    M_0\oplus M_1^+\oplus M_1^-\oplus M_2
+    \cong
+    V(0)\oplus V(1)\oplus V(1)\oplus V(2).
+    \]
+    \end{proof}
+
+\begin{exercise}
+    [P34, Ex6] Decompose the tensor product of the two \(L\)-modules \(V(3)\) and \(V(7)\) into the sum of irreducible submodules:
+    \[
+        V(4)\oplus V(6)\oplus V(8)\oplus V(10).
+    \]
+    Try to develop a general formula for the decomposition of \(V(m)\otimes V(n)\).
+\end{exercise}
+
+\begin{proof}
+    For \(r\geq 0\), the irreducible \(\mathfrak{sl}_2(F)\)-module \(V(r)\) has
+    weights
+    \[
+    r,\; r-2,\; r-4,\;\ldots,\;-r,
+    \]
+    each with multiplicity \(1\). Hence its formal character is
+    \[
+    \operatorname{ch}V(r)=q^r+q^{r-2}+\cdots+q^{-r}.
+    \]
+    
+    Assume first that \(0\leq m\leq n\). In \(V(m)\otimes V(n)\), the weights are
+    sums of weights from \(V(m)\) and \(V(n)\). Thus the multiplicity of the weight
+    \[
+    m+n-2s
+    \]
+    is
+    \[
+    c_s
+    =
+    \#\{(i,j)\mid 0\leq i\leq m,\;0\leq j\leq n,\; i+j=s\}.
+    \]
+    Therefore
+    \[
+    c_s=
+    \begin{cases}
+    s+1, & 0\leq s\leq m,\\
+    m+1, & m\leq s\leq n,\\
+    m+n-s+1, & n\leq s\leq m+n.
+    \end{cases}
+    \]
+    
+    On the other hand, consider
+    \[
+    \bigoplus_{k=0}^{m} V(m+n-2k).
+    \]
+    The weight \(m+n-2s\) occurs in \(V(m+n-2k)\) precisely when
+    \[
+    k\leq s\leq m+n-k.
+    \]
+    Thus its multiplicity in the above direct sum is
+    \[
+    \#\{k\mid 0\leq k\leq m,\; k\leq s,\; k\leq m+n-s\}
+    =
+    \min\{m,s,m+n-s\}+1,
+    \]
+    which gives exactly the same three cases as \(c_s\). Hence
+    \[
+    \operatorname{ch}\bigl(V(m)\otimes V(n)\bigr)
+    =
+    \operatorname{ch}\left(\bigoplus_{k=0}^{m}V(m+n-2k)\right).
+    \]
+    Since finite-dimensional \(\mathfrak{sl}_2(F)\)-modules are completely reducible
+    and irreducibles are determined by their highest weights, we obtain
+    \[
+    V(m)\otimes V(n)
+    \cong
+    \bigoplus_{k=0}^{m}V(m+n-2k),
+    \qquad 0\leq m\leq n.
+    \]
+    
+    Equivalently, for arbitrary \(m,n\geq 0\),
+    \[
+    V(m)\otimes V(n)
+    \cong
+    \bigoplus_{k=0}^{\min\{m,n\}} V(m+n-2k).
+    \]
+    
+    Applying this with \(m=3\) and \(n=7\), we get
+    \[
+    V(3)\otimes V(7)
+    \cong
+    V(10)\oplus V(8)\oplus V(6)\oplus V(4).
+    \]
+    Reordering the direct summands,
+    \[
+    V(3)\otimes V(7)
+    \cong
+    V(4)\oplus V(6)\oplus V(8)\oplus V(10).
+    \]
+    \end{proof}
+
+\begin{exercise}
+    [P41, Ex1] If \(L\) is a classical linear Lie algebra of type \(A_\ell\), \(B_\ell\), \(C_\ell\), or \(D_\ell\) (see (1.2)), prove that the set of all diagonal matrices in \(L\) is a maximal toral subalgebra, of dimension \(\ell\). (Cf. Exercise 2.8.)
+\end{exercise}
+
+\begin{proof}
+    We use the standard matrix realizations of the classical Lie algebras.
+    
+    For type \(A_\ell\),
+    \[
+    L=\mathfrak{sl}_{\ell+1}(F),
+    \]
+    and the diagonal matrices in \(L\) are
+    \[
+    H
+    =
+    \left\{
+    \operatorname{diag}(a_1,\ldots,a_{\ell+1})
+    \;\middle|\;
+    \sum_{i=1}^{\ell+1}a_i=0
+    \right\}.
+    \]
+    Hence
+    \[
+    \dim H=\ell.
+    \]
+    
+    For type \(B_\ell\), in the standard realization of \(\mathfrak{o}_{2\ell+1}(F)\),
+    the diagonal matrices in \(L\) have the form
+    \[
+    H
+    =
+    \left\{
+    \operatorname{diag}(0,a_1,\ldots,a_\ell,-a_1,\ldots,-a_\ell)
+    \right\}.
+    \]
+    Thus
+    \[
+    \dim H=\ell.
+    \]
+    
+    For types \(C_\ell\) and \(D_\ell\), in the standard realizations
+    \[
+    C_\ell:\quad L=\mathfrak{sp}_{2\ell}(F),
+    \qquad
+    D_\ell:\quad L=\mathfrak{o}_{2\ell}(F),
+    \]
+    the diagonal matrices in \(L\) have the form
+    \[
+    H
+    =
+    \left\{
+    \operatorname{diag}(a_1,\ldots,a_\ell,-a_1,\ldots,-a_\ell)
+    \right\}.
+    \]
+    Again,
+    \[
+    \dim H=\ell.
+    \]
+    
+    In each case, \(H\) is abelian because diagonal matrices commute. Moreover, for
+    a diagonal matrix \(h=\operatorname{diag}(d_1,\ldots,d_N)\), one has
+    \[
+    [h,E_{ij}]=(d_i-d_j)E_{ij}.
+    \]
+    Thus \(\operatorname{ad}h\) is diagonalizable on the ambient matrix algebra, and
+    therefore also on the invariant subspace \(L\). Hence every element of \(H\) is
+    semisimple under the adjoint representation. Therefore \(H\) is a toral subalgebra.
+    
+    It remains to prove maximality. We show that
+    \[
+    C_L(H)=H.
+    \]
+    Let \(V\) be the natural module. In type \(A_\ell\), the weights of \(H\) on \(V\)
+    are
+    \[
+    \varepsilon_1,\ldots,\varepsilon_{\ell+1},
+    \]
+    restricted to \(\sum a_i=0\), and they are distinct. In type \(B_\ell\), the weights
+    are
+    \[
+    0,\;\pm\varepsilon_1,\ldots,\pm\varepsilon_\ell,
+    \]
+    and in types \(C_\ell,D_\ell\), they are
+    \[
+    \pm\varepsilon_1,\ldots,\pm\varepsilon_\ell.
+    \]
+    These weights are distinct. Hence any element of \(\mathfrak{gl}(V)\) commuting
+    with every element of \(H\) preserves each one-dimensional weight space of \(V\).
+    Therefore it is diagonal in the standard basis. Consequently,
+    \[
+    C_{\mathfrak{gl}(V)}(H)
+    \]
+    is the algebra of diagonal matrices. Intersecting with \(L\), we get exactly the
+    diagonal matrices lying in \(L\), namely
+    \[
+    C_L(H)=H.
+    \]
+    
+    Now let \(T\) be a toral subalgebra of \(L\) containing \(H\). Since toral subalgebras
+    are abelian, every element of \(T\) commutes with every element of \(H\). Hence
+    \[
+    T\subseteq C_L(H)=H.
+    \]
+    Thus \(T=H\), proving that \(H\) is maximal toral.
+    
+    Therefore, in each of the classical types
+    \[
+    A_\ell,\quad B_\ell,\quad C_\ell,\quad D_\ell,
+    \]
+    the set of all diagonal matrices in \(L\) is a maximal toral subalgebra of dimension
+    \(\ell\).
+    \end{proof}
+
+\begin{exercise}
+    [P41, Ex10] Prove that no four, five, or seven dimensional semisimple Lie algebras exist.
+\end{exercise}
+
+\begin{proof}
+    Let \(L\) be a nonzero semisimple Lie algebra over \(F\). Choose a maximal toral
+    subalgebra \(H\), and let
+    \[
+    \ell=\dim H
+    \]
+    be the rank of \(L\). Let \(\Phi\subset H^*\) be the corresponding root system.
+    Then the root-space decomposition gives
+    \[
+    L
+    =
+    H\oplus \bigoplus_{\alpha\in\Phi} L_\alpha,
+    \]
+    where
+    \[
+    \dim L_\alpha=1
+    \]
+    for every \(\alpha\in\Phi\). Therefore
+    \[
+    \dim L=\ell+|\Phi|.
+    \]
+    
+    Since \(\Phi\) is a root system, \(\alpha\in\Phi\) implies \(-\alpha\in\Phi\), and
+    \(0\notin\Phi\). Thus \(|\Phi|\) is even, so
+    \[
+    \dim L\equiv \ell \pmod 2.
+    \]
+    Also, since \(\Phi\) spans \(H^*\), we may choose \(\ell\) linearly independent
+    roots
+    \[
+    \alpha_1,\ldots,\alpha_\ell.
+    \]
+    Then
+    \[
+    \pm\alpha_1,\ldots,\pm\alpha_\ell
+    \]
+    are \(2\ell\) distinct roots, so
+    \[
+    |\Phi|\geq 2\ell.
+    \]
+    Hence
+    \[
+    \dim L=\ell+|\Phi|\geq 3\ell.
+    \]
+    
+    If \(\ell=1\), then \(\Phi\) is a rank-one root system. Since no scalar multiples of
+    a root occur except its negative, we must have
+    \[
+    \Phi=\{\alpha,-\alpha\}.
+    \]
+    Therefore
+    \[
+    \dim L=\ell+|\Phi|=1+2=3.
+    \]
+    
+    We now rule out the dimensions \(4,5,7\).
+    
+    If \(\dim L=4\), then
+    \[
+    4\equiv \ell \pmod 2,
+    \]
+    so \(\ell\) is even. Since \(L\neq 0\), we have \(\ell>0\), hence \(\ell\geq 2\).
+    But then
+    \[
+    \dim L\geq 3\ell\geq 6,
+    \]
+    contradicting \(\dim L=4\).
+    
+    If \(\dim L=5\), then \(\ell\) is odd. Since
+    \[
+    5=\dim L\geq 3\ell,
+    \]
+    we must have \(\ell=1\). But rank one gives
+    \[
+    \dim L=3,
+    \]
+    contradicting \(\dim L=5\).
+    
+    If \(\dim L=7\), then \(\ell\) is odd. Since
+    \[
+    7=\dim L\geq 3\ell,
+    \]
+    we again must have \(\ell=1\). But then
+    \[
+    \dim L=3,
+    \]
+    contradicting \(\dim L=7\).
+    
+    Thus no semisimple Lie algebra of dimension \(4\), \(5\), or \(7\) exists.
+    \end{proof}

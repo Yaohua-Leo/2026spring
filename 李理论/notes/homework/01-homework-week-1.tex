@@ -1,0 +1,408 @@
+\section{Homework 1}
+
+\begin{exercise}
+    Prove the simplicity of Lie algebras $\mathfrak{sl}_n$, $\mathfrak{o}_n$, $\mathfrak{sp}_{2n}$ and $W(n)$.
+\end{exercise}
+
+I can only prove when base field is of characteristic 0 and $\neq 2$. (Or $\operatorname{Char}F \nmid n$, which is essentially the same. If $\operatorname{Char}F \mid n$ or $\operatorname{Char}F = 2$, then either $I$ will contained in the center of $L$, or the alternativity become symmetry, things could be more complicated).
+
+\textbf{The simplicity of $\mathfrak{sl}_n$}
+
+\begin{proof}
+    Let $I\neq 0$ be an ideal of $\mathfrak{sl}_n(F)$. We prove that $I=\mathfrak{sl}_n(F)$.
+
+    Write
+    \[
+        \mathfrak{sl}_n(F)=\mathfrak{h}\oplus \bigoplus_{i\neq j}Fe_{ij},
+    \]
+    where $\mathfrak{h}$ is the subalgebra of diagonal trace-zero matrices. Choose $0\neq x\in I$ and write
+    \[
+        x=y+\sum_{t=1}^s c_t e_{i_tj_t},
+        \qquad y\in\mathfrak{h},
+    \]
+    where the pairs $(i_t,j_t)$ are distinct and $c_t\neq 0$ for all $t$.
+
+    We first show that $I$ contains some off-diagonal matrix unit $e_{kl}$.
+
+    If $s=0$, then $x=y\in\mathfrak{h}$ is non-zero. Writing
+    \[
+        y=\operatorname{diag}(d_1,\dots,d_n),
+    \]
+    we can choose $k\neq l$ such that $d_k\neq d_l$. Then
+    \[
+        [y,e_{kl}]=(d_k-d_l)e_{kl}\in I,
+    \]
+    hence $e_{kl}\in I$.
+
+    Assume now that $s\geq 1$. For
+    \[
+        h=\operatorname{diag}(\lambda_1,\dots,\lambda_n)\in\mathfrak{h},
+    \]
+    define
+    \[
+        \alpha_{ij}(h)=\lambda_i-\lambda_j.
+    \]
+    Since $\operatorname{char}F=0$, the field $F$ is infinite, so we may choose $h\in\mathfrak{h}$ such that
+    \[
+        \mu_t:=\alpha_{i_tj_t}(h)\neq 0
+        \qquad\text{and}\qquad
+        \mu_1,\dots,\mu_s
+        \text{ are pairwise distinct.}
+    \]
+    Because $\mathfrak{h}$ is abelian, for every $r\geq 1$,
+    \[
+        (\operatorname{ad}h)^r(x)=\sum_{t=1}^s c_t\mu_t^r e_{i_tj_t}.
+    \]
+    Put
+    \[
+        z_r:=(\operatorname{ad}h)^r(x)\in I,
+        \qquad r=1,\dots,s.
+    \]
+    Then
+    \[
+        \begin{pmatrix}
+            z_1    \\
+            z_2    \\
+            \vdots \\
+            z_s
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \mu_1   & \mu_2   & \cdots & \mu_s   \\
+            \mu_1^2 & \mu_2^2 & \cdots & \mu_s^2 \\
+            \vdots  & \vdots  & \ddots & \vdots  \\
+            \mu_1^s & \mu_2^s & \cdots & \mu_s^s
+        \end{pmatrix}
+        \begin{pmatrix}
+            c_1e_{i_1j_1} \\
+            c_2e_{i_2j_2} \\
+            \vdots        \\
+            c_se_{i_sj_s}
+        \end{pmatrix}.
+    \]
+    The coefficient matrix is invertible: it is the product of $\operatorname{diag}(\mu_1,\dots,\mu_s)$ and a Vandermonde matrix in $\mu_1,\dots,\mu_s$. Therefore each $c_t e_{i_tj_t}$ is a linear combination of $z_1,\dots,z_s$, so $e_{i_tj_t}\in I$ for every $t$. In particular, $I$ contains some $e_{kl}$ with $k\neq l$.
+
+    Fix such an element $e_{kl}\in I$. Since $I$ is an ideal,
+    \[
+        h_{kl}:=[e_{kl},e_{lk}]=e_{kk}-e_{ll}\in I.
+    \]
+    For every $j\neq k$,
+    \[
+        [h_{kl},e_{kj}]=
+        \begin{cases}
+            2e_{kl}, & j=l,     \\
+            e_{kj},  & j\neq l,
+        \end{cases}
+    \]
+    so $e_{kj}\in I$ for all $j\neq k$. Similarly, for every $i\neq k$,
+    \[
+        [e_{ik},h_{kl}]=
+        \begin{cases}
+            2e_{lk}, & i=l,     \\
+            e_{ik},  & i\neq l,
+        \end{cases}
+    \]
+    hence $e_{ik}\in I$ for all $i\neq k$.
+
+    Now let $i\neq j$. If $i=k$ or $j=k$, then we already know $e_{ij}\in I$. If $i,j\neq k$, then
+    \[
+        e_{ij}=[e_{ik},e_{kj}]\in I.
+    \]
+    Thus every off-diagonal matrix unit $e_{ij}$ belongs to $I$.
+
+    Finally, for $i\neq j$,
+    \[
+        [e_{ij},e_{ji}]=e_{ii}-e_{jj}\in I.
+    \]
+    These elements span $\mathfrak{h}$, hence $\mathfrak{h}\subseteq I$. Therefore
+    \[
+        \mathfrak{sl}_n(F)=\mathfrak{h}\oplus \bigoplus_{i\neq j}Fe_{ij}\subseteq I,
+    \]
+    so $I=\mathfrak{sl}_n(F)$. Hence $\mathfrak{sl}_n(F)$ is simple.
+\end{proof}
+
+\textbf{The simplicity of $\mathfrak{o}_n$}
+9`='
+\begin{proof}
+    Let $\mathfrak{g}=\mathfrak{o}_n(F)$. For $i\neq j$, set
+    \[
+        X_{ij}=E_{ij}-E_{ji},
+    \]
+    so $X_{ji}=-X_{ij}$ and $\{X_{ij}\mid 1\le i<j\le n\}$ is a basis of $\mathfrak{g}$. The bracket is
+    \[
+        [X_{ij},X_{kl}]=\delta_{jk}X_{il}-\delta_{ik}X_{jl}-\delta_{jl}X_{ik}+\delta_{il}X_{jk}.
+    \]
+
+    If $n=1$ or $n=2$, then $\mathfrak{g}$ is abelian, hence not simple. For $n=4$, let
+    \[
+        I_+=\operatorname{span}\{X_{12}+X_{34},\,X_{13}-X_{24},\,X_{14}+X_{23}\},
+    \]
+    \[
+        I_-=\operatorname{span}\{X_{12}-X_{34},\,X_{13}+X_{24},\,X_{14}-X_{23}\}.
+    \]
+    A direct computation shows that $I_+$ and $I_-$ are ideals, $[I_+,I_-]=0$, and
+    \[
+        \mathfrak{o}_4=I_+\oplus I_-.
+    \]
+    Therefore $\mathfrak{o}_4$ is not simple.
+
+    Now assume $n=3$ or $n\ge5$, and let $I\neq0$ be an ideal of $\mathfrak{g}$. It is enough to show that $I$ contains some basis element $X_{pq}$. Indeed, if $X_{pq}\in I$ and $r\notin\{p,q\}$, then
+    \[
+        [X_{pq},X_{qr}]=X_{pr},\qquad [X_{rp},X_{pq}]=X_{rq},
+    \]
+    so repeated bracketing gives every basis element of $\mathfrak{g}$.
+
+    For $i\neq j$, define
+    \[
+        P_{ij}(x)=-[X_{ij},[X_{ij},x]].
+    \]
+    Since $I$ is an ideal, $P_{ij}(I)\subseteq I$. Moreover,
+    \[
+        P_{ij}(X_{kl})=-[X_{ij},[X_{ij},X_{kl}]]
+    \]
+    and this can be computed directly from the bracket formula.
+
+    If $|\{i,j\}\cap\{k,l\}|=0$, then all Kronecker deltas vanish, so
+    \[
+        [X_{ij},X_{kl}]=0,
+        \qquad\text{hence}\qquad
+        P_{ij}(X_{kl})=0.
+    \]
+
+    If $|\{i,j\}\cap\{k,l\}|=2$, then $\{k,l\}=\{i,j\}$, so $X_{kl}=\pm X_{ij}$. Hence
+    \[
+        [X_{ij},X_{kl}]=0,
+        \qquad\text{and again}\qquad
+        P_{ij}(X_{kl})=0.
+    \]
+
+    Now assume $|\{i,j\}\cap\{k,l\}|=1$. There are four possibilities:
+    \[
+        [X_{ij},X_{jl}]=X_{il}, \qquad
+        P_{ij}(X_{jl})=-[X_{ij},X_{il}]=X_{jl},
+    \]
+    \[
+        [X_{ij},X_{il}]=-X_{jl}, \qquad
+        P_{ij}(X_{il})=-[X_{ij},-X_{jl}]=X_{il},
+    \]
+    \[
+        [X_{ij},X_{ki}]=X_{jk}, \qquad
+        P_{ij}(X_{ki})=-[X_{ij},X_{jk}]=-X_{ik}=X_{ki},
+    \]
+    \[
+        [X_{ij},X_{kj}]=-X_{ki}, \qquad
+        P_{ij}(X_{kj})=-[X_{ij},-X_{ki}]=X_{kj}.
+    \]
+    Therefore
+    \[
+        P_{ij}(X_{kl})=
+        \begin{cases}
+            X_{kl}, & |\{i,j\}\cap\{k,l\}|=1,               \\
+            0,      & |\{i,j\}\cap\{k,l\}|=0 \text{ or } 2.
+        \end{cases}
+    \]
+
+    If $n=3$, write
+    \[
+        x=c_{12}X_{12}+c_{13}X_{13}+c_{23}X_{23}\in I,\qquad x\neq0.
+    \]
+    Then
+    \[
+        x-P_{12}(x)=c_{12}X_{12},\qquad
+        x-P_{13}(x)=c_{13}X_{13},\qquad
+        x-P_{23}(x)=c_{23}X_{23}.
+    \]
+    Since not all $c_{ij}$ vanish, one of these is a non-zero scalar multiple of a basis element. Hence $I$ contains a basis element, so $I=\mathfrak{o}_3$.
+
+    Assume now $n\ge5$. Choose
+    \[
+        0\neq x=\sum_{1\le a<b\le n} c_{ab}X_{ab}\in I,
+    \]
+    and relabel indices so that $c_{12}\neq0$. Set
+    \[
+        x_1=P_{13}(x),\qquad x_2=P_{24}(x_1),\qquad x_3=P_{15}(x_2),\qquad x_4=P_{25}(x_3).
+    \]
+    By the description of $P_{ij}$,
+    \[
+        x_2\in \operatorname{span}\{X_{12},X_{14},X_{23},X_{34}\},
+    \]
+    \[
+        x_3\in \operatorname{span}\{X_{12},X_{14}\},
+    \]
+    and therefore
+    \[
+        x_4=c_{12}X_{12}\in I.
+    \]
+    Thus $X_{12}\in I$, hence $I=\mathfrak{o}_n$.
+
+    Therefore $\mathfrak{o}_n$ is simple exactly when $n=3$ or $n\ge5$.
+\end{proof}
+
+\textbf{The simplicity of $\mathfrak{sp}_{2n}$}
+
+\begin{proof}
+    If $n=1$, then $\mathfrak{sp}_2(F)\cong \mathfrak{sl}_2(F)$, which is simple. So assume $n\ge2$, and let
+    \[
+        \mathfrak{g}=\mathfrak{sp}_{2n}(F)=\left\{\begin{pmatrix} A & B \\ C & -A^T \end{pmatrix} \;\middle|\; B^T=B,\ C^T=C \right\}.
+    \]
+    For $1\le i,j\le n$, define
+    \[
+        A_{ij}=E_{ij}-E_{n+j,n+i},\qquad
+        B_{ij}=E_{i,n+j}+E_{j,n+i},\qquad
+        C_{ij}=E_{n+i,j}+E_{n+j,i}.
+    \]
+    Then $B_{ij}=B_{ji}$ and $C_{ij}=C_{ji}$, and a basis of $\mathfrak{g}$ is
+    \[
+        \{A_{ij}\mid i\neq j\}\cup \{H_i:=A_{ii}\mid 1\le i\le n\}\cup \{B_{ij},C_{ij}\mid 1\le i\le j\le n\}.
+    \]
+    Let $\mathfrak{h}=\operatorname{span}\{H_1,\dots,H_n\}$. A direct computation gives
+    \[
+        [H_r,A_{ij}]=(\delta_{ri}-\delta_{rj})A_{ij},
+    \]
+    \[
+        [H_r,B_{ij}]=(\delta_{ri}+\delta_{rj})B_{ij},
+        \qquad
+        [H_r,C_{ij}]=-(\delta_{ri}+\delta_{rj})C_{ij}.
+    \]
+    Thus every basis element outside $\mathfrak{h}$ is a common eigenvector for $\operatorname{ad}\mathfrak{h}$.
+
+    Let $I\neq0$ be an ideal of $\mathfrak{g}$. Choose $0\neq x\in I$. If $x\notin \mathfrak{h}$, then exactly as in the proof for $\mathfrak{sl}_n$, a Vandermonde argument with a suitable $h\in\mathfrak{h}$ isolates a non-zero basis vector in $I$. If $x\in \mathfrak{h}$, write
+    \[
+        x=\lambda_1H_1+\cdots+\lambda_nH_n,
+    \]
+    and choose $i$ with $\lambda_i\neq0$. Then
+    \[
+        [x,B_{ii}]=2\lambda_i B_{ii}\in I.
+    \]
+    Hence in all cases $I$ contains one of the basis elements $A_{ij}$ $(i\neq j)$, $B_{ij}$, or $C_{ij}$.
+
+    We now show that this already implies $I=\mathfrak{g}$.
+
+    First suppose that $B_{ii}\in I$ for some $i$. Then for every $j\neq i$,
+    \[
+        A_{ij}=\frac{1}{2}[B_{ii},C_{ij}]\in I,\qquad
+        B_{ij}=\frac{1}{2}[A_{ij},B_{jj}]\in I,\qquad
+        C_{ij}=-\frac{1}{2}[A_{ij},C_{ii}]\in I.
+    \]
+    Also,
+    \[
+        H_i=\frac{1}{4}[B_{ii},C_{ii}]\in I.
+    \]
+    For $p,q\neq i$ with $p\neq q$, we then have
+    \[
+        A_{pq}=[B_{pi},C_{iq}]\in I,\qquad
+        B_{pq}=[A_{pi},B_{iq}]\in I,\qquad
+        C_{pq}=-[A_{ip},C_{iq}]\in I.
+    \]
+    For $p\neq i$, the same computations give
+    \[
+        B_{pp}=[A_{pi},B_{ip}]\in I,\qquad C_{pp}=-[A_{ip},C_{ip}]\in I.
+    \]
+    Finally, for $p\neq i$,
+    \[
+        H_i+H_p=[B_{ip},C_{ip}]\in I,
+    \]
+    so $H_p\in I$. Therefore every basis element of $\mathfrak{g}$ lies in $I$, and hence $I=\mathfrak{g}$.
+
+    If $B_{ij}\in I$ with $i\neq j$, then
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I,
+    \]
+    and hence
+    \[
+        B_{ii}=\frac{1}{2}[H_i+H_j,B_{ii}]\in I.
+    \]
+    So we again reduce to the first case.
+
+    If $A_{ij}\in I$ with $i\neq j$, then
+    \[
+        B_{ij}=\frac{1}{2}[A_{ij},B_{jj}]\in I,
+    \]
+    and so
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I.
+    \]
+    Consequently,
+    \[
+        B_{ii}=\frac{1}{2}[H_i+H_j,B_{ii}]\in I,
+    \]
+    and we reduce to the previous case.
+
+    If $C_{ii}\in I$, then
+    \[
+        H_i=-\frac{1}{4}[C_{ii},B_{ii}]\in I,
+    \]
+    so
+    \[
+        B_{ii}=\frac{1}{2}[H_i,B_{ii}]\in I.
+    \]
+    Again we reduce to the first case.
+
+    If $C_{ij}\in I$ with $i\neq j$, then
+    \[
+        H_i+H_j=[B_{ij},C_{ij}]\in I,
+    \]
+    hence
+    \[
+        C_{ii}=-\frac{1}{2}[H_i+H_j,C_{ii}]\in I.
+    \]
+    Also,
+    \[
+        H_i=-\frac{1}{4}[C_{ii},B_{ii}]\in I,
+    \]
+    so
+    \[
+        B_{ii}=\frac{1}{2}[H_i,B_{ii}]\in I.
+    \]
+    Again we reduce to the first case.
+
+    Therefore every non-zero ideal of $\mathfrak{g}$ is equal to $\mathfrak{g}$, so $\mathfrak{sp}_{2n}(F)$ is simple.
+\end{proof}
+
+\textbf{The simplicity of $W(n)$}
+
+\begin{proof}
+    Let
+    \[
+        W(n)=\operatorname{Der}\bigl(F[x_1,\dots,x_n]\bigr)
+        =\left\{\sum_{i=1}^n f_i\partial_i \;\middle|\; f_i\in F[x_1,\dots,x_n]\right\},
+        \qquad \partial_i=\frac{\partial}{\partial x_i},
+    \]
+    where $\operatorname{char}F=0$. This Lie algebra is non-abelian, since
+    \[
+        [\partial_i,x_i]=1\neq0.
+    \]
+    Let $I\neq0$ be an ideal of $W(n)$. We prove that $I=W(n)$.
+
+    Choose
+    \[
+        0\neq D=\sum_{i=1}^n f_i\partial_i\in I.
+    \]
+    By replacing $D$ with repeated brackets $[\partial_k,D]$, we may successively differentiate the coefficients. Since $\operatorname{char}F=0$, differentiating a non-constant polynomial lowers its degree without annihilating its highest term. Hence, after finitely many such brackets, we obtain a non-zero constant vector field
+    \[
+        C=\sum_{i=1}^n c_i\partial_i\in I.
+    \]
+    Choose $k$ with $c_k\neq0$. Then for every $j$,
+    \[
+        [x_k\partial_j,C]
+        =\sum_{i=1}^n c_i[x_k\partial_j,\partial_i]
+        =-c_k\partial_j\in I.
+    \]
+    Therefore $\partial_j\in I$ for all $j=1,\dots,n$.
+
+    Now let $\alpha=(\alpha_1,\dots,\alpha_n)\in \mathbb{N}^n$ and fix $j$. Since $\operatorname{char}F=0$, the scalar $\alpha_1+1$ is invertible in $F$. Set
+    \[
+        E=-\frac{1}{\alpha_1+1}x_1^{\alpha_1+1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}\partial_j\in W(n).
+    \]
+    Because $\partial_1\in I$ and $I$ is an ideal,
+    \[
+        [E,\partial_1]
+        =-\partial_1\!\left(-\frac{1}{\alpha_1+1}x_1^{\alpha_1+1}x_2^{\alpha_2}\cdots x_n^{\alpha_n}\right)\partial_j
+        =x_1^{\alpha_1}\cdots x_n^{\alpha_n}\partial_j
+        \in I.
+    \]
+    Thus every monomial derivation $x^\alpha\partial_j$ lies in $I$. These elements form a basis of $W(n)$, so $I=W(n)$.
+
+    Therefore $W(n)$ is simple.
+\end{proof}
+

@@ -1,0 +1,409 @@
+\section{Root space decomposition}
+
+\begin{definition}
+    A Lie algebra $L$ is called \emph{toral} if $\operatorname{ad}(a)$ is semisimple
+    for every $a\in L$.
+\end{definition}
+
+\begin{lemma}
+    Any toral Lie algebra is abelian.
+\end{lemma}
+
+\begin{proof}
+    Fix $0 \neq a \in L$. Since $\operatorname{ad} a$ is semisimple,
+    \[
+        L=\bigoplus_{\lambda} L_\lambda(a),
+        \qquad
+        L_\lambda(a)=\{x\in L\mid [a,x]=\lambda x\}.
+    \]
+    We claim that $L_\alpha(a)=0$ for all $\alpha\neq 0$.
+
+    Suppose instead that $L_\alpha(a)\neq 0$ for some $\alpha\neq 0$, and choose
+    $0\neq b\in L_\alpha(a)$. If $x\in L_\beta(a)$, then the Jacobi identity gives
+    \[
+        [a,[b,x]]
+        =
+        [[a,b],x]+[b,[a,x]]
+        =
+        \alpha[b,x]+\beta[b,x]
+        =
+        (\alpha+\beta)[b,x].
+    \]
+    Hence
+    \[
+        [b,L_\beta(a)]\subseteq L_{\alpha+\beta}(a).
+    \]
+    Thus $\operatorname{ad} b$ carries each eigenspace of $\operatorname{ad} a$ into the
+    next one shifted by $\alpha$. Since $\operatorname{ad} a$ has only finitely many
+    eigenvalues, it follows that $\operatorname{ad} b$ is nilpotent.
+
+    On the other hand, $L$ is toral, so $\operatorname{ad} b$ is semisimple. Hence
+    $\operatorname{ad} b=0$. But
+    \[
+        (\operatorname{ad} b)(a)=[b,a]=-\alpha b\neq 0,
+    \]
+    a contradiction. Therefore $L_\alpha(a)=0$ whenever $\alpha\neq 0$.
+
+    So $L=L_0(a)$, i.e.
+    \[
+        [a,x]=0
+        \qquad\text{for all }x\in L.
+    \]
+    Since $a$ was arbitrary, $L$ is abelian.
+\end{proof}
+
+Now let $L$ be semisimple, and let $H$ be a maximal toral subalgebra of $L$.
+Since $H$ is toral, it is abelian by the lemma above. Hence the commuting
+semisimple endomorphisms $\operatorname{ad}(h)$ $(h\in H)$ are simultaneously
+diagonalizable, and we obtain a decomposition
+\[
+    L=L_0\oplus \bigoplus_{\alpha\in \Delta} L_\alpha,
+\]
+where
+\[
+    L_\alpha=\{x\in L\mid [h,x]=\alpha(h)x \text{ for all } h\in H\},
+    \qquad \alpha\in H^*,
+\]
+and $\Delta\subseteq H^*\setminus\{0\}$ is the set of nonzero weights.
+
+
+\begin{lemma}
+    For $\alpha,\beta\in \Delta\cup\{0\}$ one has
+    \[
+        [L_\alpha,L_\beta]\subseteq L_{\alpha+\beta},
+    \]
+    where by convention $L_{\alpha+\beta}=0$ if $\alpha+\beta\notin \Delta\cup\{0\}$.
+\end{lemma}
+
+\begin{proof}
+    Take $x_\alpha\in L_\alpha$, $y_\beta\in L_\beta$, and $h\in H$. Then
+    \[
+        [h,[x_\alpha,y_\beta]]
+        =
+        [[h,x_\alpha],y_\beta]+[x_\alpha,[h,y_\beta]]
+        =
+        \alpha(h)[x_\alpha,y_\beta]+\beta(h)[x_\alpha,y_\beta].
+    \]
+    So
+    \[
+        [h,[x_\alpha,y_\beta]]
+        =
+        (\alpha+\beta)(h)[x_\alpha,y_\beta].
+    \]
+    Hence $[x_\alpha,y_\beta]\in L_{\alpha+\beta}$.
+\end{proof}
+
+Let $(\cdot\mid\cdot)$ denote the Killing form of $L$.
+
+\begin{lemma}
+    For any $\alpha,\beta\in \Delta\cup\{0\}$, if $\alpha+\beta\neq 0$, then
+    \[
+        (L_\alpha\mid L_\beta)=0.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Choose $h\in H$ such that $(\alpha+\beta)(h)\neq 0$.
+    Let $x_\alpha\in L_\alpha$ and $y_\beta\in L_\beta$. Then
+    \[
+        \alpha(h)(x_\alpha\mid y_\beta)
+        =
+        ([h,x_\alpha]\mid y_\beta)
+        =
+        (h\mid [x_\alpha,y_\beta]),
+    \]
+    while
+    \[
+        \beta(h)(x_\alpha\mid y_\beta)
+        =
+        (x_\alpha\mid [h,y_\beta])
+        =
+        -([h,x_\alpha]\mid y_\beta).
+    \]
+    Hence
+    \[
+        (\alpha(h)+\beta(h))(x_\alpha\mid y_\beta)=0.
+    \]
+    Since $(\alpha+\beta)(h)\neq 0$, we obtain
+    \[
+        (x_\alpha\mid y_\beta)=0.
+    \]
+\end{proof}
+
+\begin{lemma}
+    \[
+        L_0=H.
+    \]
+\end{lemma}
+
+\begin{proof}
+    First note that the restriction of the Killing form to $L_0$ is nondegenerate.
+    Indeed, if $x\in L_0$ and $(x\mid L_0)=0$, then by the previous lemma
+    \[
+        (x\mid L_\alpha)=0
+        \qquad (\alpha\neq 0),
+    \]
+    so $x$ is orthogonal to all of $L$. Since the Killing form on $L$ is nondegenerate,
+    $x=0$.
+
+    Now let $a\in L_0$, and write its abstract Jordan decomposition in $L$ as
+    \[
+        a=a_s+a_n.
+    \]
+    Because $\operatorname{ad}(a)$ commutes with every $\operatorname{ad}(h)$ $(h\in H)$,
+    the same is true of its semisimple and nilpotent parts. Hence
+    \[
+        a_s,a_n\in L_0.
+    \]
+    Since $a_s$ is semisimple and centralizes $H$, the subalgebra
+    \[
+        H+Fa_s
+    \]
+    is toral. By maximality of $H$, we must have $a_s\in H$.
+
+    We claim that $a_n=0$. To prove this, it is enough --- by the nondegeneracy
+    of $(\cdot\mid\cdot)$ on $L_0$ --- to show that
+    \[
+        (a_n\mid L_0)=0.
+    \]
+
+    First observe that $L_0$ is solvable. Indeed, if $u\in [L_0,L_0]$, then
+    $u\in L_0$, so its semisimple part $u_s$ lies in $H$. On the other hand, since
+    $u=[x,y]$ with $x,y\in L_0$ and $H$ centralizes $L_0$, one sees from the
+    Killing-form computation that $u_s$ acts trivially on $L$; hence $u_s=0$.
+    Therefore every element of $[L_0,L_0]$ is nilpotent, so Engel's theorem
+    implies that $[L_0,L_0]$ is nilpotent. Thus $L_0$ is solvable.
+
+    By Lie's theorem, there exists a basis of $L$ with respect to which all operators
+    $\operatorname{ad}(x)$ $(x\in L_0)$ are upper triangular. Since $a_n$ is nilpotent,
+    $\operatorname{ad}(a_n)$ is strictly upper triangular. Therefore, for every
+    $x\in L_0$,
+    \[
+        (a_n\mid x)
+        =
+        \operatorname{tr}\bigl(\operatorname{ad}(a_n)\operatorname{ad}(x)\bigr)=0.
+    \]
+    Hence $(a_n\mid L_0)=0$, and so $a_n=0$.
+
+    Thus $a=a_s\in H$. Since $a\in L_0$ was arbitrary, we have $L_0\subseteq H$.
+    The reverse inclusion is clear, so $L_0=H$.
+\end{proof}
+
+\begin{corollary}
+    The restriction of the Killing form to $H$ is nondegenerate.
+\end{corollary}
+
+\begin{proof}
+    This follows immediately from the lemma $L_0=H$ and the nondegeneracy
+    of the Killing form on $L_0$.
+\end{proof}
+
+\begin{corollary}
+    For every $\alpha\in\Delta$, the pairing
+    \[
+        L_\alpha\times L_{-\alpha}\to F,
+        \qquad (x,y)\mapsto (x\mid y),
+    \]
+    is nondegenerate. In particular, $L_{-\alpha}\neq 0$.
+\end{corollary}
+
+\begin{proof}
+    Let $0\neq x\in L_\alpha$ and assume $(x\mid L_{-\alpha})=0$. By the orthogonality
+    lemma, $x$ is also orthogonal to $H=L_0$ and to every $L_\beta$ with
+    $\beta\neq -\alpha$. Hence $x$ is orthogonal to all of $L$, contradicting the
+    nondegeneracy of the Killing form.
+\end{proof}
+
+We may therefore identify $H$ with $H^*$ via the Killing form:
+\[
+    \nu\colon H\longrightarrow H^*,
+    \qquad
+    h\longmapsto (h\mid \cdot)\vert_H .
+\]
+Thus
+\[
+    \nu(h)(y)=(h\mid y)
+    \qquad \text{for all } y\in H.
+\]
+Let
+\[
+    \nu^{-1}\colon H^*\longrightarrow H
+\]
+be its inverse. For $\alpha,\beta\in H^*$ define
+\[
+    (\alpha\mid\beta):=\bigl(\nu^{-1}(\alpha)\mid \nu^{-1}(\beta)\bigr).
+\]
+
+\begin{lemma}
+    For $x_\alpha\in L_\alpha$ and $y_{-\alpha}\in L_{-\alpha}$,
+    \[
+        [x_\alpha,y_{-\alpha}]
+        =
+        (x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Since $[L_\alpha,L_{-\alpha}]\subseteq L_0=H$, both sides lie in $H$.
+    Let $h\in H$. Then
+    \[
+        ([h,x_\alpha]\mid y_{-\alpha})
+        =
+        (h\mid [x_\alpha,y_{-\alpha}]).
+    \]
+    But
+    \[
+        [h,x_\alpha]=\alpha(h)x_\alpha,
+    \]
+    so
+    \[
+        \alpha(h)(x_\alpha\mid y_{-\alpha})
+        =
+        (h\mid [x_\alpha,y_{-\alpha}]).
+    \]
+    By definition of $\nu^{-1}(\alpha)$,
+    \[
+        \alpha(h)
+        =
+        (\nu^{-1}(\alpha)\mid h).
+    \]
+    Hence
+    \[
+        (h\mid [x_\alpha,y_{-\alpha}])
+        =
+        \bigl(h\mid (x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha)\bigr).
+    \]
+    Since the Killing form on $H$ is nondegenerate, we conclude that
+    \[
+        [x_\alpha,y_{-\alpha}]
+        =
+        (x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha).
+    \]
+\end{proof}
+
+\begin{lemma}
+    For every $\alpha\in\Delta$,
+    \[
+        (\alpha\mid\alpha)\neq 0.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Choose $0\neq x_\alpha\in L_\alpha$. By the preceding corollary, there exists
+    $y_{-\alpha}\in L_{-\alpha}$ such that
+    \[
+        (x_\alpha\mid y_{-\alpha})\neq 0.
+    \]
+    Hence, by the previous lemma,
+    \[
+        [x_\alpha,y_{-\alpha}]
+        =
+        (x_\alpha\mid y_{-\alpha})\,\nu^{-1}(\alpha)\neq 0.
+    \]
+
+    Suppose $(\alpha\mid\alpha)=0$. Then
+    \[
+        \alpha\bigl(\nu^{-1}(\alpha)\bigr)
+        =
+        \bigl(\nu^{-1}(\alpha)\mid \nu^{-1}(\alpha)\bigr)
+        =
+        (\alpha\mid\alpha)
+        =
+        0.
+    \]
+    Set
+    \[
+        L' := Fx_\alpha \oplus Fy_{-\alpha}\oplus F\nu^{-1}(\alpha).
+    \]
+    Then
+    \[
+        [\nu^{-1}(\alpha),x_\alpha]
+        =
+        \alpha(\nu^{-1}(\alpha))x_\alpha
+        =
+        0,
+    \]
+    and similarly
+    \[
+        [\nu^{-1}(\alpha),y_{-\alpha}]=0.
+    \]
+    Also
+    \[
+        [x_\alpha,y_{-\alpha}]
+        \in F\nu^{-1}(\alpha).
+    \]
+    Thus $L'$ is a solvable subalgebra.
+
+    Consider the adjoint representation of $L'$ on $L$. By Lie's theorem,
+    the operators $\operatorname{ad}(L')$ are simultaneously upper triangularizable.
+    Since
+    \[
+        \nu^{-1}(\alpha)\in [L',L'],
+    \]
+    its adjoint action is strictly upper triangular, hence nilpotent.
+    But $\nu^{-1}(\alpha)\in H$, so $\operatorname{ad}(\nu^{-1}(\alpha))$ is semisimple.
+    Therefore it must be $0$. This implies $\nu^{-1}(\alpha)=0$, hence $\alpha=0$,
+    a contradiction.
+
+    Therefore $(\alpha\mid\alpha)\neq 0$.
+\end{proof}
+
+\begin{proposition}
+    For every root $\alpha\in\Delta$, one may choose root vectors
+    \[
+        x_\alpha\in L_\alpha,
+        \qquad
+        y_{-\alpha}\in L_{-\alpha},
+    \]
+    such that if
+    \[
+        h_\alpha := \frac{2}{(\alpha\mid\alpha)}\,\nu^{-1}(\alpha),
+    \]
+    then
+    \[
+        [x_\alpha,y_{-\alpha}]=h_\alpha,
+        \qquad
+        [h_\alpha,x_\alpha]=2x_\alpha,
+        \qquad
+        [h_\alpha,y_{-\alpha}]=-2y_{-\alpha}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Choose $0\neq x_\alpha\in L_\alpha$. By the nondegeneracy of the pairing
+    $L_\alpha\times L_{-\alpha}$, choose $y_{-\alpha}\in L_{-\alpha}$ so that
+    \[
+        (x_\alpha\mid y_{-\alpha})=\frac{2}{(\alpha\mid\alpha)}.
+    \]
+    Then the preceding lemma gives
+    \[
+        [x_\alpha,y_{-\alpha}]
+        =
+        \frac{2}{(\alpha\mid\alpha)}\,\nu^{-1}(\alpha)
+        =
+        h_\alpha.
+    \]
+
+    Now
+    \[
+        [h_\alpha,x_\alpha]
+        =
+        \alpha(h_\alpha)x_\alpha
+        =
+        \frac{2}{(\alpha\mid\alpha)}
+        \alpha(\nu^{-1}(\alpha))x_\alpha
+        =
+        \frac{2}{(\alpha\mid\alpha)}(\alpha\mid\alpha)x_\alpha
+        =
+        2x_\alpha.
+    \]
+    Similarly,
+    \[
+        [h_\alpha,y_{-\alpha}]
+        =
+        -\alpha(h_\alpha)y_{-\alpha}
+        =
+        -2y_{-\alpha}.
+    \]
+\end{proof}
+

@@ -1,0 +1,1582 @@
+\chapter{Lecture 13}
+
+\section{Commutator Subspaces in Characteristic \texorpdfstring{$p$}{p}}
+
+Let \(A\) be a finite-dimensional associative \(k\)-algebra, where
+\[
+    \operatorname{char} k=p>0.
+\]
+Define
+\[
+    S=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\}
+\]
+and
+\[
+    T=\{\,r\in A\mid r^p\in S\,\}.
+\]
+
+\begin{lemma}
+    The subset \(T\) is a \(k\)-subspace of \(A\), and
+    \[
+        S\subseteq T.
+    \]
+\end{lemma}
+
+\begin{proof}
+    We first record a congruence modulo \(S\). Let \(x_1,\ldots,x_p\in A\), and set
+    \[
+        w=x_1x_2\cdots x_p.
+    \]
+    Let \(C_p=\langle c\rangle\) act on words of length \(p\) by cyclic permutation:
+    \[
+        c(w)=x_2x_3\cdots x_px_1.
+    \]
+    Then
+    \[
+        w-c(w)
+        =
+        x_1(x_2\cdots x_p)-(x_2\cdots x_p)x_1
+        \in S.
+    \]
+    Hence every word is congruent modulo \(S\) to each of its cyclic permutations.
+
+    Now expand \((a+b)^p\). The terms are words of length \(p\) in the two letters
+    \(a\) and \(b\). The two constant words are \(a^p\) and \(b^p\). Every other word
+    is a mixed word. Since \(p\) is prime, the orbit of a mixed word under cyclic
+    permutation has size \(p\). Since all words in one orbit are congruent modulo \(S\),
+    the sum of the words in such an orbit is congruent to
+    \[
+        p\,w=0
+    \]
+    modulo \(S\). Therefore
+    \[
+        (a+b)^p\equiv a^p+b^p \pmod S.
+    \]
+    More generally, for all \(\lambda,\mu\in k\),
+    \[
+        (\lambda a+\mu b)^p
+        \equiv
+        \lambda^p a^p+\mu^p b^p
+        \pmod S.
+    \]
+
+    We next show that \(S\subseteq T\). Let \(a,b\in A\). Applying the above congruence
+    to \(ab\) and \(-ba\), we get
+    \[
+        (ab-ba)^p
+        \equiv
+        (ab)^p-(ba)^p
+        \pmod S.
+    \]
+    But
+    \[
+        (ab)^p-(ba)^p
+        =
+        a\bigl(b(ab)^{p-1}\bigr)
+        -
+        \bigl(b(ab)^{p-1}\bigr)a
+        \in S.
+    \]
+    Hence
+    \[
+        (ab-ba)^p\in S,
+    \]
+    and so
+    \[
+        ab-ba\in T.
+    \]
+
+    Since \(S\) is spanned by elements of the form \(ab-ba\), let
+    \[
+        x=\sum_i \lambda_i c_i\in S,
+    \]
+    where each \(c_i\) is a commutator. By the congruence above,
+    \[
+        x^p
+        =
+        \left(\sum_i\lambda_i c_i\right)^p
+        \equiv
+        \sum_i \lambda_i^p c_i^p
+        \pmod S.
+    \]
+    Since each \(c_i\in T\), we have \(c_i^p\in S\). Therefore \(x^p\in S\), and hence
+    \(x\in T\). Thus
+    \[
+        S\subseteq T.
+    \]
+
+    Finally, we prove that \(T\) is a \(k\)-subspace of \(A\). Let \(a,b\in T\) and
+    \(\lambda,\mu\in k\). Then \(a^p,b^p\in S\), and by the congruence above,
+    \[
+        (\lambda a+\mu b)^p
+        \equiv
+        \lambda^p a^p+\mu^p b^p
+        \pmod S.
+    \]
+    The right-hand side lies in \(S\), because \(S\) is a \(k\)-subspace. Hence
+    \[
+        (\lambda a+\mu b)^p\in S.
+    \]
+    Therefore
+    \[
+        \lambda a+\mu b\in T.
+    \]
+    Thus \(T\) is a \(k\)-subspace of \(A\).
+\end{proof}
+
+\begin{lemma}
+    Let
+    \[
+        A=M_n(k).
+    \]
+    Then
+    \[
+        S=T=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Put
+    \[
+        V=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+    Since
+    \[
+        \operatorname{tr}(XY-YX)=0
+    \]
+    for all \(X,Y\in M_n(k)\), we have
+    \[
+        S\subseteq V.
+    \]
+
+    Conversely, let \(E_{ij}\) denote the standard matrix units. If \(i\neq j\), then
+    \[
+        E_{ij}=E_{ii}E_{ij}-E_{ij}E_{ii}\in S.
+    \]
+    Also, for \(i\neq j\),
+    \[
+        E_{ii}-E_{jj}
+        =
+        E_{ij}E_{ji}-E_{ji}E_{ij}
+        \in S.
+    \]
+    The trace-zero matrices are spanned by the off-diagonal matrix units \(E_{ij}\)
+    for \(i\neq j\), together with the diagonal differences \(E_{ii}-E_{jj}\). Hence
+    \[
+        V\subseteq S.
+    \]
+    Therefore
+    \[
+        S=V.
+    \]
+
+    By the previous lemma,
+    \[
+        S\subseteq T\subseteq A.
+    \]
+    Since \(S=V\) has codimension \(1\) in \(A=M_n(k)\), we have either
+    \[
+        T=S
+        \qquad\text{or}\qquad
+        T=A.
+    \]
+    But
+    \[
+        E_{11}^p=E_{11},
+    \]
+    and
+    \[
+        \operatorname{tr}(E_{11})=1\neq 0.
+    \]
+    Hence \(E_{11}\notin S\), so \(E_{11}\notin T\). Therefore \(T\neq A\). It follows
+    that
+    \[
+        T=S.
+    \]
+
+    Consequently,
+    \[
+        S=T=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+\end{proof}
+
+\begin{proposition}
+    Let \(A\) be a finite-dimensional \(k\)-algebra, where
+    \[
+        \operatorname{char} k=p>0.
+    \]
+    Put
+    \[
+        S(A)=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\},
+    \]
+    and
+    \[
+        T(A)=\{\,a\in A\mid a^{p^m}\in S(A)
+        \text{ for some }m\geq 0\,\}.
+    \]
+    Assume that \(k\) is a splitting field for \(A\). Then
+    \[
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}
+        =
+        \dim_k A-\dim_k T(A).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        J=J(A)
+    \]
+    be the Jacobson radical of \(A\), and set
+    \[
+        \overline{A}=A/J.
+    \]
+    Since \(A\) is finite-dimensional, \(J\) is nilpotent. Hence for every
+    \(x\in J\), there exists \(m\geq 0\) such that
+    \[
+        x^{p^m}=0.
+    \]
+    Since \(0\in S(A)\), it follows that
+    \[
+        J\subseteq T(A).
+    \]
+
+    Let
+    \[
+        \pi:A\longrightarrow \overline{A}=A/J
+    \]
+    be the natural quotient map. We claim that
+    \[
+        \pi(T(A))=T(\overline{A}).
+    \]
+
+    First, since
+    \[
+        \pi(S(A))=S(\overline{A}),
+    \]
+    if \(a\in T(A)\), then for some \(m\geq 0\),
+    \[
+        a^{p^m}\in S(A).
+    \]
+    Therefore
+    \[
+        \pi(a)^{p^m}
+        =
+        \pi(a^{p^m})
+        \in S(\overline{A}),
+    \]
+    and hence
+    \[
+        \pi(a)\in T(\overline{A}).
+    \]
+    Thus
+    \[
+        \pi(T(A))\subseteq T(\overline{A}).
+    \]
+
+    Conversely, suppose that
+    \[
+        \overline{a}=\pi(a)\in T(\overline{A}).
+    \]
+    Then for some \(m\geq 0\),
+    \[
+        \overline{a}^{p^m}\in S(\overline{A}).
+    \]
+    Since \(\pi(S(A))=S(\overline{A})\), there exist \(s\in S(A)\) and \(j\in J\)
+    such that
+    \[
+        a^{p^m}=s+j.
+    \]
+    Choose \(\ell\geq 0\) sufficiently large such that
+    \[
+        j^{p^\ell}=0.
+    \]
+    Using the congruence
+    \[
+        (x+y)^{p^\ell}\equiv x^{p^\ell}+y^{p^\ell}\pmod{S(A)},
+    \]
+    we obtain
+    \[
+        a^{p^{m+\ell}}
+        =
+        (s+j)^{p^\ell}
+        \equiv
+        s^{p^\ell}+j^{p^\ell}
+        =
+        s^{p^\ell}
+        \pmod{S(A)}.
+    \]
+    Since \(s\in S(A)\), the previous lemma implies that
+    \[
+        s^{p^\ell}\in S(A).
+    \]
+    Therefore
+    \[
+        a^{p^{m+\ell}}\in S(A),
+    \]
+    so
+    \[
+        a\in T(A).
+    \]
+    Hence
+    \[
+        T(\overline{A})\subseteq \pi(T(A)).
+    \]
+    This proves
+    \[
+        \pi(T(A))=T(\overline{A}).
+    \]
+
+    Since \(J\subseteq T(A)\), we get
+    \[
+        A/T(A)\cong \overline{A}/T(\overline{A}).
+    \]
+    Hence
+    \[
+        \dim_k A-\dim_k T(A)
+        =
+        \dim_k \overline{A}-\dim_k T(\overline{A}).
+    \]
+
+    Now \(k\) is a splitting field for \(A\), so the semisimple algebra
+    \(\overline{A}=A/J(A)\) is split semisimple. Thus by the Artin--Wedderburn
+    theorem,
+    \[
+        \overline{A}
+        \cong
+        M_{n_1}(k)\oplus\cdots\oplus M_{n_r}(k),
+    \]
+    where
+    \[
+        r=
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}.
+    \]
+    Here the simple \(A\)-modules and the simple \(\overline{A}\)-modules are the
+    same, because \(J(A)\) annihilates every simple \(A\)-module.
+
+    For a finite direct sum of algebras, commutators and \(p^m\)-powers are computed
+    componentwise. Hence
+    \[
+        T(\overline{A})
+        =
+        T(M_{n_1}(k))\oplus\cdots\oplus T(M_{n_r}(k)).
+    \]
+    By the previous lemma,
+    \[
+        T(M_{n_i}(k))
+        =
+        \{\,X\in M_{n_i}(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+    Therefore each quotient
+    \[
+        M_{n_i}(k)/T(M_{n_i}(k))
+    \]
+    is one-dimensional over \(k\). Hence
+    \[
+        \dim_k \overline{A}-\dim_k T(\overline{A})
+        =
+        \sum_{i=1}^r
+        \dim_k\bigl(M_{n_i}(k)/T(M_{n_i}(k))\bigr)
+        =
+        r.
+    \]
+    Consequently,
+    \[
+        \dim_k A-\dim_k T(A)
+        =
+        r
+        =
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}.
+    \]
+\end{proof}
+
+\section{Brauer's Theorem and Modular Systems}
+
+\begin{definition}[\texorpdfstring{\(p\)-regular}{p-regular} and \texorpdfstring{\(p\)-singular}{p-singular} elements]
+    Let \(G\) be a finite group and let \(p\) be a prime number.
+    An element \(g\in G\) is called \textbf{\(p\)-regular} if
+    \[
+        p\nmid \operatorname{ord}(g).
+    \]
+    It is called \textbf{\(p\)-singular} in the sense of these notes if
+    \[
+        \operatorname{ord}(g)=p^e
+    \]
+    for some integer \(e\geq 0\). Equivalently, \(g\) is a \(p\)-element.
+\end{definition}
+
+\begin{lemma}[\(p\)-regular and \(p\)-singular decomposition]
+    Let \(G\) be a finite group. For every \(x\in G\), there exist unique elements
+    \(s,t\in G\) such that
+    \[
+        x=st,
+        \qquad
+        st=ts,
+    \]
+    where \(s\) is \(p\)-regular and \(t\) is \(p\)-singular.
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        \operatorname{ord}(x)=p^a m,
+        \qquad
+        \gcd(p,m)=1.
+    \]
+    Since \(\gcd(p^a,m)=1\), choose integers \(r,q\in \mathbb Z\) such that
+    \[
+        rm+qp^a=1.
+    \]
+    Define
+    \[
+        t=x^{rm},
+        \qquad
+        s=x^{qp^a}.
+    \]
+    Then \(s,t\in \langle x\rangle\), so \(st=ts\), and
+    \[
+        st=x^{rm+qp^a}=x.
+    \]
+    Moreover, the order of \(t\) divides \(p^a\), so \(t\) is \(p\)-singular, while the
+    order of \(s\) divides \(m\), so \(s\) is \(p\)-regular.
+
+    For uniqueness, suppose
+    \[
+        x=s_1t_1=s_2t_2
+    \]
+    are two such decompositions, with \(s_i\) \(p\)-regular, \(t_i\) \(p\)-singular, and
+    \(s_it_i=t_is_i\). Since \(s_i\) and \(t_i\) have coprime orders, both \(s_i\) and
+    \(t_i\) are powers of \(x\). Thus they lie in the cyclic group \(\langle x\rangle\).
+    Inside the finite cyclic group \(\langle x\rangle\), the \(p\)-part and the \(p'\)-part
+    of an element are unique. Hence
+    \[
+        s_1=s_2,
+        \qquad
+        t_1=t_2.
+    \]
+\end{proof}
+
+\begin{lemma}[Commutator subspace of a group algebra]
+    Let \(G\) be a finite group and let \(k\) be a field. Put
+    \[
+        S(kG)=\operatorname{span}_k\{\,ab-ba\mid a,b\in kG\,\}.
+    \]
+    Then
+    \[
+        S(kG)
+        =
+        \left\{
+            \sum_{g\in G}\lambda_g g
+            \ \middle|\
+            \sum_{g\in C}\lambda_g=0
+            \text{ for every conjugacy class } C\subseteq G
+        \right\}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    First observe that if \(g,h\in G\), then
+    \[
+        hgh^{-1}-g
+        =
+        h(gh^{-1})-(gh^{-1})h
+        \in S(kG).
+    \]
+    Hence differences of conjugate group elements lie in \(S(kG)\).
+
+    Let
+    \[
+        \alpha=\sum_{g\in G}\lambda_g g\in S(kG).
+    \]
+    Since each commutator \(ab-ba\) has total coefficient \(0\) on every conjugacy
+    class, it follows that
+    \[
+        \sum_{g\in C}\lambda_g=0
+    \]
+    for every conjugacy class \(C\).
+
+    Conversely, suppose
+    \[
+        \alpha=\sum_{g\in G}\lambda_g g
+    \]
+    satisfies
+    \[
+        \sum_{g\in C}\lambda_g=0
+    \]
+    for every conjugacy class \(C\). For each conjugacy class \(C\), choose a
+    representative \(c_C\in C\). Then
+    \[
+        \sum_{g\in C}\lambda_g g
+        =
+        \sum_{g\in C}\lambda_g(g-c_C),
+    \]
+    because \(\sum_{g\in C}\lambda_g=0\). Since each \(g-c_C\) is a difference of
+    conjugate elements, it lies in \(S(kG)\). Therefore
+    \[
+        \sum_{g\in C}\lambda_g g\in S(kG)
+    \]
+    for every conjugacy class \(C\), and hence
+    \[
+        \alpha\in S(kG).
+    \]
+    This proves the claim.
+\end{proof}
+
+\begin{theorem}[Brauer]
+    Let \(G\) be a finite group, and let \(k\) be a splitting field for \(G\) with
+    \[
+        \operatorname{char} k=p>0.
+    \]
+    Then the number of non-isomorphic simple \(kG\)-modules is equal to the number
+    of conjugacy classes of \(p\)-regular elements of \(G\).
+\end{theorem}
+
+\begin{proof}
+    Put
+    \[
+        A=kG.
+    \]
+    As before, define
+    \[
+        S(A)=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\},
+    \]
+    and
+    \[
+        T(A)=\{\,a\in A\mid a^{p^m}\in S(A)
+        \text{ for some }m\geq 0\,\}.
+    \]
+    By the previous proposition,
+    \[
+        \#\{\,\text{non-isomorphic simple }kG\text{-modules}\,\}
+        =
+        \dim_k kG-\dim_k T(A).
+    \]
+    Thus it remains to show that
+    \[
+        \dim_k kG-\dim_k T(A)
+    \]
+    is the number of conjugacy classes of \(p\)-regular elements.
+
+    Let
+    \[
+        \{x_i\}_{i\in I}
+    \]
+    be a set of representatives of the conjugacy classes of \(p\)-regular elements of
+    \(G\). We claim that
+    \[
+        \{\,x_i+T(A)\mid i\in I\,\}
+    \]
+    is a \(k\)-basis of \(kG/T(A)\).
+
+    First we prove that these elements span \(kG/T(A)\). Let \(x\in G\). By the
+    \(p\)-regular and \(p\)-singular decomposition, write
+    \[
+        x=st,
+        \qquad
+        st=ts,
+    \]
+    where \(s\) is \(p\)-regular and \(t\) is \(p\)-singular. Since \(t\) has \(p\)-power
+    order, for sufficiently large \(n\) we have
+    \[
+        t^{p^n}=1.
+    \]
+    Hence, in characteristic \(p\),
+    \[
+        (x-s)^{p^n}
+        =
+        \bigl(s(t-1)\bigr)^{p^n}
+        =
+        s^{p^n}(t-1)^{p^n}
+        =
+        s^{p^n}(t^{p^n}-1)
+        =
+        0.
+    \]
+    Therefore
+    \[
+        x-s\in T(A).
+    \]
+    Since \(s\) is \(p\)-regular, it is conjugate to some \(x_i\). Hence
+    \[
+        s-x_i\in S(A)\subseteq T(A).
+    \]
+    Therefore
+    \[
+        x+T(A)=x_i+T(A).
+    \]
+    Since the group elements form a \(k\)-basis of \(kG\), this proves that the classes
+    \(x_i+T(A)\) span \(kG/T(A)\).
+
+    It remains to prove linear independence. Suppose
+    \[
+        \sum_{i\in I}\lambda_i x_i\in T(A).
+    \]
+    Then, by the definition of \(T(A)\), there exists \(m\geq 0\) such that
+    \[
+        \left(\sum_{i\in I}\lambda_i x_i\right)^{p^m}\in S(A).
+    \]
+    Enlarging \(m\) if necessary, we may assume that
+    \[
+        x_i^{p^m}=x_i
+        \qquad
+        \text{for all }i\in I.
+    \]
+    Indeed, the orders of the \(x_i\) are prime to \(p\), so one can choose \(m\)
+    sufficiently large such that
+    \[
+        p^m\equiv 1\pmod{\operatorname{ord}(x_i)}
+    \]
+    for all \(i\).
+
+    Using the congruence
+    \[
+        \left(\sum_i \lambda_i x_i\right)^{p^m}
+        \equiv
+        \sum_i \lambda_i^{p^m}x_i^{p^m}
+        \pmod{S(A)},
+    \]
+    we get
+    \[
+        \sum_{i\in I}\lambda_i^{p^m}x_i\in S(A).
+    \]
+    By the preceding lemma, the sum of coefficients on each conjugacy class must be
+    zero. Since the \(x_i\) lie in distinct conjugacy classes, this gives
+    \[
+        \lambda_i^{p^m}=0
+        \qquad
+        \text{for all }i.
+    \]
+    Hence
+    \[
+        \lambda_i=0
+        \qquad
+        \text{for all }i.
+    \]
+    Therefore the classes \(x_i+T(A)\) are linearly independent.
+
+    Consequently,
+    \[
+        \dim_k kG/T(A)
+        =
+        |I|,
+    \]
+    which is precisely the number of conjugacy classes of \(p\)-regular elements of
+    \(G\). Hence
+    \[
+        \#\{\,\text{non-isomorphic simple }kG\text{-modules}\,\}
+        =
+        |I|.
+    \]
+\end{proof}
+
+\section{\texorpdfstring{\(p\)-Modular Systems}{p-Modular Systems}}
+
+\begin{definition}[\(p\)-modular system]
+    Let \(G\) be a finite group and let \(p\) be a prime number. A
+    \textbf{\(p\)-modular system} for \(G\) is a triple
+    \[
+        (F,R,k)
+    \]
+    satisfying the following conditions:
+    \begin{enumerate}
+        \item \(F\) is a field of characteristic \(0\), equipped with a complete
+        discrete valuation.
+        \item \(R\) is the valuation ring of \(F\), with maximal ideal
+        \[
+            J(R)=(\pi).
+        \]
+        \item The residue field is
+        \[
+            k=R/(\pi),
+        \]
+        and
+        \[
+            \operatorname{char} k=p.
+        \]
+    \end{enumerate}
+    If both \(F\) and \(k\) are splitting fields for \(G\), then \((F,R,k)\) is called
+    a \textbf{splitting \(p\)-modular system} for \(G\).
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        J(R)=(\pi),
+    \]
+    and residue field
+    \[
+        k=R/(\pi).
+    \]
+    Let \(G\) be a finite group. Then:
+    \begin{enumerate}
+        \item If \(S\) is a simple \(RG\)-module, then
+        \[
+            \pi S=0.
+        \]
+
+        \item The simple \(RG\)-modules are exactly the simple \(kG\)-modules,
+        via the quotient homomorphism
+        \[
+            RG\longrightarrow kG.
+        \]
+
+        \item If \(U\) is an \(RG\)-module, then
+        \[
+            \pi U\subseteq \operatorname{Rad}(U).
+        \]
+        In particular,
+        \[
+            \pi RG\subseteq J(RG).
+        \]
+
+        \item For every \(RG\)-module \(U\),
+        \[
+            \operatorname{Rad}(U)/\pi U
+            =
+            \operatorname{Rad}(U/\pi U).
+        \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    First we prove that
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    Let \(z\in \pi RG\). Since \(RG\) is finite over the complete discrete valuation
+    ring \(R\), it is complete with respect to the \(\pi\)-adic topology. Hence the
+    geometric series
+    \[
+        1+z+z^2+\cdots
+    \]
+    converges in \(RG\), and gives an inverse of \(1-z\). Thus \(1-z\) is a unit.
+    More generally, for every \(y\in RG\), one has \(yz\in \pi RG\), so
+    \[
+        1-yz
+    \]
+    is a unit. By the standard characterization of the Jacobson radical, this implies
+    \[
+        z\in J(RG).
+    \]
+    Hence
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+
+    Now let \(S\) be a simple \(RG\)-module. Since the Jacobson radical annihilates
+    every simple module, we have
+    \[
+        J(RG)S=0.
+    \]
+    Since \(\pi RG\subseteq J(RG)\), it follows that
+    \[
+        \pi S=0.
+    \]
+    This proves \((1)\).
+
+    Since every simple \(RG\)-module is annihilated by \(\pi\), it factors through
+    \[
+        RG/\pi RG\cong kG.
+    \]
+    Therefore every simple \(RG\)-module is a simple \(kG\)-module. Conversely, every
+    simple \(kG\)-module becomes a simple \(RG\)-module by restriction along the
+    quotient map
+    \[
+        RG\longrightarrow kG.
+    \]
+    This proves \((2)\).
+
+    Let \(U\) be an \(RG\)-module. If \(M\) is a maximal submodule of \(U\), then
+    \(U/M\) is simple. By \((1)\),
+    \[
+        \pi(U/M)=0.
+    \]
+    Hence
+    \[
+        \pi U\subseteq M.
+    \]
+    Taking the intersection over all maximal submodules \(M\) of \(U\), we obtain
+    \[
+        \pi U\subseteq \operatorname{Rad}(U).
+    \]
+    Applying this to the regular module \(U=RG\), we get
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    This proves \((3)\).
+
+    Finally, since every maximal submodule of \(U\) contains \(\pi U\), the maximal
+    submodules of \(U/\pi U\) are precisely the quotients
+    \[
+        M/\pi U,
+    \]
+    where \(M\) runs through the maximal submodules of \(U\). Therefore
+    \[
+        \operatorname{Rad}(U/\pi U)
+        =
+        \bigcap_{M\text{ maximal in }U} M/\pi U
+        =
+        \left(\bigcap_{M\text{ maximal in }U}M\right)/\pi U
+        =
+        \operatorname{Rad}(U)/\pi U.
+    \]
+    This proves \((4)\).
+\end{proof}
+
+\begin{corollary}
+    Let \(P\) and \(Q\) be finitely generated projective \(RG\)-modules. Then
+    \[
+        P\cong Q
+        \quad\text{as }RG\text{-modules}
+    \]
+    if and only if
+    \[
+        P/\pi P\cong Q/\pi Q
+        \quad\text{as }kG\text{-modules}.
+    \]
+\end{corollary}
+
+\begin{proof}
+    The forward implication is immediate by reducing modulo \(\pi\).
+
+    Conversely, suppose that
+    \[
+        \overline{f}:P/\pi P\longrightarrow Q/\pi Q
+    \]
+    is an isomorphism of \(kG\)-modules. Let
+    \[
+        q_P:P\longrightarrow P/\pi P,
+        \qquad
+        q_Q:Q\longrightarrow Q/\pi Q
+    \]
+    be the natural quotient maps.
+
+    Since \(P\) is projective and \(q_Q\) is surjective, the map
+    \[
+        \overline{f}\circ q_P:P\longrightarrow Q/\pi Q
+    \]
+    lifts to an \(RG\)-homomorphism
+    \[
+        f:P\longrightarrow Q
+    \]
+    such that
+    \[
+        q_Q\circ f=\overline{f}\circ q_P.
+    \]
+    Similarly, the inverse
+    \[
+        \overline{f}^{-1}:Q/\pi Q\longrightarrow P/\pi P
+    \]
+    lifts to an \(RG\)-homomorphism
+    \[
+        g:Q\longrightarrow P.
+    \]
+
+    Then the induced maps modulo \(\pi\) satisfy
+    \[
+        \overline{g f}
+        =
+        \overline{g}\,\overline{f}
+        =
+        \operatorname{id}_{P/\pi P},
+    \]
+    and similarly
+    \[
+        \overline{f g}
+        =
+        \operatorname{id}_{Q/\pi Q}.
+    \]
+    Hence
+    \[
+        (gf-\operatorname{id}_P)(P)\subseteq \pi P,
+    \]
+    and
+    \[
+        (fg-\operatorname{id}_Q)(Q)\subseteq \pi Q.
+    \]
+
+    Therefore the endomorphisms \(gf\) and \(fg\) are surjective by Nakayama's
+    lemma, since
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    Since \(P\) and \(Q\) are finitely generated over the finite \(R\)-algebra \(RG\),
+    they are finite \(R\)-modules. In particular, they are Noetherian. Hence a
+    surjective endomorphism of \(P\) or \(Q\) is injective. Thus \(gf\) and \(fg\) are
+    automorphisms.
+
+    From \(gf\) being an automorphism, \(f\) is injective. From \(fg\) being an
+    automorphism, \(f\) is surjective. Therefore \(f\) is an isomorphism:
+    \[
+        P\cong Q.
+    \]
+\end{proof}
+
+\section{\texorpdfstring{\(RG\)-Lattices and Lifting of Projectives}{RG-Lattices and Lifting of Projectives}}
+
+\begin{definition}[\texorpdfstring{\(RG\)-lattice}{RG-lattice}]
+    Let \(R\) be a commutative ring and let \(G\) be a finite group.
+    An \(RG\)-module \(L\) is called an \textbf{\(RG\)-lattice} if
+    \(L\) is finitely generated as an \(RG\)-module and is free as an \(R\)-module.
+\end{definition}
+
+\begin{proposition}[Lifting projective covers from \texorpdfstring{\(kG\)}{kG} to \texorpdfstring{\(RG\)}{RG}]
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        J(R)=(\pi),
+    \]
+    and let
+    \[
+        k=R/(\pi).
+    \]
+    Let \(G\) be a finite group. Then the following hold.
+
+    \begin{enumerate}
+        \item For every simple \(kG\)-module \(S\), there exists an indecomposable
+        projective \(RG\)-module \(\widehat P_S\) such that
+        \[
+            \widehat P_S=RG\widehat e_S,
+        \]
+        where \(\widehat e_S\in RG\) is a primitive idempotent satisfying
+        \[
+            \widehat e_S S\neq 0.
+        \]
+        Moreover, \(\widehat P_S\) is a projective cover of \(S\) as an \(RG\)-module.
+
+        \item If \(P_S\) denotes the projective cover of \(S\) as a \(kG\)-module, then
+        \[
+            \widehat P_S/\pi\widehat P_S\cong P_S.
+        \]
+        Moreover, the canonical epimorphism
+        \[
+            \widehat P_S\longrightarrow \widehat P_S/\pi\widehat P_S\cong P_S
+        \]
+        is a projective cover of \(P_S\) as an \(RG\)-module. In particular,
+        \(S\) is the unique simple quotient of \(\widehat P_S\).
+
+        Consequently, for simple \(kG\)-modules \(S\) and \(T\),
+        \[
+            \widehat P_S\cong \widehat P_T
+            \quad\Longleftrightarrow\quad
+            S\cong T.
+        \]
+
+        \item Every finitely generated \(RG\)-module has a projective cover.
+
+        \item Every finitely generated indecomposable projective \(RG\)-module is
+        isomorphic to \(\widehat P_S\) for some simple \(kG\)-module \(S\).
+
+        \item Every finitely generated projective \(kG\)-module can be lifted to a
+        projective \(RG\)-lattice. Such a lift is unique up to isomorphism.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        \overline{RG}=RG/\pi RG\cong kG.
+    \]
+    Since \(R\) is complete, idempotents lift modulo the ideal \(\pi RG\). Moreover,
+    \[
+        \pi RG\subseteq J(RG),
+    \]
+    so primitive idempotents lift to primitive idempotents.
+
+    Let \(S\) be a simple \(kG\)-module. Choose a primitive idempotent
+    \(e_S\in kG\) such that
+    \[
+        P_S=kG e_S
+    \]
+    is the projective cover of \(S\), and
+    \[
+        e_S S\neq 0.
+    \]
+    Lift \(e_S\) to a primitive idempotent
+    \[
+        \widehat e_S\in RG.
+    \]
+    Define
+    \[
+        \widehat P_S:=RG\widehat e_S.
+    \]
+    Since \(\widehat e_S\) is an idempotent, \(RG\widehat e_S\) is a direct summand
+    of the regular module \(RG\), hence is projective. Since \(\widehat e_S\) is
+    primitive, \(RG\widehat e_S\) is indecomposable.
+
+    Reducing modulo \(\pi\), we get
+    \[
+        \widehat P_S/\pi\widehat P_S
+        \cong
+        (RG/\pi RG)(\widehat e_S+\pi RG)
+        \cong
+        kG e_S
+        =
+        P_S.
+    \]
+    Thus
+    \[
+        \widehat P_S/\pi\widehat P_S\cong P_S.
+    \]
+
+    Since
+    \[
+        \pi\widehat P_S\subseteq \operatorname{Rad}(\widehat P_S),
+    \]
+    the canonical epimorphism
+    \[
+        \widehat P_S\longrightarrow \widehat P_S/\pi\widehat P_S
+    \]
+    is essential. Hence
+    \[
+        \widehat P_S\longrightarrow P_S
+    \]
+    is a projective cover of \(P_S\) as an \(RG\)-module.
+
+    Composing with the projective cover
+    \[
+        P_S\longrightarrow S
+    \]
+    in \(kG\)-modules, we obtain an essential epimorphism
+    \[
+        \widehat P_S\longrightarrow S.
+    \]
+    Therefore \(\widehat P_S\) is a projective cover of \(S\) as an \(RG\)-module.
+
+    Moreover,
+    \[
+        \operatorname{Top}(\widehat P_S)
+        =
+        \widehat P_S/\operatorname{Rad}(\widehat P_S)
+        \cong
+        P_S/\operatorname{Rad}(P_S)
+        \cong
+        S.
+    \]
+    Hence \(S\) is the unique simple quotient of \(\widehat P_S\). It follows that
+    for simple \(kG\)-modules \(S\) and \(T\),
+    \[
+        \widehat P_S\cong \widehat P_T
+        \quad\Longleftrightarrow\quad
+        \operatorname{Top}(\widehat P_S)\cong \operatorname{Top}(\widehat P_T)
+        \quad\Longleftrightarrow\quad
+        S\cong T.
+    \]
+
+    Now let \(U\) be a finitely generated \(RG\)-module. Since \(RG/J(RG)\) is a
+    semisimple Artinian ring, the top
+    \[
+        \operatorname{Top}(U)=U/\operatorname{Rad}(U)
+    \]
+    is a semisimple \(RG\)-module. Hence
+    \[
+        \operatorname{Top}(U)
+        \cong
+        S_1\oplus\cdots\oplus S_m
+    \]
+    for some simple \(kG\)-modules \(S_i\). Then
+    \[
+        \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}
+        \longrightarrow
+        S_1\oplus\cdots\oplus S_m
+        \cong
+        \operatorname{Top}(U)
+    \]
+    is a projective cover. Since the canonical map
+    \[
+        U\longrightarrow \operatorname{Top}(U)
+    \]
+    is an essential epimorphism, lifting along it gives an essential epimorphism from
+    a projective module onto \(U\). Thus \(U\) has a projective cover.
+
+    Let \(P\) be a finitely generated indecomposable projective \(RG\)-module. The
+    canonical epimorphism
+    \[
+        P\longrightarrow \operatorname{Top}(P)
+    \]
+    is a projective cover. Since \(\operatorname{Top}(P)\) is semisimple, write
+    \[
+        \operatorname{Top}(P)\cong S_1\oplus\cdots\oplus S_m.
+    \]
+    Then the projective cover of \(\operatorname{Top}(P)\) is
+    \[
+        \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}.
+    \]
+    By uniqueness of projective covers,
+    \[
+        P\cong \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}.
+    \]
+    Since \(P\) is indecomposable, we must have \(m=1\). Hence
+    \[
+        P\cong \widehat P_S
+    \]
+    for some simple \(kG\)-module \(S\).
+
+    Finally, let \(Q\) be a finitely generated projective \(kG\)-module. Since
+    \(kG\) is Artinian, \(Q\) decomposes as a finite direct sum of indecomposable
+    projective \(kG\)-modules:
+    \[
+        Q\cong \bigoplus_S P_S^{\oplus m_S}.
+    \]
+    Define
+    \[
+        \widehat Q:=\bigoplus_S \widehat P_S^{\oplus m_S}.
+    \]
+    Then \(\widehat Q\) is a projective \(RG\)-lattice and
+    \[
+        \widehat Q/\pi\widehat Q
+        \cong
+        \bigoplus_S P_S^{\oplus m_S}
+        \cong
+        Q.
+    \]
+    Thus \(Q\) lifts to a projective \(RG\)-lattice. The uniqueness follows from the
+    isomorphism criterion below.
+\end{proof}
+
+\begin{corollary}
+    Let \(L\) be an \(RG\)-lattice. Then \(L\) is projective as an \(RG\)-module if
+    and only if
+    \[
+        L/\pi L
+    \]
+    is projective as a \(kG\)-module.
+\end{corollary}
+
+\begin{proof}
+    If \(L\) is projective over \(RG\), then \(L\) is a direct summand of a finite free
+    \(RG\)-module. Reducing modulo \(\pi\), we see that \(L/\pi L\) is a direct
+    summand of a finite free \(kG\)-module. Hence \(L/\pi L\) is projective over
+    \(kG\).
+
+    Conversely, assume that \(L/\pi L\) is projective over \(kG\). Let
+    \[
+        P\longrightarrow L
+    \]
+    be a projective cover of \(L\) as an \(RG\)-module. Reducing modulo \(\pi\), we
+    obtain an essential epimorphism
+    \[
+        P/\pi P\longrightarrow L/\pi L.
+    \]
+    Since \(L/\pi L\) is projective, this essential epimorphism must be an isomorphism.
+
+    Let \(K\) be the kernel of \(P\to L\). Since \(P\) and \(L\) are free over the DVR
+    \(R\), reduction modulo \(\pi\) gives
+    \[
+        K/\pi K=0.
+    \]
+    By Nakayama's lemma, \(K=0\). Hence
+    \[
+        P\cong L,
+    \]
+    and therefore \(L\) is projective.
+\end{proof}
+
+\begin{corollary}
+    Let \(L_1\) and \(L_2\) be finitely generated projective \(RG\)-modules. Then
+    \[
+        L_1\cong L_2
+        \quad\Longleftrightarrow\quad
+        L_1/\pi L_1\cong L_2/\pi L_2
+    \]
+    as \(kG\)-modules.
+\end{corollary}
+
+\begin{proof}
+    The forward implication is immediate by reduction modulo \(\pi\).
+
+    Conversely, suppose
+    \[
+        L_1/\pi L_1\cong L_2/\pi L_2
+    \]
+    as \(kG\)-modules. Since \(L_i\) is projective over \(RG\), the natural map
+    \[
+        L_i\longrightarrow L_i/\pi L_i
+    \]
+    is a projective cover. Therefore \(L_1\) and \(L_2\) are projective covers of
+    isomorphic \(RG\)-modules. By uniqueness of projective covers,
+    \[
+        L_1\cong L_2.
+    \]
+\end{proof}
+
+\section{Full Lattices}
+
+\begin{definition}[Full lattice]
+    Let \(R\) be a principal ideal domain, and let \(F=\operatorname{Frac}(R)\) be
+    its fraction field. Let \(G\) be a finite group, and let \(U\) be a finite-dimensional
+    \(FG\)-module.
+
+    A \textbf{full \(RG\)-lattice} in \(U\) is an \(RG\)-submodule
+    \[
+        L\subseteq U
+    \]
+    such that:
+    \begin{enumerate}
+        \item \(L\) is finitely generated and free as an \(R\)-module;
+        \item \(F L=U\).
+    \end{enumerate}
+    Equivalently, \(L\) contains an \(F\)-basis of \(U\), or equivalently, the natural
+    map
+    \[
+        F\otimes_R L\longrightarrow U,
+        \qquad
+        a\otimes \ell\longmapsto a\ell,
+    \]
+    is an isomorphism of \(FG\)-modules.
+\end{definition}
+
+\begin{remark}
+    If \(L\) is an \(RG\)-lattice, then
+    \[
+        F\otimes_R L
+    \]
+    is naturally an \(FG\)-module. Since \(L\) is \(R\)-torsion-free, the map
+    \[
+        L\longrightarrow F\otimes_R L,
+        \qquad
+        \ell\longmapsto 1\otimes \ell,
+    \]
+    is injective. Thus one often regards \(L\) as an \(RG\)-submodule of
+    \(F\otimes_R L\).
+\end{remark}
+
+\begin{lemma}
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(U\)
+    be a finite-dimensional \(F\)-vector space. Let \(L\subseteq U\) be a finitely
+    generated \(R\)-submodule containing an \(F\)-basis of \(U\). Then \(L\) is a full
+    \(R\)-lattice in \(U\).
+
+    If, moreover, \(U\) is an \(FG\)-module and \(L\) is \(G\)-stable, then \(L\) is a
+    full \(RG\)-lattice in \(U\).
+\end{lemma}
+
+\begin{proof}
+    Since \(L\subseteq U\) and \(U\) is an \(F\)-vector space, the \(R\)-module \(L\)
+    is torsion-free. Since \(R\) is a principal ideal domain and \(L\) is finitely
+    generated, \(L\) is free as an \(R\)-module.
+
+    Because \(L\) contains an \(F\)-basis of \(U\), we have
+    \[
+        F L=U.
+    \]
+    Hence the natural map
+    \[
+        F\otimes_R L\longrightarrow U
+    \]
+    is surjective. If \(u_1,\ldots,u_m\) is an \(R\)-basis of \(L\), then it is
+    \(F\)-linearly independent in \(U\), because any \(F\)-linear relation can be
+    cleared of denominators to give an \(R\)-linear relation. Thus
+    \[
+        \operatorname{rank}_R L\leq \dim_F U.
+    \]
+    Since \(F L=U\), we also have
+    \[
+        \operatorname{rank}_R L\geq \dim_F U.
+    \]
+    Therefore
+    \[
+        \operatorname{rank}_R L=\dim_F U,
+    \]
+    and an \(R\)-basis of \(L\) is an \(F\)-basis of \(U\). Thus \(L\) is a full
+    \(R\)-lattice in \(U\).
+
+    If \(U\) is an \(FG\)-module and \(L\) is stable under the action of \(G\), then
+    \(L\) is an \(RG\)-submodule of \(U\). Hence \(L\) is a full \(RG\)-lattice in \(U\).
+\end{proof}
+
+\begin{proposition}[Uniqueness of the lift of an indecomposable projective]
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        (\pi),
+    \]
+    residue field
+    \[
+        k=R/(\pi),
+    \]
+    and let \(G\) be a finite group.
+
+    Let \(S\) be a simple \(kG\)-module, and let
+    \[
+        P_S
+    \]
+    be its projective cover as a \(kG\)-module. Let
+    \[
+        \widehat P_S
+    \]
+    be the projective \(RG\)-lattice lifting \(P_S\), so that
+    \[
+        \widehat P_S/\pi\widehat P_S\cong P_S.
+    \]
+    If \(L\) is an \(RG\)-lattice such that
+    \[
+        L/\pi L\cong P_S
+    \]
+    as \(kG\)-modules, then
+    \[
+        L\cong \widehat P_S
+    \]
+    as \(RG\)-modules.
+\end{proposition}
+
+\begin{proof}
+    Since
+    \[
+        L/\pi L\cong P_S
+    \]
+    is projective as a \(kG\)-module, the projectivity criterion for lattices implies
+    that \(L\) is projective as an \(RG\)-module.
+
+    Consider the natural epimorphism
+    \[
+        L\longrightarrow L/\pi L\cong P_S\longrightarrow S.
+    \]
+    Since \(\widehat P_S\) is projective and
+    \[
+        \widehat P_S\longrightarrow S
+    \]
+    is the projective cover of \(S\), this map factors through \(L\). Hence there is
+    an \(RG\)-homomorphism
+    \[
+        f:\widehat P_S\longrightarrow L
+    \]
+    such that the diagram
+    \[
+    \begin{tikzcd}
+        \widehat P_S \arrow[dr] \arrow[r,"f"] & L \arrow[d] \\
+        & S
+    \end{tikzcd}
+    \]
+    commutes.
+
+    We claim that \(f\) is surjective. Since
+    \[
+        \pi L\subseteq \operatorname{Rad}(L),
+    \]
+    and
+    \[
+        \operatorname{Rad}(L)/\pi L
+        =
+        \operatorname{Rad}(L/\pi L),
+    \]
+    we have
+    \[
+        \operatorname{Top}(L)
+        =
+        L/\operatorname{Rad}(L)
+        \cong
+        (L/\pi L)/\operatorname{Rad}(L/\pi L)
+        \cong
+        P_S/\operatorname{Rad}(P_S)
+        \cong
+        S.
+    \]
+    Similarly,
+    \[
+        \operatorname{Top}(\widehat P_S)\cong S.
+    \]
+    The morphism \(f\) induces a nonzero map
+    \[
+        \operatorname{Top}(\widehat P_S)\longrightarrow \operatorname{Top}(L),
+    \]
+    hence an isomorphism, since both sides are isomorphic to the simple module \(S\).
+    Therefore
+    \[
+        f(\widehat P_S)+\operatorname{Rad}(L)=L.
+    \]
+    By Nakayama's lemma,
+    \[
+        f(\widehat P_S)=L.
+    \]
+    Thus \(f\) is surjective.
+
+    It remains to show that \(f\) is injective. Since \(\widehat P_S\) and \(L\) are
+    \(R\)-free lattices, we have
+    \[
+        \operatorname{rank}_R\widehat P_S
+        =
+        \dim_k(\widehat P_S/\pi\widehat P_S)
+        =
+        \dim_k P_S,
+    \]
+    and
+    \[
+        \operatorname{rank}_R L
+        =
+        \dim_k(L/\pi L)
+        =
+        \dim_k P_S.
+    \]
+    Hence
+    \[
+        \operatorname{rank}_R\widehat P_S=\operatorname{rank}_R L.
+    \]
+    Since \(f:\widehat P_S\to L\) is a surjective homomorphism between finite free
+    \(R\)-modules of the same rank, its kernel has \(R\)-rank \(0\). But
+    \(\ker f\) is a submodule of the free \(R\)-module \(\widehat P_S\), hence is
+    torsion-free. Therefore
+    \[
+        \ker f=0.
+    \]
+    Thus \(f\) is an isomorphism.
+\end{proof}
+
+\begin{corollary}[Uniqueness of projective lifts]
+    Let \(Q\) be a finitely generated projective \(kG\)-module. If \(L_1\) and
+    \(L_2\) are projective \(RG\)-lattices such that
+    \[
+        L_1/\pi L_1\cong Q,
+        \qquad
+        L_2/\pi L_2\cong Q,
+    \]
+    then
+    \[
+        L_1\cong L_2
+    \]
+    as \(RG\)-modules.
+\end{corollary}
+
+\begin{proof}
+    Decompose \(Q\) into indecomposable projective \(kG\)-modules:
+    \[
+        Q\cong \bigoplus_S P_S^{\oplus m_S},
+    \]
+    where \(S\) runs through the isomorphism classes of simple \(kG\)-modules.
+    By the preceding proposition, each indecomposable summand \(P_S\) has a unique
+    projective \(RG\)-lattice lift, namely \(\widehat P_S\). Hence any projective
+    \(RG\)-lattice lifting \(Q\) is isomorphic to
+    \[
+        \bigoplus_S \widehat P_S^{\oplus m_S}.
+    \]
+    Therefore
+    \[
+        L_1\cong L_2.
+    \]
+\end{proof}
+
+\begin{remark}[Realizing a lattice inside its scalar extension]
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(L\)
+    be an \(RG\)-lattice. Since \(L\) is free as an \(R\)-module, it is torsion-free.
+    Therefore the natural map
+    \[
+        L\longrightarrow F\otimes_R L,
+        \qquad
+        \ell\longmapsto 1\otimes \ell,
+    \]
+    is injective. Hence we may regard \(L\) as an \(RG\)-submodule of the
+    \(FG\)-module
+    \[
+        F\otimes_R L.
+    \]
+    In this sense, the \(FG\)-module \(F\otimes_R L\) has a form whose structure
+    constants are defined over \(R\).
+\end{remark}
+
+\begin{definition}[Full \(RG\)-lattice]
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(U\)
+    be a finite-dimensional \(FG\)-module. A \textbf{full \(RG\)-lattice} in \(U\)
+    is an \(RG\)-submodule
+    \[
+        L\subseteq U
+    \]
+    such that \(L\) is finitely generated and free as an \(R\)-module and
+    \[
+        FL=U.
+    \]
+    Equivalently, the natural map
+    \[
+        F\otimes_R L\longrightarrow U,
+        \qquad
+        a\otimes \ell\longmapsto a\ell,
+    \]
+    is an isomorphism of \(FG\)-modules.
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(U\)
+    be a finite-dimensional \(F\)-vector space. Let \(L\subseteq U\) be a finitely
+    generated \(R\)-submodule containing an \(F\)-basis of \(U\). Then \(L\) is a
+    full \(R\)-lattice in \(U\).
+
+    If, moreover, \(U\) is an \(FG\)-module and \(L\) is \(G\)-stable, then \(L\) is
+    a full \(RG\)-lattice in \(U\).
+\end{lemma}
+
+\begin{proof}
+    Since \(L\subseteq U\), the \(R\)-module \(L\) is torsion-free. Since \(R\) is a
+    principal ideal domain and \(L\) is finitely generated, \(L\) is free as an
+    \(R\)-module. Choose an \(R\)-basis
+    \[
+        x_1,\ldots,x_m
+    \]
+    of \(L\).
+
+    We claim that \(x_1,\ldots,x_m\) are \(F\)-linearly independent. Suppose
+    \[
+        \lambda_1x_1+\cdots+\lambda_mx_m=0,
+        \qquad
+        \lambda_i\in F.
+    \]
+    Write
+    \[
+        \lambda_i=\frac{a_i}{b_i},
+        \qquad
+        a_i,b_i\in R,\quad b_i\neq 0.
+    \]
+    Let
+    \[
+        b=b_1b_2\cdots b_m.
+    \]
+    Multiplying the relation by \(b\), we get
+    \[
+        b\lambda_1x_1+\cdots+b\lambda_mx_m=0,
+    \]
+    where each \(b\lambda_i\in R\). Since \(x_1,\ldots,x_m\) are \(R\)-linearly
+    independent, we get
+    \[
+        b\lambda_i=0
+    \]
+    for every \(i\). Since \(b\neq 0\), it follows that
+    \[
+        \lambda_i=0
+    \]
+    for every \(i\). Hence \(x_1,\ldots,x_m\) are \(F\)-linearly independent.
+
+    Since \(L\) contains an \(F\)-basis of \(U\), we have
+    \[
+        FL=U.
+    \]
+    Therefore \(x_1,\ldots,x_m\) also span \(U\) over \(F\). Hence
+    \[
+        x_1,\ldots,x_m
+    \]
+    form an \(F\)-basis of \(U\). Thus
+    \[
+        F\otimes_R L\cong U,
+    \]
+    and \(L\) is a full \(R\)-lattice in \(U\).
+
+    If \(U\) is an \(FG\)-module and \(L\) is \(G\)-stable, then \(L\) is an
+    \(RG\)-submodule of \(U\). Hence \(L\) is a full \(RG\)-lattice in \(U\).
+\end{proof}
+
+\begin{corollary}[Existence of full lattices]
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(G\)
+    be a finite group. If \(U\) is a finite-dimensional \(FG\)-module, then \(U\)
+    contains a full \(RG\)-lattice.
+\end{corollary}
+
+\begin{proof}
+    Let
+    \[
+        u_1,\ldots,u_n
+    \]
+    be an \(F\)-basis of \(U\). Define
+    \[
+        L=\sum_{i=1}^n\sum_{g\in G} R\,g u_i.
+    \]
+    Since \(G\) is finite, \(L\) is finitely generated as an \(R\)-module. It is also
+    stable under the action of \(G\), hence is an \(RG\)-submodule of \(U\).
+
+    Moreover, \(L\) contains the \(F\)-basis \(u_1,\ldots,u_n\), because \(1\in G\).
+    Therefore, by the previous lemma, \(L\) is a full \(RG\)-lattice in \(U\).
+\end{proof}

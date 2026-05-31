@@ -1,0 +1,637 @@
+% Save this file as chapter10.tex and add \include{chapter10} in the main file.
+
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Core}{\operatorname{Core}}
+\providecommand{\Fix}{\operatorname{Fix}}
+
+\chapter{Permutation Actions and Coset Actions}
+\label{chap:permutation-actions}
+
+
+\section{Basic Notation for Permutation Actions}
+
+\begin{definition}[Orbits and stabilizers]
+Let \(G\leq \Sym(\Omega)\), where \(|\Omega|=n\).
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item If \(\Delta\subseteq \Omega\) and \(g\in G\), define
+    \[
+        \Delta^g=\{\delta^g\mid \delta\in \Delta\}.
+    \]
+
+    \item For \(\omega_1,\omega_2\in \Omega\), write
+    \[
+        \omega_1\sim_G \omega_2
+    \]
+    if there exists \(g\in G\) such that \(\omega_1^g=\omega_2\).
+
+    \item The orbit of \(\omega\in \Omega\) under \(G\) is
+    \[
+        \omega^G=\{\omega^g\mid g\in G\}.
+    \]
+
+    \item The stabilizer of \(\omega\in\Omega\) is
+    \[
+        G_\omega=\{g\in G\mid \omega^g=\omega\}.
+    \]
+\end{enumerate}
+\end{definition}
+
+
+\section{Setwise and Pointwise Stabilizers}
+
+\begin{definition}[Stabilizers of subsets]
+Let \(\Delta\subseteq \Omega\). Define the \emph{setwise stabilizer} of \(\Delta\) in \(G\) by
+\[
+    G_\Delta=\{g\in G\mid \Delta^g=\Delta\}.
+\]
+Define the \emph{pointwise stabilizer} of \(\Delta\) in \(G\) by
+\[
+    G_{(\Delta)}
+    =
+    \{g\in G\mid \delta^g=\delta \text{ for all } \delta\in\Delta\}.
+\]
+\end{definition}
+
+\begin{proposition}
+Let \(G\leq \Sym(\Omega)\) and let \(\Delta\subseteq \Omega\). Then
+\[
+    G_{(\Delta)}\unlhd G_\Delta.
+\]
+Moreover, \(G_\Delta\) acts on \(\Delta\), and the kernel of this induced action is \(G_{(\Delta)}\). Hence
+\[
+    G_\Delta^\Delta \iso G_\Delta/G_{(\Delta)},
+\]
+where \(G_\Delta^\Delta\) denotes the permutation group induced by \(G_\Delta\) on \(\Delta\).
+\end{proposition}
+
+\begin{proof}
+First, \(G_{(\Delta)}\leq G_\Delta\), because every element fixing each point of \(\Delta\) certainly stabilizes \(\Delta\) as a set.
+
+Let \(x\in G_\Delta\) and \(h\in G_{(\Delta)}\). We show that \(x^{-1}hx\in G_{(\Delta)}\). For any \(\delta\in \Delta\), since \(x\in G_\Delta\), we have \(\delta^{x^{-1}}\in \Delta\). Since \(h\) fixes every point of \(\Delta\),
+\[
+    (\delta^{x^{-1}})^h=\delta^{x^{-1}}.
+\]
+Therefore
+\[
+    \delta^{x^{-1}hx}
+    =
+    \bigl((\delta^{x^{-1}})^h\bigr)^x
+    =
+    (\delta^{x^{-1}})^x
+    =
+    \delta.
+\]
+Thus \(x^{-1}hx\in G_{(\Delta)}\), proving that
+\[
+    G_{(\Delta)}\unlhd G_\Delta.
+\]
+
+Now consider the restriction homomorphism
+\[
+    \rho:G_\Delta\longrightarrow \Sym(\Delta),
+    \qquad
+    g\longmapsto g|_\Delta.
+\]
+Its kernel consists precisely of the elements of \(G_\Delta\) that fix every point of \(\Delta\), namely \(G_{(\Delta)}\). Its image is \(G_\Delta^\Delta\). By the First Isomorphism Theorem,
+\[
+    G_\Delta/G_{(\Delta)}\iso G_\Delta^\Delta.
+\]
+\end{proof}
+
+\begin{proposition}[Conjugating stabilizers]
+Let \(G\leq \Sym(\Omega)\).
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item For every \(\omega\in\Omega\) and \(g\in G\),
+    \[
+        g^{-1}G_\omega g=G_{\omega^g}.
+    \]
+
+    \item For every \(\Delta\subseteq\Omega\) and \(g\in G\),
+    \[
+        g^{-1}G_\Delta g=G_{\Delta^g}.
+    \]
+
+    \item For every \(\Delta\subseteq\Omega\) and \(g\in G\),
+    \[
+        g^{-1}G_{(\Delta)}g=G_{(\Delta^g)}.
+    \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We prove the first statement. Let \(h\in G_\omega\). Then
+\[
+    (\omega^g)^{g^{-1}hg}
+    =
+    \omega^{hg}
+    =
+    (\omega^h)^g
+    =
+    \omega^g.
+\]
+Thus \(g^{-1}hg\in G_{\omega^g}\), so
+\[
+    g^{-1}G_\omega g\leq G_{\omega^g}.
+\]
+Applying the same argument with \(g^{-1}\) gives the reverse inclusion. Hence
+\[
+    g^{-1}G_\omega g=G_{\omega^g}.
+\]
+
+The proofs for \(G_\Delta\) and \(G_{(\Delta)}\) are identical, replacing the point \(\omega\) by the subset \(\Delta\).
+\end{proof}
+
+\section{Fixed Points and Semiregular Actions}
+
+\begin{definition}[Fixed points]
+Let \(G\) act on \(\Omega\).
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item For \(g\in G\), define
+    \[
+        \Fix_\Omega(g)=\{\omega\in\Omega\mid \omega^g=\omega\}.
+    \]
+
+    \item The set of common fixed points of \(G\) on \(\Omega\) is
+    \[
+        \Fix_\Omega(G)
+        =
+        \{\omega\in\Omega\mid \omega^g=\omega \text{ for all } g\in G\}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Semiregular and regular actions]
+Let \(G\) act on \(\Omega\).
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item The action is called \emph{semiregular} if
+    \[
+        G_\omega=1
+    \]
+    for every \(\omega\in\Omega\).
+
+    \item The action is called \emph{regular} if it is both transitive and semiregular.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+Let \(G\) be finite and act semiregularly on \(\Omega\). Then every orbit has length \(|G|\). In particular, if \(\Omega\) is finite, then
+\[
+    |G|\mid |\Omega|.
+\]
+If the action is transitive and semiregular, then it is regular and
+\[
+    |G|=|\Omega|.
+\]
+\end{proposition}
+
+\begin{proof}
+Since the action is semiregular, \(G_\omega=1\) for every \(\omega\in\Omega\). By the orbit--stabilizer theorem,
+\[
+    |\omega^G|=|G:G_\omega|=|G|.
+\]
+Thus every orbit has length \(|G|\). If \(\Omega\) is finite, it is a disjoint union of orbits, so \(|G|\mid |\Omega|\).
+
+If the action is transitive, there is only one orbit. Hence
+\[
+    |\Omega|=|\omega^G|=|G|.
+\]
+\end{proof}
+
+\section{Coset Actions and the Core}
+
+\begin{definition}[Right coset action]
+Let \(G\) be a group and let \(H\leq G\). Let
+\[
+    [G:H]_{\mathrm r}:=\{Hg\mid g\in G\}
+\]
+be the set of right cosets of \(H\) in \(G\). Define an action of \(G\) on \([G:H]_{\mathrm r}\) by
+\[
+    (Hg)^x=Hgx
+\]
+for all \(g,x\in G\).
+\end{definition}
+
+\begin{proposition}
+The right coset action of \(G\) on \([G:H]_{\mathrm r}\) is transitive.
+\end{proposition}
+
+\begin{proof}
+For every coset \(Hg\in [G:H]_{\mathrm r}\),
+\[
+    H^g=Hg.
+\]
+Thus every coset lies in the orbit of \(H\), so the action is transitive.
+\end{proof}
+
+\begin{definition}[Core]
+Let \(H\leq G\). The \emph{core} of \(H\) in \(G\) is
+\[
+    \Core_G(H)
+    =
+    \bigcap_{g\in G} g^{-1}Hg.
+\]
+\end{definition}
+
+\begin{proposition}
+Let \(G\) act on the set \([G:H]_{\mathrm r}\) by right multiplication. Then the kernel of this action is
+\[
+    \Core_G(H)=\bigcap_{g\in G}g^{-1}Hg.
+\]
+Moreover, \(\Core_G(H)\) is the largest normal subgroup of \(G\) contained in \(H\).
+\end{proposition}
+
+\begin{proof}
+The stabilizer of the coset \(Hg\) is
+\[
+    G_{Hg}
+    =
+    \{x\in G\mid Hgx=Hg\}.
+\]
+Now
+\[
+    Hgx=Hg
+    \iff
+    gxg^{-1}\in H
+    \iff
+    x\in g^{-1}Hg.
+\]
+Thus
+\[
+    G_{Hg}=g^{-1}Hg.
+\]
+The kernel of the action is the intersection of all point stabilizers, so
+\[
+    \Ker(G\curvearrowright [G:H]_{\mathrm r})
+    =
+    \bigcap_{g\in G}G_{Hg}
+    =
+    \bigcap_{g\in G}g^{-1}Hg
+    =
+    \Core_G(H).
+\]
+
+Since the kernel of an action is normal in \(G\), \(\Core_G(H)\unlhd G\). Also, taking \(g=1\), we see that
+\[
+    \Core_G(H)\leq H.
+\]
+
+Finally, suppose \(N\unlhd G\) and \(N\leq H\). Then for every \(g\in G\),
+\[
+    N=g^{-1}Ng\leq g^{-1}Hg.
+\]
+Therefore
+\[
+    N\leq \bigcap_{g\in G}g^{-1}Hg=\Core_G(H).
+\]
+Thus \(\Core_G(H)\) is the largest normal subgroup of \(G\) contained in \(H\).
+\end{proof}
+
+\begin{proposition}
+Let \(G\) act on
+\[
+    \Omega=[G:H]_{\mathrm r}
+\]
+by right multiplication. Then
+\[
+    G^\Omega \iso G/\Core_G(H).
+\]
+In particular, \(G^\Omega\) is a transitive permutation group of degree \(|G:H|\).
+\end{proposition}
+
+\begin{proof}
+The action gives a homomorphism
+\[
+    \rho:G\longrightarrow \Sym(\Omega).
+\]
+Its image is \(G^\Omega\), and its kernel is \(\Core_G(H)\). Therefore, by the First Isomorphism Theorem,
+\[
+    G/\Core_G(H)\iso G^\Omega.
+\]
+The action is transitive by the previous proposition, and
+\[
+    |\Omega|=|G:H|.
+\]
+\end{proof}
+
+\begin{definition}[Faithful action and core-free subgroup]
+An action of \(G\) on \(\Omega\) is called \emph{faithful} if its kernel is trivial.
+
+A subgroup \(H\leq G\) is called \emph{core-free} in \(G\) if
+\[
+    \Core_G(H)=1.
+\]
+Thus the right coset action of \(G\) on \([G:H]_{\mathrm r}\) is faithful if and only if \(H\) is core-free in \(G\).
+\end{definition}
+
+\section{Transitive Actions as Coset Actions}
+
+\begin{definition}[Equivalence of actions]
+Let \(G\) act on two sets \(\Omega\) and \(\Sigma\). The two actions are called \emph{equivalent} if there exists a bijection
+\[
+    \varphi:\Omega\longrightarrow \Sigma
+\]
+such that
+\[
+    (\omega^g)\varphi=(\omega\varphi)^g
+\]
+for every \(\omega\in\Omega\) and \(g\in G\).
+
+Equivalently, the following diagram commutes for every \(g\in G\):
+\[
+\begin{tikzcd}
+\omega \arrow[r, "\varphi"] \arrow[d, "{g}"'] &
+\omega\varphi \arrow[d, "{g}"] \\
+\omega^g \arrow[r, "\varphi"'] &
+(\omega\varphi)^g.
+\end{tikzcd}
+\]
+\end{definition}
+
+\begin{theorem}[Every transitive action is a coset action]
+Let \(G\leq \Sym(\Omega)\) be transitive. Fix \(\omega\in\Omega\), and put
+\[
+    H=G_\omega.
+\]
+Then the action of \(G\) on \(\Omega\) is equivalent to the right coset action of \(G\) on \([G:H]_{\mathrm r}\). Moreover, \(H\) is core-free in \(G\), so this coset action is faithful.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \Sigma=[G:H]_{\mathrm r}.
+\]
+Define
+\[
+    \varphi:\Omega\longrightarrow \Sigma
+\]
+by
+\[
+    \varphi(\omega^g)=Hg.
+\]
+This is well-defined: if
+\[
+    \omega^g=\omega^h,
+\]
+then
+\[
+    \omega^{gh^{-1}}=\omega,
+\]
+so \(gh^{-1}\in G_\omega=H\), and hence
+\[
+    Hg=Hh.
+\]
+
+The map is surjective because every coset has the form \(Hg\), and it is injective by the same argument in reverse. Thus \(\varphi\) is a bijection.
+
+For \(x\in G\),
+\[
+    \varphi\bigl((\omega^g)^x\bigr)
+    =
+    \varphi(\omega^{gx})
+    =
+    Hgx
+    =
+    (Hg)^x
+    =
+    \varphi(\omega^g)^x.
+\]
+Thus \(\varphi\) is an equivalence of actions.
+
+It remains to show that \(H\) is core-free. Suppose \(N\unlhd G\) and \(N\leq H\). For every \(x\in G\),
+\[
+    N=N^x\leq H^x=G_{\omega^x}.
+\]
+Since \(G\) is transitive on \(\Omega\), every point of \(\Omega\) is of the form \(\omega^x\). Hence every element of \(N\) fixes every point of \(\Omega\). Since \(G\leq \Sym(\Omega)\), the action is faithful, so \(N=1\). Therefore
+\[
+    \Core_G(H)=1.
+\]
+\end{proof}
+
+\begin{example}[Coset actions of \(S_4\)]
+Let
+\[
+    G=S_4.
+\]
+Consider the following subgroups:
+\[
+    H_1=\gen{(12)},\qquad
+    H_2=\gen{(12)(34)},\qquad
+    H_3=\gen{(13)},\qquad
+    H_4=\gen{(13)(24)}.
+\]
+For each \(i\), let
+\[
+    \Omega_i=[G:H_i]_{\mathrm r}.
+\]
+
+We compare the corresponding coset actions \(G^{\Omega_i}\).
+
+\medskip
+
+\noindent
+\textbf{First, \(G^{\Omega_1}\) and \(G^{\Omega_2}\) are not equivalent.}
+
+Suppose, for contradiction, that there exists an equivalence
+\[
+    \varphi:\Omega_1\longrightarrow \Omega_2.
+\]
+Write
+\[
+    H_1\varphi=H_2g
+\]
+for some \(g\in G\). Since \((12)\in H_1\), we have
+\[
+    H_1(12)=H_1.
+\]
+Using equivariance,
+\[
+    H_2g
+    =
+    H_1\varphi
+    =
+    (H_1(12))\varphi
+    =
+    (H_1\varphi)^{(12)}
+    =
+    (H_2g)^{(12)}
+    =
+    H_2g(12).
+\]
+Thus
+\[
+    H_2g=H_2g(12),
+\]
+so
+\[
+    g(12)g^{-1}\in H_2.
+\]
+But \(g(12)g^{-1}\) is a transposition, while
+\[
+    H_2=\{1,(12)(34)\}
+\]
+contains no transposition. This contradiction shows that \(G^{\Omega_1}\) and \(G^{\Omega_2}\) are not equivalent.
+
+\medskip
+
+\noindent
+\textbf{Second, \(G^{\Omega_1}\) and \(G^{\Omega_3}\) are equivalent.}
+
+Indeed,
+\[
+    H_3^{(23)}
+    =
+    (23)^{-1}H_3(23)
+    =
+    \gen{(12)}
+    =
+    H_1.
+\]
+Define
+\[
+    \varphi:\Omega_1\longrightarrow \Omega_3
+\]
+by
+\[
+    \varphi(H_1g)=H_3(23)g.
+\]
+We check that \(\varphi\) is well-defined. If
+\[
+    H_1g=H_1h,
+\]
+then \(gh^{-1}\in H_1\). Since
+\[
+    (23)H_1(23)=H_3,
+\]
+we get
+\[
+    (23)gh^{-1}(23)\in H_3.
+\]
+Hence
+\[
+    H_3(23)g=H_3(23)h.
+\]
+Thus \(\varphi\) is well-defined. It is plainly bijective, and for \(x\in G\),
+\[
+    \varphi\bigl((H_1g)^x\bigr)
+    =
+    \varphi(H_1gx)
+    =
+    H_3(23)gx
+    =
+    (H_3(23)g)^x
+    =
+    \varphi(H_1g)^x.
+\]
+Therefore the two actions are equivalent.
+
+\medskip
+
+Similarly, \(G^{\Omega_2}\) and \(G^{\Omega_4}\) are equivalent, since \(H_2\) and \(H_4\) are conjugate in \(S_4\). However, \(G^{\Omega_1}\) is not equivalent to \(G^{\Omega_2}\) or \(G^{\Omega_4}\), because a subgroup generated by a transposition cannot be conjugate to a subgroup generated by a double transposition.
+\end{example}
+
+\begin{theorem}[Criterion for equivalence of transitive actions]
+Let \(G\) act transitively on two sets \(\Omega\) and \(\Sigma\). Fix \(\omega\in\Omega\) and \(\sigma\in\Sigma\). Then the two actions are equivalent if and only if the stabilizers \(G_\omega\) and \(G_\sigma\) are conjugate in \(G\).
+\end{theorem}
+
+\begin{proof}
+Suppose first that the two actions are equivalent. Let
+\[
+    \varphi:\Omega\longrightarrow \Sigma
+\]
+be an equivalence. Since \(G\) is transitive on \(\Sigma\), there exists \(g\in G\) such that
+\[
+    \omega\varphi=\sigma^g.
+\]
+For \(x\in G_\omega\), we have \(\omega^x=\omega\). Hence
+\[
+    (\omega\varphi)^x
+    =
+    (\omega^x)\varphi
+    =
+    \omega\varphi.
+\]
+Thus \(x\in G_{\omega\varphi}\), so
+\[
+    G_\omega\leq G_{\omega\varphi}.
+\]
+Applying the same argument to \(\varphi^{-1}\), we get equality:
+\[
+    G_\omega=G_{\omega\varphi}.
+\]
+Since \(\omega\varphi=\sigma^g\), the conjugation formula for stabilizers gives
+\[
+    G_{\omega\varphi}
+    =
+    G_{\sigma^g}
+    =
+    g^{-1}G_\sigma g.
+\]
+Therefore
+\[
+    G_\omega=g^{-1}G_\sigma g,
+\]
+so \(G_\omega\) and \(G_\sigma\) are conjugate in \(G\).
+
+Conversely, suppose that \(G_\omega\) and \(G_\sigma\) are conjugate. Choose \(g\in G\) such that
+\[
+    G_\omega=g^{-1}G_\sigma g.
+\]
+Define
+\[
+    \varphi:\Omega\longrightarrow \Sigma
+\]
+by
+\[
+    \varphi(\omega^x)=\sigma^{gx}.
+\]
+
+We check that this is well-defined. If
+\[
+    \omega^x=\omega^y,
+\]
+then
+\[
+    xy^{-1}\in G_\omega=g^{-1}G_\sigma g.
+\]
+Thus
+\[
+    gxy^{-1}g^{-1}\in G_\sigma,
+\]
+which implies
+\[
+    \sigma^{gx}=\sigma^{gy}.
+\]
+Hence \(\varphi\) is well-defined.
+
+It is surjective because every element of \(\Sigma\) has the form \(\sigma^z\), and
+\[
+    \sigma^z=\sigma^{g(g^{-1}z)}=\varphi(\omega^{g^{-1}z}).
+\]
+It is injective by reversing the well-definedness argument.
+
+Finally, for any \(a\in G\),
+\[
+    \varphi\bigl((\omega^x)^a\bigr)
+    =
+    \varphi(\omega^{xa})
+    =
+    \sigma^{gxa}
+    =
+    (\sigma^{gx})^a
+    =
+    \varphi(\omega^x)^a.
+\]
+Thus \(\varphi\) is an equivalence of actions.
+\end{proof}
+
+\begin{corollary}
+The equivalence classes of transitive \(G\)-actions are in bijection with conjugacy classes of subgroups of \(G\).
+\end{corollary}
+
+\begin{proof}
+Every transitive action is equivalent to the right coset action on \([G:H]_{\mathrm r}\), where \(H\) is a point stabilizer. By the previous theorem, two such coset actions are equivalent exactly when their stabilizers are conjugate in \(G\).
+\end{proof}

@@ -1,0 +1,94 @@
+\section{Homework 2}
+
+\begin{exercise}
+    Prove that if $A$ is a finite-dimensional associative algebra and for every element $a \in A$ one has $a^n = 0$ for some $n$, then the algebra $A$ is nilpotent. Do not use Wedderburn's theorems. Use Engel's theorem.
+\end{exercise}
+
+\begin{proof}
+    Let $A$ be a finite-dimensional associative algebra over a field, such that every element $a \in A$ is nilpotent. We want to show that $A$ is nilpotent as an algebra, meaning there exists some integer $N > 0$ such that $A^N = 0$.
+
+    Consider the left regular representation of $A$ on itself. For each $a \in A$, define the left multiplication map $L_a : A \to A$ by $L_a(x) = ax$ for all $x \in A$. Since $A$ is an associative algebra, the mapping $a \mapsto L_a$ is an algebra homomorphism from $A$ to the algebra of endomorphisms $\mathrm{End}(A)$.
+
+    We can view $\mathrm{End}(A)$ as a Lie algebra $\mathfrak{gl}(A)$ with the standard commutator bracket $[T, S] = T \circ S - S \circ T$. The set of all left multiplication maps $\mathfrak{g} = \{ L_a \mid a \in A \}$ forms a Lie subalgebra of $\mathfrak{gl}(A)$, because
+    \[ [L_a, L_b] = L_a \circ L_b - L_b \circ L_a = L_{ab} - L_{ba} = L_{[a,b]}, \]
+    and $a, b \in A \implies [a, b] \in A$, so $L_{[a,b]} \in \mathfrak{g}$.
+
+    By hypothesis, for every $a \in A$, there exists an integer $n > 0$ such that $a^n = 0$. Consequently, the endomorphism $L_a$ is strictly nilpotent, since $L_a^n(x) = a^n x = 0$ for all $x \in A$. Therefore, $\mathfrak{g}$ is a Lie subalgebra of $\mathfrak{gl}(A)$ consisting entirely of nilpotent endomorphisms.
+
+    According to Engel's Theorem, if a Lie subalgebra of $\mathfrak{gl}(V)$ (where $V$ is a non-zero finite-dimensional vector space) consists of nilpotent elements, then there exists a flag of subspaces
+    \[ 0 = V_0 \subset V_1 \subset V_2 \subset \dots \subset V_k = A \]
+    such that $\mathfrak{g}(V_i) \subseteq V_{i-1}$ for all $1 \le i \le k$.
+
+    Translating this back to the associative algebra $A$, we have $L_a(V_i) \subseteq V_{i-1}$ for all $a \in A$, which is precisely equivalent to the statement $A \cdot V_i \subseteq V_{i-1}$.
+
+    Using this property repeatedly, we obtain:
+    \[ A \cdot V_k \subseteq V_{k-1} \]
+    \[ A^2 \cdot V_k = A \cdot (A \cdot V_k) \subseteq A \cdot V_{k-1} \subseteq V_{k-2} \]
+    \[ \dots \]
+    \[ A^k \cdot V_k \subseteq V_0 = 0. \]
+
+    Since $V_k = A$, we conclude that $A^{k+1} = A^k \cdot A \subseteq 0$. Thus, $A$ is a nilpotent associative algebra.
+\end{proof}
+
+\begin{exercise}
+    Let $\operatorname{char} F = 0$; let $L$ be a finite-dimensional solvable Lie algebra; let $e_1, \dots, e_m$ be a basis of the algebra $L$. Let $M$ be a finite-dimensional $L$-module. Suppose that every element $e_i$, for $1 \le i \le m$, acts on $M$ nilpotently. Prove that the algebra $L$ acts on $M$ nilpotently.
+\end{exercise}
+
+\begin{proof}
+    Let $\bar{F}$ be the algebraic closure of $F$. We consider the scalar extensions of the Lie algebra and the module: $\bar{L} = L \otimes_F \bar{F}$ and $\bar{M} = M \otimes_F \bar{F}$.
+
+    Since $L$ is a finite-dimensional solvable Lie algebra over $F$, its scalar extension $\bar{L}$ remains a solvable Lie algebra over $\bar{F}$. Furthermore, the elements $e_1, \dots, e_m$ naturally form a basis for $\bar{L}$ as a vector space over $\bar{F}$.
+
+    Because $\operatorname{char} \bar{F} = 0$ and $\bar{F}$ is algebraically closed, we can apply Lie's Theorem to the finite-dimensional $\bar{L}$-module $\bar{M}$. Lie's Theorem guarantees the existence of a basis for $\bar{M}$ such that the representation $\rho: \bar{L} \to \operatorname{gl}(\bar{M})$ maps every element of $\bar{L}$ to an upper triangular matrix.
+
+    Consequently, for each $x \in \bar{L}$, the diagonal entries of the matrix $\rho(x)$ are given by a set of linear functionals $\lambda_1(x), \dots, \lambda_n(x)$, where $n = \dim_{\bar{F}} \bar{M}$ and $\lambda_k \in \bar{L}^*$.
+
+    We are given that each basis element $e_i$ ($1 \le i \le m$) acts nilpotently on $M$. This property is preserved under scalar extension, so each $e_i$ also acts nilpotently on $\bar{M}$. An upper triangular matrix that is nilpotent must have all its diagonal entries equal to zero. Thus, for each $i \in \{1, \dots, m\}$ and each $k \in \{1, \dots, n\}$, we have:
+    \[
+        \lambda_k(e_i) = 0.
+    \]
+
+    Since the linear functionals $\lambda_k$ vanish on the basis $e_1, \dots, e_m$, and linear transformations are determined by their action on a basis, they must vanish identically on the entire Lie algebra $\bar{L}$. That is, $\lambda_k(x) = 0$ for all $x \in \bar{L}$.
+
+    This implies that for any $x \in \bar{L}$, the matrix $\rho(x)$ is strictly upper triangular. Consequently, every $x \in \bar{L}$ acts as a nilpotent endomorphism on $\bar{M}$.
+
+    Restricting this result back to the original base field $F$ and the original module $M$, we conclude that every element $x \in L$ acts nilpotently on $M$. By Engel's Theorem, a Lie algebra of nilpotent endomorphisms acts nilpotently, which completes the proof.
+\end{proof}
+
+\begin{exercise}
+    For every prime $p$, find an example showing that Lie's theorem fails.
+\end{exercise}
+
+\begin{proof}
+    Let $F$ be an algebraically closed field of characteristic $p > 0$. We will construct a finite-dimensional solvable Lie algebra $\mathfrak{g}$ and a finite-dimensional representation $V$ over $F$ such that $\mathfrak{g}$ has no common eigenvector in $V$, thus showing that Lie's theorem fails.
+
+    Let $V$ be a $p$-dimensional vector space over $F$ with a chosen basis $v_0, v_1, \dots, v_{p-1}$.
+    We define two linear transformations $x, y \in \mathfrak{gl}(V)$ by defining their actions on the basis vectors:
+    \begin{align*}
+        x(v_i) & = v_{i-1} \quad \text{for } 0 \le i \le p-1, \\
+        y(v_i) & = i v_i \quad \text{for } 0 \le i \le p-1,
+    \end{align*}
+    where the subscripts for the action of $x$ are taken modulo $p$ (so $x(v_0) = v_{p-1}$).
+
+    Let $\mathfrak{g}$ be the Lie subalgebra of $\mathfrak{gl}(V)$ generated by $x$ and $y$. First, we compute the commutator $[x, y]$ acting on an arbitrary basis vector $v_i$:
+    \[
+        [x, y](v_i) = x(y(v_i)) - y(x(v_i)) = x(i v_i) - y(v_{i-1}) = i v_{i-1} - (i-1) v_{i-1} = v_{i-1} = x(v_i).
+    \]
+    Since this holds for all basis vectors, we have $[x, y] = x$.
+    This shows that the vector space spanned by $x$ and $y$ is closed under the Lie bracket, so $\mathfrak{g} = \text{span}_F\{x, y\}$ is a 2-dimensional Lie algebra.
+    Furthermore, its derived algebra is $\mathfrak{g}' = [\mathfrak{g}, \mathfrak{g}] = \text{span}_F\{x\}$. Since $\mathfrak{g}'$ is 1-dimensional, it is abelian, which implies that $\mathfrak{g}$ is a solvable Lie algebra.
+
+    Next, we show that $\mathfrak{g}$ has no common eigenvector in $V$.
+    Suppose, for the sake of contradiction, that $v = \sum_{i=0}^{p-1} c_i v_i$ is a common non-zero eigenvector for both $x$ and $y$.
+    Since $v$ is an eigenvector of $y$, and the eigenvalues of $y$ are exactly $0, 1, \dots, p-1$ (which are all distinct in $F$ because the characteristic is $p$), $v$ must belong to one of the 1-dimensional eigenspaces of $y$.
+    Thus, $v$ must be a non-zero scalar multiple of $v_k$ for some $0 \le k \le p-1$.
+
+    However, $v$ must also be an eigenvector for $x$. We check the action of $x$ on $v_k$:
+    \[
+        x(v_k) = v_{k-1} \pmod p.
+    \]
+    Because $p$ is a prime (and thus $p \ge 2$), $v_{k-1}$ is linearly independent from $v_k$. Therefore, $v_k$ is not an eigenvector for $x$, which is a contradiction.
+
+    Consequently, the solvable Lie algebra $\mathfrak{g}$ has no common eigenvector in the representation $V$, demonstrating that Lie's theorem does not hold in characteristic $p$.
+\end{proof}
+

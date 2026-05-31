@@ -1,0 +1,720 @@
+\chapter{Sylow Theorems}
+
+\section{Cauchy's Theorem and the Class Equation}
+
+\begin{theorem}[Cauchy's theorem]\label{thm:cauchy}
+Let $G$ be a finite group, and let $p$ be a prime. If
+\[
+    p\mid |G|,
+\]
+then there exists an element $g\in G$ such that
+\[
+    |g|=p.
+\]
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        \Omega
+        =
+        \{(x_1,x_2,\ldots,x_p)\in G^p : x_1x_2\cdots x_p=1\}.
+    \]
+    Once \(x_1,\ldots,x_{p-1}\) are chosen, the last entry is uniquely determined by
+    \[
+        x_p=(x_1x_2\cdots x_{p-1})^{-1}.
+    \]
+    Hence
+    \[
+        |\Omega|=|G|^{p-1}.
+    \]
+    Since \(p\mid |G|\), we have
+    \[
+        p\mid |\Omega|.
+    \]
+    
+    Let the cyclic group \(C_p=\langle \sigma\rangle\) act on \(\Omega\) by cyclic permutation:
+    \[
+        \sigma\cdot (x_1,x_2,\ldots,x_p)
+        =
+        (x_2,x_3,\ldots,x_p,x_1).
+    \]
+    This is well-defined. Indeed, if \(x_1x_2\cdots x_p=1\), then
+    \[
+        x_2x_3\cdots x_px_1
+        =
+        x_1^{-1}(x_1x_2\cdots x_p)x_1
+        =
+        1.
+    \]
+    
+    The orbits of this action have size either \(1\) or \(p\), because \(C_p\) has prime order.
+    Let \(N\) be the number of orbits of size \(1\). Since all remaining orbits have size \(p\), and
+    \(p\mid |\Omega|\), it follows that
+    \[
+        p\mid N.
+    \]
+    
+    Now an element \((x_1,\ldots,x_p)\in\Omega\) is fixed by \(\sigma\) if and only if
+    \[
+        x_1=x_2=\cdots=x_p.
+    \]
+    Thus the fixed points are precisely the tuples
+    \[
+        (x,x,\ldots,x)
+    \]
+    such that
+    \[
+        x^p=1.
+    \]
+    Hence \(N\) is the number of elements \(x\in G\) satisfying \(x^p=1\).
+    
+    The identity element satisfies \(1^p=1\), so \(N\geq 1\). Since \(p\mid N\), we must have
+    \[
+        N\geq p.
+    \]
+    Therefore there exists some \(g\neq 1\) such that
+    \[
+        g^p=1.
+    \]
+    Thus \(|g|\) divides \(p\). Since \(p\) is prime and \(g\neq 1\), we conclude that
+    \[
+        |g|=p.
+    \]
+    \end{proof}
+
+\begin{proposition}[Orbit decomposition]
+Let $G$ act on a set $\Omega$. Then $G$ partitions $\Omega$ into orbits:
+\[
+    \Omega=\Omega_1\sqcup\Omega_2\sqcup\cdots\sqcup\Omega_m.
+\]
+\end{proposition}
+
+\begin{proof}
+    Define a relation \(\sim\) on \(\Omega\) by
+    \[
+        \omega\sim \omega'
+        \quad\Longleftrightarrow\quad
+        \omega'=\omega^g
+        \text{ for some } g\in G.
+    \]
+    We show that \(\sim\) is an equivalence relation.
+    
+    First, for every \(\omega\in\Omega\), since \(e\in G\) acts trivially, we have
+    \[
+        \omega^e=\omega.
+    \]
+    Hence \(\omega\sim\omega\), so \(\sim\) is reflexive.
+    
+    Next, suppose \(\omega\sim\omega'\). Then there exists \(g\in G\) such that
+    \[
+        \omega'=\omega^g.
+    \]
+    Applying \(g^{-1}\), we get
+    \[
+        \omega
+        =
+        (\omega')^{g^{-1}}.
+    \]
+    Thus \(\omega'\sim\omega\), so \(\sim\) is symmetric.
+    
+    Finally, suppose \(\omega\sim\omega'\) and \(\omega'\sim\omega''\). Then there exist
+    \(g,h\in G\) such that
+    \[
+        \omega'=\omega^g,
+        \qquad
+        \omega''=(\omega')^h.
+    \]
+    Therefore
+    \[
+        \omega''
+        =
+        (\omega^g)^h
+        =
+        \omega^{gh}.
+    \]
+    Since \(gh\in G\), we have \(\omega\sim\omega''\). Hence \(\sim\) is transitive.
+    
+    Thus \(\sim\) is an equivalence relation on \(\Omega\). Its equivalence classes are exactly
+    the orbits of the action, because the equivalence class of \(\omega\) is
+    \[
+        \{\omega'\in\Omega:\omega'\sim\omega\}
+        =
+        \{\omega^g:g\in G\}.
+    \]
+    Equivalence classes of an equivalence relation form a partition of the underlying set.
+    Therefore the orbits of \(G\) partition \(\Omega\). If the distinct orbits are denoted by
+    \[
+        \Omega_1,\Omega_2,\ldots,\Omega_m,
+    \]
+    then
+    \[
+        \Omega=\Omega_1\sqcup\Omega_2\sqcup\cdots\sqcup\Omega_m.
+    \]
+    \end{proof}
+
+\begin{theorem}[Orbit-stabilizer theorem]\label{thm:orbit-stabilizer}
+Let $G$ be a finite group acting on a set $\Omega$. If $\Omega_i$ is an orbit and
+$\omega_i\in\Omega_i$, then
+\[
+    |\Omega_i|=|G:G_{\omega_i}|,
+\]
+where
+\[
+    G_{\omega_i}
+    =
+    \{g\in G:\omega_i^g=\omega_i\}
+\]
+is the stabilizer of $\omega_i$. Equivalently,
+\[
+    |G|=|\Omega_i|\,|G_{\omega_i}|.
+\]
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        H=G_{\omega_i}
+        =
+        \{g\in G:\omega_i^g=\omega_i\}.
+    \]
+    First we note that \(H\leq G\). Indeed, \(e\in H\), and if \(g,h\in H\), then
+    \[
+        \omega_i^{gh^{-1}}
+        =
+        (\omega_i^g)^{h^{-1}}
+        =
+        \omega_i^{h^{-1}}
+        =
+        \omega_i,
+    \]
+    so \(gh^{-1}\in H\). Hence \(H\) is a subgroup of \(G\).
+    
+    Now consider the set of left cosets \(H\backslash G\). Define a map
+    \[
+        \varphi:H\backslash G\longrightarrow \Omega_i
+    \]
+    by
+    \[
+        \varphi(Hg)=\omega_i^g.
+    \]
+    
+    We first show that \(\varphi\) is well-defined. Suppose
+    \[
+        Hg=Hh.
+    \]
+    Then \(h=ag\) for some \(a\in H\). Hence
+    \[
+        \omega_i^h
+        =
+        \omega_i^{ag}
+        =
+        (\omega_i^a)^g
+        =
+        \omega_i^g,
+    \]
+    because \(a\in H=G_{\omega_i}\). Thus \(\varphi(Hg)=\varphi(Hh)\).
+    
+    The map \(\varphi\) is surjective by the definition of the orbit:
+    \[
+        \Omega_i
+        =
+        \{\omega_i^g:g\in G\}.
+    \]
+    
+    It remains to show that \(\varphi\) is injective. Suppose
+    \[
+        \varphi(Hg)=\varphi(Hh).
+    \]
+    Then
+    \[
+        \omega_i^g=\omega_i^h.
+    \]
+    Applying \(h^{-1}\) to both sides gives
+    \[
+        \omega_i^{gh^{-1}}=\omega_i.
+    \]
+    Thus
+    \[
+        gh^{-1}\in H.
+    \]
+    Hence
+    \[
+        Hg=Hh.
+    \]
+    Therefore \(\varphi\) is injective.
+    
+    Thus \(\varphi\) is a bijection, so
+    \[
+        |\Omega_i|
+        =
+        |H\backslash G|
+        =
+        |G:H|
+        =
+        |G:G_{\omega_i}|.
+    \]
+    Since \(G\) is finite, this is equivalent to
+    \[
+        |G|
+        =
+        |\Omega_i|\,|G_{\omega_i}|.
+    \]
+    \end{proof}
+
+\begin{example}[Conjugation action and class equation]
+Let $G$ act on itself by conjugation:
+\[
+    x^g=g^{-1}xg.
+\]
+For $x\in G$, write
+\[
+    C(x)=x^G=\{g^{-1}xg:g\in G\}
+\]
+for the conjugacy class of $x$. Then
+\[
+    |C(x)|=|G:C_G(x)|,
+\]
+where
+\[
+    C_G(x)=\{g\in G:gx=xg\}.
+\]
+Thus
+\[
+    |G|=|C(x)|\,|C_G(x)|.
+\]
+In particular,
+\[
+    |C(x)|\mid |G|.
+\]
+
+If $x_1,\ldots,x_t$ are representatives of the noncentral conjugacy classes of $G$, then
+\[
+    G
+    =
+    Z(G)\sqcup C(x_1)\sqcup\cdots\sqcup C(x_t).
+\]
+Hence the class equation is
+\[
+    |G|
+    =
+    |Z(G)|+|C(x_1)|+\cdots+|C(x_t)|.
+\]
+\end{example}
+
+\begin{theorem}[Center of a finite $p$-group]\label{thm:p-group-center}
+Let $G$ be a finite group of order
+\[
+    |G|=p^e,
+\]
+where $p$ is prime. Then
+\[
+    Z(G)\neq 1.
+\]
+\end{theorem}
+
+\begin{proof}
+Use the class equation:
+\[
+    G
+    =
+    Z(G)\sqcup C(x_1)\sqcup\cdots\sqcup C(x_t),
+\]
+where $x_1,\ldots,x_t$ represent the noncentral conjugacy classes. Then
+\[
+    |G|
+    =
+    |Z(G)|+|C(x_1)|+\cdots+|C(x_t)|.
+\]
+
+For each noncentral element $x_i$, we have
+\[
+    |C(x_i)|=|G:C_G(x_i)|.
+\]
+Since $x_i\notin Z(G)$, the class $C(x_i)$ is not a singleton. Therefore
+\[
+    |C(x_i)|>1.
+\]
+Also $|C(x_i)|$ divides $|G|=p^e$, so
+\[
+    |C(x_i)|=p^{e_i}
+\]
+for some $e_i>0$. Hence each $|C(x_i)|$ is divisible by $p$.
+
+Thus
+\[
+    |G|
+    =
+    |Z(G)|+\sum_{i=1}^t |C(x_i)|
+\]
+implies
+\[
+    0\equiv |Z(G)| \pmod p.
+\]
+So $p\mid |Z(G)|$. In particular, $|Z(G)|>1$, and hence
+\[
+    Z(G)\neq 1.
+\]
+\end{proof}
+
+\begin{remark}
+If $x$ and $y$ are conjugate in $G$, then
+\[
+    |x|=|y|.
+\]
+The converse is not true in general. For example, in the cyclic group
+\[
+    C_m=\langle g\rangle,
+\]
+the elements $g$ and $g^{-1}$ have the same order, but they are not conjugate unless
+$g=g^{-1}$, because $C_m$ is abelian.
+\end{remark}
+
+\begin{exercise}
+Let $G$ be a finite group with the property that any two elements of the same order are conjugate. Show that
+\[
+    G\cong S_2
+    \qquad\text{or}\qquad
+    G\cong S_3.
+\]
+\end{exercise}
+
+\section{Sylow Theorems}
+
+Throughout this section, let $G$ be a finite group and write
+\[
+    |G|=p^e m,
+\]
+where $p$ is prime and
+\[
+    \gcd(p,m)=1.
+\]
+
+\begin{definition}[Sylow $p$-subgroup]
+A subgroup $P\leq G$ is called a \textbf{Sylow $p$-subgroup} of $G$ if
+\[
+    |P|=p^e.
+\]
+The set of all Sylow $p$-subgroups of $G$ is denoted by
+\[
+    \operatorname{Syl}_p(G).
+\]
+\end{definition}
+
+\begin{remark}
+If a Sylow $p$-subgroup exists, then Cauchy's theorem follows. Indeed, if
+\[
+    P\in \operatorname{Syl}_p(G),
+\]
+then $|P|=p^e$. Choose $1\neq x\in P$. Since $P$ is a $p$-group, $|x|=p^r$ for some $r\geq 1$. Then
+\[
+    x^{p^{r-1}}
+\]
+has order $p$.
+\end{remark}
+
+\begin{theorem}[First Sylow theorem]\label{thm:first-sylow}
+Let $G$ be a finite group. If
+\[
+    |G|=p^e m,
+    \qquad
+    \gcd(p,m)=1,
+\]
+then $G$ has a Sylow $p$-subgroup. That is,
+\[
+    \operatorname{Syl}_p(G)\neq\varnothing.
+\]
+\end{theorem}
+
+\begin{proof}
+We argue by induction on $|G|$.
+
+Use the class equation:
+\[
+    |G|
+    =
+    |Z(G)|+|C(x_1)|+\cdots+|C(x_t)|,
+\]
+where $x_1,\ldots,x_t$ are representatives of the noncentral conjugacy classes.
+
+\medskip
+
+\noindent\textbf{Case 1: $p\nmid |Z(G)|$.}
+
+Since
+\[
+    p\mid |G|
+\]
+but
+\[
+    p\nmid |Z(G)|,
+\]
+not all of the noncentral conjugacy class sizes can be divisible by $p$. Hence there exists some $x_i$ such that
+\[
+    p\nmid |C(x_i)|.
+\]
+By the orbit-stabilizer theorem,
+\[
+    |G|=|C(x_i)|\,|C_G(x_i)|.
+\]
+Since $p^e\mid |G|$ and $p\nmid |C(x_i)|$, we get
+\[
+    p^e\mid |C_G(x_i)|.
+\]
+Also $x_i\notin Z(G)$, so
+\[
+    C_G(x_i)<G.
+\]
+By induction, $C_G(x_i)$ has a subgroup $P$ of order $p^e$. Then $P$ is a Sylow $p$-subgroup of $G$.
+
+\medskip
+
+\noindent\textbf{Case 2: $p\mid |Z(G)|$.}
+
+First we prove Cauchy's theorem for finite abelian groups.
+
+Let $A$ be a finite abelian group and suppose $p\mid |A|$. We prove that $A$ contains an element of order $p$ by induction on $|A|$.
+
+Choose $1\neq x\in A$. If
+\[
+    p\mid |x|,
+\]
+then
+\[
+    x^{|x|/p}
+\]
+has order $p$.
+
+Now suppose
+\[
+    p\nmid |x|.
+\]
+Then $p$ divides
+\[
+    |A/\langle x\rangle|.
+\]
+By induction, $A/\langle x\rangle$ contains an element
+\[
+    a\langle x\rangle
+\]
+of order $p$. The order of $a\langle x\rangle$ divides the order of $a$, so
+\[
+    p\mid |a|.
+\]
+Hence
+\[
+    a^{|a|/p}
+\]
+has order $p$.
+
+Thus every finite abelian group whose order is divisible by $p$ contains an element of order $p$.
+
+Now return to $G$. Since $Z(G)$ is abelian and
+\[
+    p\mid |Z(G)|,
+\]
+there exists
+\[
+    x\in Z(G)
+\]
+such that
+\[
+    |x|=p.
+\]
+Then
+\[
+    \langle x\rangle\lhd G
+\]
+and
+\[
+    |G/\langle x\rangle|
+    =
+    p^{e-1}m.
+\]
+
+If $e=1$, then $\langle x\rangle$ itself is a Sylow $p$-subgroup of $G$.
+
+If $e>1$, then by induction $G/\langle x\rangle$ has a subgroup
+\[
+    H/\langle x\rangle
+\]
+of order $p^{e-1}$. Therefore
+\[
+    |H|=p^e,
+\]
+so $H$ is a Sylow $p$-subgroup of $G$.
+\end{proof}
+
+\begin{theorem}[Second Sylow theorem]\label{thm:second-sylow}
+Sylow $p$-subgroups are conjugate. More generally, if $H\leq G$ is a $p$-subgroup and
+\[
+    P\in\operatorname{Syl}_p(G),
+\]
+then there exists $x\in G$ such that
+\[
+    H\leq P^x.
+\]
+In particular, if $H$ is also a Sylow $p$-subgroup, then
+\[
+    H=P^x.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \Delta=\{P^x:x\in G\}
+\]
+be the conjugacy class of $P$ under conjugation. Then $G$ acts transitively on $\Delta$ by
+\[
+    (P^x)^g=P^{xg}.
+\]
+By the orbit-stabilizer theorem,
+\[
+    |\Delta|
+    =
+    |G:N_G(P)|.
+\]
+Since
+\[
+    P\leq N_G(P),
+\]
+we have
+\[
+    |\Delta|=|G:N_G(P)|\mid |G:P|=m.
+\]
+Hence
+\[
+    p\nmid |\Delta|.
+\]
+
+Now let $H\leq G$ be a $p$-subgroup, say
+\[
+    |H|=p^d.
+\]
+Restrict the action of $G$ on $\Delta$ to an action of $H$. Then $\Delta$ is a disjoint union of $H$-orbits:
+\[
+    \Delta=\Delta_1\sqcup\cdots\sqcup\Delta_r.
+\]
+Each orbit size divides $|H|$, so each $|\Delta_i|$ is a power of $p$. Since
+\[
+    p\nmid |\Delta|,
+\]
+at least one orbit has size $1$.
+
+Thus there exists $x\in G$ such that
+\[
+    (P^x)^h=P^x
+    \qquad
+    \text{for every }h\in H.
+\]
+Equivalently,
+\[
+    H\leq N_G(P^x).
+\]
+
+But $P^x$ is a normal Sylow $p$-subgroup of $N_G(P^x)$. Therefore every $p$-subgroup of $N_G(P^x)$ is contained in $P^x$. Hence
+\[
+    H\leq P^x.
+\]
+
+If $H$ is itself a Sylow $p$-subgroup, then
+\[
+    |H|=|P^x|=p^e,
+\]
+so
+\[
+    H=P^x.
+\]
+Therefore all Sylow $p$-subgroups are conjugate.
+\end{proof}
+
+\begin{theorem}[Third Sylow theorem]\label{thm:third-sylow}
+Let
+\[
+    |G|=p^e m,
+    \qquad
+    \gcd(p,m)=1,
+\]
+and let
+\[
+    n_p=|\operatorname{Syl}_p(G)|
+\]
+be the number of Sylow $p$-subgroups of $G$. Then
+\[
+    n_p\mid m
+\]
+and
+\[
+    n_p\equiv 1\pmod p.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    P\in\operatorname{Syl}_p(G).
+\]
+By the second Sylow theorem,
+\[
+    \operatorname{Syl}_p(G)
+    =
+    \{P^x:x\in G\}.
+\]
+Therefore
+\[
+    n_p
+    =
+    |G:N_G(P)|.
+\]
+Since
+\[
+    P\leq N_G(P),
+\]
+we get
+\[
+    n_p=|G:N_G(P)|\mid |G:P|=m.
+\]
+Hence
+\[
+    n_p\mid m.
+\]
+
+Now let $P$ act on $\operatorname{Syl}_p(G)$ by conjugation. The orbit sizes are powers of $p$. We determine the fixed points.
+
+Suppose
+\[
+    Q\in \operatorname{Syl}_p(G)
+\]
+is fixed by $P$. Then
+\[
+    Q^h=Q
+    \qquad
+    \text{for every }h\in P,
+\]
+so
+\[
+    P\leq N_G(Q).
+\]
+But $Q$ is a normal Sylow $p$-subgroup of $N_G(Q)$. Hence every $p$-subgroup of $N_G(Q)$ is contained in $Q$. Thus
+\[
+    P\leq Q.
+\]
+Since $P$ and $Q$ have the same order, we get
+\[
+    P=Q.
+\]
+Therefore the only fixed point of this action is $P$ itself.
+
+All other $P$-orbits have sizes divisible by $p$. Hence
+\[
+    n_p
+    =
+    1+\text{(a sum of multiples of }p),
+\]
+so
+\[
+    n_p\equiv 1\pmod p.
+\]
+\end{proof}
+
