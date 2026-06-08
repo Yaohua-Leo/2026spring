@@ -1,0 +1,279 @@
+\section{Brauer's Theorem and Modular Systems}
+
+\begin{definition}[\texorpdfstring{\(p\)-regular}{p-regular} and \texorpdfstring{\(p\)-singular}{p-singular} elements]
+    Let \(G\) be a finite group and let \(p\) be a prime number.
+    An element \(g\in G\) is called \textbf{\(p\)-regular} if
+    \[
+        p\nmid \operatorname{ord}(g).
+    \]
+    It is called \textbf{\(p\)-singular} in the sense of these notes if
+    \[
+        \operatorname{ord}(g)=p^e
+    \]
+    for some integer \(e\geq 0\). Equivalently, \(g\) is a \(p\)-element.
+\end{definition}
+
+\begin{lemma}[\(p\)-regular and \(p\)-singular decomposition]
+    Let \(G\) be a finite group. For every \(x\in G\), there exist unique elements
+    \(s,t\in G\) such that
+    \[
+        x=st,
+        \qquad
+        st=ts,
+    \]
+    where \(s\) is \(p\)-regular and \(t\) is \(p\)-singular.
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        \operatorname{ord}(x)=p^a m,
+        \qquad
+        \gcd(p,m)=1.
+    \]
+    Since \(\gcd(p^a,m)=1\), choose integers \(r,q\in \mathbb Z\) such that
+    \[
+        rm+qp^a=1.
+    \]
+    Define
+    \[
+        t=x^{rm},
+        \qquad
+        s=x^{qp^a}.
+    \]
+    Then \(s,t\in \langle x\rangle\), so \(st=ts\), and
+    \[
+        st=x^{rm+qp^a}=x.
+    \]
+    Moreover, the order of \(t\) divides \(p^a\), so \(t\) is \(p\)-singular, while the
+    order of \(s\) divides \(m\), so \(s\) is \(p\)-regular.
+
+    For uniqueness, suppose
+    \[
+        x=s_1t_1=s_2t_2
+    \]
+    are two such decompositions, with \(s_i\) \(p\)-regular, \(t_i\) \(p\)-singular, and
+    \(s_it_i=t_is_i\). Since \(s_i\) and \(t_i\) have coprime orders, both \(s_i\) and
+    \(t_i\) are powers of \(x\). Thus they lie in the cyclic group \(\langle x\rangle\).
+    Inside the finite cyclic group \(\langle x\rangle\), the \(p\)-part and the \(p'\)-part
+    of an element are unique. Hence
+    \[
+        s_1=s_2,
+        \qquad
+        t_1=t_2.
+    \]
+\end{proof}
+
+\begin{lemma}[Commutator subspace of a group algebra]
+    Let \(G\) be a finite group and let \(k\) be a field. Put
+    \[
+        S(kG)=\operatorname{span}_k\{\,ab-ba\mid a,b\in kG\,\}.
+    \]
+    Then
+    \[
+        S(kG)
+        =
+        \left\{
+            \sum_{g\in G}\lambda_g g
+            \ \middle|\
+            \sum_{g\in C}\lambda_g=0
+            \text{ for every conjugacy class } C\subseteq G
+        \right\}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    First observe that if \(g,h\in G\), then
+    \[
+        hgh^{-1}-g
+        =
+        h(gh^{-1})-(gh^{-1})h
+        \in S(kG).
+    \]
+    Hence differences of conjugate group elements lie in \(S(kG)\).
+
+    Let
+    \[
+        \alpha=\sum_{g\in G}\lambda_g g\in S(kG).
+    \]
+    Since each commutator \(ab-ba\) has total coefficient \(0\) on every conjugacy
+    class, it follows that
+    \[
+        \sum_{g\in C}\lambda_g=0
+    \]
+    for every conjugacy class \(C\).
+
+    Conversely, suppose
+    \[
+        \alpha=\sum_{g\in G}\lambda_g g
+    \]
+    satisfies
+    \[
+        \sum_{g\in C}\lambda_g=0
+    \]
+    for every conjugacy class \(C\). For each conjugacy class \(C\), choose a
+    representative \(c_C\in C\). Then
+    \[
+        \sum_{g\in C}\lambda_g g
+        =
+        \sum_{g\in C}\lambda_g(g-c_C),
+    \]
+    because \(\sum_{g\in C}\lambda_g=0\). Since each \(g-c_C\) is a difference of
+    conjugate elements, it lies in \(S(kG)\). Therefore
+    \[
+        \sum_{g\in C}\lambda_g g\in S(kG)
+    \]
+    for every conjugacy class \(C\), and hence
+    \[
+        \alpha\in S(kG).
+    \]
+    This proves the claim.
+\end{proof}
+
+\begin{theorem}[Brauer]
+    Let \(G\) be a finite group, and let \(k\) be a splitting field for \(G\) with
+    \[
+        \operatorname{char} k=p>0.
+    \]
+    Then the number of non-isomorphic simple \(kG\)-modules is equal to the number
+    of conjugacy classes of \(p\)-regular elements of \(G\).
+\end{theorem}
+
+\begin{proof}
+    Put
+    \[
+        A=kG.
+    \]
+    As before, define
+    \[
+        S(A)=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\},
+    \]
+    and
+    \[
+        T(A)=\{\,a\in A\mid a^{p^m}\in S(A)
+        \text{ for some }m\geq 0\,\}.
+    \]
+    By the previous proposition,
+    \[
+        \#\{\,\text{non-isomorphic simple }kG\text{-modules}\,\}
+        =
+        \dim_k kG-\dim_k T(A).
+    \]
+    Thus it remains to show that
+    \[
+        \dim_k kG-\dim_k T(A)
+    \]
+    is the number of conjugacy classes of \(p\)-regular elements.
+
+    Let
+    \[
+        \{x_i\}_{i\in I}
+    \]
+    be a set of representatives of the conjugacy classes of \(p\)-regular elements of
+    \(G\). We claim that
+    \[
+        \{\,x_i+T(A)\mid i\in I\,\}
+    \]
+    is a \(k\)-basis of \(kG/T(A)\).
+
+    First we prove that these elements span \(kG/T(A)\). Let \(x\in G\). By the
+    \(p\)-regular and \(p\)-singular decomposition, write
+    \[
+        x=st,
+        \qquad
+        st=ts,
+    \]
+    where \(s\) is \(p\)-regular and \(t\) is \(p\)-singular. Since \(t\) has \(p\)-power
+    order, for sufficiently large \(n\) we have
+    \[
+        t^{p^n}=1.
+    \]
+    Hence, in characteristic \(p\),
+    \[
+        (x-s)^{p^n}
+        =
+        \bigl(s(t-1)\bigr)^{p^n}
+        =
+        s^{p^n}(t-1)^{p^n}
+        =
+        s^{p^n}(t^{p^n}-1)
+        =
+        0.
+    \]
+    Therefore
+    \[
+        x-s\in T(A).
+    \]
+    Since \(s\) is \(p\)-regular, it is conjugate to some \(x_i\). Hence
+    \[
+        s-x_i\in S(A)\subseteq T(A).
+    \]
+    Therefore
+    \[
+        x+T(A)=x_i+T(A).
+    \]
+    Since the group elements form a \(k\)-basis of \(kG\), this proves that the classes
+    \(x_i+T(A)\) span \(kG/T(A)\).
+
+    It remains to prove linear independence. Suppose
+    \[
+        \sum_{i\in I}\lambda_i x_i\in T(A).
+    \]
+    Then, by the definition of \(T(A)\), there exists \(m\geq 0\) such that
+    \[
+        \left(\sum_{i\in I}\lambda_i x_i\right)^{p^m}\in S(A).
+    \]
+    Enlarging \(m\) if necessary, we may assume that
+    \[
+        x_i^{p^m}=x_i
+        \qquad
+        \text{for all }i\in I.
+    \]
+    Indeed, the orders of the \(x_i\) are prime to \(p\), so one can choose \(m\)
+    sufficiently large such that
+    \[
+        p^m\equiv 1\pmod{\operatorname{ord}(x_i)}
+    \]
+    for all \(i\).
+
+    Using the congruence
+    \[
+        \left(\sum_i \lambda_i x_i\right)^{p^m}
+        \equiv
+        \sum_i \lambda_i^{p^m}x_i^{p^m}
+        \pmod{S(A)},
+    \]
+    we get
+    \[
+        \sum_{i\in I}\lambda_i^{p^m}x_i\in S(A).
+    \]
+    By the preceding lemma, the sum of coefficients on each conjugacy class must be
+    zero. Since the \(x_i\) lie in distinct conjugacy classes, this gives
+    \[
+        \lambda_i^{p^m}=0
+        \qquad
+        \text{for all }i.
+    \]
+    Hence
+    \[
+        \lambda_i=0
+        \qquad
+        \text{for all }i.
+    \]
+    Therefore the classes \(x_i+T(A)\) are linearly independent.
+
+    Consequently,
+    \[
+        \dim_k kG/T(A)
+        =
+        |I|,
+    \]
+    which is precisely the number of conjugacy classes of \(p\)-regular elements of
+    \(G\). Hence
+    \[
+        \#\{\,\text{non-isomorphic simple }kG\text{-modules}\,\}
+        =
+        |I|.
+    \]
+\end{proof}
+

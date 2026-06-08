@@ -1,0 +1,805 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{textwidth=6in, top=1in, bottom=1in, headheight=12pt, headsep=25pt, footskip=30pt}
+\usepackage{setspace}
+\setstretch{1.18}
+\usepackage{enumitem}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\rep}{\operatorname{rep}}
+\newcommand{\Rep}{\operatorname{Rep}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\soc}{\operatorname{soc}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\ddim}{\underline{\dim}}
+
+\title{\textbf{$2^{\underline{nd}}$ Part Problem Set for Applied Abstract Algebra}\\ Auslander--Reiten quivers}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+%=============================================================================
+% Problem 1
+%=============================================================================
+\item Let $M=(M_i,\varphi_\alpha)\in \rep Q$ and $d_i=\dim M_i$. Show that
+\[
+0\longrightarrow M\longrightarrow \bigoplus_{i\in Q_0}d_iI(i)
+\longrightarrow \bigoplus_{\alpha:i\to j\in Q_1}d_jI(i)\longrightarrow 0
+\]
+is an injective resolution for $M$.
+
+\begin{proof}
+Write
+\[
+I^0=\bigoplus_{i\in Q_0}M_i\otimes_k I(i),
+\qquad
+I^1=\bigoplus_{\alpha:i\to j}M_j\otimes_k I(i).
+\]
+Since $\dim M_i=d_i$, these are isomorphic to the two direct sums in the statement.
+Both $I^0$ and $I^1$ are injective because they are finite direct sums of indecomposable injective representations.
+
+For a vertex $x$, the space $I(i)_x$ has basis the paths $p:x\to i$. Hence
+\[
+I^0_x=\bigoplus_{p:x\to i}M_i,
+\qquad
+I^1_x=\bigoplus_{\alpha:i\to j,\;p:x\to i}M_j.
+\]
+Define $\epsilon:M\to I^0$ by
+\[
+\epsilon_x(m)=\bigl(M_p(m)\bigr)_{p:x\to i},
+\]
+where $M_p$ denotes the composition of the arrow maps of $M$ along the path $p$.
+This is a morphism of representations, and it is injective because the component indexed by the lazy path $e_x:x\to x$ is $m$ itself.
+
+Define $\delta:I^0\to I^1$ at a vertex $x$ by
+\[
+\bigl(\delta_x((m_p)_{p:x\to i})\bigr)_{(\alpha:i\to j,\,p:x\to i)}
+=
+\varphi_\alpha(m_p)-m_{\alpha p},
+\]
+where $\alpha p:x\to j$ is the path obtained by following $p$ and then $\alpha$.
+A direct check on paths shows that $\delta$ commutes with the arrow maps of the injectives, so $\delta$ is a morphism.
+Moreover,
+\[
+\delta_x\epsilon_x(m)_{(\alpha,p)}
+=\varphi_\alpha(M_p(m))-M_{\alpha p}(m)=0,
+\]
+so $\delta\epsilon=0$.
+
+If $(m_p)\in\ker\delta_x$, then for every path $p:x\to i$ one obtains inductively
+\[
+ m_p=M_p(m_{e_x}).
+\]
+Thus $(m_p)=\epsilon_x(m_{e_x})$, and hence $\ker\delta=\im\epsilon$.
+Finally, $\delta_x$ is surjective. Given
+$(y_{\alpha,p})\in I^1_x$, define $m_{e_x}=0$. Then, inductively on the length
+of $q=\alpha p$, set
+\[
+m_{\alpha p}=\varphi_\alpha(m_p)-y_{\alpha,p}.
+\]
+Every nontrivial path has a unique decomposition as a shorter path followed by
+its last arrow, so this definition is unambiguous. Since $Q$ is acyclic, the
+induction terminates, and $\delta_x((m_p))=(y_{\alpha,p})$. Therefore
+\[
+0\to M\xrightarrow{\epsilon}I^0\xrightarrow{\delta}I^1\to 0
+\]
+is exact. Hence it is an injective resolution of $M$.
+\end{proof}
+
+%=============================================================================
+% Problem 2
+%=============================================================================
+\item Let $M\in\rep Q$ and
+\[
+0\longrightarrow P_1\longrightarrow P_0\longrightarrow M\longrightarrow 0
+\]
+be the standard projective resolution. Show that
+\[
+0\longrightarrow D(M)\longrightarrow D(P_0)\longrightarrow D(P_1)\longrightarrow 0
+\]
+is the injective resolution for $D(M)\in\rep Q^{\operatorname{op}}$ defined in Exercise 1. Show that the duality functor $D$ takes a minimal projective resolution for $M$ to an injective envelope for $D(M)$.
+
+\begin{proof}
+The standard projective resolution has the form
+\[
+0\longrightarrow
+\bigoplus_{\alpha:i\to j} d_iP_Q(j)
+\longrightarrow
+\bigoplus_{i\in Q_0}d_iP_Q(i)
+\longrightarrow M\longrightarrow 0.
+\]
+The duality $D=\Hom_k(-,k)$ is exact and contravariant. Applying $D$ gives
+\[
+0\longrightarrow D(M)\longrightarrow
+\bigoplus_{i\in Q_0}d_iD(P_Q(i))
+\longrightarrow
+\bigoplus_{\alpha:i\to j}d_iD(P_Q(j))
+\longrightarrow 0.
+\]
+For every vertex $i$ one has
+\[
+D(P_Q(i))\cong I_{Q^{\operatorname{op}}}(i).
+\]
+Also, an arrow $\alpha:i\to j$ in $Q$ becomes an arrow $\alpha^{\operatorname{op}}:j\to i$ in $Q^{\operatorname{op}}$. Therefore the last term becomes
+\[
+\bigoplus_{\alpha^{\operatorname{op}}:j\to i}d_iI_{Q^{\operatorname{op}}}(j),
+\]
+which is exactly the injective resolution from Exercise 1 applied to $D(M)$.
+
+Now suppose
+\[
+0\to P_1\to P_0\xrightarrow{\pi}M\to 0
+\]
+is minimal, so $\pi:P_0\to M$ is a projective cover. Applying $D$ gives a monomorphism
+\[
+D(M)\xrightarrow{D\pi}D(P_0).
+\]
+Since $D$ sends projectives to injectives and epimorphisms to monomorphisms, $D(P_0)$ is injective. Minimality of the projective cover is dual to minimality of the injective envelope: if $D(M)\hookrightarrow J$ is another monomorphism into an injective representation, dualizing gives an epimorphism $D(J)\twoheadrightarrow M$ from a projective representation, and the defining property of the projective cover gives a surjection $D(J)\twoheadrightarrow P_0$. Dualizing back gives a monomorphism $D(P_0)\hookrightarrow J$ extending $D(M)\hookrightarrow J$. Hence
+\[
+D(M)\hookrightarrow D(P_0)
+\]
+is an injective envelope.
+Moreover, if $P_1\to\ker\pi$ is the projective cover in the minimal projective
+resolution, then dualizing it shows that
+\[
+\operatorname{coker}(D\pi)\cong D(\ker\pi)\longrightarrow D(P_1)
+\]
+is an injective envelope. Hence the dual sequence is the minimal injective
+resolution of $D(M)$.
+\end{proof}
+
+%=============================================================================
+% Problem 3
+%=============================================================================
+\item Let $Q$ be the Kronecker quiver
+\[
+\begin{tikzcd}[column sep=large]
+1 & 2 \arrow[l, shift left=.55ex, "\alpha"] \arrow[l, shift right=.55ex, "\beta"']
+\end{tikzcd}
+\]
+For $\lambda\in k\cup\{\infty\}$, let $M_\lambda$ be given by
+\[
+M_\lambda:
+\quad k \xleftarrow[\lambda]{1} k\quad (\lambda\in k),
+\qquad
+M_\infty:
+\quad k \xleftarrow[1]{0} k.
+\]
+Recall that $S(1):k\leftarrow 0$ and $S(2):0\leftarrow k$.
+\begin{enumerate}[label=(\alph*)]
+\item Show that the short exact sequences
+\[
+0\to S(1)\to M_\lambda\to S(2)\to 0,
+\qquad
+0\to S(1)\to M_\mu\to S(2)\to 0
+\]
+are not equivalent if $\lambda\neq\mu$.
+
+\begin{proof}
+In the sequence
+\[
+0\to S(1)\to M_\lambda\to S(2)\to 0,
+\]
+the inclusion is the identity at vertex $1$ and zero at vertex $2$, while the projection is zero at vertex $1$ and the identity at vertex $2$.
+If two such extensions were equivalent, then there would be an isomorphism
+$f=(f_1,f_2):M_\lambda\to M_\mu$ inducing the identity on both $S(1)$ and $S(2)$.
+Thus $f_1=1$ and $f_2=1$.
+For $\lambda,\mu\in k$, commutativity along the two arrows gives
+\[
+1\cdot 1=1\cdot 1,
+\qquad
+1\cdot \lambda=\mu\cdot 1.
+\]
+Hence $\lambda=\mu$. The cases involving $\infty$ are identical: the pair of arrow maps $(0,1)$ cannot be carried to $(1,\lambda)$ by an equivalence fixing the end terms. Therefore the two extensions are not equivalent when $\lambda\neq\mu$.
+\end{proof}
+
+\item Show that $\tau M_\lambda=M_\lambda$ for all $\lambda$.
+
+\begin{proof}
+We compute the Auslander--Reiten translate using a minimal projective resolution.
+The projective representation $P(1)$ is $S(1)$, and
+\[
+P(2):\quad k^2\xleftarrow{\binom{1}{0},\binom{0}{1}} k.
+\]
+For $\lambda\in k$, the projective cover $P(2)\twoheadrightarrow M_\lambda$ is the identity at vertex $2$ and the row $(1\;\lambda):k^2\to k$ at vertex $1$. Its kernel is $P(1)$, embedded at vertex $1$ by the vector $(-\lambda,1)^T$. Hence
+\[
+0\to P(1)\xrightarrow{u_\lambda}P(2)\to M_\lambda\to 0
+\]
+is a minimal projective resolution.
+Applying the Nakayama functor gives
+\[
+0\to \tau M_\lambda\to I(1)\xrightarrow{\nu u_\lambda}I(2).
+\]
+Now $I(1)$ has vector spaces $k$ at vertex $1$ and $k^2$ at vertex $2$, with arrow maps $(1\;0)$ and $(0\;1)$. The map $\nu u_\lambda$ at vertex $2$ is the row $(-\lambda\;1)$, so its kernel is the line spanned by $(1,\lambda)^T$. Restricted to this line, the two arrow maps are $1$ and $\lambda$. Thus
+\[
+\tau M_\lambda\cong M_\lambda.
+\]
+For $\lambda=\infty$, the same computation uses the embedding $P(1)\to P(2)$ by $(1,0)^T$; the kernel of the dual row is spanned by $(0,1)^T$, giving arrow maps $(0,1)$, hence $\tau M_\infty\cong M_\infty$.
+\end{proof}
+\end{enumerate}
+
+%=============================================================================
+% Problem 4
+%=============================================================================
+\item Prove that $P$ is projective if and only if $\Ext^1(P,N)=0$ for all representations $N$.
+
+\begin{proof}
+If $P$ is projective, then $\Hom(P,-)$ is exact. Therefore applying $\Hom(P,-)$ to any short exact sequence produces an exact sequence without a nonzero connecting obstruction, so $\Ext^1(P,N)=0$ for all $N$.
+
+Conversely, assume $\Ext^1(P,N)=0$ for all $N$. Let $g:M\twoheadrightarrow X$ be an epimorphism and let $f:P\to X$ be any morphism. Form the pullback
+\[
+E=M\times_X P=\{(m,p):g(m)=f(p)\}.
+\]
+Then there is a short exact sequence
+\[
+0\to \ker g\to E\to P\to 0.
+\]
+Its extension class lies in $\Ext^1(P,\ker g)$, which is zero by assumption. Hence the sequence splits. Therefore there exists a section $s:P\to E$. Composing $s$ with the projection $E\to M$ gives a morphism $\widetilde f:P\to M$ satisfying $g\widetilde f=f$. Thus every morphism from $P$ lifts across every epimorphism, so $P$ is projective.
+\end{proof}
+
+%=============================================================================
+% Problem 5
+%=============================================================================
+\item Show that isoclasses of indecomposable representations of quivers of type $A_n$ are determined by their dimension vectors of the form $(0,\ldots,0,1,\ldots,1,0,\ldots,0)$, and the corresponding representation is $M=(M_i,\varphi_\alpha)$ with $M_i=k$ if the dimension at $i$ is one and $M_i=0$ otherwise; and $\varphi_\alpha=1$ if the dimension at $s(\alpha)$ and at $t(\alpha)$ is one, and $\varphi_\alpha=0$ otherwise.
+
+\begin{proof}
+Let $Q$ have underlying graph
+\[
+1-2-\cdots-n.
+\]
+For $1\le a\le b\le n$, define $M[a,b]$ by
+\[
+M[a,b]_i=\begin{cases}k,&a\le i\le b,\\0,&\text{otherwise,}\end{cases}
+\]
+and each arrow map inside the interval $[a,b]$ equal to the identity, while all other arrow maps are zero.
+The support of $M[a,b]$ is connected, and all nonzero vertex spaces are one-dimensional. Hence a nontrivial direct-sum decomposition would split a connected string of identity maps into two disjoint nonzero subrepresentations, which is impossible. Thus $M[a,b]$ is indecomposable.
+
+Conversely, by Gabriel's theorem for Dynkin quivers, the dimension vectors of
+indecomposable representations are precisely the positive roots of type $A_n$.
+These positive roots are exactly the interval vectors
+\[
+(0,\ldots,0,\underbrace{1,\ldots,1}_{a\le i\le b},0,\ldots,0).
+\]
+For each such vector the representation $M[a,b]$ defined above is
+indecomposable, so every indecomposable is isomorphic to one of the $M[a,b]$.
+The dimension vector of $M[a,b]$ is precisely
+\[
+(0,\ldots,0,\underbrace{1,\ldots,1}_{a\le i\le b},0,\ldots,0),
+\]
+and the representation is uniquely determined by this vector because the only nonzero maps in the connected support can be scaled to the identity. This proves the claim.
+\end{proof}
+
+%=============================================================================
+% Problem 6
+%=============================================================================
+\item Compute the Auslander--Reiten quiver for
+\[
+\begin{tikzcd}[column sep=large]
+1 & 2 \arrow[l] & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l]
+\end{tikzcd}
+\]
+
+\begin{proof}
+Write $\vect{d_1d_2d_3d_4d_5}$ for the indecomposable representation with dimension vector $(d_1,d_2,d_3,d_4,d_5)$. The $\tau^{-1}$-orbits are
+\[
+\begin{gathered}
+\vect{10000}\to\vect{01000}\to\vect{00110}\to\vect{00001},\\
+\vect{11000}\to\vect{01110}\to\vect{00111},\\
+\vect{11110}\to\vect{01111}\to\vect{00100},\\
+\vect{00010}\to\vect{11111}\to\vect{01100},\\
+\vect{00011}\to\vect{11100}.
+\end{gathered}
+\]
+The irreducible arrows are
+\[
+\begin{gathered}
+\vect{00010}\to\vect{00011},\quad \vect{00010}\to\vect{11110},\quad \vect{00011}\to\vect{11111},\quad \vect{00110}\to\vect{00111},\\
+\vect{00111}\to\vect{00001},\quad \vect{00111}\to\vect{00100},\quad \vect{01000}\to\vect{01110},\quad \vect{01100}\to\vect{00100},\\
+\vect{01110}\to\vect{00110},\quad \vect{01110}\to\vect{01111},\quad \vect{01111}\to\vect{00111},\quad \vect{01111}\to\vect{01100},\\
+\vect{10000}\to\vect{11000},\quad \vect{11000}\to\vect{01000},\quad \vect{11000}\to\vect{11110},\quad \vect{11100}\to\vect{01100},\\
+\vect{11110}\to\vect{01110},\quad \vect{11110}\to\vect{11111},\quad \vect{11111}\to\vect{01111},\quad \vect{11111}\to\vect{11100}.
+\end{gathered}
+\]
+Together with the above vertices, these arrows give the Auslander--Reiten quiver.
+\end{proof}
+
+%=============================================================================
+% Problem 7
+%=============================================================================
+\item Compute the Auslander--Reiten quiver for
+\[
+\begin{tikzcd}[column sep=large]
+1 \arrow[r] & 2 & 3 \arrow[l] \arrow[r] & 4 & 5 \arrow[l] & 6 \arrow[l]
+\end{tikzcd}
+\]
+
+\begin{proof}
+Write $\vect{d_1\cdots d_6}$ for the indecomposable with dimension vector $(d_1,\ldots,d_6)$. The $\tau^{-1}$-orbits are
+\[
+\begin{gathered}
+\vect{110000}\to\vect{001100}\to\vect{000010}\to\vect{000001},\\
+\vect{010000}\to\vect{111100}\to\vect{001110}\to\vect{000011},\\
+\vect{011100}\to\vect{111110}\to\vect{001111},\\
+\vect{000100}\to\vect{011110}\to\vect{111111}\to\vect{001000},\\
+\vect{000110}\to\vect{011111}\to\vect{111000},\\
+\vect{000111}\to\vect{011000}\to\vect{100000}.
+\end{gathered}
+\]
+The irreducible arrows are
+\[
+\begin{gathered}
+\vect{000010}\to\vect{000011},\quad \vect{000011}\to\vect{000001},\quad \vect{000100}\to\vect{000110},\\
+\vect{000100}\to\vect{011100},\quad \vect{000110}\to\vect{000111},\quad \vect{000110}\to\vect{011110},\\
+\vect{000111}\to\vect{011111},\quad \vect{001100}\to\vect{001110},\quad \vect{001110}\to\vect{000010},\\
+\vect{001110}\to\vect{001111},\quad \vect{001111}\to\vect{000011},\quad \vect{001111}\to\vect{001000},\\
+\vect{010000}\to\vect{011100},\quad \vect{010000}\to\vect{110000},\quad \vect{011000}\to\vect{111000},\\
+\vect{011100}\to\vect{011110},\quad \vect{011100}\to\vect{111100},\quad \vect{011110}\to\vect{011111},\\
+\vect{011110}\to\vect{111110},\quad \vect{011111}\to\vect{011000},\quad \vect{011111}\to\vect{111111},\\
+\vect{110000}\to\vect{111100},\quad \vect{111000}\to\vect{001000},\quad \vect{111000}\to\vect{100000},\\
+\vect{111100}\to\vect{001100},\quad \vect{111100}\to\vect{111110},\quad \vect{111110}\to\vect{001110},\\
+\vect{111110}\to\vect{111111},\quad \vect{111111}\to\vect{001111},\quad \vect{111111}\to\vect{111000}.
+\end{gathered}
+\]
+This determines the Auslander--Reiten quiver.
+\end{proof}
+
+%=============================================================================
+% Problem 8
+%=============================================================================
+\item The Cartan matrix $C=(c_{ij})_{1\le i,j\le n}$ of the quiver $Q$, where $c_{ij}$ is the number of paths from $j$ to $i$ and $n$ is the number of vertices in $Q$. Show that $C$ is invertible and find $C^{-1}$.
+
+\begin{proof}
+Let $A=(a_{ij})$ be the arrow matrix, where $a_{ij}$ is the number of arrows from $j$ to $i$. Since $Q$ has no oriented cycles, $A$ is nilpotent after a suitable ordering of vertices. The matrix $A^m$ counts paths of length $m$. Hence the Cartan matrix is
+\[
+C=I+A+A^2+\cdots+A^N
+\]
+for $N$ sufficiently large. Since $A$ is nilpotent,
+\[
+(I-A)(I+A+A^2+\cdots+A^N)=I.
+\]
+Thus
+\[
+C^{-1}=I-A.
+\]
+Equivalently,
+\[
+(C^{-1})_{ij}=\begin{cases}
+1,&i=j,\\
+-\#\{\text{arrows }j\to i\},&i\ne j.
+\end{cases}
+\]
+In particular, $C$ is invertible.
+\end{proof}
+
+%=============================================================================
+% Problem 9
+%=============================================================================
+\item Let $Q$ be a quiver of type $A$ with $n$ vertices and consider the triangulation corresponding to $Q$. Show that if we consider an elementary clockwise rotation of the diagonal corresponding to $1$, we obtain the diagonal corresponding to $P(1)$. Show that if we consider an elementary counterclockwise rotation of the diagonal corresponding to $1$, we obtain the diagonal corresponding to $I(1)$.
+
+\begin{proof}
+In the polygon model for type $A_n$, an indecomposable representation is represented by a diagonal $\gamma$, and the $i$-th coordinate of its dimension vector is the crossing number of $\gamma$ with the diagonal labeled $i$ in the chosen triangulation. We use the rotation convention of this exercise: its elementary clockwise rotation is Schiffler's $\tau^{-1}$-rotation. With Schiffler's convention, the words ``clockwise'' and ``counterclockwise'' in the statement are interchanged.
+
+Rotate the diagonal labeled $1$ clockwise by one elementary step. By the construction of the triangulation from the quiver, the new diagonal crosses exactly the diagonals labeled $j$ for which there exists an oriented path
+\[
+1\rightsquigarrow j
+\]
+in $Q$. Therefore its dimension vector is
+\[
+\bigl(\#\{\text{paths }1\to j\}\bigr)_{j\in Q_0},
+\]
+which is precisely the dimension vector of the projective representation $P(1)$.
+Since type $A$ indecomposables are determined by their dimension vectors, this rotated diagonal corresponds to $P(1)$.
+
+Similarly, rotating the diagonal labeled $1$ counterclockwise crosses exactly the diagonals $j$ for which there exists an oriented path
+\[
+j\rightsquigarrow 1.
+\]
+This is the dimension vector of the injective representation $I(1)$. Hence the counterclockwise rotation gives the diagonal corresponding to $I(1)$.
+\end{proof}
+
+%=============================================================================
+% Problem 10
+%=============================================================================
+\item Compute the Auslander--Reiten quiver for
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+&&&4\\
+1\arrow[r]&2&3\arrow[l]\arrow[ur]\arrow[dr]&\\
+&&&5
+\end{tikzcd}
+\]
+
+\begin{proof}
+Write $\vect{d_1d_2d_3d_4d_5}$ for the indecomposable representation with dimension vector $(d_1,d_2,d_3,d_4,d_5)$. The $\tau^{-1}$-orbits are
+\[
+\begin{gathered}
+\vect{11000}\to\vect{00111}\to\vect{01100}\to\vect{10000},\\
+\vect{01000}\to\vect{11111}\to\vect{01211}\to\vect{11100},\\
+\vect{01111}\to\vect{12211}\to\vect{11211}\to\vect{00100},\\
+\vect{00010}\to\vect{01101}\to\vect{11110}\to\vect{00101},\\
+\vect{00001}\to\vect{01110}\to\vect{11101}\to\vect{00110}.
+\end{gathered}
+\]
+The irreducible arrows are
+\[
+\begin{gathered}
+\vect{00001}\to\vect{01111},\quad \vect{00010}\to\vect{01111},\quad \vect{00101}\to\vect{00100},\quad \vect{00110}\to\vect{00100},\\
+\vect{00111}\to\vect{01211},\quad \vect{01000}\to\vect{01111},\quad \vect{01000}\to\vect{11000},\quad \vect{01100}\to\vect{11100},\\
+\vect{01101}\to\vect{12211},\quad \vect{01110}\to\vect{12211},\quad \vect{01111}\to\vect{01101},\quad \vect{01111}\to\vect{01110},\\
+\vect{01111}\to\vect{11111},\quad \vect{01211}\to\vect{01100},\quad \vect{01211}\to\vect{11211},\quad \vect{11000}\to\vect{11111},\\
+\vect{11100}\to\vect{00100},\quad \vect{11100}\to\vect{10000},\quad \vect{11101}\to\vect{11211},\quad \vect{11110}\to\vect{11211},\\
+\vect{11111}\to\vect{00111},\quad \vect{11111}\to\vect{12211},\quad \vect{11211}\to\vect{00101},\quad \vect{11211}\to\vect{00110},\\
+\vect{11211}\to\vect{11100},\quad \vect{12211}\to\vect{01211},\quad \vect{12211}\to\vect{11101},\quad \vect{12211}\to\vect{11110}.
+\end{gathered}
+\]
+These vertices and arrows give the Auslander--Reiten quiver.
+\end{proof}
+
+%=============================================================================
+% Problem 11
+%=============================================================================
+\item Compute the Auslander--Reiten quiver for
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+&&&4\\
+1\arrow[r]&2&3\arrow[l]\arrow[ur]&\\
+&&&5\arrow[ul]
+\end{tikzcd}
+\]
+
+\begin{proof}
+Again write $\vect{d_1d_2d_3d_4d_5}$ for the dimension vector. The $\tau^{-1}$-orbits are
+\[
+\begin{gathered}
+\vect{11000}\to\vect{00110}\to\vect{01101}\to\vect{10000},\\
+\vect{01000}\to\vect{11110}\to\vect{01211}\to\vect{11101},\\
+\vect{01110}\to\vect{12211}\to\vect{11211}\to\vect{00101},\\
+\vect{00010}\to\vect{01100}\to\vect{11111}\to\vect{00100}\to\vect{00001},\\
+\vect{01111}\to\vect{11100}\to\vect{00111}.
+\end{gathered}
+\]
+The irreducible arrows are
+\[
+\begin{gathered}
+\vect{00010}\to\vect{01110},\quad \vect{00100}\to\vect{00101},\quad \vect{00101}\to\vect{00001},\quad \vect{00110}\to\vect{01211},\\
+\vect{00111}\to\vect{00101},\quad \vect{01000}\to\vect{01110},\quad \vect{01000}\to\vect{11000},\quad \vect{01100}\to\vect{12211},\\
+\vect{01101}\to\vect{11101},\quad \vect{01110}\to\vect{01100},\quad \vect{01110}\to\vect{01111},\quad \vect{01110}\to\vect{11110},\\
+\vect{01111}\to\vect{12211},\quad \vect{01211}\to\vect{01101},\quad \vect{01211}\to\vect{11211},\quad \vect{11000}\to\vect{11110},\\
+\vect{11100}\to\vect{11211},\quad \vect{11101}\to\vect{00101},\quad \vect{11101}\to\vect{10000},\quad \vect{11110}\to\vect{00110},\\
+\vect{11110}\to\vect{12211},\quad \vect{11111}\to\vect{11211},\quad \vect{11211}\to\vect{00100},\quad \vect{11211}\to\vect{00111},\\
+\vect{11211}\to\vect{11101},\quad \vect{12211}\to\vect{01211},\quad \vect{12211}\to\vect{11100},\quad \vect{12211}\to\vect{11111}.
+\end{gathered}
+\]
+These data determine the Auslander--Reiten quiver.
+\end{proof}
+
+%=============================================================================
+% Problem 12
+%=============================================================================
+\item Let $Q$ be the quiver from Problem 10 and consider the indecomposable representations
+\[
+\ddim L=(0,1,1,1,0),
+\qquad
+\ddim N=(1,1,2,1,1).
+\]
+Prove that there is a unique representation $M$ for which there exists a non-split short exact sequence
+\[
+0\to L\to M\to N\to 0.
+\]
+
+\begin{proof}
+From the Auslander--Reiten quiver in Problem 10, $N=\vect{11211}$ and
+\[
+\tau N=\vect{12211}.
+\]
+Using the Auslander--Reiten formula,
+\[
+\Ext^1(N,L)\cong D\Hom(L,\tau N).
+\]
+The type $D$ hammock starting at $L=\vect{01110}$ labels
+$\tau N=\vect{12211}$ with multiplicity $1$; equivalently, the mesh recursion
+gives exactly one contribution from the sectional arrow
+\[
+\vect{01110}\longrightarrow \vect{12211}.
+\]
+Hence
+\[
+\dim\Hom(L,\tau N)=1.
+\]
+Therefore
+\[
+\dim\Ext^1(N,L)=1.
+\]
+Thus there is, up to scalar, a unique nonzero extension class. Since
+indecomposable representations of Dynkin quivers are bricks, scalar
+automorphisms of $L$ and $N$ identify the nonzero scalar multiples of this
+class. Consequently all non-split extensions have isomorphic middle term.
+
+The middle term is read from the two sectional boundary paths in the Auslander--Reiten quiver, or equivalently by adding the corresponding middle vertices in the mesh calculation. One obtains
+\[
+M\cong \vect{01211}\oplus\vect{11110}.
+\]
+Indeed,
+\[
+\ddim(\vect{01211}\oplus\vect{11110})=(0,1,2,1,1)+(1,1,1,1,0)=(1,2,3,2,1)=\ddim L+\ddim N.
+\]
+It represents the unique nonzero class in $\Ext^1(N,L)$. Thus this $M$ is
+unique up to isomorphism.
+\end{proof}
+
+%=============================================================================
+% Problem 13
+%=============================================================================
+\item Decompose the following representation of $Q$ from Problem 10 into a direct sum of indecomposable representations:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+&&&k^2\\
+k^2\arrow[r,"1"]&k^2&k^2\arrow[l,"1"']\arrow[ur,"1"]\arrow[dr,"1"']&\\
+&&&k^2
+\end{tikzcd}
+\]
+all maps are identities.
+
+\begin{proof}
+Let $X$ be the indecomposable representation with dimension vector
+\[
+\ddim X=(1,1,1,1,1)
+\]
+and with all nonzero arrow maps equal to the identity $k\to k$.
+The given representation has $k^2$ at every vertex and each arrow map is the identity on $k^2$. Choose a basis $e_1,e_2$ of $k^2$ at every vertex. The subspaces spanned by $e_1$ at all vertices form a subrepresentation isomorphic to $X$, and the subspaces spanned by $e_2$ at all vertices form another subrepresentation isomorphic to $X$. Since the identity maps preserve this decomposition, we get
+\[
+M\cong X\oplus X.
+\]
+Thus the required decomposition is
+\[
+M\cong \vect{11111}\oplus\vect{11111}.
+\]
+\end{proof}
+
+%=============================================================================
+% Problem 14
+%=============================================================================
+\item Let $Q$ be a quiver of type $D$ with $n$ vertices and consider the triangulation corresponding to $Q$. Show that if we consider an elementary clockwise rotation plus tagging of the diagonals corresponding to $n-1$ and $n$, we obtain the diagonals corresponding to $P(n-1)$ and $P(n)$ respectively.
+
+\begin{proof}
+In the punctured polygon model for type $D_n$, the two vertices $n-1$ and $n$ correspond to the two tagged arcs incident with the puncture. The dimension vector of the representation associated with an arc is given by its crossing numbers with the arcs of the fixed tagged triangulation. We use the rotation convention of this exercise: its elementary clockwise rotation is Schiffler's $\tau^{-1}$-rotation. With Schiffler's convention, the words ``clockwise'' and ``counterclockwise'' in the statement are interchanged.
+
+For an ordinary vertex $i$, the same argument as in type $A$ says that an elementary clockwise rotation of the corresponding arc crosses exactly the arcs labeled by vertices reachable from $i$ by oriented paths. For the puncture arcs, the elementary rotation must be accompanied by changing the tag; otherwise the resulting arc has the wrong tagged intersection with the puncture arcs. Thus the operation ``clockwise rotation plus tagging'' gives an arc whose crossing vector is
+\[
+\bigl(\#\{\text{paths }n-1\to j\}\bigr)_{j\in Q_0}
+\]
+for the arc labeled $n-1$, and similarly
+\[
+\bigl(\#\{\text{paths }n\to j\}\bigr)_{j\in Q_0}
+\]
+for the arc labeled $n$.
+These are exactly the dimension vectors of $P(n-1)$ and $P(n)$.
+Since indecomposables of Dynkin type $D$ are determined by their positive-root dimension vectors, the resulting tagged arcs correspond to $P(n-1)$ and $P(n)$ respectively.
+\end{proof}
+
+%=============================================================================
+% Problem 15
+%=============================================================================
+\item Construct the decomposition of $E_d$ into orbits for
+\[
+Q:\quad 1\longrightarrow 2\longleftarrow 3,
+\qquad d=(2,3,1).
+\]
+
+\begin{proof}
+A representation is a pair
+\[
+A:k^2\to k^3,
+\qquad b:k\to k^3.
+\]
+The group $G_d=\operatorname{GL}_2\times\operatorname{GL}_3\times\operatorname{GL}_1$ acts by base change. The orbit is determined by
+\[
+r=\operatorname{rank}A,
+\qquad
+s=\operatorname{rank}b,
+\qquad
+u=\dim(\im A+\im b).
+\]
+Equivalently, by Krull--Schmidt, the orbit is determined by the multiplicities of the indecomposables
+\[
+S(1),S(2),S(3),P(1),P(3),I(2).
+\]
+Solving
+\[
+x_1S(1)+x_2S(2)+x_3S(3)+x_4P(1)+x_5P(3)+x_6I(2)
+\]
+with dimension vector $(2,3,1)$ gives the following eight orbits:
+\[
+\begin{array}{c|c}
+(r,s,u)&\text{decomposition}\\ \hline
+(2,1,3)&P(1)^2\oplus P(3)\\
+(2,1,2)&P(1)\oplus I(2)\oplus S(2)\\
+(2,0,2)&P(1)^2\oplus S(2)\oplus S(3)\\
+(1,1,2)&S(1)\oplus S(2)\oplus P(1)\oplus P(3)\\
+(1,1,1)&S(1)\oplus S(2)^2\oplus I(2)\\
+(1,0,1)&S(1)\oplus S(2)^2\oplus S(3)\oplus P(1)\\
+(0,1,1)&S(1)^2\oplus S(2)^2\oplus P(3)\\
+(0,0,0)&S(1)^2\oplus S(2)^3\oplus S(3).
+\end{array}
+\]
+Thus
+\[
+E_d=\bigsqcup_{(r,s,u)}\mathcal O_{r,s,u}
+\]
+with the eight orbits listed above.
+\end{proof}
+
+%=============================================================================
+% Problem 16
+%=============================================================================
+\item Construct the decomposition of $E_d$ into orbits for $d=(2,2,1,1)$ and
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+&&3\arrow[dl,bend left=.7ex]\\
+1\arrow[r]&2\arrow[ur,bend left=.7ex]\arrow[dr]&\\
+&&4
+\end{tikzcd}
+\]
+
+\begin{proof}
+Let the arrows be
+\[
+a:1\to2,
+\qquad
+b:2\to3,
+\qquad
+c:3\to2,
+\qquad
+d:2\to4.
+\]
+A point of $E_d$ is a quadruple
+\[
+(A,B,C,D)\in \operatorname{Mat}_{2\times2}(k)\oplus \operatorname{Mat}_{1\times2}(k)
+\oplus \operatorname{Mat}_{2\times1}(k)\oplus \operatorname{Mat}_{1\times2}(k).
+\]
+Because the quiver contains the oriented two-cycle $2\rightleftarrows3$, the orbit decomposition is not finite. Indeed, consider the family
+\[
+A=0,
+\qquad
+D=0,
+\qquad
+C=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad
+B_\lambda=\begin{pmatrix}\lambda&0\end{pmatrix},
+\qquad \lambda\in k.
+\]
+For such a representation,
+\[
+B_\lambda C=\lambda\in \operatorname{End}(k).
+\]
+Under base change, $B$ and $C$ transform as
+\[
+B\mapsto g_3Bg_2^{-1},
+\qquad
+C\mapsto g_2Cg_3^{-1},
+\]
+so the scalar $BC$ is invariant:
+\[
+(g_3Bg_2^{-1})(g_2Cg_3^{-1})=g_3(BC)g_3^{-1}=BC.
+\]
+Therefore the representations corresponding to distinct $\lambda$ lie in distinct $G_d$-orbits.
+Hence $E_d$ contains the disjoint union
+\[
+\bigsqcup_{\lambda\in k}\mathcal O_\lambda,
+\]
+where $\mathcal O_\lambda$ is the orbit of $(0,B_\lambda,C,0)$. In particular, unlike the Dynkin cases, $E_d$ has infinitely many orbits. Thus no finite orbit decomposition exists; the orbit decomposition is an infinite one, already containing the one-parameter family above.
+\end{proof}
+
+%=============================================================================
+% Problem 17
+%=============================================================================
+\item Let $q:\mathbb Z^n\to\mathbb Z$ be a quadratic form. Show that
+\[
+(x,y)=q(x+y)-q(x)-q(y)
+\]
+is symmetric and bilinear.
+
+\begin{proof}
+Write
+\[
+q(x)=\sum_i a_i x_i^2+\sum_{i<j}a_{ij}x_ix_j.
+\]
+Then
+\[
+q(x+y)-q(x)-q(y)
+=\sum_i2a_ix_iy_i+\sum_{i<j}a_{ij}(x_iy_j+x_jy_i).
+\]
+This expression is linear in $x$ for fixed $y$ and linear in $y$ for fixed $x$, so it is bilinear. It is also unchanged when $x$ and $y$ are interchanged. Hence the form is symmetric and bilinear.
+\end{proof}
+
+%=============================================================================
+% Problem 18
+%=============================================================================
+\item Prove that for $n\le 5$ any tree quiver is Dynkin or Euclidean.
+
+\begin{proof}
+The representation type depends only on the underlying graph. If a tree with at most five vertices has no branching vertex, then it is a path, hence of Dynkin type $A_n$.
+If it has a branching vertex, then for $n\le5$ the only possibilities are:
+\[
+D_4,
+\qquad
+D_5,
+\qquad
+\widetilde D_4.
+\]
+Here $D_4$ and $D_5$ are Dynkin, and $\widetilde D_4$ is Euclidean. Therefore every tree quiver with $n\le5$ is Dynkin or Euclidean.
+\end{proof}
+
+%=============================================================================
+% Problem 19
+%=============================================================================
+\item Show that the smallest wild tree with valence at most $3$ at each vertex has $7$ vertices.
+
+\begin{proof}
+By Problem 18, no tree with at most five vertices is wild. For six vertices and maximum valence at most $3$, the possible underlying trees are
+\[
+A_6,
+\qquad
+D_6,
+\qquad
+E_6,
+\qquad
+\widetilde D_5.
+\]
+The first three are Dynkin and the last is Euclidean. Hence no such tree with six vertices is wild.
+
+Now consider the seven-vertex tree
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+&&\bullet\\
+\bullet&\bullet\arrow[l]\arrow[r]\arrow[ur]&\bullet\arrow[r]\arrow[dr]&\bullet\arrow[r]&\bullet\\
+&&&\bullet
+\end{tikzcd}
+\]
+where arrows may be oriented arbitrarily; only the underlying tree matters. It has maximum valence $3$ and two vertices of valence $3$. It is not of Dynkin type $A,D,E$, and it is not one of the Euclidean trees $\widetilde D_n,\widetilde E_6,\widetilde E_7,\widetilde E_8$: compared with $\widetilde D_5$, one of the outer arms has been lengthened, and it is not one of the exceptional Euclidean diagrams. Equivalently, its symmetrized Cartan matrix has determinant $-4$. Therefore it is wild. Hence the smallest possible number of vertices is $7$.
+\end{proof}
+
+%=============================================================================
+% Problem 20
+%=============================================================================
+\item Show that the smallest wild tree that has at most one vertex of valence $3$ has $8$ vertices.
+
+\begin{proof}
+Assume the tree has at most one vertex of valence $3$. If there is no such vertex, the tree is a path, hence Dynkin type $A_n$.
+If there is exactly one vertex of valence $3$, the tree is a three-armed tree. Let the arm lengths be
+\[
+a\le b\le c.
+\]
+The number of vertices is $1+a+b+c$.
+For at most seven vertices, we have $a+b+c\le6$. The possible three-armed trees are among
+\[
+(1,1,c),\qquad (1,2,2),\qquad (1,2,3),\qquad (2,2,2).
+\]
+These are respectively of type $D$, $E_6$, $E_7$, and $\widetilde E_6$. Hence none is wild.
+
+For eight vertices, take the three-armed tree with arm lengths
+\[
+(2,2,3).
+\]
+It has exactly one vertex of valence $3$ and eight vertices in total. It is not Dynkin and not Euclidean, so it is wild. Therefore the smallest such wild tree has $8$ vertices.
+\end{proof}
+
+\end{enumerate}
+
+\end{document}

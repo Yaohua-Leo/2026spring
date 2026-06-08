@@ -1,0 +1,243 @@
+\section{\texorpdfstring{\(p\)-Modular Systems}{p-Modular Systems}}
+
+\begin{definition}[\(p\)-modular system]
+    Let \(G\) be a finite group and let \(p\) be a prime number. A
+    \textbf{\(p\)-modular system} for \(G\) is a triple
+    \[
+        (F,R,k)
+    \]
+    satisfying the following conditions:
+    \begin{enumerate}
+        \item \(F\) is a field of characteristic \(0\), equipped with a complete
+        discrete valuation.
+        \item \(R\) is the valuation ring of \(F\), with maximal ideal
+        \[
+            J(R)=(\pi).
+        \]
+        \item The residue field is
+        \[
+            k=R/(\pi),
+        \]
+        and
+        \[
+            \operatorname{char} k=p.
+        \]
+    \end{enumerate}
+    If both \(F\) and \(k\) are splitting fields for \(G\), then \((F,R,k)\) is called
+    a \textbf{splitting \(p\)-modular system} for \(G\).
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        J(R)=(\pi),
+    \]
+    and residue field
+    \[
+        k=R/(\pi).
+    \]
+    Let \(G\) be a finite group. Then:
+    \begin{enumerate}
+        \item If \(S\) is a simple \(RG\)-module, then
+        \[
+            \pi S=0.
+        \]
+
+        \item The simple \(RG\)-modules are exactly the simple \(kG\)-modules,
+        via the quotient homomorphism
+        \[
+            RG\longrightarrow kG.
+        \]
+
+        \item If \(U\) is an \(RG\)-module, then
+        \[
+            \pi U\subseteq \operatorname{Rad}(U).
+        \]
+        In particular,
+        \[
+            \pi RG\subseteq J(RG).
+        \]
+
+        \item For every \(RG\)-module \(U\),
+        \[
+            \operatorname{Rad}(U)/\pi U
+            =
+            \operatorname{Rad}(U/\pi U).
+        \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    First we prove that
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    Let \(z\in \pi RG\). Since \(RG\) is finite over the complete discrete valuation
+    ring \(R\), it is complete with respect to the \(\pi\)-adic topology. Hence the
+    geometric series
+    \[
+        1+z+z^2+\cdots
+    \]
+    converges in \(RG\), and gives an inverse of \(1-z\). Thus \(1-z\) is a unit.
+    More generally, for every \(y\in RG\), one has \(yz\in \pi RG\), so
+    \[
+        1-yz
+    \]
+    is a unit. By the standard characterization of the Jacobson radical, this implies
+    \[
+        z\in J(RG).
+    \]
+    Hence
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+
+    Now let \(S\) be a simple \(RG\)-module. Since the Jacobson radical annihilates
+    every simple module, we have
+    \[
+        J(RG)S=0.
+    \]
+    Since \(\pi RG\subseteq J(RG)\), it follows that
+    \[
+        \pi S=0.
+    \]
+    This proves \((1)\).
+
+    Since every simple \(RG\)-module is annihilated by \(\pi\), it factors through
+    \[
+        RG/\pi RG\cong kG.
+    \]
+    Therefore every simple \(RG\)-module is a simple \(kG\)-module. Conversely, every
+    simple \(kG\)-module becomes a simple \(RG\)-module by restriction along the
+    quotient map
+    \[
+        RG\longrightarrow kG.
+    \]
+    This proves \((2)\).
+
+    Let \(U\) be an \(RG\)-module. If \(M\) is a maximal submodule of \(U\), then
+    \(U/M\) is simple. By \((1)\),
+    \[
+        \pi(U/M)=0.
+    \]
+    Hence
+    \[
+        \pi U\subseteq M.
+    \]
+    Taking the intersection over all maximal submodules \(M\) of \(U\), we obtain
+    \[
+        \pi U\subseteq \operatorname{Rad}(U).
+    \]
+    Applying this to the regular module \(U=RG\), we get
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    This proves \((3)\).
+
+    Finally, since every maximal submodule of \(U\) contains \(\pi U\), the maximal
+    submodules of \(U/\pi U\) are precisely the quotients
+    \[
+        M/\pi U,
+    \]
+    where \(M\) runs through the maximal submodules of \(U\). Therefore
+    \[
+        \operatorname{Rad}(U/\pi U)
+        =
+        \bigcap_{M\text{ maximal in }U} M/\pi U
+        =
+        \left(\bigcap_{M\text{ maximal in }U}M\right)/\pi U
+        =
+        \operatorname{Rad}(U)/\pi U.
+    \]
+    This proves \((4)\).
+\end{proof}
+
+\begin{corollary}
+    Let \(P\) and \(Q\) be finitely generated projective \(RG\)-modules. Then
+    \[
+        P\cong Q
+        \quad\text{as }RG\text{-modules}
+    \]
+    if and only if
+    \[
+        P/\pi P\cong Q/\pi Q
+        \quad\text{as }kG\text{-modules}.
+    \]
+\end{corollary}
+
+\begin{proof}
+    The forward implication is immediate by reducing modulo \(\pi\).
+
+    Conversely, suppose that
+    \[
+        \overline{f}:P/\pi P\longrightarrow Q/\pi Q
+    \]
+    is an isomorphism of \(kG\)-modules. Let
+    \[
+        q_P:P\longrightarrow P/\pi P,
+        \qquad
+        q_Q:Q\longrightarrow Q/\pi Q
+    \]
+    be the natural quotient maps.
+
+    Since \(P\) is projective and \(q_Q\) is surjective, the map
+    \[
+        \overline{f}\circ q_P:P\longrightarrow Q/\pi Q
+    \]
+    lifts to an \(RG\)-homomorphism
+    \[
+        f:P\longrightarrow Q
+    \]
+    such that
+    \[
+        q_Q\circ f=\overline{f}\circ q_P.
+    \]
+    Similarly, the inverse
+    \[
+        \overline{f}^{-1}:Q/\pi Q\longrightarrow P/\pi P
+    \]
+    lifts to an \(RG\)-homomorphism
+    \[
+        g:Q\longrightarrow P.
+    \]
+
+    Then the induced maps modulo \(\pi\) satisfy
+    \[
+        \overline{g f}
+        =
+        \overline{g}\,\overline{f}
+        =
+        \operatorname{id}_{P/\pi P},
+    \]
+    and similarly
+    \[
+        \overline{f g}
+        =
+        \operatorname{id}_{Q/\pi Q}.
+    \]
+    Hence
+    \[
+        (gf-\operatorname{id}_P)(P)\subseteq \pi P,
+    \]
+    and
+    \[
+        (fg-\operatorname{id}_Q)(Q)\subseteq \pi Q.
+    \]
+
+    Therefore the endomorphisms \(gf\) and \(fg\) are surjective by Nakayama's
+    lemma, since
+    \[
+        \pi RG\subseteq J(RG).
+    \]
+    Since \(P\) and \(Q\) are finitely generated over the finite \(R\)-algebra \(RG\),
+    they are finite \(R\)-modules. In particular, they are Noetherian. Hence a
+    surjective endomorphism of \(P\) or \(Q\) is injective. Thus \(gf\) and \(fg\) are
+    automorphisms.
+
+    From \(gf\) being an automorphism, \(f\) is injective. From \(fg\) being an
+    automorphism, \(f\) is surjective. Therefore \(f\) is an isomorphism:
+    \[
+        P\cong Q.
+    \]
+\end{proof}
+

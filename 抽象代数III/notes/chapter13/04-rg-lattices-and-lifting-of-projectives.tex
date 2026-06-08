@@ -1,0 +1,287 @@
+\section{\texorpdfstring{\(RG\)-Lattices and Lifting of Projectives}{RG-Lattices and Lifting of Projectives}}
+
+\begin{definition}[\texorpdfstring{\(RG\)-lattice}{RG-lattice}]
+    Let \(R\) be a commutative ring and let \(G\) be a finite group.
+    An \(RG\)-module \(L\) is called an \textbf{\(RG\)-lattice} if
+    \(L\) is finitely generated as an \(RG\)-module and is free as an \(R\)-module.
+\end{definition}
+
+\begin{proposition}[Lifting projective covers from \texorpdfstring{\(kG\)}{kG} to \texorpdfstring{\(RG\)}{RG}]
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        J(R)=(\pi),
+    \]
+    and let
+    \[
+        k=R/(\pi).
+    \]
+    Let \(G\) be a finite group. Then the following hold.
+
+    \begin{enumerate}
+        \item For every simple \(kG\)-module \(S\), there exists an indecomposable
+        projective \(RG\)-module \(\widehat P_S\) such that
+        \[
+            \widehat P_S=RG\widehat e_S,
+        \]
+        where \(\widehat e_S\in RG\) is a primitive idempotent satisfying
+        \[
+            \widehat e_S S\neq 0.
+        \]
+        Moreover, \(\widehat P_S\) is a projective cover of \(S\) as an \(RG\)-module.
+
+        \item If \(P_S\) denotes the projective cover of \(S\) as a \(kG\)-module, then
+        \[
+            \widehat P_S/\pi\widehat P_S\cong P_S.
+        \]
+        Moreover, the canonical epimorphism
+        \[
+            \widehat P_S\longrightarrow \widehat P_S/\pi\widehat P_S\cong P_S
+        \]
+        is a projective cover of \(P_S\) as an \(RG\)-module. In particular,
+        \(S\) is the unique simple quotient of \(\widehat P_S\).
+
+        Consequently, for simple \(kG\)-modules \(S\) and \(T\),
+        \[
+            \widehat P_S\cong \widehat P_T
+            \quad\Longleftrightarrow\quad
+            S\cong T.
+        \]
+
+        \item Every finitely generated \(RG\)-module has a projective cover.
+
+        \item Every finitely generated indecomposable projective \(RG\)-module is
+        isomorphic to \(\widehat P_S\) for some simple \(kG\)-module \(S\).
+
+        \item Every finitely generated projective \(kG\)-module can be lifted to a
+        projective \(RG\)-lattice. Such a lift is unique up to isomorphism.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        \overline{RG}=RG/\pi RG\cong kG.
+    \]
+    Since \(R\) is complete, idempotents lift modulo the ideal \(\pi RG\). Moreover,
+    \[
+        \pi RG\subseteq J(RG),
+    \]
+    so primitive idempotents lift to primitive idempotents.
+
+    Let \(S\) be a simple \(kG\)-module. Choose a primitive idempotent
+    \(e_S\in kG\) such that
+    \[
+        P_S=kG e_S
+    \]
+    is the projective cover of \(S\), and
+    \[
+        e_S S\neq 0.
+    \]
+    Lift \(e_S\) to a primitive idempotent
+    \[
+        \widehat e_S\in RG.
+    \]
+    Define
+    \[
+        \widehat P_S:=RG\widehat e_S.
+    \]
+    Since \(\widehat e_S\) is an idempotent, \(RG\widehat e_S\) is a direct summand
+    of the regular module \(RG\), hence is projective. Since \(\widehat e_S\) is
+    primitive, \(RG\widehat e_S\) is indecomposable.
+
+    Reducing modulo \(\pi\), we get
+    \[
+        \widehat P_S/\pi\widehat P_S
+        \cong
+        (RG/\pi RG)(\widehat e_S+\pi RG)
+        \cong
+        kG e_S
+        =
+        P_S.
+    \]
+    Thus
+    \[
+        \widehat P_S/\pi\widehat P_S\cong P_S.
+    \]
+
+    Since
+    \[
+        \pi\widehat P_S\subseteq \operatorname{Rad}(\widehat P_S),
+    \]
+    the canonical epimorphism
+    \[
+        \widehat P_S\longrightarrow \widehat P_S/\pi\widehat P_S
+    \]
+    is essential. Hence
+    \[
+        \widehat P_S\longrightarrow P_S
+    \]
+    is a projective cover of \(P_S\) as an \(RG\)-module.
+
+    Composing with the projective cover
+    \[
+        P_S\longrightarrow S
+    \]
+    in \(kG\)-modules, we obtain an essential epimorphism
+    \[
+        \widehat P_S\longrightarrow S.
+    \]
+    Therefore \(\widehat P_S\) is a projective cover of \(S\) as an \(RG\)-module.
+
+    Moreover,
+    \[
+        \operatorname{Top}(\widehat P_S)
+        =
+        \widehat P_S/\operatorname{Rad}(\widehat P_S)
+        \cong
+        P_S/\operatorname{Rad}(P_S)
+        \cong
+        S.
+    \]
+    Hence \(S\) is the unique simple quotient of \(\widehat P_S\). It follows that
+    for simple \(kG\)-modules \(S\) and \(T\),
+    \[
+        \widehat P_S\cong \widehat P_T
+        \quad\Longleftrightarrow\quad
+        \operatorname{Top}(\widehat P_S)\cong \operatorname{Top}(\widehat P_T)
+        \quad\Longleftrightarrow\quad
+        S\cong T.
+    \]
+
+    Now let \(U\) be a finitely generated \(RG\)-module. Since \(RG/J(RG)\) is a
+    semisimple Artinian ring, the top
+    \[
+        \operatorname{Top}(U)=U/\operatorname{Rad}(U)
+    \]
+    is a semisimple \(RG\)-module. Hence
+    \[
+        \operatorname{Top}(U)
+        \cong
+        S_1\oplus\cdots\oplus S_m
+    \]
+    for some simple \(kG\)-modules \(S_i\). Then
+    \[
+        \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}
+        \longrightarrow
+        S_1\oplus\cdots\oplus S_m
+        \cong
+        \operatorname{Top}(U)
+    \]
+    is a projective cover. Since the canonical map
+    \[
+        U\longrightarrow \operatorname{Top}(U)
+    \]
+    is an essential epimorphism, lifting along it gives an essential epimorphism from
+    a projective module onto \(U\). Thus \(U\) has a projective cover.
+
+    Let \(P\) be a finitely generated indecomposable projective \(RG\)-module. The
+    canonical epimorphism
+    \[
+        P\longrightarrow \operatorname{Top}(P)
+    \]
+    is a projective cover. Since \(\operatorname{Top}(P)\) is semisimple, write
+    \[
+        \operatorname{Top}(P)\cong S_1\oplus\cdots\oplus S_m.
+    \]
+    Then the projective cover of \(\operatorname{Top}(P)\) is
+    \[
+        \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}.
+    \]
+    By uniqueness of projective covers,
+    \[
+        P\cong \widehat P_{S_1}\oplus\cdots\oplus \widehat P_{S_m}.
+    \]
+    Since \(P\) is indecomposable, we must have \(m=1\). Hence
+    \[
+        P\cong \widehat P_S
+    \]
+    for some simple \(kG\)-module \(S\).
+
+    Finally, let \(Q\) be a finitely generated projective \(kG\)-module. Since
+    \(kG\) is Artinian, \(Q\) decomposes as a finite direct sum of indecomposable
+    projective \(kG\)-modules:
+    \[
+        Q\cong \bigoplus_S P_S^{\oplus m_S}.
+    \]
+    Define
+    \[
+        \widehat Q:=\bigoplus_S \widehat P_S^{\oplus m_S}.
+    \]
+    Then \(\widehat Q\) is a projective \(RG\)-lattice and
+    \[
+        \widehat Q/\pi\widehat Q
+        \cong
+        \bigoplus_S P_S^{\oplus m_S}
+        \cong
+        Q.
+    \]
+    Thus \(Q\) lifts to a projective \(RG\)-lattice. The uniqueness follows from the
+    isomorphism criterion below.
+\end{proof}
+
+\begin{corollary}
+    Let \(L\) be an \(RG\)-lattice. Then \(L\) is projective as an \(RG\)-module if
+    and only if
+    \[
+        L/\pi L
+    \]
+    is projective as a \(kG\)-module.
+\end{corollary}
+
+\begin{proof}
+    If \(L\) is projective over \(RG\), then \(L\) is a direct summand of a finite free
+    \(RG\)-module. Reducing modulo \(\pi\), we see that \(L/\pi L\) is a direct
+    summand of a finite free \(kG\)-module. Hence \(L/\pi L\) is projective over
+    \(kG\).
+
+    Conversely, assume that \(L/\pi L\) is projective over \(kG\). Let
+    \[
+        P\longrightarrow L
+    \]
+    be a projective cover of \(L\) as an \(RG\)-module. Reducing modulo \(\pi\), we
+    obtain an essential epimorphism
+    \[
+        P/\pi P\longrightarrow L/\pi L.
+    \]
+    Since \(L/\pi L\) is projective, this essential epimorphism must be an isomorphism.
+
+    Let \(K\) be the kernel of \(P\to L\). Since \(P\) and \(L\) are free over the DVR
+    \(R\), reduction modulo \(\pi\) gives
+    \[
+        K/\pi K=0.
+    \]
+    By Nakayama's lemma, \(K=0\). Hence
+    \[
+        P\cong L,
+    \]
+    and therefore \(L\) is projective.
+\end{proof}
+
+\begin{corollary}
+    Let \(L_1\) and \(L_2\) be finitely generated projective \(RG\)-modules. Then
+    \[
+        L_1\cong L_2
+        \quad\Longleftrightarrow\quad
+        L_1/\pi L_1\cong L_2/\pi L_2
+    \]
+    as \(kG\)-modules.
+\end{corollary}
+
+\begin{proof}
+    The forward implication is immediate by reduction modulo \(\pi\).
+
+    Conversely, suppose
+    \[
+        L_1/\pi L_1\cong L_2/\pi L_2
+    \]
+    as \(kG\)-modules. Since \(L_i\) is projective over \(RG\), the natural map
+    \[
+        L_i\longrightarrow L_i/\pi L_i
+    \]
+    is a projective cover. Therefore \(L_1\) and \(L_2\) are projective covers of
+    isomorphic \(RG\)-modules. By uniqueness of projective covers,
+    \[
+        L_1\cong L_2.
+    \]
+\end{proof}
+

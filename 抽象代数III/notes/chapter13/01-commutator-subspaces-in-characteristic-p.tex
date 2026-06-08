@@ -1,0 +1,505 @@
+\section{Commutator Subspaces in Characteristic \texorpdfstring{$p$}{p}}
+
+Let \(A\) be a finite-dimensional associative \(k\)-algebra, where
+\[
+    \operatorname{char} k=p>0.
+\]
+Put
+\[
+    S(A)=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\}.
+\]
+When the algebra \(A\) is clear from the context, we simply write \(S=S(A)\).
+
+For each integer \(m\geq 0\), define
+\[
+    T_m(A)=\{\,r\in A\mid r^{p^m}\in S(A)\,\}.
+\]
+We also define
+\[
+    T(A)=\bigcup_{m\geq 0}T_m(A)
+    =
+    \{\,r\in A\mid r^{p^m}\in S(A)
+    \text{ for some }m\geq 0\,\}.
+\]
+
+\begin{lemma}
+    For every integer \(e\geq 0\), every \(a,b\in A\), and every
+    \(\lambda,\mu\in k\), one has
+    \[
+        (\lambda a+\mu b)^{p^e}
+        \equiv
+        \lambda^{p^e}a^{p^e}+\mu^{p^e}b^{p^e}
+        \pmod{S(A)}.
+    \]
+    More generally, for \(x_1,\ldots,x_t\in A\) and
+    \(\lambda_1,\ldots,\lambda_t\in k\),
+    \[
+        \left(\sum_{i=1}^t\lambda_i x_i\right)^{p^e}
+        \equiv
+        \sum_{i=1}^t \lambda_i^{p^e}x_i^{p^e}
+        \pmod{S(A)}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    The case \(e=0\) is clear. Assume \(e\geq 1\), and put
+    \[
+        q=p^e.
+    \]
+    Let \(x_1,\ldots,x_q\in A\), and set
+    \[
+        w=x_1x_2\cdots x_q.
+    \]
+    A cyclic permutation of \(w\) differs from \(w\) by an element of \(S(A)\). Indeed,
+    \[
+        x_1x_2\cdots x_q-x_2\cdots x_qx_1
+        =
+        x_1(x_2\cdots x_q)-(x_2\cdots x_q)x_1
+        \in S(A).
+    \]
+    Hence every word of length \(q\) is congruent modulo \(S(A)\) to each of its cyclic
+    permutations.
+
+    Now expand
+    \[
+        (\lambda a+\mu b)^q.
+    \]
+    The terms are words of length \(q\) in the two letters \(a\) and \(b\). The two
+    constant words contribute
+    \[
+        \lambda^q a^q+\mu^q b^q.
+    \]
+    Every other word is a mixed word. Since \(q=p^e\), the cyclic orbit of a mixed word
+    has size divisible by \(p\): its size is a divisor of \(q\), and it is not \(1\).
+    All words in such an orbit are congruent modulo \(S(A)\), and their scalar
+    coefficients are the same. Therefore the sum of the terms in each mixed orbit is
+    congruent modulo \(S(A)\) to
+    \[
+        |\mathcal{O}|\,w=0,
+    \]
+    because \(\operatorname{char} k=p\). Thus
+    \[
+        (\lambda a+\mu b)^q
+        \equiv
+        \lambda^q a^q+\mu^q b^q
+        \pmod{S(A)}.
+    \]
+
+    The formula for a finite sum follows by induction on the number of summands.
+\end{proof}
+
+\begin{lemma}
+    For every fixed integer \(m\geq 0\), the subset
+    \[
+        T_m(A)=\{\,r\in A\mid r^{p^m}\in S(A)\,\}
+    \]
+    is a \(k\)-subspace of \(A\), and
+    \[
+        S(A)\subseteq T_m(A).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Put
+    \[
+        q=p^m.
+    \]
+
+    We first prove that \(S(A)\subseteq T_m(A)\). Let \(a,b\in A\), and set
+    \[
+        c=ab-ba.
+    \]
+    By the previous lemma,
+    \[
+        c^q=(ab-ba)^q
+        \equiv
+        (ab)^q-(ba)^q
+        \pmod{S(A)}.
+    \]
+    Here we use the fact that, in characteristic \(p\),
+    \[
+        (-1)^q=-1.
+    \]
+    Moreover,
+    \[
+        (ab)^q-(ba)^q
+        =
+        a\bigl(b(ab)^{q-1}\bigr)
+        -
+        \bigl(b(ab)^{q-1}\bigr)a
+        \in S(A).
+    \]
+    Hence
+    \[
+        (ab-ba)^q\in S(A).
+    \]
+
+    Now let \(s\in S(A)\). Since \(S(A)\) is spanned by commutators, we may write
+    \[
+        s=\sum_i \lambda_i c_i,
+    \]
+    where each \(c_i\) is a commutator. By the previous lemma,
+    \[
+        s^q
+        =
+        \left(\sum_i\lambda_i c_i\right)^q
+        \equiv
+        \sum_i \lambda_i^q c_i^q
+        \pmod{S(A)}.
+    \]
+    Each \(c_i^q\in S(A)\), so the right-hand side lies in \(S(A)\). Therefore
+    \[
+        s^q\in S(A).
+    \]
+    Hence \(s\in T_m(A)\), and so
+    \[
+        S(A)\subseteq T_m(A).
+    \]
+
+    It remains to prove that \(T_m(A)\) is a \(k\)-subspace. Let \(x,y\in T_m(A)\), and
+    let \(\lambda,\mu\in k\). Then
+    \[
+        x^q,y^q\in S(A).
+    \]
+    Again by the previous lemma,
+    \[
+        (\lambda x+\mu y)^q
+        \equiv
+        \lambda^q x^q+\mu^q y^q
+        \pmod{S(A)}.
+    \]
+    The right-hand side lies in \(S(A)\), and hence
+    \[
+        (\lambda x+\mu y)^q\in S(A).
+    \]
+    Therefore
+    \[
+        \lambda x+\mu y\in T_m(A).
+    \]
+    Thus \(T_m(A)\) is a \(k\)-subspace of \(A\).
+\end{proof}
+
+\begin{corollary}
+    The subset
+    \[
+        T(A)=\{\,r\in A\mid r^{p^m}\in S(A)
+        \text{ for some }m\geq 0\,\}
+    \]
+    is a \(k\)-subspace of \(A\), and
+    \[
+        S(A)\subseteq T(A).
+    \]
+\end{corollary}
+
+\begin{proof}
+    For every \(m\geq 0\), the previous lemma gives
+    \[
+        S(A)\subseteq T_m(A).
+    \]
+    Moreover,
+    \[
+        T_m(A)\subseteq T_{m+1}(A).
+    \]
+    Indeed, if \(x\in T_m(A)\), then \(x^{p^m}\in S(A)\). Since
+    \(S(A)\subseteq T_1(A)\), we have
+    \[
+        \bigl(x^{p^m}\bigr)^p=x^{p^{m+1}}\in S(A).
+    \]
+    Hence \(x\in T_{m+1}(A)\).
+
+    Therefore
+    \[
+        T(A)=\bigcup_{m\geq 0}T_m(A)
+    \]
+    is the union of an increasing chain of \(k\)-subspaces, and hence is itself a
+    \(k\)-subspace. Also,
+    \[
+        S(A)\subseteq T(A).
+    \]
+\end{proof}
+
+\begin{lemma}
+    Let
+    \[
+        A=M_n(k).
+    \]
+    Then
+    \[
+        S(A)=T(A)=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Put
+    \[
+        V=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+    Since
+    \[
+        \operatorname{tr}(XY-YX)=0
+    \]
+    for all \(X,Y\in M_n(k)\), we have
+    \[
+        S(A)\subseteq V.
+    \]
+
+    Conversely, let \(E_{ij}\) denote the standard matrix units. If \(i\neq j\), then
+    \[
+        E_{ij}
+        =
+        E_{ii}E_{ij}-E_{ij}E_{ii}
+        \in S(A).
+    \]
+    Also, for \(i\neq j\),
+    \[
+        E_{ii}-E_{jj}
+        =
+        E_{ij}E_{ji}-E_{ji}E_{ij}
+        \in S(A).
+    \]
+    The trace-zero matrices are spanned by the off-diagonal matrix units \(E_{ij}\)
+    with \(i\neq j\), together with the diagonal differences \(E_{ii}-E_{jj}\). Hence
+    \[
+        V\subseteq S(A).
+    \]
+    Therefore
+    \[
+        S(A)=V.
+    \]
+
+    By the previous corollary,
+    \[
+        S(A)\subseteq T(A)\subseteq A.
+    \]
+    Since \(S(A)=V\) has codimension \(1\) in \(A=M_n(k)\), we have either
+    \[
+        T(A)=S(A)
+        \qquad\text{or}\qquad
+        T(A)=A.
+    \]
+    But
+    \[
+        E_{11}^{p^m}=E_{11}
+        \qquad\text{for every }m\geq 0,
+    \]
+    and
+    \[
+        \operatorname{tr}(E_{11})=1\neq 0.
+    \]
+    Hence
+    \[
+        E_{11}^{p^m}\notin S(A)
+        \qquad\text{for every }m\geq 0.
+    \]
+    Therefore \(E_{11}\notin T(A)\), so \(T(A)\neq A\). It follows that
+    \[
+        T(A)=S(A).
+    \]
+
+    Consequently,
+    \[
+        S(A)=T(A)=\{\,X\in M_n(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+\end{proof}
+
+\begin{proposition}
+    Let \(A\) be a finite-dimensional \(k\)-algebra, where
+    \[
+        \operatorname{char} k=p>0.
+    \]
+    Put
+    \[
+        S(A)=\operatorname{span}_k\{\,ab-ba\mid a,b\in A\,\},
+    \]
+    and
+    \[
+        T(A)=\{\,a\in A\mid a^{p^m}\in S(A)
+        \text{ for some }m\geq 0\,\}.
+    \]
+    Assume that \(k\) is a splitting field for \(A\). Then
+    \[
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}
+        =
+        \dim_k A-\dim_k T(A).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let
+    \[
+        J=J(A)
+    \]
+    be the Jacobson radical of \(A\), and set
+    \[
+        \overline{A}=A/J.
+    \]
+    Since \(A\) is finite-dimensional, \(J\) is nilpotent. Hence for every
+    \(x\in J\), there exists \(m\geq 0\) such that
+    \[
+        x^{p^m}=0.
+    \]
+    Since \(0\in S(A)\), it follows that
+    \[
+        J\subseteq T(A).
+    \]
+
+    Let
+    \[
+        \pi:A\longrightarrow \overline{A}=A/J
+    \]
+    be the natural quotient map. We claim that
+    \[
+        \pi(T(A))=T(\overline{A}).
+    \]
+
+    First, since
+    \[
+        \pi(S(A))=S(\overline{A}),
+    \]
+    if \(a\in T(A)\), then for some \(m\geq 0\),
+    \[
+        a^{p^m}\in S(A).
+    \]
+    Therefore
+    \[
+        \pi(a)^{p^m}
+        =
+        \pi(a^{p^m})
+        \in S(\overline{A}),
+    \]
+    and hence
+    \[
+        \pi(a)\in T(\overline{A}).
+    \]
+    Thus
+    \[
+        \pi(T(A))\subseteq T(\overline{A}).
+    \]
+
+    Conversely, suppose that
+    \[
+        \overline{a}=\pi(a)\in T(\overline{A}).
+    \]
+    Then for some \(m\geq 0\),
+    \[
+        \overline{a}^{p^m}\in S(\overline{A}).
+    \]
+    Since \(\pi(S(A))=S(\overline{A})\), there exist \(s\in S(A)\) and \(j\in J\) such that
+    \[
+        a^{p^m}=s+j.
+    \]
+    Choose \(\ell\geq 0\) sufficiently large such that
+    \[
+        j^{p^\ell}=0.
+    \]
+    By the congruence above,
+    \[
+        (s+j)^{p^\ell}
+        \equiv
+        s^{p^\ell}+j^{p^\ell}
+        \pmod{S(A)}.
+    \]
+    Therefore
+    \[
+        a^{p^{m+\ell}}
+        =
+        (a^{p^m})^{p^\ell}
+        =
+        (s+j)^{p^\ell}
+        \equiv
+        s^{p^\ell}
+        \pmod{S(A)}.
+    \]
+    Since \(s\in S(A)\), the lemma on \(T_\ell(A)\) gives
+    \[
+        s^{p^\ell}\in S(A).
+    \]
+    Hence
+    \[
+        a^{p^{m+\ell}}\in S(A).
+    \]
+    Therefore
+    \[
+        a\in T(A).
+    \]
+    This proves
+    \[
+        \pi(T(A))=T(\overline{A}).
+    \]
+
+    Since \(J\subseteq T(A)\), we get
+    \[
+        A/T(A)\cong \overline{A}/T(\overline{A}).
+    \]
+    Hence
+    \[
+        \dim_k A-\dim_k T(A)
+        =
+        \dim_k \overline{A}-\dim_k T(\overline{A}).
+    \]
+
+    Now \(k\) is a splitting field for \(A\), so the semisimple algebra
+    \[
+        \overline{A}=A/J(A)
+    \]
+    is split semisimple. Thus by the Artin--Wedderburn theorem,
+    \[
+        \overline{A}
+        \cong
+        M_{n_1}(k)\oplus\cdots\oplus M_{n_r}(k),
+    \]
+    where
+    \[
+        r=
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}.
+    \]
+    The simple \(A\)-modules and the simple \(\overline{A}\)-modules are the same,
+    because \(J(A)\) annihilates every simple \(A\)-module.
+
+    For a finite direct sum of algebras, commutators and \(p^m\)-powers are computed
+    componentwise. Hence
+    \[
+        S(\overline{A})
+        =
+        S(M_{n_1}(k))\oplus\cdots\oplus S(M_{n_r}(k)).
+    \]
+    Also,
+    \[
+        T(\overline{A})
+        =
+        T(M_{n_1}(k))\oplus\cdots\oplus T(M_{n_r}(k)).
+    \]
+    Indeed, if an element belongs componentwise to the right-hand side, then each
+    component satisfies the defining condition for some exponent \(p^{m_i}\); taking a
+    common exponent \(p^m\) with \(m\geq \max_i m_i\) shows that the whole element
+    lies in \(T(\overline{A})\).
+
+    By the previous matrix algebra lemma,
+    \[
+        T(M_{n_i}(k))
+        =
+        \{\,X\in M_{n_i}(k)\mid \operatorname{tr}(X)=0\,\}.
+    \]
+    Therefore each quotient
+    \[
+        M_{n_i}(k)/T(M_{n_i}(k))
+    \]
+    is one-dimensional over \(k\). Hence
+    \[
+        \dim_k \overline{A}-\dim_k T(\overline{A})
+        =
+        \sum_{i=1}^r
+        \dim_k\bigl(M_{n_i}(k)/T(M_{n_i}(k))\bigr)
+        =
+        r.
+    \]
+    Consequently,
+    \[
+        \dim_k A-\dim_k T(A)
+        =
+        r
+        =
+        \#\{\,\text{non-isomorphic simple }A\text{-modules}\,\}.
+    \]
+\end{proof}
+

@@ -11,6 +11,222 @@
     \(kG\) is split over \(k\).
 \end{definition}
 
+\begin{theorem}[Finite-dimensional density theorem]\label{thm:finite-dimensional-density}
+    Let \(A\) be a \(k\)-algebra, and let \(S\) be a finite-dimensional simple
+    left \(A\)-module. Put
+    \[
+        D:=\operatorname{End}_A(S)^{\operatorname{op}}.
+    \]
+    We regard \(S\) as a right \(D\)-vector space by
+    \[
+        s\cdot \varphi := \varphi(s),
+        \qquad
+        s\in S,\ \varphi\in \operatorname{End}_A(S).
+    \]
+    Let
+    \[
+        I=\operatorname{Ann}_A(S)
+        =
+        \{\,a\in A\mid as=0\text{ for all }s\in S\,\}.
+    \]
+    Then the natural algebra homomorphism
+    \[
+        \overline{\rho}:A/I\longrightarrow \operatorname{End}_D(S),
+        \qquad
+        a+I\longmapsto L_a,
+    \]
+    where
+    \[
+        L_a:S\longrightarrow S,\qquad s\longmapsto as,
+    \]
+    is an isomorphism.
+\end{theorem}
+
+\begin{proof}
+    By Schur's lemma,
+    \[
+        \operatorname{End}_A(S)
+    \]
+    is a division ring. Hence
+    \[
+        D=\operatorname{End}_A(S)^{\operatorname{op}}
+    \]
+    is also a division ring, and \(S\) is a right vector space over \(D\).
+
+    For every \(a\in A\), the map
+    \[
+        L_a:S\longrightarrow S,\qquad s\longmapsto as,
+    \]
+    is right \(D\)-linear. Indeed, for \(s\in S\) and
+    \(\varphi\in \operatorname{End}_A(S)\), we have
+    \[
+        L_a(s\cdot \varphi)
+        =
+        L_a(\varphi(s))
+        =
+        a\varphi(s)
+        =
+        \varphi(as)
+        =
+        L_a(s)\cdot \varphi,
+    \]
+    because \(\varphi\) is \(A\)-linear. Thus we get an algebra homomorphism
+    \[
+        \rho:A\longrightarrow \operatorname{End}_D(S),
+        \qquad
+        a\longmapsto L_a.
+    \]
+
+    Its kernel is precisely
+    \[
+        \operatorname{Ker}(\rho)
+        =
+        \{\,a\in A\mid L_a=0\,\}
+        =
+        \{\,a\in A\mid as=0\text{ for all }s\in S\,\}
+        =
+        \operatorname{Ann}_A(S)
+        =
+        I.
+    \]
+    Therefore \(\rho\) induces an injective homomorphism
+    \[
+        \overline{\rho}:A/I\hookrightarrow \operatorname{End}_D(S).
+    \]
+
+    It remains to prove that \(\overline{\rho}\) is surjective.
+
+    We first prove the following density claim. Let
+    \[
+        x_1,\dots,x_m\in S
+    \]
+    be right \(D\)-linearly independent, and let
+    \[
+        y_1,\dots,y_m\in S
+    \]
+    be arbitrary. Then there exists \(a\in A\) such that
+    \[
+        ax_i=y_i
+        \qquad
+        (1\leq i\leq m).
+    \]
+
+    To prove the claim, consider the \(A\)-submodule
+    \[
+        N
+        :=
+        \{\, (ax_1,\dots,ax_m)\in S^m\mid a\in A\,\}
+        \subseteq S^m.
+    \]
+    We claim that
+    \[
+        N=S^m.
+    \]
+    Suppose not. Since \(S^m\) is a finite direct sum of copies of the simple
+    module \(S\), it is semisimple. Hence the proper submodule \(N\) is contained
+    in the kernel of some nonzero \(A\)-module homomorphism
+    \[
+        F:S^m\longrightarrow S.
+    \]
+    Every such homomorphism has the form
+    \[
+        F(z_1,\dots,z_m)
+        =
+        \varphi_1(z_1)+\cdots+\varphi_m(z_m),
+    \]
+    where
+    \[
+        \varphi_i\in \operatorname{End}_A(S),
+    \]
+    and not all \(\varphi_i\) are zero.
+
+    Since \(N\subseteq \operatorname{Ker}(F)\), for every \(a\in A\) we have
+    \[
+        0
+        =
+        F(ax_1,\dots,ax_m)
+        =
+        \sum_{i=1}^m \varphi_i(ax_i).
+    \]
+    Because each \(\varphi_i\) is \(A\)-linear,
+    \[
+        \sum_{i=1}^m \varphi_i(ax_i)
+        =
+        \sum_{i=1}^m a\varphi_i(x_i)
+        =
+        a\left(\sum_{i=1}^m \varphi_i(x_i)\right).
+    \]
+    Taking \(a=1\), we obtain
+    \[
+        \sum_{i=1}^m \varphi_i(x_i)=0.
+    \]
+    In terms of the right \(D\)-module structure on \(S\), this is
+    \[
+        \sum_{i=1}^m x_i\cdot \varphi_i=0.
+    \]
+    Since \(x_1,\dots,x_m\) are right \(D\)-linearly independent, it follows that
+    \[
+        \varphi_1=\cdots=\varphi_m=0,
+    \]
+    contradicting the fact that \(F\neq 0\). Therefore
+    \[
+        N=S^m.
+    \]
+    Hence for any \((y_1,\dots,y_m)\in S^m\), there exists \(a\in A\) such that
+    \[
+        (ax_1,\dots,ax_m)=(y_1,\dots,y_m).
+    \]
+    This proves the density claim.
+
+    Now let
+    \[
+        T\in \operatorname{End}_D(S).
+    \]
+    Since \(S\) is finite-dimensional over \(k\), it is also finite-dimensional as a
+    right \(D\)-vector space. Choose a right \(D\)-basis
+    \[
+        s_1,\dots,s_n
+    \]
+    of \(S\). Applying the density claim to
+    \[
+        x_i=s_i,
+        \qquad
+        y_i=T(s_i),
+    \]
+    there exists \(a\in A\) such that
+    \[
+        as_i=T(s_i)
+        \qquad
+        (1\leq i\leq n).
+    \]
+    Since both \(L_a\) and \(T\) are right \(D\)-linear and they agree on the
+    right \(D\)-basis \(s_1,\dots,s_n\), we get
+    \[
+        L_a=T.
+    \]
+    Thus every element of \(\operatorname{End}_D(S)\) lies in the image of \(\rho\).
+    Therefore \(\overline{\rho}\) is surjective.
+
+    Hence
+    \[
+        A/I\cong \operatorname{End}_D(S).
+    \]
+\end{proof}
+
+\begin{remark}
+    If one writes
+    \[
+        D=\operatorname{End}_A(S)
+    \]
+    instead of \(D=\operatorname{End}_A(S)^{\operatorname{op}}\), then the same statement
+    is obtained by remembering that \(S\) is naturally a right
+    \(\operatorname{End}_A(S)^{\operatorname{op}}\)-vector space via
+    \[
+        s\cdot \varphi=\varphi(s).
+    \]
+    In the split case \(D=k\), this distinction disappears.
+\end{remark}
+
 \begin{proposition}
     Let \(A\) be a finite-dimensional \(k\)-algebra, and let \(S\) be a simple
     left \(A\)-module. Then the following are equivalent:

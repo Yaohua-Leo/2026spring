@@ -1,0 +1,509 @@
+\section{Examples: Computing Character Tables by Orthogonality Relations}
+
+In this section we illustrate how to compute character tables using the row
+and column orthogonality relations.
+
+Recall that if
+\[
+    \operatorname{Irr}(G)=\{\chi_1,\dots,\chi_r\}
+\]
+is the set of irreducible complex characters of \(G\), and if
+\[
+    C_1,\dots,C_r
+\]
+are the conjugacy classes of \(G\), with representatives \(g_1,\dots,g_r\),
+then the row orthogonality relations say that
+\[
+    \langle \chi_i,\chi_j\rangle
+    =
+    \frac{1}{|G|}
+    \sum_{\ell=1}^r
+    |C_\ell|\chi_i(g_\ell)\overline{\chi_j(g_\ell)}
+    =
+    \delta_{ij}.
+\]
+The column orthogonality relations say that
+\[
+    \sum_{\chi\in \operatorname{Irr}(G)}
+    \chi(g_i)\overline{\chi(g_j)}
+    =
+    \begin{cases}
+        |C_G(g_i)|, & g_i\text{ and }g_j\text{ are conjugate},\\
+        0, & g_i\text{ and }g_j\text{ are not conjugate}.
+    \end{cases}
+\]
+In particular, for a representative \(g_i\),
+\[
+    \sum_{\chi\in \operatorname{Irr}(G)}
+    |\chi(g_i)|^2
+    =
+    |C_G(g_i)|.
+\]
+
+\begin{example}[The character table of \(S_3\)]
+    The conjugacy classes of \(S_3\) are represented by
+    \[
+        1,\qquad (12),\qquad (123).
+    \]
+    Their sizes and centralizer orders are
+    \[
+        \begin{array}{c|ccc}
+            \text{representative} & 1 & (12) & (123)\\
+            \hline
+            \text{class size} & 1 & 3 & 2\\
+            |C_{S_3}(g)| & 6 & 2 & 3
+        \end{array}
+    \]
+    Hence \(S_3\) has exactly three irreducible complex characters.
+
+    There are two one-dimensional characters:
+    \[
+        \chi_{\mathrm{triv}}=(1,1,1),
+        \qquad
+        \chi_{\mathrm{sgn}}=(1,-1,1).
+    \]
+    If the remaining irreducible character has degree \(d\), then
+    \[
+        1^2+1^2+d^2=|S_3|=6,
+    \]
+    so
+    \[
+        d=2.
+    \]
+    Write the remaining character as
+    \[
+        \chi=(2,a,b),
+    \]
+    where \(a=\chi((12))\) and \(b=\chi((123))\).
+
+    We first use the column orthogonality relation. For the transposition class,
+    \[
+        |\chi_{\mathrm{triv}}((12))|^2
+        +
+        |\chi_{\mathrm{sgn}}((12))|^2
+        +
+        |\chi((12))|^2
+        =
+        |C_{S_3}((12))|.
+    \]
+    Thus
+    \[
+        1^2+(-1)^2+|a|^2=2,
+    \]
+    and hence
+    \[
+        a=0.
+    \]
+    For the \(3\)-cycle class,
+    \[
+        1^2+1^2+|b|^2=3,
+    \]
+    so
+    \[
+        |b|=1.
+    \]
+
+    To determine the sign of \(b\), use row orthogonality with the trivial character:
+    \[
+        0=\langle \chi,\chi_{\mathrm{triv}}\rangle
+        =
+        \frac{1}{6}
+        \bigl(
+            1\cdot 2
+            +
+            3\cdot a
+            +
+            2\cdot b
+        \bigr).
+    \]
+    Since \(a=0\), this becomes
+    \[
+        2+2b=0,
+    \]
+    hence
+    \[
+        b=-1.
+    \]
+
+    Therefore the character table of \(S_3\) is
+    \[
+        \begin{array}{c|ccc}
+            S_3 & 1 & (12) & (123)\\
+            \hline
+            \text{class size} & 1 & 3 & 2\\
+            \hline
+            \chi_{\mathrm{triv}} & 1 & 1 & 1\\
+            \chi_{\mathrm{sgn}} & 1 & -1 & 1\\
+            \chi & 2 & 0 & -1
+        \end{array}
+    \]
+\end{example}
+
+\begin{example}[The character table of \(D_8\)]
+    Let
+    \[
+        D_8=\langle r,s\mid r^4=s^2=1,\ srs=r^{-1}\rangle
+    \]
+    be the dihedral group of order \(8\). Its conjugacy classes are represented by
+    \[
+        1,\qquad r^2,\qquad r,\qquad s,\qquad rs.
+    \]
+    More explicitly,
+    \[
+        \{1\},\qquad
+        \{r^2\},\qquad
+        \{r,r^3\},\qquad
+        \{s,r^2s\},\qquad
+        \{rs,r^3s\}.
+    \]
+    Their sizes and centralizer orders are
+    \[
+        \begin{array}{c|ccccc}
+            \text{representative} & 1 & r^2 & r & s & rs\\
+            \hline
+            \text{class size} & 1 & 1 & 2 & 2 & 2\\
+            |C_{D_8}(g)| & 8 & 8 & 4 & 4 & 4
+        \end{array}
+    \]
+    Hence \(D_8\) has exactly five irreducible complex characters.
+
+    Since
+    \[
+        D_8/[D_8,D_8]\cong C_2\times C_2,
+    \]
+    there are four one-dimensional characters. They are determined by the
+    possible values of \(r\) and \(s\), both of which must be \(\pm 1\):
+    \[
+        \begin{array}{c|ccccc}
+            & 1 & r^2 & r & s & rs\\
+            \hline
+            \chi_{++} & 1 & 1 & 1 & 1 & 1\\
+            \chi_{+-} & 1 & 1 & 1 & -1 & -1\\
+            \chi_{-+} & 1 & 1 & -1 & 1 & -1\\
+            \chi_{--} & 1 & 1 & -1 & -1 & 1
+        \end{array}
+    \]
+    Let the remaining irreducible character be
+    \[
+        \chi=(2,a,b,c,d),
+    \]
+    where the entries correspond to the classes
+    \[
+        1,\quad r^2,\quad r,\quad s,\quad rs.
+    \]
+    Its degree is \(2\), because
+    \[
+        1^2+1^2+1^2+1^2+\chi(1)^2=|D_8|=8.
+    \]
+
+    We now use column orthogonality. For the class of \(r\),
+    \[
+        1^2+1^2+(-1)^2+(-1)^2+|b|^2
+        =
+        |C_{D_8}(r)|
+        =
+        4.
+    \]
+    Thus
+    \[
+        b=0.
+    \]
+    Similarly, for the two reflection classes,
+    \[
+        c=0,
+        \qquad
+        d=0.
+    \]
+    For the central element \(r^2\), column orthogonality gives
+    \[
+        1^2+1^2+1^2+1^2+|a|^2
+        =
+        |C_{D_8}(r^2)|
+        =
+        8.
+    \]
+    Hence
+    \[
+        |a|=2.
+    \]
+
+    To determine \(a\), use row orthogonality with the trivial character:
+    \[
+        0
+        =
+        \langle \chi,\chi_{++}\rangle
+        =
+        \frac{1}{8}
+        \bigl(
+            1\cdot 2
+            +
+            1\cdot a
+            +
+            2\cdot b
+            +
+            2\cdot c
+            +
+            2\cdot d
+        \bigr).
+    \]
+    Since \(b=c=d=0\), this gives
+    \[
+        2+a=0,
+    \]
+    so
+    \[
+        a=-2.
+    \]
+
+    Therefore the character table of \(D_8\) is
+    \[
+        \begin{array}{c|ccccc}
+            D_8 & 1 & r^2 & r & s & rs\\
+            \hline
+            \text{class size} & 1 & 1 & 2 & 2 & 2\\
+            \hline
+            \chi_{++} & 1 & 1 & 1 & 1 & 1\\
+            \chi_{+-} & 1 & 1 & 1 & -1 & -1\\
+            \chi_{-+} & 1 & 1 & -1 & 1 & -1\\
+            \chi_{--} & 1 & 1 & -1 & -1 & 1\\
+            \chi & 2 & -2 & 0 & 0 & 0
+        \end{array}
+    \]
+\end{example}
+
+\begin{example}[The character table of \(S_4\)]
+    The conjugacy classes of \(S_4\) are determined by cycle type. We take
+    representatives
+    \[
+        1,\qquad
+        (12),\qquad
+        (12)(34),\qquad
+        (123),\qquad
+        (1234).
+    \]
+    The class sizes and centralizer orders are
+    \[
+        \begin{array}{c|ccccc}
+            \text{representative}
+            & 1 & (12) & (12)(34) & (123) & (1234)\\
+            \hline
+            \text{class size}
+            & 1 & 6 & 3 & 8 & 6\\
+            |C_{S_4}(g)|
+            & 24 & 4 & 8 & 3 & 4
+        \end{array}
+    \]
+    Hence \(S_4\) has exactly five irreducible complex characters.
+
+    We already know two one-dimensional characters:
+    \[
+        \chi_{\mathrm{triv}}
+        =
+        (1,1,1,1,1),
+    \]
+    and
+    \[
+        \chi_{\mathrm{sgn}}
+        =
+        (1,-1,1,1,-1).
+    \]
+
+    Next consider the permutation representation of \(S_4\) on
+    \[
+        \mathbb{C}^4.
+    \]
+    Its character is the number of fixed points of a permutation. Hence its
+    values are
+    \[
+        (4,2,0,1,0).
+    \]
+    Removing the one-dimensional trivial subrepresentation, we get the standard
+    representation \(V_{\mathrm{std}}\), whose character is
+    \[
+        \chi_{\mathrm{std}}
+        =
+        (4,2,0,1,0)-(1,1,1,1,1)
+        =
+        (3,1,-1,0,-1).
+    \]
+    We check that this character is irreducible:
+    \[
+        \langle \chi_{\mathrm{std}},\chi_{\mathrm{std}}\rangle
+        =
+        \frac{1}{24}
+        \left(
+            1\cdot 3^2
+            +
+            6\cdot 1^2
+            +
+            3\cdot (-1)^2
+            +
+            8\cdot 0^2
+            +
+            6\cdot (-1)^2
+        \right)
+        =
+        1.
+    \]
+    Therefore \(\chi_{\mathrm{std}}\) is irreducible.
+
+    Twisting by the sign character gives another irreducible character:
+    \[
+        \chi_{\mathrm{sgn}}\chi_{\mathrm{std}}
+        =
+        (3,-1,-1,0,1).
+    \]
+
+    So far we have four irreducible characters, of degrees
+    \[
+        1,\quad 1,\quad 3,\quad 3.
+    \]
+    Let the remaining irreducible character be
+    \[
+        \chi=(2,a,b,c,d),
+    \]
+    where the entries correspond to
+    \[
+        1,\quad (12),\quad (12)(34),\quad (123),\quad (1234).
+    \]
+    Its degree is \(2\), since
+    \[
+        1^2+1^2+3^2+3^2+\chi(1)^2
+        =
+        |S_4|
+        =
+        24.
+    \]
+
+    We first use column orthogonality. For the transposition class \((12)\),
+    \[
+        1^2+(-1)^2+1^2+(-1)^2+|a|^2
+        =
+        |C_{S_4}((12))|
+        =
+        4.
+    \]
+    Therefore
+    \[
+        a=0.
+    \]
+    For the \(4\)-cycle class \((1234)\),
+    \[
+        1^2+(-1)^2+(-1)^2+1^2+|d|^2
+        =
+        |C_{S_4}((1234))|
+        =
+        4,
+    \]
+    so
+    \[
+        d=0.
+    \]
+    For the double transposition class \((12)(34)\),
+    \[
+        1^2+1^2+(-1)^2+(-1)^2+|b|^2
+        =
+        |C_{S_4}((12)(34))|
+        =
+        8,
+    \]
+    hence
+    \[
+        |b|=2.
+    \]
+    For the \(3\)-cycle class \((123)\),
+    \[
+        1^2+1^2+0^2+0^2+|c|^2
+        =
+        |C_{S_4}((123))|
+        =
+        3,
+    \]
+    hence
+    \[
+        |c|=1.
+    \]
+
+    Column orthogonality has determined
+    \[
+        a=0,\qquad d=0,\qquad |b|=2,\qquad |c|=1.
+    \]
+    To determine the signs of \(b\) and \(c\), we now use row orthogonality.
+
+    Orthogonality with \(\chi_{\mathrm{std}}\) gives
+    \[
+        0
+        =
+        \langle \chi,\chi_{\mathrm{std}}\rangle
+        =
+        \frac{1}{24}
+        \left(
+            1\cdot 2\cdot 3
+            +
+            6\cdot a\cdot 1
+            +
+            3\cdot b\cdot (-1)
+            +
+            8\cdot c\cdot 0
+            +
+            6\cdot d\cdot (-1)
+        \right).
+    \]
+    Since \(a=d=0\), this becomes
+    \[
+        6-3b=0.
+    \]
+    Hence
+    \[
+        b=2.
+    \]
+    Orthogonality with the trivial character gives
+    \[
+        0
+        =
+        \langle \chi,\chi_{\mathrm{triv}}\rangle
+        =
+        \frac{1}{24}
+        \left(
+            1\cdot 2
+            +
+            6\cdot a
+            +
+            3\cdot b
+            +
+            8\cdot c
+            +
+            6\cdot d
+        \right).
+    \]
+    Using \(a=d=0\) and \(b=2\), we obtain
+    \[
+        2+6+8c=0.
+    \]
+    Therefore
+    \[
+        c=-1.
+    \]
+
+    Thus the character table of \(S_4\) is
+    \[
+        \begin{array}{c|ccccc}
+            S_4
+            & 1 & (12) & (12)(34) & (123) & (1234)\\
+            \hline
+            \text{class size}
+            & 1 & 6 & 3 & 8 & 6\\
+            \hline
+            \chi_{\mathrm{triv}}
+            & 1 & 1 & 1 & 1 & 1\\
+            \chi_{\mathrm{sgn}}
+            & 1 & -1 & 1 & 1 & -1\\
+            \chi_{\mathrm{std}}
+            & 3 & 1 & -1 & 0 & -1\\
+            \chi_{\mathrm{sgn}}\chi_{\mathrm{std}}
+            & 3 & -1 & -1 & 0 & 1\\
+            \chi
+            & 2 & 0 & 2 & -1 & 0
+        \end{array}
+    \]
+\end{example}

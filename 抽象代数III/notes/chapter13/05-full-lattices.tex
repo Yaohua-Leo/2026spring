@@ -1,0 +1,302 @@
+\section{Full Lattices}
+
+\begin{definition}[Full \(RG\)-lattice]
+    Let \(R\) be a principal ideal domain, and let \(F=\operatorname{Frac}(R)\) be
+    its fraction field. Let \(G\) be a finite group, and let \(U\) be a finite-dimensional
+    \(FG\)-module.
+
+    A \textbf{full \(RG\)-lattice} in \(U\) is an \(RG\)-submodule
+    \[
+        L\subseteq U
+    \]
+    such that:
+    \begin{enumerate}
+        \item \(L\) is finitely generated and free as an \(R\)-module;
+        \item \(F L=U\).
+    \end{enumerate}
+    Equivalently, \(L\) contains an \(F\)-basis of \(U\), or equivalently, the natural
+    map
+    \[
+        F\otimes_R L\longrightarrow U,
+        \qquad
+        a\otimes \ell\longmapsto a\ell,
+    \]
+    is an isomorphism of \(FG\)-modules.
+\end{definition}
+
+\begin{remark}[Realizing a lattice inside its scalar extension]
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(L\)
+    be an \(RG\)-lattice. Since \(L\) is free as an \(R\)-module, it is
+    torsion-free. Therefore the natural map
+    \[
+        L\longrightarrow F\otimes_R L,
+        \qquad
+        \ell\longmapsto 1\otimes \ell,
+    \]
+    is injective. Hence we may regard \(L\) as an \(RG\)-submodule of the
+    \(FG\)-module
+    \[
+        F\otimes_R L.
+    \]
+    In this sense, the \(FG\)-module \(F\otimes_R L\) has a form whose structure
+    constants are defined over \(R\).
+\end{remark}
+
+\begin{lemma}
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(U\)
+    be a finite-dimensional \(F\)-vector space. Let \(L\subseteq U\) be a finitely
+    generated \(R\)-submodule containing an \(F\)-basis of \(U\). Then \(L\) is a full
+    \(R\)-lattice in \(U\).
+
+    If, moreover, \(U\) is an \(FG\)-module and \(L\) is \(G\)-stable, then \(L\) is a
+    full \(RG\)-lattice in \(U\).
+\end{lemma}
+
+\begin{proof}
+    Since \(L\subseteq U\), the \(R\)-module \(L\) is torsion-free. Since \(R\) is a
+    principal ideal domain and \(L\) is finitely generated, \(L\) is free as an
+    \(R\)-module. Choose an \(R\)-basis
+    \[
+        x_1,\ldots,x_m
+    \]
+    of \(L\).
+
+    We claim that \(x_1,\ldots,x_m\) are \(F\)-linearly independent. Suppose
+    \[
+        \lambda_1x_1+\cdots+\lambda_mx_m=0,
+        \qquad
+        \lambda_i\in F.
+    \]
+    Write
+    \[
+        \lambda_i=\frac{a_i}{b_i},
+        \qquad
+        a_i,b_i\in R,\quad b_i\neq 0.
+    \]
+    Let
+    \[
+        b=b_1b_2\cdots b_m.
+    \]
+    Multiplying the relation by \(b\), we get
+    \[
+        b\lambda_1x_1+\cdots+b\lambda_mx_m=0,
+    \]
+    where each \(b\lambda_i\in R\). Since \(x_1,\ldots,x_m\) are \(R\)-linearly
+    independent, we get
+    \[
+        b\lambda_i=0
+    \]
+    for every \(i\). Since \(b\neq 0\), it follows that
+    \[
+        \lambda_i=0
+    \]
+    for every \(i\). Hence \(x_1,\ldots,x_m\) are \(F\)-linearly independent.
+
+    Since \(L\) contains an \(F\)-basis of \(U\), we have
+    \[
+        FL=U.
+    \]
+    Therefore \(x_1,\ldots,x_m\) also span \(U\) over \(F\). Hence
+    \[
+        x_1,\ldots,x_m
+    \]
+    form an \(F\)-basis of \(U\). Thus
+    \[
+        F\otimes_R L\cong U,
+    \]
+    and \(L\) is a full \(R\)-lattice in \(U\).
+
+    If \(U\) is an \(FG\)-module and \(L\) is \(G\)-stable, then \(L\) is an
+    \(RG\)-submodule of \(U\). Hence \(L\) is a full \(RG\)-lattice in \(U\).
+\end{proof}
+
+\begin{proposition}[Uniqueness of the lift of an indecomposable projective]
+    Let \(R\) be a complete discrete valuation ring with maximal ideal
+    \[
+        (\pi),
+    \]
+    residue field
+    \[
+        k=R/(\pi),
+    \]
+    and let \(G\) be a finite group.
+
+    Let \(S\) be a simple \(kG\)-module, and let
+    \[
+        P_S
+    \]
+    be its projective cover as a \(kG\)-module. Let
+    \[
+        \widehat P_S
+    \]
+    be the projective \(RG\)-lattice lifting \(P_S\), so that
+    \[
+        \widehat P_S/\pi\widehat P_S\cong P_S.
+    \]
+    If \(L\) is an \(RG\)-lattice such that
+    \[
+        L/\pi L\cong P_S
+    \]
+    as \(kG\)-modules, then
+    \[
+        L\cong \widehat P_S
+    \]
+    as \(RG\)-modules.
+\end{proposition}
+
+\begin{proof}
+    Since
+    \[
+        L/\pi L\cong P_S
+    \]
+    is projective as a \(kG\)-module, the projectivity criterion for lattices implies
+    that \(L\) is projective as an \(RG\)-module.
+
+    Consider the natural epimorphism
+    \[
+        L\longrightarrow L/\pi L\cong P_S\longrightarrow S.
+    \]
+    Since \(\widehat P_S\) is projective and
+    \[
+        \widehat P_S\longrightarrow S
+    \]
+    is the projective cover of \(S\), this map factors through \(L\). Hence there is
+    an \(RG\)-homomorphism
+    \[
+        f:\widehat P_S\longrightarrow L
+    \]
+    such that the diagram
+    \[
+    \begin{tikzcd}
+        \widehat P_S \arrow[dr] \arrow[r,"f"] & L \arrow[d] \\
+        & S
+    \end{tikzcd}
+    \]
+    commutes.
+
+    We claim that \(f\) is surjective. Since
+    \[
+        \pi L\subseteq \operatorname{Rad}(L),
+    \]
+    and
+    \[
+        \operatorname{Rad}(L)/\pi L
+        =
+        \operatorname{Rad}(L/\pi L),
+    \]
+    we have
+    \[
+        \operatorname{Top}(L)
+        =
+        L/\operatorname{Rad}(L)
+        \cong
+        (L/\pi L)/\operatorname{Rad}(L/\pi L)
+        \cong
+        P_S/\operatorname{Rad}(P_S)
+        \cong
+        S.
+    \]
+    Similarly,
+    \[
+        \operatorname{Top}(\widehat P_S)\cong S.
+    \]
+    The morphism \(f\) induces a nonzero map
+    \[
+        \operatorname{Top}(\widehat P_S)\longrightarrow \operatorname{Top}(L),
+    \]
+    hence an isomorphism, since both sides are isomorphic to the simple module \(S\).
+    Therefore
+    \[
+        f(\widehat P_S)+\operatorname{Rad}(L)=L.
+    \]
+    By Nakayama's lemma,
+    \[
+        f(\widehat P_S)=L.
+    \]
+    Thus \(f\) is surjective.
+
+    It remains to show that \(f\) is injective. Since \(\widehat P_S\) and \(L\) are
+    \(R\)-free lattices, we have
+    \[
+        \operatorname{rank}_R\widehat P_S
+        =
+        \dim_k(\widehat P_S/\pi\widehat P_S)
+        =
+        \dim_k P_S,
+    \]
+    and
+    \[
+        \operatorname{rank}_R L
+        =
+        \dim_k(L/\pi L)
+        =
+        \dim_k P_S.
+    \]
+    Hence
+    \[
+        \operatorname{rank}_R\widehat P_S=\operatorname{rank}_R L.
+    \]
+    Since \(f:\widehat P_S\to L\) is a surjective homomorphism between finite free
+    \(R\)-modules of the same rank, its kernel has \(R\)-rank \(0\). But
+    \(\ker f\) is a submodule of the free \(R\)-module \(\widehat P_S\), hence is
+    torsion-free. Therefore
+    \[
+        \ker f=0.
+    \]
+    Thus \(f\) is an isomorphism.
+\end{proof}
+
+\begin{corollary}[Uniqueness of projective lifts]
+    Let \(Q\) be a finitely generated projective \(kG\)-module. If \(L_1\) and
+    \(L_2\) are projective \(RG\)-lattices such that
+    \[
+        L_1/\pi L_1\cong Q,
+        \qquad
+        L_2/\pi L_2\cong Q,
+    \]
+    then
+    \[
+        L_1\cong L_2
+    \]
+    as \(RG\)-modules.
+\end{corollary}
+
+\begin{proof}
+    Decompose \(Q\) into indecomposable projective \(kG\)-modules:
+    \[
+        Q\cong \bigoplus_S P_S^{\oplus m_S},
+    \]
+    where \(S\) runs through the isomorphism classes of simple \(kG\)-modules.
+    By the preceding proposition, each indecomposable summand \(P_S\) has a unique
+    projective \(RG\)-lattice lift, namely \(\widehat P_S\). Hence any projective
+    \(RG\)-lattice lifting \(Q\) is isomorphic to
+    \[
+        \bigoplus_S \widehat P_S^{\oplus m_S}.
+    \]
+    Therefore
+    \[
+        L_1\cong L_2.
+    \]
+\end{proof}
+
+\begin{corollary}[Existence of full lattices]
+    Let \(R\) be a principal ideal domain with fraction field \(F\), and let \(G\)
+    be a finite group. If \(U\) is a finite-dimensional \(FG\)-module, then \(U\)
+    contains a full \(RG\)-lattice.
+\end{corollary}
+
+\begin{proof}
+    Let
+    \[
+        u_1,\ldots,u_n
+    \]
+    be an \(F\)-basis of \(U\). Define
+    \[
+        L=\sum_{i=1}^n\sum_{g\in G} R\,g u_i.
+    \]
+    Since \(G\) is finite, \(L\) is finitely generated as an \(R\)-module. It is also
+    stable under the action of \(G\), hence is an \(RG\)-submodule of \(U\).
+
+    Moreover, \(L\) contains the \(F\)-basis \(u_1,\ldots,u_n\), because \(1\in G\).
+    Therefore, by the previous lemma, \(L\) is a full \(RG\)-lattice in \(U\).
+\end{proof}
