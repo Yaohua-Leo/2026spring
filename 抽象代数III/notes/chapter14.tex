@@ -1,0 +1,752 @@
+\chapter{Lecture 14}
+
+\section{Brauer--Nesbitt and Decomposition Numbers}
+
+Recall a \(p\)-modular system \((F,R,k)\), where \(R\) is a complete discrete valuation ring
+with uniformizer \(\pi\), fraction field \(F\), and residue field \(k=R/(\pi)\).
+
+\begin{theorem}[Brauer--Nesbitt]
+Let \((F,R,k)\) be a \(p\)-modular system, and let \(G\) be a finite group.
+Let \(U\) be a finitely generated \(FG\)-module.
+Let \(L_1,L_2\) be full \(RG\)-lattices in \(U\).
+Then
+\[
+L_1/\pi L_1
+\qquad\text{and}\qquad
+L_2/\pi L_2
+\]
+have the same composition factors, with the same multiplicities, as \(kG\)-modules.
+\end{theorem}
+
+\begin{proof}
+First observe that \(L_1+L_2\) is also a full \(RG\)-lattice in \(U\).
+Thus, replacing \(L_1,L_2\) if necessary, we may assume
+\[
+L_1\subseteq L_2.
+\]
+
+As \(R\)-modules, \(L_1\) and \(L_2\) are free of the same rank. Hence \(L_2/L_1\)
+is a torsion \(R\)-module. Thus \(L_2/L_1\) has a finite composition series as an
+\(R\)-module, and hence we may reduce to the case where \(L_1\) is a maximal
+\(RG\)-submodule of \(L_2\).
+
+Then \(L_2/L_1\) is simple. Since \(L_2/L_1\) is torsion over the DVR \(R\), we have
+\[
+\pi L_2\subseteq L_1.
+\]
+Thus
+\[
+\pi L_1\subseteq \pi L_2\subseteq L_1\subseteq L_2.
+\]
+
+It remains to show that
+\[
+L_2/L_1 \cong \pi L_2/\pi L_1.
+\]
+Indeed, define
+\[
+\varphi:L_2\longrightarrow \pi L_2/\pi L_1,
+\qquad
+x\longmapsto \pi x+\pi L_1.
+\]
+This is a surjective \(RG\)-homomorphism, and
+\[
+\ker(\varphi)=L_1.
+\]
+Therefore
+\[
+L_2/L_1\cong \pi L_2/\pi L_1.
+\]
+
+Using the chains
+\[
+\pi L_1\subseteq \pi L_2\subseteq L_1
+\]
+and
+\[
+\pi L_2\subseteq L_1\subseteq L_2,
+\]
+the above isomorphism shows that \(L_1/\pi L_1\) and \(L_2/\pi L_2\) have the same
+composition factors with the same multiplicities.
+\end{proof}
+
+\begin{definition}[Decomposition matrix]
+Assume \((F,R,k)\) is splitting for \(G\).
+The decomposition matrix \(D=(d_{TS})\) is the matrix whose rows are indexed by
+the simple \(FG\)-modules \(T\), and whose columns are indexed by the simple
+\(kG\)-modules \(S\). Its entries are
+\[
+d_{TS}
+=
+\left[T_0/\pi T_0:S\right],
+\]
+where \(T_0\) is a full \(RG\)-lattice in \(T\), and \(S\) is a simple \(kG\)-module.
+
+The integer \(d_{TS}\) is called a decomposition number.
+\end{definition}
+
+\section{Grothendieck Groups and the Cartan Triangle}
+
+Assume \((F,R,k)\) is splitting for \(G\), and assume \(R\) is complete.
+
+Define \(G_0(FG)\) to be the free abelian group with basis the isomorphism classes of
+simple \(FG\)-modules. Similarly, define \(G_0(kG)\) to be the free abelian group with
+basis the isomorphism classes of simple \(kG\)-modules.
+
+Define \(K_0(kG)\) to be the free abelian group with basis the isomorphism classes of
+indecomposable projective \(kG\)-modules.
+
+If \(T\) is a simple \(FG\)-module, write \([T]\) for the corresponding basis element of
+\(G_0(FG)\). If \(S\) is a simple \(kG\)-module, write \([S]\) for the corresponding basis
+element of \(G_0(kG)\). If \(P\) is an indecomposable projective \(kG\)-module, write
+\([P]\) for the corresponding basis element of \(K_0(kG)\).
+
+If \(U\) is a \(kG\)-module with composition factors
+\[
+S_1,\dots,S_r
+\]
+with multiplicities
+\[
+n_1,\dots,n_r,
+\]
+we write
+\[
+[U]=n_1[S_1]+\cdots+n_r[S_r]\in G_0(kG).
+\]
+
+Similarly, for an \(FG\)-module \(V\), if
+\[
+V\cong T_1^{n_1}\oplus\cdots\oplus T_s^{n_s},
+\]
+where the \(T_i\) are simple \(FG\)-modules, we write
+\[
+[V]=n_1[T_1]+\cdots+n_s[T_s]\in G_0(FG).
+\]
+
+If \(P\) is a projective \(kG\)-module and
+\[
+P\cong P_1^{n_1}\oplus\cdots\oplus P_s^{n_s},
+\]
+where the \(P_i\) are indecomposable projective \(kG\)-modules, then
+\[
+[P]=n_1[P_1]+\cdots+n_s[P_s]\in K_0(kG).
+\]
+
+Consider the following Cartan triangle:
+\[
+\begin{tikzcd}
+& G_0(FG) \arrow[dr,"d"] & \\
+K_0(kG) \arrow[ur,"e"] \arrow[rr,"c"'] && G_0(kG).
+\end{tikzcd}
+\]
+
+If \(P_S\) is an indecomposable projective \(kG\)-module, then
+\[
+e([P_S])=\left[F\otimes_R \widehat P_S\right]\in G_0(FG),
+\]
+where \(\widehat P_S\) is an \(RG\)-lattice lifting \(P_S\). Recall that \(\widehat P_S\)
+is unique up to isomorphism.
+
+If \(V\) is a simple \(FG\)-module containing a full \(RG\)-lattice \(V_0\), define
+\[
+d([V])=[V_0/\pi V_0]\in G_0(kG).
+\]
+With respect to the bases above, the matrix of \(d\) is the transpose of the decomposition
+matrix \(D\).
+
+Let \(P_S\) be the indecomposable projective \(kG\)-module which is the projective cover
+of a simple \(kG\)-module \(S\). Define
+\[
+c([P_S])=[P_S].
+\]
+Thus \(c:K_0(kG)\to G_0(kG)\) sends a projective module to its class as a \(kG\)-module.
+If
+\[
+[P_T]=\sum_{S} C_{ST}[S],
+\]
+where \(S,T\) run through simple \(kG\)-modules, then the matrix of \(c\) is the Cartan
+matrix
+\[
+C=(C_{ST}).
+\]
+
+\begin{theorem}
+With the notation above,
+\[
+c=d\circ e.
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(P_S\) be an indecomposable projective \(kG\)-module. Then
+\[
+c([P_S])=[P_S],
+\]
+while
+\[
+e([P_S])=\left[F\otimes_R \widehat P_S\right].
+\]
+Choose the full \(RG\)-lattice \(\widehat P_S\) in \(F\otimes_R\widehat P_S\).
+Reducing modulo \(\pi\), we get
+\[
+d\left(\left[F\otimes_R \widehat P_S\right]\right)=[P_S].
+\]
+Hence
+\[
+(d\circ e)([P_S])=[P_S]=c([P_S]).
+\]
+Since the classes \([P_S]\) form a basis of \(K_0(kG)\), it follows that
+\[
+c=d\circ e.
+\]
+\end{proof}
+
+\section{Hom-Lattices}
+
+\begin{proposition}
+Let \((F,R,k)\) be a \(p\)-modular system. Let \(U,V\) be \(FG\)-modules containing full
+\(RG\)-lattices \(U_0,V_0\), respectively.
+
+\begin{enumerate}
+\item The \(R\)-module
+\[
+\Hom_{RG}(U_0,V_0)
+\]
+is a full \(RG\)-lattice in
+\[
+\Hom_{FG}(U,V).
+\]
+
+\item If \(U_0\) is a projective \(RG\)-lattice, then
+\[
+\Hom_{RG}(U_0,V_0)/\pi \Hom_{RG}(U_0,V_0)
+\cong
+\Hom_{RG}(U_0,V_0/\pi V_0)
+\]
+and
+\[
+\Hom_{RG}(U_0,V_0/\pi V_0)
+\cong
+\Hom_{kG}(U_0/\pi U_0,V_0/\pi V_0).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+First, \(\Hom_{RG}(U_0,V_0)\) may be viewed as a subset of \(\Hom_{FG}(U,V)\).
+Choose \(R\)-bases
+\[
+u_1,\dots,u_r
+\qquad\text{and}\qquad
+v_1,\dots,v_s
+\]
+of \(U_0\) and \(V_0\), respectively. These are also \(F\)-bases of \(U\) and \(V\).
+Any \(RG\)-homomorphism \(U_0\to V_0\) is represented by a matrix over \(R\), and
+therefore determines an \(FG\)-homomorphism \(U\to V\).
+
+We have
+\[
+\Hom_{RG}(U_0,V_0)\subseteq \Hom_R(U_0,V_0)\cong R^{rs}.
+\]
+Since \(R\) is a PID, this submodule is \(R\)-free.
+
+It remains to show fullness. Let
+\[
+\phi:U\to V
+\]
+be an \(FG\)-homomorphism. Write
+\[
+\phi(u_i)=\sum_j \lambda_{ji}v_j,
+\qquad
+\lambda_{ji}\in F.
+\]
+Choose \(a\in R\setminus\{0\}\) such that
+\[
+a\lambda_{ji}\in R
+\]
+for all \(i,j\). Then
+\[
+a\phi:U_0\to V_0
+\]
+is an \(RG\)-homomorphism. Therefore
+\[
+\Hom_{RG}(U_0,V_0)
+\]
+spans \(\Hom_{FG}(U,V)\) over \(F\), and hence is a full lattice.
+
+Now assume \(U_0\) is projective. Then
+\[
+\Hom_{RG}(U_0,\pi V_0)=\pi\Hom_{RG}(U_0,V_0).
+\]
+Consider the natural map
+\[
+\Hom_{RG}(U_0,V_0)
+\longrightarrow
+\Hom_{RG}(U_0,V_0/\pi V_0).
+\]
+Since \(U_0\) is projective, this map is surjective. Its kernel is
+\[
+\Hom_{RG}(U_0,\pi V_0)=\pi\Hom_{RG}(U_0,V_0).
+\]
+Hence
+\[
+\Hom_{RG}(U_0,V_0)/\pi\Hom_{RG}(U_0,V_0)
+\cong
+\Hom_{RG}(U_0,V_0/\pi V_0).
+\]
+
+For the second isomorphism, every morphism
+\[
+U_0\to V_0/\pi V_0
+\]
+contains \(\pi U_0\) in its kernel, and therefore factors uniquely through
+\[
+U_0/\pi U_0.
+\]
+Thus
+\[
+\Hom_{RG}(U_0,V_0/\pi V_0)
+\cong
+\Hom_{kG}(U_0/\pi U_0,V_0/\pi V_0).
+\]
+\end{proof}
+
+\begin{corollary}
+Suppose \(U_0,V_0\) are full \(RG\)-lattices in \(FG\)-modules \(U,V\), respectively.
+Assume \(U_0\) is projective. Then
+\[
+\operatorname{dim}_F\Hom_{FG}(U,V)
+=
+\operatorname{dim}_k\Hom_{kG}(U_0/\pi U_0,V_0/\pi V_0).
+\]
+\end{corollary}
+
+\begin{proof}
+Both sides are equal to the \(R\)-rank of \(\Hom_{RG}(U_0,V_0)\).
+\end{proof}
+
+\section{Brauer Reciprocity and the Cartan Matrix}
+
+\begin{theorem}[Brauer reciprocity]
+Assume \((F,R,k)\) is splitting for \(G\), and \(R\) is complete.
+Let \(S\) be a simple \(kG\)-module, and let \(T\) be a simple \(FG\)-module containing
+a full \(RG\)-lattice \(T_0\).
+
+Let \(P_S\) be the projective cover of \(S\), and let \(\widehat P_S\) be its lift to an
+\(RG\)-lattice. Then the multiplicity of \(T\) in
+\[
+F\otimes_R\widehat P_S
+\]
+is equal to the multiplicity of \(S\) as a composition factor of
+\[
+T_0/\pi T_0.
+\]
+Equivalently,
+\[
+\left[F\otimes_R\widehat P_S:T\right]
+=
+\left[T_0/\pi T_0:S\right].
+\]
+\end{theorem}
+
+\begin{proof}
+By the preceding corollary,
+\[
+\operatorname{dim}_F\Hom_{FG}\left(F\otimes_R\widehat P_S,T\right)
+=
+\operatorname{dim}_k\Hom_{kG}\left(P_S,T_0/\pi T_0\right).
+\]
+
+The left-hand side equals
+\[
+\operatorname{dim}_F\operatorname{End}_{FG}(T)\cdot
+\left[F\otimes_R\widehat P_S:T\right].
+\]
+The right-hand side equals
+\[
+\operatorname{dim}_k\operatorname{End}_{kG}(S)\cdot
+\left[T_0/\pi T_0:S\right].
+\]
+Since \((F,R,k)\) is splitting, we have
+\[
+\operatorname{dim}_F\operatorname{End}_{FG}(T)=1,
+\qquad
+\operatorname{dim}_k\operatorname{End}_{kG}(S)=1.
+\]
+Therefore
+\[
+\left[F\otimes_R\widehat P_S:T\right]
+=
+\left[T_0/\pi T_0:S\right].
+\]
+\end{proof}
+
+With respect to the standard bases, the matrix of \(e\) is \(D\), and the matrix of \(d\)
+is \(D^T\), where \(D\) is the decomposition matrix.
+
+\begin{corollary}
+Assume \((F,R,k)\) is splitting for \(G\), and \(R\) is complete. Then the Cartan matrix
+satisfies
+\[
+C=D^T D.
+\]
+In particular, \(C\) is symmetric.
+\end{corollary}
+
+\begin{proof}
+Since
+\[
+c=d\circ e,
+\]
+and the matrices of \(d\) and \(e\) are \(D^T\) and \(D\), respectively, the matrix of \(c\)
+is
+\[
+C=D^T D.
+\]
+\end{proof}
+
+\section{Integral Elements}
+
+Let \(S\) be a commutative ring with \(1\), and let \(R\subseteq S\) be a subring with
+\(1_R=1_S\).
+
+\begin{definition}
+An element \(s\in S\) is called integral over \(R\) if there exists a monic polynomial
+\[
+f(x)\in R[x]
+\]
+such that
+\[
+f(s)=0.
+\]
+\end{definition}
+
+\begin{theorem}
+For \(s\in S\), the following are equivalent:
+\begin{enumerate}
+\item \(s\) is integral over \(R\).
+\item \(R[s]\) is contained in some finitely generated \(R\)-submodule \(M\subseteq S\)
+such that
+\[
+sM\subseteq M.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+The elements of \(S\) which are integral over \(R\) form a subring of \(S\).
+\end{theorem}
+
+\begin{theorem}
+The algebraic integers in \(\mathbb{Q}\) are precisely the ordinary integers:
+\[
+\{x\in \mathbb{Q}\mid x\text{ is integral over }\mathbb{Z}\}=\mathbb{Z}.
+\]
+\end{theorem}
+
+\begin{theorem}
+Let \(G\) be a finite group, let \(g\in G\), and let \(\chi\) be a complex character of \(G\).
+Then
+\[
+\chi(g)
+\]
+is an algebraic integer.
+\end{theorem}
+
+\begin{remark}
+Recall that an element of \(\C\) is called an algebraic integer if it is integral over \(\mathbb{Z}\).
+\end{remark}
+
+\section{Central Elements in Group Rings}
+
+Consider the group rings
+\[
+\mathbb{C}G
+\qquad\text{and}\qquad
+\mathbb{Z}G.
+\]
+We identify
+\[
+\mathbb{Z}\cdot 1_G\subseteq Z(\mathbb{Z}G).
+\]
+
+\begin{proposition}
+The center \(Z(\mathbb{Z}G)\) is integral over \(\mathbb{Z}\).
+\end{proposition}
+
+\begin{proof}
+Let \(C_1,\dots,C_r\) be the conjugacy classes of \(G\), and define the class sums
+\[
+\overline C_i=\sum_{g\in C_i} g.
+\]
+Then
+\[
+Z(\mathbb{Z}G)=\bigoplus_{i=1}^r \mathbb{Z}\,\overline C_i.
+\]
+Thus \(Z(\mathbb{Z}G)\) is a finitely generated abelian group, hence a finitely generated
+\(\mathbb{Z}\)-module. Therefore every element of \(Z(\mathbb{Z}G)\) is integral over \(\mathbb{Z}\).
+\end{proof}
+
+\begin{corollary}
+Let \(C_1,\dots,C_r\) be the conjugacy classes of \(G\), and let
+\[
+\lambda_1,\dots,\lambda_r
+\]
+be algebraic integers in \(\C\). Then
+\[
+\sum_{i=1}^r \lambda_i\overline C_i
+\]
+is integral over \(\mathbb{Z}\).
+\end{corollary}
+
+Let
+\[
+\rho_1,\dots,\rho_r
+\]
+be the simple complex representations of \(G\), with degrees
+\[
+d_1,\dots,d_r,
+\]
+and characters
+\[
+\chi_1,\dots,\chi_r.
+\]
+Thus
+\[
+\rho_i:G\to \operatorname{GL}_{d_i}(\C).
+\]
+Extending linearly gives
+\[
+\rho_i:\mathbb{C}G\to M_{d_i}(\mathbb{C}).
+\]
+Under the Artin--Wedderburn decomposition
+\[
+\mathbb{C}G\cong \bigoplus_{i=1}^r M_{d_i}(\mathbb{C}),
+\]
+the map \(\rho_i\) is the projection onto the \(i\)-th factor.
+
+\begin{proposition}
+Fix \(i\), and let \(x\in Z(\mathbb{C}G)\). Then
+\[
+\rho_i(x)=\lambda I_{d_i}
+\]
+for some \(\lambda\in\mathbb{C}\). In fact, if
+\[
+x=\sum_{g\in G} a_g g,
+\]
+then
+\[
+\lambda
+=
+\frac{1}{d_i}\operatorname{tr}(\rho_i(x))
+=
+\frac{1}{d_i}\sum_{g\in G} a_g\chi_i(g).
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(x\in Z(\mathbb{C}G)\), for every \(y\in \mathbb{C}G\),
+\[
+xy=yx.
+\]
+Therefore, for every \(i\),
+\[
+\rho_i(x)\rho_i(y)=\rho_i(y)\rho_i(x).
+\]
+By Schur's lemma, \(\rho_i(x)\) is a scalar matrix:
+\[
+\rho_i(x)=\lambda I_{d_i}.
+\]
+Taking traces gives
+\[
+\lambda
+=
+\frac{1}{d_i}\operatorname{tr}(\rho_i(x)).
+\]
+If
+\[
+x=\sum_{g\in G}a_g g,
+\]
+then
+\[
+\operatorname{tr}(\rho_i(x))
+=
+\operatorname{tr}\left(\sum_{g\in G}a_g\rho_i(g)\right)
+=
+\sum_{g\in G}a_g\operatorname{tr}(\rho_i(g))
+=
+\sum_{g\in G}a_g\chi_i(g).
+\]
+Hence
+\[
+\lambda
+=
+\frac{1}{d_i}\sum_{g\in G}a_g\chi_i(g).
+\]
+\end{proof}
+
+\section{Degrees of Irreducible Complex Representations}
+
+\begin{theorem}
+Let \(G\) be a finite group, and let
+\[
+\rho_i:G\to \operatorname{GL}_{d_i}(\mathbb{C})
+\]
+be a simple complex representation of degree \(d_i\). Then
+\[
+d_i \mid |G|.
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(\chi_i\) be the character of \(\rho_i\). Define
+\[
+x=\sum_{g\in G}\overline{\chi_i(g)}\,g\in \mathbb{C}G.
+\]
+Since
+\[
+\overline{\chi_i(g)}=\chi_i(g^{-1}),
+\]
+the coefficients are constant on conjugacy classes, so \(x\in Z(\mathbb{C}G)\).
+
+By the previous proposition,
+\[
+\rho_i(x)
+=
+\frac{1}{d_i}
+\left(\sum_{g\in G}\overline{\chi_i(g)}\chi_i(g)\right)I_{d_i}.
+\]
+By the orthogonality relations,
+\[
+\sum_{g\in G}\overline{\chi_i(g)}\chi_i(g)=|G|.
+\]
+Therefore
+\[
+\rho_i(x)=\frac{|G|}{d_i}I_{d_i}.
+\]
+
+For every \(g\in G\), the number \(\chi_i(g)\) is an algebraic integer. Hence
+\[
+\overline{\chi_i(g)}
+=
+\chi_i(g^{-1})
+\]
+is also an algebraic integer. Therefore
+\[
+x
+=
+\sum_{C\in \operatorname{Cl}(G)}
+\overline{\chi_i(g_C)}
+\left(\sum_{g\in C}g\right)
+\]
+is integral over \(\mathbb{Z}\), where \(g_C\) is any representative of the conjugacy class \(C\).
+
+Thus \(\rho_i(x)\) is integral over \(\mathbb{Z}\). Hence the scalar
+\[
+\frac{|G|}{d_i}
+\]
+is integral over \(\mathbb{Z}\). But
+\[
+\frac{|G|}{d_i}\in \mathbb{Q}.
+\]
+Since the only rational algebraic integers are the ordinary integers, we get
+\[
+\frac{|G|}{d_i}\in \mathbb{Z}.
+\]
+Therefore
+\[
+d_i\mid |G|.
+\]
+\end{proof}
+
+\section{Character Table Examples}
+
+We recall several standard facts about irreducible characters.
+
+\begin{itemize}
+\item Linear characters of \(G\) are the irreducible characters of the abelianization
+\[
+G/[G,G].
+\]
+
+\item The number of irreducible characters equals the number of conjugacy classes:
+\[
+|\operatorname{Irr}(G)|=|\operatorname{Cl}(G)|.
+\]
+
+\item The sum of the squares of the degrees is the order of the group:
+\[
+|G|
+=
+\sum_{\chi\in \operatorname{Irr}(G)} \chi(1)^2.
+\]
+
+\item For every \(\chi\in \operatorname{Irr}(G)\),
+\[
+\chi(1)\mid |G|.
+\]
+
+\item The irreducible characters satisfy the usual orthogonality relations.
+\end{itemize}
+
+\begin{example}[The character table of \(S_3\)]
+For \(S_3\), we have
+\[
+S_3/[S_3,S_3]=S_3/A_3\cong C_2.
+\]
+Thus \(S_3\) has two linear characters. Since
+\[
+|S_3|=6
+\]
+and the irreducible degrees satisfy
+\[
+6=\sum_{\chi\in\operatorname{Irr}(S_3)}\chi(1)^2,
+\]
+the remaining irreducible character has degree \(2\).
+
+The conjugacy classes are
+\[
+(1),\qquad (12),\qquad (123).
+\]
+The character table is
+\[
+\begin{array}{c|ccc}
+ & (1) & (12) & (123)\\
+\hline
+1 & 1 & 1 & 1\\
+\varepsilon & 1 & -1 & 1\\
+\chi & 2 & 0 & -1
+\end{array}
+\]
+\end{example}
+
+\begin{example}[The character table of \(D_8\)]
+Let
+\[
+D_8=\langle r,s\mid r^4=s^2=1,\ srs=r^{-1}\rangle
+\]
+be the dihedral group of order \(8\).
+
+One standard ordering of the conjugacy classes is
+\[
+C_1=\{1\},\qquad
+C_2=\{s,r^2s\},\qquad
+C_3=\{rs,r^3s\},
+\]
+\[
+C_4=\{r,r^3\},\qquad
+C_5=\{r^2\}.
+\]
+The character table is
+\[
+\begin{array}{c|ccccc}
+ & C_1 & C_2 & C_3 & C_4 & C_5\\
+\hline
+\chi_1 & 1 & 1 & 1 & 1 & 1\\
+\chi_2 & 1 & -1 & 1 & -1 & 1\\
+\chi_3 & 1 & 1 & -1 & -1 & 1\\
+\chi_4 & 1 & -1 & -1 & 1 & 1\\
+\chi_5 & 2 & 0 & 0 & 0 & -2
+\end{array}
+\]
+\end{example}
